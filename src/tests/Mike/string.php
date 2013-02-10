@@ -5,7 +5,7 @@ class String
     var $data;
 
     // constructor
-    function String($data) {
+    function __construct($data) {
         $this->data = $data;
     }
 

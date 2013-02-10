@@ -6,7 +6,7 @@ use \PHPUnit_Framework_TestCase;
 class StringTest extends PHPUnit_Framework_TestCase
 {
     // contains the object handle of the string class
-    var $abc;
+    $abc = "";
 
     function setUp() {
         // create a new instance of String with the
@@ -31,8 +31,8 @@ class StringTest extends PHPUnit_Framework_TestCase
 
     // test the copy function
     function testCopy() {
-      $abc2 = $this->abc->copy();
-      $this->assertEquals($abc2, $this->abc);
+        $abc2 = $this->abc->copy();
+        $this->assertEquals($abc2, $this->abc);
     }
 
     // test the add function
