@@ -1,8 +1,5 @@
 <?php
 
-/**
- * Taken from https://github.com/anandkunal/ToroPHP
- */
 class Toro
 {
     public static function serve($routes)
