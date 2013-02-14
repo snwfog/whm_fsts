@@ -1,15 +1,15 @@
 <?php
 
-/**
- * Class Application_Core
+/*
+ * Application
  *
- * Main application.
+ * @description: Main application.
  */
 class Application_Core
 {
     private $_registry;
     private $_default_libraries = [ 'router' ];
-    /**
+    /*
      * CONSTRUCTOR
      *
      * Application constructor, will autoload all core singleton class.

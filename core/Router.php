@@ -1,14 +1,13 @@
 <?php
-/**
+
+/*
  * ROUTER
  *
- * This is an implementation of a RESTful PHP URL router.
- *
- * File: Router.php
- * User: Charles Yang
- * Date: 2013-02-13
+ * @description: RESTful router inspired/hacked from Toro.php. Usage is
+ * the same from Toro.php, but adapted for this particular framework.
+ * You are not mean to use this directly. You are suppose to use the
+ * Application_Core instance and call route() function.
  */
-
 class Router_Core
 {
     public static function route($routes)

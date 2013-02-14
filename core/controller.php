@@ -1,6 +1,6 @@
 <?php
 
-abstract class Controller
+abstract class Controller_Core
 {
 
     const REDIRECT_ERROR = "application/view/static/error.html";

@@ -3,7 +3,9 @@
 /*
  * HELPER FUNCTIONS
  *
- * Please do not modify this file.
+ * @description: Contains helper function used for coding and debugging.
+ * Please do not modify this file, and consult before adding extra function
+ * to this file.
  */
 class Helper_Core
 {
@@ -23,7 +25,7 @@ class Helper_Core
 
 	public static function base_path()
 	{
-		retyrb getcwd();
+		return getcwd();
 	}
 }
 
