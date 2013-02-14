@@ -77,7 +77,11 @@ class Yaml
      *
      *  Usage:
      *  <code>
+<<<<<<< HEAD
      *   $array = Yaml::parse('config.yml');
+=======
+     *   $array = Yaml::parse('core.yml');
+>>>>>>> 34105f5fe2bfce828f117e7c476ca32f35483771
      *   print_r($array);
      *  </code>
      *
@@ -104,10 +108,17 @@ class Yaml
                 $retval = include($file);
                 $content = ob_get_clean();
 
+<<<<<<< HEAD
                 // if an array is returned by the config file assume it's in plain php form else in YAML
                 $input = is_array($retval) ? $retval : $content;
 
                 // if an array is returned by the config file assume it's in plain php form else in YAML
+=======
+                // if an array is returned by the core file assume it's in plain php form else in YAML
+                $input = is_array($retval) ? $retval : $content;
+
+                // if an array is returned by the core file assume it's in plain php form else in YAML
+>>>>>>> 34105f5fe2bfce828f117e7c476ca32f35483771
                 if (is_array($input)) {
                     return $input;
                 }

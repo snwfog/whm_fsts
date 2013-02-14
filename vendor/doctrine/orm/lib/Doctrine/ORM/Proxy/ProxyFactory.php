@@ -274,7 +274,11 @@ class ProxyFactory
      * What does this mean? For proxy objects the identifier is already known,
      * however accessing the getter for this identifier usually triggers the
      * lazy loading, leading to a query that may not be necessary if only the
+<<<<<<< HEAD
      * ID is interesting for the userland code (for example in views that
+=======
+     * ID is interesting for the userland code (for example in view that
+>>>>>>> 34105f5fe2bfce828f117e7c476ca32f35483771
      * generate links to the entity, but do not display anything else).
      *
      * @param ReflectionMethod $method
