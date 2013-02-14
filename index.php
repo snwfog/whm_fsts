@@ -9,14 +9,18 @@
  * ----------------------------------------------
  */
 
+//print_r($_SERVER);
 define('APPPATH', 'application');
 define('SYSPATH', 'core');
 
-//print_r($_SERVER);
-
+/*
+ * Here we go setting up the bootstrap...
+ */
 require_once('core/Bootstrap.php');
 
-$app = new Application_Core();
+$user_libraries = array();
+
+$app = new Application_Core($user_libraries);
 
 $app->route(array
 (

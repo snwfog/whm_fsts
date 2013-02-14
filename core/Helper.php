@@ -1,5 +1,33 @@
 <?php
 
+/*
+ * HELPER FUNCTIONS
+ *
+ * Please do not modify this file.
+ */
+class Helper_Core
+{
+	public static function pr($array)
+	{
+		echo "<pre>";
+		print_r($array);
+		echo "</pre>";
+	}
+
+	public static function backtrace()
+	{
+		echo "<pre>";
+		debug_print_backtrace();
+		echo "</pre>";
+	}
+
+	public static function base_path()
+	{
+		retyrb getcwd();
+	}
+}
+
+
 if (!function_exists('load_class'))
 {
     function &load_class($class, $directory = 'core', $suffix = '_Core')
