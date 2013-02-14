@@ -1,9 +1,9 @@
 <?php
 
-/**
+/*
  * CORE CLASS REGISTRY
  *
- * This function acts as a singleton. If the requested class does not
+ * @description: This function acts as a singleton. If the requested class does not
  * exist it is instantiated and set to a static variable. If it has previously
  * been instantiated the variable is returned.
  */

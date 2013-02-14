@@ -1,15 +1,15 @@
 <?php
 
-/**
- * Class Application_Core
+/*
+ * Application
  *
- * Main application.
+ * @description: Main application.
  */
 class Application_Core
 {
     private $_registry;
-
-    /**
+    private $_default_libraries = [ 'router' ];
+    /*
      * CONSTRUCTOR
      *
      * Application constructor, will autoload all core singleton class.
@@ -17,9 +17,16 @@ class Application_Core
      *
      * @param array $libraries
      */
-    public function __construct($libraries = array('router'))
+    public function __construct($args)
     {
+        // Define the Application class registry
         $this->_registry = Registry_Core::get_instance();
+        $libraries = array();
+
+        if (!empty($args))
+        {
+            $libraries = array_merge($this->_default_libraries, $args);
+        }
 
         foreach ($libraries as $library)
         {

@@ -1,30 +1,26 @@
 <?php
 
-<<<<<<< HEAD
+// Define user libraries
+$user_libraries = array();
 
-print_r($_SERVER);
-
-=======
-//require_once('core/Config.php');
-//require_once('core/router.php');
-
+// Define user paths
+$user_routes = array
+(
+    '/' => 'Index_Controller'
+);
 
 /*-----------------------------------------------
  * Do not modify pass below this section
  * ----------------------------------------------
  */
 
-define('APPPATH', 'application');
-define('SYSPATH', 'core');
+// Define system path and application path
+define('APPPATH', 'application');   // Folder for controller, view, model
+define('SYSPATH', 'core');          // Folder for core
 
-//print_r($_SERVER);
-
+// Here we go start the bootstrap
 require_once('core/Bootstrap.php');
 
-$app = new Application_Core();
-
-$app->route(array
-(
-    '/' => 'Index_Controller'
-));
->>>>>>> 34105f5fe2bfce828f117e7c476ca32f35483771
+// Instance the application
+$app = new Application_Core($user_libraries);
+$app->route($user_routes);

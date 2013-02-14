@@ -91,7 +91,7 @@ define('FRAMEWORK_PATH', 'core');
 /* if they which to be to be displayed in the web browser.
 /*------------------------------------------------------------------------------
 */
-//require_once('controller.php');
+//require_once('Controller.php');
 //require_once('redirectable.php');
 
 /**-----------------------------------------------------------------------------

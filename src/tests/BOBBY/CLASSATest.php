@@ -37,7 +37,7 @@ var $b;
 		$name = $class->getName();
 	    $this->assertEquals('hello', $name);
 
-    
+
 	}
 }
 ?>
