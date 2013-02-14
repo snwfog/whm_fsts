@@ -2,57 +2,58 @@
 
 class Household_Controller_Test extends PHPUnit_Framework_TestCase
 {
-    function newHouseholdTest()
+    function testNewHousehold()
     {
 
     }
 
-    function registerHouseholdTest(){
+    function testRegisterHousehold(){
 
     }
 
-    function displayInformationFormTest(){
+    function testDisplayInformationForm(){
 
     }
 
-    function findHouseholdTest($name){
+    function testFindHousehold($name)
+    {
 
     }
 
-    function displayTest($household_view, $memberView, $edithousehold_view, $newDependency_view){
+    function testDisplay($household_view, $memberView, $edithousehold_view, $newDependency_view){
 
     }
 
-    function removeHouseholdTest($id){
+    function testRemoveHousehold($id){
 
     }
 
-    function findMemberTest($name){
-
-    }
-
-   
-
-    function removeMemberTest($id){
-
-    }
-   
-    function editHouseholdTest($id){
+    function testFindMember($name){
 
     }
 
    
 
-    function updateHouseholdTest(){
+    function testRemoveMember($id){
+
+    }
+   
+    function testEditHousehold($id){
 
     }
 
-    function newDependencyTest(){
+   
+
+    function testUpdateHousehold(){
+
+    }
+
+    function testNewDependency(){
 
     }
 
 
-    function addMemberTest(){
+    function testAddMember(){
 
     }
 
