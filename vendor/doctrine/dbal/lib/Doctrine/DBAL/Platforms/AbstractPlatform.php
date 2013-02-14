@@ -2262,7 +2262,7 @@ abstract class AbstractPlatform
     }
 
     /**
-     * Get the SQL to list all views of a database or user.
+     * Get the SQL to list all view of a database or user.
      *
      * @param string $database
      *
@@ -2593,7 +2593,7 @@ abstract class AbstractPlatform
     }
 
     /**
-     * Does this platform views ?
+     * Does this platform view ?
      *
      * @return boolean
      */

@@ -15,7 +15,7 @@ $classLoader->register();
 $classLoader = new \Doctrine\Common\ClassLoader('Proxies', __DIR__);
 $classLoader->register();
 
-// Variable $helperSet is defined inside cli-config.php
+// Variable $helperSet is defined inside cli-core.php
 require __DIR__ . '/cli-config.php';
 
 $cli = new \Symfony\Component\Console\Application('Doctrine Command Line Interface', Doctrine\Common\Version::VERSION);

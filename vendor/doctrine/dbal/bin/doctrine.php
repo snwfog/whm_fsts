@@ -8,7 +8,7 @@ $classLoader->register();
 $classLoader = new \Doctrine\Common\ClassLoader('Symfony');
 $classLoader->register();
 
-$configFile = getcwd() . DIRECTORY_SEPARATOR . 'cli-config.php';
+$configFile = getcwd() . DIRECTORY_SEPARATOR . 'cli-core.php';
 
 $helperSet = null;
 if (file_exists($configFile)) {

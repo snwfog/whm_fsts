@@ -194,7 +194,7 @@ class Connection implements DriverConnection
             $this->_isConnected = true;
         }
 
-        // Create default config and event manager if none given
+        // Create default core and event manager if none given
         if ( ! $config) {
             $config = new Configuration();
         }
