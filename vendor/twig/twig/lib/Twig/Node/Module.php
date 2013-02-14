@@ -11,7 +11,11 @@
  */
 
 /**
+<<<<<<< HEAD
+ * Represents a module node.
+=======
  * Represents a application node.
+>>>>>>> 34105f5fe2bfce828f117e7c476ca32f35483771
  *
  * @package    twig
  * @author     Fabien Potencier <fabien@symfony.com>

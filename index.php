@@ -1,7 +1,5 @@
 <?php
 
-
-
 // Define user libraries
 $user_libraries = array();
 

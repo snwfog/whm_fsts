@@ -12,5 +12,9 @@ return array(
     'Doctrine\\ORM' => $vendorDir . '/doctrine/orm/lib/',
     'Doctrine\\DBAL' => $vendorDir . '/doctrine/dbal/lib/',
     'Doctrine\\Common' => $vendorDir . '/doctrine/common/lib/',
+<<<<<<< HEAD
+    '' => $baseDir . '/src/',
+=======
     '' => $baseDir . '/application/',
+>>>>>>> 34105f5fe2bfce828f117e7c476ca32f35483771
 );

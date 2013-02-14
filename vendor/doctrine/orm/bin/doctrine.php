@@ -18,7 +18,11 @@
  */
 
 (@include_once __DIR__ . '/../vendor/autoload.php') || @include_once __DIR__ . '/../../../autoload.php';
+<<<<<<< HEAD
+$configFile = getcwd() . DIRECTORY_SEPARATOR . 'cli-config.php';
+=======
 $configFile = getcwd() . DIRECTORY_SEPARATOR . 'cli-core.php';
+>>>>>>> 34105f5fe2bfce828f117e7c476ca32f35483771
 
 $helperSet = null;
 if (file_exists($configFile)) {

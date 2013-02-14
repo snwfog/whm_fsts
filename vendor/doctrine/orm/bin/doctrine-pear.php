@@ -25,7 +25,11 @@ $classLoader->register();
 $classLoader = new \Doctrine\Common\ClassLoader('Symfony');
 $classLoader->register();
 
+<<<<<<< HEAD
+$configFile = getcwd() . DIRECTORY_SEPARATOR . 'cli-config.php';
+=======
 $configFile = getcwd() . DIRECTORY_SEPARATOR . 'cli-core.php';
+>>>>>>> 34105f5fe2bfce828f117e7c476ca32f35483771
 
 $helperSet = null;
 if (file_exists($configFile)) {

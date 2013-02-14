@@ -111,7 +111,11 @@ final class DriverManager
             Configuration $config = null,
             EventManager $eventManager = null)
     {
+<<<<<<< HEAD
+        // create default config and event manager, if not set
+=======
         // create default core and event manager, if not set
+>>>>>>> 34105f5fe2bfce828f117e7c476ca32f35483771
         if ( ! $config) {
             $config = new Configuration();
         }
