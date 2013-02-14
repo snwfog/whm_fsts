@@ -8,7 +8,7 @@
 
 (function(window, document, undefined) {
     /*
-     * If you would like an application-wide config, change these defaults.
+     * If you would like an application-wide core, change these defaults.
      * Otherwise, use the setMessage() function to configure form specific messages.
      */
 

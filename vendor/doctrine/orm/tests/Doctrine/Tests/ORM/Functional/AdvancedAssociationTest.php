@@ -574,7 +574,7 @@ class Definition {
 
     public function removePhrase() {
         if ($this->phrase !== null) {
-            /*@var $phrase kateglo\application\models\Phrase */
+            /*@var $phrase kateglo\application\model\Phrase */
             $phrase = $this->phrase;
             $this->phrase = null;
             $phrase->removeDefinition($this);

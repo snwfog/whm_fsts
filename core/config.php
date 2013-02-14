@@ -1,13 +1,21 @@
 <?php
 
-/**-----------------------------------------------------------------------------
- *
- * Filename:         config.php
- * @description:     All global configurations of the project shall appears
- *                 	 in this file.
- * @date:            November 10, 2012
- * @author:          Charles Yang
+/*------------------------------------------------------------------------------
+ * CONFIGURATION VARIABLES
  * -----------------------------------------------------------------------------
+ *          .-"-.
+ *         /a a  \   _/\
+ *        /  -    \  \ /
+ *       ;`'-----'`;\//           ...UNDER CONSTRUCTION...
+ *      /|___:_____|\/
+ *    _//|---------|
+ *   (_/__\/)__/)_/______
+ *   |__|_//__//__|___|__|
+ *   |___|\\__\\|___|___||
+ *   |_|_(_/_(_/___|___|_|
+ *   |____|___|___|___|__|
+ *   |jgs___|___|___|___||
+ * ^^^^^^^^^^^^^^^^^^^^^^^^^
  */
 
 /*------------------------------------------------------------------------------
@@ -24,7 +32,7 @@ define('SERVER_ROOT', $_SERVER['DOCUMENT_ROOT'] . FOLDER_URL);
 define('SITE_ROOT', BASE_URL . FOLDER_URL);
 
 define('IMAGE_PATH', 'assets/img/offer-picture/');
-/**-----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
  * Define project pathing constants.
  * Apparently PHP's include or require uses absolute pathing from the root
  * folder of the project. The difference between require and include is that
@@ -32,9 +40,9 @@ define('IMAGE_PATH', 'assets/img/offer-picture/');
  * While include will try to move on if the file is not found.
  * -----------------------------------------------------------------------------
  */
-define('VIEW_PATH', 'modules/views');
-define('MODEL_PATH', 'modules/models');
-define('CONTROLLER_PATH', 'modules/controllers');
+define('VIEW_PATH', 'application/view');
+define('MODEL_PATH', 'application/model');
+define('CONTROLLER_PATH', 'application/controller');
 
 /**-----------------------------------------------------------------------------
  * Define system class naming suffix.
@@ -45,12 +53,21 @@ define('CONTROLLER_SUFFIX', 'Controller');
 define('MODEL_SUFFIX', 'Model');
 define('VIEW_SUFFIX', 'View');
 
+/*
+ * ------------------------
+ * SYSTEM CONFIG CONSTANT
+ * ------------------------
+ */
+
+define('FRAMEWORK_SUFFIX', 'Core');
+define('FRAMEWORK_PATH', 'core');
+
 /*------------------------------------------------------------------------------
 /* Load Twig, the PHP templating framework
 /*------------------------------------------------------------------------------
 */
-require_once('libs/Twig/Autoloader.php');
-Twig_Autoloader::register();
+//require_once('libs/Twig/Autoloader.php');
+//Twig_Autoloader::register();
 
 /*------------------------------------------------------------------------------
 /* Load the default twig renderer singleton class
@@ -58,7 +75,7 @@ Twig_Autoloader::register();
 /*
 /*------------------------------------------------------------------------------
 */
-require_once('renderer.php');
+//require_once('renderer.php');
 
 
 /**-----------------------------------------------------------------------------
@@ -66,54 +83,29 @@ require_once('renderer.php');
  * The database connector should be called through the getInstance method.
  * -----------------------------------------------------------------------------
  */
-require_once('database.php');
-require_once('model.php');
+//require_once('database.php');
+//require_once('model.php');
 
 /*------------------------------------------------------------------------------
-/* Load super class for controllers from which every controller must extends
+/* Load super class for controller from which every controller must extends
 /* if they which to be to be displayed in the web browser.
 /*------------------------------------------------------------------------------
 */
-require_once('controller.php');
-require_once('redirectable.php');
+//require_once('controller.php');
+//require_once('redirectable.php');
 
 /**-----------------------------------------------------------------------------
  * Load the session class, which act as LOGIN and SESSION checker.
  * -----------------------------------------------------------------------------
  */
-require_once('session.php');
+// require_once('session.php');
 
 /**-----------------------------------------------------------------------------
  * Load the helper file, which contains bunch of non-oop functions.
  * -----------------------------------------------------------------------------
  */
- require_once('helper.php');
+// require_once('helper.old.php');
 
-/**-----------------------------------------------------------------------------
- * Bootstrap classes loading for MODELS and CONTROLLERS only.
- * -----------------------------------------------------------------------------
- */
-function __autoload($className)
-{
-    list($filename, $suffix) = explode('_', $className);
-
-    $filename = strtolower($filename);
-
-    if (preg_match('/' . CONTROLLER_SUFFIX . '/i', $suffix))
-        $file = CONTROLLER_PATH . '/' . $filename . '.php';
-    else if (preg_match('/' . MODEL_SUFFIX . '/i', $suffix))
-        $file = MODEL_PATH . '/' . $filename . 's' . '.php'; // Note the "s"
-
-//    $absolute = FOLDER_ROOT . $file;
-
-    if (file_exists($file))
-        include_once($file);
-    else
-        header('Location: ' . Controller::REDIRECT_ERROR);
-//        die("File '$file' containing class '$className' could not be located by the autoload function!");
-}
-
-spl_autoload_register('__autoload');
 
 /**
  * -----------------------------------------------------------------------------

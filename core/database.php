@@ -1,7 +1,7 @@
 <?php
 /**-----------------------------------------------------------------------------
  * Database singleton class.
- * This class should be used when accessing database in object's models.
+ * This class should be used when accessing database in object's model.
  *
  *                                ~ ~ ~ ~
  *                THE VARIABLE $dbconfig MUST BE MODIFIED

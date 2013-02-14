@@ -29,7 +29,7 @@ use Doctrine\Common\Persistence\Mapping\ClassMetadata;
  * you to implement ActiveRecord functionality on top of the persistance-ignorance
  * that Doctrine propagates.
  *
- * Word of Warning: This is a very powerful hook to change how you can work with your domain models.
+ * Word of Warning: This is a very powerful hook to change how you can work with your domain model.
  * Using this hook will break the Single Responsibility Principle inside your Domain Objects
  * and increase the coupling of database and objects.
  *

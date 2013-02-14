@@ -262,7 +262,7 @@ abstract class AbstractSchemaManager
     }
 
     /**
-     * List the views this connection has
+     * List the view this connection has
      *
      * @return View[]
      */

@@ -13,7 +13,7 @@ class Renderer
     private static $twig;
     private static $twigConfig  = array
     (
-        'cache' => 'modules/views/cache',   // Twig template cache folder
+        'cache' => 'application/view/cache',   // Twig template cache folder
         'auto_reload' => TRUE               // Autoload reload caches,
                                             // set to false when deploy
     );
