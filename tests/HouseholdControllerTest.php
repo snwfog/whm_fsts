@@ -2,7 +2,8 @@
 
 class Household_Controller_Test extends PHPUnit_Framework_TestCase
 {
-    function newHouseholdTest(){
+    function newHouseholdTest()
+    {
 
     }
 
@@ -18,7 +19,7 @@ class Household_Controller_Test extends PHPUnit_Framework_TestCase
 
     }
 
-    function displayTest($household_view){
+    function displayTest($household_view, $memberView, $edithousehold_view, $newDependency_view){
 
     }
 
@@ -30,9 +31,7 @@ class Household_Controller_Test extends PHPUnit_Framework_TestCase
 
     }
 
-    // function displayTest($memberView){
-
-    // }
+   
 
     function removeMemberTest($id){
 
@@ -42,9 +41,7 @@ class Household_Controller_Test extends PHPUnit_Framework_TestCase
 
     }
 
-    // function displayTest($edithousehold_view){
-
-    // }
+   
 
     function updateHouseholdTest(){
 
@@ -54,9 +51,6 @@ class Household_Controller_Test extends PHPUnit_Framework_TestCase
 
     }
 
-    // function displayTest($newDependency_view){
-
-    // }
 
     function addMemberTest(){
 
