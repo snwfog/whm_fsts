@@ -11,7 +11,7 @@
  */
 
 /**
- * Represents a module node.
+ * Represents a application node.
  *
  * @package    twig
  * @author     Fabien Potencier <fabien@symfony.com>

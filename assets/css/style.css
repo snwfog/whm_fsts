@@ -1,0 +1,209 @@
+/* General style for everything */
+
+html {
+    font-family: Helvetica Neue, Anaheim, Helvetica, Arial, Calibri;
+    font-weight: lighter;
+}
+
+a:visited, a:link {
+    color: #4C8FFD;
+    text-decoration-style: dashed;
+}
+
+a:hover {
+    color: red;
+}
+
+a:active {
+    color: aqua;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+ul li
+{
+    margin: 10px 0px 10px 0px;
+}
+
+h1, h2, h3, h4, h5 {
+    clear: both;
+    font-family: Serifa BT, Rambla;
+    text-shadow: 1px 1px rgba(100, 100, 100, 0.2);
+}
+
+h1
+{
+    font-size: 30px;
+    margin: 30px 0px;
+    color: #4C8FFD;
+}
+
+h2
+{
+    font-size: 20px;
+    text-shadow: none;
+}
+
+
+h3 {
+    font-size: 20px;
+    margin: 30px 0px;
+    color: #4C8FFD;
+}
+
+
+h4, h5
+{
+    font-size: 20px;
+    margin: 100px 0px 20px;
+    color: #4C8FFD;
+    text-shadow: none;
+}
+
+hr {
+    border-bottom: 1px solid rgba(100, 100, 100, 0.2);
+    margin: 30px auto 0;
+    clear: both;
+}
+
+table, table th, table td
+{
+    padding: 5px;
+    clear: both;
+    border: 1px dashed #d3d3d3;
+    text-align: left;
+    vertical-align: middle;
+    padding: 10px;
+}
+
+form {
+    color: #333;
+    width: 640px;
+    margin: 0 auto;
+    border: 1px solid #CCC;
+    padding: 20px 20px 50px;
+    background: #EEE;
+    margin: 20px 0px;
+}
+
+input {
+    color: #666;
+    background: #FCFCFC;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    vertical-align:middle;
+    display:inline-block;
+    margin:-4px 0 0;
+}
+input[type="text"],
+input[type="password"] {
+    vertical-align:middle;
+    box-shadow: 1px 2px rgba(100, 100, 100, 0.1);
+    display:inline-block;
+    width:250px;
+    padding:8px 8px;
+    border:1px solid #999;
+}
+input[type="text"]:focus,
+input[type="password"]:focus {
+    background:#FFF;
+    box-shadow: 1px 2px rgba(100, 100, 100, 0.1);
+    color:#333;
+    border:1px solid #333;
+}
+
+textarea {
+    width:640px;
+    height:150px;
+    box-shadow: 1px 2px rgba(100, 100, 100, 0.1);
+    border:1px solid #999;
+}
+
+select {
+    min-width:150px;
+    border:1px solid #999;
+}
+
+/**
+ * Static styling
+ */
+
+#header
+{
+    overflow: hidden;
+    margin: auto;
+    /*width: 70%;*/
+    background-color: #4C8FFD;
+    border-radius: 0 0 3px 3px;
+    box-shadow: 1px 2px rgba(100, 100, 100, 0.2);
+}
+
+#header #title
+{
+    color: white;
+    clear: none;
+    float: left;
+    margin: 0px 10px 0px 5px;
+}
+
+
+#content
+{
+    margin: 50px auto 50px;
+    width: 70%;
+    min-height: 700px;
+}
+
+#content .earned-rating
+{
+    color: orangered;
+}
+
+#content .unearned-rating
+{
+    color: rgba(100, 100, 100, 0.1);
+}
+
+#content table#offer-expired
+{
+    color: lightgrey;
+}
+
+#footer{
+    margin: auto;
+    padding: 5px;
+    text-align: center;
+    background-color: #4C8FFD;
+    box-shadow: 1px 2px rgba(100, 100, 100, 0.2);
+    color: white;
+}
+
+#content form#admin-member-search
+{
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#content #graph
+{
+    margin: 20px;
+    width: 600px;
+    height: 400px;
+}
+
+
+/* Easter Eggs */
+#unicorn {
+    position: absolute;
+    top: 50px;
+    right: 10%;
+    clear: none;
+    overflow: hidden;
+    z-index: -100;
+    opacity: 0.15;
+    width: 20%;
+}
