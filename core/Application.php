@@ -8,7 +8,7 @@
 class Application_Core
 {
     private $_registry;
-    private $_default_libraries = [ 'router' ];
+    private $_default_libraries = [ 'router', 'renderer', 'controller'];
     /*
      * CONSTRUCTOR
      *

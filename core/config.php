@@ -53,29 +53,12 @@ define('CONTROLLER_SUFFIX', 'Controller');
 define('MODEL_SUFFIX', 'Model');
 define('VIEW_SUFFIX', 'View');
 
-/*
- * ------------------------
- * SYSTEM CONFIG CONSTANT
- * ------------------------
- */
-
-define('FRAMEWORK_SUFFIX', 'Core');
-define('FRAMEWORK_PATH', 'core');
-
 /*------------------------------------------------------------------------------
 /* Load Twig, the PHP templating framework
 /*------------------------------------------------------------------------------
 */
 //require_once('libs/Twig/Autoloader.php');
 //Twig_Autoloader::register();
-
-/*------------------------------------------------------------------------------
-/* Load the default twig renderer singleton class
-/* Essentially one Twig class shall be used throughout the website
-/*
-/*------------------------------------------------------------------------------
-*/
-//require_once('Renderer.php');
 
 
 /**-----------------------------------------------------------------------------
@@ -86,26 +69,11 @@ define('FRAMEWORK_PATH', 'core');
 //require_once('database.php');
 //require_once('model.php');
 
-/*------------------------------------------------------------------------------
-/* Load super class for controller from which every controller must extends
-/* if they which to be to be displayed in the web browser.
-/*------------------------------------------------------------------------------
-*/
-//require_once('Controller.php');
-//require_once('Redirectable.php');
-
 /**-----------------------------------------------------------------------------
  * Load the session class, which act as LOGIN and SESSION checker.
  * -----------------------------------------------------------------------------
  */
 // require_once('session.php');
-
-/**-----------------------------------------------------------------------------
- * Load the helper file, which contains bunch of non-oop functions.
- * -----------------------------------------------------------------------------
- */
-// require_once('helper.old.php');
-
 
 /**
  * -----------------------------------------------------------------------------
