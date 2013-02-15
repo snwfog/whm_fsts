@@ -9,15 +9,22 @@
  * Date: 2013-02-13
  */
 
+
+define('BEFORE_REQUEST_HOOK', 'BEFORE_REQUEST_HOOK');
+define('AFTER_REQUEST_HOOK',  'AFTER_REQUEST_HOOK');
+define('BEFORE_HANDLER_HOOK', 'BEFORE_HANDLER_HOOK');
+define('AFTER_HANDLER_HOOK',  'AFTER_HANDLER_HOOK');
+
 class Hook_Core
 {
+
     private static $_instance;
     private $_hooks = array();
 
     private function __construct() {}
     private function __clone() {}
 
-    private static function getInstance()
+    private static function get_instance()
     {
         if (empty(self::$_instance))
         {
@@ -34,18 +41,22 @@ class Hook_Core
      */
     public static function add($hook_name, $fn)
     {
-        $instance = self::getInstance();
+        $instance = self::get_instance();
         $instance->_hooks[$hook_name][] = $fn;
     }
 
     public static function fire($hook_name, $params = null)
     {
-        $instance = self::getInstance();
+        $instance = self::get_instance();
+
         if (isset($instance->_hooks[$hook_name]))
         {
+            echo "Have found handler";
+
             foreach ($instance->_hooks[$hook_name] as $fn)
             {
-                call_user_func_array($fn, array($params));
+                echo "FIRING HOOKS";
+                call_user_func_array($fn, array(&$params));
             }
         }
     }

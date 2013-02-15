@@ -4,18 +4,18 @@
  * CONFIGURATION VARIABLES
  * -----------------------------------------------------------------------------
  *          .-"-.
- *         /a a  \   _/\
- *        /  -    \  \ /
- *       ;`'-----'`;\//           ...UNDER CONSTRUCTION...
- *      /|___:_____|\/
- *    _//|---------|
- *   (_/__\/)__/)_/______
- *   |__|_//__//__|___|__|
- *   |___|\\__\\|___|___||
- *   |_|_(_/_(_/___|___|_|
- *   |____|___|___|___|__|
- *   |jgs___|___|___|___||
- * ^^^^^^^^^^^^^^^^^^^^^^^^^
+ *         /a a  \   _/\          /////////////////////////
+ *        /  -    \  \ /          ......................../
+ *       ;`'-----'`;\//           ...UNDER CONSTRUCTION.../
+ *      /|___:_____|\/            ...PLEASE DON'T TOUCH.../
+ *    _//|---------|              ......................../
+ *   (_/__\/)__/)_/______                   ||||
+ *   |__|_//__//__|___|__|                  ||||
+ *   |___|\\__\\|___|___||                  ||||
+ *   |_|_(_/_(_/___|___|_|                  ||||
+ *   |____|___|___|___|__|                  ||||
+ *   |jgs___|___|___|___||                  ||||
+ * ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
  */
 
 /*------------------------------------------------------------------------------
@@ -32,34 +32,17 @@ define('SERVER_ROOT', $_SERVER['DOCUMENT_ROOT'] . FOLDER_URL);
 define('SITE_ROOT', BASE_URL . FOLDER_URL);
 
 define('IMAGE_PATH', 'assets/img/offer-picture/');
+define('TWIG_VIEW_PATH', 'application/view');
+
 /*------------------------------------------------------------------------------
- * Define project pathing constants.
+ * COMMENTS:
+ *
  * Apparently PHP's include or require uses absolute pathing from the root
  * folder of the project. The difference between require and include is that
  * require is obligatory, the system will fail if a require file is not found.
  * While include will try to move on if the file is not found.
  * -----------------------------------------------------------------------------
  */
-define('VIEW_PATH', 'application/view');
-define('MODEL_PATH', 'application/model');
-define('CONTROLLER_PATH', 'application/controller');
-
-/**-----------------------------------------------------------------------------
- * Define system class naming suffix.
- * They are only used as class name, and NOT the filename.
- * -----------------------------------------------------------------------------
- */
-define('CONTROLLER_SUFFIX', 'Controller');
-define('MODEL_SUFFIX', 'Model');
-define('VIEW_SUFFIX', 'View');
-
-/*------------------------------------------------------------------------------
-/* Load Twig, the PHP templating framework
-/*------------------------------------------------------------------------------
-*/
-//require_once('libs/Twig/Autoloader.php');
-//Twig_Autoloader::register();
-
 
 /**-----------------------------------------------------------------------------
  * Import the files and load the database connector file as a singleton pattern.

@@ -6,6 +6,9 @@ abstract class Controller_Core
     const REDIRECT_ERROR = "application/view/static/error.html";
     const REDIRECT_INDEX = "index.php";
 
+    private $_renderer;
+    private $_data;
+
     /**
      * The data array, you can use it, or you don't have to use it.
      */
@@ -13,9 +16,11 @@ abstract class Controller_Core
 
     public function __construct($redirect = TRUE)
     {
+        $this->_renderer = Renderer_Core::get_instance();
+
         // $this->startSession();
-        $this->data["title"] = "Welcome Hall Mission";
-        $this->data["specifier"] = "Family Service Tracking System";
+        $this->_data["title"] = "Welcome Hall Mission";
+        $this->_data["specifier"] = "Family Service Tracking System";
 
         // if (!$this->isValidSession())
         // {
@@ -39,20 +44,20 @@ abstract class Controller_Core
 
     }
 
-    public function verifySession(Session $session)
-    {
-        // Check if we invoke making a session
-        if (isset($session))
-        {
-            $session->validateSession();
-            if ($session->isValid())
-                $session->startSession();
-        }
-    }
+//    public function verifySession(Session $session)
+//    {
+//        // Check if we invoke making a session
+//        if (isset($session))
+//        {
+//            $session->validateSession();
+//            if ($session->isValid())
+//                $session->startSession();
+//        }
+//    }
 
     public function display($file, $data = array())
     {
-        Renderer::getInstance()->display($file, $data);
+        $this->_renderer->display($file, array_merge($this->_data, $data));
     }
 
     // public function isValidSession()

@@ -23,7 +23,7 @@ class Renderer_Core implements IRenderer_Core
     {
         $this->_twig_instance = new Twig_Environment
         (
-            new Twig_Loader_Filesystem(VIEW_PATH),
+            new Twig_Loader_Filesystem(TWIG_VIEW_PATH),
             $this->_twig_config
         );
     }
@@ -32,6 +32,7 @@ class Renderer_Core implements IRenderer_Core
     {
         if (!isset(self::$_instance))
         {
+            echo "New instance";
             self::$_instance = new Renderer_Core();
         }
 

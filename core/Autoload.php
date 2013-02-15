@@ -28,7 +28,7 @@ function __autoload($name)
     {
         if (in_array($suffix, $dirdir))
         {
-            $filepath = "{$dir}{$suffix}/" . ucfirst($filename) . ".php";
+            $filepath = "{$dir}{$suffix}/{$filename}.php";
 
             if (file_exists($filepath))
             {

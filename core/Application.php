@@ -8,7 +8,7 @@
 class Application_Core
 {
     private $_registry;
-    private $_default_libraries = [ 'router', 'renderer', 'controller'];
+
     /*
      * CONSTRUCTOR
      *
@@ -21,18 +21,7 @@ class Application_Core
     {
         // Define the Application class registry
         $this->_registry = Registry_Core::get_instance();
-        $libraries = array();
 
-        if (!empty($args))
-        {
-            $libraries = array_merge($this->_default_libraries, $args);
-        }
-
-        foreach ($libraries as $library)
-        {
-            $klass = ucfirst($library) . "_Core";
-            $this->_registry->$library = new $klass;
-        }
     }
 
     public function route($routes)

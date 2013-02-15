@@ -13,9 +13,6 @@ $user_routes = array
 (
     // Don't put the trailing slash /
     '' => 'Index_Controller',
-    'household' => 'Index_Controller',
-    'registration' => 'Registration_Controller',
-    'household/update' => 'HouseholdUpdate_Controller'
 );
 
 /*-----------------------------------------------
