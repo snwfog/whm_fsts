@@ -13,20 +13,20 @@ class Household_Controller extends Controller_Core implements IRedirectable_Core
 
     public function get()
     {
-        echo "string"; 
-        print_r($this->data);
+        $this->display("household_create_form.twig");
         
 
     }
 
     public function put()
     {
+        echo " i'm in put";
 
     }
 
     public function post()
     {
-
+        print_r($_POST);
     }
 
     public function delete()
