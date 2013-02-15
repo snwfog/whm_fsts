@@ -15,19 +15,18 @@ class Flag
     /** 
      * @Column(type="string")
      */
-    private $color; // type defaults to string
+    private $color;
     
     /** 
      * @Column(type="string")
      */
-    private $type; // type defaults to string
+    private $type;
     
     /**
      * @ManyToOne(targetEntity="Household")
      * @JoinColumn(name="household_id", referencedColumnName="id")
      **/
-    private $household;
-    
+    private $household;    
 }
 
 ?>
