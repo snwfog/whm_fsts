@@ -14,7 +14,6 @@ class Index_Controller extends Controller_Core implements IRenderer_Core
 
     public function get()
     {
-
         $this->display("index.twig");
     }
 

@@ -24,9 +24,8 @@ class __TwigTemplate_862472dd69531ccde117bc33b6696272 extends Twig_Template
     {
         // line 2
         echo "<div id=\"footer\">
-    <p>Wiz. Trade is an affiliate of GoBAGSys.</p>
     <p>You are viewing this page on ";
-        // line 4
+        // line 3
         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, "now", "D, d M Y H:i:s"), "html", null, true);
         echo ".</p>
 \t<p class=\"footer\">Copyright 2012</p>
@@ -41,6 +40,6 @@ class __TwigTemplate_862472dd69531ccde117bc33b6696272 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  100 => 52,  90 => 44,  83 => 39,  73 => 31,  71 => 30,  51 => 21,  49 => 20,  38 => 11,  34 => 9,  31 => 8,  30 => 5,  28 => 4,  24 => 2,  76 => 36,  67 => 39,  63 => 24,  61 => 36,  55 => 23,  27 => 7,  25 => 6,  18 => 1,  29 => 11,  26 => 3,);
+        return array (  27 => 3,  24 => 2,  18 => 1,);
     }
 }

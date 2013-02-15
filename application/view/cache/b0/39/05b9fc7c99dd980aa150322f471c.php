@@ -25,7 +25,7 @@ class __TwigTemplate_b03905b9fc7c99dd980aa150322f471c extends Twig_Template
         // line 2
         echo "
 <div id=\"header\">
-    <h1 id=\"title\">Wiz.Trade</h1>
+    <h1 id=\"title\">Welcome Hall Mission</h1>
     <div id=\"nav\">
         <div class=\"tiptip\">
             ";
@@ -112,6 +112,6 @@ class __TwigTemplate_b03905b9fc7c99dd980aa150322f471c extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  100 => 52,  90 => 44,  83 => 39,  73 => 31,  71 => 30,  51 => 21,  49 => 20,  38 => 11,  34 => 9,  31 => 8,  30 => 5,  28 => 4,  24 => 2,  76 => 36,  67 => 39,  63 => 24,  61 => 36,  55 => 23,  27 => 7,  25 => 6,  18 => 1,  29 => 11,  26 => 3,);
+        return array (  100 => 52,  90 => 44,  83 => 39,  73 => 31,  71 => 30,  63 => 24,  55 => 23,  51 => 21,  49 => 20,  38 => 11,  34 => 9,  31 => 8,  24 => 2,  18 => 1,);
     }
 }

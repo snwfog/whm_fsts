@@ -13,7 +13,8 @@ class Router_Core
     public static function route($routes)
     {
         if (!is_array($routes))
-            die(__FILE__ . " at method <b>" . __FUNCTION__ . "</b>: variable expecting to be of type array.");
+            die(__FILE__ . " at method <b>" . __FUNCTION__ .
+                "</b>: variable expecting to be of type array.");
 
         Hook_Core::fire(BEFORE_REQUEST_HOOK);
 
@@ -75,7 +76,8 @@ class Router_Core
             // Instantiate the class
             $cInstance = new $discoveredController();
 
-            if (self::isXhrRequest() && method_exists($discoveredController, $requestMethod . '_xhr'))
+            if (self::isXhrRequest() &&
+                method_exists($discoveredController, $requestMethod . '_xhr'))
             {
                 // Send JSON Files
 
@@ -85,6 +87,7 @@ class Router_Core
             if (method_exists($cInstance, $requestMethod))
             {
                 Hook_Core::fire(BEFORE_HANDLER_HOOK);
+
                 call_user_func_array(array($cInstance, $requestMethod), $regexMatches);
 
                 Hook_Core::fire(AFTER_HANDLER_HOOK);
