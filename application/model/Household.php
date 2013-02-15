@@ -27,6 +27,15 @@ use Doctrine\Common\Collections\ArrayCollection;
      * @JoinColumn(name="household_address_id", referencedColumnName="id")
      */
 	protected $address;
+	/**
+     * @OneToMany(targetEntity="HouseholdMember", mappedBy="household")
+     **/
+    protected $members = null;
+	
+	public function _construct()
+	{
+		$this->members = new ArrayCollection();
+	}
 	
 	public function getprincipalId()
 	{
