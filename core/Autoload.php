@@ -29,10 +29,9 @@ function __autoload($name)
         if (in_array($suffix, $dirdir))
         {
             $filepath = "{$dir}{$suffix}/{$filename}.php";
-
             if (file_exists($filepath))
             {
-                include_Once($filepath);
+                include_once($filepath);
             }
             else
             {

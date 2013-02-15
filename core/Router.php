@@ -86,6 +86,7 @@ class Router_Core
 
             if (method_exists($cInstance, $requestMethod))
             {
+
                 Hook_Core::fire(BEFORE_HANDLER_HOOK);
 
                 call_user_func_array(array($cInstance, $requestMethod), $regexMatches);

@@ -12,8 +12,8 @@ $user_libraries = array();
 $serves = array
 (
     // Don't put the trailing slash - "/"
-    '' => 'Index_Controller',
-    'household' => 'Household_Controller'
+    '/' => 'Index_Controller',
+    '/household' => 'Household_Controller',
 );
 
 /*-----------------------------------------------
