@@ -22,11 +22,19 @@ class Flag {
      */
     private $type;
 
-    /**
-     * @ManyToOne(targetEntity="Household")
-     * @JoinColumn(name="household_id", referencedColumnName="id")
-     * */
-    private $household;
+	/**
+     * @ManyToOne(targetEntity="Household", inversedBy="flags")
+     **/
+    private $household;    
+	/**
+     * @ManyToMany(targetEntity="Comment", mappedBy="flags")
+     */
+	private $comments;
+	
+	public function _construct()
+	{
+		this->comments = new ArrayCollection();
+	}
 
     public function getId() {
         return $this->id;
@@ -59,6 +67,7 @@ class Flag {
     public function setHousehold($household) {
         $this->household = $household;
     }
+
 }
 
 ?>

@@ -33,9 +33,17 @@ class Household {
      * */
     protected $members = null;
 
-    public function _construct() {
-        $this->members = new ArrayCollection();
-    }
+    /**
+     * @OneToMany(targetEntity="Flag", mappedBy="household")
+     **/
+    protected $flags = null;
+	
+	public function _construct()
+	{
+		$this->members = new ArrayCollection();
+		$this->flags = new ArrayCollection();
+
+	}
 
     public function getId() {
         return $this->id;
@@ -76,4 +84,12 @@ class Household {
     public function setMembers($members) {
         $this->members = $members;
     }
-}
+
+
+	
+	
+ 
+ }
+ 
+ 
+?>

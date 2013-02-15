@@ -16,7 +16,16 @@ class Comment
      * @Column(type="string")
      */
     private $content;
-    
+    /**
+     * @ManyToMany(targetEntity="Flag", inversedBy="comments")
+     * @JoinTable(name="comments_describe_flags")
+     */
+	private $flags;
+	
+	public function _construct()
+	{
+		this->flags = new ArrayCollection();
+	}
     public function getId() {
         return $this->id;
     }
@@ -32,7 +41,6 @@ class Comment
     public function setContent($content) {
         $this->content = $content;
     }
-
 
 }
 
