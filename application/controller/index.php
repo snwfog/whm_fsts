@@ -9,4 +9,12 @@ class Index_Controller extends Controller_Core
     {
         Helper_Core::backtrace();
     }
+
+    public function get()
+    {
+        echo "In get";
+    }
+
+
+
 }

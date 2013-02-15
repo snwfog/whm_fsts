@@ -1,12 +1,21 @@
 <?php
 
+/*----------------------------------------------
+ * INDEX.PHP
+ * ---------------------------------------------
+ */
+
 // Define user libraries
 $user_libraries = array();
 
 // Define user paths
 $user_routes = array
 (
-    '/' => 'Index_Controller'
+    // Don't put the trailing slash /
+    '' => 'Index_Controller',
+    'household' => 'Index_Controller',
+    'registration' => 'Registration_Controller',
+    'household/update' => 'HouseholdUpdate_Controller'
 );
 
 /*-----------------------------------------------

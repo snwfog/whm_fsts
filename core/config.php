@@ -75,7 +75,7 @@ define('FRAMEWORK_PATH', 'core');
 /*
 /*------------------------------------------------------------------------------
 */
-//require_once('renderer.php');
+//require_once('Renderer.php');
 
 
 /**-----------------------------------------------------------------------------
@@ -92,7 +92,7 @@ define('FRAMEWORK_PATH', 'core');
 /*------------------------------------------------------------------------------
 */
 //require_once('Controller.php');
-//require_once('redirectable.php');
+//require_once('Redirectable.php');
 
 /**-----------------------------------------------------------------------------
  * Load the session class, which act as LOGIN and SESSION checker.

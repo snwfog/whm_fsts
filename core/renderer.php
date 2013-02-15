@@ -7,7 +7,7 @@
  * This class is used in the Controller.php superclass of all view, as a composite.
  * -----------------------------------------------------------------------------
  */
-class Renderer
+class Renderer_Core
 {
     // Set Twig loader file system so we can locate the template folders
     private static $twig;

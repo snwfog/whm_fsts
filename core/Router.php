@@ -17,6 +17,7 @@ class Router_Core
 
         Hook_Core::fire(':beforeRequest');
 
+        // Server request method... Get, Post, Put, Delete, etc.
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 
         $pathInfo = '/';
@@ -63,16 +64,15 @@ class Router_Core
                     $regexMatches = $matches;
                     break;
                 }
-
             }
-
         }
 
         if (!empty($discoveredController) && class_exists($discoveredController))
         {
-            // class_exists triggers __autoload
-            unset($regexMatches);
+            // Shift away the first element of the array
+            $pop_path = array_shift($regexMatches);
 
+            // Instantiate the class
             $cInstance = new $discoveredController();
 
             if (self::isXhrRequest() && method_exists($discoveredController, $requestMethod . '_xhr'))
@@ -81,7 +81,6 @@ class Router_Core
 
                 $requestMethod .= '_xhr';
             }
-
 
             if (method_exists($cInstance, $requestMethod))
             {
