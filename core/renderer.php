@@ -32,7 +32,6 @@ class Renderer_Core implements IRenderer_Core
     {
         if (!isset(self::$_instance))
         {
-            echo "New instance";
             self::$_instance = new Renderer_Core();
         }
 

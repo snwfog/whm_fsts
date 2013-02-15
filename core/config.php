@@ -33,6 +33,8 @@ define('SITE_ROOT', BASE_URL . FOLDER_URL);
 
 define('IMAGE_PATH', 'assets/img/offer-picture/');
 define('TWIG_VIEW_PATH', 'application/view');
+define('DOCTRINE_MODEL_PATH', 'application/model');
+define('DOCTRINE_PROXY_PATH', 'application/proxy');
 
 /*------------------------------------------------------------------------------
  * COMMENTS:
