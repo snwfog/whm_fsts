@@ -1,9 +1,11 @@
 <?php
 
-class Household_Contoller extends Controller_Core implements IRedirectable_Core
+class Household_Controller extends Controller_Core implements IRedirectable_Core
 {
+    public $data = "ok";    
     public function __construct(array $args = null)
     {
+        $this->data = $args;
         parent::__construct();
         
         Helper_Core::backtrace();
@@ -11,7 +13,9 @@ class Household_Contoller extends Controller_Core implements IRedirectable_Core
 
     public function get()
     {
-        echo "hi";
+        echo "string"; 
+        print_r($this->data);
+        
 
     }
 

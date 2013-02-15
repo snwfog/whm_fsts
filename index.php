@@ -13,7 +13,7 @@ $serves = array
 (
     // Don't put the trailing slash - "/"
     '' => 'Index_Controller',
-    'household' => 'Household_Controller',
+    'household' => 'Household_Controller'
 );
 
 /*-----------------------------------------------
