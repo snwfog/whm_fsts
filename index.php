@@ -1,12 +1,18 @@
 <?php
 
+/*----------------------------------------------
+ * INDEX.PHP
+ * ---------------------------------------------
+ */
+
 // Define user libraries
 $user_libraries = array();
 
-// Define user paths
-$user_routes = array
+// Define router routes to serve
+$serves = array
 (
-    '/' => 'Index_Controller'
+    // Don't put the trailing slash - "/"
+    '' => 'Index_Controller',
 );
 
 /*-----------------------------------------------
@@ -23,4 +29,4 @@ require_once('core/Bootstrap.php');
 
 // Instance the application
 $app = new Application_Core($user_libraries);
-$app->route($user_routes);
+$app->route($serves);

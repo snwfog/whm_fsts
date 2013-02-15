@@ -28,8 +28,8 @@ class App
         $this->component['em'] = EntityManager::create($dbParams, $config);
 
         /* Configuring Twig */
-        $loader = new Twig_Loader_Filesystem(__DIR__.'/src/views');
-        $this->component['twig'] = new Twig_Environment($loader);
+//        $loader = new Twig_Loader_Filesystem(__DIR__.'/src/views');
+//        $this->component['twig'] = new Twig_Environment($loader);
     }
 
     public static function get($key)

@@ -7,27 +7,41 @@
  * This class is used in the Controller.php superclass of all view, as a composite.
  * -----------------------------------------------------------------------------
  */
-class Renderer
+class Renderer_Core implements IRenderer_Core
 {
     // Set Twig loader file system so we can locate the template folders
-    private static $twig;
-    private static $twigConfig  = array
+    private static $_instance;
+    private $_twig_instance;
+    private $_twig_config = array
     (
         'cache' => 'application/view/cache',   // Twig template cache folder
         'auto_reload' => TRUE               // Autoload reload caches,
                                             // set to false when deploy
     );
 
-    private function __construct() { }
-
-    public static function getInstance()
+    private function __construct()
     {
-        if (!isset(self::$twig))
-            self::$twig = new Twig_Environment
-            (
-                new Twig_Loader_Filesystem(VIEW_PATH),
-                self::$twigConfig
-            );
-        return self::$twig;
+        $this->_twig_instance = new Twig_Environment
+        (
+            new Twig_Loader_Filesystem(TWIG_VIEW_PATH),
+            $this->_twig_config
+        );
+    }
+
+    public static function get_instance()
+    {
+        if (!isset(self::$_instance))
+        {
+            echo "New instance";
+            self::$_instance = new Renderer_Core();
+        }
+
+        return self::$_instance;
+    }
+
+    public function display($view, $data = array())
+    {
+        $this->_twig_instance->display($view, $data);
+
     }
 }

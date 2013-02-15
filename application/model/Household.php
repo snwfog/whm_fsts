@@ -6,50 +6,74 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @Entity @Table(name="households")
  * */
 class Household {
-
+    
     /**
      * @Id @Column(type="integer") @GeneratedValue
-     * */
-    protected $id;
-
+     **/
+    protected $id;    
+    
     /**
      * @Column(type="integer")
-     * */
-    protected $household_principal_id;
-
+     **/
+    protected $household_principal_id;    
+    
     /**
      * @Column(type="string")
-     * */
-    protected $phone_number;
-
-    /**
+     **/
+    protected $phone_number;    
+    
+    /*
      * @OneToOne(targetEntity="Address", inversedBy="household")
      * @JoinColumn(name="household_address_id", referencedColumnName="id")
      */
     protected $address;
 
-    public function getprincipalId() {
+    /**
+     * @OneToMany(targetEntity="HouseholdMember", mappedBy="household")
+     * */
+    protected $members = null;
+
+    public function _construct() {
+        $this->members = new ArrayCollection();
+    }
+
+    public function getId() {
+        return $this->id;
+    }
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+
+    public function getHousehold_principal_id() {
         return $this->household_principal_id;
     }
 
-    public function getPhoneNumber() {
+    public function setHousehold_principal_id($household_principal_id) {
+        $this->household_principal_id = $household_principal_id;
+    }
+
+    public function getPhone_number() {
         return $this->phone_number;
     }
 
-    public function getAdress() {
-        return $this->adress;
+    public function setPhone_number($phone_number) {
+        $this->phone_number = $phone_number;
     }
 
-    public function setprincipalId($principal) {
-        $this->household_principal_id = $principal;
+    public function getAddress() {
+        return $this->address;
     }
 
-    public function setPhoneNumber($phone) {
-        $this->phone_number = $phone;
+    public function setAddress($address) {
+        $this->address = $address;
     }
 
-    public function setAdress($address) {
-        $this->adress = $address;
+    public function getMembers() {
+        return $this->members;
     }
 
+    public function setMembers($members) {
+        $this->members = $members;
+    }
 }

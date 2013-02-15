@@ -13,10 +13,12 @@ class Router_Core
     public static function route($routes)
     {
         if (!is_array($routes))
-            die(__FILE__ . " at method <b>" . __FUNCTION__ . "</b>: variable expecting to be of type array.");
+            die(__FILE__ . " at method <b>" . __FUNCTION__ .
+                "</b>: variable expecting to be of type array.");
 
-        Hook_Core::fire(':beforeRequest');
+        Hook_Core::fire(BEFORE_REQUEST_HOOK);
 
+        // Server request method... Get, Post, Put, Delete, etc.
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 
         $pathInfo = '/';
@@ -63,32 +65,32 @@ class Router_Core
                     $regexMatches = $matches;
                     break;
                 }
-
             }
-
         }
 
         if (!empty($discoveredController) && class_exists($discoveredController))
         {
-            // class_exists triggers __autoload
-            unset($regexMatches);
+            // Shift away the first element of the array
+            $pop_path = array_shift($regexMatches);
 
+            // Instantiate the class
             $cInstance = new $discoveredController();
 
-            if (self::isXhrRequest() && method_exists($discoveredController, $requestMethod . '_xhr'))
+            if (self::isXhrRequest() &&
+                method_exists($discoveredController, $requestMethod . '_xhr'))
             {
                 // Send JSON Files
 
                 $requestMethod .= '_xhr';
             }
 
-
             if (method_exists($cInstance, $requestMethod))
             {
-                Hook_Core::fire(':beforeHandler');
+                Hook_Core::fire(BEFORE_HANDLER_HOOK);
+
                 call_user_func_array(array($cInstance, $requestMethod), $regexMatches);
 
-                Hook_Core::fire(':afterHandler');
+                Hook_Core::fire(AFTER_HANDLER_HOOK);
             }
             else
             {
@@ -100,7 +102,7 @@ class Router_Core
             Hook_Core::fire(":404");
         }
 
-        Hook_Core::fire(":afterRequest");
+        Hook_Core::fire(AFTER_REQUEST_HOOK);
     }
 
     /**
