@@ -9,7 +9,11 @@
             <div id="error">{{ error }}</div></br>
         {% endblock %}
     {% endfor %}
-   <div id="registration"> 
+
+    <div id="info">
+        <h2>Information</h2>
+    </div>
+   <div id="regis"> 
     <form action="household" method="POST" name="household_create">
         <div >
             <h2>Personal Information</h2>
@@ -237,31 +241,21 @@
 
                      <br />
 
-
-                    <select name="lang"><option selected disabled>Language</option><option>French</option><option>English</option><option>Other</option></select><br />
-                            
-
-
-
-        </ul></div>
-
-     <div>   
-
-            <h2>Address</h2>
-            <ul>
-                <li><input type="text" name="street_name" placeholder="Street Name" value="{{form["streetName"]}}"/>
-                <li><input type="text" name="streetNumber" placeholder="Street No." value="{{form["streetNumber"]}}"/>
-                <li><input type="text" name="addess" placeholder="Address" value="{{form["address"]}}"/>
-                <li><input type="text" name="appt_number" placeholder="Appartment Number" value="{{form["appt_number"]}}" />
-                 <li><input type="text" name="city" placeholder="City" value="{{form["city"]}}"/>
-                <li><input type="text" name="province" placeholder="Province" value="{{form["province"]}}"/>
-                <li><input type="text" name="postal_code" placeholder="Postal Code" value="{{form["postal_code"]}}"/>
-            </ul>
-            <input type="hidden" name="household_create_form" value="TRUE" />
-            <button class="action blue submit">
-                <span class="label">Register</span>
-            </button>
-        </form>
-    </div>
+        </ul>
+        <div id="address">
+        <h2>Address</h2>
+        <ul>
+            <li><input type="text" name="addess" placeholder="Address" value="{{form["address"]}}"/>
+            <li><input type="text" name="appt_number" placeholder="Appartment Number" value="{{form["appt_number"]}}" />
+             <li><input type="text" name="city" placeholder="City" value="{{form["city"]}}"/>
+            <li><input type="text" name="province" placeholder="Province" value="{{form["province"]}}"/>
+            <li><input type="text" name="postal_code" placeholder="Postal Code" value="{{form["postal_code"]}}"/>
+        </ul>
+        </div>
+        <input type="hidden" name="household_create_form" value="TRUE" />
+        <button class="action blue submit">
+            <span class="label">Register</span>
+        </button>
+    </form>
 </div>
 {% endblock content %}
