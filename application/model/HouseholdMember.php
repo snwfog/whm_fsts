@@ -58,8 +58,31 @@ use Doctrine\Common\Collections\ArrayCollection;
      **/
 	protected $first_visit_date;
 	/**
-     * @ManyToOne(targetEntity="Household", inversedBy="members")
+     *@ManyToOne(targetEntity="Household", inversedBy="members")
      **/
 	protected $household;
+	/**
+	 *@ManyToMany(targetEntity="Event", mappedBy="members") 
+	 **/
+	protected $events;
+	
+	public function _construct()
+	{
+		$this->events = new ArrayCollection();
+	}	
+	public function getId()
+    {
+        return $this->id;
+    }
+ 
+	
+ 
+ 
+ 
+ 
+ 
+ 
  
  }
+ 
+ ?>

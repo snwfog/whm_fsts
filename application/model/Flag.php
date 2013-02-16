@@ -3,23 +3,23 @@
 /**
  * @Entity
  * @Table(name="flags")
- */
+ **/
 class Flag {
 
     /**
      * @Id
      * @Column(type="integer")
-     */
+     **/
     private $id;
 
     /**
      * @Column(type="string")
-     */
+     **/
     private $color;
 
     /**
      * @Column(type="string")
-     */
+     **/
     private $type;
 
 	/**
@@ -28,12 +28,12 @@ class Flag {
     private $household;    
 	/**
      * @ManyToMany(targetEntity="Comment", mappedBy="flags")
-     */
+     **/
 	private $comments;
 	
 	public function _construct()
 	{
-		this->comments = new ArrayCollection();
+		$this->comments = new ArrayCollection();
 	}
 
     public function getId() {

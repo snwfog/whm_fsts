@@ -1,9 +1,7 @@
 <?php
 
-use Doctrine\Common\Collections\ArrayCollection;
-
 /**
- * @Entity @Table(name="address")
+ * @Entity @Table(name="addresses")
  **/
  
  class Address
@@ -15,12 +13,12 @@ use Doctrine\Common\Collections\ArrayCollection;
     protected $id;
 	/**
      * @OneToOne(targetEntity="Household", mappedBy="adress")
-     */
+     **/
 	protected $household;
 	/**
      * @Column(type="string")
      **/
-	protected $streetAndNumber;
+	protected $street;
 	/**
      * @Column(type="string")
      **/
@@ -37,6 +35,11 @@ use Doctrine\Common\Collections\ArrayCollection;
      * @Column(type="string")
      **/
 	protected $province;
+	
+	public function getId()
+    {
+        return $this->id;
+    }
 	
 	public function getStreet()
 	{
@@ -90,7 +93,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 	
 }
 	
-
+?>
 	
 	
 	

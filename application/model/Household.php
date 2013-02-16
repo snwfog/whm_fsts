@@ -22,15 +22,15 @@ class Household {
      **/
     protected $phone_number;    
     
-    /*
+    /**
      * @OneToOne(targetEntity="Address", inversedBy="household")
-     * @JoinColumn(name="household_address_id", referencedColumnName="id")
-     */
+     * @JoinColumn(name="address_id", referencedColumnName="id")
+     **/
     protected $address;
 
     /**
      * @OneToMany(targetEntity="HouseholdMember", mappedBy="household")
-     * */
+     **/
     protected $members = null;
 
     /**

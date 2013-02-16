@@ -1,30 +1,28 @@
 <?php
 
 /**
- * @Entity
- * @Table(name="comments")
- */
+ * @Entity @Table(name="comments")
+ **/
 class Comment
 {
     /**
-     * @Id
-     * @Column(type="integer")
-     */
+     * @Id @Column(type="integer")
+     **/
     private $id;
     
     /** 
      * @Column(type="string")
-     */
+     **/
     private $content;
     /**
      * @ManyToMany(targetEntity="Flag", inversedBy="comments")
-     * @JoinTable(name="comments_describe_flags")
-     */
+     * @JoinTable(name="describes")
+     **/
 	private $flags;
 	
 	public function _construct()
 	{
-		this->flags = new ArrayCollection();
+		$this->flags = new ArrayCollection();
 	}
     public function getId() {
         return $this->id;
