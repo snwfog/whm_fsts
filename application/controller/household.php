@@ -15,26 +15,24 @@ class Household_Controller extends Controller_Core implements IRedirectable_Core
         $this->display("household_create_form.twig");
     }
 
-    public function post()
-    {
-    
-        print_r($_POST);
-        echo $_POST["first_name"];
-
-     //   $house_model = new HouseholdMember();
-       // $house_model->create()
-    }
-
     public function put()
     {
 
+        $content = "charles=yang&mike=pham";
+        file_put_contents("php://output", $content);
+        $var = null;
+        echo "before marker";
+        $unparsed = file_get_contents("php://input");
+        echo $unparsed."unique<br>";
+
+        echo $unparsed."secondtime<br>";
+        parse_str($unparsed, $var);
+        print_r($var);
 
     }
 
-    public function delete()
+    public function post()
     {
-
+        echo "This is a post";
     }
-
 }
-
