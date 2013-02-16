@@ -5,7 +5,7 @@ function __autoload_test($name)
 
     list($filename, $suffix, $test) = explode('_', strtolower($name));
 
-    $filepath = "test/{$suffix}/" . ucfirst($filename) . ucfirst($suffix) . "Test.php";
+    $filepath = "tests/{$suffix}/" . ucfirst($filename) . ucfirst($suffix) . "Test.php";
 
     if (file_exists($filepath))
     {
@@ -18,4 +18,4 @@ function __autoload_test($name)
     }
 }
 
-spl_autoload_register('__autoload');
+spl_autoload_register('__autoload_test');
