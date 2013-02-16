@@ -45,7 +45,7 @@ spl_autoload_register('__autoload');
 
 function __autoload_test($name)
 {
-
+    echo $name;
     list($filename, $suffix, $test) = explode('_', strtolower($name));
 
     $filepath = "tests/{$suffix}/" . ucfirst($filename) . ucfirst($suffix) . "Test.php";
@@ -57,8 +57,8 @@ function __autoload_test($name)
     else
     {
         // header('Location: ' . Controller::REDIRECT_ERROR);
-        exit("File '$filepath' containing class '$name' could not be located by the autoload function.");
+        exit("File '$filepath' containing class '$name' could not be located by the __autoload_test function.");
     }
 }
 
-spl_autoload_register('__autoload_test');
+// spl_autoload_register('__autoload_test');
