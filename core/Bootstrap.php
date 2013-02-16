@@ -8,9 +8,13 @@
  * @required_by: index.php
  */
 
-// Bootstrap all autoloader functions
+
+
 //define('APPPATH', 'application');   //ENABLED FOR PHPUNIT
 //define('SYSPATH', 'core');         //ENABLED FOR PHPUNIT  
+
+// Bootstrap all autoloader functions
+
 require_once('vendor/autoload.php');
 require_once(SYSPATH . '/Autoload.php');
 
@@ -24,3 +28,8 @@ Twig_Autoloader::register();
 // Bootstrap Doctrine ORM 2.3.2
 require_once('vendor/Doctrine/Doctrine/ORM/Tools/Setup.php');
 Doctrine\ORM\Tools\Setup::registerAutoloadDirectory("vendor/Doctrine");
+
+
+
+
+
