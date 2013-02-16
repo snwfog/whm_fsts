@@ -4,7 +4,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @Entity @Table(name="households")
- * */
+ **/
 class Household {
     
     /**
@@ -38,22 +38,25 @@ class Household {
      **/
     protected $flags = null;
 	
+	
 	public function _construct()
 	{
 		$this->members = new ArrayCollection();
 		$this->flags = new ArrayCollection();
 
 	}
-
-    public function getId() {
+    public function getId() 
+	{
         return $this->id;
     }
 
-    public function setId($id) {
+    public function setId($id) 
+	{
         $this->id = $id;
     }
 
-    public function getHousehold_principal_id() {
+    public function getHousehold_principal_id() 
+	{
         return $this->household_principal_id;
     }
 
@@ -85,10 +88,6 @@ class Household {
         $this->members = $members;
     }
 
-
-	
-	
- 
  }
  
  

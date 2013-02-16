@@ -36,38 +36,56 @@ class Flag {
 		$this->comments = new ArrayCollection();
 	}
 
-    public function getId() {
+    public function getId() 
+	{
         return $this->id;
     }
 
-    public function setId($id) {
+    public function setId($id) 
+	{
         $this->id = $id;
     }
 
-    public function getColor() {
+    public function getColor() 
+	{
         return $this->color;
     }
 
-    public function setColor($color) {
+    public function setColor($color) 
+	{
         $this->color = $color;
     }
 
-    public function getType() {
+    public function getType() 
+	{
         return $this->type;
     }
 
-    public function setType($type) {
+    public function setType($type) 
+	{
         $this->type = $type;
     }
 
-    public function getHousehold() {
-        return $this->household;
+    public function getHousehold() 
+	{
+		return $this->household;
     }
 
-    public function setHousehold($household) {
+    public function setHousehold($household) 
+	{
         $this->household = $household;
     }
+	public function getComments() 
+	{
+		return $this->comments;
+    }
 
+    public function setComments($comments) 
+	{
+        $this->comments = $comments;
+    }
+
+	
 }
 
 ?>

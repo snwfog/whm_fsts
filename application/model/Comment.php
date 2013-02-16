@@ -35,10 +35,16 @@ class Comment
     public function getContent() {
         return $this->content;
     }
-
     public function setContent($content) {
         $this->content = $content;
     }
+	 public function getFlags() {
+        return $this->flags;
+    }
+    public function setFlags($flags) {
+        $this->flags = $flags;
+    }
+	
 
 }
 

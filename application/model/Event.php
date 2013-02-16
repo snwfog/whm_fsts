@@ -56,10 +56,76 @@ class Event
     {
         return $this->id;
     }
-
-
-
-
+	public function setId($id) 
+	{
+        $this->id = $id;
+    }
+	public function getStart_time()
+    {
+        return $this->start_time;
+    }
+	public function setStart_time($start_time) 
+	{
+        $this->start_time = $start_time;
+    }
+	public function getEnd_time()
+    {
+        return $this->end_time;
+    }
+	public function setEnd_time($end_time) 
+	{
+        $this->end_time = $end_time;
+    }	
+	public function getDate()
+    {
+        return $this->date;
+    }
+	public function setDate($date) 
+	{
+        $this->date = $date;
+    }
+	public function getType()
+    {
+        return $this->type;
+    }
+	public function setType($type) 
+	{
+        $this->type = $type;
+    }	
+	public function getMax_attendees()
+    {
+        return $this->max_attendees;
+    }
+	public function setMax_attendees($max_attendees) 
+	{
+        $this->max_attendees = $max_attendees;
+    }
+	public function getRecurrence()
+    {
+        return $this->recurrence;
+    }
+	public function setRecurrence($recurrence) 
+	{
+        $this->recurrence = $recurrence;
+    }
+	public function getTemplates()
+    {
+        return $this->templates;
+    }
+	public function setTemplates($templates) 
+	{
+        $this->templates = $templates;
+    }
+	public function getMembers()
+    {
+        return $this->members;
+    }
+	public function setMembers($members) 
+	{
+        $this->members= $members;
+    }		
+	
+	
 }
 
 ?>
