@@ -9,6 +9,8 @@
  */
 
 // Bootstrap all autoloader functions
+//define('APPPATH', 'application');   //ENABLED FOR PHPUNIT
+//define('SYSPATH', 'core');         //ENABLED FOR PHPUNIT  
 require_once('vendor/autoload.php');
 require_once(SYSPATH . '/Autoload.php');
 
