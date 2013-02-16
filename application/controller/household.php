@@ -19,7 +19,9 @@ class Household_Controller extends Controller_Core implements IRedirectable_Core
                 break;
             
             default:
-                $this->display("household_view_form.twig");;
+                $data
+                $this->display("household_view_form.twig", $data);
+                break;
         }
 
         
