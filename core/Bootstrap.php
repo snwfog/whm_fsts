@@ -8,6 +8,8 @@
  * @required_by: index.php
  */
 
+define('APPPATH', 'application');   // Folder for controller, view, model
+define('SYSPATH', 'core');          // Folder for core
 // Bootstrap all autoloader functions
 require_once('vendor/autoload.php');
 require_once(SYSPATH . '/Autoload.php');
