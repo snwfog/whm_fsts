@@ -5,6 +5,11 @@
  *
  * @description: Main application.
  */
+
+use Doctrine\ORM\Tools\Setup;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Configuration;
+
 class Application_Core
 {
     private $_registry;
@@ -24,7 +29,11 @@ class Application_Core
 
         // Define Doctrine information...
 
+        $doctrine_config = Setup::createAnnotationMetadataConfiguration
+            (array(DOCTRINE_MODEL_PATH), $this->_default_config['dev_mode']);
 
+        $em = EntityManager::create($this->_default_config['dbconfig'],
+            $doctrine_config);
     }
 
     public function route($routes)
