@@ -25,7 +25,6 @@
 define('BASE_URL', "http://".$_SERVER['HTTP_HOST']);
 define('FOLDER_URL', str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']));
 
-//define('FOLDER_ROOT', '/groups/e/et_comp353_2/');
 define('FOLDER_ROOT', '/Applications/MAMP/htdocs/353/');
 
 define('SERVER_ROOT', $_SERVER['DOCUMENT_ROOT'] . FOLDER_URL);
@@ -45,20 +44,6 @@ define('DOCTRINE_PROXY_PATH', 'application/proxy');
  * While include will try to move on if the file is not found.
  * -----------------------------------------------------------------------------
  */
-
-/**-----------------------------------------------------------------------------
- * Import the files and load the database connector file as a singleton pattern.
- * The database connector should be called through the getInstance method.
- * -----------------------------------------------------------------------------
- */
-//require_once('database.php');
-//require_once('model.php');
-
-/**-----------------------------------------------------------------------------
- * Load the session class, which act as LOGIN and SESSION checker.
- * -----------------------------------------------------------------------------
- */
-// require_once('session.php');
 
 /**
  * -----------------------------------------------------------------------------

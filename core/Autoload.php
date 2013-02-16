@@ -18,7 +18,6 @@ function __autoload($name)
         'application/' => array('controller', 'model', 'hook', 'view')
     );
 
-
     list($filename, $suffix) = explode('_', strtolower($name));
 
     // Variable topography $dir/$dirdir/$filename.php

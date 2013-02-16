@@ -8,6 +8,7 @@
 class Application_Core
 {
     private $_registry;
+    private $_default_config = array();
 
     /*
      * CONSTRUCTOR
@@ -17,10 +18,12 @@ class Application_Core
      *
      * @param array $libraries
      */
-    public function __construct($args)
+    public function __construct($config)
     {
-        // Define the Application class registry
-        $this->_registry = Registry_Core::get_instance();
+        $this->_default_config = array_merge($this->_default_config, $config);
+
+        // Define Doctrine information...
+
 
     }
 

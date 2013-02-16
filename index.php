@@ -5,8 +5,22 @@
  * ---------------------------------------------
  */
 
-// Define user libraries
-$user_libraries = array();
+// Define application configuration variables
+$config = array
+(
+    // Dev mode use ArrayCache and auto generate proxy in Doctrine
+    'dev_mode' => true,
+    'dbconfig' => array
+    (
+        'driver' => 'pdo_mysql',
+        'user'   => 'root',
+        'password' => 'root',
+        'dbname' => 'soen390'
+    ),
+
+
+);
+
 
 // Define router routes to serve
 $serves = array
@@ -26,9 +40,9 @@ $serves = array
 define('APPPATH', 'application');   // Folder for controller, view, model
 define('SYSPATH', 'core');          // Folder for core
 
-// Here we go start the bootstrap
+// Here we go start the bootstrap...
 require_once('core/Bootstrap.php');
 
 // Instance the application
-$app = new Application_Core($user_libraries);
+$app = new Application_Core($config);
 $app->route($serves);

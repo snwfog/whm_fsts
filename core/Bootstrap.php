@@ -8,13 +8,14 @@
  * @required_by: index.php
  */
 
-// Require the autoloader for classes
+// Bootstrap all autoloader functions
+require_once('vendor/autoload.php');
 require_once(SYSPATH . '/Autoload.php');
 
 // Require the config file for define variables
 require_once(SYSPATH . '/Config.php');
 
-// Bootstrap Twig Templating Framework
+// Bootstrap Twig templating engine
 require_once('vendor/Twig/Autoloader.php');
 Twig_Autoloader::register();
 
