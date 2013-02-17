@@ -8,12 +8,11 @@
             <div id="error">{{ error }}</div></br>
         {% endblock %}
     {% endfor %}
-
-
-   <fieldset id="regis">
-    <legend><h2>Registration</h2></legend>
+    
+   <fieldset id="regis"> 
+        <legend><h1>Registration</h1></legend>
     <form action="household" method="POST" name="household_create">
-
+        <div style = "pers" >
             <h2>Personal Information</h2>
             <ul>
 
@@ -240,7 +239,8 @@
                      <br />
 
         </ul>
-        <div id="address">
+    </div>
+        <div style="address">
         <h2>Address</h2>
         <ul>
             <li><input type="text" name="addess" placeholder="Address" value="{{form["address"]}}"/>
@@ -254,6 +254,11 @@
         <button class="action blue submit">
             <span class="label">Register</span>
         </button>
-    </form>
+    
 </fieldset>
+<<<<<<< HEAD:application/whm/view/household_create_form.twig
 {% endblock content %}
+=======
+</form>
+{% endblock content %}
+>>>>>>> updates:application/view/household_create_form.twig
