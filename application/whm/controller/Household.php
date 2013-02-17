@@ -1,6 +1,6 @@
 <?php
 
-class Household_Controller extends Controller_Core implements IRedirectable_Core
+class Household extends WHM\Controller implements WHM\IRedirectable
 {
     public $data = array("errors" => array(), "form" => array());
     public function __construct(array $args = null)
