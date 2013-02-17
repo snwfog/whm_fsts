@@ -33,6 +33,7 @@ define('SERVER_ROOT', $_SERVER['DOCUMENT_ROOT'] . FOLDER_URL);
 define('SITE_ROOT', BASE_URL . FOLDER_URL);
 
 define('IMAGE_PATH', 'assets/img/offer-picture/');
+define('TWIG_CACHE_PATH', 'application/whm/view/cache');
 define('TWIG_VIEW_PATH', 'application/whm/view');
 define('DOCTRINE_MODEL_PATH', 'application/whm/model');
 define('DOCTRINE_PROXY_PATH', 'application/whm/proxy');

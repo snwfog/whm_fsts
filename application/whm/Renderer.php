@@ -16,9 +16,9 @@ class Renderer implements IRenderer
     private $_twig_instance;
     private $_twig_config = array
     (
-        'cache' => 'application/view/cache',   // Twig template cache folder
-        'auto_reload' => TRUE               // Autoload reload caches,
-                                            // set to false when deploy
+        'cache' => TWIG_CACHE_PATH, // Twig template cache folder
+        'auto_reload' => TRUE       // Autoload reload caches,
+                                    // set to false when deploy
     );
 
     private function __construct()
