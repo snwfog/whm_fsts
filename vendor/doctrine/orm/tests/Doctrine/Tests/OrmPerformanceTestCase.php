@@ -57,3 +57,4 @@ class OrmPerformanceTestCase extends OrmFunctionalTestCase
         return $this->maxRunningTime;
     }
 }
+

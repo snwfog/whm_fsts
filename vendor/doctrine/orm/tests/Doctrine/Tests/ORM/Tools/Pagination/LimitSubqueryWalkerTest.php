@@ -45,3 +45,4 @@ class LimitSubqueryWalkerTest extends PaginationTestCase
         );
     }
 }
+

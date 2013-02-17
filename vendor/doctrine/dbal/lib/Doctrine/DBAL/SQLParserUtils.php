@@ -82,7 +82,7 @@ class SQLParserUtils
      * @param string    $query  The SQL query to execute.
      * @param array     $params The parameters to bind to the query.
      * @param array     $types  The types the previous parameters are in.
-     *
+     * 
      * @return array
      */
     static public function expandListParameters($query, $params, $types)
@@ -161,7 +161,7 @@ class SQLParserUtils
                 $paramsOrd[]  = $value;
                 $typesOrd[]   = $types[$paramName];
                 $query        = substr($query, 0, $pos) . '?' . substr($query, ($pos + $paramLen));
-
+            
                 continue;
             }
 

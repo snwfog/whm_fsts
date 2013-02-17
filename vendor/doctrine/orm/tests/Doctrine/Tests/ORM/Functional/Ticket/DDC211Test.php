@@ -113,3 +113,4 @@ class DDC211Group
 
     public function getUsers() { return $this->users; }
 }
+

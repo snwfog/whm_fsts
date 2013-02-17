@@ -49,3 +49,4 @@ class SequenceMock extends \Doctrine\ORM\Id\SequenceGenerator
         $this->_sequenceNumber++;
     }
 }
+

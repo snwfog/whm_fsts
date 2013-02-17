@@ -1,12 +1,11 @@
 <?php
 
-require_once('App.php');
-
-use \App;
+require_once 'index.php';
 
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
+use WHM\Application;
 
-$em = App::get('em');
+$em = Application::em();
 
 $helperSet = new \Symfony\Component\Console\Helper\HelperSet(array(
     'db' => new \Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper($em->getConnection()),

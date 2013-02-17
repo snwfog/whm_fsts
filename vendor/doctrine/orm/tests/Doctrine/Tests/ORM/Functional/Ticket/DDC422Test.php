@@ -72,3 +72,4 @@ class DDC422Contact {
     /** @Id @Column(type="integer") @GeneratedValue */
     public $id;
 }
+

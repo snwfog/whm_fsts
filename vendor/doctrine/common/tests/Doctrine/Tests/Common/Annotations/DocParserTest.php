@@ -747,7 +747,7 @@ DOCBLOCK;
             'intefacewithconstants'     => 'Doctrine\Tests\Common\Annotations\Fixtures\IntefaceWithConstants',
             'annotationwithconstants'   => 'Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants'
         ));
-
+        
         $result = $parser->parse($docblock);
         $this->assertInstanceOf('\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants', $annotation = $result[0]);
         $this->assertEquals($expected, $annotation->value);

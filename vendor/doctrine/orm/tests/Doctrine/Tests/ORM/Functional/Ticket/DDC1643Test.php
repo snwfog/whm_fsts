@@ -118,3 +118,4 @@ class DDC1643Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->assertEquals(3, count($user1->groups));
     }
 }
+

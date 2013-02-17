@@ -165,7 +165,7 @@ class SqliteSchemaManager extends AbstractSchemaManager
                 if (isset($tableColumn['length'])) {
                     if (strpos($tableColumn['length'], ',') === false) {
                         $tableColumn['length'] .= ",0";
-                    }
+                    }                    
                     list($precision, $scale) = array_map('trim', explode(',', $tableColumn['length']));
                 }
                 $length = null;

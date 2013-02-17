@@ -104,3 +104,4 @@ class StaticReflectionService implements ReflectionService
         return method_exists($class, $method) && is_callable(array($class, $method));
     }
 }
+

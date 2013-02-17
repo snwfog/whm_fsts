@@ -195,3 +195,4 @@ class TestObject
         return $this->bar;
     }
 }
+

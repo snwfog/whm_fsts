@@ -134,7 +134,7 @@ class PhpExtensions
         system($cmd, $ret);
         if (0 !== $ret) {
             printf("=> Command '%s' failed !", $cmd);
-
+            
             exit($ret);
         }
     }

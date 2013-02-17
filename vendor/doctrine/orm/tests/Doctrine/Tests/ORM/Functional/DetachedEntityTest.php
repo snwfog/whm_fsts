@@ -215,3 +215,4 @@ class DetachedEntityTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_em->merge($article);
     }
 }
+

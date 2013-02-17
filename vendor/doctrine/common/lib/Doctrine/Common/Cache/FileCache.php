@@ -68,7 +68,7 @@ abstract class FileCache extends CacheProvider
 
     /**
      * Gets the cache directory.
-     *
+     * 
      * @return string
      */
     public function getDirectory()
@@ -78,7 +78,7 @@ abstract class FileCache extends CacheProvider
 
     /**
      * Gets the cache file extension.
-     *
+     * 
      * @return string
      */
     public function getExtension()

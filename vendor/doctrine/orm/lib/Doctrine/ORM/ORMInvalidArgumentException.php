@@ -44,7 +44,7 @@ class ORMInvalidArgumentException extends \InvalidArgumentException
     static public function entityWithoutIdentity($className, $entity)
     {
         return new self(
-            "The given entity of type '" . $className . "' (".self::objToStr($entity).") has no identity/no " .
+            "The given entity of type '" . $className . "' (".self::objToStr($entity).") has no identity/no " . 
             "id values set. It cannot be added to the identity map."
         );
     }
@@ -98,7 +98,7 @@ class ORMInvalidArgumentException extends \InvalidArgumentException
 
     public static function invalidObject($context, $given, $parameterIndex = 1)
     {
-        return new self($context .' expects parameter ' . $parameterIndex .
+        return new self($context .' expects parameter ' . $parameterIndex . 
                     ' to be an entity object, '. gettype($given) . ' given.');
     }
 

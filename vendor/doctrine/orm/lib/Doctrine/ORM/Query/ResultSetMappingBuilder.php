@@ -210,7 +210,7 @@ class ResultSetMappingBuilder extends ResultSetMapping
 
     /**
      * Adds the entity result mapping of the results of native SQL queries to the result set.
-     *
+     * 
      * @param ClassMetadataInfo $classMetadata
      * @param array $entityMapping
      * @param string $alias

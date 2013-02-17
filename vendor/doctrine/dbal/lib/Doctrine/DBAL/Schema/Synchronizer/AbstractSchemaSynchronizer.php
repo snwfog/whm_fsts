@@ -53,5 +53,6 @@ abstract class AbstractSchemaSynchronizer implements SchemaSynchronizer
             $this->conn->exec($s);
         }
     }
-
+    
 }
+

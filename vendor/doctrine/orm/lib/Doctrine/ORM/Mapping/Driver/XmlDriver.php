@@ -727,3 +727,4 @@ class XmlDriver extends FileDriver
         return ($flag === true || $flag == "true" || $flag == "1");
     }
 }
+

@@ -157,7 +157,7 @@ class ResultSetMappingTest extends \Doctrine\Tests\OrmTestCase
             )
         ));
 
-
+        
         $queryMapping = $cm->getNamedNativeQuery('find-all');
 
         $rsm = new \Doctrine\ORM\Query\ResultSetMappingBuilder($this->_em);
@@ -256,3 +256,4 @@ class ResultSetMappingTest extends \Doctrine\Tests\OrmTestCase
         $this->assertEquals('Doctrine\Tests\Models\CMS\CmsUser', $rsm->getDeclaringClass('username'));
     }
 }
+

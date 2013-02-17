@@ -73,3 +73,4 @@ class LoadClassMetadataEventArgs extends EventArgs
         return $this->objectManager;
     }
 }
+

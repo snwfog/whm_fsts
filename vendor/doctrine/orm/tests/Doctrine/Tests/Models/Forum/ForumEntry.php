@@ -23,3 +23,4 @@ class ForumEntry
         return $this->topic;
     }
 }
+

@@ -24,7 +24,7 @@ namespace Doctrine\DBAL\Schema;
 /**
  * Represent the change of a column
  *
- *
+ * 
  * @link    www.doctrine-project.org
  * @since   2.0
  * @version $Revision$

@@ -24,7 +24,7 @@ use Doctrine\ORM\Query\Lexer;
 /**
  * "CONCAT" "(" StringPrimary "," StringPrimary ")"
  *
- *
+ * 
  * @link    www.doctrine-project.org
  * @since   2.0
  * @author  Guilherme Blanco <guilhermeblanco@hotmail.com>
@@ -64,3 +64,4 @@ class ConcatFunction extends FunctionNode
         $parser->match(Lexer::T_CLOSE_PARENTHESIS);
     }
 }
+

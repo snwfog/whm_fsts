@@ -45,3 +45,4 @@ interface Selectable
      */
     function matching(Criteria $criteria);
 }
+

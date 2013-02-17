@@ -28,3 +28,4 @@ interface Expression
 {
     public function visit(ExpressionVisitor $visitor);
 }
+

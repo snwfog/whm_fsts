@@ -192,3 +192,4 @@ class ClosureExpressionVisitor extends ExpressionVisitor
         };
     }
 }
+

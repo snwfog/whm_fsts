@@ -92,7 +92,7 @@ class ClassTableInheritanceTest extends \Doctrine\Tests\OrmFunctionalTestCase
     }
 
     public function testMultiLevelUpdateAndFind() {
-	$manager = new CompanyManager;
+    	$manager = new CompanyManager;
         $manager->setName('Roman S. Borschel');
         $manager->setSalary(100000);
         $manager->setDepartment('IT');
@@ -139,7 +139,7 @@ class ClassTableInheritanceTest extends \Doctrine\Tests\OrmFunctionalTestCase
     }
 
     public function testSelfReferencingOneToOne() {
-	$manager = new CompanyManager;
+    	$manager = new CompanyManager;
         $manager->setName('John Smith');
         $manager->setSalary(100000);
         $manager->setDepartment('IT');

@@ -60,3 +60,5 @@ class DDC144Operand extends DDC144Expression {
     public $operandProperty;
     function method() {}
 }
+
+

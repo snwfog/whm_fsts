@@ -26,7 +26,7 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo,
 /**
  * Class to help with converting Doctrine 1 schema files to Doctrine 2 mapping files
  *
- *
+ * 
  * @link    www.doctrine-project.org
  * @since   2.0
  * @author  Guilherme Blanco <guilhermeblanco@hotmail.com>

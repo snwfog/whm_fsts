@@ -67,3 +67,4 @@ class RuntimeReflectionServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf("ReflectionProperty", $reflProp);
     }
 }
+

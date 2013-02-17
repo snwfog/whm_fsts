@@ -285,3 +285,4 @@ class IdentityMapTest extends \Doctrine\Tests\OrmFunctionalTestCase
         return spl_object_hash($user);
     }
 }
+

@@ -5,9 +5,9 @@
     xmlns:orm="http://doctrine-project.org/schemas/orm/doctrine-mapping"
     elementFormDefault="qualified">
 
-  <xs:annotation>
-    <xs:documentation><![CDATA[
-       This is the XML Schema for the object/relational
+  <xs:annotation> 
+    <xs:documentation><![CDATA[ 
+       This is the XML Schema for the object/relational 
        mapping file used by the Doctrine ORM.
      ]]></xs:documentation>
   </xs:annotation>
@@ -22,26 +22,26 @@
       <xs:anyAttribute namespace="##other"/>
     </xs:complexType>
   </xs:element>
-
+  
   <xs:complexType name="emptyType">
     <xs:sequence>
       <xs:any minOccurs="0" maxOccurs="unbounded" namespace="##other"/>
     </xs:sequence>
     <xs:anyAttribute namespace="##other"/>
   </xs:complexType>
-
+  
   <xs:complexType name="cascade-type">
     <xs:sequence>
-      <xs:element name="cascade-all" type="orm:emptyType" minOccurs="0"/>
-      <xs:element name="cascade-persist" type="orm:emptyType" minOccurs="0"/>
-      <xs:element name="cascade-merge" type="orm:emptyType" minOccurs="0"/>
-      <xs:element name="cascade-remove" type="orm:emptyType" minOccurs="0"/>
-      <xs:element name="cascade-refresh" type="orm:emptyType" minOccurs="0"/>
+      <xs:element name="cascade-all" type="orm:emptyType" minOccurs="0"/> 
+      <xs:element name="cascade-persist" type="orm:emptyType" minOccurs="0"/> 
+      <xs:element name="cascade-merge" type="orm:emptyType" minOccurs="0"/> 
+      <xs:element name="cascade-remove" type="orm:emptyType" minOccurs="0"/> 
+      <xs:element name="cascade-refresh" type="orm:emptyType" minOccurs="0"/> 
       <xs:any minOccurs="0" maxOccurs="unbounded" namespace="##other"/>
     </xs:sequence>
     <xs:anyAttribute namespace="##other"/>
   </xs:complexType>
-
+  
   <xs:simpleType name="lifecycle-callback-type">
     <xs:restriction base="xs:token">
       <xs:enumeration value="prePersist"/>
@@ -53,7 +53,7 @@
       <xs:enumeration value="postLoad"/>
     </xs:restriction>
   </xs:simpleType>
-
+  
   <xs:complexType name="lifecycle-callback">
     <xs:sequence>
       <xs:any minOccurs="0" maxOccurs="unbounded" namespace="##other"/>
@@ -62,7 +62,7 @@
     <xs:attribute name="method" type="xs:NMTOKEN" use="required" />
     <xs:anyAttribute namespace="##other"/>
   </xs:complexType>
-
+  
   <xs:complexType name="lifecycle-callbacks">
     <xs:sequence>
       <xs:element name="lifecycle-callback" type="orm:lifecycle-callback" minOccurs="1" maxOccurs="unbounded" />
@@ -158,7 +158,7 @@
     <xs:attribute name="read-only" type="xs:boolean" default="false" />
     <xs:anyAttribute namespace="##other"/>
   </xs:complexType>
-
+  
   <xs:complexType name="option" mixed="true">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:element name="option" type="orm:option"/>
@@ -194,7 +194,7 @@
       <xs:enumeration value="NOTIFY"/>
     </xs:restriction>
   </xs:simpleType>
-
+  
   <xs:simpleType name="inheritance-type">
     <xs:restriction base="xs:token">
       <xs:enumeration value="SINGLE_TABLE"/>
@@ -202,32 +202,32 @@
       <xs:enumeration value="TABLE_PER_CLASS"/>
     </xs:restriction>
   </xs:simpleType>
-
-  <xs:simpleType name="generator-strategy">
-    <xs:restriction base="xs:token">
-      <xs:enumeration value="TABLE"/>
-      <xs:enumeration value="SEQUENCE"/>
-      <xs:enumeration value="IDENTITY"/>
-      <xs:enumeration value="AUTO"/>
-      <xs:enumeration value="UUID"/>
+  
+  <xs:simpleType name="generator-strategy"> 
+    <xs:restriction base="xs:token"> 
+      <xs:enumeration value="TABLE"/> 
+      <xs:enumeration value="SEQUENCE"/> 
+      <xs:enumeration value="IDENTITY"/> 
+      <xs:enumeration value="AUTO"/> 
+      <xs:enumeration value="UUID"/> 
       <xs:enumeration value="CUSTOM" />
-    </xs:restriction>
+    </xs:restriction> 
   </xs:simpleType>
-
-  <xs:simpleType name="fk-action">
-    <xs:restriction base="xs:token">
-      <xs:enumeration value="CASCADE"/>
-      <xs:enumeration value="RESTRICT"/>
+  
+  <xs:simpleType name="fk-action"> 
+    <xs:restriction base="xs:token"> 
+      <xs:enumeration value="CASCADE"/> 
+      <xs:enumeration value="RESTRICT"/> 
       <xs:enumeration value="SET NULL"/>
-    </xs:restriction>
+    </xs:restriction> 
   </xs:simpleType>
-
-  <xs:simpleType name="fetch-type">
-    <xs:restriction base="xs:token">
-      <xs:enumeration value="EAGER"/>
+  
+  <xs:simpleType name="fetch-type"> 
+    <xs:restriction base="xs:token"> 
+      <xs:enumeration value="EAGER"/> 
       <xs:enumeration value="LAZY"/>
       <xs:enumeration value="EXTRA_LAZY"/>
-    </xs:restriction>
+    </xs:restriction> 
   </xs:simpleType>
 
   <xs:complexType name="field">
@@ -247,7 +247,7 @@
     <xs:attribute name="scale" type="xs:integer" use="optional" />
     <xs:anyAttribute namespace="##other"/>
   </xs:complexType>
-
+  
   <xs:complexType name="discriminator-column">
     <xs:sequence>
       <xs:any minOccurs="0" maxOccurs="unbounded" namespace="##other"/>
@@ -259,7 +259,7 @@
     <xs:attribute name="column-definition" type="xs:string" />
     <xs:anyAttribute namespace="##other"/>
   </xs:complexType>
-
+  
   <xs:complexType name="unique-constraint">
     <xs:sequence>
       <xs:any minOccurs="0" maxOccurs="unbounded" namespace="##other"/>
@@ -268,7 +268,7 @@
     <xs:attribute name="columns" type="xs:string" use="required"/>
     <xs:anyAttribute namespace="##other"/>
   </xs:complexType>
-
+  
   <xs:complexType name="unique-constraints">
     <xs:sequence>
       <xs:element name="unique-constraint" type="orm:unique-constraint" minOccurs="1" maxOccurs="unbounded"/>
@@ -276,7 +276,7 @@
     </xs:sequence>
     <xs:anyAttribute namespace="##other"/>
   </xs:complexType>
-
+  
   <xs:complexType name="index">
     <xs:sequence>
       <xs:any minOccurs="0" maxOccurs="unbounded" namespace="##other"/>
@@ -285,7 +285,7 @@
     <xs:attribute name="columns" type="xs:string" use="required"/>
     <xs:anyAttribute namespace="##other"/>
   </xs:complexType>
-
+  
   <xs:complexType name="indexes">
     <xs:sequence>
       <xs:element name="index" type="orm:index" minOccurs="1" maxOccurs="unbounded"/>
@@ -293,7 +293,7 @@
     </xs:sequence>
     <xs:anyAttribute namespace="##other"/>
   </xs:complexType>
-
+  
   <xs:complexType name="discriminator-mapping">
     <xs:sequence>
       <xs:any minOccurs="0" maxOccurs="unbounded" namespace="##other"/>
@@ -302,7 +302,7 @@
     <xs:attribute name="class" type="xs:string" use="required"/>
     <xs:anyAttribute namespace="##other"/>
   </xs:complexType>
-
+  
   <xs:complexType name="discriminator-map">
     <xs:sequence>
       <xs:element name="discriminator-mapping" type="orm:discriminator-mapping" minOccurs="1" maxOccurs="unbounded"/>
@@ -447,7 +447,7 @@
     <xs:attribute name="fetch" type="orm:fetch-type" default="LAZY" />
     <xs:anyAttribute namespace="##other"/>
   </xs:complexType>
-
+  
   <xs:complexType name="many-to-one">
     <xs:sequence>
       <xs:element name="cascade" type="orm:cascade-type" minOccurs="0" />
@@ -465,7 +465,7 @@
     <xs:attribute name="inversed-by" type="xs:NMTOKEN" />
     <xs:anyAttribute namespace="##other"/>
   </xs:complexType>
-
+  
   <xs:complexType name="one-to-one">
     <xs:sequence>
       <xs:element name="cascade" type="orm:cascade-type" minOccurs="0" />

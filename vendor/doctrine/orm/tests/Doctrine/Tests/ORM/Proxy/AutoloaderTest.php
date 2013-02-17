@@ -59,3 +59,4 @@ class AutoloaderTest extends OrmTestCase
         unlink(sys_get_temp_dir() ."/AutoloaderTestClass.php");
     }
 }
+

@@ -102,3 +102,4 @@ class IndexByAssociationTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->assertFalse(isset($bond->stocks['GOOG']), "GOOG symbol not exists in re-indexed assocation.");
     }
 }
+

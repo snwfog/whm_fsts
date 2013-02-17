@@ -26,7 +26,7 @@ use Doctrine\ORM\Tools\Export\ExportException;
  * Abstract base class which is to be used for the Exporter drivers
  * which can be found in \Doctrine\ORM\Tools\Export\Driver
  *
- *
+ * 
  * @link    www.doctrine-project.org
  * @since   2.0
  * @author  Jonathan Wage <jonwage@gmail.com>

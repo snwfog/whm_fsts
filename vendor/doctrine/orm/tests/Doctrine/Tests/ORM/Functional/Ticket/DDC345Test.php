@@ -154,3 +154,4 @@ class DDC345Membership
         $this->updated = new \DateTime;
     }
 }
+

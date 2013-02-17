@@ -387,7 +387,7 @@ class CmsUser
                   )
             )
         ));
-
+        
         $metadata->addSqlResultSetMapping(array(
             'name'      => 'mappingMultipleJoinsEntityResults',
             'entities'  => array(array(

@@ -86,3 +86,4 @@ class DDC1436Page
         $this->parent = $parent;
     }
 }
+

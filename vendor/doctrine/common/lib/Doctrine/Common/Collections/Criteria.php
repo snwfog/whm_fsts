@@ -237,3 +237,4 @@ class Criteria
         return $this;
     }
 }
+

@@ -87,3 +87,4 @@ class CountWalker extends TreeWalkerAdapter
         $AST->orderByClause = null;
     }
 }
+

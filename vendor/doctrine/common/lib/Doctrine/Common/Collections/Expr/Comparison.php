@@ -72,3 +72,4 @@ class Comparison implements Expression
         return $visitor->walkComparison($this);
     }
 }
+

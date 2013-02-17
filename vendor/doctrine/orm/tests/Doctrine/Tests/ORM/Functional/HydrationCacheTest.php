@@ -85,3 +85,4 @@ class HydrationCacheTest extends OrmFunctionalTestCase
         $this->assertEquals($c, $this->getCurrentQueryCount(), "Should not execute query. Its cached!");
     }
 }
+

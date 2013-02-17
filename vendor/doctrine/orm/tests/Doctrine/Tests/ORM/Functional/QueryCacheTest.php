@@ -150,3 +150,4 @@ class QueryCacheTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $users = $query->getResult();
     }
 }
+

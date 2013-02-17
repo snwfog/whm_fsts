@@ -173,14 +173,14 @@ class OneToManyBidirectionalAssociationTest extends \Doctrine\Tests\OrmFunctiona
         $this->assertInstanceOf('Doctrine\Common\Collections\Collection', $results);
         $this->assertEquals(2, count($results));
     }
-
+	
     public function testMatchingBis()
     {
         $this->_createFixture();
 
         $product  = $this->_em->find('Doctrine\Tests\Models\ECommerce\ECommerceProduct', $this->product->getId());
         $features = $product->getFeatures();
-
+        
         $thirdFeature = new ECommerceFeature();
         $thirdFeature->setDescription('Third feature');
         $product->addFeature($thirdFeature);

@@ -77,3 +77,4 @@ interface ReflectionService
      */
     function hasPublicMethod($class, $method);
 }
+

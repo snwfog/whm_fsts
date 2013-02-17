@@ -24,7 +24,7 @@ use Doctrine\ORM\Query\Lexer;
 /**
  * "IDENTITY" "(" SingleValuedAssociationPathExpression ")"
  *
- *
+ * 
  * @link    www.doctrine-project.org
  * @since   2.2
  * @author  Guilherme Blanco <guilhermeblanco@hotmail.com>
@@ -64,3 +64,4 @@ class IdentityFunction extends FunctionNode
         $parser->match(Lexer::T_CLOSE_PARENTHESIS);
     }
 }
+

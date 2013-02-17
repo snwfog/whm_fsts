@@ -81,7 +81,7 @@ class RedisCache extends CacheProvider
     {
         $result = $this->redis->set($id, $data);
         if ($lifeTime > 0) {
-            $this->redis->expire($id, $lifeTime);
+            $this->redis->expire($id, $lifeTime);        
         }
         return $result;
     }

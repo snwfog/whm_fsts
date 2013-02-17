@@ -19,3 +19,4 @@ $classLoader->register();
 
 $classLoader = new \Doctrine\Common\ClassLoader('Symfony', __DIR__ . "/../../../lib/vendor");
 $classLoader->register();
+

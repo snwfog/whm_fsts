@@ -4,8 +4,8 @@
     <import file="${project.basedir}/lib/vendor/doctrine-build-common/packaging.xml" />
 
     <property file="build.properties" />
-
-    <!--
+    
+    <!-- 
         Fileset for artifacts shared across all distributed packages.
     -->
     <fileset id="shared-artifacts" dir=".">
@@ -14,7 +14,7 @@
         <include name="CHANGELOG"/>
     </fileset>
 
-    <!--
+    <!-- 
         Fileset for the sources of the Doctrine Common package.
     -->
     <fileset id="common-sources" dir="./lib">
@@ -33,7 +33,7 @@
         </copy>
     </target>
 
-    <!--
+    <!-- 
         Builds distributable PEAR packages.
     -->
     <target name="define-pear-package" depends="copy-files">

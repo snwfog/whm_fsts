@@ -835,3 +835,4 @@ final class PersistentCollection implements Collection, Selectable
         return new ArrayCollection(array_merge($persister->loadCriteria($criteria), $newObjects));
     }
 }
+

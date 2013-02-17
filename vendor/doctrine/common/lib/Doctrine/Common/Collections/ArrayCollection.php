@@ -497,3 +497,4 @@ class ArrayCollection implements Collection, Selectable
         return new static($filtered);
     }
 }
+

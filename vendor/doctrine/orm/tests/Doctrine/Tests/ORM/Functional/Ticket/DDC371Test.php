@@ -69,3 +69,4 @@ class DDC371Parent {
     /** @OneToMany(targetEntity="DDC371Child", mappedBy="parent") */
     public $children;
 }
+

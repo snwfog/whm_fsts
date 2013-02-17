@@ -96,3 +96,4 @@ class MysqlSchemaNamespacedEntity
     /** @Column(type="integer") @Id @GeneratedValue */
     public $id;
 }
+

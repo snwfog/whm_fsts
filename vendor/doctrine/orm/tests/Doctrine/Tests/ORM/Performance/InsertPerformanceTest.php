@@ -53,3 +53,4 @@ class InsertPerformanceTest extends \Doctrine\Tests\OrmPerformanceTestCase
         echo ' Inserted 10000 objects in ' . ($e - $s) . ' seconds' . PHP_EOL;
     }
 }
+

@@ -34,3 +34,4 @@ class DDC1360DoubleQuote
     /** @Id @GeneratedValue @Column(type="integer") */
     public $id;
 }
+

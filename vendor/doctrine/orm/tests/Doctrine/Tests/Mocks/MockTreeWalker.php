@@ -14,3 +14,4 @@ class MockTreeWalker extends \Doctrine\ORM\Query\TreeWalkerAdapter
         return null;
     }
 }
+

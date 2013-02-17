@@ -23,7 +23,7 @@ class DDC964Group
 
     /**
      * @ArrayCollection
-     *
+     * 
      * @ManyToMany(targetEntity="DDC964User", mappedBy="groups")
      */
     private $users;
@@ -67,3 +67,4 @@ class DDC964Group
     }
 
 }
+

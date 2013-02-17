@@ -72,3 +72,5 @@ class PostUpdateListener
         $this->wasNotified = true;
     }
 }
+
+

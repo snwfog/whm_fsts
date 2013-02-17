@@ -816,7 +816,7 @@ class PHPUnit_Util_Configuration
             if ($testSuiteFilter && $directoryNode->parentNode->getAttribute('name') != $testSuiteFilter) {
                 continue;
             }
-
+            
             $directory = (string)$directoryNode->nodeValue;
 
             if (empty($directory)) {
@@ -864,7 +864,7 @@ class PHPUnit_Util_Configuration
             if ($testSuiteFilter && $fileNode->parentNode->getAttribute('name') != $testSuiteFilter) {
                 continue;
             }
-
+            
             $file = (string)$fileNode->nodeValue;
 
             if (empty($file)) {
