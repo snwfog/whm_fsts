@@ -18,8 +18,6 @@ class CreateHousehold extends WHM\Controller implements WHM\IRedirectable
     public function get()
     {
         $this->display("household_create_form.twig");
-
-        ManageHousehold::createHousehold("1", "514-1919191");
     }
 
 
