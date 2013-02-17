@@ -1,7 +1,5 @@
 <?php
 
-require_once("EntityManager.php");
-
 class Household_Controller extends Controller_Core implements IRedirectable_Core
 {
     public $data = array("errors" => array(), "form" => array());
@@ -27,13 +25,6 @@ class Household_Controller extends Controller_Core implements IRedirectable_Core
                 break;
         }
 
-        
-		$household = new Household();
-		$household->setHousehold_principal_id("123");
-		$household->setPhone_number("514-6789999");
-		$em->persist($household);
-		$em->flush();
-		echo "Created Household with ID " . $household->getId() . "\n";
 		
 			
        // $this->display("household_create_form.twig");
@@ -123,7 +114,7 @@ class Household_Controller extends Controller_Core implements IRedirectable_Core
    
     }
 
-*/
+
 
 
 }
