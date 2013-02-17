@@ -1,22 +1,21 @@
 <?php
 
+namespace WHM\Controller;
+
+use WHM;
+
 class Household extends WHM\Controller implements WHM\IRedirectable
 {
-    public $data = array("errors" => array(), "form" => array());
     public function __construct(array $args = null)
     {
-        $this->data = $args;
         parent::__construct();
-        Helper_Core::backtrace();
+        WHM\Helper::backtrace();
 
     }
 
     public function get()
     {
-
-        $data = array("first_name" => "wais");
-        $this->display("household_view_form.twig", $data);
-       // $this->display("household_create_form.twig");
+        $this->display("household_view_form.twig");
     }
 
     public function put()
