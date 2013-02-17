@@ -1,5 +1,8 @@
 <?php
 
+// Require the Bootstrap file
+require_once('application/whm/Bootstrap.php');
+
 /*----------------------------------------------
  * INDEX.PHP
  * ---------------------------------------------
@@ -18,7 +21,13 @@ $config = array
         'dbname' => 'soen390'
     ),
 
-
+    // Twig configuration
+    'twig_config' => array
+    (
+        'cache' => TWIG_CACHE_PATH, // Twig template cache folder
+        'auto_reload' => TRUE       // Autoload reload caches,
+                                    // set to false when deploy
+    ),
 );
 
 
@@ -36,13 +45,6 @@ $serves = array
  * Do not modify pass below this section
  * ----------------------------------------------
  */
-
-// Define system path and application path
-define('APPPATH', 'application');   // Folder for controller, view, model
-//define('SYSPATH', 'core');        // Folder for core
-
-// Here we go start the bootstrap...
-require_once('application/whm/Bootstrap.php');
 
 // Instance the application
 $app = new WHM\Application($config);
