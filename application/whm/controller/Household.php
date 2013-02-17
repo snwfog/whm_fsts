@@ -20,7 +20,7 @@ class Household extends Controller implements IRedirectable
 
     public function get()
     {
-
+       
         $data = array("first_name" => "wais");
         $this->display("household_view_form.twig", $data);
        // $this->display("household_create_form.twig");
