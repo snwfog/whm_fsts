@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'WHM' => $baseDir . '/application/',
     'Twig_' => $vendorDir . '/twig/twig/lib/',
+    'Test' => $baseDir . '/tests/',
     'Symfony\\Component\\Yaml' => $vendorDir . '/symfony/yaml/',
     'Symfony\\Component\\Console' => $vendorDir . '/symfony/console/',
     'Doctrine\\ORM' => $vendorDir . '/doctrine/orm/lib/',

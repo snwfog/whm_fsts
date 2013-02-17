@@ -88,9 +88,6 @@ class Router
 
             if (method_exists($cInstance, $requestMethod))
             {
-
-                echo "Class method $requestMethod exists";
-
                 Hook::fire(BEFORE_HANDLER_HOOK);
 
                 call_user_func_array(array($cInstance, $requestMethod), $regexMatches);
