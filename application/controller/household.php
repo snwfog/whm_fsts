@@ -54,14 +54,15 @@ class Household_Controller extends Controller_Core implements IRedirectable_Core
     {
         echo "This is a post";
 
-
-        $householdModel  = new HouseholdMember();
+        $householdModel = new Household();
+        $householdMemberModel  = new HouseholdMember();
         $addressModel    = new Address();
     
 
-        if ($household_instance = $householdModel->create_household($_POST["name"], $address_instance["id"], $this)); {
+        if ($household_instance = $householdModel->create_household($household_member_instance["id"], $address_instance["id"], $this)); 
+        {
             
-
+            $household_member_instance = $householdMemberModel ->create_householdMember($_POST["first_name"], $_POST["last_name"], $_POST["work_status"], $_POST["welfare_number"], $_POST["referal"], $_POST["language"], $_POST["martial_status"], $_POST["origin"], $_POST["medicare"]);
             $address_instance = $addressModel->create_address($_POST["address"], $_POST["city"], $_POST["province"], $_POST["country"], $_POST["postal_code"], $this);
         
             return $household_instance;
