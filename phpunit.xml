@@ -1,6 +1,5 @@
 <phpunit bootstrap="application/WHM/Bootstrap.php">
     <php>
-      <includePath>.</includePath>
       <ini name="foo" value="bar"/>
       <const name="foo" value="bar"/>
       <var name="foo" value="bar"/>
