@@ -20,9 +20,9 @@ $config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
 $em = EntityManager::create($con, $config);
 
 
-$tool = new \Doctrine\ORM\Tools\SchemaTool($em);
-$classes = $em->getMetadataFactory()->getAllMetadata();
-$tool->createSchema($classes);
+//$tool = new \Doctrine\ORM\Tools\SchemaTool($em);
+//$classes = $em->getMetadataFactory()->getAllMetadata();
+//$tool->createSchema($classes);
 //$tool->dropSchema($classes);
 
 ?>

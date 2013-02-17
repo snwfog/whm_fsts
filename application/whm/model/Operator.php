@@ -1,5 +1,8 @@
 <?php
 
+namespace WHM\Model;
+
+
 /**
  *@Entity @Table(name="operators")
  **/
