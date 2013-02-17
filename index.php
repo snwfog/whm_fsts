@@ -2,6 +2,8 @@
 
 // Require the Bootstrap file
 require_once('application/whm/Bootstrap.php');
+// Require the config file for define variables
+require_once('application/whm/Config.php');
 
 /*----------------------------------------------
  * INDEX.PHP
@@ -48,4 +50,4 @@ $serves = array
 
 // Instance the application
 $app = new WHM\Application($config);
-$app->route($serves);
+$app::route($serves);
