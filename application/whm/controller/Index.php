@@ -17,6 +17,6 @@ class Index extends WHM\Controller implements WHM\IRedirectable
 
     public function get()
     {
-        $this->display("household_create_form.twig");
+        $this->display("index.twig");
     }
 }
