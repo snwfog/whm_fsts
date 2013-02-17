@@ -1,20 +1,22 @@
 <?php
 
-namespace Controller;
-
-class Household extends Controller implements IRedirectable
+class Household_Controller extends Controller_Core implements IRedirectable_Core
 {
-    public $data = "ok";
+    public $data = array("errors" => array(), "form" => array());
     public function __construct(array $args = null)
     {
         $this->data = $args;
         parent::__construct();
         Helper_Core::backtrace();
+
     }
 
     public function get()
     {
-        $this->display("household_create_form.twig");
+
+        $data = array("first_name" => "wais");
+        $this->display("household_view_form.twig", $data);
+       // $this->display("household_create_form.twig");
     }
 
     public function put()
@@ -33,8 +35,11 @@ class Household extends Controller implements IRedirectable
 
     }
 
-    public function post()
-    {
-        echo "This is a post";
-    }
+   public function post()
+   {
+
+   }
+
+
+
 }

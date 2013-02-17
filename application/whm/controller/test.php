@@ -31,6 +31,7 @@ class Test_Controller extends Controller implements IRedirectable_Core
 
     public function post_call($arg1, $arg2)
     {
+        return "a";
     }
 }
 

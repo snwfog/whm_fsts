@@ -31,6 +31,7 @@ h1, h2, h3, h4, h5 {
     clear: both;
     font-family: Serifa BT, Rambla;
     text-shadow: 1px 1px rgba(100, 100, 100, 0.2);
+    color:white
 }
 
 h1
@@ -78,15 +79,7 @@ table, table th, table td
     padding: 10px;
 }
 
-form {
-    color: #333;
-    width: 640px;
-    margin: 0 auto;
-    border: 1px solid #CCC;
-    padding: 20px 20px 50px;
-    background: #EEE;
-    margin: 20px 0px;
-}
+
 
 input {
     color: #666;
@@ -159,10 +152,41 @@ select {
     float: left;
     margin: 0px 10px 0px 5px;
 }
+#info
+{
+    font-family:verdana;
+    position:absolute;
+    left:620px;
+    width:450px;
+    height:150px;
+    padding:20px;
+    border-radius:10px;
+    border:10px solid #5076CD;
+    background-color:#404552;
 
+}
+#address
+{
+    position:absolute;
+    left:320px;
+    width:450px;
+    top:125px;
+    height:400px
+}
+#regis
+{
+    font-family:verdana;
+    width:550px;
+    padding:20px;
+    border-radius:10px;
+    border:10px solid #5076CD;
+    background-color:#404552
+}
 
 #content
 {
+    position:absolute;
+    left:100px;
     margin: 50px auto 50px;
     width: 70%;
     min-height: 700px;
