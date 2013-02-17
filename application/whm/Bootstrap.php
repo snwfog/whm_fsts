@@ -11,6 +11,9 @@ namespace WHM;
  * @required_by: Index.php
  */
 
+//UNCOMMENT FOR TEST
+//$_SERVER['HTTP_HOST'] = 'bar';
+//define('APPPATH', 'application');
 // Require the config file for define variables
 require_once(APPPATH . '/whm/Config.php');
 

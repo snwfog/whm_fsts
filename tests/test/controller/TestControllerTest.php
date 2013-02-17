@@ -3,6 +3,7 @@
 namespace Test\Controller;
 
 use \PHPUnit_Framework_TestCase;
+use \Mock_Test_Controller;
 use \WHM\Controller\Test;
 
 class TestControllerTest extends PHPUnit_Framework_TestCase
@@ -13,7 +14,7 @@ class TestControllerTest extends PHPUnit_Framework_TestCase
 
         $controller = new Test();
 
-        $observer = $this->getMock('Test_Controller', array('post_call'));
+        $observer = $this->getMock("WHM\Controller\Test", array('post_call'));
         $observer->expects($this->once())
                  ->method('post_call')
                  ->with($this->equalTo("bso"), $this->equalTo("coman"));
