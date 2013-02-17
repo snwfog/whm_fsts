@@ -2,7 +2,7 @@
 
 class Household_Controller extends Controller_Core implements IRedirectable_Core
 {
-    public $data = "ok";    
+    public $data = array("errors" => array(), "form" => array());
     public function __construct(array $args = null)
     {
         $this->data = $args;
@@ -15,11 +15,18 @@ class Household_Controller extends Controller_Core implements IRedirectable_Core
     {
         switch ($args) {
             case 'createHousehold':
+                if (isset($_POST["registration_create"]))
+                {
+                    $this->data["form"] = $_POST;
+                    $this->check_form($_POST);
+            
+               }
+                else
                 $this->display("household_create_form.twig");
                 break;
             
             default:
-                $data
+                $data = array("first_name" => "wais");
                 $this->display("household_view_form.twig", $data);
                 break;
         }
@@ -51,7 +58,6 @@ class Household_Controller extends Controller_Core implements IRedirectable_Core
         $householdModel  = new HouseholdMember();
         $addressModel    = new Address();
     
-
 
         if ($household_instance = $householdModel->create_household($_POST["name"], $address_instance["id"], $this)); {
             
@@ -88,6 +94,12 @@ class Household_Controller extends Controller_Core implements IRedirectable_Core
         if (count($this->data["errors"]) > 0)
         {
             $this->display("household_create_form.twig", $this->data);
+        }
+
+        else
+        {
+            $this->post();
+            $this->redirect("index.php?household");
         }
 
    
