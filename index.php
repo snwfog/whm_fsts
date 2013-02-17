@@ -1,37 +1,9 @@
 <?php
 
-// Require the Bootstrap file
-require_once('application/whm/Bootstrap.php');
-// Require the config file for define variables
-require_once('application/whm/Config.php');
-
 /*----------------------------------------------
  * INDEX.PHP
  * ---------------------------------------------
  */
-
-// Define application configuration variables
-$config = array
-(
-    // Dev mode use ArrayCache and auto generate proxy in Doctrine
-    'dev_mode' => true,
-    'dbconfig' => array
-    (
-        'driver' => 'pdo_mysql',
-        'user'   => 'root',
-        'password' => '',
-        'dbname' => 'foo'
-    ),
-
-    // Twig configuration
-    'twig_config' => array
-    (
-        'cache' => TWIG_CACHE_PATH, // Twig template cache folder
-        'auto_reload' => TRUE       // Autoload reload caches,
-                                    // set to false when deploy
-    ),
-);
-
 
 // Define router routes to serve
 $serves = array
@@ -47,6 +19,13 @@ $serves = array
  * Do not modify pass below this section
  * ----------------------------------------------
  */
+
+// Require the Bootstrap file
+require_once('application/whm/Bootstrap.php');
+// Require the config file for define variables
+require_once('application/whm/Config.php');
+// Require the local config
+require_once('local-config.php');
 
 // Instance the application
 $app = new WHM\Application($config);

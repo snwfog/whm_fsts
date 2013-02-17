@@ -10,7 +10,7 @@
      **/
     protected $id;
 	/**
-     * @OneToOne(targetEntity="Household", mappedBy="adress")
+     * @OneToOne(targetEntity="Household", mappedBy="address")
      **/
 	protected $household;
 	/**
