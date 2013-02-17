@@ -8,14 +8,13 @@ require_once "vendor/autoload.php";
 require_once "entities/Address.php";
 require_once "entities/HouseholdMember.php";
 */
-
-$paths = array("application/whm/model");
+$paths = array("C:/Users/Admin/Documents/GitHub/whm_fsts/application/model");
 $isDevMode = false;
 
 $con = array(
     'driver'   => 'pdo_mysql',
     'user'     => 'root',
-    'password' => 'root',
+    'password' => '',
     'dbname'   => 'fsts',
 );
 $config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);

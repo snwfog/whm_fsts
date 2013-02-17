@@ -9,21 +9,18 @@ namespace WHM;
  * Define local or server side URL and path constants
  *------------------------------------------------------------------------------
  */
-define('BASE_URL', "http://".$_SERVER['HTTP_HOST']);
-define('FOLDER_URL', str_replace(basename($_SERVER['SCRIPT_NAME']),
-    "", $_SERVER['SCRIPT_NAME']));
-
-define('FOLDER_ROOT', '/Applications/MAMP/htdocs/353/');
-
-define('SERVER_ROOT', $_SERVER['DOCUMENT_ROOT'] . FOLDER_URL);
-define('SITE_ROOT', BASE_URL . FOLDER_URL);
+//define('BASE_URL', "http://".$_SERVER['HTTP_HOST']);
+//define('FOLDER_URL', str_replace(basename($_SERVER['SCRIPT_NAME']),
+//    "", $_SERVER['SCRIPT_NAME']));
+//
+//define('SERVER_ROOT', $_SERVER['DOCUMENT_ROOT'] . FOLDER_URL);
+//define('SITE_ROOT', BASE_URL . FOLDER_URL);
 
 define('IMAGE_PATH', 'assets/img/offer-picture/');
 define('TWIG_CACHE_PATH', 'application/whm/view/cache');
 define('TWIG_VIEW_PATH', 'application/whm/view');
 define('DOCTRINE_MODEL_PATH', 'application/whm/model');
 define('DOCTRINE_PROXY_PATH', 'application/whm/proxy');
-
 define('APPPATH', 'application');   // Folder for controller, view, model
 /*------------------------------------------------------------------------------
  * COMMENTS:
