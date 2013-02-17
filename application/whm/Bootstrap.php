@@ -12,7 +12,7 @@ namespace WHM;
  */
 
 // Require the config file for define variables
-//require_once(APPPATH . '/whm/Config.php');
+require_once(APPPATH . '/whm/Config.php');
 
 // Bootstrap all autoloader functions
 require_once('vendor/autoload.php');
