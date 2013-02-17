@@ -2,6 +2,9 @@
 
 namespace WHM;
 
+use Twig_Loader_Filesystem;
+use Twig_Environment;
+
 /**-----------------------------------------------------------------------------
  * Template renderer class.
  * This class implement the Singleton pattern. It is used to generate a
@@ -23,9 +26,9 @@ class Renderer implements IRenderer
 
     private function __construct()
     {
-        $this->_twig_instance = new \Twig_Environment
+        $this->_twig_instance = new Twig_Environment
         (
-            new \Twig_Loader_Filesystem(TWIG_VIEW_PATH),
+            new Twig_Loader_Filesystem(TWIG_VIEW_PATH),
             $this->_twig_config
         );
     }
