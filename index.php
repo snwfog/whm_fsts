@@ -28,6 +28,7 @@ $serves = array
     // Don't put the trailing slash - "/"
     '/' => 'WHM\Controller\Index',
     '/household' => 'WHM\Controller\Household',
+    '/household_create' => 'WHM\Controller\CreateHousehold',
     '/member' => 'WHM\Controller\Member'
 );
 
