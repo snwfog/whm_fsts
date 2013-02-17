@@ -1,11 +1,17 @@
 <?php
 
-class Test_Controller extends Controller implements IRedirectable_Core
+namespace WHM\Controller;
+
+use WHM\Controller;
+use WHM\IRedirectable;
+use WHM\Helper;
+
+class Test extends Controller implements IRedirectable
 {
     public function __construct(array $args = null)
     {
         parent::__construct();
-        Helper_Core::backtrace();
+        Helper::backtrace();
     }
 
     public function get()
