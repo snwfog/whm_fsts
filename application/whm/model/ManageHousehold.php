@@ -1,6 +1,7 @@
 <?php
 
-require_once('Entity_Manager.php');
+namespace WHM\Model;
+use WHM;
 
 /**
  * Manage entity household
@@ -8,11 +9,12 @@ require_once('Entity_Manager.php');
 class ManageHousehold {
 	
 	//Create
-	public static function createHousehold($id, $phone_number, $address) {
+	public static function createHousehold($id, $phone_number) {
+		include_once('Entity_Manager.php');
 		 $household = new Household();
 		 $household->setId($id);
 		 $household->setPhone_number($phone_number);
-		 $household->setAddress($address);
+		 //$household->setAddress($address);
 		 
 		 $em->persist($household);
 		 $em->flush();

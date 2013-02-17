@@ -16,6 +16,7 @@ class Test extends Controller implements IRedirectable
 
     public function get()
     {
+        $this->display("household_view_form.twig");
     }
 
     public function put()
