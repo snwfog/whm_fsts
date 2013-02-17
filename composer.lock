@@ -1,5 +1,5 @@
 {
-    "hash": "f76e355aa6935494082a93cf1640499c",
+    "hash": "e13c2cba9db764f137e3513ae9de1b73",
     "packages": [
         {
             "name": "doctrine/common",
@@ -63,11 +63,11 @@
             "description": "Common Library for Doctrine projects",
             "homepage": "http://www.doctrine-project.org",
             "keywords": [
-                "annotations",
                 "collections",
+                "spl",
                 "eventmanager",
-                "persistence",
-                "spl"
+                "annotations",
+                "persistence"
             ]
         },
         {
@@ -85,8 +85,8 @@
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": "2.3.*",
-                "php": ">=5.3.2"
+                "php": ">=5.3.2",
+                "doctrine/common": "2.3.*"
             },
             "time": "2013-01-07 20:03:43",
             "type": "library",
@@ -128,8 +128,8 @@
             "homepage": "http://www.doctrine-project.org",
             "keywords": [
                 "database",
-                "dbal",
                 "persistence",
+                "dbal",
                 "queryobject"
             ]
         },
@@ -148,9 +148,9 @@
                 "shasum": ""
             },
             "require": {
-                "doctrine/dbal": "2.3.*",
-                "ext-pdo": "*",
                 "php": ">=5.3.2",
+                "ext-pdo": "*",
+                "doctrine/dbal": "2.3.*",
                 "symfony/console": "2.*"
             },
             "suggest": {
