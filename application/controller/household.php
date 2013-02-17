@@ -15,13 +15,7 @@ class Household_Controller extends Controller_Core implements IRedirectable_Core
     {
         switch ($args) {
             case 'createHousehold':
-                if (isset($_POST["registration_create"]))
-                {
-                    $this->data["form"] = $_POST;
-                    $this->check_form($_POST);
-            
-               }
-                else
+
                 $this->display("household_create_form.twig");
                 break;
             
@@ -54,6 +48,16 @@ class Household_Controller extends Controller_Core implements IRedirectable_Core
     {
         echo "This is a post";
 
+        if (isset($_POST))
+        {
+            $this->data["form"] = $_POST;
+            print_r($this->data);
+            $this->check_form($this->data["form"]);
+            
+        }
+
+        /*
+
         $householdModel = new Household();
         $householdMemberModel  = new HouseholdMember();
         $addressModel    = new Address();
@@ -70,6 +74,8 @@ class Household_Controller extends Controller_Core implements IRedirectable_Core
         } 
 
         $this->display("household_create_form.twig", $this->data);
+
+        */
         
 
 
@@ -81,12 +87,12 @@ class Household_Controller extends Controller_Core implements IRedirectable_Core
     {
         $householdModel = new HouseholdMember();
         
-        if ($householdModel->exist_attribute("welfare_number", $_POST["welfare_number"]))
+        if ($householdModel->exist_attribute("welfare_number", $form["welfare_number"]))
         {
             array_push($this->data["errors"], "welfare number Exist!");
         }
 
-        if ($householdModel->exist_attribute("medicare", $_POST["medicare"]))
+        if ($householdModel->exist_attribute("medicare", $form["medicare"]))
         {
             array_push($this->data["errors"], "medicare Exist!");
         }
@@ -106,7 +112,7 @@ class Household_Controller extends Controller_Core implements IRedirectable_Core
    
     }
 
-
+*/
 
 
 }
