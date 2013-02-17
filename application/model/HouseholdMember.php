@@ -34,10 +34,6 @@ use Doctrine\Common\Collections\ArrayCollection;
      **/
 	protected $welfare_number;
 	/**
-	 * @Column(type="string")
-	 **/
-	protected $medicare_number;
-	/**
      * @Column(type="string")
      **/
 	protected $referal;
