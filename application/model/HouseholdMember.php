@@ -5,8 +5,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @Entity @Table(name="household_members")
  **/ 
- class HouseholdMember
+ class HouseholdMember extends Model
  {
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
 	/**
      * @Id @Column(type="integer") @GeneratedValue
      **/
