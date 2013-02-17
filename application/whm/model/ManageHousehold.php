@@ -2,6 +2,7 @@
 
 namespace WHM\Model;
 use WHM;
+use WHM\Application;
 
 /**
  * Manage entity household
@@ -10,12 +11,12 @@ class ManageHousehold {
 	
 	//Create
 	public static function createHousehold($id, $phone_number) {
-		include_once('Entity_Manager.php');
+		//include_once('Entity_Manager.php');
 		 $household = new Household();
-		 $household->setId($id);
 		 $household->setPhone_number($phone_number);
+		 $household->setHousehold_principal_id($id);
 		 //$household->setAddress($address);
-		 
+		 $em = Application::em();
 		 $em->persist($household);
 		 $em->flush();
 	}
