@@ -73,6 +73,9 @@ class CreateHousehold extends WHM\Controller implements WHM\IRedirectable
 
     }
 
+
+
+
      public function check_form($form)
     {
         $householdModel = new HouseholdMember();
