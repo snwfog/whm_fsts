@@ -28,7 +28,7 @@ $serves = array
     // Don't put the trailing slash - "/"
     '/' => 'Index_Controller',
     '/household' => 'Household_Controller',
-    '/household/:string' => 'Household_Controller',
+    '/household_create' => 'CreateHousehold_Controller',
     '/member' => 'Member_Controller',
 );
 
