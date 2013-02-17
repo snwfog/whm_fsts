@@ -13,11 +13,11 @@ class TestControllerTest extends PHPUnit_Framework_TestCase
 
         $controller = new Test();
 
-//        $observer = $this->getMock('Test_Controller', array('post_call'));
-//        $observer->expects($this->once())
-//            ->method('post_call')
-//            ->with($this->equalTo("bso"), $this->equalTo("coman"));
-//        $observer->post();
+        $observer = $this->getMock('Test_Controller', array('post_call'));
+        $observer->expects($this->once())
+                 ->method('post_call')
+                 ->with($this->equalTo("bso"), $this->equalTo("coman"));
+        $observer->post();
     }
 
     public static function tearDownAfterClass()
