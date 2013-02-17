@@ -17,8 +17,6 @@ require_once(APPPATH . '/whm/Config.php');
 // Bootstrap all autoloader functions
 require_once('vendor/autoload.php');
 
-//require_once(SYSPATH . '/Autoload.php');
-
 // Bootstrap Twig templating engine
 //require_once('vendor/Twig/Autoloader.php');
 //Twig_Autoloader::register();
