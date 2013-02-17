@@ -2,8 +2,8 @@
 
 namespace WHM;
 
-use Twig_Loader_Filesystem;
-use Twig_Environment;
+use \Twig_Loader_Filesystem;
+use \Twig_Environment;
 
 /**-----------------------------------------------------------------------------
  * Template renderer class.
