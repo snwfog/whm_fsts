@@ -5,7 +5,6 @@
  **/
  class Address
  {
-
 	/**
      * @Id @Column(type="integer") @GeneratedValue
      **/

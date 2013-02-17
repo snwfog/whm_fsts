@@ -10,7 +10,7 @@ class CreateHousehold extends WHM\Controller implements WHM\IRedirectable
     {
         $this->data = $args;
         parent::__construct();
-         WHM\Helper::backtrace();
+        WHM\Helper::backtrace();
 
     }
 
