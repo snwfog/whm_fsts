@@ -26,9 +26,9 @@ $config = array
 $serves = array
 (
     // Don't put the trailing slash - "/"
-    '/' => 'Index_Controller',
-    '/household' => 'Household_Controller',
-    '/member' => 'Member_Controller',
+    '/' => 'WHM\Controller\Index',
+    '/household' => 'WHM\Controller\Household',
+    '/member' => 'WHM\Controller\Member'
 );
 
 /*-----------------------------------------------
@@ -38,11 +38,11 @@ $serves = array
 
 // Define system path and application path
 define('APPPATH', 'application');   // Folder for controller, view, model
-define('SYSPATH', 'core');          // Folder for core
+//define('SYSPATH', 'core');        // Folder for core
 
 // Here we go start the bootstrap...
-require_once('core/Bootstrap.php');
+require_once('application/whm/Bootstrap.php');
 
 // Instance the application
-$app = new Application_Core($config);
+$app = new WHM\Application($config);
 $app->route($serves);

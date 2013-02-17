@@ -13,7 +13,7 @@ class CachedReaderTest extends AbstractReaderTest
 
     public function testIgnoresStaleCache()
     {
-        $file = __DIR__.'/Fixtures/Controller.php';
+        $file = __DIR__.'/Fixtures/controller.php';
         touch($file);
         $name = 'Doctrine\Tests\Common\Annotations\Fixtures\Controller';
         $cacheKey = $name.'@[Annot]';

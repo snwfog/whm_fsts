@@ -5,90 +5,90 @@ $(function() {
   recallTime = 2000;
   setInterval(function() {
     return $.ajax({
-      url: "index.php?ajax&notify_acquire=1",
+      url: "Index.php?ajax&notify_acquire=1",
       dataType: "json"
     }).done(function(data) {
       if (data != null) {
         return $.each(data, function(i, item) {
-          return noteAlert("Your bid \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"            just arrived at the garage. You may come and pick it up            during our regular business hour within the next <b>14</b> days.", "success");
+          return noteAlert("Your bid \"<b><a href=\"Index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"            just arrived at the garage. You may come and pick it up            during our regular business hour within the next <b>14</b> days.", "success");
         });
       }
     });
   }, recallTime);
   setInterval(function() {
     return $.ajax({
-      url: "index.php?ajax&notify_bid=1",
+      url: "Index.php?ajax&notify_bid=1",
       dataType: "json"
     }).done(function(data) {
       if (data != null) {
         return $.each(data, function(i, item) {
-          return noteAlert(("You received a new bid for your offer            \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"            approximately <b>") + moment(item.date, "YYYY-MM-DD hh:mm:ss").add('hours', 1).fromNow() + "</b>.", "success");
+          return noteAlert(("You received a new bid for your offer            \"<b><a href=\"Index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"            approximately <b>") + moment(item.date, "YYYY-MM-DD hh:mm:ss").add('hours', 1).fromNow() + "</b>.", "success");
         });
       }
     });
   }, recallTime);
   setInterval(function() {
     return $.ajax({
-      url: "index.php?ajax&notify_winning_bid=1",
+      url: "Index.php?ajax&notify_winning_bid=1",
       dataType: "json"
     }).done(function(data) {
       if (data != null) {
         return $.each(data, function(i, item) {
-          return noteAlert(("You just won an offer                      \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"                      approximately <b>") + moment(item.date, "YYYY-MM-DD hh:mm:ss").add('hours', 1).fromNow() + "</b>.                      You will be billed accordingly to your bidding offer. Please see your                      credit card transaction history for detail information.", "success");
+          return noteAlert(("You just won an offer                      \"<b><a href=\"Index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"                      approximately <b>") + moment(item.date, "YYYY-MM-DD hh:mm:ss").add('hours', 1).fromNow() + "</b>.                      You will be billed accordingly to your bidding offer. Please see your                      credit card transaction history for detail information.", "success");
         });
       }
     });
   }, recallTime);
   setInterval(function() {
     return $.ajax({
-      url: "index.php?ajax&notify_expired_bids=1",
+      url: "Index.php?ajax&notify_expired_bids=1",
       dataType: "json"
     }).done(function(data) {
       if (data != null) {
         return $.each(data, function(i, item) {
-          return noteAlert(("Your bids \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.description + "</a></b>\"          was expired <b>") + moment(item.date, "YYYY-MM-DD hh:mm:ss").add('hours', 1).fromNow() + "</b>.", "warning");
+          return noteAlert(("Your bids \"<b><a href=\"Index.php?offer&id=" + item.id + "\">" + item.description + "</a></b>\"          was expired <b>") + moment(item.date, "YYYY-MM-DD hh:mm:ss").add('hours', 1).fromNow() + "</b>.", "warning");
         });
       }
     });
   }, recallTime);
   setInterval(function() {
     return $.ajax({
-      url: "index.php?ajax&notify_receive=1",
+      url: "Index.php?ajax&notify_receive=1",
       dataType: "json"
     }).done(function(data) {
       if (data != null) {
         return $.each(data, function(i, item) {
-          return noteAlert("Hey, we just received your item \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"            in our garage. Rest assured as we've already notified            the bidder to come and pick it up.", "success");
+          return noteAlert("Hey, we just received your item \"<b><a href=\"Index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"            in our garage. Rest assured as we've already notified            the bidder to come and pick it up.", "success");
         });
       }
     });
   }, recallTime);
   setInterval(function() {
     return $.ajax({
-      url: "index.php?ajax&notify_modify=1",
+      url: "Index.php?ajax&notify_modify=1",
       dataType: "json"
     }).done(function(data) {
       if (data != null) {
         return $.each(data, function(i, item) {
-          return noteAlert("The item \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"                      has been modified by the owner.", "warning");
+          return noteAlert("The item \"<b><a href=\"Index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"                      has been modified by the owner.", "warning");
         });
       }
     });
   }, recallTime);
   setInterval(function() {
     return $.ajax({
-      url: "index.php?ajax&warn=1",
+      url: "Index.php?ajax&warn=1",
       dataType: "json"
     }).done(function(data) {
       if (data != null) {
         return $.each(data, function(i, item) {
-          return noteAlert("You received a warning for your post \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"", "error");
+          return noteAlert("You received a warning for your post \"<b><a href=\"Index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"", "error");
         });
       }
     });
   }, recallTime);
   $.ajax({
-    url: "index.php?ajax&is_admin=1",
+    url: "Index.php?ajax&is_admin=1",
     dataType: "json"
   }).done(function(data) {
     if (data != null) {
@@ -125,13 +125,13 @@ $(function() {
       }
     }
     return $.ajax({
-      url: "index.php?ajax&admin_member_search=" + $('#member-name').val() + evalStr,
+      url: "Index.php?ajax&admin_member_search=" + $('#member-name').val() + evalStr,
       dataType: "json"
     }).done(function(data) {
       if (data != null) {
         $('#member-search-table').html("<tr><th>Position</th><th>User</th><th>Posts</th>          <th>Buys</th><th>Sells</th><th>Rating</th></tr>");
         return $.each(data, function(i, item) {
-          return $('#member-search-table').append("<tr>" + ("<td>" + (i + 1) + "</td><td><div class='tiptip'>") + "<a href='index.php?member&id=" + item.id + "' class='button'>" + "<span class='icon icon191'>" + "</span><span class='label'>" + item.username + "</span></a></div></td>" + ("<td>" + item.posts + "</td>") + ("<td>" + item.buys + "</td>") + ("<td>" + item.sells + "</td>") + "<td>" + (item.rating === null ? "No Rating" : drawRating(item.rating) + "</td></tr>"));
+          return $('#member-search-table').append("<tr>" + ("<td>" + (i + 1) + "</td><td><div class='tiptip'>") + "<a href='Index.php?member&id=" + item.id + "' class='button'>" + "<span class='icon icon191'>" + "</span><span class='label'>" + item.username + "</span></a></div></td>" + ("<td>" + item.posts + "</td>") + ("<td>" + item.buys + "</td>") + ("<td>" + item.sells + "</td>") + "<td>" + (item.rating === null ? "No Rating" : drawRating(item.rating) + "</td></tr>"));
         });
       }
     });
@@ -154,7 +154,7 @@ $(function() {
       }
     }
     return $.ajax({
-      url: "index.php?ajax&admin_category=1" + evalStr,
+      url: "Index.php?ajax&admin_category=1" + evalStr,
       dataType: "json"
     }).done(function(data) {
       var category, counts, volume;
@@ -208,7 +208,7 @@ $(function() {
       url = "&by_week=1";
     }
     return $.ajax({
-      url: "index.php?ajax&admin_transaction=1" + url,
+      url: "Index.php?ajax&admin_transaction=1" + url,
       dataType: "json"
     }).done(function(data) {
       var x_axis, y_axis;
@@ -248,7 +248,7 @@ $(function() {
       url = "&by_country=1";
     }
     return $.ajax({
-      url: "index.php?ajax&admin_regions_and_territories=1" + url,
+      url: "Index.php?ajax&admin_regions_and_territories=1" + url,
       dataType: "json"
     }).done(function(data) {
       var x_axis, y_axis;
@@ -288,7 +288,7 @@ $(function() {
       url = "&by_service=1";
     }
     return $.ajax({
-      url: "index.php?ajax&admin_buys_and_sells=1" + url,
+      url: "Index.php?ajax&admin_buys_and_sells=1" + url,
       dataType: "json"
     }).done(function(data) {
       var x_axis, y_axis;
