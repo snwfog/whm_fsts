@@ -34,6 +34,10 @@ use Doctrine\Common\Collections\ArrayCollection;
      **/
 	protected $welfare_number;
 	/**
+	 * @Column(type="string")
+	 **/
+	protected $medicare_number;
+	/**
      * @Column(type="string")
      **/
 	protected $referal;
@@ -113,6 +117,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 	public function setWelfare_number($welfare_number)
     {
         $this->welfare_number = $welfare_number;
+    }
+    public function getMedicare_number()
+    {
+    	return $this->medicare_number;
+    }
+    public function setMedicare_number($medicare_number)
+    {
+    	$this->medicare_number = $medicare_number;
     }
 	public function getReferal()
     {
