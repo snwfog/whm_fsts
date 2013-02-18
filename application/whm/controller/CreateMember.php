@@ -4,7 +4,7 @@ namespace WHM\Controller;
 use WHM;
 use \WHM\Model\ManageHousehold;
 
-class CreateHousehold extends WHM\Controller implements WHM\IRedirectable
+class CreateMember extends WHM\Controller implements WHM\IRedirectable
 {
     protected $data = array("errors" => array(), "form" => array());
     public function __construct(array $args = null)
@@ -17,7 +17,7 @@ class CreateHousehold extends WHM\Controller implements WHM\IRedirectable
 
     public function get()
     {
-        $this->display("household_create_form.twig");
+        $this->display("member_create_form.twig");
     }
 
 
@@ -43,11 +43,10 @@ class CreateHousehold extends WHM\Controller implements WHM\IRedirectable
         if (isset($_POST))
         {
             $this->data["form"] = $_POST;
-            $manageHouse = new ManageHousehold();
-            $manageHouse->createHousehold($_POST);
-            $this->redirect("household");
+            $manageMember = new ManageHousehold();
+            $manageMember->createMember($_POST);
         }else{
-            $this->display("household_create_form.twig");
+            $this->display("member_create_form.twig");
         }
 
 

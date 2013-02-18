@@ -96,6 +96,7 @@ input[type="view"]
     width:250px;
     padding:8px 8px;
     border:0px;
+    margin-bottom:-10px;
 }
 
 input {
@@ -117,7 +118,19 @@ input[type="password"] {
     width:250px;
     padding:8px 8px;
     border:1px solid #999;
+    margin-bottom:-10px;
 }
+input[type="text2"],
+input[type="password2"] {
+    vertical-align:middle;
+    box-shadow: 1px 2px rgba(100, 100, 100, 0.1);
+    display:inline-block;
+    width:250px;
+    padding:8px 8px;
+    border:1px solid #999;
+    margin-bottom:0px;
+}
+
 input[type="text"]:focus,
 input[type="password"]:focus {
     background:#FFF;
@@ -150,6 +163,8 @@ select {
     width:267px;
     padding:8px 8px;
     border:1px solid #999;
+    margin-bottom:0px;
+
 }
 
 
@@ -196,7 +211,7 @@ select {
     float: right;
     padding:10px;
     width: 250px;
-    height:140px;
+    height:165px;
     border-radius:10px;
     border:10px solid #5076CD;
     background-color:#404552;
@@ -211,20 +226,20 @@ select {
     float: right;
     padding:10px;
     width: 250px;
-    height:560px;
+    height:463px;
     border-radius:10px;
     border:10px solid #5076CD;
     background-color:#404552;
     margin-right:40px;
-    margin-top: -600px;
+    margin-top: -503px;
     color:white;
 
 }
 .info .memberList
 {
 overflow:auto;
-width: 255px;
-height:270px;
+width: 260px;
+height:140px;
 }
 .info .p
 {
@@ -234,14 +249,14 @@ height:270px;
 .address
 {
 	float: right;
-	margin-top: -500px;
+	margin-top: -410px;
     width: 260px;
 }
 
 .address2
 {
     float: right;
-    margin-top: -515px;
+    margin-top: -415px;
     width: 260px;
 }
 
@@ -283,7 +298,7 @@ height:270px;
     bottom:40px;
     position:absolute;
 	width: 100%;
-    overflow:hidden;
+    overflow:auto;
 	background-color: #404552;
 }
 
