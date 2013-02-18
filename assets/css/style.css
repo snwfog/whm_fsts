@@ -190,6 +190,11 @@ select {
     margin: 0px 10px 0px 5px;
 }
 
+.kblegend
+{
+	display: none;
+}
+
 .main
 {
     width: 1000px;

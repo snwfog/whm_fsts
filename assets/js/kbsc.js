@@ -23,4 +23,17 @@ document.onkeydown = keydown;
 		{
 			window.location.href = "household";
 		}
+		if (evt.altKey && evt.keyCode == 112) //ALT + F1  OPEN/CLOSE LEGEND
+		{
+			var legend = document.getElementById('kblegend'); //Store the legend element object
+			
+			if(legend.style.display == "") //Check that the display style is empty (none) and invisible.
+			{
+				legend.style.display = 'block';//Make it visible
+			}
+			else if(legend.style.display == "block")//Case that the display style is block and visible.
+			{
+				legend.style.display = "";//Hide it.
+			}
+		}
 	}
