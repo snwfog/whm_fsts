@@ -18,9 +18,8 @@ class ManageHousehold {
 	public function createHousehold($form_data) {
 		//include_once('Entity_Manager.php');
 		//Objects to be saved
-
-		$this->create_address($form_data);
-		$this->create_member($form_data);
+		$this->createMember($form_data);
+		$this->createAddress($form_data);
 
 		$household = new Household();
 
@@ -50,7 +49,7 @@ class ManageHousehold {
 	}
 
 	//$data is type array
-	private function create_member($data)
+	private function createMember($data)
 	{
 		$household_member = new HouseholdMember();
 		$household_member->setFirst_name($data["first_name"]);
@@ -67,7 +66,7 @@ class ManageHousehold {
 		return $household_member;
 	}
 
-	private function create_address($data)
+	private function createAddress($data)
 	{
 		$address = new Address();
 		$address->setStreet($data['address']);
