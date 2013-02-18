@@ -172,6 +172,7 @@ use Doctrine\Common\Collections\ArrayCollection;
     }
 	public function setHousehold($household)
     {
+		$household->assignedToMember($this);
         $this->household = $household;
     }
 	public function getEvents()

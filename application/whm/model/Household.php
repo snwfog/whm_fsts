@@ -14,9 +14,9 @@ class Household {
     protected $id;
 
     /**
-     * @Column(type="integer")
+     * @OneToOne(targetEntity="HouseholdMember")
      **/
-    protected $household_principal_id;
+    protected $principal_member;
 
     /**
      * @Column(type="string")
@@ -88,6 +88,14 @@ class Household {
     public function setMembers($members) {
         $this->members = $members;
     }
+	public function assignedToMember($member)
+	{
+		$this->members[] = $member;
+	}
+	public function assignedToFlag($flag)
+	{
+		$this->flags[] = $flag;
+	}
 
  }
 

@@ -14,7 +14,7 @@ class Household extends Controller implements IRedirectable
     {
         $this->data = $args;
         parent::__construct();
-        Helper::backtrace();
+        //Helper::backtrace();
 
     }
 
