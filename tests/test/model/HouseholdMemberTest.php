@@ -249,13 +249,6 @@ class HouseholdMemberTest extends PHPUnit_Framework_TestCase
                  ->with($this->equalTo($household_member));
         $household_member->setHousehold($observer);
 
-
-        // $householdmember = new HouseholdMember();
-        // $householdmember->setHousehold("Syrian");
-        // $this->assertEquals(
-        //                     "Syrian", 
-        //                     PHPUnit_Framework_TestCase::readAttribute($householdmember, "household")
-        //                     );
     }
 
     public function testgetEvents()
