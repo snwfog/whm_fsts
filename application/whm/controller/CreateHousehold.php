@@ -1,10 +1,13 @@
 <?php
 
 namespace WHM\Controller;
-use WHM;
-use \WHM\Model\ManageHousehold;
 
-class CreateHousehold extends WHM\Controller implements WHM\IRedirectable
+use WHM;
+use WHM\Controller;
+use WHM\IRedirectable;
+use WHM\Model\ManageHousehold;
+
+class CreateHousehold extends Controller implements IRedirectable
 {
     protected $data = array("errors" => array(), "form" => array());
     private $manageHouse;

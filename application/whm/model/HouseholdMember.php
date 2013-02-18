@@ -6,59 +6,111 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @Entity @Table(name="household_members")
  **/
- class HouseholdMember
- {
-	/**
-     * @Id @Column(type="integer") @GeneratedValue
+class HouseholdMember
+{
+    /**
+     * @Id @Column(type="integer")
+     * @GeneratedValue
      **/
     protected $id;
 
 	/**
-     * @Column(type="string")
+     * @Column(nullable=TRUE)
      **/
 	protected $first_name;
+
 	/**
-     * @Column(type="string")
+     * @Column(nullable=TRUE)
      **/
 	protected $last_name;
-	/**
-     * @Column(type="string")
+
+    /**
+     * @Column(nullable=TRUE, length=9)
+     */
+    protected $sin_number;
+
+    /**
+     * @Column(nullable=TRUE)
+     */
+    protected $mcare_number;
+
+    /**
+     * @Column(nullable=TRUE, length=2)
      **/
 	protected $work_status;
+
 	/**
-     * @Column(type="string")
+     * @Column(nullable=TRUE)
      **/
 	protected $welfare_number;
+
 	/**
-     * @Column(type="string")
+     * @Column(nullable=TRUE)
      **/
-	protected $referal;
+	protected $referral;
+
 	/**
-     * @Column(type="string")
+     * @Column(nullable=TRUE, length=2)
      **/
 	protected $language;
+
 	/**
-     * @Column(type="string",nullable = true)
-     **/
-	protected $note;
-	/**
-     * @Column(type="string")
+     * @Column(length=2)
      **/
 	protected $marital_status;
+
 	/**
-     * @Column(type="string")
+     * TO BE CHANGED TO TABLES...
+     *
+     * @Column(nullable=TRUE)
      **/
 	protected $origin;
+
 	/**
-     * @Column(type="date")
+     * @Column(type="datetime")
      **/
 	protected $first_visit_date;
+
+    /**
+     * @Column(nullable=TRUE)
+     */
+    protected $contact;
+
+    /**
+     * 1 <-> * -- Owning
+     *
+     * @ManyToOne(targetEntity="Household", inversedBy="household")
+     * @JoinColumn(name="household_id", referencedColumnName="id")
+     *
+     * @var $household;
+     */
+    protected $household;
+
 	/**
-     *@ManyToOne(targetEntity="Household", inversedBy="members")
-     **/
-	protected $household;
-	/**
-	 *@ManyToMany(targetEntity="Event", mappedBy="members")
+     * * <-> * -- Owning
+     *
+	 * @ManyToMany(targetEntity="Event", inversedBy="participants")
+     * @JoinTable
+     * (
+     *      name="participants_events",
+     *      joinColumns=
+     *      {
+     *          @JoinColumn
+     *          (
+     *              name="household_member_id",
+     *              referencedColumnName="id"
+     *          )
+     *      },
+     *      inverseJoinColumns=
+     *      {
+     *          @JoinColumn
+     *          (
+     *              name="event_id",
+     *              referencedColumnName="id"
+     *          )
+     *      }
+     * )
+     *
 	 **/
 	protected $events = null;
 
@@ -66,112 +118,157 @@ use Doctrine\Common\Collections\ArrayCollection;
 	{
 		$this->events = new ArrayCollection();
 	}
-	public function getId()
+
+    public function getId()
     {
         return $this->id;
     }
-	public function setId($id)
-    {
-        $this->id = $id;
-    }
-	public function getFirst_name()
-    {
-        return $this->first_name;
-    }
-	public function setFirst_name($first_name)
+
+    public function setFirstName($first_name)
     {
         $this->first_name = $first_name;
     }
-	public function getLast_name()
+
+    public function getFirstName()
     {
-        return $this->last_name;
+        return $this->first_name;
     }
-	public function setLast_name($last_name)
+
+    public function setLastName($last_name)
     {
         $this->last_name = $last_name;
     }
-	public function getWork_status()
+
+    public function getLastName()
     {
-        return $this->work_status;
+        return $this->last_name;
     }
-	public function setWork_status($work_status)
+
+    public function setSinNumber($sin_number)
+    {
+        $this->sin_number = $sin_number;
+    }
+
+    public function getSinNumber()
+    {
+        return $this->sin_number;
+    }
+
+    public function setMcareNumber($mcare_number)
+    {
+        $this->mcare_number = $mcare_number;
+    }
+
+    public function getMcareNumber()
+    {
+        return $this->mcare_number;
+    }
+
+    public function setWorkStatus($work_status)
     {
         $this->work_status = $work_status;
     }
-	public function getWelfare_number()
+
+    public function getWorkStatus()
     {
-        return $this->welfare_number;
+        return $this->work_status;
     }
-	public function setWelfare_number($welfare_number)
+
+    public function setWelfareNumber($welfare_number)
     {
         $this->welfare_number = $welfare_number;
     }
-	public function getReferal()
+
+    public function getWelfareNumber()
     {
-        return $this->referal;
+        return $this->welfare_number;
     }
-	public function setReferal($referal)
-    {
-        $this->referal = $referal;
-    }
-	public function getLanguage()
-    {
-        return $this->language;
-    }
-	public function setLanguage($language)
-    {
-        $this->language = $language;
-    }
-	public function getNote()
-    {
-        return $this->note;
-    }
-	public function setNote($note)
-    {
-        $this->note = $note;
-    }
-	public function getMarital_status()
-    {
-        return $this->marital_status;
-    }
-	public function setMarital_status($marital_status)
-    {
-        $this->marital_status = $marital_status;
-    }
-	public function getOrigin()
-    {
-        return $this->origin;
-    }
-	public function setOrigin($origin)
+
+    public function setOrigin($origin)
     {
         $this->origin = $origin;
     }
-	public function getFirst_visit_date()
+
+    public function getOrigin()
     {
-        return $this->first_visit_date;
+        return $this->origin;
     }
-	public function setFirst_visit_date($first_visit_date)
+
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+    }
+
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    public function setMaritalStatus($marital_status)
+    {
+        $this->marital_status = $marital_status;
+    }
+
+    public function getMaritalStatus()
+    {
+        return $this->marital_status;
+    }
+
+    public function setReferral($referral)
+    {
+        $this->referral = $referral;
+    }
+
+    public function getReferral()
+    {
+        return $this->referral;
+    }
+
+    public function setContact($contact)
+    {
+        $this->contact = $contact;
+    }
+
+    public function getContact()
+    {
+        return $this->contact;
+    }
+
+    public function setFirstVisitDate($first_visit_date)
     {
         $this->first_visit_date = $first_visit_date;
     }
-	public function getHousehold()
+
+    public function getFirstVisitDate()
     {
-        return $this->$household;
+        return $this->first_visit_date;
     }
-	public function setHousehold($household)
+
+    public function addEvent(Event $events)
     {
-		$household->assignedToMember($this);
-        $this->household = $household;
+        $this->events[] = $events;
+        $events->addParticipant($this);
     }
-	public function getEvents()
+
+    public function getEvents()
     {
         return $this->events;
     }
-	public function setEvents($events)
+
+    /**
+     * @param  $household
+     */
+    public function setHousehold(Household $household)
     {
-        $this->events = $events;
+        $this->household = $household;
+        $household->addMember($this);
     }
 
- }
-
- ?>
+    /**
+     * @return
+     */
+    public function getHousehold()
+    {
+        return $this->household;
+    }
+}

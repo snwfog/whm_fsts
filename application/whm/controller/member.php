@@ -1,6 +1,6 @@
 <?php
 
-class Member_Controller extends Controller implements IRedirectable_Core
+class Member extends Controller implements IRedirectable
 {
     public $data = "ok";
     public function __construct(array $args = null)

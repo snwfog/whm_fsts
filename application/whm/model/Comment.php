@@ -1,4 +1,5 @@
 <?php
+
 namespace WHM\Model;
 use WHM;
 
@@ -9,6 +10,7 @@ class Comment
 {
     /**
      * @Id @Column(type="integer")
+     * @GeneratedValue
      **/
     private $id;
 

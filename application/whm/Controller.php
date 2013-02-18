@@ -2,27 +2,29 @@
 
 namespace WHM;
 
+use \WHM\Helper;
+
 abstract class Controller
 {
 
     const REDIRECT_ERROR = "application/view/static/error.html";
     const REDIRECT_INDEX = "Index.php";
 
-    private $_renderer;
-    private $_data;
-
-    /**
-     * The data array, you can use it, or you don't have to use it.
-     */
+    protected $renderer;
+    protected $em;
     protected $data = array();
 
     public function __construct($redirect = TRUE)
     {
-        $this->_renderer = Renderer::get_instance();
+        // Get an instance of the renderer for display
+        $this->renderer = Renderer::get_instance();
+
+        // Get an instance of the entity manager for entity management
+        $this->em = Application::em();
 
         // $this->startSession();
-        $this->_data["title"] = "Welcome Hall Mission";
-        $this->_data["specifier"] = "Family Service Tracking System";
+        $this->data["title"] = "Welcome Hall Mission";
+        $this->data["specifier"] = "Family Service Tracking System";
 
         // if (!$this->isValidSession())
         // {
@@ -59,7 +61,22 @@ abstract class Controller
 
     public function display($file, $data = array())
     {
-        $this->_renderer->display($file, array_merge($this->_data, $data));
+        $this->renderer->display($file, array_merge($this->data, $data));
+    }
+
+    public function persist($object)
+    {
+        $this->em->persist($object);
+    }
+
+    public function flush()
+    {
+        $this->em->flush();
+    }
+
+    public function find($class, $var)
+    {
+        return $this->em->find("\\WHM\\Model\\{$class}", $var);
     }
 
     // public function isValidSession()

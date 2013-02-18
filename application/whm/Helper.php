@@ -9,6 +9,8 @@ namespace WHM;
  * Please do not modify this file, and consult before adding extra function
  * to this file.
  */
+use Doctrine\Common\Util\Debug;
+
 class Helper
 {
 	public static function pr($array)
@@ -47,9 +49,11 @@ class Helper
      */
     public static function entity_dump($var)
     {
-        if (class_exists(Doctrine\Common\Util\Debug))
+        if (class_exists('\Doctrine\Common\Util\Debug'))
         {
-            Doctrine\Common\Util\Debug::dump($var);
+            echo "<pre>";
+            \Doctrine\Common\Util\Debug::dump($var);
+            echo "</pre>";
         }
     }
 }

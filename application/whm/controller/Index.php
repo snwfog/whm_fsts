@@ -3,10 +3,16 @@
 namespace WHM\Controller;
 
 use WHM;
+use WHM\Controller;
+use WHM\IRedirectable;
+use WHM\Helper;
+use WHM\Model\Address;
+use WHM\Application;
+
 /*
  * INDEX CONTROLLER / ALSO AS TEMPLATE
  */
-class Index extends WHM\Controller implements WHM\IRedirectable
+class Index extends Controller implements IRedirectable
 {
     public function __construct(array $args = null)
     {
@@ -17,6 +23,18 @@ class Index extends WHM\Controller implements WHM\IRedirectable
 
     public function get()
     {
-        $this->display("index.twig");
+        $household = new WHM\Model\Household();
+        $address = new Address();
+
+        $address->setStreet("Panet");
+        $household->setAddress($address);
+
+        $this->persist($household);
+        $this->flush();
+
+        echo "Saved...<br>";
+        echo "Retreaving...<br>";
+
+        Helper::entity_dump($household);
     }
 }
