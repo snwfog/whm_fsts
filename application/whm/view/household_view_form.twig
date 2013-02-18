@@ -11,54 +11,9 @@
         {% endblock %}
     {% endfor %}
 <div class="main">
-   <fieldset class="regis2"> 
-        <legend><h1> Registration </h1></legend>
    
-        <div style = "pers" >
-            <h3>Personal Information</h3>
-            <ul>
-
-                <li><input type="view" name="first_name" placeholder="Steve" disabled="true" />
-                <li><input type="view" name="last_name" placeholder="Gourgue" disabled="true" />
-                <li><input type="view" name="work_status" placeholder="Part Time" disabled="true" />
-                <li><input type="view" name="welfare_number" disabled="true" />
-                <li><input type="view" name="phone_number" placeholder="5141009999" disabled="true" />
-                <li><input type="view" name="medicare_num" placeholder="GOUS03098706" disabled="true" />
-                <li><input type="view" name="referal" disabled="true" />
-
-                <br />
-
-                <li><input type="view" name="marital" placeholder="Widowed" disabled="true" />
-                <br />
-                <li><input type="view" name="origin" placeholder="Canada" disabled="true" />
-
-                <br />
-
-			</ul>
-		</div>
-        <div class="address2">
-		<h3>Address</h3>
-			<ul>
-				<li><input type="view" name="address" placeholder="100 Zoo" disabled="true" />
-				<li><input type="view" name="apt" disabled="true" />
-				<li><input type="view" name="city" placeholder="Pierrefonds" disabled="true" />
-				<li><input type="view" name="province" placeholder="Quebec" disabled="true" />
-				<li><input type="view" name="postal" placeholder="H1H1H1" disabled="true" />
-			</ul>
-        </div>    
-
-	</fieldset>
-	<fieldset class ="info">
-		<legend><h1>Info.</h1></legend>
-		<h3>Household ID: </h3><p>9114234</p><br />
-		<h3>Date of birth: </h3><p>September 3rd 1987</p><br />
-		<h3>Age: </h3><p>25</p><br />
-		<h3>Gender: </h3><p>Male</p><br />
-		<h3>Dependants: </h3><p>Bobbert</p><br /><p>Charlie</p><br /><p>Michel</p><br /><p>Saudi</p><br />
-	</fieldset>
-	<fieldset class ="notes">
-		<legend><h1>Notes</h1></legend>
-		<textarea rows="4" disabled="true" />Household master drinks too many energy drinks, potential sudden death possible. Dependant Bobbert buys overpriced flowers. Dependant Charlie listens to weird asian music. Dependant Michel is named Michel. Dependant Saudi is not actually from Saudi Arabia. </textarea>
-	</fieldset>
+	{% include 'static/viewRegis.twig' %}
+    {% include 'static/viewInfo.twig' %}
+	{% include 'static/viewNote.twig' %}
 </div>
 {% endblock content %}
