@@ -18,50 +18,47 @@
             <h3>Personal Information</h3>
             <ul>
 
-                <li>first_name
-                <li>last_name
-                <li>work_status
-                <li>welfare_number
-                <li>phone_number
-                <li>medicare
-                <li>referal
+                <li><input type="text" name="first_name" placeholder="Steve" disabled="true" />
+                <li><input type="text" name="last_name" placeholder="Gourgue" disabled="true" />
+                <li><input type="text" name="work_status" placeholder="Part Time" disabled="true" />
+                <li><input type="text" name="welfare_number" disabled="true" />
+                <li><input type="text" name="phone_number" placeholder="5141009999" disabled="true" />
+                <li><input type="text" name="medicare_num" placeholder="GOUS03098706" disabled="true" />
+                <li><input type="text" name="referal" disabled="true" />
 
                 <br />
 
-                    <select name ="marital">
-                        <option selected disabled>Marital Status</option>
-                        <option>Married</option>
-                        <option>Single</option>
-                        <option>Divorced</option>
-                        <option>Widowed</option>
-                        <option>Common Law</option>
-                    </select>
+                <li><input type="text" name="marital" placeholder="Widowed" disabled="true" />
                 <br />
-                    {% include 'static/origin.twig' %}
+                <li><input type="text" name="origin" placeholder="Canada" disabled="true" />
 
-                     <br />
+                <br />
 
-        </ul>
-    </div>
+			</ul>
+		</div>
         <div class="address2">
-        <h3>Address</h3>
-        <ul>
-            <li>Address
-            <li>Appartment
-             <li>City
-            <li>Province
-            <li>Postal Code
-        </ul>
+		<h3>Address</h3>
+			<ul>
+				<li><input type="text" name="address" placeholder="100 Zoo" disabled="true" />
+				<li><input type="text" name="apt" disabled="true" />
+				<li><input type="text" name="city" placeholder="Pierrefonds" disabled="true" />
+				<li><input type="text" name="province" placeholder="Quebec" disabled="true" />
+				<li><input type="text" name="postal" placeholder="H1H1H1" disabled="true" />
+			</ul>
         </div>    
 
-</fieldset>
-<fieldset class ="info">
-    <legend><h1>Info.</h1></legend>
-    <h3>Household ID: </h3><p>9114234</p><br />
-    <h3>Date of birth: </h3><p>September 3rd 1987</p><br />
-    <h3>Age: </h3><p>25</p><br />
-    <h3>Gender: </h3><p>Male</p><br />
-    <h3>Dependants: </h3><p>Child1</p>
-</fieldset>
+	</fieldset>
+	<fieldset class ="info">
+		<legend><h1>Info.</h1></legend>
+		<h3>Household ID: </h3><p>9114234</p><br />
+		<h3>Date of birth: </h3><p>September 3rd 1987</p><br />
+		<h3>Age: </h3><p>25</p><br />
+		<h3>Gender: </h3><p>Male</p><br />
+		<h3>Dependants: </h3><p>Bobbert</p><br /><p>Charlie</p><br /><p>Michel</p><br /><p>Saudi</p><br />
+	</fieldset>
+	<fieldset class ="notes">
+		<legend><h1>Notes</h1></legend>
+		<textarea rows="4" disabled="true" style="resize:none" />Household master drinks too many energy drinks, potential sudden death possible. Dependant Bobbert buys overpriced flowers. Dependant Charlie listens to weird asian music. Dependant Michel is named Michel. Dependant Saudi is not actually from Saudi Arabia. </textarea>
+	</fieldset>
 </div>
 {% endblock content %}
