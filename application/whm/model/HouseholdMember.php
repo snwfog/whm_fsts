@@ -38,7 +38,7 @@ use Doctrine\Common\Collections\ArrayCollection;
      **/
 	protected $language;
 	/**
-     * @Column(type="string")
+     * @Column(type="string",nullable = true)
      **/
 	protected $note;
 	/**
