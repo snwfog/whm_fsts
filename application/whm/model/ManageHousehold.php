@@ -18,19 +18,15 @@ class ManageHousehold {
 
 	public function createHousehold($form_data) {
 		//include_once('Entity_Manager.php');
-		//Objects to be saved
-		$this->createMember($form_data);
-		$this->createAddress($form_data);
-
+		$pmember = $this->createMember($form_data);
+		$address = $this->createAddress($form_data);
 		$household = new Household();
 
-		//Preparing object to be saved
-
-		// $household->setPhone_number($phone_number);
-		// $household->setHousehold_principal_id($id);
-		// //$household->setAddress($address);
-		// $em->persist($household);
-		// $em->flush();
+		$household->setPhone_number($form_data["phone_number"]);
+		$household->setPrincipalMember($pmember);
+		$household->setAddress($address);
+		$this->em->persist($household);
+		$this->em->flush();
 
 	}
 	

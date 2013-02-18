@@ -56,13 +56,13 @@ class Household {
         $this->id = $id;
     }
 
-    public function getHousehold_principal_id()
+    public function getPrincipalMember()
 	{
-        return $this->household_principal_id;
+        return $this->$principal_member;
     }
 
-    public function setHousehold_principal_id($household_principal_id) {
-        $this->household_principal_id = $household_principal_id;
+    public function setPrincipalMember($principal_member) {
+        $this->principal_member = $principal_member;
     }
 
     public function getPhone_number() {
