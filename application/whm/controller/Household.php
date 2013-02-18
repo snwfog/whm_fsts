@@ -20,10 +20,11 @@ class Household extends Controller implements IRedirectable
 
     public function get()
     {
-       
-        $data = array("first_name" => "wais");
+        $manageHouse = new ManageHousehold(); 
+
+        $this->data["form"] = $manageHouse->getFirstName();        
         $this->display("household_view_form.twig", $data);
-       // $this->display("household_create_form.twig");
+     
     }
 
     public function put()
@@ -47,6 +48,15 @@ class Household extends Controller implements IRedirectable
 
    }
 
+
+   public function delete($household_id)
+   {
+
+
+    $manageHouse = new ManageHousehold();
+    //$household_id = $manageHouse->setHousehold();
+    $manageHouse->removeHousehold($household_id);
+   }
 
 
 }
