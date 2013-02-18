@@ -54,7 +54,7 @@ class Household extends Controller implements IRedirectable
 
 
     $manageHouse = new ManageHousehold();
-    //$household_id = $manageHouse->setHousehold();
+    $household_id = $manageHouse->getId();
     $manageHouse->removeHousehold($household_id);
    }
 
