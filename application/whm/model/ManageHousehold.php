@@ -27,6 +27,7 @@ class ManageHousehold {
 		$household->setAddress($address);
 		$this->em->persist($household);
 		$this->em->flush();
+		return $household;
 
 	}
 	

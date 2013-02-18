@@ -7,12 +7,15 @@ use \WHM\Model\ManageHousehold;
 class CreateHousehold extends WHM\Controller implements WHM\IRedirectable
 {
     protected $data = array("errors" => array(), "form" => array());
+    private $manageHouse;
+    private $householdController;
     public function __construct(array $args = null)
     {
         $this->data = $args;
         parent::__construct();
       //  WHM\Helper::backtrace();
-
+        $this->manageHouse = new ManageHousehold();
+        $this->householdController = new Household();
     }
 
     public function get()
@@ -39,17 +42,13 @@ class CreateHousehold extends WHM\Controller implements WHM\IRedirectable
 
     public function post()
     {
-
         if (isset($_POST))
         {
             $this->data["form"] = $_POST;
-            $manageHouse = new ManageHousehold();
-            $manageHouse->createHousehold($_POST);
-        }else{
-            $this->display("household_create_form.twig");
+            $household = $this->manageHouse->createHousehold($_POST);
+            $this->householdController->setHousehold($household);
+            $this->householdController->get();
         }
-
-
     }
 
 }
