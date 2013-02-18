@@ -241,15 +241,13 @@ class HouseholdMemberTest extends PHPUnit_Framework_TestCase
 
     public function testsetHousehold()
     {
-        // $household_member = new HouseholdMember();
-        // $household = new Household();
-        // $observer = $this->getMock('WHM\Model\Household', array('assignedToMember'));
-        // $observer_2 = $this->getMock('WHM\Model\HouseholdMember', array());
-        // $observer_2->setHousehold($household);
-        // $household_member->setHousehold($household);
-        // $observer->expects($this->once())
-        //          ->method('assignedToMember')
-        //          ->with($this->equalTo($household));
+        $household_member = new HouseholdMember();
+
+        $observer = $this->getMock('WHM\Model\Household', array('assignedToMember'));
+        $observer->expects($this->once())
+                 ->method('assignedToMember')
+                 ->with($this->equalTo($household_member));
+        $household_member->setHousehold($observer);
 
 
         // $householdmember = new HouseholdMember();
