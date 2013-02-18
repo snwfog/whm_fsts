@@ -5,23 +5,6 @@
  * ---------------------------------------------
  */
 
-// Define application configuration variables
-$config = array
-(
-    // Dev mode use ArrayCache and auto generate proxy in Doctrine
-    'dev_mode' => true,
-    'dbconfig' => array
-    (
-        'driver' => 'pdo_mysql',
-        'user'   => 'root',
-        'password' => 'root',
-        'dbname' => 'soen390'
-    ),
-
-
-);
-
-
 // Define router routes to serve
 $serves = array
 (
@@ -37,13 +20,13 @@ $serves = array
  * ----------------------------------------------
  */
 
-// Define system path and application path
-define('APPPATH', 'application');   // Folder for controller, view, model
-//define('SYSPATH', 'core');        // Folder for core
-
-// Here we go start the bootstrap...
+// Require the local config
+require_once('local-config.php');
+// Require the config file for define variables
+require_once('application/whm/Config.php');
+// Require the Bootstrap file
 require_once('application/whm/Bootstrap.php');
 
 // Instance the application
 $app = new WHM\Application($config);
-$app->route($serves);
+$app::route($serves);

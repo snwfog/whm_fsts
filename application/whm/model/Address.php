@@ -1,5 +1,6 @@
 <?php
 
+namespace WHM\Model;
 /**
  * @Entity @Table(name="addresses")
  **/
@@ -10,7 +11,7 @@
      **/
     protected $id;
 	/**
-     * @OneToOne(targetEntity="Household", mappedBy="adress")
+     * @OneToOne(targetEntity="Household", mappedBy="address")
      **/
 	protected $household;
 	/**

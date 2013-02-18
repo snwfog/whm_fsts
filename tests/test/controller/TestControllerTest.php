@@ -3,7 +3,6 @@
 namespace Test\Controller;
 
 use \PHPUnit_Framework_TestCase;
-use \Mock_Test_Controller;
 use \WHM\Controller\Test;
 
 class TestControllerTest extends PHPUnit_Framework_TestCase

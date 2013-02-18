@@ -2,6 +2,7 @@
 
 namespace WHM\Controller;
 use WHM;
+use \WHM\Model\ManageHousehold;
 
 class CreateHousehold extends WHM\Controller implements WHM\IRedirectable
 {
@@ -10,7 +11,7 @@ class CreateHousehold extends WHM\Controller implements WHM\IRedirectable
     {
         $this->data = $args;
         parent::__construct();
-        WHM\Helper::backtrace();
+      //  WHM\Helper::backtrace();
 
     }
 
@@ -50,6 +51,10 @@ class CreateHousehold extends WHM\Controller implements WHM\IRedirectable
 
 
 
+
+
+
+/*
         $householdModel = new Household();
         $householdMemberModel  = new HouseholdMember();
         $addressModel    = new Address();
@@ -68,10 +73,13 @@ class CreateHousehold extends WHM\Controller implements WHM\IRedirectable
         $this->display("household_create_form.twig", $this->data);
 
 
-
+*/
 
 
     }
+
+
+
 
      public function check_form($form)
     {

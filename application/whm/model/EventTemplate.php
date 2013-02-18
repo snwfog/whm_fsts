@@ -1,4 +1,5 @@
 <?php
+namespace WHM\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 

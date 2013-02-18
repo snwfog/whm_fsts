@@ -1,19 +1,26 @@
 <?php
 
-require_once('App.php');
+require_once('local-config.php');
 
-use \App;
+use \Doctrine\ORM\Tools\Console\ConsoleRunner;
+use \Doctrine\ORM\Tools\Setup;
+use \Doctrine\ORM\EntityManager;
 
-use Doctrine\ORM\Tools\Console\ConsoleRunner;
+$path = array(DOCTRINE_MODEL_PATH);
+$dev_mode = $config['dev_mode'];
+$dbconfig = $config['dbconfig'];
 
-$em = App::get('em');
+$config = Setup::createAnnotationMetadataConfiguration($path, $dev_mode);
+$em = EntityManager::create($dbconfig, $config);
 
-$helperSet = new \Symfony\Component\Console\Helper\HelperSet(array(
-    'db' => new \Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper($em->getConnection()),
-    'em' => new \Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper($em)
-));
+$helperSet = new \Symfony\Component\Console\Helper\HelperSet
+(
+    array
+    (
+        'db' => new \Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper($em->getConnection()),
+        'em' => new \Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper($em)
+    )
+);
 
 ConsoleRunner::run($helperSet);
 
-
-?>

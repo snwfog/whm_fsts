@@ -1,4 +1,6 @@
 <?php
+namespace WHM\Model;
+use WHM;
 
 /**
  * @Entity @Table(name="comments")

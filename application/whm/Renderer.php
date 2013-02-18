@@ -2,9 +2,6 @@
 
 namespace WHM;
 
-use \Twig_Loader_Filesystem;
-use \Twig_Environment;
-
 /**-----------------------------------------------------------------------------
  * Template renderer class.
  * This class implement the Singleton pattern. It is used to generate a
@@ -17,20 +14,10 @@ class Renderer implements IRenderer
     // Set Twig loader file system so we can locate the template folders
     private static $_instance;
     private $_twig_instance;
-    private $_twig_config = array
-    (
-        'cache' => TWIG_CACHE_PATH, // Twig template cache folder
-        'auto_reload' => TRUE       // Autoload reload caches,
-                                    // set to false when deploy
-    );
 
     private function __construct()
     {
-        $this->_twig_instance = new Twig_Environment
-        (
-            new Twig_Loader_Filesystem(TWIG_VIEW_PATH),
-            $this->_twig_config
-        );
+        $this->_twig_instance = Application::twig();
     }
 
     public static function get_instance()
