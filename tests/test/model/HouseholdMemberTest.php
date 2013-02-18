@@ -5,6 +5,7 @@ namespace Test\Model;
 use \PHPUnit_Framework_TestCase;
 use \WHM\Model\HouseholdMember;
 use \WHM\Model\Household;
+
 class HouseholdMemberTest extends PHPUnit_Framework_TestCase
 {
     public function testgetId()
@@ -87,8 +88,6 @@ class HouseholdMemberTest extends PHPUnit_Framework_TestCase
                             PHPUnit_Framework_TestCase::readAttribute($householdmember, "work_status")
                             );
     }
-
-
 
     public function testWelfare_number()
     {
@@ -238,12 +237,6 @@ class HouseholdMemberTest extends PHPUnit_Framework_TestCase
                  ->method('assignedToMember')
                  ->with($this->equalTo($household_member));
         $household_member->setHousehold($observer);
-        // $householdmember = new HouseholdMember();
-        // $householdmember->setHousehold("Syrian");
-        // $this->assertEquals(
-        //                     "Syrian", 
-        //                     $householdmember->getHousehold()
-        //                     );
     }
 
     public function testsetHousehold()
