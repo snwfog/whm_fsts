@@ -83,7 +83,7 @@ input[type="view"]::-webkit-input-placeholder{
 input[type="view"]:-moz-placeholder {
     color:white;
 }
-input[placeholder], [placeholder], *[placeholder]
+input[placeholder]
 {
     color:black !important;
 }
@@ -92,10 +92,11 @@ input[type="view"]
     color:white;
     font-size: 15px;
     font-family:verdana;
-    background-color:#404552;
+    background-color:#262323;
     width:250px;
     padding:8px 8px;
     border:0px;
+    margin-bottom:-10px;
 }
 
 input {
@@ -117,7 +118,19 @@ input[type="password"] {
     width:250px;
     padding:8px 8px;
     border:1px solid #999;
+    margin-bottom:-10px;
 }
+input[type="text2"],
+input[type="password2"] {
+    vertical-align:middle;
+    box-shadow: 1px 2px rgba(100, 100, 100, 0.1);
+    display:inline-block;
+    width:250px;
+    padding:8px 8px;
+    border:1px solid #999;
+    margin-bottom:0px;
+}
+
 input[type="text"]:focus,
 input[type="password"]:focus {
     background:#FFF;
@@ -127,20 +140,18 @@ input[type="password"]:focus {
 }
 
 textarea {
+    color: white;
+    outline-color:white;
     width:570px;
     height:90px;
     box-shadow: 1px 2px rgba(100, 100, 100, 0.1);
-    border:none;
+    border:0px;
     background-color:#404552;
-    color:white;
     resize:none;
-    border-color: Transparent; 
+    border-color: blue; 
     overflow: auto;  
 }
-textarea:focus
-{
-   outline:0px none transparent; 
-}
+
 
 select {
     min-width:150px;
@@ -149,9 +160,11 @@ select {
     vertical-align:middle;
     box-shadow: 1px 2px rgba(100, 100, 100, 0.1);
     display:inline-block;
-    width:250px;
+    width:267px;
     padding:8px 8px;
     border:1px solid #999;
+    margin-bottom:0px;
+
 }
 
 
@@ -192,6 +205,20 @@ select {
 	margin-left: 48px;
 }
 
+.status
+{
+  font-family:verdana;
+    float: right;
+    padding:10px;
+    width: 250px;
+    height:165px;
+    border-radius:10px;
+    border:10px solid #5076CD;
+    background-color:#404552;
+    margin-right:40px;
+    margin-top: -204px;
+    color:white;
+}
 
 .info
 {
@@ -199,15 +226,21 @@ select {
     float: right;
     padding:10px;
     width: 250px;
+    height:463px;
     border-radius:10px;
     border:10px solid #5076CD;
     background-color:#404552;
     margin-right:40px;
-    margin-top: -555px;
+    margin-top: -503px;
     color:white;
 
 }
-
+.info .memberList
+{
+overflow:auto;
+width: 260px;
+height:140px;
+}
 .info .p
 {
     display: inline;
@@ -216,14 +249,14 @@ select {
 .address
 {
 	float: right;
-	margin-top: -500px;
+	margin-top: -410px;
     width: 260px;
 }
 
 .address2
 {
     float: right;
-    margin-top: -465px;
+    margin-top: -415px;
     width: 260px;
 }
 
@@ -265,7 +298,7 @@ select {
     bottom:40px;
     position:absolute;
 	width: 100%;
-    overflow:hidden;
+    overflow:auto;
 	background-color: #404552;
 }
 

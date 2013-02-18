@@ -28,23 +28,23 @@ class HouseholdTest extends PHPUnit_Framework_TestCase
                             );
     }
 
-    public function testgetHousehold_principal_id()
+    public function testgetPrincipalMember()
     {
         $household = new Household();
-        $household->setHousehold_principal_id(123456789);
+        $household->setPrincipalMember("Michel");
         $this->assertEquals(
-                            123456789, 
-                            $household->getHousehold_principal_id()
+                            "Michel", 
+                            $household->getPrincipalMember()
                             );
     }
 
-        public function testsetHousehold_principal_id()
+    public function testsetPrincipalMember()
     {
         $household = new Household();
-        $household->setHousehold_principal_id(123456789);
+        $household->setPrincipalMember('Michel');
         $this->assertEquals(
-                            123456789, 
-                            PHPUnit_Framework_TestCase::readAttribute($household, "household_principal_id")
+                            "Michel", 
+                            PHPUnit_Framework_TestCase::readAttribute($household, "principal_member")
                             );
     }
 
@@ -58,7 +58,7 @@ class HouseholdTest extends PHPUnit_Framework_TestCase
                             );
     }
 
-        public function testsetPhone_number()
+    public function testsetPhone_number()
     {
         $household = new Household();
         $household->setPhone_number(123456789);
@@ -78,7 +78,7 @@ class HouseholdTest extends PHPUnit_Framework_TestCase
                             );
     }
 
-        public function testsetAddress()
+    public function testsetAddress()
     {
         $household = new Household();
         $household->setAddress(123456789);
@@ -99,7 +99,7 @@ class HouseholdTest extends PHPUnit_Framework_TestCase
                             );
     }
 
-        public function testsetMember()
+    public function testsetMember()
     {
         $household = new Household();
         $household->setMembers(123456789);
@@ -108,4 +108,24 @@ class HouseholdTest extends PHPUnit_Framework_TestCase
                             PHPUnit_Framework_TestCase::readAttribute($household, "members")
                             );
     }
+
+    // public function testassignedToMember()
+    // {
+    //     $household = new Household();
+    //     $household->assignedToMember(123456789);
+    //     $this->assertEquals(
+    //                         123456789, 
+    //                         PHPUnit_Framework_TestCase::readAttribute($household, "members")
+    //                         );
+    // }
+
+    // public function testassignedToFlag()
+    // {
+    //     $household = new Household();
+    //     $household->assignedToFlag(123456789);
+    //     $this->assertEquals(
+    //                         123456789, 
+    //                         PHPUnit_Framework_TestCase::readAttribute($household, "flags")
+    //                         );
+    // }
 }

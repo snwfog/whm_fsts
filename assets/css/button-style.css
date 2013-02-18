@@ -60,7 +60,10 @@ button {
 	height: 29px !important;
 	cursor: pointer;
 }
-
+button.pos{
+	float:right;
+	margin-top:5px;
+}
 button.left,
 .button.left {
 	margin: 5px 0 5px 5px;

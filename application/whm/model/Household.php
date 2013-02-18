@@ -58,7 +58,7 @@ class Household {
 
     public function getPrincipalMember()
 	{
-        return $this->$principal_member;
+        return $this->principal_member;
     }
 
     public function setPrincipalMember($principal_member) {

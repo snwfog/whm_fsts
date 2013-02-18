@@ -18,15 +18,14 @@
 
                 <li><input type="text" name="first_name" placeholder="First Name" value="{{form["first_name"]}}"/>
                 <li><input type="text" name="last_name" placeholder="Last Name" value="{{form["last_name"]}}"/>
-                <li><input type="text" name="language" placeholder="Main Language" value=""/>
+                <li><input type="text" name="language" placeholder="Spoken Language" value=""/>
                 <li><input type="text" name="work_status" placeholder="Work Status" value="{{form["work_status"]}}"/>
                 <li><input type="text" name="welfare_number" placeholder="Welfare Number" value="{{form["welfare_number"]}}"/>
                 <li><input type="text" name="phone_number" placeholder="Phone Number" value="{{form["phone_number"]}}" />
                 <li><input type="text" name="medicare" placeholder="Medicare" value="{{form["medicare"]}}"/>
-                <li><input type="text2" name="referal" placeholder="Referal" value="{{form["referal"]}}"/>
+                <li><input type="text" name="referal" placeholder="Referal" value="{{form["referal"]}}"/>
 
                 <br />
-                
                     <select name="marital">
                         <option disabled selected="selected">Marital Status</option>
                         <option>Single</option>
@@ -42,19 +41,10 @@
 
         </ul>
     </div>
-        <div class="address">
-        <h3>Address</h3>
-        <ul>
-            <li><input type="text" name="address" placeholder="Address" value="{{form["address"]}}"/>
-            <li><input type="text" name="appt_number" placeholder="Appartment Number" value="{{form["appt_number"]}}" />
-             <li><input type="text" name="city" placeholder="City" value="{{form["city"]}}"/>
-            <li><input type="text" name="province" placeholder="Province" value="{{form["province"]}}"/>
-            <li><input type="text" name="postal_code" placeholder="Postal Code" value="{{form["postal_code"]}}"/>
-        </ul>
-        </div>
-        <input type="hidden" name="household_create_form" value="TRUE" />
+       
+        <input type="hidden" name="member_create_form" value="TRUE" />
         <button class="action blue submit">
-            <span class="label">Register</span>
+            <span class="label">Add Member</span>
         </button>
     
     </form>
