@@ -156,7 +156,7 @@ use Doctrine\Common\Collections\ArrayCollection;
     }
 	public function getHousehold()
     {
-        return $this->household;
+        return $this->$household;
     }
 	public function setHousehold($household)
     {

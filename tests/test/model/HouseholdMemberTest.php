@@ -229,15 +229,22 @@ class HouseholdMemberTest extends PHPUnit_Framework_TestCase
                             );
     }
 
-    // public function testgetHousehold()
-    // {
-    //     $householdmember = new HouseholdMember();
-    //     $householdmember->setHousehold("Syrian");
-    //     $this->assertEquals(
-    //                         "Syrian", 
-    //                         $householdmember->getHousehold()
-    //                         );
-    // }
+    public function testgetHousehold()
+    {
+        $household_member = new HouseholdMember();
+
+        $observer = $this->getMock('WHM\Model\Household', array('assignedToMember'));
+        $observer->expects($this->once())
+                 ->method('assignedToMember')
+                 ->with($this->equalTo($household_member));
+        $household_member->setHousehold($observer);
+        // $householdmember = new HouseholdMember();
+        // $householdmember->setHousehold("Syrian");
+        // $this->assertEquals(
+        //                     "Syrian", 
+        //                     $householdmember->getHousehold()
+        //                     );
+    }
 
     public function testsetHousehold()
     {
