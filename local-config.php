@@ -13,7 +13,6 @@ return $config = array
         'user'   => 'root',
         'password' => '',
         'dbname' => 'fsts',
-        'host' => '127.0.0.1'
     ),
 
     // Twig configuration

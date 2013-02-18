@@ -44,15 +44,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 	/**
      * @Column(type="string")
      **/
-	protected $martial_status;
+	protected $marital_status;
 	/**
      * @Column(type="string")
      **/
 	protected $origin;
-	/**
-     * @Column(type="integer")
-     **/
-	protected $dependants_number;
 	/**
      * @Column(type="date")
      **/
@@ -134,13 +130,13 @@ use Doctrine\Common\Collections\ArrayCollection;
     {
         $this->note = $note;
     }
-	public function getMartial_status()
+	public function getMarital_status()
     {
-        return $this->martial_status;
+        return $this->marital_status;
     }
-	public function setMartial_status($martial_status)
+	public function setMarital_status($marital_status)
     {
-        $this->martial_status = $martial_status;
+        $this->marital_status = $marital_status;
     }
 	public function getOrigin()
     {
@@ -149,14 +145,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 	public function setOrigin($origin)
     {
         $this->origin = $origin;
-    }
-	public function getDependants_number()
-    {
-        return $this->dependants_number;
-    }
-	public function setDependants_number($dependants_number)
-    {
-        $this->dependants_number = $dependants_number;
     }
 	public function getFirst_visit_date()
     {
@@ -172,6 +160,7 @@ use Doctrine\Common\Collections\ArrayCollection;
     }
 	public function setHousehold($household)
     {
+		$household->assignedToMember($this);
         $this->household = $household;
     }
 	public function getEvents()

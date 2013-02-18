@@ -18,6 +18,7 @@
 
                 <li><input type="text" name="first_name" placeholder="First Name" value="{{form["first_name"]}}"/>
                 <li><input type="text" name="last_name" placeholder="Last Name" value="{{form["last_name"]}}"/>
+                <li><input type="text" name="language" placeholder="Spoken Language" value=""/>
                 <li><input type="text" name="work_status" placeholder="Work Status" value="{{form["work_status"]}}"/>
                 <li><input type="text" name="welfare_number" placeholder="Welfare Number" value="{{form["welfare_number"]}}"/>
                 <li><input type="text" name="phone_number" placeholder="Phone Number" value="{{form["phone_number"]}}" />
@@ -25,11 +26,9 @@
                 <li><input type="text" name="referal" placeholder="Referal" value="{{form["referal"]}}"/>
 
                 <br />
-
-                    <select name ="marital">
-                        <option selected disabled>Marital Status</option>
-                        <option>Married</option>
+                    <select name="marital">
                         <option>Single</option>
+                        <option>Married</option>
                         <option>Divorced</option>
                         <option>Widowed</option>
                         <option>Common Law</option>
@@ -37,7 +36,7 @@
                 <br />
                     {% include 'static/origin.twig' %}
 
-                     <br />
+                <br />
 
         </ul>
     </div>
