@@ -45,7 +45,7 @@ namespace WHM\Model;
 	}
 	public function getStreet()
 	{
-		return $this->streetAndNumber;
+		return $this->street;
 	}
 	public function setStreet($street)
 	{

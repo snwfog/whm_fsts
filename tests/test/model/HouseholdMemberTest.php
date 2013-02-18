@@ -3,9 +3,9 @@
 namespace Test\Model;
 
 use \PHPUnit_Framework_TestCase;
-use \WHM\Model\Address;
+use \WHM\Model\HouseholdMember;
 
-class AddressTest extends PHPUnit_Framework_TestCase
+class HouseholdMemberTest extends PHPUnit_Framework_TestCase
 {
     public function testgetId()
     {

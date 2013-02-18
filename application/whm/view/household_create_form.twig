@@ -10,7 +10,7 @@
     {% endfor %}
     
    <fieldset class="regis"> 
-        <legend><h1>Registration</h1></legend>
+        <legend><h1> Registration </h1></legend>
     <form action="household_create" method="POST" name="household_create">
         <div style = "pers" >
             <h2>Personal Information</h2>
@@ -44,7 +44,7 @@
         <div class="address">
         <h2>Address</h2>
         <ul>
-            <li><input type="text" name="addess" placeholder="Address" value="{{form["address"]}}"/>
+            <li><input type="text" name="address" placeholder="Address" value="{{form["address"]}}"/>
             <li><input type="text" name="appt_number" placeholder="Appartment Number" value="{{form["appt_number"]}}" />
              <li><input type="text" name="city" placeholder="City" value="{{form["city"]}}"/>
             <li><input type="text" name="province" placeholder="Province" value="{{form["province"]}}"/>

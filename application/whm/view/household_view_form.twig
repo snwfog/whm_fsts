@@ -1,77 +1,67 @@
+
+
 {% extends 'static/base.twig' %}
 
 {% block content %}
 
-    {#----------------------------------------------------------------------------#}
-    {#----------------------------------------------------------------------------#}
-    {# HOUSEHOLD INFORMATION #}
-    {#----------------------------------------------------------------------------#}
-    {#----------------------------------------------------------------------------#}
 
-    <div id="info">
-        <h1>Household Information</h1>
-        <table>
-            {% if true %}
-                <tr>
-                    <td>First Name</td>
-                    <td>{{ first_name }}</td>
-                </tr>
-                <tr>
-                    <td>Last Name</td>
-                    <td>{{ last_name }}</td>
-                </tr>
-                <tr>
-                    <td>Phone Number</td>
-                    <td>{{ phone_number }}</td>
-                </tr>
-                <tr>
-                    <td>Work Status</td>
-                    <td>{{ work_status }}</td>
-                </tr>
-                <tr>
-                    <td>Welfare Number</td>
-                    <td>{{ welfare_number }}</td>
-                </tr>
-                <tr>
-                    <td>Medicare</td>
-                    <td>{{ medicare }}</td>
-                </tr>
-                <tr>
-                    <td>Referal</td>
-                    <td>{{ referal }}</td>
-                </tr>
-                <tr>
-                    <td>Marital</td>
-                    <td>{{ marital }}</td>
-                </tr>
-                <tr>
-                    <td>Origin</td>
-                    <td>{{ origin }}</td>
-                </tr>
+    {% for error in errors %}
+        {% block error %}
+            <div id="error">{{ error }}</div></br>
+        {% endblock %}
+    {% endfor %}
+<div class="main">
+   <fieldset class="regis2"> 
+        <legend><h1> Registration </h1></legend>
+   
+        <div style = "pers" >
+            <h3>Personal Information</h3>
+            <ul>
 
-                <tr>
-                    <td>Address</td>
-                    <td>{{ address }}</td>
-                </tr>
-                <tr>
-                    <td>Apt Number</td>
-                    <td>{{ appt_number }}</td>
-                </tr>
+                <li>first_name
+                <li>last_name
+                <li>work_status
+                <li>welfare_number
+                <li>phone_number
+                <li>medicare
+                <li>referal
 
-                <tr>
-                    <td>City</td>
-                    <td>{{ city }}</td>
-                </tr>
-                <tr>
-                    <td>Province</td>
-                    <td>{{ province }}</td>
-                </tr>
-                <tr>
-                    <td>Postal Code</td>
-                    <td>{{ postal_code }}</td>
-                </tr>
-            {% endif %}
-        </table>
+                <br />
+
+                    <select name ="marital">
+                        <option selected disabled>Marital Status</option>
+                        <option>Married</option>
+                        <option>Single</option>
+                        <option>Divorced</option>
+                        <option>Widowed</option>
+                        <option>Common Law</option>
+                    </select>
+                <br />
+                    {% include 'static/origin.twig' %}
+
+                     <br />
+
+        </ul>
     </div>
+        <div class="address2">
+        <h3>Address</h3>
+        <ul>
+            <li>Address
+            <li>Appartment
+             <li>City
+            <li>Province
+            <li>Postal Code
+        </ul>
+        </div>    
 
+</fieldset>
+<fieldset class ="info">
+    <legend><h1>Info.</h1></legend>
+    <h3>Household ID: </h3><p>9114234</p><br />
+    <h3>Date of birth: </h3><p>September 3rd 1987</p><br />
+    <h3>Age: </h3><p>25</p><br />
+    <h3>Gender: </h3><p>Male</p><br />
+    <h3>Dependants: </h3><p>Child1</p>
+</fieldset>
+</div>
 {% endblock content %}

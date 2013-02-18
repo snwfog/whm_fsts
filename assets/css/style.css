@@ -50,8 +50,8 @@ h2
 
 h3 {
     font-size: 20px;
-    margin: 30px 0px;
-    color: #4C8FFD;
+    text-shadow:none;
+    color: #9E8C8C;
 }
 
 
@@ -137,7 +137,6 @@ select {
 
 .header
 {
-	float: top;
 	width: 100%;
 	height: 40px;
     overflow:hidden;
@@ -153,18 +152,29 @@ select {
     float: left;
     margin: 0px 10px 0px 5px;
 }
-#info
+
+.main
+{
+    width: 1000px;
+}
+.info
 {
     font-family:verdana;
-    position:absolute;
-    left:620px;
-    width:450px;
-    height:150px;
-    padding:20px;
+    float: right;
+    padding:10px;
+    width: 250px;
     border-radius:10px;
     border:10px solid #5076CD;
     background-color:#404552;
+    margin-right:40px;
+    margin-top: -398px;
+    color:white;
 
+}
+
+.info .p
+{
+    display: inline;
 }
 
 .address
@@ -173,6 +183,14 @@ select {
 	margin-top: -450px;
     width: 260px;
 }
+
+.address2
+{
+    float: right;
+    margin-top: -310px;
+    width: 260px;
+}
+
 .regis
 {
 	
@@ -186,6 +204,19 @@ select {
 	
 }
 
+.regis2
+{
+    
+    width: 550px;
+    font-family:verdana;
+    padding:20px;
+    border-radius:10px;
+    border:10px solid #5076CD;
+    background-color:#404552;
+    margin-left: 50px;
+    color:white;
+    
+}
 .pers
 {
 	width: 250px;
