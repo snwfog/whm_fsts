@@ -9,7 +9,7 @@ class Flag {
 
     /**
      * @Id
-     * @Column(type="integer")
+     * @Column(type="integer") @GeneratedValue
      **/
     private $id;
 
@@ -74,6 +74,7 @@ class Flag {
 
     public function setHousehold($household)
 	{
+		$household->assignedToMember($this);
         $this->household = $household;
     }
 	public function getComments()

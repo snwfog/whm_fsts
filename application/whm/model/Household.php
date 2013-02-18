@@ -88,6 +88,14 @@ class Household {
     public function setMembers($members) {
         $this->members = $members;
     }
+	public function assignedToMember($member)
+	{
+		$this->members[] = $member;
+	}
+	public function assignedToFlag($flag)
+	{
+		$this->flags[] = $flag;
+	}
 
  }
 
