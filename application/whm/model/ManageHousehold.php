@@ -3,6 +3,7 @@
 namespace WHM\Model;
 use WHM;
 use WHM\Application;
+use \DateTime;
 
 /**
  * Manage entity household
@@ -52,6 +53,7 @@ class ManageHousehold {
 	private function createMember($data)
 	{
 		$household_member = new HouseholdMember();
+		$datetime = new DateTime("now");
 		$household_member->setFirst_name($data["first_name"]);
 		$household_member->setLast_name($data["last_name"]);
 		$household_member->setWork_status($data["work_status"]);
@@ -60,7 +62,7 @@ class ManageHousehold {
 		$household_member->setLanguage($data["language"]);
 		$household_member->setMarital_status($data["marital"]);
 		$household_member->setOrigin($data["origin"]);
-		$household_member->setFirst_visit_date(date("Y-m-d H:i:s"));
+		$household_member->setFirst_visit_date($datetime);
 		$this->em->persist($household_member);
 		$this->em->flush();
 		return $household_member;
