@@ -50,10 +50,6 @@ use Doctrine\Common\Collections\ArrayCollection;
      **/
 	protected $origin;
 	/**
-     * @Column(type="integer")
-     **/
-	protected $dependants_number;
-	/**
      * @Column(type="date")
      **/
 	protected $first_visit_date;
@@ -149,14 +145,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 	public function setOrigin($origin)
     {
         $this->origin = $origin;
-    }
-	public function getDependants_number()
-    {
-        return $this->dependants_number;
-    }
-	public function setDependants_number($dependants_number)
-    {
-        $this->dependants_number = $dependants_number;
     }
 	public function getFirst_visit_date()
     {
