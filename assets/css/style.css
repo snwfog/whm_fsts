@@ -140,6 +140,7 @@ select {
 	float: top;
 	width: 100%;
 	height: 40px;
+    overflow:hidden;
     background-color: #4C8FFD;
     border-radius: 0 0 3px 3px;
     box-shadow: 1px 2px rgba(100, 100, 100, 0.2);
@@ -193,9 +194,11 @@ select {
 
 #content
 {
-    position: absolute;
-	height: 100%;
+    top:40px;
+    bottom:40px;
+    position:absolute;
 	width: 100%;
+    overflow:hidden;
 	background-color: #404552;
 }
 
@@ -218,7 +221,9 @@ select {
 {
 	position: absolute;
 	bottom: 0;
+    overflow:hidden;
 	width: 100%;
+    height:40px;
     text-align: center;
     background-color: #4C8FFD;
     box-shadow: 1px 2px rgba(100, 100, 100, 0.2);
