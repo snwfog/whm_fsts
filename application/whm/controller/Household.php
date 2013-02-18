@@ -5,6 +5,8 @@ namespace WHM\Controller;
 use \WHM\Helper;
 use \WHM\Controller;
 use \WHM\IRedirectable;
+use \WHM\Model\ManageHousehold;
+use \WHM\Model\HouseholdMember;
 
 class Household extends Controller implements IRedirectable
 {
@@ -20,12 +22,14 @@ class Household extends Controller implements IRedirectable
 
     public function get()
     {
-        $manageHouse = new ManageHousehold(); 
+        $houseMember = new HouseholdMember(); 
 
-        $this->data["form"] = $manageHouse->getFirstName();        
-        $this->display("household_view_form.twig", $data);
+        $this->data["form"] = $houseMember->getFirst_name();        
+        $this->display("household_view_form.twig", $this->data);
      
     }
+
+
 
     public function put()
     {
