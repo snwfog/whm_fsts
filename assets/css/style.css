@@ -207,6 +207,7 @@ select {
 	border: 10px solid #5076CD;
 	background-color: #404552;
 	width: 575px;
+    height:165px;
 	margin-left: 48px;
 }
 
@@ -263,6 +264,7 @@ height:140px;
     float: right;
     margin-top: -415px;
     width: 260px;
+    height:400px;
 }
 
 .regis
