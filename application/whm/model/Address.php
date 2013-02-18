@@ -45,7 +45,7 @@ namespace WHM\Model;
 	}
 	public function getStreet()
 	{
-		return $this->streetAndNumber;
+		return $this->street;
 	}
 	public function setStreet($street)
 	{
@@ -70,7 +70,7 @@ namespace WHM\Model;
 	public function getCity()
 	{
 		return $this->city;
-	}
+    }
 	public function setCity($city)
 	{
 		$this->city = $city;

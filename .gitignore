@@ -217,4 +217,4 @@ pip-log.txt
 .mr.developer.cfg
 /composer.lock
 /vendor
-/local-config.php
+

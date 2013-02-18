@@ -44,7 +44,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 	/**
      * @Column(type="string")
      **/
-	protected $martial_status;
+	protected $marital_status;
 	/**
      * @Column(type="string")
      **/
@@ -134,13 +134,13 @@ use Doctrine\Common\Collections\ArrayCollection;
     {
         $this->note = $note;
     }
-	public function getMartial_status()
+	public function getMarital_status()
     {
-        return $this->martial_status;
+        return $this->marital_status;
     }
-	public function setMartial_status($martial_status)
+	public function setMarital_status($marital_status)
     {
-        $this->martial_status = $martial_status;
+        $this->marital_status = $marital_status;
     }
 	public function getOrigin()
     {
