@@ -26,7 +26,7 @@ class Index extends Controller implements IRedirectable
         $household = new WHM\Model\Household();
         $address = new Address();
 
-        $address->setStreet("Panet");
+        $address->setStreet("Concordia");
         $household->setAddress($address);
 
         $this->persist($household);

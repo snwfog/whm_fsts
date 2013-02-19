@@ -1,5 +1,3 @@
-
-
 {% extends 'static/base.twig' %}
 
 {% block content %}
@@ -12,9 +10,10 @@
     {% endfor %}
 <div class="main">
    
-	{% include 'householdView/viewHRegis.twig' %}
-    {% include 'householdView/viewHInfo.twig' %}
-	{% include 'householdView/viewHNote.twig' %}
+	{% include 'household_view/viewHRegis.twig' %}
+    {% include 'household_view/viewHInfo.twig' %}
+	{% include 'household_view/viewHNote.twig' %}
+
     <fieldset class="status">
         <legend><h1>Status</h1></legend>
     </fieldset>

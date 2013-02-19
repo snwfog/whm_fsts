@@ -25,6 +25,11 @@ class HouseholdMember
 	protected $last_name;
 
     /**
+     * @Column(nullable=TRUE)
+     */
+    protected $phone_number;
+
+    /**
      * @Column(nullable=TRUE, length=9)
      */
     protected $sin_number;
@@ -142,6 +147,16 @@ class HouseholdMember
     public function getLastName()
     {
         return $this->last_name;
+    }
+
+    public function setPhoneNumber($phone_number)
+    {
+        $this->phone_number = $phone_number;
+    }
+
+    public function getPhoneNumber()
+    {
+        return $this->phone_number;
     }
 
     public function setSinNumber($sin_number)
