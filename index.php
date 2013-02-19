@@ -11,9 +11,9 @@ $serves = array
     // Don't put the trailing slash - "/"
     '/' => 'WHM\Controller\Index',
     '/household' => 'WHM\Controller\Household',
-    '/household_create' => 'WHM\Controller\CreateHousehold',
+    '/household/new' => 'WHM\Controller\CreateHousehold',
     '/member' => 'WHM\Controller\Member',
-    '/member_create' => 'WHM\Controller\CreateMember',
+    '/member/new' => 'WHM\Controller\CreateMember',
     '/search' => 'WHM\Controller\Search'
 );
 
