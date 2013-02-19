@@ -1,5 +1,18 @@
 <?php
 
+
+namespace WHM\Controller;
+
+use \WHM\Helper;
+use \WHM\Controller;
+use \WHM\IRedirectable;
+use \WHM\Model\ManageHousehold;
+use \WHM\Model\HouseholdMember;
+
+
+
+
+
 class Member_Controller extends Controller implements IRedirectable_Core
 {
     public $data = "ok";
@@ -7,7 +20,7 @@ class Member_Controller extends Controller implements IRedirectable_Core
     {
         $this->data = $args;
         parent::__construct();
-        Helper_Core::backtrace();
+      //  Helper_Core::backtrace();
     }
 
     public function get()

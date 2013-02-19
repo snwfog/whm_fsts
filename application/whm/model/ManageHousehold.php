@@ -45,6 +45,18 @@ class ManageHousehold {
 		return $household = $em->find("Household", (int)$id);
 	}
 
+
+	public function addMember($data)
+	{
+		$household = $em->find("Household", (int)$id);
+		$member = $this->createMember($data);
+		
+
+	
+
+	}
+
+
 	//$data is type array
 	private function createMember($data)
 	{
