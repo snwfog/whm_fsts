@@ -1,5 +1,4 @@
 <?php
-
 namespace WHM\Model;
 use WHM;
 use WHM\Application;
@@ -32,18 +31,18 @@ class ManageHousehold {
 	}
 	
 	//Delete
-	public static function removeHousehold($id) {
+	public function removeHousehold($id) {
 		$household = findHousehold($id);
 		$em->remove($household);
 		$em->flush();
 	}
 	
 	//View
-	public static function findAllHouseholds() {
+	public  function findAllHouseholds() {
 		// to do
 	}
-	public static function findHousehold($id) {
-		return $household = $em->find("Household", (int)$id);
+	public function findHousehold($id) {
+		return $this->em->find("Household", (int)$id);
 	}
 
 	//$data is type array
@@ -77,6 +76,17 @@ class ManageHousehold {
 		$this->em->flush();
 
 		return $address;
+
+	}
+
+
+	public function addMember($data)
+	{
+	//	$household = $em->find("Household", (int)$id);
+		$member = $this->createMember($data);
+		
+
+	
 
 	}
 }

@@ -12,9 +12,12 @@
 
  
         </div>
+        <form action="member_create" method="GET" name="member_create">
         <button class="action blue submit pos">
-        	<span class="label">Add Member</span>
+                <input type="hidden" name="household_id" value="2"/>
+        	<input type="submit" value="Add Member"/>
         </button>
+        </form>
 </fieldset>
 
 {% endblock viewInfo %}

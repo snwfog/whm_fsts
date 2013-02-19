@@ -17,7 +17,9 @@ class CreateMember extends WHM\Controller implements WHM\IRedirectable
 
     public function get()
     {
-        $this->display("member_create_form.twig");
+        print_r($_GET);
+        $this->data = $_GET;
+        $this->display("member_create_form.twig",$this->data);
     }
 
 
@@ -44,11 +46,11 @@ class CreateMember extends WHM\Controller implements WHM\IRedirectable
         {
             $this->data["form"] = $_POST;
             $manageMember = new ManageHousehold();
-            $manageMember->createMember($_POST);
+            $manageMember->addMember($_POST);
+            $this->redirect("member");
         }else{
             $this->display("member_create_form.twig");
         }
-
 
     }
 

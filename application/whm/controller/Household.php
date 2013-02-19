@@ -6,7 +6,6 @@ use \WHM\Helper;
 use \WHM\Controller;
 use \WHM\IRedirectable;
 use \WHM\Model\ManageHousehold;
-use \WHM\Model\HouseholdMember;
 
 class Household extends Controller implements IRedirectable
 {
@@ -23,7 +22,9 @@ class Household extends Controller implements IRedirectable
 
     public function get()
     {
-
+        //$mHousehold = new ManageHousehold();
+        //$household = $mHousehold->findHousehold($_GET["household_id"]);
+        //print_r($household);
         $houseMember = new HouseholdMember(); 
         $this->data["form"] = $houseMember->getFirstName();        
         $this->display("household_view_form.twig", $this->data);

@@ -1,6 +1,13 @@
 <?php
 
-class Household extends Controller implements IRedirectable
+namespace WHM\Controller;
+
+use \WHM\Helper;
+use \WHM\Controller;
+use \WHM\IRedirectable;
+use \WHM\Model\ManageHousehold;
+use \WHM\Model\HouseholdMember;
+class Search extends Controller implements IRedirectable
 {
     public function __construct(array $args = null)
     {
@@ -12,7 +19,7 @@ class Household extends Controller implements IRedirectable
 
     public function get()
     {        
-        $this->display("household_view_form.twig", $this->data);
+        $this->display("search_view.twig");
     }
 
 
