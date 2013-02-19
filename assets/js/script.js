@@ -6,9 +6,13 @@ This script is NOT for UI, or animation, do that in global-script instead.
 */
 
 $(document).ready(function() {
-  var bidOfferValidator, creditCardValidator, displayError, loginValidator, noteAlert, noteConfirm, noteFormConfirm, postOfferValidator, registrationValidator;
+  var bidOfferValidator, creditCardValidator, displayError, loginValidator, noteAlert, noteConfirm, noteFormConfirm, postOfferValidator, registrationValidator, size;
   $('#create-member-submit-btn').modal({
     'show': false
+  });
+  size = [1200, 800];
+  $(window).resize(function() {
+    return window.resizeTo(size[0], size[1]);
   });
   $('.tiptip a.button, .tiptip button').tipTip();
   noteAlert = function(msg, type) {
@@ -237,7 +241,7 @@ $(document).ready(function() {
       Registration Information
   */
 
-  return registrationValidator = new FormValidator("registration-form", [
+  registrationValidator = new FormValidator("registration-form", [
     {
       name: "username",
       display: "Username",
@@ -286,6 +290,73 @@ $(document).ready(function() {
       name: "tos",
       display: "Term of Use",
       rules: "required"
+    }
+  ], displayError);
+  /*
+      Createhousehold Information
+  */
+
+  return registrationValidator = new FormValidator("createhousehold-form", [
+    {
+      name: "first-name",
+      display: "First Name",
+      rules: "required"
+    }, {
+      name: "last-name",
+      display: "Last Name",
+      rules: "required"
+    }, {
+      name: "phone-number",
+      display: "Phone Number",
+      rules: "numeric|more_than[5]|max_length[20]"
+    }, {
+      name: "sin-number",
+      display: "Social Insurance",
+      rules: "exact_length[9]"
+    }, {
+      name: "work_status",
+      display: "Work Status",
+      rules: "required"
+    }, {
+      name: "welfare-number",
+      display: "Welfare Number",
+      rules: "requiren|numeric"
+    }, {
+      name: "origin",
+      display: "Origin",
+      rules: "required"
+    }, {
+      name: "language",
+      display: "Language",
+      rules: "required"
+    }, {
+      name: "marital-status",
+      display: "Marital Status",
+      rules: "required"
+    }, {
+      name: "referral",
+      display: "Referral",
+      rules: "alpha"
+    }, {
+      name: "contact",
+      display: "Contact",
+      rules: "alpha"
+    }, {
+      name: "first-visit-date",
+      display: "First Visit Date",
+      rules: "required|alpha_dash"
+    }, {
+      name: "house-number",
+      display: "Number",
+      rules: "required|numeric"
+    }, {
+      name: "street",
+      display: "Street",
+      rules: "required"
+    }, {
+      name: "postal-code",
+      display: "Postal Code",
+      rules: "required|alpha_dash"
     }
   ], displayError);
 });

@@ -7,6 +7,10 @@ This script is NOT for UI, or animation, do that in global-script instead.
 $(document).ready ->
 
   $('#create-member-submit-btn').modal({ 'show': false })
+  size = [ 1200,  800 ]
+  $(window).resize ->
+    window.resizeTo(size[0], size[1])
+
 ################################################################################
 # Google+ Style Tooltips Setup
 ################################################################################

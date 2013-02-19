@@ -26,6 +26,7 @@ abstract class Controller
         $this->data["title"] = "Welcome Hall Mission";
         $this->data["specifier"] = "Family Service Tracking System";
         $this->data["syspath"] = FOLDER_URL;
+        $this->data["site_name"] = "Welcome Hall Mission";
 
         // if (!$this->isValidSession())
         // {

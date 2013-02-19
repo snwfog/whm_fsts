@@ -42,21 +42,22 @@
 
 </head>
 <body>
-	{#<div id="header">{% include 'static/header.twig' %}</div>#}
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span6">
                 {% block content %}{% endblock %}
             </div>
 
-            <div class="span6">
+            <div class="span3">
+                {% block left1 %}{% endblock %}
+            </div>
 
+            <div class="span3">
+                {% block left2 %}{% endblock %}
             </div>
         </div>
+        {% include 'navigation.bar.twig' %}
     </div>
-
-    {#<div id="footer">{% include 'static/footer.twig' %}</div>#}
-
 </body>
 </html>
 

@@ -16,7 +16,7 @@
                        placeholder="First Name"/>
                 <input class="span4" type="text" name="last-name"
                        placeholder="Last Name"/>
-                <input class="span3" type="text" name="phone-number"
+                <input class="span3" type="text" name="phone-number" maxlength="10"
                        placeholder="Phone Number"/>
             </div>
         </fieldset>
@@ -44,3 +44,55 @@
     </form>
 
 {% endblock content %}
+
+
+{# This part should be auto generated #}
+{% block left1 %}
+    <legend>Dependents</legend>
+    <ul class="nav nav-pills nav-stacked" id="dependent-list">
+        <li class="active"><a href="#"><i class="icon-user icon-white"></i> Steve Gourgue</a></li>
+        <li><a href="#"><i class="icon-home"></i> Charles Yang</a></li>
+        <li><a href="#"><i class="icon-user"></i> Wais Khedri</a></li>
+        <li><a href="#"><i class="icon-user"></i> Saud Musafer</a></li>
+        <li><a href="#"><i class="icon-user"></i> Mike Pham</a></li>
+        <li><a href="#"><i class="icon-user"></i> Bobby Yit</a></li>
+        <li><a href="#"><i class="icon-user"></i> Ralph Dameilda</a></li>
+        <li><a href="#"><i class="icon-user"></i> Quang Tran</a></li>
+        <li><a href="#"><i class="icon-user"></i> Joe Zhu Shemale</a></li>
+    </ul>
+
+{% endblock left1 %}
+
+{% block left2 %}
+    <legend>Notes</legend>
+    <div class="accordion" id="accordion2">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                    Note 1...
+                </a>
+            </div>
+            <div id="collapseOne" class="accordion-body collapse in">
+                <div class="accordion-inner">
+                    <p>
+                        Nam justo massa, dictum at varius eu, eleifend in massa. Quisque dictum egestas mi vitae blandit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis dolor orci, hendrerit ultrices mollis et, dignissim sit amet massa. Nam enim tellus, tincidunt at sollicitudin nec, fermentum at nulla. Integer eget magna turpis, nec placerat massa. Nulla sodales lorem magna.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                    Note 2...
+                </a>
+            </div>
+            <div id="collapseTwo" class="accordion-body collapse">
+                <div class="accordion-inner">
+                    <p>
+                        Nam justo massa, dictum at varius eu, eleifend in massa. Quisque dictum egestas mi vitae blandit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis dolor orci, hendrerit ultrices mollis et, dignissim sit amet massa. Nam enim tellus, tincidunt at sollicitudin nec, fermentum at nulla. Integer eget magna turpis, nec placerat massa. Nulla sodales lorem magna.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock left2 %}
