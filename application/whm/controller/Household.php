@@ -11,6 +11,7 @@ use \WHM\Model\HouseholdMember;
 class Household extends Controller implements IRedirectable
 {
     public $data = array( "errors" => array(), "form" => array());
+    private $household;
 
     public function __construct(array $args = null)
     {
@@ -22,11 +23,10 @@ class Household extends Controller implements IRedirectable
 
     public function get()
     {
-        $houseMember = new HouseholdMember(); 
 
-        $this->data["form"] = $houseMember->getFirst_name();        
+        $houseMember = new HouseholdMember(); 
+        $this->data["form"] = $houseMember->getFirstName();        
         $this->display("household_view_form.twig", $this->data);
-     
     }
 
 
@@ -52,15 +52,16 @@ class Household extends Controller implements IRedirectable
 
    }
 
+   public function setHousehold($household){
+       $this->household = $household;
+   }
 
    public function delete($household_id)
    {
-
-
     $manageHouse = new ManageHousehold();
     $household_id = $manageHouse->getId();
     $manageHouse->removeHousehold($household_id);
    }
-
-
 }
+
+?>

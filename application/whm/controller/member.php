@@ -1,5 +1,6 @@
 <?php
 
+class Member extends Controller implements IRedirectable
 
 namespace WHM\Controller;
 
@@ -9,11 +10,6 @@ use \WHM\IRedirectable;
 use \WHM\Model\ManageHousehold;
 use \WHM\Model\HouseholdMember;
 
-
-
-
-
-class Member_Controller extends Controller implements IRedirectable_Core
 {
     public $data = "ok";
     public function __construct(array $args = null)
