@@ -285,7 +285,7 @@ $(document).ready ->
   }, {
     name: "welfare-number",
     display: "Welfare Number",
-    rules: "requiren|numeric"
+    rules: "required|numeric"
     # is it numeric or alpha? or both??
   }, {
     name: "origin",
