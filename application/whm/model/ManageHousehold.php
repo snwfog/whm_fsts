@@ -70,7 +70,6 @@ class ManageHousehold {
 		$household_member->setFirstName($data["first_name"]);
 		$household_member->setLastName($data["last_name"]);
 		$household_member->setPhoneNumber($data["phone_number"]);
-		$household_member->setSinNumber($data["sin_number"]);
 		$household_member->setMcareNumber($data["medicare_num"]);
 		$household_member->setWorkStatus($data["work_status"]);
 		$household_member->setWelfareNumber($data["welfare_number"]);
