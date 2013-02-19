@@ -23,6 +23,7 @@ class Household extends Controller implements IRedirectable
 
     public function get()
     {
+
         $houseMember = new HouseholdMember(); 
         $this->data["form"] = $houseMember->getFirst_name();        
         $this->display("household_view_form.twig", $this->data);
@@ -62,3 +63,5 @@ class Household extends Controller implements IRedirectable
     $manageHouse->removeHousehold($household_id);
    }
 }
+
+?>
