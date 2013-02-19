@@ -8,66 +8,66 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class HouseholdTest extends PHPUnit_Framework_TestCase
 {
-    public function testgetId()
-    {
-        $household = new Household();
-        $household->setId(123456789);
-        $this->assertEquals(
-                            123456789, 
-                            $household->getId()
-                            );
-    }
+    // public function testgetId()
+    // {
+    //     $household = new Household();
+    //     $household->setId(123456789);
+    //     $this->assertEquals(
+    //                         123456789, 
+    //                         $household->getId()
+    //                         );
+    // }
 
 
-    public function testsetId()
-    {
-        $household = new Household();
-        $household->setId(123456789);
-        $this->assertEquals(
-                            123456789, 
-                            PHPUnit_Framework_TestCase::readAttribute($household, "id")
-                            );
-    }
+    // public function testsetId()
+    // {
+    //     $household = new Household();
+    //     $household->setId(123456789);
+    //     $this->assertEquals(
+    //                         123456789, 
+    //                         PHPUnit_Framework_TestCase::readAttribute($household, "id")
+    //                         );
+    // }
 
     public function testgetPrincipalMember()
     {
         $household = new Household();
-        $household->setPrincipalMember("Michel");
+        $household->setHouseholdPrincipal("Michel");
         $this->assertEquals(
                             "Michel", 
-                            $household->getPrincipalMember()
+                            $household->getHouseholdPrincipal()
                             );
     }
 
     public function testsetPrincipalMember()
     {
         $household = new Household();
-        $household->setPrincipalMember('Michel');
+        $household->setHouseholdPrincipal('Michel');
         $this->assertEquals(
                             "Michel", 
-                            PHPUnit_Framework_TestCase::readAttribute($household, "principal_member")
+                            PHPUnit_Framework_TestCase::readAttribute($household, "household_principal")
                             );
     }
 
-    public function testgetPhone_number()
-    {
-        $household = new Household();
-        $household->setPhone_number(123456789);
-        $this->assertEquals(
-                            123456789,  
-                            $household->getPhone_number()
-                            );
-    }
+    // public function testgetPhone_number()
+    // {
+    //     $household = new Household();
+    //     $household->setPhone_number(123456789);
+    //     $this->assertEquals(
+    //                         123456789,  
+    //                         $household->getPhone_number()
+    //                         );
+    // }
 
-    public function testsetPhone_number()
-    {
-        $household = new Household();
-        $household->setPhone_number(123456789);
-        $this->assertEquals(
-                            123456789, 
-                            PHPUnit_Framework_TestCase::readAttribute($household, "phone_number")
-                            );
-    }
+    // public function testsetPhone_number()
+    // {
+    //     $household = new Household();
+    //     $household->setPhone_number(123456789);
+    //     $this->assertEquals(
+    //                         123456789, 
+    //                         PHPUnit_Framework_TestCase::readAttribute($household, "phone_number")
+    //                         );
+    // }
 
     public function testgetAddress()
     {
@@ -92,39 +92,52 @@ class HouseholdTest extends PHPUnit_Framework_TestCase
 
     public function testgetMembers()
     {
+        $ac = new ArrayCollection();
+        $ac[]="hello";
+
         $household = new Household();
-        $household->addMember(123456789);
+        $household->_construct();
+        $household->addMember("hello");
         $this->assertEquals(
-                            123456789, 
+                            $ac, 
                             $household->getMembers()
                             );
     }
 
     public function testsetMember()
     {
-        $household = new Household();
-        $household->addMember(123456789);
-        $this->assertEquals(
-                            123456789, 
-                            PHPUnit_Framework_TestCase::readAttribute($household, "members")
-                            );
-    }
-
-    public function testassignedToMember()
-    {
-        $household = new Household();
-        $household->_construct();
+    //     $household = new Household();
+    //     $household->addMember(123456789);
+    //     $this->assertEquals(
+    //                         123456789, 
+    //                         PHPUnit_Framework_TestCase::readAttribute($household, "members")
+    //                         );
+        $event = new Household();
+        $event->_construct();
 
         $ac = new ArrayCollection();
-        $this->assertEquals($ac, PHPUnit_Framework_TestCase::readAttribute($household, "members"));
+
+        $this->assertEquals($ac, PHPUnit_Framework_TestCase::readAttribute($event, "members"));
+     
     }
 
-    public function testassignedToFlag()
+    public function testgetMember()
     {
-        $household = new Household();
-        $household->_construct();
+        $event = new Household();
+        $event->_construct();
 
         $ac = new ArrayCollection();
-        $this->assertEquals($ac, PHPUnit_Framework_TestCase::readAttribute($household, "flags"));
+
+        $this->assertEquals($ac, PHPUnit_Framework_TestCase::readAttribute($event, "members"));
+     
     }
+
+    // public function testassignedToFlag()
+    // {
+    //     $household = new Household();
+    //     $household->_construct();
+
+    //     $ac = new ArrayCollection();
+    //     $this->assertEquals($ac, PHPUnit_Framework_TestCase::readAttribute($household, "flags"));
+    // }
 }

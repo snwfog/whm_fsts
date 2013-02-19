@@ -7,27 +7,6 @@ use \WHM\Model\Address;
 
 class AddressTest extends PHPUnit_Framework_TestCase
 {
-    public function testgetId()
-    {
-        $address = new Address();
-        $address->setId(123456789);
-        $this->assertEquals(
-                            123456789, 
-                            $address->getId()
-                            );
-    }
-
-
-    public function testsetId()
-    {
-        $address = new Address();
-        $address->setId(123456789);
-        $this->assertEquals(
-                            123456789, 
-                            PHPUnit_Framework_TestCase::readAttribute($address, "id")
-                            );
-    }
-
     public function testgetstreet()
     {
         $address = new Address();
@@ -48,27 +27,7 @@ class AddressTest extends PHPUnit_Framework_TestCase
                             );
     }
 
-    public function testgetHousehold()
-    {
-        $address = new Address();
-        $address->setHousehold(123456789);
-        $this->assertEquals(
-                            123456789,  
-                            $address->getHousehold()
-                            );
-    }
-
-        public function testsetHousehold()
-    {
-        $address = new Address();
-        $address->setHousehold(123456789);
-        $this->assertEquals(
-                            123456789, 
-                            PHPUnit_Framework_TestCase::readAttribute($address, "household")
-                            );
-    }
-
-    public function testgetAppt_number()
+    public function testgetAptNumber()
     {
         $address = new Address();
         $address->setAptNumber(123456789);
@@ -78,7 +37,7 @@ class AddressTest extends PHPUnit_Framework_TestCase
                             );
     }
 
-        public function testsetAppt_number()
+        public function testsetAptNumber()
     {
         $address = new Address();
         $address->setAptNumber(123456789);
@@ -129,7 +88,7 @@ class AddressTest extends PHPUnit_Framework_TestCase
                             );
     }
 
-    public function testgetPost_code()
+    public function testgetPostalCode()
     {
         $address = new Address();
         $address->setPostalCode("H7X");
@@ -139,7 +98,7 @@ class AddressTest extends PHPUnit_Framework_TestCase
                             );
     }
 
-    public function testsetPost_code()
+    public function testsetPostalCode()
     {
         $address = new Address();
         $address->setPostalCode("H7X");
