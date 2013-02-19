@@ -18,41 +18,41 @@
             </a>
 
             {% if is_logged_in %}
-                <a href="index.php?member" class="button" title="Profile">
+                <a href="" class="button" title="Profile">
                     <span class="icon icon191"></span><span class="label">
                     {% if username %} {{ username }} {% else %} Profile {% endif %}
                     </span>
                 </a>
-                <a href="index.php?post" class="button" title="Post Offer">
+                <a href="" class="button" title="Post Offer">
                     <span class="icon icon130"></span><span class="label">Post Offer</span>
                 </a>
 
                 {% if is_admin %}
-                    <a href="index.php?admin" class="button" title="Admin Tool">
+                    <a href="" class="button" title="Admin Tool">
                         <span class="icon icon185"></span><span class="label">Admin</span>
                     </a>
 
-                    <a href="index.php?garage" class="button" title="Garage">
+                    <a href="" class="button" title="Garage">
                         <span class="icon icon2"></span><span class="label">Garage</span>
                     </a>
                 {% endif %}
 
-                <a href="index.php?login&logout=1" class="button" title="Sign Out">
+                <a href="" class="button" title="Sign Out">
                     <span class="icon icon151"></span><span class="label">Sign Out</span>
                 </a>
             {% else %}
 
-                <a href="index.php?login" class="button" title="Sign In">
+                <a href="" class="button" title="Sign In">
                     <span class="icon icon116"></span><span class="label">Sign In</span>
                 </a>
-                <a href="index.php?registration" class="button" title="Register">
+                <a href="" class="button" title="Register">
                     <span class="icon icon60"></span><span class="label">Register</span>
                 </a>
             {% endif %}
         </div>
     </div>
-	<div class="kblegend" id="kblegend">
-	<pre> Open/Close Legend: (Alt + F1)  &nbsp Search: (Alt + 1)  &nbsp Create Household: (Alt + 2) </pre>
-	</div> <!-- End div for hidden KB Legend -->
+	{#<div class="kblegend" id="kblegend">#}
+	{#<pre> Open/Close Legend: (Alt + F1)  &nbsp Search: (Alt + 1)  &nbsp Create Household: (Alt + 2) </pre>#}
+	{#</div> <!-- End div for hidden KB Legend -->#}
 </div>
 {% endblock header %}

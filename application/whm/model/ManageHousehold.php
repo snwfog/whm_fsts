@@ -51,6 +51,10 @@ class ManageHousehold {
 		$household = $this->em->find("WHM\model\household", (int)$id);
 		return $household;
 	}
+	public function getHouseholdMembers($id){
+		$household = $this->findHousehold($id);
+		return $household->getMembers();
+    }
 
 	//$data is type array
 	private function createMember($data)

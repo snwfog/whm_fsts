@@ -84,4 +84,3 @@ class Household extends Controller implements IRedirectable
    }
 }
 
-?>
