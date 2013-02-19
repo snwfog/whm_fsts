@@ -6,6 +6,8 @@ use \WHM\Helper;
 use \WHM\Controller;
 use \WHM\IRedirectable;
 use \WHM\Model\ManageHousehold;
+use \WHM\Model\HouseholdMember;
+
 
 class Household extends Controller implements IRedirectable
 {
