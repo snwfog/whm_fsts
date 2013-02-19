@@ -64,7 +64,12 @@ class HouseholdMember
      **/
 	protected $marital_status;
 
-	/**
+    /**
+     * @Column(length=1)
+     */
+    protected $gender;
+
+    /**
      * TO BE CHANGED TO TABLES...
      *
      * @Column(nullable=TRUE)
@@ -167,6 +172,16 @@ class HouseholdMember
     public function getSinNumber()
     {
         return $this->sin_number;
+    }
+
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+    }
+
+    public function getGender()
+    {
+        return $this->gender;
     }
 
     public function setMcareNumber($mcare_number)

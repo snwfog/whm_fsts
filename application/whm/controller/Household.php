@@ -26,7 +26,7 @@ class Household extends Controller implements IRedirectable
         //$mHousehold = new ManageHousehold();
         //$household = $mHousehold->findHousehold($_GET["household_id"]);
         //print_r($household);
-        $houseMember = new HouseholdMember(); 
+        $houseMember = new HouseholdMember();
         $this->data["form"] = $houseMember->getFirstName();        
         $this->display("household_view_form.twig", $this->data);
     }
@@ -66,4 +66,3 @@ class Household extends Controller implements IRedirectable
    }
 }
 
-?>
