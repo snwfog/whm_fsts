@@ -77,6 +77,7 @@ class Household extends Controller implements IRedirectable
         $address = $household->getAddress();
 
         $data = array(
+                        "household_id" => $household_id,
                         "firstName" => $householdPrincipal->getFirstName(),
                         "lastName"  => $householdPrincipal->getLastName(),
                         "language"  => $householdPrincipal->getLanguage(),
@@ -91,7 +92,7 @@ class Household extends Controller implements IRedirectable
                         "apt"      => $address->getAptNumber(),
                         "city"     => $address->getCity(),
                         "province" => $address->getProvince(),
-                        "postal"   => $address->getProvince(),
+                        "postal"   => $address->getPostalCode(),
                      );
         return $data; 
    }

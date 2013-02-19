@@ -12,8 +12,11 @@
 
 
         </div>
-        <form action="member/new" method="GET" name="member_create">
-                <a href="member/2"> Add Member </a>
+        <form action="../member/new" method="GET" name="member_create">
+                <input type="hidden" name="household_id" placeholder="Household Id" value="{{household["household_id"]}}"/>
+                <button class="action blue submit">
+                    <span class="label">Add Member</span>
+                </button> 
         </form>
 </fieldset>
 

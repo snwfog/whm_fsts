@@ -14,8 +14,8 @@ $serves = array
     '/household/:number' => 'WHM\Controller\Household',
     '/household/new' => 'WHM\Controller\CreateHousehold',
     '/member' => 'WHM\Controller\Member',
-    '/member/:number' => 'WHM\Controller\CreateMember',
-    '/member/create' => 'WHM\Controller\CreateMember',
+    '/member/:number' => 'WHM\Controller\member',
+    '/member/new' => 'WHM\Controller\CreateMember',
     '/search' => 'WHM\Controller\Search'
 );
 

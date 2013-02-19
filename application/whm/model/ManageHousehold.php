@@ -51,6 +51,12 @@ class ManageHousehold {
 		$household = $this->em->find("WHM\model\household", (int)$id);
 		return $household;
 	}
+
+	public function findMember($id) {
+		$member = $this->em->find("WHM\model\HouseholdMember", (int)$id);
+		return $member;
+	}
+
 	public function getHouseholdMembers($id){
 		$household = $this->findHousehold($id);
 		return $household->getMembers();
@@ -94,16 +100,12 @@ class ManageHousehold {
 
 	public function addMember($data)
 	{
-		//$id = new Household;
-		//$id->getId();
-	//	$this->findHousehold($id);
-		
-//		$this->em->find("Household", (int)$id);
-
+		$household = $this->findHousehold($data["household_id"]);
 		$member = $this->createMember($data);
-
-		
-
+		$member->setHousehold($household);
+		$this->em->persist($member);
+		$this->em->flush();	
+		return $member;
 	}
 }
 ?>

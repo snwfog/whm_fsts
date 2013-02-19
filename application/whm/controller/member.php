@@ -10,18 +10,40 @@ use \WHM\Model\HouseholdMember;
 
 class Member extends Controller implements IRedirectable
 {
-    public $data = "ok";
+    public $data = array();
+    private $manageHousehold;
     public function __construct(array $args = null)
     {
         $this->data = $args;
         parent::__construct();
       //  Helper_Core::backtrace();
+        $this->manageHousehold = new manageHousehold();
+
     }
 
-    public function get()
-    {
-        $houseMember = new HouseholdMember(); 
-        $this->data["form"] = $houseMember->getFirstName();        
+    public function get($memberId)
+    {  
+        $member = $this->manageHousehold->findMember($memberId);
+        $household = $member->getHousehold();
+        $address = $household->getAddress();
+        $data = array(
+                        "firstName" => $member->getFirstName(),
+                        "lastName"  => $member->getLastName(),
+                        "language"  => $member->getLanguage(),
+                        "workStatus"  => $member->getWorkStatus(),
+                        "welfareNumber"  => $member->getWelfareNumber(),
+                        "phoneNumber"  => $member->getPhoneNumber(),
+                        "medicareNum"  => $member->getMcareNumber(),
+                        "referral"  => $member->getReferral(),
+                        "marital"  => $member->getMaritalStatus(),
+                        "origin"   => $member->getOrigin(),
+                        "street"    => $address->getStreet(),
+                        "apt"      => $address->getAptNumber(),
+                        "city"     => $address->getCity(),
+                        "province" => $address->getProvince(),
+                        "postal"   => $address->getPostalCode(),
+                     );
+        $this->data["household"] = $data;
         $this->display("member_view_form.twig", $this->data);
      //  $this->display("member_create_form.twig");
     }
@@ -42,5 +64,8 @@ class Member extends Controller implements IRedirectable
     {
 
     }
+
+
+
 
 }

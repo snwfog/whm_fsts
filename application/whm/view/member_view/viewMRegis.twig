@@ -1,37 +1,33 @@
 {% block viewRegis %}
 <fieldset class="regis2">
-        <legend><h1> Registration </h1></legend>
+        <legend>
+            <h1> 
+                {{household["firstName"]|capitalize}} {{household["lastName"]|capitalize}}
+            </h1>
+        </legend>
 
         <div style = "pers" >
-            <h3>Personal Information</h3>
             <ul>
-
-                <li><input type="view" name="first_name" placeholder="Bobbert" disabled="true" />
-                <li><input type="view" name="last_name" placeholder="Soma Yit" disabled="true" />
-                <li><input type="view" name="work_status" placeholder="Part Time" disabled="true" />
-                <li><input type="view" name="welfare_number" placeholder="90464421" />
-                <li><input type="view" name="phone_number" placeholder="5141009999" disabled="true" />
-                <li><input type="view" name="medicare_num" placeholder="SOMM24039006" disabled="true" />
-                <li><input type="view" name="referal" placeholder="Friend" />
-
+                <li><input type="view" name="Main Language" placeholder="{{household["language"]}}" disabled="true" />
+                <li><input type="view" name="work_status" placeholder="{{household["workStatus"]}}" disabled="true" />
+                <li><input type="view" name="welfare_number" placeholder="{{household["welfareNumber"]}}" disabled="true" />
+                <li><input type="view" name="phone_number" placeholder="{{household["phoneNumber"]}}" disabled="true" />
+                <li><input type="view" name="medicare_num" placeholder="{{household["medicareNum"]}}" disabled="true" />
+                <li><input type="view" name="referal" placeholder="{{household["referral"]}}"disabled="true" />
+                <li><input type="view" name="marital" placeholder="{{household["marital"]}}" disabled="true" />
+                <li><input type="view" name="origin" placeholder="{{household["origin"]}}" disabled="true" />
                 <br />
-
-                <li><input type="view" name="marital" placeholder="Divorced" disabled="true" />
-                <br />
-                <li><input type="view" name="origin" placeholder="Cambodia" disabled="true" />
-
-                <br />
-
 			</ul>
 		</div>
         <div class="address2">
 		<h3>Address</h3>
 			<ul>
-				<li><input type="view" name="address" placeholder="100 Zoo" disabled="true" />
-				<li><input type="view" name="apt" disabled="true" />
-				<li><input type="view" name="city" placeholder="Pierrefonds" disabled="true" />
-				<li><input type="view" name="province" placeholder="Quebec" disabled="true" />
-				<li><input type="view" name="postal" placeholder="H1H1H1" disabled="true" />
+                <li><input type="view" name="address" placeholder="{{household["street"]}}" disabled="true" />
+                <li><input type="view" name="apt" placeholder="{{household["apt"]}}" disabled="true" />
+                <li><input type="view" name="city" placeholder="{{household["city"]}}" disabled="true" />
+                <li><input type="view" name="province" placeholder="{{household["province"]}}" disabled="true" />
+                <li><input type="view" name="postal" placeholder="{{household["postal"]}}" disabled="true" />
+            </ul>
 			</ul>
         </div>
 </fieldset>
