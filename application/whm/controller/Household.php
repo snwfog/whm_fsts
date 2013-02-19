@@ -23,12 +23,30 @@ class Household extends Controller implements IRedirectable
 
     public function get()
     {
-        //$mHousehold = new ManageHousehold();
-        //$household = $mHousehold->findHousehold($_GET["household_id"]);
-        //print_r($household);
-        $houseMember = new HouseholdMember(); 
-        $this->data["form"] = $houseMember->getFirstName();        
-        $this->display("household_view_form.twig", $this->data);
+        $mHousehold = new ManageHousehold();
+        $household = $mHousehold->findHousehold($_GET["household_id"]);
+        $householdPrincipal = $household->getHouseholdPrincipal();
+        $address = $household->getAddress();
+
+        $data = array(
+                        "firstName" => $householdPrincipal->getFirstName(),
+                        "lastName"  => $householdPrincipal->getLastName(),
+                        "language"  => $householdPrincipal->getLanguage(),
+                        "workStatus"  => $householdPrincipal->getWorkStatus(),
+                        "welfareNumber"  => $householdPrincipal->getWelfareNumber(),
+                        "phoneNumber"  => $householdPrincipal->getPhoneNumber(),
+                        "medicareNum"  => $householdPrincipal->getMcareNumber(),
+                        "referral"  => $householdPrincipal->getReferral(),
+                        "marital"  => $householdPrincipal->getMaritalStatus(),
+                        "origin"   => $householdPrincipal->getOrigin(),
+                        "street"    => $address->getStreet(),
+                        "apt"      => $address->getAptNumber(),
+                        "city"     => $address->getCity(),
+                        "province" => $address->getProvince(),
+                        "postal"   => $address->getProvince(),
+                     );
+        $data = array("household" =>$data);       
+        $this->display("household_view_form.twig", $data);
     }
 
 

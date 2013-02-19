@@ -47,7 +47,9 @@ class ManageHousehold {
 		// to do
 	}
 	public function findHousehold($id) {
-		return $this->em->find("Household", (int)$id);
+
+		$household = $this->em->find("WHM\model\household", (int)$id);
+		return $household;
 	}
 
 	//$data is type array
