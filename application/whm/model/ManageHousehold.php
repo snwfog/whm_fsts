@@ -1,5 +1,4 @@
 <?php
-
 namespace WHM\Model;
 use WHM;
 use WHM\Application;
@@ -82,7 +81,7 @@ class ManageHousehold {
 
 	public function addMember($data)
 	{
-		$household = $em->find("Household", (int)$id);
+	//	$household = $em->find("Household", (int)$id);
 		$member = $this->createMember($data);
 		
 
