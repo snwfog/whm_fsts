@@ -21,40 +21,17 @@ class Household extends Controller implements IRedirectable
 
     }
 
-    public function get($household_id)
+    public function get($household_id = null)
     {
         if(isset($_GET["household_id"])){
             $household_id = $_GET["household_id"];
         }
 
-        if(isset($_GET["household_id"])){
-            $household_id = $_GET["household_id"];
-        }
-
-        $mHousehold = new ManageHousehold();
-        $household = $mHousehold->findHousehold($_GET["household_id"]);
-        $householdPrincipal = $household->getHouseholdPrincipal();
-        $address = $household->getAddress();
-
-        $data = array(
-                        "firstName" => $householdPrincipal->getFirstName(),
-                        "lastName"  => $householdPrincipal->getLastName(),
-                        "language"  => $householdPrincipal->getLanguage(),
-                        "workStatus"  => $householdPrincipal->getWorkStatus(),
-                        "welfareNumber"  => $householdPrincipal->getWelfareNumber(),
-                        "phoneNumber"  => $householdPrincipal->getPhoneNumber(),
-                        "medicareNum"  => $householdPrincipal->getMcareNumber(),
-                        "referral"  => $householdPrincipal->getReferral(),
-                        "marital"  => $householdPrincipal->getMaritalStatus(),
-                        "origin"   => $householdPrincipal->getOrigin(),
-                        "street"    => $address->getStreet(),
-                        "apt"      => $address->getAptNumber(),
-                        "city"     => $address->getCity(),
-                        "province" => $address->getProvince(),
-                        "postal"   => $address->getProvince(),
-                     );
-        $data = array("household" =>$data);     
+        if(!is_null($household_id)){
+        $data = $this->extractHouseholdInfo($household_id);  
+        $data = array( "household" => $data);
         $this->display("household_view_form.twig", $data);
+        }
 
     }
 
@@ -90,6 +67,33 @@ class Household extends Controller implements IRedirectable
     $manageHouse = new ManageHousehold();
     $household_id = $manageHouse->getId();
     $manageHouse->removeHousehold($household_id);
+   }
+
+
+   private function extractHouseholdInfo($household_id){
+        $mHousehold = new ManageHousehold();
+        $household = $mHousehold->findHousehold($household_id);
+        $householdPrincipal = $household->getHouseholdPrincipal();
+        $address = $household->getAddress();
+
+        $data = array(
+                        "firstName" => $householdPrincipal->getFirstName(),
+                        "lastName"  => $householdPrincipal->getLastName(),
+                        "language"  => $householdPrincipal->getLanguage(),
+                        "workStatus"  => $householdPrincipal->getWorkStatus(),
+                        "welfareNumber"  => $householdPrincipal->getWelfareNumber(),
+                        "phoneNumber"  => $householdPrincipal->getPhoneNumber(),
+                        "medicareNum"  => $householdPrincipal->getMcareNumber(),
+                        "referral"  => $householdPrincipal->getReferral(),
+                        "marital"  => $householdPrincipal->getMaritalStatus(),
+                        "origin"   => $householdPrincipal->getOrigin(),
+                        "street"    => $address->getStreet(),
+                        "apt"      => $address->getAptNumber(),
+                        "city"     => $address->getCity(),
+                        "province" => $address->getProvince(),
+                        "postal"   => $address->getProvince(),
+                     );
+        return $data; 
    }
 }
 
