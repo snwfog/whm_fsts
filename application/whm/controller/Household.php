@@ -21,8 +21,16 @@ class Household extends Controller implements IRedirectable
 
     }
 
-    public function get()
+    public function get($household_id)
     {
+        if(isset($_GET["household_id"])){
+            $household_id = $_GET["household_id"];
+        }
+
+        if(isset($_GET["household_id"])){
+            $household_id = $_GET["household_id"];
+        }
+
         $mHousehold = new ManageHousehold();
         $household = $mHousehold->findHousehold($_GET["household_id"]);
         $householdPrincipal = $household->getHouseholdPrincipal();
@@ -45,8 +53,9 @@ class Household extends Controller implements IRedirectable
                         "province" => $address->getProvince(),
                         "postal"   => $address->getProvince(),
                      );
-        $data = array("household" =>$data);       
+        $data = array("household" =>$data);     
         $this->display("household_view_form.twig", $data);
+
     }
 
 

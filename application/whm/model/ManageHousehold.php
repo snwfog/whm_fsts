@@ -65,10 +65,11 @@ class ManageHousehold {
 		$household_member->setLastName($data["last_name"]);
 		$household_member->getWorkStatus($data["work_status"]);
 		$household_member->setWelfareNumber($data["welfare_number"]);
-		$household_member->getReferral($data["referal"]);
+		$household_member->getReferral($data["referral"]);
 		$household_member->setLanguage($data["language"]);
 		$household_member->setMaritalStatus($data["marital"]);
 		$household_member->setOrigin($data["origin"]);
+		$household_member->setGender($data["gender"]);
 		$household_member->setFirstVisitDate($datetime);
 		$this->em->persist($household_member);
 		$this->em->flush();
