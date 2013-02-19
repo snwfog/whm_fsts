@@ -1,6 +1,9 @@
 /* General style for everything */
 
-
+.horizontal-align-form-row
+{
+    float: left;
+}
 
 /*html {*/
     /*font-family: Helvetica Neue, Anaheim, Helvetica, Arial, Calibri;*/

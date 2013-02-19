@@ -9,35 +9,114 @@
         {% endblock %}
     {% endfor %}
 
+<<<<<<< HEAD
     <fieldset class="regis">
         <legend><h1>Registration </h1></legend>
         <form action="new" method="POST" name="household_create">
                 <h3>Personal Information</h3>
+=======
+    <form action="household_create" method="POST" name="household_create">
+        <fieldset>
+            <legend>Personal Information</legend>
+            <ul>
+>>>>>>> Fix folder path define
                 <ul>
-                    <ul>
-                        <li><input type="text" name="first_name" placeholder="First Name" /></li>
-                        <li><input type="text" name="last_name" placeholder="Last Name" ></li>
-                    </ul>
+                    <li class="horizontal-align-form-row"><input type="text" name="first_name" placeholder="First Name" />
+                    <li class="horizontal-align-form-row"><input type="text" name="last_name" placeholder="Last Name" />
+                    <li class="horizontal-align-form-row"><input name="gender" placeholder="Gender"
+                               maxlength="1" size="1" type="text"/>
+                </ul>
 
+                <ul>
+                    <li>
+                        <ul>
+                            <li><input maxlength="3" size="3" type="text" name="sin-1" />
+                            <li><input maxlength="3" size="3" type="text" name="sin-2" />
+                            <li><input maxlength="3" size="3" type="text" name="sin-3" />
+                        </ul>
+                    </li>
+                    <li>
+                        <ul>
+                            <li><input maxlength="4" size="4" name="mcare-1"
+                                       type="text"/></li>
+                            <li><input maxlength="4" size="4" name="mcare-2"
+                                       type="text"/></li>
+                            <li><input maxlength="4" size="4" name="mcare-3"
+                                       type="text"/></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li><input type="text" name="work_status"
+                               placeholder="Work Status" maxlength="2" size="2" />
+                    <li>
+                        <ul>
+                            <li><input maxlength="4" size="4" name="welfare-1"
+                                       type="text"/></li>
+                            <li><input maxlength="4" size="4" name="welfare-2"
+                                       type="text"/></li>
+                            <li><input maxlength="4" size="4" name="welfare-3"
+                                       type="text"/></li>
+                            <li><input maxlength="4" size="4" name="welfare-4"
+                                       type="text"/></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul>
+                    <li><input type="text" name="origin" placeholder="Country Origin" />
+                    <li><input type="text" name="language" placeholder="Main Language" />
+                </ul>
+
+                <ul>
+                    <li>
+                        <ul>
+                            <li><input name="phone-1" maxlength="3" size="3"
+                                       type="text"/></li>
+                            <li><input name="phone-2" maxlength="3" size="3"
+                                       type="text"/></li>
+                            <li><input name="phone-3" maxlength="3" size="3"
+                                       type="text"/></li>
+                        </ul>
+                    </li>
+
+                    <li><input type="text" name="marital_status" placeholder="Marital Status" maxlength="2" size="2" />
+                </ul>
+
+                <ul>
+                    <li><input name="referral" placeholder="Referral"
+                               type="text"/>
+                    <li><input name="contact" placeholder="Contact"
+                               type="text"/>
+                </ul>
+            </ul>
+        </fieldset>
+
+        <fieldset>
+            <legend>Address</legend>
+            <ul>
+                <li>
                     <ul>
+                        <li><input name="house_number" placeholder="#" type="text"/></li>
+                        <li><input name="street" placeholder="Street" type="text"/></li>
+                        <li><input name="apt_number" placeholder="Apt" type="text"/></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li><input name="city" placeholder="City" type="text" />
+                        <li><input name="province" placeholder="Province" size="2"
+                                   maxlength="2" type="text" />
                         <li>
                             <ul>
-                                <li><input maxlength="3" size="3" type="text" name="sin-1" />
-                                <li><input maxlength="3" size="3" type="text" name="sin-2" />
-                                <li><input maxlength="3" size="3" type="text" name="sin-3" />
-                            </ul>
-                        </li>
-                        <li>
-                            <ul>
-                                <li><input maxlength="4" size="4" name="mcare-1"
+                                <li><input name="postal-code-1" maxlength="3"
                                            type="text"/></li>
-                                <li><input maxlength="4" size="4" name="mcare-2"
-                                           type="text"/></li>
-                                <li><input maxlength="4" size="4" name="mcare-3"
+                                <li><input name="postal-code-2" maxlength="3"
                                            type="text"/></li>
                             </ul>
                         </li>
                     </ul>
+<<<<<<< HEAD
                     <li><input type="text" name="language" placeholder="Main Language" value=""/>
                     <li><input type="text" name="work_status" placeholder="Work Status" value="{{form["work_status"]}}"/>
                     <li><input type="text" name="welfare_number" placeholder="Welfare Number" value="{{form["welfare_number"]}}"/>
@@ -87,4 +166,12 @@
             </button>
         </form>
     </fieldset>
+=======
+                </li>
+
+            </ul>
+        </fieldset>
+    </form>
+
+>>>>>>> Fix folder path define
 {% endblock content %}

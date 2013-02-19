@@ -9,12 +9,12 @@ namespace WHM;
  * Define local or server side URL and path constants
  *------------------------------------------------------------------------------
  */
-define('BASE_URL', "http://".$_SERVER['HTTP_HOST']);
+//define('BASE_URL', "http://".$_SERVER['HTTP_HOST']);
 define('FOLDER_URL', str_replace(basename($_SERVER['SCRIPT_NAME']),
     "", $_SERVER['SCRIPT_NAME']));
 
-define('SERVER_ROOT', $_SERVER['DOCUMENT_ROOT'] . FOLDER_URL);
-define('SITE_ROOT', BASE_URL . FOLDER_URL);
+//define('SERVER_ROOT', $_SERVER['DOCUMENT_ROOT'] . FOLDER_URL);
+//define('SITE_ROOT', BASE_URL . FOLDER_URL);
 
 define('IMAGE_PATH', 'assets/img/offer-picture/');
 define('TWIG_CACHE_PATH', 'application/whm/view/cache');
