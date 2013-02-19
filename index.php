@@ -12,9 +12,9 @@ $serves = array
     '/' => 'WHM\Controller\Index',
     '/household' => 'WHM\Controller\Household',
     '/household_create' => 'WHM\Controller\CreateHousehold',
-    '/member' => 'WHM\Controller\Member_Controller',
-    '/member_create' => 'WHM\Controller\CreateMember'
-
+    '/member' => 'WHM\Controller\Member',
+    '/member_create' => 'WHM\Controller\CreateMember',
+    '/search' => 'WHM\Controller\Search'
 );
 
 /*-----------------------------------------------
