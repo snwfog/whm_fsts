@@ -11,11 +11,11 @@
     
    <fieldset class="regis"> 
         <legend><h1> Registration </h1></legend>
-    <form action="member_create" method="POST" name="member_create">
+    <form action="create" method="POST" name="member_create">
         <div style = "pers" >
             <h3>Personal Information</h3>
             <ul>
-                <li><input type="hidden" name="household_id" placeholder="Household Id" value="{{2}}"/>
+                <li><input type="hidden" name="household_id" placeholder="Household Id" value="{{ household_id }}"/>
                 <li><input type="text" name="first_name" placeholder="First Name" value="{{form["first_name"]}}"/>
                 <li><input type="text" name="last_name" placeholder="Last Name" value="{{form["last_name"]}}"/>
                 <li><input type="text" name="language" placeholder="Spoken Language" value=""/>

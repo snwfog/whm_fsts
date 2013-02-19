@@ -20,7 +20,10 @@ class Member extends Controller implements IRedirectable
 
     public function get()
     {
-    //    $this->display("member_create_form.twig");
+        $houseMember = new HouseholdMember(); 
+        $this->data["form"] = $houseMember->getFirstName();        
+        $this->display("member_view_form.twig", $this->data);
+     //  $this->display("member_create_form.twig");
     }
 
     public function post()
