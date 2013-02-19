@@ -5,6 +5,8 @@ This script is NOT for UI, or animation, do that in global-script instead.
 ###
 
 $(document).ready ->
+
+  $('#create-member-submit-btn').modal({ 'show': false })
 ################################################################################
 # Google+ Style Tooltips Setup
 ################################################################################

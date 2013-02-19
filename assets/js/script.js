@@ -7,6 +7,9 @@ This script is NOT for UI, or animation, do that in global-script instead.
 
 $(document).ready(function() {
   var bidOfferValidator, creditCardValidator, displayError, loginValidator, noteAlert, noteConfirm, noteFormConfirm, postOfferValidator, registrationValidator;
+  $('#create-member-submit-btn').modal({
+    'show': false
+  });
   $('.tiptip a.button, .tiptip button').tipTip();
   noteAlert = function(msg, type) {
     var n;
