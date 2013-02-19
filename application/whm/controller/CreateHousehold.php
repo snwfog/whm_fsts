@@ -48,6 +48,8 @@ class CreateHousehold extends WHM\Controller implements WHM\IRedirectable
             $household = $this->manageHouse->createHousehold($_POST);
             $this->householdController->setHousehold($household);
             $this->householdController->get();
+        }else{
+            $this->display("household_create_form.twig");
         }
     }
 

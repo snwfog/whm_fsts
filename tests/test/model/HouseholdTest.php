@@ -4,6 +4,7 @@ namespace Test\Model;
 
 use \PHPUnit_Framework_TestCase;
 use \WHM\Model\Household;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class HouseholdTest extends PHPUnit_Framework_TestCase
 {
@@ -109,23 +110,21 @@ class HouseholdTest extends PHPUnit_Framework_TestCase
                             );
     }
 
-    // public function testassignedToMember()
-    // {
-    //     $household = new Household();
-    //     $household->assignedToMember(123456789);
-    //     $this->assertEquals(
-    //                         123456789, 
-    //                         PHPUnit_Framework_TestCase::readAttribute($household, "members")
-    //                         );
-    // }
+    public function testassignedToMember()
+    {
+        $household = new Household();
+        $household->_construct();
 
-    // public function testassignedToFlag()
-    // {
-    //     $household = new Household();
-    //     $household->assignedToFlag(123456789);
-    //     $this->assertEquals(
-    //                         123456789, 
-    //                         PHPUnit_Framework_TestCase::readAttribute($household, "flags")
-    //                         );
-    // }
+        $ac = new ArrayCollection();
+        $this->assertEquals($ac, PHPUnit_Framework_TestCase::readAttribute($household, "members"));
+    }
+
+    public function testassignedToFlag()
+    {
+        $household = new Household();
+        $household->_construct();
+
+        $ac = new ArrayCollection();
+        $this->assertEquals($ac, PHPUnit_Framework_TestCase::readAttribute($household, "flags"));
+    }
 }
