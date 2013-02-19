@@ -11,8 +11,8 @@ class AddressFixture implements FixtureInterface
     public function load(ObjectManager $em)
     {
         $address = new Address();
-        $address->setPost_Code("h1m 2m7");
-        $address->setApp_number("4578");
+        $address->setPostalCode("h1m 2m7");
+        $address->getAptNumber("4578");
         $address->setCity("montreal");
         $address->setProvince("none");
         $address->setStreet("none");
