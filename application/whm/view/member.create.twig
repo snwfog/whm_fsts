@@ -1,0 +1,45 @@
+{% extends 'static/base.twig' %}
+
+{% block content %}
+
+    {% for error in errors %}
+        {% block error %}
+            <div id="error">{{ error }}</div></br>
+        {% endblock %}
+    {% endfor %}
+
+    <form action="member_create" method="POST" name="member-create">
+        <fieldset>
+            <legend>Create Member</legend>
+            <div class="controls controls-row" id="name-row">
+                <input class="span5" type="text" name="first-name"
+                       placeholder="First Name"/>
+                <input class="span4" type="text" name="last-name"
+                       placeholder="Last Name"/>
+                <input class="span3" type="text" name="phone-number"
+                       placeholder="Phone Number"/>
+            </div>
+        </fieldset>
+
+        {% include 'information.form.part.twig' %}
+
+        <legend>Action</legend>
+        <div class="btn-toolbar">
+            <button class="btn btn-success btn-large" id="create-member-submit-btn"
+                    name="create-member-submit-btn" type="button"
+                    data-toggle="modal" data-target="#confirm-member-before-saving-modal">
+                <i class="icon-plus icon-white"></i> Create
+
+            </button>
+            <button class="btn btn-danger btn-large"
+                    name="abandon-create-member-btn"
+                    type="button"><i class="icon-remove
+                            icon-white"></i> Abandon</button>
+        </div>
+
+        <input type="hidden" name="household-id" value="{{ household["household_id"] }}"/>
+
+        {% include 'information.modal.twig' %}
+    </form>
+
+{% endblock content %}

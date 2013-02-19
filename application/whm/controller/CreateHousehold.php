@@ -23,24 +23,7 @@ class CreateHousehold extends Controller implements IRedirectable
 
     public function get()
     {
-        $this->display("household_create_form.twig");
-    }
-
-
-    public function put()
-    {
-
-        $content = "charles=yang&mike=pham";
-        file_put_contents("php://output", $content);
-        $var = null;
-        echo "before marker";
-        $unparsed = file_get_contents("php://input");
-        echo $unparsed."unique<br>";
-
-        echo $unparsed."secondtime<br>";
-        parse_str($unparsed, $var);
-        print_r($var);
-
+        $this->display("household.create.twig");
     }
 
     public function post()
@@ -52,7 +35,7 @@ class CreateHousehold extends Controller implements IRedirectable
             //$this->householdController->setHousehold($household);
             $this->redirect((string)$household->getId());
         }else{
-            $this->display("household_create_form.twig");
+            $this->display("household.create.twig");
         }
     }
 

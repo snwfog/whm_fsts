@@ -1,0 +1,33 @@
+{% block information %}
+    <fieldset>
+        <legend>Information</legend>
+        <div class="controls controls-row">
+            <input class="span3" maxlength="{{ 3 * 3 + 2 }}" type="text"
+                   name="sin-number" placeholder="Social Insurance"/>
+            <input class="span4" maxlength="{{ 3 * 4 + 2 }}" type="text"
+                   name="mcare-number" placeholder="Medical Care"/>
+            <input class="span1" type="text" name="work_status"
+                   placeholder="Work Status" maxlength="2" />
+            <input class="span4" maxlength="{{ 3 * 4 + 2 + 3 }}"
+                   type="text" name="welfare-number" placeholder="Welfare Number"/>
+        </div>
+
+        <div class="controls controls-row">
+            <input class="span5" type="text"
+                   name="origin" placeholder="Origin"/>
+            <input class="span4" type="text"
+                   name="language" placeholder="Language"/>
+            <input class="span3" maxlength="2" type="text"
+                   name="work-status" placeholder="Work Status"/>
+        </div>
+
+        <div class="controls controls-row">
+            <input class="span4" type="text"
+                   name="referral" placeholder="Referral"/>
+            <input class="span5" type="text"
+                   name="contact" placeholder="Contact"/>
+            <input class="span3" type="text"
+                   name="first-visit-date" placeholder="MM-DD-YY"/>
+        </div>
+    </fieldset>
+{% endblock information %}

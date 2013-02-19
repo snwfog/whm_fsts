@@ -1,0 +1,22 @@
+{% block address %}
+    <fieldset>
+        <legend>Address</legend>
+        <div class="controls controls-row">
+            <input class="span2" type="text" maxlength="8"
+                   name="house-number" placeholder="Number"/>
+            <input class="span7" type="text"
+                   name="street" placeholder="Street"/>
+            <input class="span3" type="text" maxlength="8"
+                   name="apt-number" placeholder="Apartment"/>
+        </div>
+
+        <div class="controls controls-row">
+            <input class="span4" type="text" disabled
+                   name="city" placeholder="City" value="Montreal"/>
+            <input class="span3" type="text" disabled
+                   name="province" placeholder="Province" value="QC"/>
+            <input class="span5" type="text" maxlength="7"
+                   name="postal-code" placeholder="Postal Code"/>
+        </div>
+    </fieldset>
+{% endblock address %}
