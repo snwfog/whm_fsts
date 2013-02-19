@@ -22,8 +22,8 @@ class ManageHousehold {
 		$address = $this->createAddress($form_data);
 		$household = new Household();
 
-		$household->setPhone_number($form_data["phone_number"]);
-		$household->setPrincipalMember($pmember);
+		//$household->setPhoneNumber($form_data["phone_number"]);
+		$household->setHouseholdPrincipal($pmember);
 		$household->setAddress($address);
 		$this->em->persist($household);
 		$this->em->flush();
@@ -51,15 +51,15 @@ class ManageHousehold {
 	{
 		$household_member = new HouseholdMember();
 		$datetime = new DateTime("now");
-		$household_member->setFirst_name($data["first_name"]);
-		$household_member->setLast_name($data["last_name"]);
-		$household_member->setWork_status($data["work_status"]);
-		$household_member->setWelfare_number($data["welfare_number"]);
-		$household_member->setReferal($data["referal"]);
+		$household_member->setFirstName($data["first_name"]);
+		$household_member->setLastName($data["last_name"]);
+		$household_member->getWorkStatus($data["work_status"]);
+		$household_member->setWelfareNumber($data["welfare_number"]);
+		$household_member->getReferral($data["referal"]);
 		$household_member->setLanguage($data["language"]);
-		$household_member->setMarital_status($data["marital"]);
+		$household_member->setMaritalStatus($data["marital"]);
 		$household_member->setOrigin($data["origin"]);
-		$household_member->setFirst_visit_date($datetime);
+		$household_member->setFirstVisitDate($datetime);
 		$this->em->persist($household_member);
 		$this->em->flush();
 		return $household_member;
@@ -69,9 +69,9 @@ class ManageHousehold {
 	{
 		$address = new Address();
 		$address->setStreet($data['address']);
-		$address->setApp_number($data['appt_number']);
+		$address->setAptNumber($data['appt_number']);
 		$address->setCity($data['city']);
-		$address->setPost_Code($data['postal_code']);
+		$address->getPostalCode($data['postal_code']);
 		$address->setProvince($data['province']);
 		$this->em->persist($address);
 		$this->em->flush();

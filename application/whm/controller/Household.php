@@ -25,7 +25,7 @@ class Household extends Controller implements IRedirectable
     {
 
         $houseMember = new HouseholdMember(); 
-        $this->data["form"] = $houseMember->getFirst_name();        
+        $this->data["form"] = $houseMember->getFirstName();        
         $this->display("household_view_form.twig", $this->data);
     }
 
