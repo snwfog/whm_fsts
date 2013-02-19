@@ -12,7 +12,8 @@ $serves = array
     '/' => 'WHM\Controller\Index',
     '/household' => 'WHM\Controller\Household',
     '/household_create' => 'WHM\Controller\CreateHousehold',
-    '/member' => 'WHM\Controller\Member'
+    '/member' => 'WHM\Controller\Member',
+    '/search' => 'WHM\Controller\Search'
 );
 
 /*-----------------------------------------------
