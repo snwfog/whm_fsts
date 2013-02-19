@@ -254,3 +254,70 @@ $(document).ready ->
     display: "Term of Use",
     rules: "required"
   }], displayError)
+
+  ###
+    Createhousehold Information
+  ###
+  registrationValidator = new FormValidator("createhousehold-form", [{
+    name: "first-name",
+    display: "First Name",
+    rules: "required"
+  }, {
+    name: "last-name",
+    display: "Last Name",
+    rules: "required"
+  }, {
+    name: "phone-number",
+    display: "Phone Number",
+    rules: "numeric|more_than[5]|max_length[20]"
+  }, {
+    name: "sin-number",
+    display: "Social Insurance",
+    rules: "exact_length[9]"
+  }, {
+    name: "work_status",
+    display: "Work Status",
+    rules: "required"
+  }, {
+    name: "welfare-number",
+    display: "Welfare Number",
+    rules: "requiren|numeric"
+    # is it numeric or alpha? or both??
+  }, {
+    name: "origin",
+    display: "Origin",
+    rules: "required"
+  }, {
+    name: "language",
+    display: "Language",
+    rules: "required"
+  }, {
+    name: "marital-status",
+    display: "Marital Status",
+    rules: "required"
+  }, {
+    name: "referral",
+    display: "Referral",
+    rules: "alpha"
+  }, {
+    name: "contact",
+    display: "Contact",
+    rules: "alpha"
+  }, {
+    name: "first-visit-date",
+    display: "First Visit Date",
+    rules: "required|alpha_dash"
+  }, {
+    name: "house-number",
+    display: "Number",
+    rules: "required|numeric"
+  }, {
+    name: "street",
+    display: "Street",
+    rules: "required"
+  }, {
+    name: "postal-code",
+    display: "Postal Code",
+    rules: "required|alpha_dash"
+  }], displayError)
+
