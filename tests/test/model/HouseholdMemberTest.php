@@ -254,7 +254,7 @@ class HouseholdMemberTest extends PHPUnit_Framework_TestCase
     public function testgetEvents()
     {
         $householdmember = new HouseholdMember();
-        $householdmember->setEvents("Xmas");
+        $householdmember->addEvent("Xmas");
         $this->assertEquals(
                             "Xmas", 
                             $householdmember->getEvents()
@@ -264,7 +264,7 @@ class HouseholdMemberTest extends PHPUnit_Framework_TestCase
     public function testsetEvents()
     {
         $householdmember = new HouseholdMember();
-        $householdmember->setEvents("Vday");
+        $householdmember->addEvent("Vday");
         $this->assertEquals(
                             "Vday", 
                             PHPUnit_Framework_TestCase::readAttribute($householdmember, "events")

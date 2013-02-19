@@ -93,7 +93,7 @@ class HouseholdTest extends PHPUnit_Framework_TestCase
     public function testgetMembers()
     {
         $household = new Household();
-        $household->setMembers(123456789);
+        $household->addMember(123456789);
         $this->assertEquals(
                             123456789, 
                             $household->getMembers()
@@ -103,7 +103,7 @@ class HouseholdTest extends PHPUnit_Framework_TestCase
     public function testsetMember()
     {
         $household = new Household();
-        $household->setMembers(123456789);
+        $household->addMember(123456789);
         $this->assertEquals(
                             123456789, 
                             PHPUnit_Framework_TestCase::readAttribute($household, "members")

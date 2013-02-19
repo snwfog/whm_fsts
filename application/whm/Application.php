@@ -51,7 +51,6 @@ class Application
     }
 
     public static function em() { return self::$_registry['em']; }
-
     public static function twig() { return self::$_registry['twig']; }
     public static function route($routes) { Router::route($routes); }
 }

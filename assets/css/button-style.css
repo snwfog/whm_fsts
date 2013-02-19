@@ -64,6 +64,17 @@ button.pos{
 	float:right;
 	margin-top:5px;
 }
+button.regisPos{
+	position:static;
+	float:right;
+	margin-top:178px;
+	margin-right:-5px;
+}
+button.notePos{
+	float:right;
+	position:static;
+	margin-top:17px;
+}
 button.left,
 .button.left {
 	margin: 5px 0 5px 5px;

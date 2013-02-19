@@ -71,20 +71,20 @@ class AddressTest extends PHPUnit_Framework_TestCase
     public function testgetAppt_number()
     {
         $address = new Address();
-        $address->setApp_number(123456789);
+        $address->setAptNumber(123456789);
         $this->assertEquals(
                             123456789, 
-                            $address->getAppt_number()
+                            $address->getAptNumber()
                             );
     }
 
         public function testsetAppt_number()
     {
         $address = new Address();
-        $address->setApp_number(123456789);
+        $address->setAptNumber(123456789);
         $this->assertEquals(
                             123456789, 
-                            PHPUnit_Framework_TestCase::readAttribute($address, "appt_number")
+                            PHPUnit_Framework_TestCase::readAttribute($address, "apt_number")
                             );
     }
 
@@ -132,20 +132,20 @@ class AddressTest extends PHPUnit_Framework_TestCase
     public function testgetPost_code()
     {
         $address = new Address();
-        $address->setPost_code("H7X");
+        $address->setPostalCode("H7X");
         $this->assertEquals(
                             "H7X", 
-                            $address->getPost_code()
+                            $address->getPostalCode()
                             );
     }
 
     public function testsetPost_code()
     {
         $address = new Address();
-        $address->setPost_code("H7X");
+        $address->setPostalCode("H7X");
         $this->assertEquals(
                             "H7X", 
-                            PHPUnit_Framework_TestCase::readAttribute($address, "post_code")
+                            PHPUnit_Framework_TestCase::readAttribute($address, "postal_code")
                             );
     }
 
