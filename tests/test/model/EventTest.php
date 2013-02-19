@@ -5,7 +5,7 @@ namespace Test\Model;
 use \PHPUnit_Framework_TestCase;
 use \WHM\Model\Event;
 
-class HouseholdMemberTest extends PHPUnit_Framework_TestCase
+class EventTest extends PHPUnit_Framework_TestCase
 {
     public function testgetId()
     {
