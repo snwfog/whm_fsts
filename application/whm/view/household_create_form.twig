@@ -9,169 +9,154 @@
         {% endblock %}
     {% endfor %}
 
-<<<<<<< HEAD
-    <fieldset class="regis">
-        <legend><h1>Registration </h1></legend>
-        <form action="new" method="POST" name="household_create">
-                <h3>Personal Information</h3>
-=======
+
     <form action="household_create" method="POST" name="household_create">
         <fieldset>
             <legend>Personal Information</legend>
-            <ul>
->>>>>>> Fix folder path define
-                <ul>
-                    <li class="horizontal-align-form-row"><input type="text" name="first_name" placeholder="First Name" />
-                    <li class="horizontal-align-form-row"><input type="text" name="last_name" placeholder="Last Name" />
-                    <li class="horizontal-align-form-row"><input name="gender" placeholder="Gender"
-                               maxlength="1" size="1" type="text"/>
-                </ul>
+            <div class="row-fluid">
+                <div class="span6">
+                    <label>First Name</label>
+                    <input class="span10" type="text" name="first_name"
+                           placeholder="First Name" />
+                </div>
+                <div class="span6">
+                    <label>Last Name</label>
+                    <input class="span12" type="text" name="last_name"
+                           placeholder="Last Name" />
+                </div>
+            </div>
 
-                <ul>
-                    <li>
-                        <ul>
-                            <li><input maxlength="3" size="3" type="text" name="sin-1" />
-                            <li><input maxlength="3" size="3" type="text" name="sin-2" />
-                            <li><input maxlength="3" size="3" type="text" name="sin-3" />
-                        </ul>
-                    </li>
-                    <li>
-                        <ul>
-                            <li><input maxlength="4" size="4" name="mcare-1"
-                                       type="text"/></li>
-                            <li><input maxlength="4" size="4" name="mcare-2"
-                                       type="text"/></li>
-                            <li><input maxlength="4" size="4" name="mcare-3"
-                                       type="text"/></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul>
-                    <li><input type="text" name="work_status"
-                               placeholder="Work Status" maxlength="2" size="2" />
-                    <li>
-                        <ul>
-                            <li><input maxlength="4" size="4" name="welfare-1"
-                                       type="text"/></li>
-                            <li><input maxlength="4" size="4" name="welfare-2"
-                                       type="text"/></li>
-                            <li><input maxlength="4" size="4" name="welfare-3"
-                                       type="text"/></li>
-                            <li><input maxlength="4" size="4" name="welfare-4"
-                                       type="text"/></li>
-                        </ul>
-                    </li>
-                </ul>
+            <div class="row-fluid">
 
-                <ul>
-                    <li><input type="text" name="origin" placeholder="Country Origin" />
-                    <li><input type="text" name="language" placeholder="Main Language" />
-                </ul>
+                <div class="span6">
+                    <label>Social Insurance Number</label>
+                    <input class="span3" maxlength="3" type="text"
+                           name="sin-1"/>
+                    <input class="span3" maxlength="3" type="text"
+                           name="sin-2"/>
+                    <input class="span3" maxlength="3" type="text"
+                           name="sin-3"/>
+                </div>
 
-                <ul>
-                    <li>
-                        <ul>
-                            <li><input name="phone-1" maxlength="3" size="3"
-                                       type="text"/></li>
-                            <li><input name="phone-2" maxlength="3" size="3"
-                                       type="text"/></li>
-                            <li><input name="phone-3" maxlength="3" size="3"
-                                       type="text"/></li>
-                        </ul>
-                    </li>
+                <div class="span6">
+                    <label>Medical Care Number</label>
+                    <input class="span4" maxlength="4"
+                           size="4" name="mcare-1" type="text"/>
+                    <input class="span4" maxlength="4" size="4"
+                           name="mcare-2" type="text"/>
+                    <input class="span4" maxlength="4" size="4"
+                           name="mcare-3" type="text"/>
+                </div>
+            </div>
 
-                    <li><input type="text" name="marital_status" placeholder="Marital Status" maxlength="2" size="2" />
-                </ul>
+            <div class="row-fluid">
+                <div class="span4">
+                    <label>Work Status</label>
+                    <input class="span10" type="text" name="work_status"
+                           placeholder="Work Status" maxlength="2" />
+                </div>
 
-                <ul>
-                    <li><input name="referral" placeholder="Referral"
-                               type="text"/>
-                    <li><input name="contact" placeholder="Contact"
-                               type="text"/>
-                </ul>
-            </ul>
-        </fieldset>
+                <div class="span8">
+                    <label>Welfare Number</label>
+                    <input class="span3" maxlength="4" name="welfare-1"
+                           type="text"/>
+                    <input class="span3" maxlength="4" name="welfare-2"
+                           type="text"/>
+                    <input class="span3" maxlength="4" name="welfare-3"
+                           type="text"/>
+                    <input class="span3"  maxlength="4" name="welfare-4"
+                           type="text"/>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span4">
+                    <label>Origin</label>
+                    <input class="span10" type="text" name="origin"
+                           placeholder="Origin" />
+                </div>
+
+                <div class="span4">
+                    <label>Language Spoken</label>
+                    <input class="span10" type="text" name="language"
+                           placeholder="Main Language" />
+                </div>
+
+                <div class="span4">
+                    <label>Marital Status</label>
+                    <input class="span12" type="text" name="marital_status"
+                           placeholder="Marital Status" maxlength="2" />
+                </div>
+            </div>
+
+
+            <div class="row-fluid">
+                <div class="span4">
+                    <label>Referral</label>
+                    <input class="span11" name="referral"
+                           placeholder="Referral" type="text" />
+                </div>
+
+                <div class="span4">
+                    <label>Contact</label>
+                    <input class="span11" name="contact" placeholder="Contact"
+                           type="text" />
+
+                </div>
+            </div>
+
+
+                            {#<li><input name="phone-1" maxlength="3" size="3"#}
+                                       {#type="text"/></li>#}
+                            {#<li><input name="phone-2" maxlength="3" size="3"#}
+                                       {#type="text"/></li>#}
+                            {#<li><input name="phone-3" maxlength="3" size="3"#}
+                                       {#type="text"/></li>#}
 
         <fieldset>
             <legend>Address</legend>
-            <ul>
-                <li>
-                    <ul>
-                        <li><input name="house_number" placeholder="#" type="text"/></li>
-                        <li><input name="street" placeholder="Street" type="text"/></li>
-                        <li><input name="apt_number" placeholder="Apt" type="text"/></li>
-                    </ul>
-                </li>
-                <li>
-                    <ul>
-                        <li><input name="city" placeholder="City" type="text" />
-                        <li><input name="province" placeholder="Province" size="2"
-                                   maxlength="2" type="text" />
-                        <li>
-                            <ul>
-                                <li><input name="postal-code-1" maxlength="3"
-                                           type="text"/></li>
-                                <li><input name="postal-code-2" maxlength="3"
-                                           type="text"/></li>
-                            </ul>
-                        </li>
-                    </ul>
-<<<<<<< HEAD
-                    <li><input type="text" name="language" placeholder="Main Language" value=""/>
-                    <li><input type="text" name="work_status" placeholder="Work Status" value="{{form["work_status"]}}"/>
-                    <li><input type="text" name="welfare_number" placeholder="Welfare Number" value="{{form["welfare_number"]}}"/>
-                    <li><input type="text" name="phone_number" placeholder="Phone Number" value="{{form["phone_number"]}}" />
-                    <li><input type="text" name="medicare_num" placeholder="Medicare" value="{{form["medicare"]}}"/>
-                    <li><input type="text" name="referral" placeholder="Referral" value="{{form["referral"]}}"/>
-                    <br/>
-                    <select name="gender">
-                        <option value="M">Male</option>
-                        <option value="F">Female</option>
-                    </select>
-                    <br/>
-                    <select name="marital">
-                        <option disabled selected="selected">Marital Status</option>
-                        <option>Single</option>
-                        <option>Married</option>
-                        <option>Divorced</option>
-                        <option>Widowed</option>
-                        <option>Common Law</option>
-                    </select>
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>Number</label>
+                    <input class="span10" name="house_number" placeholder="#"
+                           type="text" />
+                </div>
 
-                    <br />
+                <div class="span6">
+                    <label>Street</label>
+                    <input class="span11" name="street" placeholder="Street"
+                           type="text" />
+                </div>
 
-                    {% include 'static/origin.twig' %}
-
-                    <br />
-                </ul>
+                <div class="span4">
+                    <label>Apartment</label>
+                    <input class="span12" name="apt_number"
+                           placeholder="Apartment Number" type="text" />
+                </div>
             </div>
 
-            <div class="address">
-                <h3>Address</h3>
-                <ul>
-                    <li><input type="text" name="address" placeholder="Address" value="{{form["address"]}}"/>
-                    <li><input type="text" name="appt_number" placeholder="Apartment Number" value="{{form["apt_number"]}}" />
-                    <li><input type="text" name="city" placeholder="City" value="{{form["city"]}}"/>
-                    <li><input type="text" name="province" placeholder="Province" value="{{form["province"]}}"/>
-                    <li><input type="text" name="postal_code" placeholder="Postal Code" value="{{form["postal_code"]}}"/>
-                </ul>
+            <div class="row-fluid">
+                <div class="span5">
+                    <label>City</label>
+                    <input class="span10" name="city" placeholder="City"
+                           type="text" />
+                </div>
+
+                <div class="span3">
+                    <label>Province</label>
+                    <input class="span10" name="province"
+                           placeholder="Province"
+                           maxlength="2" type="text" />
+                </div>
+
+                <div class="span4">
+                    <label>Postal Code</label>
+                    <input class="span5" name="postal-code-1" maxlength="3"
+                           type="text"/>
+                    <input class="span5" name="postal-code-2" maxlength="3"
+                           type="text"/>
+                </div>
             </div>
-
-            <a href="index.php" class="button" title="Home">
-                <span class="icon icon108"></span><span class="label"></span>
-            </a>
-
-            <button class="action blue submit">
-                <span class="label">Create Household</span>
-            </button>
-        </form>
-    </fieldset>
-=======
-                </li>
-
-            </ul>
         </fieldset>
     </form>
 
->>>>>>> Fix folder path define
 {% endblock content %}

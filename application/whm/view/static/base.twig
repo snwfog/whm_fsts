@@ -23,7 +23,8 @@
     {#<script type="text/javascript" src="{{ syspath }}assets/js/ajax.js"></script>#}
 	{#<script type="text/javascript" src="{{ syspath }}assets/js/kbsc.js"></script>#}
 
-    <link rel="stylesheet" type="text/css" href="{{ syspath }}assets/css/bootstrap.min.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="{{ syspath }}assets/css/bootstrap.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="{{ syspath }}assets/css/bootstrap-reponsive.css" media="screen"/>
     {#<link rel="stylesheet" type="text/css" href="{{ syspath }}assets/css/reset.css" />#}
     {#<link rel="stylesheet" type="text/css" href="{{ syspath }}assets/css/button-style.css" media="screen" />#}
     {#<link rel="stylesheet" type="text/css" href="{{ syspath }}assets/css/tiptip.css" />#}
@@ -41,13 +42,20 @@
 
 </head>
 <body>
-	<div id="header">{% include 'static/header.twig' %}</div>
-    <div id="content">
+	{#<div id="header">{% include 'static/header.twig' %}</div>#}
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span6">
+                {% block content %}{% endblock %}
+            </div>
 
-		{% block content %}{% endblock %}
+            <div class="span6">
 
-	</div>
-    <div id="footer">{% include 'static/footer.twig' %}</div>
+            </div>
+        </div>
+    </div>
+
+    {#<div id="footer">{% include 'static/footer.twig' %}</div>#}
 
 </body>
 </html>
