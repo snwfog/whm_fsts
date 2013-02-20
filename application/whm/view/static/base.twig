@@ -53,6 +53,12 @@
                 <div class="span3">
                     {% block left2 %}{% endblock %}
                 </div>
+
+                {# NAVBAR MODAL GROUP #}
+                {# COMPONENTS HERE WILL PERSIST IN THE ENTIRE #}
+                {# USER SESSION. PLACE THEM HERE WITH CARE. #}
+                {% include 'addhousehold.modal.twig' %}
+
             {% endif %}
         </div>
     </div>

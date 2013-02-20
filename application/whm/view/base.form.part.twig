@@ -1,0 +1,12 @@
+{% block base_form_part_twig %}
+    <fieldset>
+        <div class="controls controls-row" id="name-row">
+            <input class="span5" type="text" name="first-name"
+                   placeholder="First Name" value="{{ household["firstName"] }}"/>
+            <input class="span4" type="text" name="last-name"
+                   placeholder="Last Name" value="{{ household["lastName"] }}"/>
+            <input class="span3" type="text" name="phone-number" maxlength="12"
+                   placeholder="Phone Number" value="{{ household["phoneNumber"] }}"/>
+        </div>
+    </fieldset>
+{% endblock base_form_part_twig %}

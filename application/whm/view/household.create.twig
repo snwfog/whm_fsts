@@ -8,19 +8,12 @@
         {% endblock %}
     {% endfor %}
 
+
     <form action="{{ household["formAction"] }}" method="{{ household["httpMethod"] }}" name="household-create">
         <input type="hidden" name="household-id" value="{{ household["household_id"] }}"/>
-        <fieldset>
-            <legend>Create Household</legend>
-            <div class="controls controls-row" id="name-row">
-                <input class="span5" type="text" name="first-name"
-                       placeholder="First Name" value="{{ household["firstName"] }}"/>
-                <input class="span4" type="text" name="last-name"
-                       placeholder="Last Name" value="{{ household["lastName"] }}"/>
-                <input class="span3" type="text" name="phone-number" maxlength="12"
-                       placeholder="Phone Number" value="{{ household["phoneNumber"] }}"/>
-            </div>
-        </fieldset>
+        <legend>Create Household</legend>
+        
+        {% include 'base.form.part.twig' %}
 
         {% include 'information.form.part.twig' %}
 
@@ -31,7 +24,7 @@
         <div class="btn-toolbar">
             <button class="btn btn-success btn-large" id="create-member-submit-btn"
                     name="create-member-submit-btn" type="button"
-                    data-toggle="modal" data-target="#confirm-member-before-saving-modal">
+                    data-toggle="modal" data-target="#create-member-modal">
                 <i class="icon-plus icon-white"></i><i class="icon-user icon-white"></i> Add Member
             </button>
 
