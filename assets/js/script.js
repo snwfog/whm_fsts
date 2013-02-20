@@ -323,9 +323,13 @@ $(document).ready(function() {
       display: "Work Status",
       rules: "required"
     }, {
+      name: "gender",
+      display: "Gender",
+      rules: "required|exact_length[1]"
+    }, {
       name: "welfare-number",
       display: "Welfare Number",
-      rules: "requiren|numeric"
+      rules: "required|numeric"
     }, {
       name: "origin",
       display: "Origin",
@@ -351,12 +355,20 @@ $(document).ready(function() {
       display: "First Visit Date",
       rules: "required|alpha_dash"
     }, {
-      name: "house-number",
-      display: "Number",
-      rules: "required|numeric"
+      name: "address",
+      display: "Address",
+      rules: "required|alpha_numeric"
     }, {
-      name: "street",
-      display: "Street",
+      name: "apt-number",
+      display: "Apartment",
+      rules: "alpha_numeric"
+    }, {
+      name: "city",
+      display: "City",
+      rules: "required|alpha"
+    }, {
+      name: "province",
+      display: "Province",
       rules: "required"
     }, {
       name: "postal-code",
