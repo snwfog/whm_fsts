@@ -31,6 +31,8 @@ class Household extends Controller implements IRedirectable
         $data = $this->extractHouseholdInfo($household_id);  
         $data = array( "household" => $data);
         $this->display("household_view_form.twig", $data);
+        }else{
+            $this->redirect("search");
         }
 
     }
