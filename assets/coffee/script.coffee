@@ -11,6 +11,15 @@ $(document).ready ->
   $(window).resize ->
     window.resizeTo(size[0], size[1])
 
+  time = -> $('#navbar-time').html moment().format "hh:mm:ss A", 1000
+  setInterval time, 1000
+  time()
+
+#  (displayTime = ->
+#    $('#navbar-time').html moment().format "hh:mm:ss A", 1000
+#    setInterval displayTime, 1000)();
+
+
 ################################################################################
 # Google+ Style Tooltips Setup
 ################################################################################

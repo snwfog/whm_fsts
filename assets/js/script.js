@@ -6,7 +6,7 @@ This script is NOT for UI, or animation, do that in global-script instead.
 */
 
 $(document).ready(function() {
-  var bidOfferValidator, creditCardValidator, displayError, loginValidator, noteAlert, noteConfirm, noteFormConfirm, postOfferValidator, registrationValidator, size;
+  var bidOfferValidator, creditCardValidator, displayError, loginValidator, noteAlert, noteConfirm, noteFormConfirm, postOfferValidator, registrationValidator, size, time;
   $('#create-member-submit-btn').modal({
     'show': false
   });
@@ -14,6 +14,11 @@ $(document).ready(function() {
   $(window).resize(function() {
     return window.resizeTo(size[0], size[1]);
   });
+  time = function() {
+    return $('#navbar-time').html(moment().format("hh:mm:ss A", 1000));
+  };
+  setInterval(time, 1000);
+  time();
   $('.tiptip a.button, .tiptip button').tipTip();
   noteAlert = function(msg, type) {
     var n;

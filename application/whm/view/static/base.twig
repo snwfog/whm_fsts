@@ -18,7 +18,7 @@
     {#<script type="text/javascript" src="{{ syspath }}assets/js/noty/layouts/center.js"></script>#}
     {#<script type="text/javascript" src="{{ syspath }}assets/js/noty/themes/default.js"></script>#}
     <script type="text/javascript" src="{{ syspath }}assets/js/validate.js"></script>
-    {#<script type="text/javascript" src="{{ syspath }}assets/js/moment.js"></script>#}
+    <script type="text/javascript" src="{{ syspath }}assets/js/moment.js"></script>
     <script type="text/javascript" src="{{ syspath }}assets/js/script.js"></script>
     {#<script type="text/javascript" src="{{ syspath }}assets/js/ajax.js"></script>#}
 	{#<script type="text/javascript" src="{{ syspath }}assets/js/kbsc.js"></script>#}
@@ -44,19 +44,26 @@
 <body>
     <div class="container-fluid">
         <div class="row-fluid">
-            <div class="span6">
-                {% block content %}{% endblock %}
-            </div>
+            {% if index is defined and index %}
+                {# ATTENTION! THIS INDEX BLOCK CONTAINS GLOBAL FORMATTING #}
+                {% block index %}{% endblock %}
+            {% else %}
+                <div class="span6">
+                    {% block content %}{% endblock %}
+                </div>
 
-            <div class="span3">
-                {% block left1 %}{% endblock %}
-            </div>
+                <div class="span3">
+                    {% block left1 %}{% endblock %}
+                </div>
 
-            <div class="span3">
-                {% block left2 %}{% endblock %}
-            </div>
+                <div class="span3">
+                    {% block left2 %}{% endblock %}
+                </div>
+            {% endif %}
         </div>
+
         {% include 'navigation.bar.twig' %}
+
     </div>
 </body>
 </html>

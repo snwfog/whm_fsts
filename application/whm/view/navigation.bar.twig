@@ -8,36 +8,69 @@
                     <span class="icon-bar"></span>
                 </a>
                 <a class="brand" href="#">{{ site_name }}</a>
+
+
                 <div class="nav-collapse collapse navbar-responsive-collapse">
+
+
                     <ul class="nav">
-                        <li class="active"><a href="#">Household</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
+                        {#<li class="active"><a href="#">Household</a></li>#}
+
+                        {#<li><a href="#">Link</a></li>#}
+                        {#<li><a href="#">Link</a></li>#}
+
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Household <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li class="nav-header">Nav header</li>
-                                <li><a href="#">Separated link</a></li>
-                                <li><a href="#">One more separated link</a></li>
+                                <li class="nav-header">Household</li>
+                                <li><a href="#">Manage Household</a></li>
+                                <li><a href="#"><i class="icon-plus"></i><i class="icon-home"></i> Create Household</a></li>
                             </ul>
                         </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Event <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-header">Event Template</li>
+                                <li><a href="#">Create Template</a></li>
+                                <li><a href="#">Manage Template</a></li>
+                                <li class="divider"></li>
+                                <li class="nav-header">Event</li>
+                                <li><a href="#">Create Event</a></li>
+                                <li><a href="#">Manage Event</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Report <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-header">Report</li>
+                                <li><a href="#">Yearly Report</a></li>
+                                <li><a href="#">Quartely Report</a></li>
+                                <li><a href="#">Ad-hoc Report</a></li>
+                            </ul>
+                        </li>
+
                     </ul>
+
+
+
                     <form class="navbar-search pull-left" action="">
-                        <input type="text" class="search-query" placeholder="Search">
+                        <input type="text" class="search-query span2" placeholder="Search Member">
                     </form>
+
+
                     <ul class="nav pull-right">
-                        {#<li><a href="#">Link</a></li>#}
+                        <li class="divider-vertical"></li>
+                        {# TIME CLOCK #}
+                        <li><a href="#" id="navbar-time"></a></li>
                         <li class="divider-vertical"></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Operator <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
+                                <li><a href="#"><i class="icon-list-alt"></i> Generate Report</a></li>
+                                <li><a href="#"><i class="icon-user"></i> Manage Operator</a></li>
+                                <li><a href="#"><i class="icon-flag"></i> Manage Flag</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#"><i class="icon-off"></i> Sign Out</a></li>
                             </ul>
