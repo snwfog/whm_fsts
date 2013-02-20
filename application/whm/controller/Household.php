@@ -11,26 +11,27 @@ use \WHM\Model\HouseholdMember;
 class Household extends Controller implements IRedirectable
 {
     public $data = array( "errors" => array(), "form" => array());
-    private $household;
+    private $manageHousehold;
 
     public function __construct(array $args = null)
     {
         $this->data = $args;
         parent::__construct();
         //Helper::backtrace();
+        $this->manageHousehold = new ManageHousehold();
 
     }
 
     public function get($household_id = null)
-    {
+    {   
         if(isset($_GET["household_id"])){
             $household_id = $_GET["household_id"];
         }
 
         if(!is_null($household_id)){
-        $data = $this->extractHouseholdInfo($household_id);  
-        $data = array( "household" => $data);
-        $this->display("household_view_form.twig", $data);
+            $data = $this->extractHouseholdInfo($household_id);  
+            $data = array( "household" => $data);
+            $this->display("household_view_form.twig", $data);
         }else{
             $this->redirect("search");
         }
@@ -55,10 +56,13 @@ class Household extends Controller implements IRedirectable
 
     }
 
-   public function post()
-   {
 
-   }
+    //This post is used for Update household.
+    public function post()
+    {
+        $this->manageHousehold->updateHousehold($_POST);
+        $this->redirect('../household/update/'.$_POST["household-id"]);
+    }
 
    public function setHousehold($household){
        $this->household = $household;

@@ -16,13 +16,13 @@ class ManageHousehold {
 		$this->em = Application::em();
 	}
 
-	public function createHousehold($form_data) {
+	public function createHousehold($data) {
 		//include_once('Entity_Manager.php');
-		$pmember = $this->createMember($form_data);
-		$address = $this->createAddress($form_data);
+		$pmember = $this->createMember($data);
+		$address = $this->createAddress($data);
 		$household = new Household();
 
-		//$household->setPhoneNumber($form_data["phone_number"]);
+		//$household->setPhoneNumber($data["phone_number"]);
 		$household->setHouseholdPrincipal($pmember);
 		$household->setAddress($address);
 		$this->em->persist($household);
@@ -34,6 +34,46 @@ class ManageHousehold {
 
 		return $household;
 	}
+
+	public function updateHousehold($data) {
+		print_r($data);
+		$household = $this->findHousehold($data["household-id"]);
+		$pMember = $household->getHouseholdPrincipal();
+		$address = $household->getAddress();
+		$this->updateMember($pMember, $data);
+		$this->updateAddress($address, $data);
+	}
+
+	private function updateMember($memberInstance, $data)
+	{
+		$memberInstance->setFirstName($data["first-name"]);
+		$memberInstance->setLastName($data["last-name"]);
+		$memberInstance->setPhoneNumber($data["phone-number"]);
+		$memberInstance->setSinNumber($data["sin-number"]);
+		$memberInstance->setMcareNumber($data["mcare-number"]);
+		$memberInstance->setWorkStatus($data["work_status"]);
+		$memberInstance->setWelfareNumber($data["welfare-number"]);
+		$memberInstance->setReferral($data["referral"]);
+		$memberInstance->setLanguage($data["language"]);
+		$memberInstance->setMaritalStatus($data["marital-status"]);
+		$memberInstance->setGender("M"); //CHANGE WHEN EXTRACT FROM MEDICARE
+		$memberInstance->setOrigin($data["origin"]);
+		$this->em->persist($memberInstance);
+		$this->em->flush();
+	}
+
+	private function updateAddress($addressInstance, $data)
+	{
+		$addressInstance->setHouseNumber($data["house-number"]);
+		$addressInstance->setStreet($data["street"]);
+		$addressInstance->setAptNumber($data["apt-number"]);
+		//$addressInstance->setCity($data["city"]);
+		$addressInstance->getPostalCode($data["postal-code"]);
+		//$address->setProvince($data["province"]);
+		$this->em->persist($addressInstance);
+		$this->em->flush();
+	}
+
 	
 	//Delete
 	public function removeHousehold($id) {
