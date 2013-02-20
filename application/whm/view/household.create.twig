@@ -17,7 +17,7 @@
                        placeholder="First Name" value="{{ household["firstName"] }}"/>
                 <input class="span4" type="text" name="last-name"
                        placeholder="Last Name" value="{{ household["lastName"] }}"/>
-                <input class="span3" type="text" name="phone-number" maxlength="10"
+                <input class="span3" type="text" name="phone-number" maxlength="12"
                        placeholder="Phone Number" value="{{ household["phoneNumber"] }}"/>
             </div>
         </fieldset>
@@ -47,8 +47,8 @@
             
             {# <input type="submit" value="Submit">  #}      
         </div>
-
-        {% include 'information.modal.twig' %}
+        
+        {% include 'addmember.modal.twig' %}
 
     </form>
 
@@ -56,6 +56,7 @@
 
 
 {# This part should be auto generated #}
+
 {% block left1 %}
     <legend>ID: HH000001</legend>
     <ul class="nav nav-pills nav-stacked" id="dependent-list">
@@ -69,7 +70,6 @@
         <li><a href="#"><i class="icon-user"></i> Quang Tran</a></li>
         <li><a href="#"><i class="icon-user"></i> Joe Zhu Shemale</a></li>
     </ul>
-
 {% endblock left1 %}
 
 {% block left2 %}
@@ -81,7 +81,6 @@
                 <div class="accordion-heading">
                     <a class="accordion-toggle" data-toggle="collapse"
                        data-parent="#accordion2" href="#collapse{{ i }}">
-
                         <span class="badge badge-{{ notetype }}"> {{ notetype }}</span>
                         <div class="pull-right">
                             <i class="icon-calendar"></i> {{ "now"|date("d-m-y") }}

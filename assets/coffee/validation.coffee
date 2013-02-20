@@ -24,7 +24,7 @@ $(document).ready ->
 # Google+ Style Tooltips Setup
 ################################################################################
 
-  $('.tiptip a.button, .tiptip button').tipTip()
+#  $('.tiptip a.button, .tiptip button').tipTip()
 
 ################################################################################
 # Noty Confirmation Setup
@@ -352,4 +352,3 @@ $(document).ready ->
     display: "Postal Code",
     rules: "required|postal_code"
   }], displayError)
-

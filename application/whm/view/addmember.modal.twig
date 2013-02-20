@@ -16,17 +16,19 @@
                                placeholder="First Name"/>
                         <input class="span4" type="text" name="last-name"
                                placeholder="Last Name"/>
-                        <input class="span3" type="text" name="phone-number" maxlength="10"
-                               placeholder="Phone Number"/>
+                        <input id="phone-number" class="span3" type="text" name="phone-number"
+                               maxlength="12" placeholder="Phone Number"/>
                     </div>
                 </fieldset>
 
                 {% include 'information.form.part.twig' %}
+
             </form>
         </div>
 
         <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn" data-dismiss="modal" aria-hidden="true"> Close</button>
+            <button class="btn btn-warning" aria-hidden="true"> Clear</button>
             <button class="btn btn-success"><i class="icon-ok icon-white"></i> Save changes</button>
         </div>
     </div>

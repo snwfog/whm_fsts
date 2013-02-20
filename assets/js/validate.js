@@ -1,5 +1,5 @@
 /*
- * validate.js 1.1
+ * validate.js 1.2
  * Copyright (c) 2011 Rick Harrison, http://rickharrison.me
  * validate.js is open sourced under the MIT license.
  * Portions of validate.js are inspired by CodeIgniter.
@@ -8,7 +8,7 @@
 
 (function(window, document, undefined) {
     /*
-     * If you would like an application-wide core, change these defaults.
+     * If you would like an application-wide config, change these defaults.
      * Otherwise, use the setMessage() function to configure form specific messages.
      */
 
@@ -33,11 +33,8 @@
             is_natural_no_zero: 'The %s field must contain a number greater than zero.',
             valid_ip: 'The %s field must contain a valid IP.',
             valid_base64: 'The %s field must contain a base64 string.',
-            phone_number: 'The %s field must be in the format XXX-XXX-XXXX',
-            sin_number: 'The $s field must contain 9 digits.',
-            postal_code: 'The $s field must contain 6 characters.',
-            welface_number: 'The $s field must be in the format AA-####-####-##.',
-            mcare_number: 'The $s field must be in the format AAAA-####-####.'
+            valid_credit_card: 'The %s field must contain a vaild credit card number',
+            is_file_type: 'The %s field must contain only %s files.'
         },
         callback: function(errors) {
 
@@ -48,11 +45,11 @@
      * Define the regular expressions that will be used
      */
 
-    var ruleRegex = /^(.+)\[(.+)\]$/,
+    var ruleRegex = /^(.+?)\[(.+)\]$/,
         numericRegex = /^[0-9]+$/,
         integerRegex = /^\-?[0-9]+$/,
         decimalRegex = /^\-?[0-9]*\.?[0-9]+$/,
-        emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,6}$/i,
+        emailRegex = /^[a-zA-Z0-9.!#$%&amp;'*+-/=?\^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
         alphaRegex = /^[a-z]+$/i,
         alphaNumericRegex = /^[a-z0-9]+$/i,
         alphaDashRegex = /^[a-z0-9_-]+$/i,
@@ -60,12 +57,7 @@
         naturalNoZeroRegex = /^[1-9][0-9]*$/i,
         ipRegex = /^((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})$/i,
         base64Regex = /[^a-zA-Z0-9\/\+=]/i,
-        phoneNumberRegex = [0-9]{3}-[0-9]{3}-[0-9]{4},
-        sinNumberRegex = [0-9]{3}-[0-9]{3}-[0-9]{3},
-        postalCodeRegex = ([A-Z]{1}[0-9]{1}[A-Z]{1}-[0-9]{1}[A-Z]{1}[0-9]{1}),
-        welfareNumberRegex = ([A-Z]{4}-[0-9]{4}-[0-9]{4}-[0-9]{2}),
-        mcareNumberRegex = ([A-Z]{4}-[0-9]{4}-[0-9]{4})
-        ;
+        numericDashRegex = /^[\d\-\s]+$/;
 
     /*
      * The exposed public object to validate a form:
@@ -123,6 +115,22 @@
                 } catch(e) {}
             }
         })(this);
+    },
+
+    attributeValue = function (element, attributeName) {
+        var i;
+
+        if ((element.length > 0) && (element[0].type === 'radio')) {
+            for (i = 0; i < element.length; i++) {
+                if (element[i].checked) {
+                    return element[i][attributeName];
+                }
+            }
+
+            return;
+        }
+
+        return element[attributeName];
     };
 
     /*
@@ -165,10 +173,10 @@
                     element = this.form[field.name];
 
                 if (element && element !== undefined) {
-                    field.id = element.id;
-                    field.type = element.type;
-                    field.value = element.value;
-                    field.checked = element.checked;
+                    field.id = attributeValue(element, 'id');
+                    field.type = (element.length > 0) ? element[0].type : element.type;
+                    field.value = attributeValue(element, 'value');
+                    field.checked = attributeValue(element, 'checked');
                 }
 
                 /*
@@ -180,7 +188,7 @@
         }
 
         if (typeof this.callback === 'function') {
-            var _confirmSubmit = this.callback(this.errors, event);
+            this.callback(this.errors, event);
         }
 
         if (this.errors.length > 0) {
@@ -192,7 +200,7 @@
             }
         }
 
-        return _confirmSubmit;
+        return true;
     };
 
     /*
@@ -218,13 +226,14 @@
         for (var i = 0, ruleLength = rules.length; i < ruleLength; i++) {
             var method = rules[i],
                 param = null,
-                failed = false;
+                failed = false,
+                parts = ruleRegex.exec(method);
 
             /*
              * If the rule has a parameter (i.e. matches[param]) split it out
              */
 
-            if (parts = ruleRegex.exec(method)) {
+            if (parts) {
                 method = parts[1];
                 param = parts[2];
             }
@@ -268,7 +277,8 @@
                 this.errors.push({
                     id: field.id,
                     name: field.name,
-                    message: message
+                    message: message,
+                    rule: method
                 });
 
                 // Break out so as to not spam with validation errors (i.e. required and valid_email)
@@ -286,7 +296,7 @@
         required: function(field) {
             var value = field.value;
 
-            if (field.type === 'checkbox') {
+            if ((field.type === 'checkbox') || (field.type === 'radio')) {
                 return (field.checked === true);
             }
 
@@ -294,7 +304,9 @@
         },
 
         matches: function(field, matchName) {
-            if (el = this.form[matchName]) {
+            var el = this.form[matchName];
+
+            if (el) {
                 return field.value === el.value;
             }
 
@@ -397,26 +409,46 @@
             return (base64Regex.test(field.value));
         },
 
-        phone_number: function(field) {
-            return (phoneNumber.test(field.value));
+        valid_credit_card: function(field){
+            // Luhn Check Code from https://gist.github.com/4075533
+            // accept only digits, dashes or spaces
+            if (!numericDashRegex.test(field.value)) return false;
+
+            // The Luhn Algorithm. It's so pretty.
+            var nCheck = 0, nDigit = 0, bEven = false;
+            var strippedField = field.value.replace(/\D/g, "");
+
+            for (var n = strippedField.length - 1; n >= 0; n--) {
+                var cDigit = strippedField.charAt(n),
+                nDigit = parseInt(cDigit, 10);
+                if (bEven) {
+                    if ((nDigit *= 2) > 9) nDigit -= 9;
+                }
+
+                nCheck += nDigit;
+                bEven = !bEven;
+            }
+
+            return (nCheck % 10) == 0;
         },
 
-        sin_number: function(field) {
-            return (sinNumber.test(field.value));
-        },
+        is_file_type: function(field,type) {
+            if (field.type !== 'file') {
+                return true;
+            }
 
-        postal_code: function(field) {
-            return (postalCode.test(field.value));
-        },
+            var ext = field.value.substr((field.value.lastIndexOf('.') + 1)),
+                typeArray = type.split(','),
+                inArray = false,
+                i = 0,
+                len = typeArray.length;
 
-        welface_number: function(field) {
-            return (welfareNumber.test(field.value));
-        },
+            for (i; i < len; i++) {
+                if (ext == typeArray[i]) inArray = true;
+            }
 
-        mcare_number: function(field) {
-            return (mcareNumber.test(field.value));
+            return inArray;
         }
-
     };
 
     window.FormValidator = FormValidator;
