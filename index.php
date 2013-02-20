@@ -13,6 +13,7 @@ $serves = array
     '/household' => 'WHM\Controller\Household',
     '/household/:number' => 'WHM\Controller\Household',
     '/household/new' => 'WHM\Controller\CreateHousehold',
+    '/household/update/:number' => 'WHM\Controller\CreateHousehold',
     '/member' => 'WHM\Controller\Member',
     '/member/:number' => 'WHM\Controller\member',
     '/member/new' => 'WHM\Controller\CreateMember',

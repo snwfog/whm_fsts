@@ -3,27 +3,28 @@
         <legend>Information</legend>
         <div class="controls controls-row">
             <input class="span3" maxlength="{{ 3 * 3 + 2 }}" type="text"
-                   name="sin-number" placeholder="Social Insurance"/>
+                   name="sin-number" placeholder="Social Insurance" value="{{ household["sinNumber"] }}"/>
             <input class="span4" maxlength="{{ 3 * 4 + 2 }}" type="text"
-                   name="mcare-number" placeholder="Medical Care"/>
+                   name="mcare-number" placeholder="Medical Care" value="{{ household["medicareNum"] }}"/>
             <input class="span1" type="text" name="work_status"
-                   placeholder="Work Status" maxlength="2" />
+                   placeholder="Work Status" maxlength="2" value="{{ household["workStatus"] }}"/>
             <input class="span4" maxlength="{{ 3 * 4 + 2 + 3 }}"
-                   type="text" name="welfare-number" placeholder="Welfare Number"/>
+                   type="text" name="welfare-number" placeholder="Welfare Number"
+                   value="{{ household["welfareNumber"] }}"/>
         </div>
 
         <div class="controls controls-row">
             <input class="span5" type="text"
-                   name="origin" placeholder="Origin"/>
+                   name="origin" placeholder="Origin" value="{{ household["origin"] }}"/>
             <input class="span4" type="text"
-                   name="language" placeholder="Language"/>
+                   name="language" placeholder="Language" value="{{ household["language"] }}"/>
             <input class="span3" maxlength="2" type="text"
-                   name="marital-status" placeholder="Marital Status"/>
+                   name="marital-status" placeholder="Marital Status" value="{{ household["marital"] }}"/>
         </div>
 
         <div class="controls controls-row">
             <input class="span4" type="text"
-                   name="referral" placeholder="Referral"/>
+                   name="referral" placeholder="Referral" value="{{ household["referral"] }}"/>
             <input class="span5" type="text"
                    name="contact" placeholder="Contact"/>
             <input class="span3" type="text"

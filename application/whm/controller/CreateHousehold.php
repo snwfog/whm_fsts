@@ -6,6 +6,7 @@ use WHM;
 use WHM\Controller;
 use WHM\IRedirectable;
 use WHM\Model\ManageHousehold;
+use WHM\Controller\Household;
 
 class CreateHousehold extends Controller implements IRedirectable
 {
@@ -21,9 +22,21 @@ class CreateHousehold extends Controller implements IRedirectable
         $this->householdController = new Household();
     }
 
-    public function get()
-    {
-        $this->display("household.create.twig");
+    public function get($household_id = null)
+    {    
+        $data = array( "httpMethod" => "POST", 
+                       "formAction" => "new"
+                     );
+
+        if(!is_null($household_id))
+        {
+            $data = $this->householdController->extractHouseholdInfo($household_id);
+            $data["httpMethod"] = "PUT";
+            $data["formAction"] = "$household_id";
+
+        }
+        $this->data["household"] = $data;
+        $this->display("household.create.twig", $this->data);
     }
 
     public function post()
@@ -32,11 +45,14 @@ class CreateHousehold extends Controller implements IRedirectable
         {
             $this->data["form"] = $_POST;
             $household = $this->manageHouse->createHousehold($_POST);
-            //$this->householdController->setHousehold($household);
             $this->redirect((string)$household->getId());
         }else{
             $this->display("household.create.twig");
         }
+    }
+
+    public function put()
+    {
     }
 
 }

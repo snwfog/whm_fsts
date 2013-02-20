@@ -72,7 +72,7 @@ class Household extends Controller implements IRedirectable
    }
 
 
-   private function extractHouseholdInfo($household_id){
+   public function extractHouseholdInfo($household_id){
         $mHousehold = new ManageHousehold();
         $household = $mHousehold->findHousehold($household_id);
         $householdPrincipal = $household->getHouseholdPrincipal();
@@ -82,14 +82,17 @@ class Household extends Controller implements IRedirectable
                         "household_id" => $household_id,
                         "firstName" => $householdPrincipal->getFirstName(),
                         "lastName"  => $householdPrincipal->getLastName(),
-                        "language"  => $householdPrincipal->getLanguage(),
+                        "phoneNumber"  => $householdPrincipal->getPhoneNumber(),
+                        "sinNumber"  => $householdPrincipal->getSinNumber(),
+                        "medicareNum"  => $householdPrincipal->getMcareNumber(),
                         "workStatus"  => $householdPrincipal->getWorkStatus(),
                         "welfareNumber"  => $householdPrincipal->getWelfareNumber(),
-                        "phoneNumber"  => $householdPrincipal->getPhoneNumber(),
-                        "medicareNum"  => $householdPrincipal->getMcareNumber(),
                         "referral"  => $householdPrincipal->getReferral(),
+                        "language"  => $householdPrincipal->getLanguage(),
                         "marital"  => $householdPrincipal->getMaritalStatus(),
+                        "gender"  => $householdPrincipal->getGender(),
                         "origin"   => $householdPrincipal->getOrigin(),
+                        "houseNumber"    => $address->getHouseNumber(),
                         "street"    => $address->getStreet(),
                         "apt"      => $address->getAptNumber(),
                         "city"     => $address->getCity(),

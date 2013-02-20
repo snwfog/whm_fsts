@@ -70,14 +70,15 @@ class ManageHousehold {
 		$household_member->setFirstName($data["first-name"]);
 		$household_member->setLastName($data["last-name"]);
 		$household_member->setPhoneNumber($data["phone-number"]);
+		$household_member->setSinNumber($data["sin-number"]);
 		$household_member->setMcareNumber($data["mcare-number"]);
 		$household_member->setWorkStatus($data["work_status"]);
 		$household_member->setWelfareNumber($data["welfare-number"]);
 		$household_member->setReferral($data["referral"]);
 		$household_member->setLanguage($data["language"]);
 		$household_member->setMaritalStatus($data["marital-status"]);
+		$household_member->setGender("M"); //CHANGE WHEN EXTRACT FROM MEDICARE
 		$household_member->setOrigin($data["origin"]);
-		$household_member->setGender($data["gender"]);
 		$household_member->setFirstVisitDate($datetime);
 		$this->em->persist($household_member);
 		$this->em->flush();
@@ -87,7 +88,8 @@ class ManageHousehold {
 	private function createAddress($data)
 	{
 		$address = new Address();
-		$address->setStreet($data["address"]);
+		$address->setHouseNumber($data["house-number"]);
+		$address->setStreet($data["street"]);
 		$address->setAptNumber($data["apt-number"]);
 		$address->setCity($data["city"]);
 		$address->getPostalCode($data["postal-code"]);
