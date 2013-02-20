@@ -67,15 +67,15 @@ class ManageHousehold {
 	{
 		$household_member = new HouseholdMember();
 		$datetime = new DateTime("now");
-		$household_member->setFirstName($data["first_name"]);
-		$household_member->setLastName($data["last_name"]);
-		$household_member->setPhoneNumber($data["phone_number"]);
-		$household_member->setMcareNumber($data["medicare_num"]);
+		$household_member->setFirstName($data["first-name"]);
+		$household_member->setLastName($data["last-name"]);
+		$household_member->setPhoneNumber($data["phone-number"]);
+		$household_member->setMcareNumber($data["mcare-number"]);
 		$household_member->setWorkStatus($data["work_status"]);
-		$household_member->setWelfareNumber($data["welfare_number"]);
+		$household_member->setWelfareNumber($data["welfare-number"]);
 		$household_member->setReferral($data["referral"]);
 		$household_member->setLanguage($data["language"]);
-		$household_member->setMaritalStatus($data["marital"]);
+		$household_member->setMaritalStatus($data["marital-status"]);
 		$household_member->setOrigin($data["origin"]);
 		$household_member->setGender($data["gender"]);
 		$household_member->setFirstVisitDate($datetime);
