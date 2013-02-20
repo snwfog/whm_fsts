@@ -313,11 +313,15 @@ $(document).ready(function() {
     }, {
       name: "phone-number",
       display: "Phone Number",
-      rules: "numeric|more_than[5]|max_length[20]"
+      rules: "numeric|phone_number"
     }, {
       name: "sin-number",
       display: "Social Insurance",
-      rules: "exact_length[9]"
+      rules: "sin_number"
+    }, {
+      name: "mcare-number",
+      display: "Medical Card",
+      rules: "mcare_number"
     }, {
       name: "work_status",
       display: "Work Status",
@@ -341,7 +345,7 @@ $(document).ready(function() {
     }, {
       name: "marital-status",
       display: "Marital Status",
-      rules: "required"
+      rules: "required|length[2]"
     }, {
       name: "referral",
       display: "Referral",
@@ -355,8 +359,12 @@ $(document).ready(function() {
       display: "First Visit Date",
       rules: "required|alpha_dash"
     }, {
-      name: "address",
-      display: "Address",
+      name: "house-number",
+      display: "Number",
+      rules: "required|alpha_numeric"
+    }, {
+      name: "street",
+      display: "Street",
       rules: "required|alpha_numeric"
     }, {
       name: "apt-number",
@@ -373,7 +381,7 @@ $(document).ready(function() {
     }, {
       name: "postal-code",
       display: "Postal Code",
-      rules: "required|alpha_dash"
+      rules: "required|postal_code"
     }
   ], displayError);
 });
