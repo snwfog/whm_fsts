@@ -32,7 +32,12 @@
             is_natural: 'The %s field must contain only positive numbers.',
             is_natural_no_zero: 'The %s field must contain a number greater than zero.',
             valid_ip: 'The %s field must contain a valid IP.',
-            valid_base64: 'The %s field must contain a base64 string.'
+            valid_base64: 'The %s field must contain a base64 string.',
+            phone_number: 'The %s field must be in the format XXX-XXX-XXXX',
+            sin_number: 'The $s field must contain 9 digits.',
+            postal_code: 'The $s field must contain 6 characters.',
+            welface_number: 'The $s field must be in the format AA-####-####-##.',
+            mcare_number: 'The $s field must be in the format AAAA-####-####.'
         },
         callback: function(errors) {
 
@@ -54,7 +59,13 @@
         naturalRegex = /^[0-9]+$/i,
         naturalNoZeroRegex = /^[1-9][0-9]*$/i,
         ipRegex = /^((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})$/i,
-        base64Regex = /[^a-zA-Z0-9\/\+=]/i;
+        base64Regex = /[^a-zA-Z0-9\/\+=]/i,
+        phoneNumberRegex = [0-9]{3}-[0-9]{3}-[0-9]{4},
+        sinNumberRegex = [0-9]{3}-[0-9]{3}-[0-9]{3},
+        postalCodeRegex = ([A-Z]{1}[0-9]{1}[A-Z]{1}-[0-9]{1}[A-Z]{1}[0-9]{1}),
+        welfareNumberRegex = ([A-Z]{4}-[0-9]{4}-[0-9]{4}-[0-9]{2}),
+        mcareNumberRegex = ([A-Z]{4}-[0-9]{4}-[0-9]{4})
+        ;
 
     /*
      * The exposed public object to validate a form:
@@ -384,7 +395,28 @@
 
         valid_base64: function(field) {
             return (base64Regex.test(field.value));
+        },
+
+        phone_number: function(field) {
+            return (phoneNumber.test(field.value));
+        },
+
+        sin_number: function(field) {
+            return (sinNumber.test(field.value));
+        },
+
+        postal_code: function(field) {
+            return (postalCode.test(field.value));
+        },
+
+        welface_number: function(field) {
+            return (welfareNumber.test(field.value));
+        },
+
+        mcare_number: function(field) {
+            return (mcareNumber.test(field.value));
         }
+
     };
 
     window.FormValidator = FormValidator;
