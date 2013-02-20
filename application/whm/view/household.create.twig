@@ -31,13 +31,19 @@
             <button class="btn btn-success btn-large" id="create-member-submit-btn"
                     name="create-member-submit-btn" type="button"
                     data-toggle="modal" data-target="#confirm-member-before-saving-modal">
-                <i class="icon-plus icon-white"></i> Create
+                <i class="icon-plus icon-white"></i><i class="icon-user icon-white"></i> Add Member
 
             </button>
+
+            <button class="btn btn-warning btn-large"
+                    name="modify-member-submit-btn" type="button">
+                <i class="icon-edit icon-white"></i> Modify
+            </button>
+
             <button class="btn btn-danger btn-large"
-                    name="abandon-create-member-btn"
-                    type="button"><i class="icon-remove
-                            icon-white"></i> Abandon</button>
+                    name="deactivate-household-btn" type="button">
+                <i class="icon-remove icon-white"></i> Deactivate
+            </button>
         </div>
 
         {% include 'information.modal.twig' %}
@@ -48,7 +54,7 @@
 
 {# This part should be auto generated #}
 {% block left1 %}
-    <legend>Dependents</legend>
+    <legend>ID: HH000001</legend>
     <ul class="nav nav-pills nav-stacked" id="dependent-list">
         <li class="active"><a href="#"><i class="icon-user icon-white"></i> Steve Gourgue</a></li>
         <li><a href="#"><i class="icon-home"></i> Charles Yang</a></li>
@@ -66,33 +72,27 @@
 {% block left2 %}
     <legend>Notes</legend>
     <div class="accordion" id="accordion2">
-        <div class="accordion-group">
-            <div class="accordion-heading">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                    Note 1...
-                </a>
-            </div>
-            <div id="collapseOne" class="accordion-body collapse in">
-                <div class="accordion-inner">
-                    <p>
-                        Nam justo massa, dictum at varius eu, eleifend in massa. Quisque dictum egestas mi vitae blandit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis dolor orci, hendrerit ultrices mollis et, dignissim sit amet massa. Nam enim tellus, tincidunt at sollicitudin nec, fermentum at nulla. Integer eget magna turpis, nec placerat massa. Nulla sodales lorem magna.
-                    </p>
+        {% for i in range(0, 6) %}
+            {% set notetype =  random(['success', 'warning', 'important', 'info']) %}
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse"
+                       data-parent="#accordion2" href="#collapse{{ i }}">
+
+                        <span class="badge badge-{{ notetype }}"> {{ notetype }}</span>
+                        <div class="pull-right">
+                            <i class="icon-calendar"></i> {{ "now"|date("d-m-y") }}
+                        </div>
+                    </a>
+                </div>
+                <div id="collapse{{ i }}" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                        <p>
+                            Nam justo massa, dictum at varius eu, eleifend in massa. Quisque dictum egestas mi vitae blandit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis dolor orci, hendrerit ultrices mollis et, dignissim sit amet massa. Nam enim tellus, tincidunt at sollicitudin nec, fermentum at nulla. Integer eget magna turpis, nec placerat massa. Nulla sodales lorem magna.
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="accordion-group">
-            <div class="accordion-heading">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                    Note 2...
-                </a>
-            </div>
-            <div id="collapseTwo" class="accordion-body collapse">
-                <div class="accordion-inner">
-                    <p>
-                        Nam justo massa, dictum at varius eu, eleifend in massa. Quisque dictum egestas mi vitae blandit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis dolor orci, hendrerit ultrices mollis et, dignissim sit amet massa. Nam enim tellus, tincidunt at sollicitudin nec, fermentum at nulla. Integer eget magna turpis, nec placerat massa. Nulla sodales lorem magna.
-                    </p>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 {% endblock left2 %}
