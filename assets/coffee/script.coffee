@@ -288,6 +288,10 @@ $(document).ready ->
     display: "Social Insurance",
     rules: "sin_number"
   }, {
+    name: "mcare-number",
+    display: "Medical Card",
+    rules: "mcare_number"
+  }, {
     name: "work_status",
     display: "Work Status",
     rules: "required"
@@ -346,6 +350,6 @@ $(document).ready ->
   }, {
     name: "postal-code",
     display: "Postal Code",
-    rules: "required|postat_code"
+    rules: "required|postal_code"
   }], displayError)
 
