@@ -89,9 +89,9 @@ class ManageHousehold {
 		$address = new Address();
 		$address->setStreet($data['address']);
 		$address->setAptNumber($data['apt-number']);
-		$address->getCity($data['city']);
+		//$address->setCity($data['city']);
 		$address->getPostalCode($data['postal-code']);
-		$address->getProvince($data['province']);
+	//	$address->setProvince($data['province']);
 		$this->em->persist($address);
 		$this->em->flush();
 
