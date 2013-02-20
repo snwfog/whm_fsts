@@ -65,8 +65,20 @@ class Event
     public function addParticipants(HouseholdMember $participant)
     {
         $this->participants[] = $participant;
-        $participant->addEvent($this);
+        $participant->addEvent2($this);
     }
+
+    /**
+     * Helper Method for Event class used to achieve bi-directional relationship
+     * attribute synchronization.
+     * You should never have to call this method explicitly,
+     * 
+     * @param \WHM\Model\HouseholdMember $participant
+     */
+    public function addParticipants2(HouseholdMember $participant)
+    {
+        $this->participants[] = $participant;
+    }    
 
     public function getParticipants()
     {
