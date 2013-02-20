@@ -33,7 +33,6 @@ class CreateHousehold extends Controller implements IRedirectable
             $data = $this->householdController->extractHouseholdInfo($household_id);
             $data["httpMethod"] = "PUT";
             $data["formAction"] = "$household_id";
-
         }
         $this->data["household"] = $data;
         $this->display("household.create.twig", $this->data);

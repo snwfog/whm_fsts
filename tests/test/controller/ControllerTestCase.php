@@ -15,7 +15,7 @@ abstract class ControllerTestCase extends PHPUnit_Framework_TestCase
 
     /**
      *
-     * @var Goutte\Client
+     * @var \Goutte\Client client
      */
     protected $client;
     
@@ -43,7 +43,7 @@ abstract class ControllerTestCase extends PHPUnit_Framework_TestCase
      * @param string  $content       The raw body data
      * @param Boolean $changeHistory Whether to update the history or not (only used internally for back(), forward(), and reload())
      *
-     * @return Crawler
+     * @return \Symfony\Component\DomCrawler\Crawler a web crawler
      *
      */
     protected function request($method, $route, array $parameters = array(), array $files = array(), array $server = array(), $content = null)
