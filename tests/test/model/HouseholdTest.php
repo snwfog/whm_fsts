@@ -8,6 +8,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class HouseholdTest extends PHPUnit_Framework_TestCase
 {
+    private $household;
+    
+    protected function setUp() 
+    {
+        parent::setUp();
+        $this->household = new Household();
+    }
+    
     // public function testgetId()
     // {
     //     $household = new Household();
@@ -31,27 +39,25 @@ class HouseholdTest extends PHPUnit_Framework_TestCase
 
     public function testgetPrincipalMember()
     {
-        $household = new Household();
-        $household->setHouseholdPrincipal("Michel");
+        $this->household->setHouseholdPrincipal("Michel");
         $this->assertEquals(
                             "Michel", 
-                            $household->getHouseholdPrincipal()
+                            $this->household->getHouseholdPrincipal()
                             );
     }
 
     public function testsetPrincipalMember()
     {
-        $household = new Household();
-        $household->setHouseholdPrincipal('Michel');
+        $this->household->setHouseholdPrincipal('Michel');
         $this->assertEquals(
                             "Michel", 
-                            PHPUnit_Framework_TestCase::readAttribute($household, "household_principal")
+                            PHPUnit_Framework_TestCase::readAttribute($this->household, "household_principal")
                             );
     }
 
     // public function testgetPhone_number()
     // {
-    //     $household = new Household();
+    //     $this->household = new Household();
     //     $household->setPhone_number(123456789);
     //     $this->assertEquals(
     //                         123456789,  
@@ -71,36 +77,29 @@ class HouseholdTest extends PHPUnit_Framework_TestCase
 
     public function testgetAddress()
     {
-        $household = new Household();
-        $household->setAddress(123456789);
+        $this->household->setAddress(123456789);
         $this->assertEquals(
                             123456789, 
-                            $household->getAddress()
+                            $this->household->getAddress()
                             );
     }
 
     public function testsetAddress()
     {
-        $household = new Household();
-        $household->setAddress(123456789);
+        $this->household->setAddress(123456789);
         $this->assertEquals(
                             123456789, 
-                            PHPUnit_Framework_TestCase::readAttribute($household, "address")
+                            PHPUnit_Framework_TestCase::readAttribute($this->household, "address")
                             );
     }
 
 
     public function testgetMembers()
     {
-        $ac = new ArrayCollection();
-        $ac[]="hello";
-
-        $household = new Household();
-        $household->_construct();
-        $household->addMember("hello");
-        $this->assertEquals(
-                            $ac, 
-                            $household->getMembers()
+        $this->household->addMember("hello");
+        $this->assertContains(
+                            "hello", 
+                            $this->household->getMembers()
                             );
     }
 
@@ -112,23 +111,23 @@ class HouseholdTest extends PHPUnit_Framework_TestCase
     //                         123456789, 
     //                         PHPUnit_Framework_TestCase::readAttribute($household, "members")
     //                         );
-        $event = new Household();
-        $event->_construct();
-
         $ac = new ArrayCollection();
 
-        $this->assertEquals($ac, PHPUnit_Framework_TestCase::readAttribute($event, "members"));
+        $this->assertEquals($ac, PHPUnit_Framework_TestCase::readAttribute($this->household, "members"));
      
+    }
+    
+    public function testAddMember()
+    {
+        $this->household->addMember('a Nice Member');
+        $this->assertContains("a Nice Member", $this->household->getMembers());
     }
 
     public function testgetMember()
     {
-        $event = new Household();
-        $event->_construct();
-
         $ac = new ArrayCollection();
 
-        $this->assertEquals($ac, PHPUnit_Framework_TestCase::readAttribute($event, "members"));
+        $this->assertEquals($ac, PHPUnit_Framework_TestCase::readAttribute($this->household, "members"));
      
     }
 
