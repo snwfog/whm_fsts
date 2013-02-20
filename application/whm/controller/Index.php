@@ -18,23 +18,11 @@ class Index extends Controller implements IRedirectable
     {
         parent::__construct();
 
-        WHM\Helper::backtrace();
+        $this->data['index'] = true;
     }
 
     public function get()
     {
-        $household = new WHM\Model\Household();
-        $address = new Address();
-
-        $address->setStreet("Concordia");
-        $household->setAddress($address);
-
-        $this->persist($household);
-        $this->flush();
-
-        echo "Saved...<br>";
-        echo "Retreaving...<br>";
-
-        Helper::entity_dump($household);
+        $this->display("index.twig", $this->data);
     }
 }

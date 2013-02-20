@@ -6,7 +6,7 @@ This script is NOT for UI, or animation, do that in global-script instead.
 */
 
 $(document).ready(function() {
-  var bidOfferValidator, creditCardValidator, displayError, loginValidator, noteAlert, noteConfirm, noteFormConfirm, postOfferValidator, registrationValidator, size;
+  var bidOfferValidator, creditCardValidator, displayError, loginValidator, noteAlert, noteConfirm, noteFormConfirm, postOfferValidator, registrationValidator, size, time;
   $('#create-member-submit-btn').modal({
     'show': false
   });
@@ -14,6 +14,11 @@ $(document).ready(function() {
   $(window).resize(function() {
     return window.resizeTo(size[0], size[1]);
   });
+  time = function() {
+    return $('#navbar-time').html(moment().format("hh:mm:ss A", 1000));
+  };
+  setInterval(time, 1000);
+  time();
   $('.tiptip a.button, .tiptip button').tipTip();
   noteAlert = function(msg, type) {
     var n;
@@ -318,9 +323,13 @@ $(document).ready(function() {
       display: "Work Status",
       rules: "required"
     }, {
+      name: "gender",
+      display: "Gender",
+      rules: "required|exact_length[1]"
+    }, {
       name: "welfare-number",
       display: "Welfare Number",
-      rules: "requiren|numeric"
+      rules: "required|numeric"
     }, {
       name: "origin",
       display: "Origin",
@@ -346,12 +355,20 @@ $(document).ready(function() {
       display: "First Visit Date",
       rules: "required|alpha_dash"
     }, {
-      name: "house-number",
-      display: "Number",
-      rules: "required|numeric"
+      name: "address",
+      display: "Address",
+      rules: "required|alpha_numeric"
     }, {
-      name: "street",
-      display: "Street",
+      name: "apt-number",
+      display: "Apartment",
+      rules: "alpha_numeric"
+    }, {
+      name: "city",
+      display: "City",
+      rules: "required|alpha"
+    }, {
+      name: "province",
+      display: "Province",
       rules: "required"
     }, {
       name: "postal-code",
