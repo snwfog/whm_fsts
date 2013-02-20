@@ -24,4 +24,7 @@ return $config = array
         'auto_reload' => TRUE       // Autoload reload caches,
         // set to false when deploy
     ),
+    
+    // ControllerTestCase Paramaters
+    'ControllerTestCase.Base_URI' => 'http://localhost/whm_fsts'
 );
