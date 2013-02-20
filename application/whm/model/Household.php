@@ -49,12 +49,12 @@ class Household
      * 1 <-> * -- Inversing
      * @OneToMany(targetEntity="HouseholdMember", mappedBy="household")
      **/
-    protected $members = null;
+    protected $members ;
 
-	public function _construct()
-	{
-		$this->members = new ArrayCollection();
-	}
+    public function __construct()
+    {
+            $this->members = new ArrayCollection();
+    }
 
     public function getId()
     {
