@@ -273,11 +273,11 @@ $(document).ready ->
   }, {
     name: "phone-number",
     display: "Phone Number",
-    rules: "numeric|more_than[5]|max_length[20]"
+    rules: "numeric|phone_number"
   }, {
     name: "sin-number",
     display: "Social Insurance",
-    rules: "exact_length[9]"
+    rules: "sin_number"
   }, {
     name: "work_status",
     display: "Work Status",
@@ -290,7 +290,6 @@ $(document).ready ->
     name: "welfare-number",
     display: "Welfare Number",
     rules: "required|numeric"
-    # is it numeric or alpha? or both??
   }, {
     name: "origin",
     display: "Origin",
@@ -302,7 +301,7 @@ $(document).ready ->
   }, {
     name: "marital-status",
     display: "Marital Status",
-    rules: "required"
+    rules: "required|length[2]"
   }, {
     name: "referral",
     display: "Referral",
@@ -316,8 +315,12 @@ $(document).ready ->
     display: "First Visit Date",
     rules: "required|alpha_dash"
   }, {
-    name: "address",
-    display: "Address",
+    name: "house-number",
+    display: "Number",
+    rules: "required|alpha_numeric"
+  }, {
+    name: "street",
+    display: "Street",
     rules: "required|alpha_numeric"
   }, {
     name: "apt-number",
@@ -334,6 +337,6 @@ $(document).ready ->
   }, {
     name: "postal-code",
     display: "Postal Code",
-    rules: "required|alpha_dash"
+    rules: "required|postat_code"
   }], displayError)
 
