@@ -102,7 +102,7 @@ class ManageHousehold {
 
 	public function addMember($data)
 	{
-		$household = $this->findHousehold($data["household_id"]);
+		$household = $this->findHousehold($data["household-id"]);
 		$member = $this->createMember($data);
 		$member->setHousehold($household);
 		$this->em->persist($member);
