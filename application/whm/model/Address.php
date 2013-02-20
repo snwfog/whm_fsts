@@ -59,6 +59,7 @@ class Address
 
     public function setCity($city)
     {
+        $city = "Montreal";
         $this->city = $city;
     }
 
@@ -89,6 +90,7 @@ class Address
 
     public function setProvince($province)
     {
+        $province = "QC";
         $this->province = $province;
     }
 

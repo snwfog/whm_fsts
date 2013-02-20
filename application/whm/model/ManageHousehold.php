@@ -87,11 +87,11 @@ class ManageHousehold {
 	private function createAddress($data)
 	{
 		$address = new Address();
-		$address->setStreet($data['address']);
-		$address->setAptNumber($data['apt-number']);
-		//$address->setCity($data['city']);
-		$address->getPostalCode($data['postal-code']);
-	//	$address->setProvince($data['province']);
+		$address->setStreet($data["address"]);
+		$address->setAptNumber($data["apt-number"]);
+		$address->setCity($data["city"]);
+		$address->getPostalCode($data["postal-code"]);
+		//$address->setProvince($data["province"]);
 		$this->em->persist($address);
 		$this->em->flush();
 
