@@ -41,14 +41,15 @@ class CreateHousehold extends Controller implements IRedirectable
 
     public function post()
     {
-        if (isset($_POST))
+        print_r($_POST);
+/*        if (isset($_POST))
         {
             $this->data["form"] = $_POST;
             $household = $this->manageHouse->createHousehold($_POST);
             $this->redirect((string)$household->getId());
         }else{
             $this->display("household.create.twig");
-        }
+        }*/
     }
 
     public function put()
