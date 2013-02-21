@@ -26,5 +26,9 @@ $(function() {
   $('input[name="phone-number"]').keyup("3,3,4", dynamicDash);
   $('input[name="mcare-number"]').keyup("4,4,4", dynamicDash);
   $('input[name="welfare-number"]').keyup("4,4,4,2", dynamicDash);
-  return $('input[name="sin-number"]').keyup("3,3,3", dynamicDash);
+  $('input[name="sin-number"]').keyup("3,3,3", dynamicDash);
+  $('button#household-create-clear').click(function() {
+    return $('form[name="household-create"]')[0].reset();
+  });
+  return true;
 });
