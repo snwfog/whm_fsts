@@ -9,7 +9,7 @@
     {% endfor %}
 
 
-    <form action="{{ household["formAction"] }}" method="{{ household["httpMethod"] }}">
+    <form action="{{ apppath }}{{ household["formAction"] }}" method="{{ household["httpMethod"] }}" name="household-create">
         <input type="hidden" name="household-id" value="{{ household["household_id"] }}"/>
         <legend>Create Household</legend>
 
