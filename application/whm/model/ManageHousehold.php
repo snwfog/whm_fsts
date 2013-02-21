@@ -127,6 +127,7 @@ class ManageHousehold {
 
 	private function createAddress($data)
 	{
+
 		$address = new Address();
 		$address->setHouseNumber($data["house-number"]);
 		$address->setStreet($data["street"]);
