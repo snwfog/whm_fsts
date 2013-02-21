@@ -2,6 +2,7 @@ $ ->
   $('button#create-household-save').click ->
     $('form[name="household-create"]').submit()
 
+
 ################################################################################
 # Fetch ready for pickup offer function handler
 ################################################################################

@@ -34,3 +34,4 @@ $ ->
     $('form[name="household-create"]')[0].reset()
 
   true
+

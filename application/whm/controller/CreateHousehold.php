@@ -52,7 +52,6 @@ class CreateHousehold extends Controller implements IRedirectable
         {
             $this->display("household.create.twig");
         }
-
     }
 
     public function put()
