@@ -256,9 +256,9 @@ class HouseholdMemberTest extends PHPUnit_Framework_TestCase
     {
         $household_member = new HouseholdMember();
 
-        $observer = $this->getMock('WHM\Model\Event', array('addParticipant'));
+        $observer = $this->getMock('WHM\Model\Event', array('addParticipant2'));
         $observer->expects($this->once())
-                 ->method('addParticipant')
+                 ->method('addParticipant2')
                  ->with($this->equalTo($household_member));
         $household_member->addEvent($observer);
     }
