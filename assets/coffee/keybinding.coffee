@@ -9,7 +9,7 @@ $ ->
     $('#search-modal input').focus()
 
   $('#create-household-modal').on 'shown', ->
-    console.log $(this).find("input").first().focus()
+    $(this).find("input").first().focus()
 
   $('#create-household-modal').on 'hide', ->
     $('#create-household-modal input').each ->

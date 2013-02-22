@@ -30,8 +30,8 @@ $ ->
 #######################################################
 # Clear form button
 #######################################################
-  $('button#household-create-clear').click ->
-    $('form[name="household-create"]')[0].reset()
+  $('button#household-create-clear, button#member-create-btn').click ->
+    $(this).closest("div.modal-footer").siblings("div.modal-body").find("form")[0].reset()
 
 #######################################################
 # Change the theme
