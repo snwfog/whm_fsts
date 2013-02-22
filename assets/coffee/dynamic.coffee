@@ -1,7 +1,7 @@
 # This file contains dynamic sugar candy behaviour
 $ ->
 #######################################################
-#  Dynamic adding slashes
+# Dynamic adding slashes
 #######################################################
   dynamicDash = (event) ->
     patterns = event.data.split ","
@@ -28,13 +28,37 @@ $ ->
   $('input[name="sin-number"]').keyup "3,3,3", dynamicDash
 
 #######################################################
-#  Clear form button
+# Clear form button
 #######################################################
   $('button#household-create-clear').click ->
     $('form[name="household-create"]')[0].reset()
 
 #######################################################
-#  Change the theme
+# Change the theme
 #######################################################
+
+#######################################################
+# Disable the form
+#######################################################
+  # Default view household form is not modifiable
+  $("#view-household-form input").prop "disabled", true
+  $('button[name="modify-household-btn"]').click ->
+    inputs = $("#view-household-form input")
+    if $(this).attr "class-toggle"
+      # Remove the class-toggle attribute
+      $(this).removeAttribute "class-toggle"
+      # Enable the form for rewrite
+      inputs.prop "disabled", false
+    else
+      # Add the class-toggle attribute
+      $(this).attr "class-toggle", "btn-state"
+      # Disable the form for rewrite
+      inputs.prop "disabled", true
+
+    # Disable the deactivate and add member button
+    $(this).siblings().each (index, element) ->
+      btn = $(element)
+      btn.prop "disabled", if btn.prop "disabled" then false else true
+
   true
 

@@ -30,5 +30,22 @@ $(function() {
   $('button#household-create-clear').click(function() {
     return $('form[name="household-create"]')[0].reset();
   });
+  $("#view-household-form input").prop("disabled", true);
+  $('button[name="modify-household-btn"]').click(function() {
+    var inputs;
+    inputs = $("#view-household-form input");
+    if ($(this).attr("class-toggle")) {
+      $(this).removeAttribute("class-toggle");
+      inputs.prop("disabled", false);
+    } else {
+      $(this).attr("class-toggle", "btn-state");
+      inputs.prop("disabled", true);
+    }
+    return $(this).siblings().each(function(index, element) {
+      var btn;
+      btn = $(element);
+      return btn.prop("disabled", btn.prop("disabled") ? false : true);
+    });
+  });
   return true;
 });

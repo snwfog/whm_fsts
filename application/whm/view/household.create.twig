@@ -8,9 +8,9 @@
             {% endblock %}
         {% endfor %}
 
-        <form action="{{ apppath }}{{ household["formAction"] }}" method="{{ household["httpMethod"] }}">
+        <form action="{{ apppath }}{{ household["formAction"] }}" method="{{ household["httpMethod"] }}" id="view-household-form">
             <input type="hidden" name="household-id" value="{{ household["household_id"] }}"/>
-            <legend>Create Household</legend>
+            <legend>ID: HH100232</legend>
 
             {% include 'base.form.part.twig' %}
 
@@ -27,8 +27,7 @@
                     <i class="icon-plus icon-white"></i><i class="icon-user icon-white"></i> Add Member
                 </button>
 
-                <button class="btn btn-warning btn-large"
-                        name="modify-member-submit-btn" type="button">
+                <button class="btn btn-warning btn-large" data-toggle="button" class-toggle="btn-state" name="modify-household-btn" type="button">
                     <i class="icon-edit icon-white"></i> Modify
                 </button>
 
@@ -50,10 +49,10 @@
 
 {% block left1 %}
     <div class="span3">
-     <legend>ID: HH000001</legend>
+        <legend>Dependents</legend>
         <ul class="nav nav-pills nav-stacked" id="dependent-list">
-            <li class="active" id="t0"><a onclick="selectChange(t0)" href="#"><i class="icon-home"></i> Steve Gourgue</a></li>
-            <li class="" id="t1"><a onclick="selectChange(t1)" href="#"><i class="icon-user"></i> Charles Yang</a></li>
+            <li class="" id="t0"><a onclick="selectChange(t0)" href="#"><i class="icon-user"></i> Steve Gourgue</a></li>
+            <li class="" id="t1"><a onclick="selectChange(t1)" href="#"><i class="icon-home"></i> Charles Yang</a></li>
             <li class="" id="t2"><a onclick="selectChange(t2)" href="#"><i class="icon-user"></i> Wais Khedri</a></li>
             <li class="" id="t3"><a onclick="selectChange(t3)" href="#"><i class="icon-user"></i> Saud Musafer</a></li>
             <li class="" id="t4"><a onclick="selectChange(t4)" href="#"><i class="icon-user"></i> Mike Pham</a></li>
