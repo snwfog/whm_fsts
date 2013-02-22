@@ -67,8 +67,8 @@ class Household extends Controller implements IRedirectable
      */
     public function post()
     {
-        //$this->manageHousehold->updateHousehold($_POST);
-        //$this->redirect('../household/update/'.$_POST["household-id"]);
+        $this->manageHousehold->updateHousehold($_POST);
+        $this->redirect('household/'.$_POST["household-id"]);
     }
 
    public function setHousehold($household){

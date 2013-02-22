@@ -40,6 +40,7 @@ $(function() {
       noteAlert("Household Edit Mode", "warning");
     } else {
       $(this).attr("class-toggle", "btn-state");
+      $(this).closest("form").submit();
       inputs.prop("disabled", true);
       $.noty.closeAll();
     }
@@ -69,5 +70,8 @@ $(function() {
     });
     return n;
   };
+  $("form :input").keyup(function() {
+    return $(this).val($(this).val().toUpperCase());
+  });
   return true;
 });

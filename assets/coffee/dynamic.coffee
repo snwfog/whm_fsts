@@ -55,6 +55,8 @@ $ ->
       # TODO: Resend the form modification
       # Add the class-toggle attribute
       $(this).attr "class-toggle", "btn-state"
+      # Resend the form modification
+      $(this).closest("form").submit()
       # Disable the form for rewrite
       inputs.prop "disabled", true
       $.noty.closeAll()
@@ -83,6 +85,11 @@ $ ->
       },
     })
     return n
+###############################################################################
+# Auto-capitalize all form input
+##############################################################################
+  $("form :input").keyup ->
+    $(this).val $(this).val().toUpperCase()
 
   true
 
