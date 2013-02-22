@@ -5,7 +5,7 @@ $(function() {
   dynamicDash = function(event) {
     var begin, end, i, n, p, pattern, patterns, _i, _len;
     patterns = event.data.split(",");
-    n = $(this).val().replace(/-/g, '').toUpperCase();
+    n = $(this).val().toUpperCase().replace(/-/g, '');
     p = "";
     begin = 0;
     end = parseInt(patterns[0]);

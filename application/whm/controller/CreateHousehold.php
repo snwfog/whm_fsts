@@ -45,7 +45,7 @@ class CreateHousehold extends Controller implements IRedirectable
         {
             $this->data["form"] = $_POST;
             $household = $this->manageHouse->createHousehold($_POST);
-            $this->redirect((string)$household->getId());
+            $this->redirect("/" . $household->getId());
         }
         else
         {

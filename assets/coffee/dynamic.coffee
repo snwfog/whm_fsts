@@ -5,7 +5,7 @@ $ ->
 #######################################################
   dynamicDash = (event) ->
     patterns = event.data.split ","
-    n = $(this).val().replace(/-/g, '').toUpperCase()
+    n = $(this).val().toUpperCase().replace(/-/g, '')
     p = ""
     begin = 0
     end = parseInt patterns[0]
@@ -33,5 +33,8 @@ $ ->
   $('button#household-create-clear').click ->
     $('form[name="household-create"]')[0].reset()
 
+#######################################################
+#  Change the theme
+#######################################################
   true
 

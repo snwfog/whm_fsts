@@ -28,6 +28,7 @@ abstract class Controller
         $this->data["syspath"] = FOLDER_URL;
         $this->data["apppath"] = SITE_ROOT;
         $this->data["site_name"] = "Welcome Hall Mission";
+        $this->data["login"] = true;
 
         // if (!$this->isValidSession())
         // {

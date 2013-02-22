@@ -29,6 +29,7 @@
 
     <link rel="stylesheet" type="text/css" href="{{ syspath }}assets/css/bootstrap.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="{{ syspath }}assets/css/bootstrap-reponsive.css" media="screen"/>
+    <link id="alternate" rel="alternate stylesheet" type="text/css" href="#" media="screen"/>
 
     <link rel="stylesheet" type="text/css" href="{{ syspath }}assets/css/style.css" />
 	<link rel='icon' type='image/x-icon' href='{{ syspath }}assets/img/web/favicon.ico'>
@@ -40,29 +41,23 @@
 <body>
     <div class="container-fluid">
         <div class="row-fluid">
-            {% if index is defined and index %}
+            {#{% if login is defined and login %}#}
                 {# ATTENTION! THIS INDEX BLOCK CONTAINS GLOBAL FORMATTING #}
-                {% block index %}{% endblock %}
 
-            {% else %}
-                <div class="span6">
+            {#{% else %}#}
+
+            {# -------------------------------------------- #}
+            {# ATTENTION, BLOCKS MANAGE ITS OWN SPAN NOW!!! #}
+            {# -------------------------------------------- #}
                     {% block content %}{% endblock %}
-                </div>
 
-                <div class="span3">
                     {% block left1 %}{% endblock %}
-                </div>
 
-                <div class="span3">
                     {% block left2 %}{% endblock %}
-                </div>
 
-                {# NAVBAR MODAL GROUP #}
-                {# COMPONENTS HERE WILL PERSIST IN THE ENTIRE #}
-                {# USER SESSION. PLACE THEM HERE WITH CARE. #}
-                {% include 'addhousehold.modal.twig' %}
 
-            {% endif %}
+
+            {#{% endif %}#}
         </div>
     </div>
 

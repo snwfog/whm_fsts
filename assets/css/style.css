@@ -1,6 +1,13 @@
 /* General style for everything */
 
+/*Overwrite boostrap default modal sliding animation*/
+.modal.fade.out
+{
+
+}
+
 /*html {*/
+
     /*font-family: Helvetica Neue, Anaheim, Helvetica, Arial, Calibri;*/
     /*font-weight: lighter;*/
 /*}*/
