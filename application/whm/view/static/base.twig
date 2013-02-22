@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+	<title>
+		{% include 'static/title.twig' %}
+	</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="text/javascript" src="{{ syspath }}assets/js/jquery.js"></script>
+    <script type="text/javascript" src="{{ syspath }}assets/js/bootstrap.min.js"></script>
+    {#<script type="text/javascript" src="{{ syspath }}assets/js/jquery.tiptip.js"></script>#}
+    {#<script type="text/javascript" src="{{ syspath }}assets/js/g/raphael.js"></script>#}
+    {#<script type="text/javascript" src="{{ syspath }}assets/js/g/ico.min.js"></script>#}
+    {#<script type="text/javascript" src="{{ syspath }}assets/js/noty/jquery.noty.js"></script>#}
+    {#<script type="text/javascript" src="{{ syspath }}assets/js/noty/layouts/bottomRight.js"></script>#}
+    {#<script type="text/javascript" src="{{ syspath }}assets/js/noty/layouts/center.js"></script>#}
+    {#<script type="text/javascript" src="{{ syspath }}assets/js/noty/themes/default.js"></script>#}
+    <script type="text/javascript" src="{{ syspath }}assets/js/validate.js"></script>
+    <script type="text/javascript" src="{{ syspath }}assets/js/moment.js"></script>
+    <script type="text/javascript" src="{{ syspath }}assets/js/validation.js"></script>
+    <script type="text/javascript" src="{{ syspath }}assets/js/dynamic.js"></script>
+    <script type="text/javascript" src="{{ syspath }}assets/js/ajax.js"></script>
+	{#<script type="text/javascript" src="{{ syspath }}assets/js/kbsc.js"></script>#}
+
+    <link rel="stylesheet" type="text/css" href="{{ syspath }}assets/css/bootstrap.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="{{ syspath }}assets/css/bootstrap-reponsive.css" media="screen"/>
+
+    <link rel="stylesheet" type="text/css" href="{{ syspath }}assets/css/style.css" />
+	<link rel='icon' type='image/x-icon' href='{{ syspath }}assets/img/web/favicon.ico'>
+
+	<link href='http://fonts.googleapis.com/css?family=Rambla|Anaheim' rel='stylesheet' type='text/css'>
+
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            {% if index is defined and index %}
+                {# ATTENTION! THIS INDEX BLOCK CONTAINS GLOBAL FORMATTING #}
+                {% block index %}{% endblock %}
+
+            {% else %}
+                <div class="span6">
+                    {% block content %}{% endblock %}
+                </div>
+
+                <div class="span3">
+                    {% block left1 %}{% endblock %}
+                </div>
+
+                <div class="span3">
+                    {% block left2 %}{% endblock %}
+                </div>
+
+                {# NAVBAR MODAL GROUP #}
+                {# COMPONENTS HERE WILL PERSIST IN THE ENTIRE #}
+                {# USER SESSION. PLACE THEM HERE WITH CARE. #}
+                {% include 'addhousehold.modal.twig' %}
+
+            {% endif %}
+        </div>
+    </div>
+
+    {% include 'navigation.bar.twig' %}
+</body>
+</html>
+

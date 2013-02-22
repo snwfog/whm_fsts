@@ -1,0 +1,58 @@
+{% block header %}
+
+<div class="header">
+    <h1 id="title">Welcome Hall Mission</h1>
+    <div id="nav">
+        <div class="tiptip">
+            {#</form>#}
+            {% if is_admin %}
+                <img src="assets/img/web/admin-logo.jpeg" alt="Admin" id="unicorn" />
+            {% endif %}
+
+            <a href="index.php" class="button" title="Home">
+                <span class="icon icon108"></span><span class="label"></span>
+            </a>
+
+            <a href="index.php?search" class="button" title="Search">
+                <span class="icon icon198"></span><span class="label">Search</span>
+            </a>
+
+            {% if is_logged_in %}
+                <a href="" class="button" title="Profile">
+                    <span class="icon icon191"></span><span class="label">
+                    {% if username %} {{ username }} {% else %} Profile {% endif %}
+                    </span>
+                </a>
+                <a href="" class="button" title="Post Offer">
+                    <span class="icon icon130"></span><span class="label">Post Offer</span>
+                </a>
+
+                {% if is_admin %}
+                    <a href="" class="button" title="Admin Tool">
+                        <span class="icon icon185"></span><span class="label">Admin</span>
+                    </a>
+
+                    <a href="" class="button" title="Garage">
+                        <span class="icon icon2"></span><span class="label">Garage</span>
+                    </a>
+                {% endif %}
+
+                <a href="" class="button" title="Sign Out">
+                    <span class="icon icon151"></span><span class="label">Sign Out</span>
+                </a>
+            {% else %}
+
+                <a href="" class="button" title="Sign In">
+                    <span class="icon icon116"></span><span class="label">Sign In</span>
+                </a>
+                <a href="" class="button" title="Register">
+                    <span class="icon icon60"></span><span class="label">Register</span>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+	{#<div class="kblegend" id="kblegend">#}
+	{#<pre> Open/Close Legend: (Alt + F1)  &nbsp Search: (Alt + 1)  &nbsp Create Household: (Alt + 2) </pre>#}
+	{#</div> <!-- End div for hidden KB Legend -->#}
+</div>
+{% endblock header %}

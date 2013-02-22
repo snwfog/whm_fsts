@@ -1,0 +1,32 @@
+{% block add_household_modal %}
+    <div id="create-household-modal"
+         class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+            <h3>Create Household</h3>
+        </div>
+
+        <div class="modal-body">
+            <form action="{{ apppath }}household/new" method="POST" name="household-create">
+
+                {% include 'base.form.part.twig' %}
+
+                {% include 'information.form.part.twig' %}
+
+                {% include 'address.form.part.twig' %}
+
+            </form>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true"> Close</button>
+            <button id="household-create-clear" class="btn btn-warning" aria-hidden="true"> Clear</button>
+            <button id="create-household-save" class="btn btn-success"><i class="icon-ok icon-white"></i> Save changes</button>
+
+        </div>
+    </div>
+
+
+{% endblock add_household_modal %}

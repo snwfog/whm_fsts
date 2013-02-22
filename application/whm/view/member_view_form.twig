@@ -1,0 +1,20 @@
+{% extends 'static/base.twig' %}
+
+{% block content %}
+
+
+    {% for error in errors %}
+        {% block error %}
+            <div id="error">{{ error }}</div></br>
+        {% endblock %}
+    {% endfor %}
+<div class="main">
+   
+	{% include 'member_view/viewMRegis.twig' %}
+    {% include 'member_view/viewMInfo.twig' %}
+	{% include 'member_view/viewMNote.twig' %}
+    <fieldset class="status">
+        <legend><h1>Status</h1></legend>
+    </fieldset>
+</div>
+{% endblock content %}

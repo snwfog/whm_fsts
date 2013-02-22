@@ -1,0 +1,20 @@
+
+
+{% extends 'static/base.twig' %}
+
+{% block content %}
+
+<form action="household" method="GET" name="household_view">
+        <div style = "pers" >
+            <h3>Personal Information</h3>
+            <ul>
+
+                <li><input type="text" name="household_id" placeholder="Household ID"/>
+
+            </ul>
+        </div>
+        <button class="action blue submit">
+            <span class="label">Search</span>
+        </button>
+    </form>
+{% endblock content %}

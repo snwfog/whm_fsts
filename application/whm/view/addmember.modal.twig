@@ -1,0 +1,35 @@
+{% block add_member_modal %}
+    <div id="create-member-modal"
+         class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+            <h3>Add Member</h3>
+        </div>
+
+        <div class="modal-body">
+            <form action="member/new" method="POST" name="member-create">
+                <fieldset>
+                    <div class="controls controls-row" id="name-row">
+                        <input class="span5" type="text" name="first-name"
+                               placeholder="First Name"/>
+                        <input class="span4" type="text" name="last-name"
+                               placeholder="Last Name"/>
+                        <input id="phone-number" class="span3" type="text" name="phone-number"
+                               maxlength="12" placeholder="Phone Number"/>
+                    </div>
+                </fieldset>
+
+                {% include 'information.form.part.twig' %}
+
+            </form>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true"> Close</button>
+            <button class="btn btn-warning" aria-hidden="true"> Clear</button>
+            <button class="btn btn-success"><i class="icon-ok icon-white"></i> Save changes</button>
+        </div>
+    </div>
+{% endblock %}

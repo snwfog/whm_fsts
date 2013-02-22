@@ -6,11 +6,18 @@
     "require": {
         "twig/twig": "1.*",
         "doctrine/orm": "2.*",
+        "doctrine/data-fixtures" : "1.0.*-dev", 
+        "fabpot/goutte" : "1.0.*-dev",
         "symfony/console": "2.*",
-        "symfony/yaml": "2.*"
+        "symfony/yaml": "2.*",
+        "symfony/twig-bridge": "2.1.*"
     },
 
     "autoload": {
-        "psr-0": {"": "src/"}
+        "psr-0": {
+            "WHM": "application/",
+            "Test": "tests/",
+            "": "application/"
+        }
     }
 }
