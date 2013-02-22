@@ -89,26 +89,33 @@ class Household extends Controller implements IRedirectable
         $householdPrincipal = $household->getHouseholdPrincipal();
         $address = $household->getAddress();
 
+        $date = $householdPrincipal->getFirstVisitDate();
+        $date = $date->format("m-d-Y");
+
         $data = array(
                         "household_id" => $household_id,
-                        "firstName" => $householdPrincipal->getFirstName(),
-                        "lastName"  => $householdPrincipal->getLastName(),
-                        "phoneNumber"  => $householdPrincipal->getPhoneNumber(),
-                        "sinNumber"  => $householdPrincipal->getSinNumber(),
-                        "medicareNum"  => $householdPrincipal->getMcareNumber(),
-                        "workStatus"  => $householdPrincipal->getWorkStatus(),
-                        "welfareNumber"  => $householdPrincipal->getWelfareNumber(),
+                        //PrincipalMember
+                        "first-name" => $householdPrincipal->getFirstName(),
+                        "last-name"  => $householdPrincipal->getLastName(),
+                        "phone-number"  => $householdPrincipal->getPhoneNumber(),
+                        "sin-number"  => $householdPrincipal->getSinNumber(),
+                        "medicare-number"  => $householdPrincipal->getMcareNumber(),
+                        "work-status"  => $householdPrincipal->getWorkStatus(),
+                        "welfare-number"  => $householdPrincipal->getWelfareNumber(),
                         "referral"  => $householdPrincipal->getReferral(),
                         "language"  => $householdPrincipal->getLanguage(),
                         "marital"  => $householdPrincipal->getMaritalStatus(),
                         "gender"  => $householdPrincipal->getGender(),
                         "origin"   => $householdPrincipal->getOrigin(),
-                        "houseNumber"    => $address->getHouseNumber(),
+                        "first-visit-date"  => $date,
+                        "contact"   => $householdPrincipal->getContact(),
+                        //Address
+                        "house-number"    => $address->getHouseNumber(),
                         "street"    => $address->getStreet(),
-                        "apt"      => $address->getAptNumber(),
+                        "apt-number" => $address->getAptNumber(),
                         "city"     => $address->getCity(),
                         "province" => $address->getProvince(),
-                        "postal"   => $address->getPostalCode(),
+                        "postal-code"   => $address->getPostalCode(),
                      );
         return $data; 
    }

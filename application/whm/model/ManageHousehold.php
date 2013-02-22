@@ -17,12 +17,10 @@ class ManageHousehold {
 	}
 
 	public function createHousehold($data) {
-		//include_once('Entity_Manager.php');
 		$pmember = $this->createMember($data);
 		$address = $this->createAddress($data);
 		$household = new Household();
 
-		//$household->setPhoneNumber($data["phone_number"]);
 		$household->setHouseholdPrincipal($pmember);
 		$household->setAddress($address);
 		$this->em->persist($household);
@@ -57,6 +55,8 @@ class ManageHousehold {
 		$memberInstance->setMaritalStatus($data["marital-status"]);
 		$memberInstance->setGender("M"); //CHANGE WHEN EXTRACT FROM MEDICARE
 		$memberInstance->setOrigin($data["origin"]);
+		$memberInstance->setContact($data["contact"]);
+
 		$this->em->persist($memberInstance);
 		$this->em->flush();
 	}
@@ -66,9 +66,9 @@ class ManageHousehold {
 		$addressInstance->setHouseNumber($data["house-number"]);
 		$addressInstance->setStreet($data["street"]);
 		$addressInstance->setAptNumber($data["apt-number"]);
-		//$addressInstance->setCity($data["city"]);
+		$addressInstance->setCity($data["city"]);
 		$addressInstance->getPostalCode($data["postal-code"]);
-		//$address->setProvince($data["province"]);
+		$addressInstance->setProvince($data["province"]);
 		$this->em->persist($addressInstance);
 		$this->em->flush();
 	}
@@ -106,6 +106,7 @@ class ManageHousehold {
 	{
 		$household_member = new HouseholdMember();
 		$datetime = new DateTime("now");
+
 		$household_member->setFirstName($data["first-name"]);
 		$household_member->setLastName($data["last-name"]);
 		$household_member->setPhoneNumber($data["phone-number"]);
@@ -119,6 +120,8 @@ class ManageHousehold {
 		$household_member->setGender("M"); //CHANGE WHEN EXTRACT FROM MEDICARE
 		$household_member->setOrigin($data["origin"]);
 		$household_member->setFirstVisitDate($datetime);
+		$household_member->setContact($data["contact"]);
+
 		$this->em->persist($household_member);
 		$this->em->flush();
 		return $household_member;
@@ -132,8 +135,8 @@ class ManageHousehold {
 		$address->setStreet($data["street"]);
 		$address->setAptNumber($data["apt-number"]);
 		$address->setCity($data["city"]);
-		$address->getPostalCode($data["postal-code"]);
-		//$address->setProvince($data["province"]);
+		$address->setPostalCode($data["postal-code"]);
+		$address->setProvince($data["province"]);
 		$this->em->persist($address);
 		$this->em->flush();
 

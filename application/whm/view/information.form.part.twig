@@ -3,32 +3,32 @@
         <legend>Information</legend>
         <div class="controls controls-row">
             <input class="span3" maxlength="{{ 3 * 3 + 2 }}" type="text"
-                   name="sin-number" placeholder="Social Insurance" value="{{ household["sinNumber"] }}"/>
+                   name="sin-number" placeholder="Social Insurance" value="{{ household["sin-number"] }}"/>
             <input class="span4" maxlength="{{ 3 * 4 + 2 }}" type="text"
-                   name="mcare-number" placeholder="Medical Care" value="{{ household["medicareNum"] }}"/>
+                   name="mcare-number" placeholder="Medical Care" value="{{ household["medicare-number"] }}"/>
             <input class="span1" type="text" name="work_status"
-                   placeholder="Work Status" maxlength="2" value="{{ household["workStatus"] }}"/>
+                   placeholder="Work Status" maxlength="2" value="{{ household["work-status"] }}"/>
             <input class="span4" maxlength="{{ 3 * 4 + 2 + 3 }}"
                    type="text" name="welfare-number" placeholder="Welfare Number"
-                   value="{{ household["welfareNumber"] }}"/>
+                   value="{{ household["welfare-number"] }}"/>
         </div>
 
         <div class="controls controls-row">
             <input class="span5" type="text"
-                   name="origin" placeholder="Origin" value="{{ household["origin"] }}"/>
+                   name="origin" placeholder="Origin" value="{{ household.origin }}"/>
             <input class="span4" type="text"
-                   name="language" placeholder="Language" value="{{ household["language"] }}"/>
+                   name="language" placeholder="Language" value="{{ household.language }}"/>
             <input class="span3" maxlength="2" type="text"
-                   name="marital-status" placeholder="Marital Status" value="{{ household["marital"] }}"/>
+                   name="marital-status" placeholder="Marital Status" value="{{ household.marital }}"/>
         </div>
 
         <div class="controls controls-row">
             <input class="span4" type="text"
-                   name="referral" placeholder="Referral" value="{{ household["referral"] }}"/>
+                   name="referral" placeholder="Referral" value="{{ household.referral }}"/>
             <input class="span5" type="text"
-                   name="contact" placeholder="Contact"/>
+                   name="contact" placeholder="Contact" value="{{ household.contact }}"/>
             <input class="span3" type="text"
-                   name="first-visit-date" placeholder="MM-DD-YY"/>
+                   name="first-visit-date" placeholder="MM-DD-YY" value="{{ household["first-visit-date"] }}"/>
         </div>
     </fieldset>
 {% endblock information %}
