@@ -41,8 +41,94 @@ class ManageHousehold {
 		$this->updateAddress($address, $data);
 	}
 
+	
+	//Delete
+	public function removeHousehold($id) {
+		$household = findHousehold($id);
+		$em->remove($household);
+		$em->flush();
+	}
+	
+	//View
+	public  function findAllHouseholds() {
+		// to do
+	}
+	public function findHousehold($id) {
+
+		$household = $this->em->find("WHM\model\household", (int)$id);
+		return $household;
+	}
+
+	public function findMember($id) {
+		$member = $this->em->find("WHM\model\HouseholdMember", (int)$id);
+		return $member;
+	}
+
+	public function getHouseholdMembers($id){
+		$household = $this->findHousehold($id);
+		return $household->getMembers();
+    }
+
+
+
+	public function addMember($data)
+	{
+		$household = $this->findHousehold($data["household-id"]);
+		$member = $this->createMember($data);
+		$member->setHousehold($household);
+		$this->em->persist($member);
+		$this->em->flush();	
+		return $member;
+	}
+
+
+
+	//Private Methods
+	private function createMember($data)
+	{
+		$household_member = new HouseholdMember();
+		$datetime = new DateTime("now");
+
+		$data = $this->formatData($data);
+		$household_member->setFirstName($data["first-name"]);
+		$household_member->setLastName($data["last-name"]);
+		$household_member->setPhoneNumber($data["phone-number"]);
+		$household_member->setSinNumber($data["sin-number"]);
+		$household_member->setMcareNumber($data["mcare-number"]);
+		$household_member->setWorkStatus($data["work_status"]);
+		$household_member->setWelfareNumber($data["welfare-number"]);
+		$household_member->setReferral($data["referral"]);
+		$household_member->setLanguage($data["language"]);
+		$household_member->setMaritalStatus($data["marital-status"]);
+		$household_member->setGender("M"); //CHANGE WHEN EXTRACT FROM MEDICARE
+		$household_member->setOrigin($data["origin"]);
+		$household_member->setFirstVisitDate($datetime);
+		$household_member->setContact($data["contact"]);
+
+		$this->em->persist($household_member);
+		$this->em->flush();
+		return $household_member;
+	}
+
+	private function createAddress($data)
+	{
+		$address = new Address();
+		$address->setHouseNumber($data["house-number"]);
+		$address->setStreet($data["street"]);
+		$address->setAptNumber($data["apt-number"]);
+		$address->setCity($data["city"]);
+		$address->setPostalCode($data["postal-code"]);
+		$address->setProvince($data["province"]);
+		$this->em->persist($address);
+		$this->em->flush();
+
+		return $address;
+
+	}
+
 	private function updateMember($memberInstance, $data)
 	{
+		$data = $this->formatData($data);
 		$memberInstance->setFirstName($data["first-name"]);
 		$memberInstance->setLastName($data["last-name"]);
 		$memberInstance->setPhoneNumber($data["phone-number"]);
@@ -73,86 +159,14 @@ class ManageHousehold {
 		$this->em->flush();
 	}
 
-	
-	//Delete
-	public function removeHousehold($id) {
-		$household = findHousehold($id);
-		$em->remove($household);
-		$em->flush();
-	}
-	
-	//View
-	public  function findAllHouseholds() {
-		// to do
-	}
-	public function findHousehold($id) {
 
-		$household = $this->em->find("WHM\model\household", (int)$id);
-		return $household;
-	}
-
-	public function findMember($id) {
-		$member = $this->em->find("WHM\model\HouseholdMember", (int)$id);
-		return $member;
-	}
-
-	public function getHouseholdMembers($id){
-		$household = $this->findHousehold($id);
-		return $household->getMembers();
-    }
-
-	//$data is type array
-	private function createMember($data)
+	private function formatData($data)
 	{
-		$household_member = new HouseholdMember();
-		$datetime = new DateTime("now");
-
-		$household_member->setFirstName($data["first-name"]);
-		$household_member->setLastName($data["last-name"]);
-		$household_member->setPhoneNumber($data["phone-number"]);
-		$household_member->setSinNumber($data["sin-number"]);
-		$household_member->setMcareNumber($data["mcare-number"]);
-		$household_member->setWorkStatus($data["work_status"]);
-		$household_member->setWelfareNumber($data["welfare-number"]);
-		$household_member->setReferral($data["referral"]);
-		$household_member->setLanguage($data["language"]);
-		$household_member->setMaritalStatus($data["marital-status"]);
-		$household_member->setGender("M"); //CHANGE WHEN EXTRACT FROM MEDICARE
-		$household_member->setOrigin($data["origin"]);
-		$household_member->setFirstVisitDate($datetime);
-		$household_member->setContact($data["contact"]);
-
-		$this->em->persist($household_member);
-		$this->em->flush();
-		return $household_member;
-	}
-
-	private function createAddress($data)
-	{
-
-		$address = new Address();
-		$address->setHouseNumber($data["house-number"]);
-		$address->setStreet($data["street"]);
-		$address->setAptNumber($data["apt-number"]);
-		$address->setCity($data["city"]);
-		$address->setPostalCode($data["postal-code"]);
-		$address->setProvince($data["province"]);
-		$this->em->persist($address);
-		$this->em->flush();
-
-		return $address;
-
-	}
-
-
-	public function addMember($data)
-	{
-		$household = $this->findHousehold($data["household-id"]);
-		$member = $this->createMember($data);
-		$member->setHousehold($household);
-		$this->em->persist($member);
-		$this->em->flush();	
-		return $member;
+		foreach ($data as $key => $value)
+		{
+			$data[$key] = str_replace("-", "", $value);
+		}
+		return $data;
 	}
 }
 ?>
