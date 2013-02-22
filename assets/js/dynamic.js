@@ -28,7 +28,7 @@ $(function() {
   $('input[name="welfare-number"]').keyup("4,4,4,2", dynamicDash);
   $('input[name="sin-number"]').keyup("3,3,3", dynamicDash);
   $('button#household-create-clear, button#member-create-btn').click(function() {
-    return console.log($(this).closest("div.modal-footer").siblings("div.modal-body form").length);
+    return $(this).closest("div.modal-footer").siblings("div.modal-body").find("form")[0].reset();
   });
   $("#view-household-form input").prop("disabled", true);
   $('button[name="modify-household-btn"]').click(function() {

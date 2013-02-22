@@ -31,7 +31,7 @@ $ ->
 # Clear form button
 #######################################################
   $('button#household-create-clear, button#member-create-btn').click ->
-    console.log $(this).closest("div.modal-footer").siblings("div.modal-body form").length
+    $(this).closest("div.modal-footer").siblings("div.modal-body").find("form")[0].reset()
 
 #######################################################
 # Change the theme
