@@ -1,5 +1,20 @@
 /* General style for everything */
 
+div#modal-search
+{
+    width: 94%;
+}
+
+.fade
+{
+    opacity: 0;
+    -webkit-transition: opacity .01s linear;
+    -moz-transition: opacity .01s linear;
+    -ms-transition: opacity .01s linear;
+    -o-transition: opacity .01s linear;
+    transition: opacity .01s linear;
+}
+
 /*Overwrite boostrap default modal sliding animation*/
 .modal.fade.out
 {

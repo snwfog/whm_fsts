@@ -62,5 +62,6 @@ $ ->
       btn = $(element)
       btn.prop "disabled", if btn.prop "disabled" then false else true
 
+
   true
 
