@@ -38,7 +38,7 @@ $ ->
 #######################################################
 
 #######################################################
-# Disable the form
+# Edit household information form
 #######################################################
   # Default view household form is not modifiable
   $("#view-household-form input").prop "disabled", true
@@ -49,6 +49,7 @@ $ ->
       $(this).removeAttr "class-toggle"
       # Enable the form for rewrite
       inputs.prop "disabled", false
+      noteAlert "Household Edit Mode", "warning"
     else
       # TODO: Revalidate the form
       # TODO: Resend the form modification
@@ -56,12 +57,32 @@ $ ->
       $(this).attr "class-toggle", "btn-state"
       # Disable the form for rewrite
       inputs.prop "disabled", true
+      $.noty.closeAll()
 
     # Disable the deactivate and add member button
     $(this).siblings().each (index, element) ->
       btn = $(element)
       btn.prop "disabled", if btn.prop "disabled" then false else true
 
+################################################################################
+# Noty Confirmation Setup
+# Since this function is in the local scope of the script.coffee
+# I just copy & pasted here for simplicity
+################################################################################
+  noteAlert = (msg, type) ->
+    n = noty({
+      layout: 'bottom',
+      type: type,
+      text: msg,
+      timeout: false,
+      animation: {
+        open: {height: 'toggle'},
+        close: {height: 'toggle'},
+        easing: 'swing',
+        speed: 200
+      },
+    })
+    return n
 
   true
 

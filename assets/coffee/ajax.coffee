@@ -123,18 +123,18 @@ $ ->
 # Since this function is in the local scope of the script.coffee
 # I just copy & pasted here for simplicity
 ################################################################################
-#  noteAlert = (msg, type) ->
-#    n = noty({
-#      layout: 'bottomRight',
-#      type: type,
-#      text: msg,
-#      animation: {
-#        open: {height: 'toggle'},
-#        close: {height: 'toggle'},
-#        easing: 'swing',
-#        speed: 200
-#      },
-#    })
+  noteAlert = (msg, type) ->
+    n = noty({
+      layout: 'bottomRight',
+      type: type,
+      text: msg,
+      animation: {
+        open: {height: 'toggle'},
+        close: {height: 'toggle'},
+        easing: 'swing',
+        speed: 200
+      },
+    })
 
 #################################################################################
 ## Admin member search
