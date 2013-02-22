@@ -8,7 +8,7 @@ $(function() {
     return $('#search-modal input').focus();
   });
   $('#create-household-modal').on('shown', function() {
-    return console.log($(this).find("input").first().focus());
+    return $(this).find("input").first().focus();
   });
   $('#create-household-modal').on('hide', function() {
     return $('#create-household-modal input').each(function() {
