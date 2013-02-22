@@ -46,10 +46,12 @@ $ ->
     inputs = $("#view-household-form input")
     if $(this).attr "class-toggle"
       # Remove the class-toggle attribute
-      $(this).removeAttribute "class-toggle"
+      $(this).removeAttr "class-toggle"
       # Enable the form for rewrite
       inputs.prop "disabled", false
     else
+      # TODO: Revalidate the form
+      # TODO: Resend the form modification
       # Add the class-toggle attribute
       $(this).attr "class-toggle", "btn-state"
       # Disable the form for rewrite

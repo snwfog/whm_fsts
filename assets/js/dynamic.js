@@ -35,7 +35,7 @@ $(function() {
     var inputs;
     inputs = $("#view-household-form input");
     if ($(this).attr("class-toggle")) {
-      $(this).removeAttribute("class-toggle");
+      $(this).removeAttr("class-toggle");
       inputs.prop("disabled", false);
     } else {
       $(this).attr("class-toggle", "btn-state");
