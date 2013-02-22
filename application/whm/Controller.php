@@ -135,7 +135,10 @@ abstract class Controller
      */
     public function redirect($file = self::REDIRECT_INDEX)
     {
-        header("Location: $file");
+        $uri = explode("/", rtrim(dirname($_SERVER['PHP_SELF']), '/\\'));
+        $url = '/'. $_SERVER['HTTP_HOST'] . '/'. $uri[1] . '/' . $file;
+
+        header('Location: /' . $url);
     }
 
     public function back()
