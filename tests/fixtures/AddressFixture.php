@@ -3,10 +3,10 @@
 namespace Test\Fixtures;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use WHM\Model\Address;
 
-class AddressFixture implements FixtureInterface
+class AddressFixture extends AbstractFixture
 {
     public function load(ObjectManager $em)
     {
@@ -15,8 +15,7 @@ class AddressFixture implements FixtureInterface
         $address->getAptNumber("4578");
         $address->setCity("montreal");
         $address->setProvince("none");
-        $address->setStreet("none");
-        
+        $address->setStreet("none");        
         
         $em->persist($address);
         $em->flush();

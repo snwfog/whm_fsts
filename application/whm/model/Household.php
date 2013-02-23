@@ -19,7 +19,7 @@ class Household
     /**
      * 1 -> 1 -- Owning
      *
-     * @OneToOne(targetEntity="HouseholdMember")
+     * @OneToOne(targetEntity="HouseholdMember", cascade={"all"})
      * @JoinColumn
      * (
      *      name="household_principal_id",
@@ -34,7 +34,7 @@ class Household
     /**
      * 1 -> 1 -- Owning
      *
-     * @OneToOne(targetEntity="Address", cascade={"persist"})
+     * @OneToOne(targetEntity="Address", cascade={"all"})
      * @JoinColumn
      * (
      *      name="address_id",
@@ -47,7 +47,7 @@ class Household
 
     /**
      * 1 <-> * -- Inversing
-     * @OneToMany(targetEntity="HouseholdMember", mappedBy="household")
+     * @OneToMany(targetEntity="HouseholdMember", mappedBy="household", cascade={"all"})
      **/
     protected $members ;
 
