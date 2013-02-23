@@ -29,11 +29,10 @@ class Household extends Controller implements IRedirectable
             $household_id = $_GET["household_id"];
         }
 
-        if (!is_null($household_id))
-        {
-            $data = $this->extractHouseholdInfo($household_id);  
-            $data = array("household" => $data);
-            $this->display("household.create.twig", $data);
+        if(!is_null($household_id)){
+        $data = $this->extractHouseholdInfo($household_id);  
+        $data = array( "household" => $data);
+        $this->display("household_view_form.twig", $data);
         }
         else
         {

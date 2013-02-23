@@ -28,17 +28,12 @@ class Household_Controller_Test extends ControllerTestCase
         $this->AssertEquals('search', $this->client->getResponse()->getHeader('location'));
     }
 
-    function testDisplay($household_view, $memberView, $edithousehold_view, $newDependency_view)
+    function testRemoveHousehold()
     {
         
     }
 
-    function testRemoveHousehold($id)
-    {
-        
-    }
-
-    function testFindMember($name)
+    function testFindMember()
     {
         
     }
