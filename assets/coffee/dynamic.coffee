@@ -52,7 +52,6 @@ $ ->
       noteAlert "Household Edit Mode", "warning"
     else
       # TODO: Revalidate the form
-      # TODO: Resend the form modification
       # Add the class-toggle attribute
       $(this).attr "class-toggle", "btn-state"
       # Resend the form modification
@@ -90,6 +89,33 @@ $ ->
 ##############################################################################
   $("form :input").keyup ->
     $(this).val $(this).val().toUpperCase()
+
+###############################################################################
+# Auto filling gender and date of birth from medical care number
+##############################################################################
+  $('form input[name="mcare-number"]').keyup ->
+    input = $(this).val().split('-')
+    if input.length == 3
+      for shard, index in input
+        switch index
+          # Handle birth year, month and gender
+          when 1
+            [ year, month ] = shard.match /[\d]{2}/g
+            gender = if month > 12 then "F" else "M"
+            month %= 50
+          when 2
+            date = shard.match(/[\d]{2}/g)[0]
+
+      dob = "#{month}-#{date}-#{year}"
+      $(this).closest('form').find('input[name="gender"]').val gender
+      $(this).closest('form').find('input[name="date-of-birth"]').val dob
+
+###############################################################################
+# Create time clock in the navbar
+##############################################################################
+  time = -> $('#navbar-time').html moment().format "hh:mm:ss A", 1000
+  setInterval time, 1000
+  time()
 
   true
 

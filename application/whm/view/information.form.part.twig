@@ -14,12 +14,15 @@
         </div>
 
         <div class="controls controls-row">
-            <input class="span5" type="text"
-                   name="origin" placeholder="Origin" value="{{ household.origin }}"/>
             <input class="span4" type="text"
-                   name="language" placeholder="Language" value="{{ household.language }}"/>
+                   name="origin" placeholder="Origin" value="{{ household["origin"] }}"/>
+            <input class="span4" type="text"
+                   name="language" placeholder="Language" value="{{ household["language"] }}"/>
+            <input class="span1" type="text" maxlength="1"
+                   name="gender" placeholder="Gender" value="{{ household["gender"] }}"/>
             <input class="span3" maxlength="2" type="text"
-                   name="marital-status" placeholder="Marital Status" value="{{ household.marital }}"/>
+                   name="marital-status" placeholder="Marital Status" value="{{ household["marital"] }}"/>
+            <input type="hidden" value="" name="date-of-birth">
         </div>
 
         <div class="controls controls-row">

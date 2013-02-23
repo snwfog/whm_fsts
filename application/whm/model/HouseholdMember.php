@@ -124,10 +124,19 @@ class HouseholdMember
      **/
     protected $events = null;
 
-    public function _construct()
-    {
-        $this->events = new ArrayCollection();
-    }
+    /**
+     * 1 <-> * -- Inversing by default
+     *
+     * @OneToMany(targetEntity="Flag", mappedBy="household_member")
+     * @var flags
+     */
+    protected $flags = null;
+
+	public function _construct()
+	{
+		$this->events = new ArrayCollection();
+        $this->flags = new ArrayCollection();
+	}
 
     public function getId()
     {
@@ -279,7 +288,7 @@ class HouseholdMember
         $this->events[] = $events;
         $events->addParticipant2($this);
     }
-    
+
     /**
      * Helper Method for HouseholdMember class used to achieve bi-directional relationship
      * attribute synchronization.
@@ -312,5 +321,22 @@ class HouseholdMember
     public function getHousehold()
     {
         return $this->household;
+    }
+
+    /**
+     * @param \WHM\Model\flags $flags
+     */
+    public function addFlags($flags)
+    {
+        $this->flags[] = $flags;
+        $flags->addHouseholdMember($this);
+    }
+
+    /**
+     * @return \WHM\Model\flags
+     */
+    public function getFlags()
+    {
+        return $this->flags;
     }
 }
