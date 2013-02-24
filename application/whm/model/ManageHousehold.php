@@ -33,7 +33,8 @@ class ManageHousehold {
         return $household;
     }
 
-    public function updateHousehold($data) {
+    public function updateHousehold($data)
+    {
         $household = $this->findHousehold($data["household-id"]);
         $pMember = $household->getHouseholdPrincipal();
         $address = $household->getAddress();
@@ -43,28 +44,33 @@ class ManageHousehold {
 
     
     //Delete
-    public function removeHousehold($id) {
+    public function removeHousehold($id)
+    {
         $household = findHousehold($id);
         $em->remove($household);
         $em->flush();
     }
     
     //View
-    public  function findAllHouseholds() {
+    public  function findAllHouseholds()
+    {
         // to do
     }
-    public function findHousehold($id) {
+    public function findHousehold($id)
+    {
 
         $household = $this->em->find("WHM\model\household", (int) $id);
         return $household;
     }
 
-    public function findMember($id) {
-        $member = $this->em->find("WHM\model\HouseholdMember", (int)$id);
+    public function findMember($id)
+    {
+        $member = $this->em->find("WHM\model\HouseholdMember", (int) $id);
         return $member;
     }
 
-    public function getHouseholdMembers($id){
+    public function getHouseholdMembers($id)
+    {
         $household = $this->findHousehold($id);
         return $household->getMembers();
     }
@@ -169,4 +175,3 @@ class ManageHousehold {
         return $data;
     }
 }
-?>

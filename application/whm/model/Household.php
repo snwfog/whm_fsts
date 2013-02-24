@@ -91,7 +91,8 @@ class Household
         return $this->members;
     }
 
-    public function getInstance(){
+    public function getInstance()
+    {
         return $this;
     }
 
