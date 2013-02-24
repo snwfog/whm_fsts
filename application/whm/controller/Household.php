@@ -70,7 +70,8 @@ class Household extends Controller implements IRedirectable
         $this->redirect('household/'.$_POST["household-id"]);
     }
 
-   public function setHousehold($household){
+   public function setHousehold($household)
+   {
        $this->household = $household;
    }
 
@@ -82,7 +83,8 @@ class Household extends Controller implements IRedirectable
    }
 
 
-   public function extractHouseholdInfo($household_id){
+   public function extractHouseholdInfo($household_id)
+   {
         $mHousehold = new ManageHousehold();
         $household = $mHousehold->findHousehold($household_id);
         $householdPrincipal = $household->getHouseholdPrincipal();
@@ -115,7 +117,7 @@ class Household extends Controller implements IRedirectable
                         "city"     => $address->getCity(),
                         "province" => $address->getProvince(),
                         "postal-code"   => $address->getPostalCode(),
-                     );
+                );
         return $data; 
    }
 }

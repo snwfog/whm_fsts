@@ -35,5 +35,3 @@ class Search extends Controller implements IRedirectable
    }
 
 }
-
-?>

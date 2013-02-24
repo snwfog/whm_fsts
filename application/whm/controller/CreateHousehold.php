@@ -27,7 +27,7 @@ class CreateHousehold extends Controller implements IRedirectable
         $data = array(
                        "httpMethod" => "POST",
                        "formAction" => "household/new"
-                     );
+                );
         //if household id exists then prepopulate field and send to household post function
         if(!is_null($household_id))
         {
