@@ -6,7 +6,7 @@ use WHM;
 use WHM\Controller;
 use WHM\IRedirectable;
 use WHM\Model\ManageHousehold;
-use WHM\Controller\Household;
+use WHM\Controller\HouseholdController;
 
 class CreateHousehold extends Controller implements IRedirectable
 {
