@@ -101,21 +101,23 @@ class Household extends Controller implements IRedirectable
         $count = 0;
         $members = null;
         foreach ($dependents as $dependent){
+            $members[$count++] = array(
+                                        "member-id"  => $dependent->getId(),
+                                        "first-name" => $dependent->getFirstName(),
+                                        "last-name"  => $dependent->getLastName(),
+                                        "active"     => false,
+                                        "principal"  => false,
+                                 );
             if (($principal->getId() == $dependent->getId())){
-                $members["Principal"] = array(
-                                            "member-id"  => $dependent->getId(),
-                                            "first-name" => $dependent->getFirstName(),
-                                            "last-name"  => $dependent->getLastName(),
-                                     );
-            }else {
-                $members[$count++] = array(
-                                            "member-id"  => $dependent->getId(),
-                                            "first-name" => $dependent->getFirstName(),
-                                            "last-name"  => $dependent->getLastName(),
-                                     );
-
+                $members[$count-1]["principal"] = true;
             }
+            if (($member->getId() == $dependent->getId())){
+                $members[$count-1]["active"] = true;     
+            }
+
+            
         }
+        print_r($members);
 
         $date = $member->getFirstVisitDate();
         $date = $date->format("m-d-Y");

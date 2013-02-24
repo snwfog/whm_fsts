@@ -52,18 +52,24 @@
     <div class="span3">
         <legend>Dependents</legend>
         <ul class="nav nav-pills nav-stacked" id="dependent-list">
-            <li class="active" id="t0"><a onclick="selectChange(t0)" href="#"><i class="icon-home"></i> Steve Gourgue</a></li>
-            <li class="" id="t1"><a onclick="selectChange(t1)" href="#"><i class="icon-user"></i> Charles Yang</a></li>
-            <li class="" id="t2"><a onclick="selectChange(t2)" href="#"><i class="icon-user"></i> Wais Khedri</a></li>
-            <li class="" id="t3"><a onclick="selectChange(t3)" href="#"><i class="icon-user"></i> Saud Musafer</a></li>
-            <li class="" id="t4"><a onclick="selectChange(t4)" href="#"><i class="icon-user"></i> Mike Pham</a></li>
-            <li class="" id="t5"><a onclick="selectChange(t5)" href="#"><i class="icon-user"></i> Bobby Yit</a></li>
-            <li class="" id="t6"><a onclick="selectChange(t6)" href="#"><i class="icon-user"></i> Ralph Dameilda</a></li>
-            <li class="" id="t7"><a onclick="selectChange(t7)" href="#"><i class="icon-user"></i> Quang Tran</a></li>
-            <li class="" id="t8"><a onclick="selectChange(t8)" href="#"><i class="icon-user"></i> Joe Zhou</a></li>
+
             {% for member in household.members %}
+                {% if(member.principal and member.active) %}
+                    <li class="active" id="t8"><a onclick="selectChange(t8)" href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
+                        <i class="icon-home"></i>{{member["first-name"] }}{{ member["last-name"]}}</a></li>
+
+                {% elseif member.active %}
+                    <li class="active" id="t8"><a onclick="selectChange(t8)" href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
+                        <i class="icon-user"></i>{{member["first-name"] }}{{ member["last-name"]}}</a></li>
+
+                {% elseif member.principal %}
+                    <li class="" id="t8"><a onclick="selectChange(t8)" href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
+                        <i class="icon-home"></i>{{member["first-name"] }}{{ member["last-name"]}}</a></li>
+
+                {% else%}
                     <li class="" id="t8"><a onclick="selectChange(t8)" href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
                         <i class="icon-user"></i>{{member["first-name"] }}{{ member["last-name"]}}</a></li>
+                {% endif %}
             {% endfor %}
         </ul>
 
