@@ -23,7 +23,7 @@ class Debug extends Controller implements IRedirectable
 
     public function get()
     {
-        $household = new WHM\Model\HouseholdM();
+        $household = new WHM\Model\Household();
         $address = new Address();
 
         $address->setStreet("Concordia");
