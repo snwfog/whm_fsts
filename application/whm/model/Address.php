@@ -6,7 +6,7 @@ namespace WHM\Model;
  **/
 class Address
 {
-	/**
+    /**
      * @Id @Column(type="integer")
      * @GeneratedValue
      **/

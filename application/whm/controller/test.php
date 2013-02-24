@@ -26,7 +26,7 @@ class Test extends Controller implements IRedirectable
 
     public function post()
     {
-        $this->post_call($_POST["b"],$_POST["c"]);
+        $this->post_call($_POST["b"], $_POST["c"]);
     }
 
     public function delete()

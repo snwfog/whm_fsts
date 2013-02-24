@@ -22,12 +22,12 @@ class Comment
      * @ManyToMany(targetEntity="Flag", inversedBy="comments")
      * @JoinTable(name="describes")
      **/
-	private $flags;
+    private $flags;
 
-	public function _construct()
-	{
-		$this->flags = new ArrayCollection();
-	}
+    public function _construct()
+    {
+        $this->flags = new ArrayCollection();
+    }
     public function getId() {
         return $this->id;
     }
@@ -42,7 +42,7 @@ class Comment
     public function setContent($content) {
         $this->content = $content;
     }
-	 public function getFlags() {
+     public function getFlags() {
         return $this->flags;
     }
     public function setFlags($flags) {

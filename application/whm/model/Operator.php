@@ -8,88 +8,88 @@ namespace WHM\Model;
  **/
 class Operator
 {
-	/**
-	 *@Id @Column(type="integer") @GeneratedValue
+    /**
+     *@Id @Column(type="integer") @GeneratedValue
      **/
     protected $id;
-	/**
+    /**
      * @Column(type="string")
      **/
-	protected $first_name;
-	/**
+    protected $first_name;
+    /**
      * @Column(type="string")
      **/
-	protected $last_name;
-	/**
+    protected $last_name;
+    /**
      * @Column(type="date")
      **/
-	protected $dob;
-	/**
+    protected $dob;
+    /**
      * @Column(type="string")
      **/
-	protected $phone_number;
-	/**
+    protected $phone_number;
+    /**
      * @Column(type="string")
      **/
-	protected $username;
-	/**
+    protected $username;
+    /**
      * @Column(type="string")
      **/
-	protected $password;
+    protected $password;
 
-	public function getId()
+    public function getId()
     {
         return $this->id;
     }
-	public function setId($id)
+    public function setId($id)
     {
         $this->id = $id;
     }
-	public function getFirst_name()
+    public function getFirst_name()
     {
         return $this->first_name;
     }
-	public function setFirst_name($first_name)
+    public function setFirst_name($first_name)
     {
         $this->first_name = $first_name;
     }
-	public function getLast_name()
+    public function getLast_name()
     {
         return $this->last_name;
     }
-	public function setLast_name($last_name)
+    public function setLast_name($last_name)
     {
         $this->last_name = $last_name;
     }
-	public function getDob()
+    public function getDob()
     {
         return $this->dob;
     }
-	public function setDob($dob)
+    public function setDob($dob)
     {
         $this->dob = $dob;
     }
-	public function getPhone_number()
+    public function getPhone_number()
     {
         return $this->phone_number;
     }
-	public function setPhone_number($phone_number)
+    public function setPhone_number($phone_number)
     {
         $this->phone_number= $phone_number;
     }
-	public function getUsername()
+    public function getUsername()
     {
         return $this->username;
     }
-	public function setUsername($username)
+    public function setUsername($username)
     {
         $this->username= $username;
     }
-	public function getPassword()
+    public function getPassword()
     {
         return $this->password;
     }
-	public function setPassword($password)
+    public function setPassword($password)
     {
         $this->password= $password;
     }

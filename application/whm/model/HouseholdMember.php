@@ -14,15 +14,15 @@ class HouseholdMember
      **/
     protected $id;
 
-	/**
+    /**
      * @Column(nullable=TRUE)
      **/
-	protected $first_name;
+    protected $first_name;
 
-	/**
+    /**
      * @Column(nullable=TRUE)
      **/
-	protected $last_name;
+    protected $last_name;
 
     /**
      * @Column(nullable=TRUE)
@@ -42,27 +42,27 @@ class HouseholdMember
     /**
      * @Column(nullable=TRUE, length=2)
      **/
-	protected $work_status;
+    protected $work_status;
 
-	/**
+    /**
      * @Column(nullable=TRUE)
      **/
-	protected $welfare_number;
+    protected $welfare_number;
 
-	/**
+    /**
      * @Column(nullable=TRUE)
      **/
-	protected $referral;
+    protected $referral;
 
-	/**
+    /**
      * @Column(nullable=TRUE, length=2)
      **/
-	protected $language;
+    protected $language;
 
-	/**
+    /**
      * @Column(length=2)
      **/
-	protected $marital_status;
+    protected $marital_status;
 
     /**
      * @Column(length=1)
@@ -74,12 +74,12 @@ class HouseholdMember
      *
      * @Column(nullable=TRUE)
      **/
-	protected $origin;
+    protected $origin;
 
-	/**
+    /**
      * @Column(type="datetime")
      **/
-	protected $first_visit_date;
+    protected $first_visit_date;
 
     /**
      * @Column(nullable=TRUE)
@@ -96,10 +96,10 @@ class HouseholdMember
      */
     protected $household;
 
-	/**
+    /**
      * * <-> * -- Owning
      *
-	 * @ManyToMany(targetEntity="Event", inversedBy="participants")
+     * @ManyToMany(targetEntity="Event", inversedBy="participants")
      * @JoinTable
      * (
      *      name="participants_events",
@@ -121,13 +121,13 @@ class HouseholdMember
      *      }
      * )
      *
-	 **/
-	protected $events = null;
+     **/
+    protected $events = null;
 
-	public function _construct()
-	{
-		$this->events = new ArrayCollection();
-	}
+    public function _construct()
+    {
+        $this->events = new ArrayCollection();
+    }
 
     public function getId()
     {
