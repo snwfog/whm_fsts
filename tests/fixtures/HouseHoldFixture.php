@@ -13,8 +13,8 @@ class HouseHoldFixture extends AbstractFixture
     public function load(ObjectManager $em)
     {
         $household1 = new Household();
-        
-        $householdPrincipal1 = new HouseholdMember();     
+
+        $householdPrincipal1 = new HouseholdMember();
         $householdPrincipal1->setContact("+1 514 999-88888");
         $householdPrincipal1->setFirstName("Abraham");
         $householdPrincipal1->setFirstVisitDate(new \DateTime('2010-02-01'));
@@ -29,20 +29,20 @@ class HouseHoldFixture extends AbstractFixture
         $householdPrincipal1->setSinNumber("N/A");
         $householdPrincipal1->setWelfareNumber("+1 514 999-0008");
         $householdPrincipal1->setWorkStatus("Unemployed");
-        
+
         $address1 = new Address();
         $address1->setPostalCode("h1m 2m7");
         $address1->getAptNumber("4578");
         $address1->setCity("montreal");
         $address1->setProvince("none");
-        $address1->setStreet("none");        
-        
+        $address1->setStreet("none");
+
         $household1->setAddress($address1);
         $household1->setHouseholdPrincipal($householdPrincipal1);
         $householdPrincipal1->setHousehold($household1);
-        
+
         $em->persist($household1);
-        
+
         $em->flush();
     }
 }
