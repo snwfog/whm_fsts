@@ -26,5 +26,5 @@ return $config = array
     ),
     
     // ControllerTestCase Paramaters
-    'ControllerTestCase.Base_URI' => 'http://localhost/whm_fsts'
+    'ControllerTestCase.Base_URI' => 'http://localhost:8889/390/'
 );

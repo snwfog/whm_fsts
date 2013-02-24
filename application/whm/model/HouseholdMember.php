@@ -59,13 +59,13 @@ class HouseholdMember
      **/
     protected $language;
 
-    /**
-     * @Column(length=2)
+	/**
+     * @Column(nullable=TRUE, length=2)
      **/
     protected $marital_status;
 
     /**
-     * @Column(length=1)
+     * @Column(nullable=TRUE, length=1)
      */
     protected $gender;
 
@@ -87,9 +87,9 @@ class HouseholdMember
     protected $contact;
 
     /**
-     * 1 <-> * -- Owning
+     * * -> 1 -- Owning by Default
      *
-     * @ManyToOne(targetEntity="Household", inversedBy="household")
+     * @ManyToOne(targetEntity="Household")
      * @JoinColumn(name="household_id", referencedColumnName="id")
      *
      * @var $household;
@@ -312,7 +312,6 @@ class HouseholdMember
     public function setHousehold(Household $household)
     {
         $this->household = $household;
-        $household->addMember($this);
     }
 
     /**

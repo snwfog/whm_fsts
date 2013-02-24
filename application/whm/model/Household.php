@@ -17,7 +17,7 @@ class Household
     protected $id;
 
     /**
-     * 1 -> 1 -- Owning
+     * 1 -> 1 -- Owning by Default
      *
      * @OneToOne(targetEntity="HouseholdMember", cascade={"all"})
      * @JoinColumn
@@ -25,7 +25,7 @@ class Household
      *      name="household_principal_id",
      *      referencedColumnName="id",
      *      unique=TRUE,
-     *      nullable=TRUE
+     *      nullable=FALSE
      *
      * )
      **/
@@ -46,7 +46,7 @@ class Household
     protected $address;
 
     /**
-     * 1 <-> * -- Inversing
+     * 1 <-> * -- Inversing by Default
      * @OneToMany(targetEntity="HouseholdMember", mappedBy="household", cascade={"all"})
      **/
     protected $members ;
@@ -74,6 +74,7 @@ class Household
     public function setHouseholdPrincipal($household_principal)
     {
         $this->household_principal = $household_principal;
+        $household_principal->setHousehold($this);
     }
 
     public function getHouseholdPrincipal()
@@ -81,9 +82,10 @@ class Household
         return $this->household_principal;
     }
 
-    public function addMember($members)
+    public function addMember($member)
     {
-        $this->members[] = $members;
+        $this->members[] = $member;
+        $member->setHousehold($this);
     }
 
     public function getMembers()
