@@ -117,7 +117,6 @@ class Household extends Controller implements IRedirectable
 
             
         }
-        print_r($members);
 
         $date = $member->getFirstVisitDate();
         $date = $date->format("m-d-Y");
