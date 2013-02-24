@@ -16,7 +16,8 @@ class ManageHousehold {
         $this->em = Application::em();
     }
 
-    public function createHousehold($data) {
+    public function createHousehold($data)
+    {
         $pmember = $this->createMember($data);
         $address = $this->createAddress($data);
         $household = new Household();
