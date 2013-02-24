@@ -10,6 +10,7 @@
 
         <form action="{{ apppath }}household" method="POST" id="view-household-form">
             <input type="hidden" name="household-id" value="{{ household["household_id"] }}"/>
+            <input type="hidden" name="member-id" value="{{ household["member-id"] }}"/>
             <legend>ID: HH100232</legend>
 
             {% include 'base.form.part.twig' %}
@@ -60,7 +61,13 @@
             <li class="" id="t6"><a onclick="selectChange(t6)" href="#"><i class="icon-user"></i> Ralph Dameilda</a></li>
             <li class="" id="t7"><a onclick="selectChange(t7)" href="#"><i class="icon-user"></i> Quang Tran</a></li>
             <li class="" id="t8"><a onclick="selectChange(t8)" href="#"><i class="icon-user"></i> Joe Zhou</a></li>
+            {% for member in household.members %}
+                    <li class="" id="t8"><a onclick="selectChange(t8)" href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
+                        <i class="icon-user"></i>{{member["first-name"] }}{{ member["last-name"]}}</a></li>
+            {% endfor %}
         </ul>
+
+
 
     </div>
 {% endblock left1 %}

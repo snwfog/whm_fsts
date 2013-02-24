@@ -37,7 +37,7 @@ class ManageHousehold {
     public function updateHousehold($data)
     {
         $household = $this->findHousehold($data["household-id"]);
-        $pMember = $household->getHouseholdPrincipal();
+        $pMember = $this->findMember($data["member-id"]);
         $address = $household->getAddress();
         $this->updateMember($pMember, $data);
         $this->updateAddress($address, $data);

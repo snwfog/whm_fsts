@@ -24,19 +24,7 @@ class CreateHousehold extends Controller implements IRedirectable
 
     public function get($household_id = null)
     {
-        $data = array(
-                       "httpMethod" => "POST",
-                       "formAction" => "household/new"
-                );
-        //if household id exists then prepopulate field and send to household post function
-        if(!is_null($household_id))
-        {
-            $data = $this->householdController->extractHouseholdInfo($household_id);
-            $data["httpMethod"] = "POST";
-            $data["formAction"] = 'household/update/' . $household_id;
-        }
-        $this->data["household"] = $data;
-        $this->display("household.create.twig", $this->data);
+        $this->display("household.create.twig");
     }
 
     public function post()
@@ -45,7 +33,9 @@ class CreateHousehold extends Controller implements IRedirectable
         {
             $this->data["form"] = $_POST;
             $household = $this->manageHouse->createHousehold($_POST);
-            $this->redirect('household/' . $household->getId());
+            $pMember = $household->getHouseholdPrincipal();
+
+            $this->redirect('household/' . $household->getId()."/". $pMember->getId());
 
         }
         else

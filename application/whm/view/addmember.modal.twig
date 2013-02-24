@@ -9,7 +9,9 @@
         </div>
 
         <div class="modal-body">
-            <form action="member/new" method="POST" name="member-create">
+            <form action="{{ apppath }}member/new" method="POST" name="member-create">
+                <input type="hidden" name="household-id" value ="{{ household.household_id }}"/>
+
                 <fieldset>
                     <div class="controls controls-row" id="name-row">
                         <input class="span5" type="text" name="first-name"
@@ -23,13 +25,15 @@
 
                 {% include 'information.form.part.twig' %}
 
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true"> Close</button>
+                    <button id="member-create-btn" class="btn btn-warning" aria-hidden="true"> Clear</button>
+                    <button class="btn btn-success"><i class="icon-ok icon-white"></i> Save changes</button>
+                    <input type="submit" value="Submit"/>
+                </div>
             </form>
         </div>
 
-        <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true"> Close</button>
-            <button id="member-create-btn" class="btn btn-warning" aria-hidden="true"> Clear</button>
-            <button class="btn btn-success"><i class="icon-ok icon-white"></i> Save changes</button>
-        </div>
+
     </div>
 {% endblock %}

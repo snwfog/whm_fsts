@@ -22,7 +22,7 @@ class Household extends Controller implements IRedirectable
 
     }
 
-    public function get($household_id = null)
+    public function get($household_id = null, $member_id = null)
     {   
         if (isset($_GET["household_id"]))
         {
@@ -30,9 +30,9 @@ class Household extends Controller implements IRedirectable
         }
 
         if(!is_null($household_id)){
-        $data = $this->extractHouseholdInfo($household_id);  
-        $data = array( "household" => $data);
-        $this->display("household_view_form.twig", $data);
+            $data = $this->extractHouseholdInfo($household_id, $member_id); 
+            $data = array( "household" => $data);
+            $this->display("household.create.twig", $data);
         }
         else
         {
@@ -67,49 +67,77 @@ class Household extends Controller implements IRedirectable
     public function post()
     {
         $this->manageHousehold->updateHousehold($_POST);
-        $this->redirect('household/'.$_POST["household-id"]);
+        $this->redirect('household/'.$_POST["household-id"]."/".$_POST["member-id"] );
     }
 
-   public function setHousehold($household)
-   {
+    public function setHousehold($household)
+    {
        $this->household = $household;
-   }
+    }
 
-   public function delete($household_id)
-   {
+    public function delete($household_id)
+    {
     $manageHouse = new ManageHousehold();
     $household_id = $manageHouse->getId();
     $manageHouse->removeHousehold($household_id);
-   }
+    }
 
-
-   public function extractHouseholdInfo($household_id)
-   {
-        $mHousehold = new ManageHousehold();
+    public function extractHouseholdInfo($household_id, $member_id)
+    {
+        $mHousehold = $this->manageHousehold;
         $household = $mHousehold->findHousehold($household_id);
-        $householdPrincipal = $household->getHouseholdPrincipal();
-        $address = $household->getAddress();
+        $principal = $household->getHouseholdPrincipal();
 
-        $date = $householdPrincipal->getFirstVisitDate();
+        if(is_null($member_id)){
+            $member = $household->getHouseholdPrincipal();
+        }else{
+            $member = $mHousehold->findMember($member_id);
+        }
+
+        $address = $household->getAddress();
+        $dependents = $household->getMembers();
+         
+        // NEED REFACTORING
+        $count = 0;
+        $members = null;
+        foreach ($dependents as $dependent){
+            if (($principal->getId() == $dependent->getId())){
+                $members["Principal"] = array(
+                                            "member-id"  => $dependent->getId(),
+                                            "first-name" => $dependent->getFirstName(),
+                                            "last-name"  => $dependent->getLastName(),
+                                     );
+            }else {
+                $members[$count++] = array(
+                                            "member-id"  => $dependent->getId(),
+                                            "first-name" => $dependent->getFirstName(),
+                                            "last-name"  => $dependent->getLastName(),
+                                     );
+
+            }
+        }
+
+        $date = $member->getFirstVisitDate();
         $date = $date->format("m-d-Y");
 
         $data = array(
                         "household_id" => $household_id,
-                        //PrincipalMember
-                        "first-name" => $householdPrincipal->getFirstName(),
-                        "last-name"  => $householdPrincipal->getLastName(),
-                        "phone-number"  => $householdPrincipal->getPhoneNumber(),
-                        "sin-number"  => $householdPrincipal->getSinNumber(),
-                        "medicare-number"  => $householdPrincipal->getMcareNumber(),
-                        "work-status"  => $householdPrincipal->getWorkStatus(),
-                        "welfare-number"  => $householdPrincipal->getWelfareNumber(),
-                        "referral"  => $householdPrincipal->getReferral(),
-                        "language"  => $householdPrincipal->getLanguage(),
-                        "marital"  => $householdPrincipal->getMaritalStatus(),
-                        "gender"  => $householdPrincipal->getGender(),
-                        "origin"   => $householdPrincipal->getOrigin(),
+                        //PrincipalMember or Selected Member
+                        "member-id" => $member->getId(),
+                        "first-name" => $member->getFirstName(),
+                        "last-name"  => $member->getLastName(),
+                        "phone-number"  => $member->getPhoneNumber(),
+                        "sin-number"  => $member->getSinNumber(),
+                        "medicare-number"  => $member->getMcareNumber(),
+                        "work-status"  => $member->getWorkStatus(),
+                        "welfare-number"  => $member->getWelfareNumber(),
+                        "referral"  => $member->getReferral(),
+                        "language"  => $member->getLanguage(),
+                        "marital"  => $member->getMaritalStatus(),
+                        "gender"  => $member->getGender(),
+                        "origin"   => $member->getOrigin(),
                         "first-visit-date"  => $date,
-                        "contact"   => $householdPrincipal->getContact(),
+                        "contact"   => $member->getContact(),
                         //Address
                         "house-number"    => $address->getHouseNumber(),
                         "street"    => $address->getStreet(),
@@ -118,7 +146,8 @@ class Household extends Controller implements IRedirectable
                         "province" => $address->getProvince(),
                         "postal-code"   => $address->getPostalCode(),
                 );
-        return $data; 
-   }
+        $data["members"] = $members;
+        return $data;
+    }
 }
 

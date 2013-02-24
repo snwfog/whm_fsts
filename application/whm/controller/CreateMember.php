@@ -32,12 +32,10 @@ class CreateMember extends WHM\Controller implements WHM\IRedirectable
 
     public function post()
     {
-
         if (isset($_POST))
         {
-            $this->data["form"] = $_POST;    
             $member = $this->manageHousehold->addMember($_POST);
-            $this->redirect($member->getId());
+            $this->redirect("household/". $_POST['household-id'] . "/" . $member->getId());
         }else{
             $this->display("member.create.form.twig");
         }
