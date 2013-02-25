@@ -15,9 +15,6 @@ class MultiAddressHouseholdFixture extends AbstractFixture
 	{
         // Load the user test file
         $userArr = $this->loadTestFile();
-        // Shuffle the records so that every time
-        // we get different records
-        shuffle($userArr);
 
         // Test file format
         //   Number
