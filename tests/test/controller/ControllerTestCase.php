@@ -26,18 +26,20 @@ abstract class ControllerTestCase extends PHPUnit_Framework_TestCase
     {
         require_once __DIR__ . '../../../../local-config.php';
         self::$BASE_URI = $config['ControllerTestCase.Base_URI'];
+        
+        FixtureProvider::load();
     }
 
     protected function setUp()
     {
-        parent::setUp();
+        parent::setUp();        
         $this->client = new Client();        
+        $this->client->followRedirects(false);
     }
     
     public static function setUpBeforeClass()
     {
-        parent::setUpBeforeClass();
-        FixtureProvider::load();        
+        parent::setUpBeforeClass();                
     }
 
         /**
