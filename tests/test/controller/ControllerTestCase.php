@@ -34,9 +34,8 @@ abstract class ControllerTestCase extends PHPUnit_Framework_TestCase
     {
         parent::setUp();        
         $this->client = new Client();        
-        $this->client->followRedirects(false);
     }
-    
+        
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();                

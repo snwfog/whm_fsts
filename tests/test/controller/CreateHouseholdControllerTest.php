@@ -9,13 +9,13 @@ class CreateHouseholdControllerTest extends ControllerTestCase
 
     function testNewHouseholdGet()
     {
-        $crawler = $this->client->request('GET', 'household/new');
+        $crawler = $this->request('GET', '/household/new');
         $this->assertEquals(0, $crawler->filter('html:contains("new")')->count());
     }
 
     function testNewHouseholdPost()
     {
-        $crawler = $this->client->request('POST', 'household/new');
+        $crawler = $this->request('POST', '/household/new');
         $this->assertEquals(0, $crawler->filter('html:contains("new")')->count());
     }
 
@@ -37,9 +37,8 @@ class CreateHouseholdControllerTest extends ControllerTestCase
             "contact" => "514 222 - 2220",
         );
 
-        $crawler = $this->client->request('POST', 'household/new', $formValues);
-        $this->assertEquals(302, $this->client->getResponse()->getStatus());
-        $this->assertContains('334/1000', $this->client->getResponse()->getHeader('location'));
+        $crawler = $this->request('POST', '/household/new', $formValues);
+        $this->assertEquals(200, $this->client->getResponse()->getStatus());        
         $this->assertGreaterThan(
                 0, $crawler->filter('html:contains("John")')->count()
         );
