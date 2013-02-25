@@ -24,7 +24,7 @@
             <div class="btn-toolbar">
                 <button class="btn btn-success btn-large" id="create-member-submit-btn"
                         name="create-member-submit-btn" type="button"
-                        data-toggle="modal" data-target="#create-member-modal">
+                        data-toggle="modal" data-target="#add-member-modal">
                     <i class="icon-plus icon-white"></i><i class="icon-user icon-white"></i> Add Member
                 </button>
 
@@ -55,20 +55,20 @@
 
             {% for member in household.members %}
                 {% if(member.principal and member.active) %}
-                    <li class="active" id="t8"><a onclick="selectChange(t8)" href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                        <i class="icon-home"></i>{{member["first-name"] }}{{ member["last-name"]}}</a></li>
+                    <li class="active" id="t8"><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
+                        <i class="icon-home"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
 
                 {% elseif member.active %}
-                    <li class="active" id="t8"><a onclick="selectChange(t8)" href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                        <i class="icon-user"></i>{{member["first-name"] }}{{ member["last-name"]}}</a></li>
+                    <li class="active" id="t8"><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
+                        <i class="icon-user"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
 
                 {% elseif member.principal %}
-                    <li class="" id="t8"><a onclick="selectChange(t8)" href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                        <i class="icon-home"></i>{{member["first-name"] }}{{ member["last-name"]}}</a></li>
+                    <li id="t8"><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
+                        <i class="icon-home"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
 
                 {% else%}
-                    <li class="" id="t8"><a onclick="selectChange(t8)" href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                        <i class="icon-user"></i>{{member["first-name"] }}{{ member["last-name"]}}</a></li>
+                    <li id="t8"><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
+                        <i class="icon-user"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
                 {% endif %}
             {% endfor %}
         </ul>
@@ -82,7 +82,7 @@
     <div class="span3">
         <legend>Notes</legend>
         <div class="accordion" id="accordion2">
-            {% for i in range(0, 6) %}
+            {% for i in range(0, random(6) + 1) %}
                 {% set notetype =  random(['success', 'warning', 'important', 'info']) %}
                 <div class="accordion-group">
                     <div class="accordion-heading">

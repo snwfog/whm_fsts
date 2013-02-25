@@ -43,7 +43,7 @@ class ManageHousehold {
         $this->updateAddress($address, $data);
     }
 
-    
+
     //Delete
     public function removeHousehold($id)
     {
@@ -51,7 +51,7 @@ class ManageHousehold {
         $em->remove($household);
         $em->flush();
     }
-    
+
     //View
     public  function findAllHouseholds()
     {
@@ -84,7 +84,7 @@ class ManageHousehold {
         $member = $this->createMember($data);
         $member->setHousehold($household);
         $this->em->persist($member);
-        $this->em->flush(); 
+        $this->em->flush();
         return $member;
     }
 

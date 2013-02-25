@@ -5,10 +5,4 @@ This script is used for data validation, and ajax.
 This script is NOT for UI, or animation, do that in global-script instead.
 */
 
-$(function() {
-  return $("button.submit").live("click", function() {
-    this.blur();
-    console.log("clicked submitable button");
-    return false;
-  });
-});
+$(function() {});

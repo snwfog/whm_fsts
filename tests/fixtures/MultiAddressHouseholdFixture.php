@@ -32,7 +32,7 @@ class MultiAddressHouseholdFixture extends AbstractFixture
         // | Occupation
 
         // Set the number of created users (Max: 20 000)
-        $max = 300;
+        $max = 1000;
 
         // Generate users
         $i = 1;
@@ -40,7 +40,7 @@ class MultiAddressHouseholdFixture extends AbstractFixture
         list($id, $lastName, $firstName, $streetAddress,
                 $city, $state, $postalCode, $country,
                 $phoneNumber, $occupation) =
-            explode("|", $userArr[0]);
+            explode("|", strtoupper($userArr[0]));
 
         // Further narrow down the variables
         $addressArr = explode(' ', $streetAddress);
@@ -65,7 +65,7 @@ class MultiAddressHouseholdFixture extends AbstractFixture
             list($id, $lastName, $firstName, $streetAddress,
                 $city, $state, $postalCode, $country,
                 $phoneNumber, $occupation) =
-            explode("|", $userArr[$i]);
+            explode("|", strtoupper($userArr[$i]));
 
             // Further narrow down the variables
             $addressArr = explode(' ', $streetAddress);
@@ -133,7 +133,7 @@ class MultiAddressHouseholdFixture extends AbstractFixture
         $addr->setHouseNumber($houseNumber);
         $addr->setStreet($streetName);
         $addr->setAptNumber(rand(1, 999));
-        $addr->setPostalCode($postalCode);
+        $addr->setPostalCode(str_replace(" ", "", $postalCode));
         $addr->setCity($city);
         $addr->setProvince($state);
 

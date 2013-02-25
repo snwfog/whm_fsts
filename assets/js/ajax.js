@@ -2,6 +2,12 @@
 
 $(function() {
   var noteAlert;
+  $('button#create-household-save').click(function() {
+    return $('form[name="household-create"]').submit();
+  });
+  $('button#add-household-member-save').click(function() {
+    return $('form[name="member-create"]').submit();
+  });
   return noteAlert = function(msg, type) {
     var n;
     return n = noty({

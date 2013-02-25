@@ -76,10 +76,10 @@ $ ->
 
   # Hack to prevent default link follow click through so we
   # can call noty confirmation to follow the link through.
-  $("button.submit").live "click", ->
-    this.blur()
-    console.log "clicked submitable button"
-    false
+#  $("button.submit").live "click", ->
+#    this.blur()
+#    console.log "clicked submitable button"
+#    false
 
   # Confirm delete and confirm class link with noty on click
   # Customize the msg when needed.

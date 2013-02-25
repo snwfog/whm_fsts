@@ -1,5 +1,5 @@
 {% block add_member_modal %}
-    <div id="create-member-modal"
+    <div id="add-member-modal"
          class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
 
@@ -24,14 +24,12 @@
                 </fieldset>
 
                 {% include 'information.form.part.twig' %}
-
-                <div class="modal-footer">
-                    <button class="btn" data-dismiss="modal" aria-hidden="true"> Close</button>
-                    <button id="member-create-btn" class="btn btn-warning" aria-hidden="true"> Clear</button>
-                    <button class="btn btn-success"><i class="icon-ok icon-white"></i> Save changes</button>
-                    <input type="submit" value="Submit"/>
-                </div>
             </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true"> Close</button>
+            <button id="member-create-btn" class="btn btn-warning" aria-hidden="true"> Clear</button>
+            <button id="add-household-member-save" class="btn btn-success"><i class="icon-ok icon-white"></i> Save changes</button>
         </div>
 
 

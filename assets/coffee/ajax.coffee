@@ -1,8 +1,12 @@
 $ ->
 
   # Submit the create household form
-#  $('button#create-household-save').click ->
-#    $('form[name="household-create"]').submit()
+  $('button#create-household-save').click ->
+    $('form[name="household-create"]').submit()
+
+  # Submit the create household member form
+  $('button#add-household-member-save').click ->
+    $('form[name="member-create"]').submit()
 
 ################################################################################
 # Fetch ready for pickup offer function handler
