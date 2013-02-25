@@ -2,7 +2,7 @@
 
 namespace Test;
 
-require_once(__DIR__ . '/../vendor/autoload.php');
+require_once(__DIR__ . '/../../vendor/autoload.php');
 
 use \Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use \Doctrine\Common\DataFixtures\Purger\ORMPurger;
@@ -21,9 +21,9 @@ class FixtureProvider
         ob_start();
 
         $loader = new Loader();
-        $loader->loadFromDirectory(__DIR__ . '/fixtures');
+        $loader->loadFromDirectory(__DIR__ . '/../fixtures');
 
-        $config = require_once(__DIR__ . '/../local-config.php');
+        $config = require_once(__DIR__ . '/../../local-config.php');
         $path = array(DOCTRINE_MODEL_PATH);        
         $dev_mode = $config['dev_mode'];
         $dbconfig = $config['dbconfig'];
