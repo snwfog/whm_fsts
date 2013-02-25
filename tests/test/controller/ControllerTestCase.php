@@ -4,6 +4,7 @@ namespace Test\Controller;
 
 use Goutte\Client;
 use \PHPUnit_Framework_TestCase;
+use Test\FixtureProvider;
 
 /**
  * TestCase class that provides an http client/crawler to ease functional
@@ -29,10 +30,17 @@ abstract class ControllerTestCase extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
+        parent::setUp();
         $this->client = new Client();        
     }
+    
+    public static function setUpBeforeClass()
+    {
+        parent::setUpBeforeClass();
+        FixtureProvider::load();        
+    }
 
-    /**
+        /**
      * Calls a URI.
      *
      * @param string  $method        The request method

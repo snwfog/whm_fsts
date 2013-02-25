@@ -25,7 +25,7 @@ class Household_Controller_Test extends ControllerTestCase
         $this->client->followRedirects(false);
         $this->request('GET', '/household');                        
         $this->AssertEquals(302, $this->client->getResponse()->getStatus()); 
-        $this->AssertEquals('search', $this->client->getResponse()->getHeader('location'));
+        $this->assertContains('search', $this->client->getResponse()->getHeader('location'));
     }
 
     function testRemoveHousehold()
