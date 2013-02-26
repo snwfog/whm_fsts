@@ -12,7 +12,9 @@ use Test\FixtureProvider;
 $config = require __DIR__ . '/../local-config.php';
 define('BASE_URI', $config['PHPUnit.Base_URI']);
 
-// LoadingFixture
+new WHM\Application($config);
+
+// Loading Fixtures
 FixtureProvider::load();
 
 ?>
