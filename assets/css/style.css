@@ -5,6 +5,23 @@ div#modal-search
     width: 94%;
 }
 
+div#login-well
+{
+    position: absolute;
+    top: 20%;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.2);
+    border-width: 2px;
+}
+
+div#login-well input
+{
+    height: 3em;
+    padding: 3px 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
 .fade
 {
     opacity: 0;
