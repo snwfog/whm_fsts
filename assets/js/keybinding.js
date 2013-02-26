@@ -16,9 +16,11 @@ $(function() {
     return $(this).find("form :input").first().focus().blur();
   });
   return $(modal).on('shown', function() {
-    $(this).find("form :input").each(function() {
+    var $inputs;
+    $inputs = $(this).find("form :input:not(:hidden)");
+    $inputs.each(function() {
       return $(this).val("");
     });
-    return $(this).find("input").first().focus();
+    return $inputs.first().focus();
   });
 });

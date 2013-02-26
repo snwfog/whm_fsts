@@ -10,7 +10,7 @@
 
         <div class="modal-body">
             <form action="{{ apppath }}member/new" method="POST" name="member-create">
-                <input type="hidden" name="household-id" value ="{{ household.household_id }}"/>
+
 
                 <fieldset>
                     <div class="controls controls-row" id="name-row">
@@ -24,6 +24,8 @@
                 </fieldset>
 
                 {% include 'information.form.part.twig' %}
+
+                <input type="hidden" name="household-id" value="{{ household.household_id }}"/>
             </form>
         </div>
         <div class="modal-footer">

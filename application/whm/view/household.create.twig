@@ -9,8 +9,7 @@
         {% endfor %}
 
         <form action="{{ apppath }}household" method="POST" id="view-household-form">
-            <input type="hidden" name="household-id" value="{{ household["household_id"] }}"/>
-            <input type="hidden" name="member-id" value="{{ household["member-id"] }}"/>
+
             <legend>ID: HH100232</legend>
 
             {% include 'base.form.part.twig' %}
@@ -37,6 +36,9 @@
                     <i class="icon-remove icon-white"></i> Deactivate
                 </button>
             </div>
+
+            <input type="hidden" name="household-id" value="{{ household["household_id"] }}"/>
+            <input type="hidden" name="member-id" value="{{ household["member-id"] }}"/>
 
         </form>
 

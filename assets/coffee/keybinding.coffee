@@ -19,6 +19,7 @@ $ ->
     $(this).find("form :input").first().focus().blur()
 
   $(modal).on 'shown', ->
-    $(this).find("form :input").each ->
+    $inputs = $(this).find("form :input:not(:hidden)")
+    $inputs.each ->
       $(this).val ""
-    $(this).find("input").first().focus()
+    $inputs.first().focus()
