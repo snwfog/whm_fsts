@@ -25,6 +25,6 @@ return $config = array
         // set to false when deploy
     ),
     
-    // ControllerTestCase Paramaters
-    'ControllerTestCase.Base_URI' => 'http://localhost:8889/390/'
+    // PHPUnit Paramaters ()
+    'PHPUnit.Base_URI' => 'http://localhost:8889/390' // DO NOT put forward slash at the end.
 );
