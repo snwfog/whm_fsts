@@ -21,6 +21,7 @@ $serves = array
     '/search' => 'WHM\Controller\Search',
     '/debug' => 'WHM\Controller\Debug',
     '/flag/new' => 'WHM\Controller\Flag',
+    '/logger' => 'WHM\Controller\Logger'
 );
 
 /*-----------------------------------------------

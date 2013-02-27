@@ -82,37 +82,78 @@
             </ul>
         </div>
         <div class="well">
-            <button class="btn btn-success btn-large" id="create-member-submit-btn"
+            <button class="btn btn-success btn-block btn-large" id="create-member-submit-btn"
                     name="create-member-submit-btn" type="button"
                     data-toggle="modal" data-target="#add-member-modal">
-                <i class="icon-plus icon-white"></i><i class="icon-user icon-white"></i> Add Member
+                <i class="icon-plus icon-white"></i><i class="icon-user icon-white"></i> Add New Member
             </button>
         </div>
     </div>
 {% endblock left1 %}
 
 {% block left2 %}
-    <div class="span3" style="height: 450px"><!-- MESSY CSS!! DONT DO THAT. TO BE CORRECTED ON LIVE. -->
-        <div class="tabbable tabs-below" style="height: 450px"><!-- Only required for left/right tabs -->
-            <div class="tab-content" style="height: 450px">
-                <div class="tab-pane active" id="tab1" style="height: 450px">
+    <div class="span3">
+        <div class="tabbable tabs-below">
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab1">
                     <legend>Events</legend>
-                    <p>Howdy, I'm in Section 2.</p>
+
+                    <div class="accordion" id="accordion2">
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                                    Collapsible Group Item #1
+                                </a>
+                            </div>
+                            <div id="collapseOne" class="accordion-body collapse in">
+                                <div class="accordion-inner">
+                                    Anim pariatur cliche...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="tab-pane" id="tab2">
                     <legend>Flags</legend>
-                    {% for i in range(0, random(4) + 1) %}
-                        {% set type = random(['success', 'warning', 'info', 'important']) %}
-                        <div class="alert alert-{{ type }} notes" data-toggle="popover" data-placement="left" data-content="Vivamus" title="Popover on top">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <span class="badge badge-{{ type }}">
-                                <i class="icon-tag icon-white"></i> <strong>{{ type|capitalize }}</strong>
-                            </span>
-                            <div class="pull-right">
-                                <strong>{{ "now"|date('m-d-y') }}</strong>
+                    <div class="accordion" id="flag-accordion">
+                        {% for i in range(0, random(6) + 1) %}
+                        {% set notetype = random(['success', 'warning', 'important', 'info']) %}
+                        {% set alerttype =
+                            {
+                                'success': 'alert-success',
+                                'warning': '',
+                                'important': 'alert-error',
+                                'info': 'alert-info'
+                            }
+                        %}
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                {# TSK TSK TSK! QUICK STYLE HACK! MUST CORRECT! #}
+                                <div class="alert {{ alerttype[notetype] }}" style="padding: 0px; margin: 0px;">
+                                    <a class="accordion-toggle" data-toggle="collapse"
+                                       data-parent="#flag-accordion" href="#collapse{{ i }}">
+                                        <strong>{{ "now"|date("d-m-y") }}</strong>
+                                        <div class="pull-right">
+                                            <span class="label label-{{ notetype }}"><i class="icon-tag icon-white"></i> {{ notetype }}</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div id="collapse{{ i }}" class="accordion-body collapse">
+                                <div class="accordion-inner" style="padding: 0px">
+
+                                    <div class="alert {{ alerttype[notetype] }}" style="margin: 0px;">
+                                    <p>
+                                        Nam justo massa, dictum at varius eu, eleifend in massa. Quisque dictum egestas mi vitae blandit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis dolor orci, hendrerit ultrices mollis et, dignissim sit amet massa. Nam enim tellus, tincidunt at sollicitudin nec, fermentum at nulla. Integer eget magna turpis, nec placerat massa. Nulla sodales lorem magna.
+                                    </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
             <ul class="nav nav-tabs">

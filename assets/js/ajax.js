@@ -8,7 +8,11 @@ $(function() {
   $('button#add-household-member-save').click(function() {
     return $('form[name="member-create"]').submit();
   });
-  return noteAlert = function(msg, type) {
+  $.ajaxSetup({
+    cache: false
+  });
+  $.post('/');
+  noteAlert = function(msg, type) {
     var n;
     return n = noty({
       layout: 'bottomRight',
@@ -26,4 +30,5 @@ $(function() {
       }
     });
   };
+  return true;
 });
