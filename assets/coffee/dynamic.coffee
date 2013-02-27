@@ -123,5 +123,11 @@ $ ->
   setInterval time, 1000
   time()
 
+  # Popover test for flags - temporary - charles
+  $("div.notes").popover({
+    'trigger': 'hover',
+  })
+
+
   true
 

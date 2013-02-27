@@ -10,7 +10,15 @@
 
         <form action="{{ apppath }}household" method="POST" id="view-household-form">
 
-            <legend>ID: HH100232</legend>
+            <legend>
+                ID: HH100232
+                <div class='pull-right'>
+                    <span class="badge badge-success"><i class="icon-tags icon-white"></i> 1</span>
+                    <span class="badge badge-warning"><i class="icon-tags icon-white"></i> 2</span>
+                    <span class="badge badge-important"><i class="icon-tags icon-white"></i> 3</span>
+                    <span class="badge badge-info"><i class="icon-tags icon-white"></i> 1</span>
+                </div>
+            </legend>
 
             {% include 'base.form.part.twig' %}
 
@@ -21,12 +29,6 @@
 
             <legend>Action</legend>
             <div class="btn-toolbar">
-                <button class="btn btn-success btn-large" id="create-member-submit-btn"
-                        name="create-member-submit-btn" type="button"
-                        data-toggle="modal" data-target="#add-member-modal">
-                    <i class="icon-plus icon-white"></i><i class="icon-user icon-white"></i> Add Member
-                </button>
-
                 <button class="btn btn-warning btn-large" data-toggle="button" class-toggle="btn-state" name="modify-household-btn" type="button">
                     <i class="icon-edit icon-white"></i> Modify
                 </button>
@@ -34,6 +36,11 @@
                 <button class="btn btn-danger btn-large"
                         name="deactivate-household-btn" type="button">
                     <i class="icon-remove icon-white"></i> Deactivate
+                </button>
+
+                <button class="btn btn-primary btn-large"
+                        data-toggle="modal" data-target="#add-flag-modal">
+                    <i class="icon-flag icon-white"></i> Flag
                 </button>
             </div>
 
@@ -43,68 +50,75 @@
         </form>
 
         {% include 'addmember.modal.twig' %}
-
+        {% include 'addflag.modal.twig' %}
     </div>
 {% endblock content %}
-
 
 {# This part should be auto generated #}
 
 {% block left1 %}
     <div class="span3">
         <legend>Dependents</legend>
-        <ul class="nav nav-pills nav-stacked" id="dependent-list">
+        <div class="well" id="dependents-well">
+            <ul class="nav nav-list" id="dependent-list">
+                {% for member in household.members %}
+                    {% if(member.principal and member.active) %}
+                        <li class="active"><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
+                                <i class="icon-home"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
 
-            {% for member in household.members %}
-                {% if(member.principal and member.active) %}
-                    <li class="active" id="t8"><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                        <i class="icon-home"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
+                    {% elseif member.active %}
+                        <li class="active"><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
+                                <i class="icon-user"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
 
-                {% elseif member.active %}
-                    <li class="active" id="t8"><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                        <i class="icon-user"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
+                    {% elseif member.principal %}
+                        <li><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
+                                <i class="icon-home"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
 
-                {% elseif member.principal %}
-                    <li id="t8"><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                        <i class="icon-home"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
-
-                {% else%}
-                    <li id="t8"><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                        <i class="icon-user"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
-                {% endif %}
-            {% endfor %}
-        </ul>
-
-
-
+                    {% else%}
+                        <li><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
+                                <i class="icon-user"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="well">
+            <button class="btn btn-success btn-large" id="create-member-submit-btn"
+                    name="create-member-submit-btn" type="button"
+                    data-toggle="modal" data-target="#add-member-modal">
+                <i class="icon-plus icon-white"></i><i class="icon-user icon-white"></i> Add Member
+            </button>
+        </div>
     </div>
 {% endblock left1 %}
 
 {% block left2 %}
-    <div class="span3">
-        <legend>Notes</legend>
-        <div class="accordion" id="accordion2">
-            {% for i in range(0, random(6) + 1) %}
-                {% set notetype =  random(['success', 'warning', 'important', 'info']) %}
-                <div class="accordion-group">
-                    <div class="accordion-heading">
-                        <a class="accordion-toggle" data-toggle="collapse"
-                           data-parent="#accordion2" href="#collapse{{ i }}">
-                            <span class="badge badge-{{ notetype }}"> {{ notetype }}</span>
-                            <div class="pull-right">
-                                <i class="icon-calendar"></i> {{ "now"|date("d-m-y") }}
-                            </div>
-                        </a>
-                    </div>
-                    <div id="collapse{{ i }}" class="accordion-body collapse">
-                        <div class="accordion-inner">
-                            <p>
-                                Nam justo massa, dictum at varius eu, eleifend in massa. Quisque dictum egestas mi vitae blandit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis dolor orci, hendrerit ultrices mollis et, dignissim sit amet massa. Nam enim tellus, tincidunt at sollicitudin nec, fermentum at nulla. Integer eget magna turpis, nec placerat massa. Nulla sodales lorem magna.
-                            </p>
-                        </div>
-                    </div>
+    <div class="span3" style="height: 450px"><!-- MESSY CSS!! DONT DO THAT. TO BE CORRECTED ON LIVE. -->
+        <div class="tabbable tabs-below" style="height: 450px"><!-- Only required for left/right tabs -->
+            <div class="tab-content" style="height: 450px">
+                <div class="tab-pane active" id="tab1" style="height: 450px">
+                    <legend>Events</legend>
+                    <p>Howdy, I'm in Section 2.</p>
                 </div>
-            {% endfor %}
+                <div class="tab-pane" id="tab2">
+                    <legend>Flags</legend>
+                    {% for i in range(0, random(4) + 1) %}
+                        {% set type = random(['success', 'warning', 'info', 'important']) %}
+                        <div class="alert alert-{{ type }} notes" data-toggle="popover" data-placement="left" data-content="Vivamus" title="Popover on top">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <span class="badge badge-{{ type }}">
+                                <i class="icon-tag icon-white"></i> <strong>{{ type|capitalize }}</strong>
+                            </span>
+                            <div class="pull-right">
+                                <strong>{{ "now"|date('m-d-y') }}</strong>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab1" data-toggle="tab"><i class="icon-calendar"></i> Events</a></li>
+                <li><a href="#tab2" data-toggle="tab"><i class="icon-flag"></i> Flags</a></li>
+            </ul>
         </div>
     </div>
 {% endblock left2 %}

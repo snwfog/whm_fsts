@@ -10,9 +10,9 @@ div#login-well
     position: absolute;
     top: 20%;
     z-index: 2;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(10, 10, 10, 0.5);
     border-color: rgba(255, 255, 255, 0.2);
-    border-width: 2px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
 div#login-well input
@@ -30,6 +30,12 @@ div#login-well input
     -ms-transition: opacity .01s linear;
     -o-transition: opacity .01s linear;
     transition: opacity .01s linear;
+}
+
+div#dependents-well
+{
+    max-width: 340px;
+    padding: 8px 0;
 }
 
 /*Overwrite boostrap default modal sliding animation*/

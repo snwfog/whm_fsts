@@ -101,5 +101,8 @@ $(function() {
   };
   setInterval(time, 1000);
   time();
+  $("div.notes").popover({
+    'trigger': 'hover'
+  });
   return true;
 });
