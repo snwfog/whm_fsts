@@ -9,7 +9,7 @@
         </div>
 
         <div class="modal-body">
-            <form class="form-horizontal" action="" method="POST" name="" id="">
+            <form class="form-horizontal" action="{{ apppath }}flag/new" method="POST" name="flag-create" id="flag-create-form">
                 <fieldset>
                     <div class="control">
                         <div id="flag-types" class="btn-group" data-toggle="buttons-radio">
@@ -24,9 +24,14 @@
                     <legend>Message</legend>
                     <div class="control">
                         {#<div class="alert">#}
-                            <textarea class="span12" rows="4" placeholder="Message..."></textarea>
+                            <textarea class="span12" rows="4" name="message" placeholder="Message..."></textarea>
                         {#</div>#}
                     </div>
+                    
+
+
+                    <input type="submit" value="Submit">
+
                 </fieldset>
             </form>
         </div>

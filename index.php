@@ -19,7 +19,8 @@ $serves = array
     '/member/:number' => 'WHM\Controller\member',
     '/member/new' => 'WHM\Controller\CreateMember',
     '/search' => 'WHM\Controller\Search',
-    '/debug' => 'WHM\Controller\Debug'
+    '/debug' => 'WHM\Controller\Debug',
+    '/flag/new' => 'WHM\Controller\Flag',
 );
 
 /*-----------------------------------------------
