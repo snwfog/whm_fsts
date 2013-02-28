@@ -74,33 +74,33 @@ class ManageHouseholdTest extends PHPUnit_Framework_TestCase
     public function testFindHousehold()
     {
         // Find the Household with id = 50
-        $householdToUpdate = $this->manageHousehold->findHousehold(50);
+        $householdToUpdate = $this->manageHousehold->findHousehold(3);
 
         $this->assertThat(
                 $householdToUpdate->getId(), 
-                $this->equalTo(50));
+                $this->equalTo(3));
 
         $principal = $householdToUpdate->getHouseholdPrincipal();
         $address = $householdToUpdate->getAddress();
 
         $this->assertThat(
                 $principal->getId(),
-                $this->equalTo(100));
+                $this->equalTo(6));
         $this->assertThat(
                 $principal->getLastName(),
-                $this->equalTo('ERLING'));
+                $this->equalTo('PONTO'));
         $this->assertThat(
                 $principal->getFirstName(),
-                $this->equalTo('PROUDFOOT'));        
+                $this->equalTo('GAMMIDGE'));        
         $this->assertThat(
                 $address->getId(),
-                $this->equalTo(50));
+                $this->equalTo(3));
         $this->assertThat(
                 $address->getStreet(),
-                $this->equalTo('TYCOS DR'));
+                $this->equalTo('184TH STREET'));
         $this->assertThat(
                 $address->getAptNumber(),
-                $this->equalTo('ff'));
+                $this->equalTo('db'));
     }
 
     public function testFindMember()
