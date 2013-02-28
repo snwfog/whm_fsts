@@ -67,9 +67,8 @@ class MultiAddressHouseholdFixture extends AbstractFixture
 
 
             // Determine the fate of this person
-            // This new person has 1/3 chance of becoming
-            // a household pricipal, or 2/3 chance
-            // of being added to a household as a member
+            // Each household will have at most one member 
+            // (including house household principal)
             switch ($i % 6)
             {
                 case 0:
@@ -123,7 +122,7 @@ class MultiAddressHouseholdFixture extends AbstractFixture
         $addr = new Address();
         $addr->setHouseNumber($houseNumber);
         $addr->setStreet($streetName);
-        $addr->setAptNumber(rand(1, 999));
+        $addr->setAptNumber(substr(sha1($houseNumber), 0, 2));
         $addr->setPostalCode(str_replace(" ", "", $postalCode));
         $addr->setCity($city);
         $addr->setProvince($state);
