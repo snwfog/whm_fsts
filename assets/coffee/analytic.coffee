@@ -9,4 +9,8 @@ $.ajaxSetup({
 $.get "http://api.hostip.info/get_html.php", (data) ->
   reg = /([\d]{1,3}\.?){4}/ig
   ip = reg.exec(data)
-  $.post 'analytic', { "geoip": ip[0] }
+  $.post 'analytic',
+  {
+    "geoip": ip[0],
+    "request_uri": document.URL
+  }
