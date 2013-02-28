@@ -76,6 +76,8 @@ class ManageHousehold {
         return $household->getMembers();
     }
 
+    
+
 
 
     public function addMember($data)
