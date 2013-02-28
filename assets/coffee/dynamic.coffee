@@ -42,6 +42,17 @@ $ ->
 #######################################################
 # Change the theme
 #######################################################
+  $('a[name="switch-theme"]').click ->
+    darkstrap =
+    $secondStyleSheet = $('link[rel="stylesheet"]').first().next()
+    if $secondStyleSheet.attr("href").match("darkstrap")
+      $secondStyleSheet.attr "href", ""
+    else
+      # Add the stylesheet back
+      # Get the previous style href link
+      href = $secondStyleSheet.prev().attr("href")
+      pattern = /\/[^\/]*\.css/i
+      $secondStyleSheet.attr "href", href.replace(pattern, "/bootstrap.darkstrap.css")
 
 #######################################################
 # Edit household information form
@@ -122,7 +133,6 @@ $ ->
   time = -> $('#navbar-time').html moment().format "hh:mm:ss A", 1000
   setInterval time, 1000
   time()
-
 
 
 

@@ -32,6 +32,17 @@ $(function() {
       return $(this).val("");
     });
   });
+  $('a[name="switch-theme"]').click(function() {
+    var $secondStyleSheet, darkstrap, href, pattern;
+    darkstrap = $secondStyleSheet = $('link[rel="stylesheet"]').first().next();
+    if ($secondStyleSheet.attr("href").match("darkstrap")) {
+      return $secondStyleSheet.attr("href", "");
+    } else {
+      href = $secondStyleSheet.prev().attr("href");
+      pattern = /\/[^\/]*\.css/i;
+      return $secondStyleSheet.attr("href", href.replace(pattern, "/bootstrap.darkstrap.css"));
+    }
+  });
   $("#view-household-form input").prop("disabled", true);
   $('button[name="modify-household-btn"]').click(function() {
     var inputs;
