@@ -57,6 +57,13 @@ class ManageHousehold {
     {
         // to do
     }
+    
+    /**
+     * Returns the household with the passed id.
+     * 
+     * @param int $id 
+     * @return Household
+     */
     public function findHousehold($id)
     {
 

@@ -66,6 +66,10 @@ class Household
         $this->address = $address;
     }
 
+    /**
+     * 
+     * @return Address
+     */
     public function getAddress()
     {
         return $this->address;
