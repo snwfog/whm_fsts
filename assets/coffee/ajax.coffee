@@ -14,7 +14,7 @@ $ ->
     cache: false
   })
 
-  $.post('logger')
+  $.post('analytic')
 
 ################################################################################
 # Noty Confirmation Setup
