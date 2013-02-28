@@ -74,7 +74,7 @@ class Logger
     protected $event;
 
     /**
-     * @Column(nullabe=TRUE)
+     * @Column(nullable=TRUE)
      * @var Potential value of the field if there is any
      */
     protected $value;

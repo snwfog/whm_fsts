@@ -7,14 +7,8 @@ $ ->
   # Submit the create household member form
   $('button#add-household-member-save').click ->
     $('form[name="member-create"]').submit()
-###############################################################################
-# Generate an analytic instance
-##############################################################################
-  $.ajaxSetup({
-    cache: false
-  })
 
-  $.post('analytic')
+
 
 ################################################################################
 # Noty Confirmation Setup
