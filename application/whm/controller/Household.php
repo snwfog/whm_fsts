@@ -6,12 +6,13 @@ use \WHM\Helper;
 use \WHM\Controller;
 use \WHM\IRedirectable;
 use \WHM\Model\ManageHousehold;
-use \WHM\Model\HouseholdMember;
+use \WHM\Model\ManageFlag;
 
 class Household extends Controller implements IRedirectable
 {
     public $data = array( "errors" => array(), "form" => array());
     private $manageHousehold;
+    private $manageFlag;
 
     public function __construct(array $args = null)
     {
@@ -19,19 +20,25 @@ class Household extends Controller implements IRedirectable
         parent::__construct();
         //Helper::backtrace();
         $this->manageHousehold = new ManageHousehold();
+        $this->manageFlag = new ManageFlag();
 
     }
 
     public function get($household_id = null, $member_id = null)
-    {   
+    {
         if (isset($_GET["household_id"]))
         {
             $household_id = $_GET["household_id"];
         }
 
         if(!is_null($household_id)){
-            $data = $this->extractHouseholdInfo($household_id, $member_id); 
-            $data = array( "household" => $data);
+            $data = $this->extractHouseholdInfo($household_id, $member_id);
+            $flagDescriptors = $this->manageFlag->getFlagDescriptors();
+            $formattedDescriptor = $this->formatDescriptor($flagDescriptors);
+            $data = array(
+                            "household" => $data,
+                            "flagDescriptors" => $formattedDescriptor,
+                    );
             $this->display("household.create.twig", $data);
         }
         else
@@ -148,6 +155,21 @@ class Household extends Controller implements IRedirectable
                         "postal-code"   => $address->getPostalCode(),
                 );
         $data["members"] = $members;
+        return $data;
+    }
+
+    private function formatDescriptor($flagDescriptors)
+    {
+        $data = array();
+        $count = 0;
+        foreach( $flagDescriptors as $flagD){
+            $data[$count++] = array(
+                                  "flag-id" => $flagD->getId(),
+                                  "flag-color" => $flagD->getColor(),
+                                  "flag-meaning" => $flagD->getMeaning(),
+                              );
+        }
+
         return $data;
     }
 }

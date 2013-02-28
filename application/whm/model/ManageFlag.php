@@ -24,9 +24,7 @@ class ManageFlag
 
      public function createFlag($data)
     {
-
         $flag = new Flag();
-
         $flag->setMessage($data["message"]); 
         $household_member = $this->findm->findMember($data["member-id"]); 
         $flag->$this->mflag->setHouseholdMember($household_member);    
@@ -35,6 +33,12 @@ class ManageFlag
 
         return $flag;
 
+    }
+
+    public function getFlagDescriptors(){
+        $query = $this->em->createQuery('SELECT u FROM WHM\Model\FlagDescriptor u');
+        $flagDescriptors = $query->getResult();
+        return $flagDescriptors;
     }
 
 
