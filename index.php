@@ -21,7 +21,10 @@ $serves = array
     '/search' => 'WHM\Controller\Search',
     '/debug' => 'WHM\Controller\Debug',
     '/flag/new' => 'WHM\Controller\Flag',
-    '.*/analytic' => 'WHM\Controller\Logger'
+    '.*/analytic' => 'WHM\Controller\Logger',
+    '/appointment/:number' => 'WHM\Controller\CreateAppointment',
+    '/appointment/new' => 'WHM\Controller\CreateAppointment'
+>>>>>>> Create Make Appointment function skeleton
 );
 
 /*-----------------------------------------------
