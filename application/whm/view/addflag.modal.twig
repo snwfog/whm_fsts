@@ -9,7 +9,7 @@
         </div>
 
         <div class="modal-body">
-            <form class="form-horizontal" action="" method="POST" name="" id="">
+            <form class="form-horizontal" action="{{ apppath }}flag/new" method="POST" name="flag-create-form" id="">
                 <fieldset>
                     <div class="control">
                         <div id="flag-types" class="btn-group" data-toggle="buttons-radio">
@@ -28,6 +28,7 @@
                         {#</div>#}
                     </div>
                     
+                      <input type="hidden" name="member-id" value="{{ household["member-id"] }}"/>
 
 
                     <input type="submit" value="Submit">

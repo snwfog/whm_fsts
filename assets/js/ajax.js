@@ -8,10 +8,6 @@ $(function() {
   $('button#add-household-member-save').click(function() {
     return $('form[name="member-create"]').submit();
   });
-  $.ajaxSetup({
-    cache: false
-  });
-  $.post('analytic');
   noteAlert = function(msg, type) {
     var n;
     return n = noty({

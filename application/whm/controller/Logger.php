@@ -21,6 +21,26 @@ class Logger
 
     public function post_xhr()
     {
+        $headers = apache_request_headers();
+
+        $geoip = "Unidentified";
+        $requestURI = str_replace($_SERVER['HTTP_ORIGIN'], "", $_SERVER['HTTP_REFERER']);
+
+        echo "<pre>";
+        if (array_key_exists("geoip", $_POST))
+        {
+            echo "GEOIP: {$_POST['geoip']}<br />";
+            $geoip = $_POST['geoip'];
+        }
+
+        foreach ($headers as $header => $value)
+        {
+            echo "{$header}: {$value}<br />";
+        }
+
+        print_r($_SERVER);
+        echo "</pre>";
+
         $logger = new Logger();
 
         $mysqli = new \mysqli
@@ -38,20 +58,15 @@ class Logger
         }
 
         // Insert some information
-        $query = "INSERT INTO log (agent) VALUES ('" . mysql_real_escape_string($_SERVER['HTTP_USER_AGENT']) . "')";
+        $query = "INSERT INTO log (agent
+            , ip
+            , request_uri ) VALUES ('"
+            . mysql_real_escape_string($_SERVER['HTTP_USER_AGENT']) . "', '"
+            . $geoip . "', '"
+            . $requestURI . "')";
 
         if (!$result = $mysqli->query($query))
             printf("There was an error in the query: %s\n", $mysqli->error);
 
-        $headers = apache_request_headers();
-
-        echo "<pre>";
-        foreach ($headers as $header => $value)
-        {
-            echo "{$header}: {$value}<br />";
-        }
-
-        print_r($_SERVER);
-        echo "</pre>";
     }
 }

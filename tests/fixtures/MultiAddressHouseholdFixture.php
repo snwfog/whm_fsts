@@ -11,8 +11,9 @@ use WHM\Helper;
 
 class MultiAddressHouseholdFixture extends AbstractFixture
 {
-	public function load(ObjectManager $em)
-	{
+
+    public function load(ObjectManager $em)
+    {
         // Load the user test file
         $userArr = $this->loadTestFile();
 
@@ -27,7 +28,6 @@ class MultiAddressHouseholdFixture extends AbstractFixture
         // | Country
         // | TelephoneNumber
         // | Occupation
-
         // Set the number of created users (Max: 20 000)
         $max = 1000;
 
@@ -37,7 +37,7 @@ class MultiAddressHouseholdFixture extends AbstractFixture
         list($id, $lastName, $firstName, $streetAddress,
                 $city, $state, $postalCode, $country,
                 $phoneNumber, $occupation) =
-            explode("|", strtoupper($userArr[0]));
+                explode("|", strtoupper($userArr[0]));
 
         // Further narrow down the variables
         $addressArr = explode(' ', $streetAddress);
@@ -45,24 +45,20 @@ class MultiAddressHouseholdFixture extends AbstractFixture
         $streetName = implode(' ', $addressArr);
 
         // Generate a first household
-        $addr = $this->_createAddress($houseNumber, $streetName, $postalCode,
-                    $city, $state);
+        $addr = $this->_createAddress($houseNumber, $streetName, $postalCode, $city, $state);
         $person = $this->_createMember($firstName, $lastName, $phoneNumber);
         $hh = $this->_createHousehold($addr, $person);
 
         do
         {
             // ob_start();
-
             // Helper::entity_dump($person);
-
             // ob_flush();
-
             // Get the properties that we are looking for
             list($id, $lastName, $firstName, $streetAddress,
-                $city, $state, $postalCode, $country,
-                $phoneNumber, $occupation) =
-            explode("|", strtoupper($userArr[$i]));
+                    $city, $state, $postalCode, $country,
+                    $phoneNumber, $occupation) =
+                    explode("|", strtoupper($userArr[$i]));
 
             // Further narrow down the variables
             $addressArr = explode(' ', $streetAddress);
@@ -74,30 +70,29 @@ class MultiAddressHouseholdFixture extends AbstractFixture
             // This new person has 1/3 chance of becoming
             // a household pricipal, or 2/3 chance
             // of being added to a household as a member
-            switch (rand(1, 9))
+            switch ($i % 6)
             {
-                case 1:
-                case 2:
-                case 3:
+                case 0:
+                case 2:                    
+                case 5:
                     // Flush the household before creating a new one
                     $em->persist($person);
                     $em->persist($hh);
                     $em->flush();
 
-                    // Create a new person
-                    $person = $this->_createMember($firstName, $lastName,
-                        $phoneNumber);
-                    $addr = $this->_createAddress($houseNumber, $streetName,
-                        $postalCode, $city, $state);
+                    // Create a new household
+                    $person = $this->_createMember($firstName, $lastName, $phoneNumber);
+                    $addr = $this->_createAddress($houseNumber, $streetName, $postalCode, $city, $state);
                     $hh = $this->_createHousehold($addr, $person);
-                break;
+                    break;
+                
                 default:
-                    $person = $this->_createMember($firstName, $lastName,
-                        $phoneNumber);
+                    $person = $this->_createMember($firstName, $lastName, $phoneNumber);
                     $hh->addMember($person);
+                    break;
             }
         } while (++$i < $max);
-	}
+    }
 
     private function _createMember($firstName, $lastName, $phoneNumber)
     {
@@ -122,8 +117,7 @@ class MultiAddressHouseholdFixture extends AbstractFixture
         return $hh;
     }
 
-    private function _createAddress($houseNumber, $streetName, $postalCode,
-        $city, $state)
+    private function _createAddress($houseNumber, $streetName, $postalCode, $city, $state)
     {
         // Create new address object
         $addr = new Address();
@@ -163,4 +157,5 @@ class MultiAddressHouseholdFixture extends AbstractFixture
     {
         return file(__DIR__ . "/../users-20000.txt");
     }
+
 }

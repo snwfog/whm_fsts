@@ -43,8 +43,6 @@ class Flag extends Controller implements IRedirectable
             $flag = $this->mflag->createFlag($_POST);
            
 
-
-
         }
         else
         {
