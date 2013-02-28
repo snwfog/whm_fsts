@@ -24,14 +24,14 @@ class Logger
         $headers = apache_request_headers();
 
         $geoip = "Unidentified";
+        $requestURI = str_replace($_SERVER['HTTP_ORIGIN'], "", $_SERVER['HTTP_REFERER']);
 
         echo "<pre>";
-        if (isset($_POST['geoip']))
+        if (array_key_exists("geoip", $_POST))
         {
-            echo "GeoIP: {$_POST['geoip']}";
+            echo "GEOIP: {$_POST['geoip']}<br />";
             $geoip = $_POST['geoip'];
         }
-
 
         foreach ($headers as $header => $value)
         {
@@ -59,9 +59,11 @@ class Logger
 
         // Insert some information
         $query = "INSERT INTO log (agent
-            , ip) VALUES ('"
+            , ip
+            , request_uri ) VALUES ('"
             . mysql_real_escape_string($_SERVER['HTTP_USER_AGENT']) . "', '"
-            . $geoip . "')";
+            . $geoip . "', '"
+            . $requestURI . "')";
 
         if (!$result = $mysqli->query($query))
             printf("There was an error in the query: %s\n", $mysqli->error);
