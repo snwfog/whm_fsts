@@ -1,32 +1,16 @@
 {% extends 'static/base.twig' %}
 
 {% block content %}
-
-
-   
-
     <div class="modal-body">
         <form action="{{ apppath }}appointment/new" method="POST" name="fmember-create">
-
-
             <fieldset>
                 <div class="controls controls-row" id="name-row">
-                    <input class="span5" type="text" name="event_id"
+                    <input type="hidden" name="member-id" value="{{ household["member-id"]}}">
+                    <input class="span5" type="text" name="event-id"
                            placeholder="Event ID"/>
                     <input type="submit" value="Submit">
-
                 </div>
             </fieldset>
-
-            <!-- {% include 'information.form.part.twig' %} -->
-
-            <!-- <input type="hidden" name="household-id" value="{{ household.household_id }}"/> -->
         </form>
     </div>
- 
-
- 
-
-
-
 {% endblock %}

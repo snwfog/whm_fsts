@@ -24,13 +24,15 @@ class CreateAppointment extends WHM\Controller implements WHM\IRedirectable
 
     public function get($member_id)
     {
-        // echo $member_id;
-        $this->display("appointment.modal.twig");
+        echo $member_id;
+        $this->data["household"] = array("member_id" => $member_id);
+        $this->display("appointment.modal.twig", $this->data);
 
     }
 
     public function post()
     {
+        print_r( $_POST);
         if (isset($_POST))
         {
              // $member = $this->appointment->addMember($_POST);
