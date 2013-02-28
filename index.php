@@ -24,7 +24,6 @@ $serves = array
     '.*/analytic' => 'WHM\Controller\Logger',
     '/appointment/:number' => 'WHM\Controller\CreateAppointment',
     '/appointment/new' => 'WHM\Controller\CreateAppointment'
->>>>>>> Create Make Appointment function skeleton
 );
 
 /*-----------------------------------------------

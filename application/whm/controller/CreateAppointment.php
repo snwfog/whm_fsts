@@ -7,25 +7,25 @@ namespace WHM\Controller;
 use WHM;
 use WHM\Controller;
 use WHM\IRedirectable;
-use WHM\Model\Appointement;
+use WHM\Model\Appointment;
 
 class CreateAppointment extends WHM\Controller implements WHM\IRedirectable
 {
     protected $data = array("errors" => array(), "form" => array());
-   
-    protected $createAppointment;
+    private $appointment;
+
     public function __construct()//array $args = null
     {
         // $this->data = $args;
         parent::__construct();
       //  WHM\Helper::backtrace();
-        $this->$appointment = new Appointment();
+        $this->appointment = new Appointment();
     }
 
     public function get($member_id)
     {
         // echo $member_id;
-                $this->display("appointment.modal.twig");
+        $this->display("appointment.modal.twig");
 
     }
 
