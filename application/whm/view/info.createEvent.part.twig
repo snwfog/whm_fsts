@@ -1,0 +1,9 @@
+{% block create_event_info_part_twig %}
+    <fieldset>
+    	<legend>Description</legend>
+        <div class="controls controls-row" id="name-row">
+            <input class="span5" type="textarea" cols="5" rows="5" name="Description" placeholder="Write here..." value="{{ event["description"] }}"/>
+
+        </div>
+    </fieldset>
+{% endblock create_event_info_part_twig %}

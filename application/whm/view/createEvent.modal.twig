@@ -1,0 +1,33 @@
+{% block add_event_modal %}
+    <div id="create-event-modal"
+         class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+            <h3>Create Event</h3>
+        </div>
+
+        <div class="modal-body">
+            <form action="???" method="POST" name="???" id="???">
+
+                {% include 'base.createEvent.part.twig' %}
+
+                {% include 'date.createEvent.part.twig' %}
+
+                {% include 'info.createEvent.part.twig' %}
+
+            </form>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true"> Close</button>
+            <button id="household-create-clear" class="btn btn-warning" aria-hidden="true"> Clear</button>
+            <button id="create-event-save" class="btn btn-success"><i class="icon-ok icon-white submit"></i> Create Event</button>
+            <button id="create-template-save" class="btn btn-success"><i class="icon-ok icon-white submit"></i> Save Template </button>
+
+        </div>
+    </div>
+
+
+{% endblock add_event_modal %}
