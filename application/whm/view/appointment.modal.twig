@@ -5,7 +5,7 @@
         <form action="{{ apppath }}appointment/new" method="POST" name="fmember-create">
             <fieldset>
                 <div class="controls controls-row" id="name-row">
-                    <input type="hidden" name="member-id" value="{{ household["member-id"]}}">
+                    <input type="hidden" name="member-id" value="{{ household["member_id"]}}">
                     <input class="span5" type="text" name="event-id"
                            placeholder="Event ID"/>
                     <input type="submit" value="Submit">
