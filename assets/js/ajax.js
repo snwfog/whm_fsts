@@ -11,7 +11,7 @@ $(function() {
   $.ajaxSetup({
     cache: false
   });
-  $.post('/');
+  $.post('logger');
   noteAlert = function(msg, type) {
     var n;
     return n = noty({
