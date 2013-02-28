@@ -42,10 +42,20 @@
                         data-toggle="modal" data-target="#add-flag-modal">
                     <i class="icon-flag icon-white"></i> Flag
                 </button>
+                <button class="btn btn-success btn-large" 
+                        id="create-member-submit-btn"
+                        name="create-member-submit-btn" type="button"
+                        data-toggle="modal" data-target="#add-member-modal">
+                    <i class="icon-plus icon-white"></i><i class="icon-user icon-white"></i> Add New Member
+                </button>
             </div>
 
             <input type="hidden" name="household-id" value="{{ household["household_id"] }}"/>
             <input type="hidden" name="member-id" value="{{ household["member-id"] }}"/>
+    
+            
+
+
 
         </form>
 
@@ -81,15 +91,8 @@
                 {% endfor %}
             </ul>
         </div>
-        <div class="well">
-            <button class="btn btn-success btn-block btn-large" id="create-member-submit-btn"
-                    name="create-member-submit-btn" type="button"
-                    data-toggle="modal" data-target="#add-member-modal">
-                <i class="icon-plus icon-white"></i><i class="icon-user icon-white"></i> Add New Member
-            </button>
-
-            <a href="{{ apppath }}appointment/{{ household["member-id"]}}">Make Appointment</a>
-        </div>
+        <br/>
+             <a href="{{ apppath }}appointment/{{ household["member-id"]}}">Make Appointment</a>
     </div>
 {% endblock left1 %}
 
@@ -132,7 +135,7 @@
                         <div class="accordion-group">
                             <div class="accordion-heading">
                                 {# TSK TSK TSK! QUICK STYLE HACK! MUST CORRECT! #}
-                                <div class="alert {{ alerttype[notetype] }}" style="padding: 0px; margin: 0px;">
+                                <div style="padding: 0px; margin: 0px;">
                                     <a class="accordion-toggle" data-toggle="collapse"
                                        data-parent="#flag-accordion" href="#collapse{{ i }}">
                                         <strong>{{ "now"|date("d-m-y") }}</strong>
