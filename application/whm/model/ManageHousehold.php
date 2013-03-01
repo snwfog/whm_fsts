@@ -57,6 +57,13 @@ class ManageHousehold {
     {
         // to do
     }
+    
+    /**
+     * Returns the household with the passed id.
+     * 
+     * @param int $id 
+     * @return Household
+     */
     public function findHousehold($id)
     {
 
@@ -64,6 +71,9 @@ class ManageHousehold {
         return $household;
     }
 
+    /*
+     * @return HouseholdMember
+     */
     public function findMember($id)
     {
         $member = $this->em->find("WHM\model\HouseholdMember", (int) $id);

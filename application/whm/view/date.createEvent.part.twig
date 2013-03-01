@@ -1,0 +1,16 @@
+{% block create_event_date_part_twig %}
+    <fieldset>
+    	<legend>Date and Time</legend>
+        <div class="controls controls-row" id="name-row">
+            <input class="span5" type="text" name="Start Time" placeholder="Start Time" value="{{ event["starttime"] }}"/>
+           
+            <input class="span3" type="text" name="End Time" maxlength="12" placeholder="End Time" value="{{ event["endtime"] }}"/>
+
+            <input class="span3" type="text" name="Date" maxlength="12" placeholder="Date" value="{{ event["date"] }}"/>
+
+        </div>
+        <div class="controls controls-row">
+         	<input class="span5" type="text" name="Repeating" maxlength="12" placeholder="Repeating" value="{{ event["repeating"] }}"/>
+         </div>
+    </fieldset>
+{% endblock create_event_date_part_twig %}

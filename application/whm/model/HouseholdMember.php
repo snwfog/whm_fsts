@@ -315,7 +315,7 @@ class HouseholdMember
     }
 
     /**
-     * @return
+     * @return Household
      */
     public function getHousehold()
     {

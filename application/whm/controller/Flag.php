@@ -39,7 +39,7 @@ class Flag extends Controller implements IRedirectable
         {
        
             $this->data["form"] = $_POST;
-
+         //   $flag = $this->mflag->updateFlag($_POST);
             $flag = $this->mflag->createFlag($_POST);
            
 
