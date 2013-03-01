@@ -34,7 +34,7 @@ class CreateAppointment extends WHM\Controller implements WHM\IRedirectable
         print_r($_POST);
         if (isset($_POST))
         {
-             // $member = $this->manageappointment->addAppointment($_POST);
+            $member = $this->manageappointment->addAppointment($_POST['member-id'], $_POST['event-id']);
         }
         else
         {
