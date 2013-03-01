@@ -6,3 +6,20 @@
     RewriteRule ^(.*)$ index.php/$1 [QSA]
 </IfModule>
 
+# Allow for PHP to handle utf-8 code natively
+AddDefaultCharset utf-8
+
+# You must also add the following code in your php.ini file
+# default_charset = "utf-8"
+# mbstring.internal_encoding=utf-8
+# mbstring.http_output=UTF-8
+# mbstring.encoding_translation=On
+# mbstring.func_overload=6
+
+# You must also make sure that you have your database created as utf8_
+
+# Finally, make sure you have this in all of the HTML header
+# <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+# You can see the issue on
+# http://stackoverflow.com/questions/1605760/how-to-best-configure-php-to-handle-a-utf-8-website

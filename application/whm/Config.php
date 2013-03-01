@@ -25,6 +25,7 @@ define('TWIG_VIEW_PATH', 'application/whm/view');
 define('DOCTRINE_MODEL_PATH', 'application/whm/model');
 define('DOCTRINE_PROXY_PATH', 'application/whm/proxy');
 define('APPPATH', 'application');   // Folder for controller, view, model
+
 /*------------------------------------------------------------------------------
  * COMMENTS:
  *

@@ -5,23 +5,23 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @Entity @Table(name="household_members")
- **/
+ */
 class HouseholdMember
 {
     /**
      * @Id @Column(type="integer")
      * @GeneratedValue
-     **/
+     */
     protected $id;
 
     /**
      * @Column(nullable=TRUE)
-     **/
+     */
     protected $first_name;
 
     /**
      * @Column(nullable=TRUE)
-     **/
+     */
     protected $last_name;
 
     /**
@@ -41,27 +41,27 @@ class HouseholdMember
 
     /**
      * @Column(nullable=TRUE, length=2)
-     **/
+     */
     protected $work_status;
 
     /**
      * @Column(nullable=TRUE)
-     **/
+     */
     protected $welfare_number;
 
     /**
      * @Column(nullable=TRUE)
-     **/
+     */
     protected $referral;
 
     /**
      * @Column(nullable=TRUE, length=2)
-     **/
+     */
     protected $language;
 
 	/**
      * @Column(nullable=TRUE, length=2)
-     **/
+     */
     protected $marital_status;
 
     /**
@@ -73,12 +73,12 @@ class HouseholdMember
      * TO BE CHANGED TO TABLES...
      *
      * @Column(nullable=TRUE)
-     **/
+     */
     protected $origin;
 
     /**
      * @Column(type="datetime")
-     **/
+     */
     protected $first_visit_date;
 
     /**
@@ -283,10 +283,10 @@ class HouseholdMember
         return $this->first_visit_date;
     }
 
-    public function addEvent(Event $events)
+    public function registerEvent(Event $events)
     {
         $this->events[] = $events;
-        $events->addParticipant2($this);
+        $events->addParticipant($this);
     }
 
     /**
@@ -296,7 +296,7 @@ class HouseholdMember
      * 
      * @param \WHM\Model\Event $events
      */
-    public function addEvent2(Event $events)
+    public function addEvent(Event $events)
     {
         $this->events[] = $events;
     }    
