@@ -8,8 +8,9 @@
 
             <input class="span3" type="text" name="Date" maxlength="12" placeholder="Date" value="{{ event["date"] }}"/>
 
-            <input class="span5" type="text" name="Repeating" maxlength="12" placeholder="Repeating" value="{{ event["repeating"] }}"/>
-
         </div>
+        <div class="controls controls-row">
+         	<input class="span5" type="text" name="Repeating" maxlength="12" placeholder="Repeating" value="{{ event["repeating"] }}"/>
+         </div>
     </fieldset>
 {% endblock create_event_date_part_twig %}
