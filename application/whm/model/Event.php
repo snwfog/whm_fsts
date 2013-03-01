@@ -31,7 +31,7 @@ class Event
         return $this->id;
     }
 
-    public function registeredParticipant(HouseholdMember $participant)
+    public function registerParticipant(HouseholdMember $participant)
     {
         $this->participants[] = $participant;
         $participant->addEvent($this);
@@ -52,6 +52,11 @@ class Event
     public function getParticipants()
     {
         return $this->participants;
+    }
+
+    public function __construct()
+    {
+
     }
 }
 

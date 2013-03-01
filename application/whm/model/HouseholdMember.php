@@ -283,7 +283,7 @@ class HouseholdMember
         return $this->first_visit_date;
     }
 
-    public function registerEvent(Event $events)
+    public function attendEvent(Event $events)
     {
         $this->events[] = $events;
         $events->addParticipant($this);
