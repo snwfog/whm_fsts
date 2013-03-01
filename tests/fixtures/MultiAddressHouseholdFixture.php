@@ -17,6 +17,8 @@ class MultiAddressHouseholdFixture extends AbstractFixture
         // Load the user test file
         $userArr = $this->loadTestFile();
 
+        ob_start();
+
         // Test file format
         //   Number
         // | GivenName
@@ -39,6 +41,9 @@ class MultiAddressHouseholdFixture extends AbstractFixture
                 $phoneNumber, $occupation) =
                 explode("|", strtoupper($userArr[0]));
 
+        echo $userArr[0] . PHP_EOL;
+        ob_flush();
+
         // Further narrow down the variables
         $addressArr = explode(' ', $streetAddress);
         $houseNumber = array_shift($addressArr);
@@ -59,6 +64,9 @@ class MultiAddressHouseholdFixture extends AbstractFixture
                     $city, $state, $postalCode, $country,
                     $phoneNumber, $occupation) =
                     explode("|", strtoupper($userArr[$i]));
+
+            echo $lastName . PHP_EOL;
+            ob_flush();
 
             // Further narrow down the variables
             $addressArr = explode(' ', $streetAddress);

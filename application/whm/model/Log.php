@@ -3,9 +3,12 @@
 namespace WHM\Model;
 
 /**
- * Class Log
+ *
+ * Do not need to be tested, nor include in the project's description.
+ * This file is not part of the project.
  *
  * Used to log user activity on the site through AJAX.
+ * Work in progress... - Charles
  *
  * @Entity @Table(name="logger")
  * @package WHM\Model

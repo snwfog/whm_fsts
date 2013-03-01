@@ -4,6 +4,15 @@ namespace WHM\Controller;
 
 use \WHM\Model\Log;
 
+/**
+ *
+ * Do not need to be tested, nor include in the project's description.
+ * This file is not part of the project.
+ *
+ * Class Logger
+ * @package WHM\Controller
+ *
+ */
 class Logger
 {
     private $dbconfig = array
