@@ -1,30 +1,41 @@
 <?php
-namespace WHM\Model;
-use WHM;
-use WHM\Application;
 
+namespace WHM\Model;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * @Entity @Table(name="participants_events")
+ **/
 class Appointment
 {
-    private $em;
+    /**
+     * @Column(length=2)
+     **/
+    protected $household_member_id;
 
-    public function __construct()
+    /**
+     * @Column(length=2)
+     **/
+    protected $event_id;
+
+    public function setEventId($event_id)
     {
-        $this->em = Application::em();
+        $this->event_id=event_id;
     }
 
-    public function addAppointment($data)
+    public function getEventId()
     {
-        // $household = $this->findHousehold($data["household-id"]);
-        // $member = $this->createMember($data);
-        // $member->setHousehold($household);
-        // $this->em->persist($member);
-        // $this->em->flush();
-        // return $member;
+        return $this->event_id;
     }
 
-   
+    public function setHouseholdMemberId($household_member_id)
+    {
+        $this->household_member_id=$household_member_id;
+    }
 
-
-
+    public function getHouseholdMemberId()
+    {
+        return $household_member_id;
+    }
 
 }
