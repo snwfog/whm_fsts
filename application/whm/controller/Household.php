@@ -7,12 +7,14 @@ use \WHM\Controller;
 use \WHM\IRedirectable;
 use \WHM\Model\ManageHousehold;
 use \WHM\Model\ManageFlag;
+use \WHM\Model\Flag;
 
 class Household extends Controller implements IRedirectable
 {
     public $data = array( "errors" => array(), "form" => array());
     private $manageHousehold;
     private $manageFlag;
+    private $flag;
 
     public function __construct(array $args = null)
     {
@@ -21,6 +23,7 @@ class Household extends Controller implements IRedirectable
         //Helper::backtrace();
         $this->manageHousehold = new ManageHousehold();
         $this->manageFlag = new ManageFlag();
+        $this->flag = new Flag();
 
     }
 
@@ -35,9 +38,12 @@ class Household extends Controller implements IRedirectable
             $data = $this->extractHouseholdInfo($household_id, $member_id);
             $flagDescriptors = $this->manageFlag->getFlagDescriptors();
             $formattedDescriptor = $this->formatDescriptor($flagDescriptors);
+            $flagm = $this->flag->getMessage();
+            $flagm = $this->extractMessage();
             $data = array(
                             "household" => $data,
                             "flagDescriptors" => $formattedDescriptor,
+                            "fMessage"=> $flagm,
                     );
             $this->display("household.create.twig", $data);
         }
@@ -171,6 +177,23 @@ class Household extends Controller implements IRedirectable
         }
 
         return $data;
+    }
+
+    private function extractMessage()
+    {
+      /*  $flag = new Flag();
+        if(!is_null($flag))
+        {
+        $flagm= array("message" => $this->flag->getMessage(),);
+        }
+        return $flagm;
+*/
+
+        $flag = new Flag();
+        $flagm= array("message" => $this->flag->getMessage(),);
+        
+        return $flagm;
+
     }
 }
 

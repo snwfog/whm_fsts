@@ -122,41 +122,33 @@
                 <div class="tab-pane" id="tab2">
                     <legend>Flags</legend>
                     <div class="accordion" id="flag-accordion">
-                        {% for i in range(0, random(6) + 1) %}
-                        {% set notetype = random(['success', 'warning', 'important', 'info']) %}
-                        {% set alerttype =
-                            {
-                                'success': 'alert-success',
-                                'warning': '',
-                                'important': 'alert-error',
-                                'info': 'alert-info'
-                            }
-                        %}
-                        <div class="accordion-group">
-                            <div class="accordion-heading">
-                                {# TSK TSK TSK! QUICK STYLE HACK! MUST CORRECT! #}
-                                <div style="padding: 0px; margin: 0px;">
-                                    <a class="accordion-toggle" data-toggle="collapse"
-                                       data-parent="#flag-accordion" href="#collapse{{ i }}">
-                                        <strong>{{ "now"|date("d-m-y") }}</strong>
-                                        <div class="pull-right">
-                                            <span class="label label-{{ notetype }}"><i class="icon-tag icon-white"></i> {{ notetype }}</span>
-                                        </div>
-                                    </a>
+                        {% set i = 0 %}
+                        {%  for flagD in flagDescriptors %}                    
+                            {% set i = i + 1 %}
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    {# TSK TSK TSK! QUICK STYLE HACK! MUST CORRECT! #}
+                                    <div style="padding: 0px; margin: 0px;">
+                                        <a class="accordion-toggle" data-toggle="collapse"
+                                           data-parent="#flag-accordion" href="#collapse{{ i }}">
+                                            <strong>{{ "now"|date("d-m-y") }}</strong>
+                                            <div class="pull-right">
+                                                <span class="label label-{{ flagD["flag-meaning"] | lower }}"><i class="icon-tag icon-white"></i> {{ flagD["flag-meaning"] }}</span>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div id="collapse{{ i }}" class="accordion-body collapse">
-                                <div class="accordion-inner" style="padding: 0px">
 
-                                    <div class="alert {{ alerttype[notetype] }}" style="margin: 0px;">
-                                    <p>
-                                        Nam justo massa, dictum at varius eu, eleifend in massa. Quisque dictum egestas mi vitae blandit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis dolor orci, hendrerit ultrices mollis et, dignissim sit amet massa. Nam enim tellus, tincidunt at sollicitudin nec, fermentum at nulla. Integer eget magna turpis, nec placerat massa. Nulla sodales lorem magna.
-                                    </p>
+
+                                <div id="collapse{{ i }}" class="accordion-body collapse">
+                                    <div class="accordion-inner" style="padding: 0px">                         
+                                        <div class="alert alert-{{ flagD["flag-meaning"] | lower }}" style="margin: 0px;">
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         {% endfor %}
                     </div>
                 </div>
