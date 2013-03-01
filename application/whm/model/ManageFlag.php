@@ -24,8 +24,10 @@ class ManageFlag
     {
         $flag = new Flag();
         $flag->setMessage($data["message"]); 
-        $household_member = $this->mhousehold->findMember($data["member-id"]); 
-        $flag->setHouseholdMember($household_member);    
+        $household_member = $this->mhousehold->findMember($data["member-id"]);
+        $flag_descriptors = $this->findDescriptors($data["flag-descriptor"]); 
+        $flag->setHouseholdMember($household_member);
+        $flag->setDescriptor($flag_descriptors);    
         $this->em->persist($flag);
         $this->em->flush();
 
@@ -33,12 +35,18 @@ class ManageFlag
 
     }
 
+    public function findDescriptors($id)
+    {
+        $flag_descriptors = $this->em->find("WHM\model\FlagDescriptor", (int) $id);
+        return $flag_descriptors;
+    }
+
     public function getFlagDescriptors(){
         $query = $this->em->createQuery('SELECT u FROM WHM\Model\FlagDescriptor u');
         $flagDescriptors = $query->getResult();
         return $flagDescriptors;
     }
-    
+
     public function updateFlag($data)
     {
         $data = $this->formatData($data);
