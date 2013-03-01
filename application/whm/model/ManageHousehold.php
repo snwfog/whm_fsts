@@ -71,6 +71,9 @@ class ManageHousehold {
         return $household;
     }
 
+    /*
+     * @return HouseholdMember
+     */
     public function findMember($id)
     {
         $member = $this->em->find("WHM\model\HouseholdMember", (int) $id);
