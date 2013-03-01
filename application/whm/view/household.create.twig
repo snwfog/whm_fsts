@@ -144,7 +144,11 @@
                                 <div id="collapse{{ i }}" class="accordion-body collapse">
                                     <div class="accordion-inner" style="padding: 0px">                         
                                         <div class="alert alert-{{ flagD["flag-meaning"] | lower }}" style="margin: 0px;">
-
+                                             {% for flag in flagMessage %} 
+                                                <p>
+                                                    {{ flag["message"] }}
+                                                </p>
+                                             {% endfor %}
                                         </div>
                                     </div>
                                 </div>

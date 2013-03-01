@@ -41,9 +41,10 @@ class ManageFlag
         return $flag_descriptors;
     }
 
-    public function findFlag($string)
+    public function getFlagMessage($member_id)
     {
-        $flag_message = $this->em->find("WHM\model\Flag", (string) $string);
+        $query = $this->em->createQuery('SELECT u FROM WHM\Model\Flag u WHERE u.household_member=' . $member_id);
+        $flag_message = $query->getResult();
         return $flag_message;
     }
 

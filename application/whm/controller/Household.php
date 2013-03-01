@@ -38,12 +38,12 @@ class Household extends Controller implements IRedirectable
             $data = $this->extractHouseholdInfo($household_id, $member_id);
             $flagDescriptors = $this->manageFlag->getFlagDescriptors();
             $formattedDescriptor = $this->formatDescriptor($flagDescriptors);
-            $flagm = $this->flag->getMessage();
-            $flagm = $this->extractMessage();
+            $flagMessage = $this->manageFlag->getFlagMessage($member_id);
+            $extractM = $this->extractMessage($flagMessage);
             $data = array(
                             "household" => $data,
                             "flagDescriptors" => $formattedDescriptor,
-                            "fMessage"=> $flagm,
+                            "flagMessage"=> $extractM,
                     );
             $this->display("household.create.twig", $data);
         }
@@ -179,7 +179,7 @@ class Household extends Controller implements IRedirectable
         return $data;
     }
 
-    private function extractMessage()
+    private function extractMessage($flagMessage)
     {
       /*  $flag = new Flag();
         if(!is_null($flag))
@@ -188,12 +188,16 @@ class Household extends Controller implements IRedirectable
         }
         return $flagm;
 */
+        $data = array();
+        $count = 0;
+        foreach( $flagMessage as $flag){
+            $data[$count++] = array(
+                                  "message" => $flag->getMessage(),
+                              );
+        }
 
-        $flag = new Flag();
-        $flagm= array("message" => $this->flag->getMessage(),);
+        return $data;
         
-        return $flagm;
-
     }
 }
 

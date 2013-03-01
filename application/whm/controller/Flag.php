@@ -37,12 +37,8 @@ class Flag extends Controller implements IRedirectable
       print_r($_POST);
         if (isset($_POST))
         {
-       
-            $this->data["form"] = $_POST;
-         //   $flag = $this->mflag->updateFlag($_POST);
-            $flag = $this->mflag->createFlag($_POST);
-           
-
+            $flag = $this->mflag->createFlag($_POST);         
+            $this->redirect("/household/" . $_POST["household-id"] . "/" . $_POST["member-id"]);
         }
         else
         {
