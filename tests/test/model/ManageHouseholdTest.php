@@ -95,10 +95,10 @@ class ManageHouseholdTest extends PHPUnit_Framework_TestCase
 
     public function testRemoveHousehold()
     {
-//        $this->manageHousehold->removeHousehold(3);        
-//        $this->assertThat(
-//                $this->manageHousehold->findHousehold(3), 
-//                $this->isNull());
+        $this->manageHousehold->removeHousehold(3);        
+        $this->assertThat(
+                $this->manageHousehold->findHousehold(3), 
+                $this->equalTo(null));
     }
 
     public function testFindAllHouseholds()
@@ -115,7 +115,8 @@ class ManageHouseholdTest extends PHPUnit_Framework_TestCase
 
         $this->assertThat($memberToFind->getId(), $this->equalTo(7));
         $this->assertThat(
-                $memberToFind->getHousehold(), $this->manageHousehold->findHousehold(4)
+            $memberToFind->getHousehold(), 
+            $this->equalTo($this->manageHousehold->findHousehold(4))
         );
 
         $this->assertThat($memberToFind->getFirstName(), $this->equalTo('FAIRBAIRN'));
