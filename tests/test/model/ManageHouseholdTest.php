@@ -133,41 +133,8 @@ class ManageHouseholdTest extends PHPUnit_Framework_TestCase
         $this->manageHousehold->addMember($this->data);
         
         $household = $this->manageHousehold->findHousehold(3);
-
-        $principal = $household->getHouseholdPrincipal();
-        $address = $household->getAddress();
-
-        $this->assertThat($principal->getId(), $this->equalTo(6));
-        $this->assertThat($principal->getLastName(), $this->equalTo('John'));
-        $this->assertThat($principal->getFirstName(), $this->equalTo('Georges'));
-        $this->assertThat($address->getId(), $this->equalTo(3));
-        $this->assertThat($address->getStreet(), $this->equalTo('Mckay'));
-        $this->assertThat($address->getAptNumber(), $this->equalTo('3'));
-    }
-
-    public function testCreateMember()
-    {
-
-    }
-
-    public function testCreateAddress()
-    {
         
-    }
-
-    public function testUpdateMember()
-    {
-        
-    }
-
-    public function testUpdateAddress()
-    {
-        
-    }
-
-    public function testFormatData()
-    {
-        
+        $this->assertThat(sizeof($household), $this->equalTo(2));
     }
 
 }
