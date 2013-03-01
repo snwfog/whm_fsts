@@ -2,7 +2,8 @@
 namespace WHM\Model;
 use WHM;
 use WHM\Application;
-use WHM\Model\Appointment;
+use WHM\Model\Event;
+use WHM\Model\HouseholdMember;
 
 /**
  * ManageAppointment appointment
@@ -18,21 +19,26 @@ class ManageAppointment
 
     public function addAppointment($data)
     {
-        // $household = $this->findHousehold($data["household-id"]);
-        $appointment = $this->createAppointment($data);
-        // $member->setHousehold($household);
-        $this->em->persist($appointment);
-        $this->em->flush();
-        return $appointment;
+        // print_r($data);
+        // $appointment = $this->createAppointment($data);
+        // $this->em->persist($appointment);
+        // $this->em->flush();
+        // return $appointment;
+        $householdmember = new HouseholdMember();
+        $event = new Event();
+
+        // $this->householdmember->addEvent($event)
+
+
     }
 
     //Private Methods
     private function createAppointment($data)
     {
-        $appointment = new Appointment();
+        // $appointment = new Appointment();
 
-        $appointment->setHouseholdMemberId($data["member_id"]);
-        $appointment->setEventId($data["event_id"]);
+        // $appointment->setHouseholdMemberId($data["member_id"]);
+        // $appointment->setEventId($data["event_id"]);
     }
 
 }
