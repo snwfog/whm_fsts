@@ -8,6 +8,6 @@ class IndexControllerTest extends ControllerTestCase
     public function testGet()
     {        
         $this->request('GET', '/');
-        $this->assertRegExp("/Mission Bon Accueil/", $this->client->getResponse()->getContent());
+        $this->assertRegExp("/Welcome Hall Mission/", $this->client->getResponse()->getContent());
     }
 }
