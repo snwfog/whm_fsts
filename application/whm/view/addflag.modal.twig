@@ -12,13 +12,6 @@
             <form class="form-horizontal" action="{{ apppath }}flag/new" method="POST" name="flag-create-form" id="">
                 <fieldset>
                     <div class="control">
-                        {%  for flagD in flagDescriptors %}
-                            <!-- FIX: Remove Radio button and have active submit value -->
-                            <input type="radio" name="flag-descriptor" value="{{ flagD["flag-id"] }}">
-                            <button name="flag-descriptor" type="button" class="btn btn-{{ flagD["flag-meaning"] | lower }}">
-                                <i class="icon-tag icon-white"></i> {{ flagD["flag-meaning"] }}
-                            </button>
-                        {%  endfor %}
                         <!--
                         <div id="flag-types" class="btn-group" data-toggle="buttons-radio">
                             <button type="button" class="btn btn-success"><i class="icon-tag icon-white"></i> Success</button>
@@ -39,21 +32,29 @@
                     
                       <input type="hidden" name="member-id" value="{{ household["member-id"] }}"/>
                       <input type="hidden" name="household-id" value="{{ household.household_id}}"/>
-                      
-
-
-                    <input class="btn" type="submit" value="Submit">
 
                 </fieldset>
+
+
+
+                <div class="modal-footer">
+                    <!--
+                    <button class="btn" data-dismiss="modal" aria-hidden="true"> Close</button>
+                    <button id="household-create-clear" class="btn btn-warning" aria-hidden="true"> Clear</button>
+                    <button id="create-household-save" class="btn btn-success"><i class="icon-ok icon-white submit"></i> Save changes</button>
+                    -->
+                    {%  for flagD in flagDescriptors %}
+                        <!-- FIX: Remove Radio button and have active submit value -->
+                        <button name="flag-descriptor" type="submit" class="btn btn-{{ flagD["flag-meaning"] | lower }}" value="{{ flagD["flag-id"] }}">
+                        <i class="icon-tag icon-white"></i> {{ flagD["flag-meaning"] }}
+                        </button>
+                    {%  endfor %}
+
+                </div>
             </form>
         </div>
 
-        <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true"> Close</button>
-            <button id="household-create-clear" class="btn btn-warning" aria-hidden="true"> Clear</button>
-            <button id="create-household-save" class="btn btn-success"><i class="icon-ok icon-white submit"></i> Save changes</button>
 
-        </div>
     </div>
 
 {% endblock add_flag_modal %}

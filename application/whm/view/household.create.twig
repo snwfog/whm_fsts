@@ -49,10 +49,6 @@
 
             <input type="hidden" name="household-id" value="{{ household["household_id"] }}"/>
             <input type="hidden" name="member-id" value="{{ household["member-id"] }}"/>
-    
-            
-
-
 
         </form>
 
@@ -126,7 +122,7 @@
                     <legend>Flags</legend>
                     <div class="accordion" id="flag-accordion">
                         {% set i = 0 %}
-                        {%  for flagD in flagDescriptors %}                    
+                        {%  for flag in flags %}                    
                             {% set i = i + 1 %}
                             <div class="accordion-group">
                                 <div class="accordion-heading">
@@ -136,7 +132,7 @@
                                            data-parent="#flag-accordion" href="#collapse{{ i }}">
                                             <strong>{{ "now"|date("d-m-y") }}</strong>
                                             <div class="pull-right">
-                                                <span class="label label-{{ flagD["flag-meaning"] | lower }}"><i class="icon-tag icon-white"></i> {{ flagD["flag-meaning"] }}</span>
+                                                <span class="label label-{{ flag["flag-meaning"] | lower }}"><i class="icon-tag icon-white"></i> {{ flag["flag-meaning"] }}</span>
                                             </div>
                                         </a>
                                     </div>
@@ -146,12 +142,10 @@
 
                                 <div id="collapse{{ i }}" class="accordion-body collapse">
                                     <div class="accordion-inner" style="padding: 0px">                         
-                                        <div class="alert alert-{{ flagD["flag-meaning"] | lower }}" style="margin: 0px;">
-                                             {% for flag in flagMessage %} 
-                                                <p>
-                                                    {{ flag["message"] }}
-                                                </p>
-                                             {% endfor %}
+                                        <div class="alert alert-{{ flag["flag-meaning"] | lower }}" style="margin: 0px;">
+                                            <p>
+                                                {{ flag["message"] }}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

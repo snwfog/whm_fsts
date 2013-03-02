@@ -35,15 +35,29 @@ class Household extends Controller implements IRedirectable
         }
 
         if(!is_null($household_id)){
-            $data = $this->extractHouseholdInfo($household_id, $member_id);
+            //Get household and as default, get household principal if specific member is not specified.
+            $household = $this->manageHousehold->findHousehold($household_id);
+            if(is_null($member_id)){
+                $member = $household->getHouseholdPrincipal();
+            }else{
+                $member = $this->manageHousehold->findMember($member_id);
+            }
+
+            $data = $this->formatHouseholdInfo($household, $member);
+            
+            //Get flag descriptor for creating flags
             $flagDescriptors = $this->manageFlag->getFlagDescriptors();
             $formattedDescriptor = $this->formatDescriptor($flagDescriptors);
-            $flagMessage = $this->manageFlag->getFlagMessage($member_id);
-            $extractM = $this->extractMessage($flagMessage);
+
+            //Get member flags
+            $flags = $member->getFlags();
+            $formattedFlags = $this->formatMessage($flags);
+            
+
             $data = array(
                             "household" => $data,
                             "flagDescriptors" => $formattedDescriptor,
-                            "flagMessage"=> $extractM,
+                            "flags"=> $formattedFlags,
                     );
             $this->display("household.create.twig", $data);
         }
@@ -95,18 +109,12 @@ class Household extends Controller implements IRedirectable
     $manageHouse->removeHousehold($household_id);
     }
 
-    public function extractHouseholdInfo($household_id, $member_id)
+
+
+    public function formatHouseholdInfo($household, $member)
     {
-        $mHousehold = $this->manageHousehold;
-        $household = $mHousehold->findHousehold($household_id);
+        
         $principal = $household->getHouseholdPrincipal();
-
-        if(is_null($member_id)){
-            $member = $household->getHouseholdPrincipal();
-        }else{
-            $member = $mHousehold->findMember($member_id);
-        }
-
         $address = $household->getAddress();
         $dependents = $household->getMembers();
          
@@ -135,7 +143,7 @@ class Household extends Controller implements IRedirectable
         $date = $date->format("m-d-Y");
 
         $data = array(
-                        "household_id" => $household_id,
+                        "household_id" => $household->getId(),
                         //PrincipalMember or Selected Member
                         "member-id" => $member->getId(),
                         "first-name" => $member->getFirstName(),
@@ -179,25 +187,21 @@ class Household extends Controller implements IRedirectable
         return $data;
     }
 
-    private function extractMessage($flagMessage)
+    private function formatMessage($flagMessage)
     {
-      /*  $flag = new Flag();
-        if(!is_null($flag))
-        {
-        $flagm= array("message" => $this->flag->getMessage(),);
-        }
-        return $flagm;
-*/
+
         $data = array();
         $count = 0;
         foreach( $flagMessage as $flag){
+            $flagD = $flag->getDescriptor();
             $data[$count++] = array(
                                   "message" => $flag->getMessage(),
+                                  "flag-color" => $flagD->getColor(),
+                                  "flag-meaning" => $flagD->getMeaning(),
                               );
         }
 
-        return $data;
-        
+        return $data;      
     }
 }
 
