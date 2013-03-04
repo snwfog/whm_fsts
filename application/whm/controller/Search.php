@@ -7,6 +7,7 @@ use \WHM\Controller;
 use \WHM\IRedirectable;
 use \WHM\Model\ManageHousehold;
 use \WHM\Model\HouseholdMember;
+
 class Search extends Controller implements IRedirectable
 {
     public function __construct(array $args = null)
@@ -22,16 +23,21 @@ class Search extends Controller implements IRedirectable
         $this->display("search_view.twig");
     }
 
-
-
     public function put()
     {
 
     }
 
    public function post()
-   {
+   { 
+        if (isset($_POST))
+        {
+            $this->redirect("household/" . $_POST["household-id"]);
+        }
+        else
+        {
 
+        }
    }
 
 }

@@ -9,10 +9,10 @@
         </div>
 
         <div class="modal-body">
-                <form class="form-search">
+                <form class="form-search" action="{{ apppath }}search" method="POST">
                     <div id="modal-search" class="input-prepend">
                         <span class="add-on"><i class="icon-user"></i></span>
-                        <input type="text" class="span12 search-query">
+                        <input type="text" class="span12 search-query" name="household-id">
                     </div>
                 </form>
         </div>

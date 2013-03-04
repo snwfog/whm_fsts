@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="modal-body">
-        <form action="{{ apppath }}appointment/new" method="POST" name="fmember-create">
+        <form action="{{ apppath }}appointment/new" method="POST" >
             <fieldset>
                 <div class="controls controls-row" id="name-row">
                     <input type="hidden" name="member-id" value="{{ household["member_id"]}}">
