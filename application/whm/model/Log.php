@@ -4,8 +4,8 @@ namespace WHM\Model;
 
 /**
  *
- * Do not need to be tested, nor include in the project's description.
  * This file is not part of the project.
+ * Do not need to be tested, nor include in the project's description.
  *
  * Used to log user activity on the site through AJAX.
  * Work in progress... - Charles

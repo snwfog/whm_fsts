@@ -6,8 +6,8 @@ use \WHM\Model\Log;
 
 /**
  *
- * Do not need to be tested, nor include in the project's description.
  * This file is not part of the project.
+ * Do not need to be tested, nor include in the project's description.
  *
  * Class Logger
  * @package WHM\Controller
@@ -33,7 +33,8 @@ class Logger
         $headers = apache_request_headers();
 
         $geoip = "Unidentified";
-        $requestURI = str_replace($_SERVER['HTTP_ORIGIN'], "", $_SERVER['HTTP_REFERER']);
+        $requestURI = isset($_SERVER['HTTP_ORIGIN']) && isset($_SERVER['HTTP_REFERER']) ?
+            str_replace($_SERVER['HTTP_ORIGIN'], "", $_SERVER['HTTP_REFERER']) : "localhost";
 
         echo "<pre>";
         if (array_key_exists("geoip", $_POST))

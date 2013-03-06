@@ -8,6 +8,8 @@ $ ->
   $('button#add-household-member-save').click ->
     $('form[name="member-create"]').submit()
 
+  $('button#flag-create-save').click ->
+    $('form[name="flag-create-form"]').submit()
 
 
 ################################################################################

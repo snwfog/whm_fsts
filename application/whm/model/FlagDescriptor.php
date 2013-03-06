@@ -34,6 +34,12 @@ class FlagDescriptor
     private $meaning;
 
     /**
+     * @Column()
+     * @var alternative meaning
+     */
+    private $alternative_meaning;
+
+    /**
      * @return \WHM\Model\id
      */
     public function getId()

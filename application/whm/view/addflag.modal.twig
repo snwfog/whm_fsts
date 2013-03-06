@@ -9,7 +9,7 @@
         </div>
 
         <div class="modal-body">
-            <form class="form-horizontal" action="{{ apppath }}flag/new" method="POST" name="flag-create-form" id="">
+            <form class="form-horizontal" action="{{ apppath }}flag/new" method="POST" name="flag-create-form" id="flag-create">
                 <fieldset>
                     <div class="control">
                         {#
@@ -21,7 +21,7 @@
                         {%  endfor %}
                         #}
 
-                        
+
                         <div id="flag-types" class="btn-group" data-toggle="buttons-radio">
                             <button type="button" class="btn btn-success"><i class="icon-tag icon-white"></i> Success</button>
                             <button type="button" class="btn btn-danger"><i class="icon-tag icon-white"></i> Danger</button>
@@ -38,24 +38,19 @@
                             <textarea class="span12" rows="4" name="message" placeholder="Message..."></textarea>
                         {#</div>#}
                     </div>
-                    
-                      <input type="hidden" name="member-id" value="{{ household["member-id"] }}"/>
-                      <input type="hidden" name="household-id" value="{{ household.household_id}}"/>
+
+                    <input type="hidden" name="member-id" value="{{ household["member-id"] }}"/>
+                    <input type="hidden" name="household-id" value="{{ household.household_id}}"/>
 
                 </fieldset>
-
-
-
-
             </form>
         </div>
 
         <div class="modal-footer">
             <button class="btn" data-dismiss="modal" aria-hidden="true"> Close</button>
-            <button id="household-create-clear" class="btn btn-warning" aria-hidden="true"> Clear</button>
-            <button id="create-household-save" class="btn btn-success"><i class="icon-ok icon-white submit"></i> Save changes</button>
+            <button id="flag-create-clear" class="btn btn-warning" aria-hidden="true"> Clear</button>
+            <button id="flag-create-save" class="btn btn-success"><i class="icon-ok icon-white"></i> Save changes</button>
         </div>
-
     </div>
 
 {% endblock add_flag_modal %}
