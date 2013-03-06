@@ -7,7 +7,6 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use WHM\Model\Address;
 use WHM\Model\HouseholdMember;
 use WHM\Model\Household;
-use WHM\Helper;
 
 class MultiAddressHouseholdFixture extends AbstractFixture
 {

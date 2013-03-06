@@ -29,15 +29,16 @@ class FlagDescriptor
 
     /**
      * @Column()
+     * @var alternative color
+     */
+    private $alternative_color;
+
+    /**
+     * @Column()
      * @var description
      */
     private $meaning;
 
-    /**
-     * @Column()
-     * @var alternative meaning
-     */
-    private $alternative_meaning;
 
     /**
      * @return \WHM\Model\id
@@ -61,6 +62,22 @@ class FlagDescriptor
     public function getColor()
     {
         return $this->color;
+    }
+
+    /**
+     * @param \WHM\Model\alternative $alternative_color
+     */
+    public function setAlternativeColor($alternative_color)
+    {
+        $this->alternative_color = $alternative_color;
+    }
+
+    /**
+     * @return \WHM\Model\alternative
+     */
+    public function getAlternativeColor()
+    {
+        return $this->alternative_color;
     }
 
     /**
