@@ -13,7 +13,7 @@ class HouseholdMemberTest extends PHPUnit_Framework_TestCase
     //     $householdmember = new HouseholdMember();
     //     $householdmember->setId(123456789);
     //     $this->assertEquals(
-    //                         123456789, 
+    //                         123456789,
     //                         $householdmember->getId()
     //                         );
     // }
@@ -24,7 +24,7 @@ class HouseholdMemberTest extends PHPUnit_Framework_TestCase
     //     $householdmember = new HouseholdMember();
     //     $householdmember->setId(123456789);
     //     $this->assertEquals(
-    //                         123456789, 
+    //                         123456789,
     //                         PHPUnit_Framework_TestCase::readAttribute($householdmember, "id")
     //                         );
     // }
@@ -33,120 +33,84 @@ class HouseholdMemberTest extends PHPUnit_Framework_TestCase
     {
         $householdmember = new HouseholdMember();
         $householdmember->setFirstName("John Smith");
-        $this->assertEquals(
-                            "John Smith", 
-                            $householdmember->getFirstName()
-                            );
+        $this->assertEquals("John Smith", $householdmember->getFirstName());
     }
 
     public function testsetFirst_name()
     {
         $householdmember = new HouseholdMember();
         $householdmember->setFirstName("John Smith");
-        $this->assertEquals(
-                            "John Smith", 
-                            PHPUnit_Framework_TestCase::readAttribute($householdmember, "first_name")
-                            );
+        $this->assertEquals("John Smith", PHPUnit_Framework_TestCase::readAttribute($householdmember, "first_name"));
     }
 
     public function testgetLastName()
     {
         $householdmember = new HouseholdMember();
         $householdmember->setLastName("Smith");
-        $this->assertEquals(
-                            "Smith",  
-                            $householdmember->getLastName()
-                            );
+        $this->assertEquals("Smith", $householdmember->getLastName());
     }
 
     public function testsetLastName()
     {
         $householdmember = new HouseholdMember();
         $householdmember->setLastName("Smith");
-        $this->assertEquals(
-                            "Smith", 
-                            PHPUnit_Framework_TestCase::readAttribute($householdmember, "last_name")
-                            );
+        $this->assertEquals("Smith", PHPUnit_Framework_TestCase::readAttribute($householdmember, "last_name"));
     }
 
     public function testgetWorkStatus()
     {
         $householdmember = new HouseholdMember();
         $householdmember->setWorkStatus("CEOatJobless");
-        $this->assertEquals(
-                            "CEOatJobless", 
-                            $householdmember->getWorkStatus()
-                            );
+        $this->assertEquals("CEOatJobless", $householdmember->getWorkStatus());
     }
 
     public function testsetWorkStatus()
     {
         $householdmember = new HouseholdMember();
         $householdmember->setWorkStatus("CEOatJobless");
-        $this->assertEquals(
-                            "CEOatJobless", 
-                            PHPUnit_Framework_TestCase::readAttribute($householdmember, "work_status")
-                            );
+        $this->assertEquals("CEOatJobless", PHPUnit_Framework_TestCase::readAttribute($householdmember, "work_status"));
     }
 
     public function testWelfareNumber()
     {
         $householdmember = new HouseholdMember();
         $householdmember->setWelfareNumber(123456789);
-        $this->assertEquals(
-                            123456789, 
-                            $householdmember->getWelfareNumber()
-                            );
+        $this->assertEquals(123456789, $householdmember->getWelfareNumber());
     }
 
     public function testsetWelfareNumber()
     {
         $householdmember = new HouseholdMember();
         $householdmember->setWelfareNumber(123456789);
-        $this->assertEquals(
-                            123456789, 
-                            PHPUnit_Framework_TestCase::readAttribute($householdmember, "welfare_number")
-                            );
+        $this->assertEquals(123456789, PHPUnit_Framework_TestCase::readAttribute($householdmember, "welfare_number"));
     }
 
     public function testgetReferal()
     {
         $householdmember = new HouseholdMember();
         $householdmember->setReferral("Ontario");
-        $this->assertEquals(
-                            "Ontario", 
-                            $householdmember->getReferral()
-                            );
+        $this->assertEquals("Ontario", $householdmember->getReferral());
     }
 
     public function testsetReferal()
     {
         $householdmember = new HouseholdMember();
         $householdmember->setReferral("Ontario");
-        $this->assertEquals(
-                            "Ontario", 
-                            PHPUnit_Framework_TestCase::readAttribute($householdmember, "referral")
-                            );
+        $this->assertEquals("Ontario", PHPUnit_Framework_TestCase::readAttribute($householdmember, "referral"));
     }
 
     public function testgetLanguage()
     {
         $householdmember = new HouseholdMember();
         $householdmember->setLanguage("Syrian");
-        $this->assertEquals(
-                            "Syrian", 
-                            $householdmember->getLanguage()
-                            );
+        $this->assertEquals("Syrian", $householdmember->getLanguage());
     }
 
     public function testsetLanguage()
     {
         $householdmember = new HouseholdMember();
         $householdmember->setLanguage("Syrian");
-        $this->assertEquals(
-                            "Syrian", 
-                            PHPUnit_Framework_TestCase::readAttribute($householdmember, "language")
-                            );
+        $this->assertEquals("Syrian", PHPUnit_Framework_TestCase::readAttribute($householdmember, "language"));
     }
 
     // public function testgetNote()
@@ -154,7 +118,7 @@ class HouseholdMemberTest extends PHPUnit_Framework_TestCase
     //     $householdmember = new HouseholdMember();
     //     $householdmember->setNote("Syrian");
     //     $this->assertEquals(
-    //                         "Syrian", 
+    //                         "Syrian",
     //                         $householdmember->getNote()
     //                         );
     // }
@@ -164,7 +128,7 @@ class HouseholdMemberTest extends PHPUnit_Framework_TestCase
     //     $householdmember = new HouseholdMember();
     //     $householdmember->setNote("Syrian");
     //     $this->assertEquals(
-    //                         "Syrian", 
+    //                         "Syrian",
     //                         PHPUnit_Framework_TestCase::readAttribute($householdmember, "note")
     //                         );
     // }
@@ -173,60 +137,42 @@ class HouseholdMemberTest extends PHPUnit_Framework_TestCase
     {
         $householdmember = new HouseholdMember();
         $householdmember->setMaritalStatus("Forever Alone");
-        $this->assertEquals(
-                            "Forever Alone", 
-                            $householdmember->getMaritalStatus()
-                            );
+        $this->assertEquals("Forever Alone", $householdmember->getMaritalStatus());
     }
 
     public function testsetMaritalStatus()
     {
         $householdmember = new HouseholdMember();
         $householdmember->setMaritalStatus("Forever Alone");
-        $this->assertEquals(
-                            "Forever Alone", 
-                            PHPUnit_Framework_TestCase::readAttribute($householdmember, "marital_status")
-                            );
+        $this->assertEquals("Forever Alone", PHPUnit_Framework_TestCase::readAttribute($householdmember, "marital_status"));
     }
 
     public function testgetOrigin()
     {
         $householdmember = new HouseholdMember();
         $householdmember->setOrigin("Syrian");
-        $this->assertEquals(
-                            "Syrian", 
-                            $householdmember->getOrigin()
-                            );
+        $this->assertEquals("Syrian", $householdmember->getOrigin());
     }
 
     public function testsetOrigin()
     {
         $householdmember = new HouseholdMember();
         $householdmember->setOrigin("Syrian");
-        $this->assertEquals(
-                            "Syrian", 
-                            PHPUnit_Framework_TestCase::readAttribute($householdmember, "origin")
-                            );
+        $this->assertEquals("Syrian", PHPUnit_Framework_TestCase::readAttribute($householdmember, "origin"));
     }
 
     public function testgetFirstVisitDate()
     {
         $householdmember = new HouseholdMember();
         $householdmember->setFirstVisitDate("Syrian");
-        $this->assertEquals(
-                            "Syrian", 
-                            $householdmember->getFirstVisitDate()
-                            );
+        $this->assertEquals("Syrian", $householdmember->getFirstVisitDate());
     }
 
     public function testsetFirstVisitDate()
     {
         $householdmember = new HouseholdMember();
         $householdmember->setFirstVisitDate("Syrian");
-        $this->assertEquals(
-                            "Syrian", 
-                            PHPUnit_Framework_TestCase::readAttribute($householdmember, "first_visit_date")
-                            );
+        $this->assertEquals("Syrian", PHPUnit_Framework_TestCase::readAttribute($householdmember, "first_visit_date"));
     }
 
     public function testGetSetHousehold()
@@ -235,18 +181,18 @@ class HouseholdMemberTest extends PHPUnit_Framework_TestCase
 
         $observer = $this->getMock('WHM\Model\Household');
         $household_member->setHousehold($observer);
-        
-        $this->assertEquals($household_member->getHousehold(), $observer);              
+
+        $this->assertEquals($household_member->getHousehold(), $observer);
     }
 
     public function testgetEvents()
     {
         $household_member = new HouseholdMember();
 
-        $observer = $this->getMock('WHM\Model\Event', array('addParticipant2'));
-        $observer->expects($this->once())
-                 ->method('addParticipant2')
-                 ->with($this->equalTo($household_member));
+        $observer = $this->getMock('WHM\Model\Event', array(
+            'addParticipant2'
+        ));
+        $observer->expects($this->once())->method('addParticipant2')->with($this->equalTo($household_member));
         $household_member->addEvent($observer);
     }
 
@@ -255,7 +201,7 @@ class HouseholdMemberTest extends PHPUnit_Framework_TestCase
     //     $householdmember = new HouseholdMember();
     //     $householdmember->addEvent("Vday");
     //     $this->assertEquals(
-    //                         "Vday", 
+    //                         "Vday",
     //                         PHPUnit_Framework_TestCase::readAttribute($householdmember, "events")
     //                         );
     // }

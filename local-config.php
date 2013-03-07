@@ -11,7 +11,7 @@ return $config = array
     (
         'driver'    => 'pdo_mysql',
         'user'      => 'root',
-        'password'  => '',
+        'password'  => 'root',
         'dbname'    => 'fsts',
         'host'      => 'localhost',
         'port'      => '8899'
