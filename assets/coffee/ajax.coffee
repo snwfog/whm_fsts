@@ -9,8 +9,16 @@ $ ->
     $('form[name="member-create"]').submit()
 
   $('button#flag-create-save').click ->
-    $('form[name="flag-create-form"]').submit()
-
+    clicked = $("#flag-types .active").length > 0;
+    alert("Choose a Flag") if not clicked
+    if clicked
+        flagD_id = $("#flag-types .active").data("value")
+        formElement = document.createElement("input")
+        formElement.setAttribute("name", "flag-descriptor-id")
+        formElement.setAttribute("type", "hidden");
+        formElement.setAttribute("value", flagD_id)
+        $('form[name="flag-create-form"]').append(formElement)  
+        $('form[name="flag-create-form"]').submit()
 
 ################################################################################
 # Noty Confirmation Setup

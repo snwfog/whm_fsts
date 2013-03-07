@@ -12,23 +12,19 @@
             <form class="form-horizontal" action="{{ apppath }}flag/new" method="POST" name="flag-create-form" id="flag-create">
                 <fieldset>
                     <div class="control">
-                        {#
-                        {%  for flagD in flagDescriptors %}
-                            <!-- FIX: Remove Radio button and have active submit value -->
-                            <button name="flag-descriptor" type="button" class="btn btn-{{ flagD["flag-color"] | lower }}" value="{{ flagD["flag-id"] }}">
-                            <i class="icon-tag icon-white"></i> {{ flagD["flag-meaning"] }}
-                            </button>
-                        {%  endfor %}
-                        #}
-
-
                         <div id="flag-types" class="btn-group" data-toggle="buttons-radio">
-                            <button type="button" class="btn btn-success"><i class="icon-tag icon-white"></i> Success</button>
-                            <button type="button" class="btn btn-danger"><i class="icon-tag icon-white"></i> Danger</button>
-                            <button type="button" class="btn btn-warning"><i class="icon-tag icon-white"></i> Warning</button>
-                            <button type="button" class="btn btn-info"><i class="icon-tag icon-white"></i> Info</button>
-                        </div>
-                        
+                            {%  for flagD in flagDescriptors %}                     
+                                <button name="flag-descriptor" type="button" class="btn btn-{{ flagD["flag-color"] | lower }}" data-value="{{ flagD["flag-id"] }}">
+                                    <i class="icon-tag icon-white"></i> {{ flagD["flag-meaning"] }}
+                                </button>
+                            {%  endfor %}
+                            {#
+                                <button type="button" class="btn btn-success"><i class="icon-tag icon-white"></i> Success</button>
+                                <button type="button" class="btn btn-danger"><i class="icon-tag icon-white"></i> Danger</button>
+                                <button type="button" class="btn btn-warning"><i class="icon-tag icon-white"></i> Warning</button>
+                                <button type="button" class="btn btn-info"><i class="icon-tag icon-white"></i> Info</button>
+                            #}
+                        </div>                       
                     </div>
                 </fieldset>
                 <fieldset>

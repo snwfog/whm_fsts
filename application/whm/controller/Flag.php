@@ -22,6 +22,11 @@ class Flag extends Controller implements IRedirectable
         parent::__construct();
       //  WHM\Helper::backtrace();
         $this->mflag = new ManageFlag();
+
+
+         // Check delete comment
+        if (isset($args['delete_flag']))
+            $this->delete($args['delete_flag']);
    
     }
 
@@ -33,8 +38,6 @@ class Flag extends Controller implements IRedirectable
 
     public function post()
     {
-    
-      print_r($_POST);
         if (isset($_POST))
         {
             $flag = $this->mflag->createFlag($_POST);         
@@ -49,6 +52,13 @@ class Flag extends Controller implements IRedirectable
 
     public function put()
     {
+    }
+
+    public function delete($id)
+    {
+        $this->mflag->deleteFlag($id);
+        $this->redirect("/household/" . $_POST["household-id"] . "/" . $_POST["member-id"]);
+
     }
 
 
