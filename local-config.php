@@ -14,7 +14,7 @@ return $config = array
         'password'  => '',
         'dbname'    => 'fsts',
         'host'      => 'localhost',
-        'port'      => '8889'
+        'port'      => '8899'
     ),
 
     // Twig configuration
