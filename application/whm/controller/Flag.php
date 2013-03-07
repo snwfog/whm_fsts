@@ -38,9 +38,6 @@ class Flag extends Controller implements IRedirectable
 
     public function post()
     {
-    
-      print_r($_POST);
-      
         if (isset($_POST))
         {
             $flag = $this->mflag->createFlag($_POST);         
