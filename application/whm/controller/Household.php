@@ -102,13 +102,13 @@ class Household extends Controller implements IRedirectable
        $this->household = $household;
     }
 
-    public function delete($household_id)
+  /*  public function delete($household_id)
     {
     $manageHouse = new ManageHousehold();
     $household_id = $manageHouse->getId();
     $manageHouse->removeHousehold($household_id);
     }
-
+*/
 
 
     public function formatHouseholdInfo($household, $member)
