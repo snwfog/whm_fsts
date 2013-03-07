@@ -24,7 +24,19 @@ class CreateEvent extends Controller implements IRedirectable
 
     public function post()
     {
+        if (isset($_POST))
+        {
+            $this->data["form"] = $_POST;
+            $household = $this->manageEvent->createEvent($_POST);
+            $pMember = $event->getEventPrincipal();
 
+            $this->redirect('event/' . $event->getId()."/". $pMember->getId());
+
+        }
+        else
+        {
+            $this->display("event.create.twig");
+        }
     }
 
     public function put()
