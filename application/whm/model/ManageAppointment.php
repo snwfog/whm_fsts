@@ -29,4 +29,16 @@ class ManageAppointment
         return $appointment;
     }
 
+    public function deleteAppointment($member_id, $event_id)
+    {
+        $managehousehold = new ManageHousehold();
+        $member = $managehousehold->findMember($member_id);
+        $event = $this->em->find("WHM\model\Event", (int) $event_id);
+
+        $member->attendEvent($event);
+        $this->em->remove($member);
+        $this->em->flush();
+        return $appointment;
+    }
+
 }
