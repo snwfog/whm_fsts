@@ -1,0 +1,16 @@
+{% extends 'static/base.twig' %}
+
+{% block content %}
+    <div class="modal-body">
+        <form action="{{ apppath }}appointment/delete" method="DELETE" >
+            <fieldset>
+                <div class="controls controls-row" id="name-row">
+                    <input type="hidden" name="member-id" value="{{ household["member_id"]}}">
+                    <input class="span5" type="text" name="event-id"
+                           placeholder="Event ID"/>
+                    <input type="submit" value="Submit">
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

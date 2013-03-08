@@ -35,6 +35,37 @@ class ManageFlag
 
     }
 
+    public function deleteFlag($id)
+    {
+        /*
+        $flag = new Flag();
+        $flagId = $this->findFlag($id["flag-id"]); 
+        $flag->getId($flagId);
+        $this->em->remove($flag);
+        $this->em->flush();
+
+        return $flag;
+*/
+
+        $flag = new Flag();
+        $flag->setMessage($data["message"]); 
+        $household_member = $this->mhousehold->findMember($data["member-id"]);
+        $flag_descriptors = $this->findDescriptors($data["flag-descriptor"]); 
+        $flag->setHouseholdMember($household_member);
+        $flag->setDescriptor($flag_descriptors);    
+        $this->em->persist($flag);
+        $this->em->flush();
+
+        return $flag;
+
+    }
+
+  /*  public function findFlag($id)
+    
+        $flagId = $this->em->find("WHM\model\Flag", (int) $id);
+        return $flags;
+    }
+*/
     public function findDescriptors($id)
     {
         $flag_descriptors = $this->em->find("WHM\model\FlagDescriptor", (int) $id);
@@ -62,6 +93,8 @@ class ManageFlag
         }
         return $data;
     }
+
+
 
 
 
