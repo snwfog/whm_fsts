@@ -12,6 +12,8 @@ abstract class Controller
 
     protected $renderer;
     protected $em;
+    protected $content;
+    protected $requestContents = array();
     protected $data = array();
 
     public function __construct($redirect = TRUE)
@@ -88,6 +90,19 @@ abstract class Controller
     public function find($class, $var)
     {
         return $this->em->find("\\WHM\\Model\\{$class}", $var);
+    }
+
+    public function getContent()
+    {
+        if (null === $this->content)
+        {
+            if (0 === strlen(trim($this->content = file_get_contents('php://input'))))
+            {
+                $this->content = false;
+            }
+        }
+
+        return $this->content;
     }
 
     // public function isValidSession()

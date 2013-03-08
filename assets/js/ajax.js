@@ -24,6 +24,21 @@ $(function() {
       return $('form[name="flag-create-form"]').submit();
     }
   });
+  $('button.flag-delete-btn').click(function() {
+    var $form;
+    console.log("trying to delete a flag");
+    $form = $(this).siblings("form");
+    return $.ajax({
+      url: 'flag',
+      data: $form.serialize(),
+      type: 'DELETE',
+      success: function() {
+        var $group;
+        $group = $form.parents('div.accordion-group');
+        return $group.remove();
+      }
+    });
+  });
   noteAlert = function(msg, type) {
     var n;
     return n = noty({
