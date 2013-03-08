@@ -30,6 +30,13 @@ abstract class Controller
         $this->data["site_name"] = "Welcome Hall Mission";
         $this->data["login"] = true;
 
+        // 0 for white (default), 1 for black
+        $theme = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 0;
+        // Restore the cookie
+        setcookie("theme", $theme, time() + 3600 * 24 * 7); // Save cookie for 7 days
+        // Add the cookie to data so twig can display it properly
+        $this->data['theme'] = $theme;
+
         // if (!$this->isValidSession())
         // {
         //     if ($redirect)

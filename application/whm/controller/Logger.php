@@ -35,8 +35,10 @@ class Logger
         $geoip = "Unidentified";
         $requestURI = isset($_SERVER['HTTP_ORIGIN']) && isset($_SERVER['HTTP_REFERER']) ?
             str_replace($_SERVER['HTTP_ORIGIN'], "", $_SERVER['HTTP_REFERER']) : "localhost";
+        $theme = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 0;
 
         echo "<pre>";
+        echo "THEME: {$_COOKIE['theme']}";
         if (array_key_exists("geoip", $_POST))
         {
             echo "GEOIP: {$_POST['geoip']}<br />";
@@ -70,10 +72,12 @@ class Logger
         // Insert some information
         $query = "INSERT INTO log (agent
             , ip
-            , request_uri ) VALUES ('"
+            , request_uri
+            , theme ) VALUES ('"
             . mysql_real_escape_string($_SERVER['HTTP_USER_AGENT']) . "', '"
             . $geoip . "', '"
-            . $requestURI . "')";
+            . $requestURI . "', '"
+            . $theme . "')";
 
         if (!$result = $mysqli->query($query))
             printf("There was an error in the query: %s\n", $mysqli->error);

@@ -33,15 +33,28 @@ $(function() {
     });
   });
   $('a[name="switch-theme"]').click(function() {
-    var $secondStyleSheet, darkstrap, href, pattern;
-    darkstrap = $secondStyleSheet = $('link[rel="stylesheet"]').first().next();
+    var $secondStyleSheet, href, pattern;
+    $secondStyleSheet = $('link[rel="stylesheet"]').first().next();
     if ($secondStyleSheet.attr("href").match("darkstrap")) {
-      return $secondStyleSheet.attr("href", "");
+      $secondStyleSheet.attr("href", "");
+      document.cookie = "theme=0";
+      console.log(document.cookie);
     } else {
       href = $secondStyleSheet.prev().attr("href");
       pattern = /\/[^\/]*\.css/i;
-      return $secondStyleSheet.attr("href", href.replace(pattern, "/bootstrap.darkstrap.css"));
+      $secondStyleSheet.attr("href", href.replace(pattern, "/bootstrap.darkstrap.css"));
+      document.cookie = "theme=1";
+      console.log(document.cookie);
     }
+    return $.get("http://api.hostip.info/get_html.php", function(data) {
+      var ip, reg;
+      reg = /([\d]{1,3}\.?){4}/ig;
+      ip = reg.exec(data);
+      return $.post('analytic', {
+        "geoip": ip[0],
+        "request_uri": document.URL
+      });
+    });
   });
   $("#view-household-form input").prop("disabled", true);
   $('button[name="modify-household-btn"]').click(function() {

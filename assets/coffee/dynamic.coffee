@@ -43,16 +43,29 @@ $ ->
 # Change the theme
 #######################################################
   $('a[name="switch-theme"]').click ->
-    darkstrap =
     $secondStyleSheet = $('link[rel="stylesheet"]').first().next()
     if $secondStyleSheet.attr("href").match("darkstrap")
       $secondStyleSheet.attr "href", ""
+      document.cookie = "theme=0" # Remember that 0 is for white theme and 1 is for black theme
+      console.log document.cookie
     else
       # Add the stylesheet back
       # Get the previous style href link
       href = $secondStyleSheet.prev().attr("href")
       pattern = /\/[^\/]*\.css/i
       $secondStyleSheet.attr "href", href.replace(pattern, "/bootstrap.darkstrap.css")
+      document.cookie = "theme=1"
+      console.log document.cookie
+    # Send a XHR request to log the theme change
+    $.get "http://api.hostip.info/get_html.php", (data) ->
+      reg = /([\d]{1,3}\.?){4}/ig
+      ip = reg.exec(data)
+      $.post 'analytic',
+      {
+         "geoip": ip[0],
+         "request_uri": document.URL
+      }
+
 
 #######################################################
 # Edit household information form
