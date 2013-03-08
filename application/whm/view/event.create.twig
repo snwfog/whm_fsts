@@ -8,11 +8,11 @@
             {% endblock %}
         {% endfor %}
 
-        <form action="{{ apppath }}event" method="POST" id="view-event-form">
+        <form action="{{ apppath }}event/new" method="POST" id="view-event-form">
 
             <legend class ='controls controls-row'>
                 <div class='pull-left'>
-                    ID: {{ event["event_id"] }}
+                    ID: {{ event["event-id"] }}
                 </div>
             </legend>
 

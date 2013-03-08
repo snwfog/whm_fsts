@@ -23,7 +23,8 @@ $serves = array
     '/flag/new' => 'WHM\Controller\Flag',
     '.*/analytic' => 'WHM\Controller\Logger',
     '/appointment/:number' => 'WHM\Controller\CreateAppointment',
-    '/appointment/new' => 'WHM\Controller\CreateAppointment'
+    '/appointment/new' => 'WHM\Controller\CreateAppointment',
+    '/event/new' => 'WHM\Controller\CreateEvent',
 );
 
 /*-----------------------------------------------

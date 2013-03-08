@@ -2,15 +2,24 @@
     <fieldset>
     	<legend>Date and Time</legend>
         <div class="controls controls-row" id="name-row">
-            <input class="span5" type="text" name="Start Time" placeholder="Start Time" value="{{ event["starttime"] }}"/>
+            <input class="span2" type="text" name="start-time" placeholder="Start Time" value="{{ event["starttime"] }}"/>
            
-            <input class="span3" type="text" name="End Time" maxlength="12" placeholder="End Time" value="{{ event["endtime"] }}"/>
-
-            <input class="span3" type="text" name="Date" maxlength="12" placeholder="Date" value="{{ event["date"] }}"/>
-
+            <input class="span2" type="text" name="end-time" maxlength="12" placeholder="End Time" value="{{ event["endtime"] }}"/>
         </div>
+
         <div class="controls controls-row">
-         	<input class="span5" type="text" name="Repeating" maxlength="12" placeholder="Repeating" value="{{ event["repeating"] }}"/>
+            <input class="span5" id="dp1" type="text" name="Date" maxlength="12" placeholder="Pick a Date" />
+            <div id="event-occurrence" class="btn-group" data-toggle="buttons-radio">
+                <button type="button" class="btn btn-primary" value="daily">Daily</button>
+                <button type="button" class="btn btn-primary" value="weekly">Weekly</button>
+                <button type="button" class="btn btn-primary" value="biweekly">Biweekly</button>
+                <button type="button" class="btn btn-primary" value="monthly">Monthly</button>
+                <button type="button" class="btn btn-primary" value="bimonthly">Bimonthly</button>
+                <button type="button" class="btn btn-primary" value="yearly">Yearly</button>
+            </div>
          </div>
     </fieldset>
+    <script type="text/javascript">
+        $('#dp1').datepicker()
+    </script>
 {% endblock create_event_date_part_twig %}
