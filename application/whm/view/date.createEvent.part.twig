@@ -1,7 +1,5 @@
 {% block create_event_date_part_twig %}
-    <script type="text/javascript" src="{{ syspath }}assets/js/datepicker.js">
-    $('.datepicker').datepicker();
-    </script>
+
     <fieldset>
     	<legend>Date and Time</legend>
         <div class="controls controls-row" id="name-row">
@@ -14,13 +12,12 @@
         </div>
         <div class="controls controls-row">
          	<input class="span5" type="text" name="Repeating" maxlength="12" placeholder="Repeating" value="{{ event["repeating"] }}"/>
-        
-            <input class="datepicker" id="dp1" type="text" name="Date" maxlength="12" placeholder="Date" value="{{ event["date"] }}"/>
-
-            <script type="text/javascript">
-            $('.datepicker').datepicker();
-            </script>
+            
+            <input class="span5" id="dp1" type="text" name="Date" maxlength="12" placeholder="Pick a Date" />
 
          </div>
     </fieldset>
+    <script type="text/javascript">
+    $('#dp1').datepicker()
+    </script>
 {% endblock create_event_date_part_twig %}
