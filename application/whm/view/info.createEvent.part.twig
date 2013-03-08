@@ -1,11 +1,16 @@
 {% block create_event_info_part_twig %}
     <fieldset>
-    	<legend>Description</legend>
-        <div class="control">
-                        {#<div class="alert">#}
-                            <textarea class="span10" rows="4" name="description" placeholder="Description..."></textarea>
-                        {#</div>#}
-                    </div>
+    	<legend>Event repeating options</legend>
+
+    	<div id="event-occurrence" class="btn-group" data-toggle="buttons-radio">
+                <button type="button" class="btn btn-primary" value="daily">Daily</button>
+                <button type="button" class="btn btn-primary" value="weekly">Weekly</button>
+                <button type="button" class="btn btn-primary" value="biweekly">Biweekly</button>
+                <button type="button" class="btn btn-primary" value="monthly">Monthly</button>
+                <button type="button" class="btn btn-primary" value="bimonthly">Bimonthly</button>
+                <button type="button" class="btn btn-primary" value="yearly">Yearly</button>
+            </div>
+        
 
     </fieldset>
 {% endblock create_event_info_part_twig %}

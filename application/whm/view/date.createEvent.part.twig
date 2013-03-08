@@ -8,18 +8,14 @@
         </div>
 
         <div class="controls controls-row">
-            <input class="span5" id="dp1" type="text" name="Date" maxlength="12" placeholder="Pick a Date" />
-            <div id="event-occurrence" class="btn-group" data-toggle="buttons-radio">
-                <button type="button" class="btn btn-primary" value="daily">Daily</button>
-                <button type="button" class="btn btn-primary" value="weekly">Weekly</button>
-                <button type="button" class="btn btn-primary" value="biweekly">Biweekly</button>
-                <button type="button" class="btn btn-primary" value="monthly">Monthly</button>
-                <button type="button" class="btn btn-primary" value="bimonthly">Bimonthly</button>
-                <button type="button" class="btn btn-primary" value="yearly">Yearly</button>
-            </div>
-         </div>
+            <input class="span4" id="dp1" type="text" name="Date" maxlength="8" placeholder="Start Date" />
+            
+       
+            <input class="span4" id="dp2" type="text" name="Date" maxlength="8" placeholder="End Date" />
+            
+        </div
     </fieldset>
     <script type="text/javascript">
-        $('#dp1').datepicker()
+        $('#dp1,#dp2').datepicker()
     </script>
 {% endblock create_event_date_part_twig %}
