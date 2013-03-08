@@ -289,6 +289,12 @@ class HouseholdMember
         $events->addParticipant($this);
     }
 
+    public function removeEvent(Event $event)
+    {
+        $this->events->removeElement($event);
+        $event->removeParticipant($this);
+    }
+
     /**
      * Helper Method for HouseholdMember class used to achieve bi-directional relationship
      * attribute synchronization.

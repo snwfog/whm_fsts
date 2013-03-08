@@ -157,6 +157,11 @@ class Event
         $this->participants[] = $participant;
     }
 
+    public function removeParticipant($participant)
+    {
+        $this->participants->removeElement($participant);
+    }
+
     public function getParticipants()
     {
         return $this->participants;
