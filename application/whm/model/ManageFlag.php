@@ -17,7 +17,8 @@ class ManageFlag
     public function __construct()
     {
         $this->em = Application::em();
-        $this->mhousehold = new ManageHousehold(); 
+        $this->mhousehold = new ManageHousehold();
+        
     }
 
      public function createFlag($data)
@@ -37,35 +38,18 @@ class ManageFlag
 
     public function deleteFlag($id)
     {
-        /*
-        $flag = new Flag();
         $flagId = $this->findFlag($id["flag-id"]); 
-        $flag->getId($flagId);
-        $this->em->remove($flag);
+        $this->em->remove($flagId);
         $this->em->flush();
-
-        return $flag;
-*/
-
-        $flag = new Flag();
-        $flag->setMessage($data["message"]); 
-        $household_member = $this->mhousehold->findMember($data["member-id"]);
-        $flag_descriptors = $this->findDescriptors($data["flag-descriptor"]); 
-        $flag->setHouseholdMember($household_member);
-        $flag->setDescriptor($flag_descriptors);    
-        $this->em->persist($flag);
-        $this->em->flush();
-
-        return $flag;
-
+        return $flagId;
     }
 
-  /*  public function findFlag($id)
-    
+    public function findFlag($id)
+    {
         $flagId = $this->em->find("WHM\model\Flag", (int) $id);
-        return $flags;
+        return $flagId;
     }
-*/
+
     public function findDescriptors($id)
     {
         $flag_descriptors = $this->em->find("WHM\model\FlagDescriptor", (int) $id);
