@@ -64,7 +64,7 @@ class Flag extends Controller implements IRedirectable
         if(isset($_GET))
         {
             $dflag = $this->mflag->deleteFlag($_GET);
-           // $this->redirect("/household/" . $_POST["household-id"] . "/" . $_POST["member-id"]);
+            $this->redirect("/household/" . $_POST["household-id"] . "/" . $_POST["member-id"]);
         }
     }
    
