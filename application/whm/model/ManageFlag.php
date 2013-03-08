@@ -38,7 +38,7 @@ class ManageFlag
 
     public function deleteFlag($id)
     {
-        $flagId = $this->findFlag($id["flag-id"]); 
+        $flagId = $this->findFlag($id["flag-id"]);
         $this->em->remove($flagId);
         $this->em->flush();
         return $flagId;
