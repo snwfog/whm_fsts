@@ -41,10 +41,10 @@ class CreateAppointment extends WHM\Controller implements WHM\IRedirectable
 
     public function post()
     {
-        print_r($_POST);
         if (isset($_POST))
         {
             $member = $this->manageappointment->addAppointment($_POST['member-id'], $_POST['event-id']);
+            echo "Appointment " . $_POST['event-id'] . " added to member " .  $_POST['member-id'];
         }
         else
         {
@@ -57,8 +57,10 @@ class CreateAppointment extends WHM\Controller implements WHM\IRedirectable
 
     }
 
-    public function delete($_GET){
+    public function delete($_GET)
+    {
         $member = $this->manageappointment->deleteAppointment($_GET['member-id'], $_GET['event-id']);
+        echo "Appointment " . $_GET['event-id'] . " sucessfully removed from member " .  $_GET['member-id'];
     }
 
 }
