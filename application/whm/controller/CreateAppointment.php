@@ -22,19 +22,29 @@ class CreateAppointment extends WHM\Controller implements WHM\IRedirectable
         $this->manageappointment = new ManageAppointment();
     }
 
-    public function get($member_id)
+    public function get($member_id = null)//url
     {
-        $this->data["household"] = array("member_id" => $member_id);
-        $this->display("appointment.modal.twig", $this->data);
-
+        if (in_array("create", $_GET)) {
+            // print_r($_GET);
+            $this->data["household"] = array("member_id" => $member_id);
+            $this->display("appointment.modal.twig", $this->data);
+        }
+        if (in_array("remove", $_GET)) {
+            // print_r($_GET);
+            $this->data["household"] = array("member_id" => $member_id);
+            $this->display("removeAppointment.modal.twig", $this->data);
+        }
+        if (in_array("delete", $_GET)) {
+            $this->delete($_GET);
+        }
     }
 
     public function post()
     {
-        print_r($_POST);
         if (isset($_POST))
         {
             $member = $this->manageappointment->addAppointment($_POST['member-id'], $_POST['event-id']);
+            echo "Appointment " . $_POST['event-id'] . " added to member " .  $_POST['member-id'];
         }
         else
         {
@@ -45,6 +55,12 @@ class CreateAppointment extends WHM\Controller implements WHM\IRedirectable
     public function put()
     {
 
+    }
+
+    public function delete($_GET)
+    {
+        $member = $this->manageappointment->deleteAppointment($_GET['member-id'], $_GET['event-id']);
+        echo "Appointment " . $_GET['event-id'] . " sucessfully removed from member " .  $_GET['member-id'];
     }
 
 }

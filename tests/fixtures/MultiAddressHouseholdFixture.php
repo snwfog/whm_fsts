@@ -38,7 +38,7 @@ class MultiAddressHouseholdFixture extends AbstractFixture
         list($id, $lastName, $firstName, $streetAddress,
                 $city, $state, $postalCode, $country,
                 $phoneNumber, $occupation) =
-                explode("|", strtoupper($userArr[0]));
+                explode("|", mb_strtoupper($userArr[0], 'UTF-8'));
 
         echo $userArr[0] . PHP_EOL;
         ob_flush();
@@ -62,7 +62,7 @@ class MultiAddressHouseholdFixture extends AbstractFixture
             list($id, $lastName, $firstName, $streetAddress,
                     $city, $state, $postalCode, $country,
                     $phoneNumber, $occupation) =
-                    explode("|", strtoupper($userArr[$i]));
+                    explode("|", mb_strtoupper($userArr[$i], 'UTF-8'));
 
             echo $lastName . PHP_EOL;
             ob_flush();

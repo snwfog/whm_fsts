@@ -204,6 +204,7 @@ class Household extends Controller implements IRedirectable
                                     "flag-id" => $flag->getId(),
                                     "message" => $flag->getMessage(),
                                     "flag-color" => $flagD->getColor(),
+                                    "flag-alternative-color" => $flagD->getAlternativeColor(),
                                     "flag-meaning" => $flagD->getMeaning(),
                               );
         }
