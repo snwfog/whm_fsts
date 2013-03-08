@@ -39,7 +39,7 @@ class Event
     protected $is_template;
 
     /** @Column(type="date") */
-    protected $capacity
+    protected $capacity;
 
     /**
      * * <-> * -- Inversing
