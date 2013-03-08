@@ -2,12 +2,13 @@
 
 {% block content %}
     <div class="modal-body">
-        <form action="{{ apppath }}appointment/delete" method="DELETE" >
+        <form action="{{ apppath }}appointment/new" method="GET" >
             <fieldset>
                 <div class="controls controls-row" id="name-row">
                     <input type="hidden" name="member-id" value="{{ household["member_id"]}}">
+                    <input type="hidden" name="type" value="delete">
                     <input class="span5" type="text" name="event-id"
-                           placeholder="Event ID"/>
+                           placeholder="Event ID to remove"/>
                     <input type="submit" value="Submit">
                 </div>
             </fieldset>
