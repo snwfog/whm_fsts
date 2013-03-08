@@ -24,6 +24,37 @@ $(function() {
       return $('form[name="flag-create-form"]').submit();
     }
   });
+
+  $('button#create-event-save').click(function() {
+    var clicked, formElement, occurrence;
+    clicked = $("#event-occurrence .active").length > 0;
+    if (clicked) {
+      occurrence = $("#event-occurrence .active").data("value");
+      formElement = document.createElement("input");
+      formElement.setAttribute("name", "occurrence-type");
+      formElement.setAttribute("type", "hidden");
+      formElement.setAttribute("value", occurrence);
+      $('form[name="event-form"]').append(formElement);
+    }
+    return $('form[name="event-form"]').submit();
+  });
+
+  $('button.flag-delete-btn').click(function() {
+    var $form;
+    console.log("trying to delete a flag");
+    $form = $(this).siblings("form");
+    return $.ajax({
+      url: 'flag',
+      data: $form.serialize(),
+      type: 'DELETE',
+      success: function() {
+        var $group;
+        $group = $form.parents('div.accordion-group');
+        return $group.remove();
+      }
+    });
+  });
+
   noteAlert = function(msg, type) {
     var n;
     return n = noty({

@@ -23,10 +23,9 @@ class Flag extends Controller implements IRedirectable
       //  WHM\Helper::backtrace();
         $this->mflag = new ManageFlag();
 
-
-         // Check delete comment
-        if (isset($_GET['REQUEST_METHOD'])&& ($_GET['REQUEST_METHOD']=='DELETE'))
-            $this->delete();  
+//         // Check delete comment
+//        if (isset($_GET['REQUEST_METHOD'])&& ($_GET['REQUEST_METHOD']=='DELETE'))
+//            $this->delete();
 
 
    
@@ -59,13 +58,7 @@ class Flag extends Controller implements IRedirectable
 
     public function delete()
     {
-
-        
-        if(isset($_GET))
-        {
-            $dflag = $this->mflag->deleteFlag($_GET);
-            $this->redirect("/household/" . $_GET["household-id"] . "/" . $_GET["member-id"]);
-        }
+        parse_str($this->getContent(), $this->requestContents);
+        $dflag = $this->mflag->deleteFlag($this->requestContents);
     }
-   
 }

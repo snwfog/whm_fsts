@@ -199,14 +199,19 @@ class Household extends Controller implements IRedirectable
         $count = 0;
         foreach( $flagMessage as $flag){
             $flagD = $flag->getDescriptor();
-            $data[$count++] = array(
-                                    "member-id" => $member->getId(),
-                                    "flag-id" => $flag->getId(),
-                                    "message" => $flag->getMessage(),
-                                    "flag-color" => $flagD->getColor(),
-                                    "flag-alternative-color" => $flagD->getAlternativeColor(),
-                                    "flag-meaning" => $flagD->getMeaning(),
-                              );
+            $data[$count++] = array
+            (
+                "member-id" => $member->getId(),
+                "flag-id" => $flag->getId(),
+                "message" => $flag->getMessage(),
+                "flag-color" => $flagD->getColor(),
+                "tag-color" => (!strcasecmp($flagD->getColor(),
+                    "danger")) ? "important" : $flagD->getColor(),
+                "alert-color" => (!strcasecmp($flagD->getColor(),
+                    "danger")) ? "error" : $flagD->getColor(),
+                "flag-alternative-color" => $flagD->getAlternativeColor(),
+                "flag-meaning" => $flagD->getMeaning(),
+            );
         }
 
         return $data;      

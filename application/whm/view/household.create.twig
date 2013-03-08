@@ -137,10 +137,13 @@
                                     <div style="padding: 0px; margin: 0px;">
                                         <a class="accordion-toggle" data-toggle="collapse"
                                            data-parent="#flag-accordion" href="#collapse{{ i }}">
-                                            <strong>{{ "now"|date("d-m-y") }}</strong>
+                                            <strong>{{ "now"|date("d-m-y") }}</strong>{# Date is not displaying
+                                            properly here #}
                                             <div class="pull-right">
-                                                <span class="label label-{{ flag["flag-color"] | lower }}"><i class="icon-tag icon-white"></i> {{ flag["flag-meaning"] }}</span>
+                                                <span class="label label-{{ flag["tag-color"] | lower }}">
+                                                    <i class="icon-tag icon-white"></i> {{ flag["flag-meaning"] }}</span>
                                             </div>
+
                                         </a>
                                     </div>
                                 </div>
@@ -149,18 +152,18 @@
 
                                 <div id="collapse{{ i }}" class="accordion-body collapse">
                                     <div class="accordion-inner" style="padding: 0px">                         
-                                        <div class="alert alert-{{ flag["flag-alternative-color"] | lower }}" style="margin: 0px;">
-                                            <p>
-                                             <form class="form-horizontal" action="{{ apppath }}flag/new" method="GET" name="flag-delete-form" id="flag-delete">
-                                                <input type="hidden" value="DELETE" name="REQUEST_METHOD">
+                                        <div class="alert alert-{{ flag["alert-color"] | lower }}" style="margin: 0px;">
+                                            <form class="form-horizontal" action="{{ apppath }}flag"
+                                                name="flag-delete-form" id="flag-delete-{{ i }}">
                                                 <input type="hidden" name="flag-id" value="{{ flag["flag-id"] }}"/>
-                                                <input type="submit" value="Delete Flag!" >
                                                 <input type="hidden" name="member-id" value="{{ household["member-id"] }}"/>
                                                 <input type="hidden" name="household-id" value="{{ household.household_id}}"/>
-
                                             </form>
-                                                {{ flag["message"] }}
-                                            </p>
+                                            <p>{{ flag["message"] }}</p>
+                                            <button class="btn btn-danger flag-delete-btn" type="button"
+                                                    id="flag-delete-btn-{{ 1 }}">
+                                               <i class="icon-trash icon-white"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

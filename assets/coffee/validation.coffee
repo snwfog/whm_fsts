@@ -1,29 +1,33 @@
 ###
 Do NOT modify .js file, modify only the .coffee file
 This script is used for data validation, and ajax.
-This script is NOT for UI, or animation, do that in global-script instead.
+This script is NOT for UI, or animation, do that in other script instead.
 ###
 
 $ ->
 
-
-
 ################################################################################
 # Noty Confirmation Setup
+#
+# NOTE TYPE:
+#
+# [ alert - success - error - warning - information - confirmation ]
 ################################################################################
-#  noteAlert = (msg, type) ->
-#    n = noty({
-#      layout: 'bottomRight',
-#      type: type,
-#      text: msg,
-#      animation: {
-#        open: {height: 'toggle'},
-#        close: {height: 'toggle'},
-#        easing: 'swing',
-#        speed: 200
-#      },
-#      timeout: 5000
-#    })
+  noteAlert = (msg, type) ->
+    n = noty({
+      layout: 'bottomRight',
+      type: type,
+      text: msg,
+      animation: {
+        open: {height: 'toggle'},
+        close: {height: 'toggle'},
+        easing: 'swing',
+        speed: 200
+      },
+      timeout: 5000
+    })
+
+  noteAlert("World", "success")
 
 #  noteConfirm = (msg, url) ->
 #    n = noty({

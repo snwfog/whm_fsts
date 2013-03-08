@@ -20,6 +20,20 @@ $ ->
         $('form[name="flag-create-form"]').append(formElement)  
         $('form[name="flag-create-form"]').submit()
 
+  $('button.flag-delete-btn').click ->
+    console.log "trying to delete a flag"
+    $form = $(this).siblings("form")
+    $.ajax({
+      url: 'flag',
+      data: $form.serialize(),
+      type: 'DELETE',
+      success: ->
+        $group = $form.parents('div.accordion-group')
+        $group.remove()
+    })
+
+
+
 ################################################################################
 # Noty Confirmation Setup
 # Since this function is in the local scope of the script.coffee

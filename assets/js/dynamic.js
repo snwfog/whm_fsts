@@ -38,13 +38,11 @@ $(function() {
     if ($secondStyleSheet.attr("href").match("darkstrap")) {
       $secondStyleSheet.attr("href", "");
       document.cookie = "theme=0";
-      console.log(document.cookie);
     } else {
       href = $secondStyleSheet.prev().attr("href");
       pattern = /\/[^\/]*\.css/i;
       $secondStyleSheet.attr("href", href.replace(pattern, "/bootstrap.darkstrap.css"));
       document.cookie = "theme=1";
-      console.log(document.cookie);
     }
     return $.get("http://api.hostip.info/get_html.php", function(data) {
       var ip, reg;
