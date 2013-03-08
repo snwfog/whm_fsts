@@ -21,7 +21,7 @@ class ManageFlag
         
     }
 
-     public function createFlag($data)
+    public function createFlag($data)
     {
         $flag = new Flag();
         $flag->setMessage($data["message"]); 
@@ -52,11 +52,12 @@ class ManageFlag
 
     public function findDescriptors($id)
     {
-        $flag_descriptors = $this->em->find("WHM\model\FlagDescriptor", (int) $id);
+        $flag_descriptors = $this->em->find("WHM\Model\FlagDescriptor", (int) $id);
         return $flag_descriptors;
     }
 
-    public function getFlagDescriptors(){
+    public function getFlagDescriptors()
+    {
         $query = $this->em->createQuery('SELECT u FROM WHM\Model\FlagDescriptor u');
         $flagDescriptors = $query->getResult();
         return $flagDescriptors;
