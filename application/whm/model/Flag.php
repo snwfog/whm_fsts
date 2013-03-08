@@ -9,6 +9,7 @@ namespace WHM\Model;
 class Flag
 {
 
+
     /**
      * @Id
      * @Column(type="integer")
@@ -81,7 +82,4 @@ class Flag
     {
         return $this->message;
     }
-
-
-   
 }

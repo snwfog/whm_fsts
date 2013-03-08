@@ -8,6 +8,7 @@ use \WHM\IRedirectable;
 use \WHM\Model\ManageHousehold;
 use \WHM\Model\ManageFlag;
 use \WHM\Model\Flag;
+use \WHM\Model\HouseholdMember;
 
 class Household extends Controller implements IRedirectable
 {
@@ -15,6 +16,7 @@ class Household extends Controller implements IRedirectable
     private $manageHousehold;
     private $manageFlag;
     private $flag;
+
 
     public function __construct(array $args = null)
     {
@@ -24,6 +26,7 @@ class Household extends Controller implements IRedirectable
         $this->manageHousehold = new ManageHousehold();
         $this->manageFlag = new ManageFlag();
         $this->flag = new Flag();
+
 
     }
 
@@ -189,17 +192,20 @@ class Household extends Controller implements IRedirectable
 
     private function formatMessage($flagMessage)
     {
+      //  $household = new Household();
+        $member = new HouseholdMember();
 
         $data = array();
         $count = 0;
         foreach( $flagMessage as $flag){
             $flagD = $flag->getDescriptor();
             $data[$count++] = array(
-                                  "flag-id" => $flag->getId(),
-                                  "message" => $flag->getMessage(),
-                                  "flag-color" => $flagD->getColor(),
-                                  "flag-alternative-color" => $flagD->getAlternativeColor(),
-                                  "flag-meaning" => $flagD->getMeaning(),
+                                    "member-id" => $member->getId(),
+                                    "flag-id" => $flag->getId(),
+                                    "message" => $flag->getMessage(),
+                                    "flag-color" => $flagD->getColor(),
+                                    "flag-alternative-color" => $flagD->getAlternativeColor(),
+                                    "flag-meaning" => $flagD->getMeaning(),
                               );
         }
 

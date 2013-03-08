@@ -8,7 +8,6 @@ $(function() {
   $('button#add-household-member-save').click(function() {
     return $('form[name="member-create"]').submit();
   });
-
   $('button#flag-create-save').click(function() {
     var clicked, flagD_id, formElement;
     clicked = $("#flag-types .active").length > 0;
@@ -25,7 +24,6 @@ $(function() {
       return $('form[name="flag-create-form"]').submit();
     }
   });
-  
   noteAlert = function(msg, type) {
     var n;
     return n = noty({

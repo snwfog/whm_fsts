@@ -10,6 +10,9 @@ namespace WHM\Model;
  * @Table(name="flag_descriptors")
  * @package WHM\Model
  */
+
+use Doctrine\ORM\EntityManager;
+
 class FlagDescriptor
 {
 
@@ -94,5 +97,29 @@ class FlagDescriptor
     public function getMeaning()
     {
         return $this->meaning;
+    }
+
+    public static function build(EntityManager $entityManager, $flagTrueColor)
+    {
+        $colorMatch = array(
+            'red'       => 'important',
+            'yellow'    => 'warning',
+            'blue'      => 'info',
+            'green'     => 'success'
+        );
+
+        if (!array_key_exists($flagTrueColor, $colorMatch))
+        {
+
+            die("Cannot find your flag type. This message comes from FlagDescriptor.php.");
+        }
+
+        $query = "SELECT flagDescriptor
+            FROM \WHM\Model\FlagDescriptor flagDescriptor
+            WHERE flagDescriptor.color LIKE {$colorMatch[$flagTrueColor]}";
+        $q = $entityManager->createQuery($query);
+        $result = $q->getFirstResult();
+
+        return $result;
     }
 }
