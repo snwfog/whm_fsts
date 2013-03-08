@@ -48,4 +48,16 @@ class CreateHousehold extends Controller implements IRedirectable
     {
     }
 
+     public function delete()
+    {
+        print_r($_DELETE);
+        /*
+        if(isset($_DELETE))
+        {
+            $dflag = $this->mflag->deleteFlag($_DELETE);
+            $this->redirect("/household/" . $_POST["household-id"] . "/" . $_POST["member-id"]);
+        }*/
+    }
+
+
 }

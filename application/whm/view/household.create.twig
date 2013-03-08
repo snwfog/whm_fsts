@@ -144,6 +144,15 @@
                                     <div class="accordion-inner" style="padding: 0px">                         
                                         <div class="alert alert-{{ flag["flag-meaning"] | lower }}" style="margin: 0px;">
                                             <p>
+
+                                             <form class="form-horizontal" action="{{ apppath }}flag/new" method="GET" name="flag-delete-form" id="flag-delete">
+                                             <input type="hidden" value="DELETE" name="REQUEST_METHOD">
+                                            <input type="hidden" name="flag-id" value="{{ flag["flag-id"] }}"/>
+                                                <input type="submit" value="Delete Flag!" >
+
+
+                                                </form>
+
                                                 {{ flag["message"] }}
                                             </p>
                                         </div>

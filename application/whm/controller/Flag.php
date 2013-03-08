@@ -25,15 +25,18 @@ class Flag extends Controller implements IRedirectable
 
 
          // Check delete comment
-        if (isset($args['delete_flag']))
-            $this->delete($args['delete_flag']);
+        if (isset($_GET['REQUEST_METHOD'])&& ($_GET['REQUEST_METHOD']=='DELETE'))
+            $this->delete();  
+
+
    
     }
 
     public function get()
     {
-
+    
         $this->display("addflag.modal.twig");
+
     }
 
     public function post()
@@ -54,12 +57,15 @@ class Flag extends Controller implements IRedirectable
     {
     }
 
-    public function delete($id)
+    public function delete()
     {
-        $this->mflag->deleteFlag($id);
-        $this->redirect("/household/" . $_POST["household-id"] . "/" . $_POST["member-id"]);
 
+        
+        if(isset($_GET))
+        {
+            $dflag = $this->mflag->deleteFlag($_GET);
+           // $this->redirect("/household/" . $_POST["household-id"] . "/" . $_POST["member-id"]);
+        }
     }
-
-
+   
 }
