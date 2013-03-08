@@ -90,7 +90,14 @@
                         data-toggle="modal" data-target="#add-member-modal">
                     <i class="icon-plus icon-white"></i><i class="icon-user icon-white"></i> Add New Member
             </button>
-            <a href="{{ apppath }}appointment/{{ household["member-id"]}}">Make Appointment</a>
+            <form action="{{ apppath }}appointment/{{ household["member-id"]}}" method="GET" >
+                <input type="hidden" name="type" value="create">
+                <input type="submit" value="Make Appointment">
+            </form>
+            <form action="{{ apppath }}appointment/{{ household["member-id"]}}" method="GET" >
+                <input type="hidden" name="type" value="remove">
+                <input type="submit" value="Delete Appointment">
+            </form>
             </div>
     </div>
 {% endblock left1 %}
@@ -144,12 +151,6 @@
                                     <div class="accordion-inner" style="padding: 0px">                         
                                         <div class="alert alert-{{ flag["flag-meaning"] | lower }}" style="margin: 0px;">
                                             <p>
-                                             <form class="form-horizontal" action="{{ apppath }}flag/new" method="GET" name="flag-delete-form" id="flag-delete">
-                                                <input type="hidden" value="DELETE" name="REQUEST_METHOD">
-                                                <input type="hidden" name="flag-id" value="{{ flag["flag-id"] }}"/>
-                                                <input type="submit" value="Delete Flag!" >
-
-                                            </form>
                                                 {{ flag["message"] }}
                                             </p>
                                         </div>
