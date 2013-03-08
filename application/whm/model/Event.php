@@ -27,13 +27,19 @@ class Event
     protected $end_time;
 
     /** @Column(type="date") */
-    protected $date;
+    protected $start_date;
+
+    /** @Column(type="date") */
+    protected $end_date;
 
     /** @Column(type="smallint") */
     protected $group_id;
 
     /** @Column(type="boolean") */
     protected $is_template;
+
+    /** @Column(type="date") */
+    protected $capacity
 
     /**
      * * <-> * -- Inversing
@@ -92,14 +98,24 @@ class Event
         return $this->end_time;
     }
 
-    public function setDate($date)
+    public function setStartDate($start_date)
     {
-        $this->date = $date;
+        $this->start_date = $start_date;
     }
 
-    public function getDate($date)
+    public function getStartDate($start_date)
     {
-        return $this->date;
+        return $this->start_date;
+    }
+
+    public function setEndDate($end_date)
+    {
+        $this->end_date = $end_date;
+    }
+
+    public function getEndDate($end_date)
+    {
+        return $this->end_date;
     }
 
     public function setGroupId($group_id)
@@ -146,6 +162,15 @@ class Event
         return $this->participants;
     }
 
+    public function setCapacity($capacity)
+    {
+        $this->capacity = $capacity;
+    }
+
+    public function getCapacity($capacity)
+    {
+        return $this->capacity;
+    }
 
 }
 
