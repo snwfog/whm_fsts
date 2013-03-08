@@ -8,7 +8,7 @@
             {% endblock %}
         {% endfor %}
 
-        <form action="{{ apppath }}event/new" method="POST" id="view-event-form">
+        <form action="{{ apppath }}event/new" method="POST" name="event-form" id="view-event-form">
 
             <legend class ='controls controls-row'>
                 <div class='pull-left'>
@@ -29,9 +29,9 @@
             <legend>Action</legend>
             <div class="btn-toolbar">
                 <button id="event-create-clear" class="btn btn-warning" aria-hidden="true"> Clear</button>
-                <button id="create-event-save" class="btn btn-success"><i class="icon-ok icon-white submit"></i> Create Event</button>
-                <!--<button id="load-event-template" class="btn btn-info"><i class="icon-file icon-white submit"></i> Load Template </button>-->
-                <button id="create-template-save" class="btn btn-info"><i class="icon-file icon-white submit"></i> Save Template </button>             
+                <button id="create-event-save" type="button" class="btn btn-success"><i class="icon-ok icon-white"></i> Create Event</button>
+                <!--<button id="load-event-template" type="button" class="btn btn-info"><i class="icon-file icon-white"></i> Load Template </button>-->
+                <button id="create-template-save" type="button" class="btn btn-info"><i class="icon-file icon-white"></i> Save Template </button>             
             </div>
 
             <input type="hidden" name="household-id" value="{{ household["household_id"] }}"/>
