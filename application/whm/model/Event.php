@@ -15,25 +15,25 @@ class Event
     protected $id;
 
     /** @Column(type="string") */
-    protected $name
+    protected $name;
 
     /** @Column(type="text") */
-    protected $description
+    protected $description;
 
     /** @Column(type="time") */   
-    protected $start_time
+    protected $start_time;
 
     /** @Column(type="time") */
-    protected $end_time
+    protected $end_time;
 
     /** @Column(type="date") */
-    protected $date
+    protected $date;
 
     /** @Column(type="smallint") */
-    protected $group_id
+    protected $group_id;
 
     /** @Column(type="boolean") */
-    protected $is_template
+    protected $is_template;
 
     /**
      * * <-> * -- Inversing

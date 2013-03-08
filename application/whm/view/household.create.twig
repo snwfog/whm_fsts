@@ -139,7 +139,7 @@
                                            data-parent="#flag-accordion" href="#collapse{{ i }}">
                                             <strong>{{ "now"|date("d-m-y") }}</strong>
                                             <div class="pull-right">
-                                                <span class="label label-{{ flag["flag-meaning"] | lower }}"><i class="icon-tag icon-white"></i> {{ flag["flag-meaning"] }}</span>
+                                                <span class="label label-{{ flag["flag-color"] | lower }}"><i class="icon-tag icon-white"></i> {{ flag["flag-meaning"] }}</span>
                                             </div>
                                         </a>
                                     </div>
@@ -149,7 +149,7 @@
 
                                 <div id="collapse{{ i }}" class="accordion-body collapse">
                                     <div class="accordion-inner" style="padding: 0px">                         
-                                        <div class="alert alert-{{ flag["flag-meaning"] | lower }}" style="margin: 0px;">
+                                        <div class="alert alert-{{ flag["flag-alternative-color"] | lower }}" style="margin: 0px;">
                                             <p>
                                                 {{ flag["message"] }}
                                             </p>
