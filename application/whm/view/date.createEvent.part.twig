@@ -2,18 +2,14 @@
     <fieldset>
     	<legend>Date and Time</legend>
         <div class="controls controls-row" id="name-row">
+            <input class="span4" id="dp1" type="text" name="Date" maxlength="8" placeholder="Start Date" />
+            <input class="span4" id="dp2" type="text" name="Date" maxlength="8" placeholder="End Date" />
             <input class="span2" type="text" name="start-time" placeholder="Start Time" value="{{ event["starttime"] }}"/>
            
             <input class="span2" type="text" name="end-time" maxlength="12" placeholder="End Time" value="{{ event["endtime"] }}"/>
         </div>
 
-        <div class="controls controls-row">
-            <input class="span4" id="dp1" type="text" name="Date" maxlength="8" placeholder="Start Date" />
-            
-       
-            <input class="span4" id="dp2" type="text" name="Date" maxlength="8" placeholder="End Date" />
-            
-        </div
+        
     </fieldset>
     <script type="text/javascript">
         $('#dp1,#dp2').datepicker()

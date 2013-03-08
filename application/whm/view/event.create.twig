@@ -25,17 +25,17 @@
 
             {% include 'info.createEvent.part.twig' %}
 
-
+        
             <legend>Action</legend>
             <div class="btn-toolbar">
-                <button id="event-create-clear" class="btn btn-warning" aria-hidden="true"> Clear</button>
-                <button id="create-event-save" type="button" class="btn btn-success"><i class="icon-ok icon-white"></i> Create Event</button>
-                <!--<button id="load-event-template" type="button" class="btn btn-info"><i class="icon-file icon-white"></i> Load Template </button>-->
-                <button id="create-template-save" type="button" class="btn btn-info"><i class="icon-file icon-white"></i> Save Template </button>             
+                <button id="event-create-modify" type="button" class="btn btn-large btn-warning" aria-hidden="true"><i class="icon-edit icon-white"></i> Modify</button>
+                <button id="create-event-save" type="button" class="btn btn-large btn-success"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Create Event</button>
+                <!--<button id="load-event-template" class="btn btn-info"><i class="icon-file icon-white"></i> Load Template </button>-->
+                <button id="create-template-save" type="button" class="btn btn-large btn-info"><i class="icon-file icon-white"></i> Save Template </button>
             </div>
-
-            <input type="hidden" name="household-id" value="{{ household["household_id"] }}"/>
-            <input type="hidden" name="member-id" value="{{ household["member-id"] }}"/>
+        
+            <input type="hidden" name="event-id" value="{{ event["event_id"] }}"/>
+            <input type="hidden" name="template-id" value="{{ template["template-id"] }}"/>
 
         </form>
 
@@ -49,28 +49,28 @@
         <legend>Templates</legend>
         <div class="well" id="events-well">
             <ul class="nav nav-list" id="event-list">
-                {% for member in household.members %}
-                    {% if(member.principal and member.active) %}
-                        <li class="active"><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                                <i class="icon-home"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
+                {% for template in event.templates %}
+                    {% if(template.principal and template.active) %}
+                        <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
+                                <i class="icon-home"></i> {{member["name"] }}</a></li>
 
-                    {% elseif member.active %}
-                        <li class="active"><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                                <i class="icon-user"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
+                    {% elseif template.active %}
+                        <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
+                                <i class="icon-home"></i> {{member["name"] }}</a></li>
 
-                    {% elseif member.principal %}
-                        <li><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                                <i class="icon-home"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
+                    {% elseif template.principal %}
+                        <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
+                                <i class="icon-home"></i> {{member["name"] }}</a></li>
 
                     {% else%}
-                        <li><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                                <i class="icon-user"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
+                        <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
+                                <i class="icon-home"></i> {{member["name"] }}</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
         </div>
             
-            <button class="btn btn-success" 
+            <button class="btn btn-large btn-success" 
                         id="load-template-submit-btn"
                         name="load-template-submit-btn" type="button"
                         data-toggle="modal" data-target="#load-template-modal">
@@ -83,8 +83,26 @@
 {% block left2 %}
        <div class="span3">
         <legend>Events</legend>
-        <div class="well" id="events-well">
-            <ul class="nav nav-list" id="event-list">
+        <div class="well" id="events-well">            <thead>
+        <table class ='table table-hover controls controls-row'>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Christmas Food Giveaways</td>
+                </tr>
+                <tr>
+                    <td>Back to School Supplies</td>
+                </tr>
+                <tr>
+                    <td>Matresse Giveaways</td>
+                </tr>
+
+            </tbody>
+
+
+
+        </table>
+          <!--  <ul class="nav nav-list" id="event-list">
                 {% for member in household.members %}
                     {% if(member.principal and member.active) %}
                         <li class="active"><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
@@ -103,8 +121,8 @@
                                 <i class="icon-user"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
                     {% endif %}
                 {% endfor %}
-            </ul>
-        </div>
+            </ul>-->
+        </div> 
                      
     </div>
 {% endblock left2 %}
