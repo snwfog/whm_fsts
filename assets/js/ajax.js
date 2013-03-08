@@ -26,9 +26,9 @@ $(function() {
   });
 
   $('button#create-event-save').click(function() {
-    var clicked, formElement, occurence;
+    var clicked, formElement, occurrence;
     clicked = $("#event-occurrence .active").length > 0;
-    if(clicked){
+    if (clicked) {
       occurrence = $("#event-occurrence .active").data("value");
       formElement = document.createElement("input");
       formElement.setAttribute("name", "occurrence-type");
@@ -37,6 +37,22 @@ $(function() {
       $('form[name="event-form"]').append(formElement);
     }
     return $('form[name="event-form"]').submit();
+  });
+
+  $('button.flag-delete-btn').click(function() {
+    var $form;
+    console.log("trying to delete a flag");
+    $form = $(this).siblings("form");
+    return $.ajax({
+      url: 'flag',
+      data: $form.serialize(),
+      type: 'DELETE',
+      success: function() {
+        var $group;
+        $group = $form.parents('div.accordion-group');
+        return $group.remove();
+      }
+    });
   });
 
   noteAlert = function(msg, type) {
