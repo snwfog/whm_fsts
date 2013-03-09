@@ -9,22 +9,29 @@
 $serves = array
 (
     // Don't put the trailing slash - "/"
-    '/' => 'WHM\Controller\Index',
-    '/household' => 'WHM\Controller\Household',
-    '/household/:number' => 'WHM\Controller\Household',
-    '/household/:number/:number' => 'WHM\Controller\Household',
-    '/household/new' => 'WHM\Controller\CreateHousehold',
-    '/household/update/:number' => 'WHM\Controller\Household',
-    '/member' => 'WHM\Controller\Member',
-    '/member/:number' => 'WHM\Controller\member',
-    '/member/new' => 'WHM\Controller\CreateMember',
-    '/search' => 'WHM\Controller\Search',
-    '/debug' => 'WHM\Controller\Debug',
-    '.*/flag' => 'WHM\Controller\Flag',
-    '.*/analytic' => 'WHM\Controller\Logger',
-    '/appointment/:number' => 'WHM\Controller\CreateAppointment',
-    '/appointment/new' => 'WHM\Controller\CreateAppointment',
-    '/event/new' => 'WHM\Controller\CreateEvent',
+    '/'                             => 'WHM\Controller\Index',
+    '/household'                    => 'WHM\Controller\Household',
+    '/household/:number'            => 'WHM\Controller\Household',
+    '/household/:number/:number'    => 'WHM\Controller\Household',
+    '/household/new'                => 'WHM\Controller\CreateHousehold',
+    '/household/update/:number'     => 'WHM\Controller\Household',
+    '/member'                       => 'WHM\Controller\Member',
+    '/member/:number'               => 'WHM\Controller\member',
+    '/member/new'                   => 'WHM\Controller\CreateMember',
+    '/search'                       => 'WHM\Controller\Search',
+    '/debug'                        => 'WHM\Controller\Debug',
+    '.*/flag'                       => 'WHM\Controller\Flag',
+    '.*/analytic'                   => 'WHM\Controller\Logger',
+    '/appointment/:number'          => 'WHM\Controller\CreateAppointment',
+    '/appointment/new'              => 'WHM\Controller\CreateAppointment',
+    '/event/new'                    => 'WHM\Controller\CreateEvent',
+
+
+
+    // Ajax controller
+    '.*/country' => 'WHM\Controller\Ajax\Country',
+    '.*/postalcode' => 'WHM\Controller\Ajax\PostalCode',
+    '.*/language' => 'WHM\Controller\Ajax\Language'
 );
 
 /*-----------------------------------------------

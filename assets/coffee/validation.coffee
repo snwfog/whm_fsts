@@ -222,6 +222,6 @@ $ ->
 
   createHouseholdValidator.registerCallback('check_postal_code', (value) ->
     console.log value
-    reg = /((\w\d\w)-?){2}/ig
+    reg = /(\w\d\w)-?(\d\w\d)/ig
     if reg.exec value then true else false
   ).setMessage('check_postal_code', 'Invalid Postal Code format. The valid format should be of <b>A#A-#A#</b>.')

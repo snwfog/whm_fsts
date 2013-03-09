@@ -31,6 +31,7 @@ $ ->
   $('input[name="mcare-number"]').keyup "4,4,4", dynamicDash
   $('input[name="welfare-number"]').keyup "4,4,4,2", dynamicDash
   $('input[name="sin-number"]').keyup "3,3,3", dynamicDash
+  $('input[name="postal-code"]').keyup "3,3", dynamicDash
 
 #######################################################
 # Clear form button
