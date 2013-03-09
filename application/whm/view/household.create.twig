@@ -60,6 +60,7 @@
 
         {% include 'addmember.modal.twig' %}
         {% include 'addflag.modal.twig' %}
+        {% include 'appointment.modal.twig' %}
     </div>
 {% endblock content %}
 
@@ -95,6 +96,11 @@
                         name="create-member-submit-btn" type="button"
                         data-toggle="modal" data-target="#add-member-modal">
                     <i class="icon-plus icon-white"></i><i class="icon-user icon-white"></i> Add New Member
+            </button>
+            <button class="btn btn-success btn-block btn-large" 
+                        id=""
+                        name="" type="button"
+                        data-toggle="modal" data-target="#appointment-modal">HERP
             </button>
             <form action="{{ apppath }}appointment/{{ household["member-id"]}}" method="GET" >
                 <input type="hidden" name="type" value="create">

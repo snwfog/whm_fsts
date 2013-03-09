@@ -25,14 +25,12 @@ class CreateAppointment extends WHM\Controller implements WHM\IRedirectable
     public function get($member_id = null)//url
     {
         if (in_array("create", $_GET)) {
-            // print_r($_GET);
             $this->data["household"] = array("member_id" => $member_id);
-            $this->display("appointment.modal.twig", $this->data);
+            $this->display("appointment.twig", $this->data);
         }
         if (in_array("remove", $_GET)) {
-            // print_r($_GET);
             $this->data["household"] = array("member_id" => $member_id);
-            $this->display("removeAppointment.modal.twig", $this->data);
+            $this->display("removeAppointment.twig", $this->data);
         }
         if (in_array("delete", $_GET)) {
             $this->delete($_GET);
