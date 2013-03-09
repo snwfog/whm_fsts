@@ -42,6 +42,7 @@ class Member extends Controller implements IRedirectable
                         "city"     => $address->getCity(),
                         "province" => $address->getProvince(),
                         "postal-code"   => $address->getPostalCode(),
+                        "income" => $income->getIncome(),
                 );
         $this->data["household"] = $data;
         $this->display("member_view_form.twig", $this->data);

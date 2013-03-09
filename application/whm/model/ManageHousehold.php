@@ -126,6 +126,8 @@ class ManageHousehold {
         $household_member->setOrigin($data["origin"]);
         $household_member->setFirstVisitDate($datetime);
         $household_member->setContact($data["contact"]);
+        $household_member->setIncome($data["income"]);
+
 
         $this->em->persist($household_member);
         $this->em->flush();
@@ -164,6 +166,7 @@ class ManageHousehold {
         $memberInstance->setGender("M"); //CHANGE WHEN EXTRACT FROM MEDICARE
         $memberInstance->setOrigin($data["origin"]);
         $memberInstance->setContact($data["contact"]);
+        $memberInstance->setIncome($data["income"]);
 
         $this->em->persist($memberInstance);
         $this->em->flush();
