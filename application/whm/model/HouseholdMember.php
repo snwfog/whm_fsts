@@ -87,6 +87,12 @@ class HouseholdMember
     protected $contact;
 
     /**
+     * @Column(nullable=TRUE)
+     */
+    protected $income;
+
+
+    /**
      * * -> 1 -- Owning by Default
      *
      * @ManyToOne(targetEntity="Household")
@@ -271,6 +277,16 @@ class HouseholdMember
     public function getContact()
     {
         return $this->contact;
+    }
+
+    public function setIncome($income)
+    {
+        $this->income = $income;
+    }
+
+    public function getIncome()
+    {
+        return $this->income;
     }
 
     public function setFirstVisitDate($first_visit_date)

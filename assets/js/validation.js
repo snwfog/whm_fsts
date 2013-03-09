@@ -168,7 +168,7 @@ $(function() {
   return createHouseholdValidator.registerCallback('check_postal_code', function(value) {
     var reg;
     console.log(value);
-    reg = /((\w\d\w)-?){2}/ig;
+    reg = /(\w\d\w)-?(\d\w\d)/ig;
     if (reg.exec(value)) {
       return true;
     } else {

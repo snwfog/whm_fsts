@@ -166,6 +166,7 @@ class Household extends Controller implements IRedirectable
                         "origin"   => $member->getOrigin(),
                         "first-visit-date"  => $date,
                         "contact"   => $member->getContact(),
+                        "income"   => $member->getIncome(),
                         //Address
                         "house-number"    => $address->getHouseNumber(),
                         "street"    => $address->getStreet(),
@@ -173,6 +174,7 @@ class Household extends Controller implements IRedirectable
                         "city"     => $address->getCity(),
                         "province" => $address->getProvince(),
                         "postal-code"   => $address->getPostalCode(),
+                        "district"   => $address->getDistrict(),
                 );
         $data["members"] = $members;
         return $data;

@@ -13,10 +13,12 @@
         <div class="controls controls-row">
             <input class="span4" type="text"
                    name="city" placeholder="City" value="{{ household["city"] }}"/>
-            <input class="span3" type="text" maxlength="2"
+            <input class="span2" type="text" maxlength="2"
                    name="province" placeholder="Province" value="{{ household["province"] }}"/>
-            <input class="span5" type="text" maxlength="7"
+            <input class="span2" type="text" maxlength="7"
                    name="postal-code" placeholder="Postal Code" value="{{ household["postal-code"] }}"/>
+            <input class="span4" type="text" maxlength="20"
+                   name="district" placeholder="District" value="{{ household["district"] }}"/>
         </div>
     </fieldset>
 {% endblock address %}

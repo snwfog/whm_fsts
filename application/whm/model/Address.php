@@ -38,6 +38,11 @@ class Address
     protected $postal_code;
 
     /**
+     * @Column(nullable=TRUE)
+     */
+    protected $district;
+
+    /**
      * @Column(nullable=TRUE, length=2)
      **/
     protected $province;
@@ -85,6 +90,16 @@ class Address
     public function getPostalCode()
     {
         return $this->postal_code;
+    }
+
+     public function setDistrict($district)
+    {
+        $this->district = $district;
+    }
+
+    public function getDistrict()
+    {
+        return $this->district;
     }
 
     public function setProvince($province)

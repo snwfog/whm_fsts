@@ -24,21 +24,6 @@ $(function() {
       return $('form[name="flag-create-form"]').submit();
     }
   });
-
-  $('button#create-event-save').click(function() {
-    var clicked, formElement, occurrence;
-    clicked = $("#event-occurrence .active").length > 0;
-    if (clicked) {
-      occurrence = $("#event-occurrence .active").data("value");
-      formElement = document.createElement("input");
-      formElement.setAttribute("name", "occurrence-type");
-      formElement.setAttribute("type", "hidden");
-      formElement.setAttribute("value", occurrence);
-      $('form[name="event-form"]').append(formElement);
-    }
-    return $('form[name="event-form"]').submit();
-  });
-
   $('button.flag-delete-btn').click(function() {
     var $form;
     console.log("trying to delete a flag");
@@ -54,7 +39,6 @@ $(function() {
       }
     });
   });
-
   noteAlert = function(msg, type) {
     var n;
     return n = noty({
@@ -73,5 +57,51 @@ $(function() {
       }
     });
   };
+  /*
+    Bootstrap Typeahead for ORIGINS and LANGUAGES
+    Sexy way of doing typeahead with ajax & bootstrap
+    http://stackoverflow.com/questions/9232748/twitter-bootstrap-typeahead-ajax-example
+  */
+
+  $("input[name='origin']").typeahead({
+    source: function(query, process) {
+      return $.ajax({
+        url: $(this)[0].$element.data('link'),
+        type: 'get',
+        data: {
+          query: query
+        },
+        dataType: 'json',
+        success: function(json) {
+          var countries;
+          countries = [];
+          $.each(json, function(code, country) {
+            return countries.push(country);
+          });
+          return process(countries);
+        }
+      });
+    }
+  });
+  $("input[name='language']").typeahead({
+    source: function(query, process) {
+      return $.ajax({
+        url: $(this)[0].$element.data('link'),
+        type: 'get',
+        data: {
+          query: query
+        },
+        dataType: 'json',
+        success: function(json) {
+          var languages;
+          languages = [];
+          $.each(json, function(name, languageObj) {
+            return languages.push(languageObj['name']);
+          });
+          return process(languages);
+        }
+      });
+    }
+  });
   return true;
 });

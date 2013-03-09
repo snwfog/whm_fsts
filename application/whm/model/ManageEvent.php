@@ -23,15 +23,13 @@ class ManageEvent
     public function createEvent($data)
     {
         $event = new Event();
-        $event->setName($data["name"]);
+        $event->setName($data["event-name"]);
         $event->setDescription($data["description"]);
         $event->setStartTime($data["start-time"]); 
         $event->setEndTime($data["end-time"]);
         $event->setStartDate($data["start-date"]); 
         $event->setEndDate($data["end-date"]);
-        $event->setCapacity($data["capacity"]);
-        $event_participants = $this->getParticipants($data["event-participants"]); 
-        $event->addParticipant($event_participants);
+        $event->setCapacity($data["event-capacity"]);
         $this->em->persist($event);
         $this->em->flush();
 
@@ -58,6 +56,29 @@ class ManageEvent
         $query = $this->em->createQuery('SELECT u FROM WHM\Model\Event u');
         $flagParticipants = $query->getResult();
         return $flagParticipants;
+    }
+
+      private function updateEvent($eventInstance, $data)
+    {
+        $data = $this->formatData($data);
+        $eventInstance->setName($data["event-name"]);
+        $eventInstance->setDescription($data["description"]);
+        $eventInstance->setStartTime($data["start-time"]); 
+        $eventInstance->setEndTime($data["end-time"]);
+        $eventInstance->setStartDate($data["start-date"]); 
+        $eventInstance->setEndDate($data["end-date"]);
+        $eventInstance->setCapacity($data["event-capacity"]);
+        $this->em->persist($eventInstance);
+        $this->em->flush();
+    }
+
+    private function formatData($data)
+    {
+        foreach ($data as $key => $value)
+        {
+            $data[$key] = str_replace("-", "", $value);
+        }
+        return $data;
     }
 
 }

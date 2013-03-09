@@ -51,5 +51,39 @@ $ ->
         speed: 200
       },
     })
+  ###
+  Bootstrap Typeahead for ORIGINS and LANGUAGES
+  Sexy way of doing typeahead with ajax & bootstrap
+  http://stackoverflow.com/questions/9232748/twitter-bootstrap-typeahead-ajax-example
+  ###
+  $("input[name='origin']").typeahead(
+    source: (query, process) ->
+      return $.ajax(
+        url: $(this)[0].$element.data('link')
+        type: 'get'
+        data: {query : query}
+        dataType: 'json'
+        success: (json) ->
+          countries = []
+          $.each json, (code, country) ->
+            countries.push country
+          return process(countries)
+      )
+  )
+
+  $("input[name='language']").typeahead(
+    source: (query, process) ->
+      return $.ajax(
+        url: $(this)[0].$element.data('link')
+        type: 'get'
+        data: {query : query}
+        dataType: 'json'
+        success: (json) ->
+          languages = []
+          $.each json, (name, languageObj) ->
+            languages.push languageObj['name']
+          return process(languages)
+      )
+  )
 
   true
