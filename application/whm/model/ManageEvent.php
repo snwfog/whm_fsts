@@ -23,15 +23,13 @@ class ManageEvent
     public function createEvent($data)
     {
         $event = new Event();
-        $event->setName($data["name"]);
+        $event->setName($data["event-name"]);
         $event->setDescription($data["description"]);
         $event->setStartTime($data["start-time"]); 
         $event->setEndTime($data["end-time"]);
         $event->setStartDate($data["start-date"]); 
         $event->setEndDate($data["end-date"]);
-        $event->setCapacity($data["capacity"]);
-        $event_participants = $this->getParticipants($data["event-participants"]); 
-        $event->addParticipant($event_participants);
+        $event->setCapacity($data["event-capacity"]);
         $this->em->persist($event);
         $this->em->flush();
 
