@@ -17,28 +17,26 @@ class Event
     /** @Column(type="string") */
     protected $name;
 
-    /** @Column(type="text") */
+    /** @Column(type="text", nullable=TRUE) */
     protected $description;
 
-    /** @Column(type="time") */   
+    /** @Column(type="string", nullable=TRUE) */   
     protected $start_time;
 
-    /** @Column(type="time") */
+    /** @Column(type="string", nullable=TRUE) */
     protected $end_time;
 
     /** @Column(type="date") */
     protected $start_date;
 
-    /** @Column(type="date") */
-    protected $end_date;
-
-    /** @Column(type="smallint") */
+    /** @Column(type="smallint", nullable=TRUE) */
     protected $group_id;
 
-    /** @Column(type="boolean") */
+    /** @Column(type="boolean", nullable=TRUE) 
+    */
     protected $is_template;
 
-    /** @Column(type="date") */
+    /** @Column(type="integer") */
     protected $capacity;
 
     /**
@@ -106,16 +104,6 @@ class Event
     public function getStartDate($start_date)
     {
         return $this->start_date;
-    }
-
-    public function setEndDate($end_date)
-    {
-        $this->end_date = $end_date;
-    }
-
-    public function getEndDate($end_date)
-    {
-        return $this->end_date;
     }
 
     public function setGroupId($group_id)

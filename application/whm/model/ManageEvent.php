@@ -28,8 +28,15 @@ class ManageEvent
         $event->setStartTime($data["start-time"]); 
         $event->setEndTime($data["end-time"]);
         $event->setStartDate($data["start-date"]); 
-        $event->setEndDate($data["end-date"]);
         $event->setCapacity($data["event-capacity"]);
+        $event->setIsTemplate($data["is_template"]);
+        if(isset($data["group-id"]) && !is_null($data["group-id"])){
+            $event->setGroupId($data["group-id"]);
+        }else{
+            $this->em->persist($event);
+            $this->em->flush();
+            $event->setGroupId($event->getId());
+        }
         $this->em->persist($event);
         $this->em->flush();
 
