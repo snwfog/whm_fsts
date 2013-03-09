@@ -26,8 +26,12 @@ class ManageEvent
         $event->setName($data["name"]);
         $event->setDescription($data["description"]);
         $event->setStartTime($data["start-time"]); 
-        $event->setEndTime($data["end-time"]); 
-        $event->setDate($data["date"]);
+        $event->setEndTime($data["end-time"]);
+        $event->setStartDate($data["start-date"]); 
+        $event->setEndDate($data["end-date"]);
+        $event->setCapacity($data["capacity"]);
+        $event_participants = $this->getParticipants($data["event-participants"]); 
+        $event->addParticipant($event_participants);
         $this->em->persist($event);
         $this->em->flush();
 
@@ -47,6 +51,13 @@ class ManageEvent
     {
         $eventId = $this->em->find("WHM\model\Event", (int) $id);
         return $eventId;
+    }
+
+    public function getParticipants()
+    {
+        $query = $this->em->createQuery('SELECT u FROM WHM\Model\Event u');
+        $flagParticipants = $query->getResult();
+        return $flagParticipants;
     }
 
 }

@@ -15,10 +15,16 @@
                     ID: {{ household["household_id"] }}
                 </div>
                 <div class='pull-right'>
-                    <span class="label label-success"><i class="icon-tags icon-white"></i> 1</span>
-                    <span class="label label-warning"><i class="icon-tags icon-white"></i> 2</span>
-                    <span class="label label-important"><i class="icon-tags icon-white"></i> 3</span>
-                    <span class="label label-info"><i class="icon-tags icon-white"></i> 1</span>
+                    {%  for flag in flags %}  
+                        {% set count = 0 %}
+                               <span class="label label-{{ flag["flag-color"] | lower }}">
+                                    <i class="icon-tag icon-white"></i> {{ flag["flag-meaning"] }}
+                                </span>
+                            {% for flagn_number in flagn %}
+                                {{ flag-number["flagn"] }}
+                            {% endfor %}
+                        {% set count = count + 1 %}
+                    {% endfor %}
                 </div>
             </legend>
 

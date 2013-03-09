@@ -5,6 +5,8 @@ use WHM\Application;
 use \WHM\Model\Flag;
 use \WHM\Model\FlagDescriptor;
 use \WHM\Model\ManageHousehold;
+use \WHM\Model\HouseholdMember;
+
 
 /**
  * Manage entity household
@@ -48,6 +50,21 @@ class ManageFlag
     {
         $flagId = $this->em->find("WHM\model\Flag", (int) $id);
         return $flagId;
+    }
+    public function flagNumber()
+    {
+        $flag_descriptors = new FlagDescriptor();
+        $flag_descriptors->getId();
+        $household_member = new HouseholdMember();
+        $household_member->getId();
+        $query = $this->em->createQuery('   SELECT u,count(u) 
+                                            FROM WHM\Model\Flag flag
+                                            JOIN WHM\Model\FlagDescriptor descriptor
+                                            JOIN WHM\Model\HouseholdMember member 
+                                            WHERE flag_descriptor_id=$flag_descriptors and household_member_id=$household_members 
+                                            GROUP BY flag_descriptor_id' );
+        $flagNmber = $query->getResult();
+        return $flagNmber;
     }
 
     public function findDescriptors($id)

@@ -56,11 +56,14 @@ class Household extends Controller implements IRedirectable
             $flags = $member->getFlags();
             $formattedFlags = $this->formatMessage($flags);
             
+        //   $flagNumber = $this->flagNum($formattedFlags);
+
 
             $data = array(
                             "household" => $data,
                             "flagDescriptors" => $formattedDescriptor,
                             "flags"=> $formattedFlags,
+      //                    "flag_number"=>$flagNumber,
                     );
             $this->display("household.create.twig", $data);
         }
@@ -215,6 +218,20 @@ class Household extends Controller implements IRedirectable
         }
 
         return $data;      
+    }
+
+    private function flagNum($flagN)
+    {
+        $data = array();
+        $count = 0;
+        foreach( $flagN as $manageFlag){
+            $manageFlag = new ManageFlag();
+            $data[$count++] = array(
+                                    "flagn" => $manageFlag->flagNumber(),
+                              );
+        }
+
+        return $data;
     }
 }
 
