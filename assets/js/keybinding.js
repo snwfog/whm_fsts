@@ -12,6 +12,12 @@ $(function() {
   Mousetrap.bind("m", function() {
     return $('#add-member-modal').modal();
   });
+  Mousetrap.bind('right', function() {
+    return $('a#tab2-toggle').tab('show');
+  });
+  Mousetrap.bind('left', function() {
+    return $('a#tab1-toggle').tab('show');
+  });
   $(modal).on("hide", function() {
     return $(this).find("form :input").first().focus().blur();
   });

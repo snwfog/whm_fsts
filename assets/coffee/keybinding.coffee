@@ -15,6 +15,12 @@ $ ->
   Mousetrap.bind "m", ->
     $('#add-member-modal').modal()
 
+  Mousetrap.bind 'right', ->
+    $('a#tab2-toggle').tab('show')
+
+  Mousetrap.bind 'left', ->
+    $('a#tab1-toggle').tab('show')
+
   $(modal).on "hide", ->
     $(this).find("form :input").first().focus().blur()
 
