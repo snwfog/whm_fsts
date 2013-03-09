@@ -9,31 +9,56 @@
         </div>
 
         <div class="modal-body">
-<!--             <form action="{{ apppath }}member/new" method="POST" name="member-create">
-
-
-                <fieldset>
-                    <div class="controls controls-row" id="name-row">
-                        <input class="span4" type="text" name="last-name"
-                               placeholder="Last Name"/>
-                        <input class="span5" type="text" name="first-name"
-                               placeholder="First Name"/>
-                        <input id="phone-number" class="span3" type="text" name="phone-number"
-                               maxlength="12" placeholder="Phone Number"/>
-                    </div>
-                </fieldset>
-
-                {% include 'information.form.part.twig' %}
-
-                <input type="hidden" name="household-id" value="{{ household.household_id }}"/>
-            </form> -->
+            <table class="table table-striped">
+                <tr>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                </tr>
+                <tr>
+                    <td>{{ "now"|date('l', timezone="America/Montreal") }}</td>
+                    <td>{{ "tomorrow"|date('l', timezone="America/Montreal") }}</td>
+                    <td>{{ "2days"|date('l', timezone="America/Montreal") }}</td>
+                    <td>{{ "3days"|date('l', timezone="America/Montreal") }}</td>
+                    <td>{{ "4days"|date('l', timezone="America/Montreal") }}</td>
+                    <td>{{ "5days"|date('l', timezone="America/Montreal") }}</td>
+                    <td>{{ "6days"|date('l', timezone="America/Montreal") }}</td>
+                </tr>
+                <tr align=>
+                    <td>{{ "now"|date('F jS', timezone="America/Montreal") }}</td>
+                    <td>{{ "tomorrow"|date('F jS', timezone="America/Montreal") }}</td>
+                    <td>{{ "2days"|date('F jS', timezone="America/Montreal") }}</td>
+                    <td>{{ "3days"|date('F jS', timezone="America/Montreal") }}</td>
+                    <td>{{ "4days"|date('F jS', timezone="America/Montreal") }}</td>
+                    <td>{{ "5days"|date('F jS', timezone="America/Montreal") }}</td>
+                    <td>{{ "6days"|date('F jS', timezone="America/Montreal") }}</td>
+                </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><button type="button" class="btn btn-primary" data-dismiss="modal">Christmas Basket<br />69/96</td>
+                        <td><button type="button" class="btn btn-primary">Back to School<br />4/10</td>
+                        <td><button type="button" class="btn btn-primary">Food Basket<br />1/50</button><button type="button" class="btn btn-primary">Tax Stuff<br />1/50</button></td>
+                        <td>
+                        </td>
+                        <td></td>
+                    </tr>
+            </table>
+            <div class="pagination pagination-large" align="center">
+              <ul>
+                <li><a href="#"><<</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">>></a></li>
+              </ul>
+            </div>
         </div>
         <div class="modal-footer">
-           <!--  <button class="btn" data-dismiss="modal" aria-hidden="true"> Close</button>
-            <button id="member-create-btn" class="btn btn-warning" aria-hidden="true"> Clear</button>
-            <button id="add-household-member-save" class="btn btn-success"><i class="icon-ok icon-white"></i> Save changes</button> -->
+            <button class="btn" data-dismiss="modal" aria-hidden="true"> Close</button>
         </div>
-
-
     </div>
 {% endblock %}
