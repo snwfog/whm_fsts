@@ -26,17 +26,14 @@
         </div>
 
         <div class="controls controls-row">
-            <input class="span4" type="text"
+            <input class="span3" type="text"
                    name="referral" placeholder="Referral" value="{{ household.referral }}"/>
-            <input class="span5" type="text"
+            <input class="span3" type="text"
                    name="contact" placeholder="Contact" value="{{ household.contact }}"/>
             <input class="span3" type="text"
                    name="first-visit-date" placeholder="MM-DD-YY" value="{{ household["first-visit-date"] }}"/>
+            <input class="span3" type="text"
+                   name="income" placeholder="Annual Income" value="{{ household["income"] }}"/>
         </div>
-
-        <div class="controls controls-row">
-        <input class="span4" type="text"
-                   name="income" placeholder="Income" value="{{ household["income"] }}"/>    
-        </div> 
     </fieldset>
 {% endblock information %}
