@@ -29,7 +29,9 @@ class ManageEvent
         $event->setEndTime($data["end-time"]);
         $event->setStartDate($data["start-date"]); 
         $event->setCapacity($data["event-capacity"]);
-        $event->setIsTemplate($data["is_template"]);
+        if(isset($data["is_template"])){
+            $event->setIsTemplate($data["is_template"]);
+        }
         if(isset($data["group-id"]) && !is_null($data["group-id"])){
             $event->setGroupId($data["group-id"]);
         }else{
