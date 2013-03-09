@@ -174,6 +174,7 @@ class Household extends Controller implements IRedirectable
                         "city"     => $address->getCity(),
                         "province" => $address->getProvince(),
                         "postal-code"   => $address->getPostalCode(),
+                        "district"   => $address->getDistrict(),
                 );
         $data["members"] = $members;
         return $data;

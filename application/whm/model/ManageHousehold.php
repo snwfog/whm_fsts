@@ -142,6 +142,7 @@ class ManageHousehold {
         $address->setAptNumber($data["apt-number"]);
         $address->setCity($data["city"]);
         $address->setPostalCode($data["postal-code"]);
+        $address->setDistrict($data["district"]);
         $address->setProvince($data["province"]);
         $this->em->persist($address);
         $this->em->flush();
@@ -178,7 +179,8 @@ class ManageHousehold {
         $addressInstance->setStreet($data["street"]);
         $addressInstance->setAptNumber($data["apt-number"]);
         $addressInstance->setCity($data["city"]);
-        $addressInstance->getPostalCode($data["postal-code"]);
+        $addressInstance->setPostalCode($data["postal-code"]);
+        $addressInstance->setDistrict($data["district"]);
         $addressInstance->setProvince($data["province"]);
         $this->em->persist($addressInstance);
         $this->em->flush();
