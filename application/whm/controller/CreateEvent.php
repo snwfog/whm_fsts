@@ -45,7 +45,7 @@ class CreateEvent extends Controller implements IRedirectable
             $repeat = array(    "daily" => "1 day", 
                                 "weekly" => "1 week", 
                                 "biweekly" => "2 week", 
-                                "bimonthly" => "2 month", 
+                                "monthly" => "1 month", 
                                 "bimonthly" => "2 month",
                                 "yearly" => "1 year",
             );
