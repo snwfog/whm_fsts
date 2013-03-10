@@ -160,11 +160,12 @@
                                     </div>
                                 </div>
 
-
-
                                 <div id="collapse{{ i }}" class="accordion-body collapse">
                                     <div class="accordion-inner" style="padding: 0px">                         
                                         <div class="alert alert-{{ flag["alert-color"] | lower }}" style="margin: 0px;">
+                                            <button type="button" style="margin-top: 5px;"
+                                                    class="close flag-delete-btn" id="flag-delete-btn-{{ i }}">
+                                                <i class="icon-remove"></i></button>
                                             <form class="form-horizontal" action="{{ apppath }}flag"
                                                 name="flag-delete-form" id="flag-delete-{{ i }}">
                                                 <input type="hidden" name="flag-id" value="{{ flag["flag-id"] }}"/>
@@ -172,10 +173,6 @@
                                                 <input type="hidden" name="household-id" value="{{ household.household_id}}"/>
                                             </form>
                                             <p>{{ flag["message"] }}</p>
-                                            <button class="btn btn-danger flag-delete-btn" type="button"
-                                                    id="flag-delete-btn-{{ 1 }}">
-                                               <i class="icon-trash icon-white"></i>
-                                            </button>
                                         </div>
                                     </div>
                                 </div>

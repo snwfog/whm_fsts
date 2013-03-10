@@ -88,6 +88,7 @@ $(function() {
     Bootstrap Typeahead for ORIGINS and LANGUAGES
     Sexy way of doing typeahead with ajax & bootstrap
     http://stackoverflow.com/questions/9232748/twitter-bootstrap-typeahead-ajax-example
+    http://tatiyants.com/how-to-use-json-objects-with-twitter-bootstrap-typeahead/
   */
 
   $("input[name='origin']").typeahead({
@@ -103,7 +104,7 @@ $(function() {
           var countries;
           countries = [];
           $.each(json, function(code, country) {
-            return countries.push(country);
+            return countries.push(country.trim());
           });
           return process(countries);
         }
@@ -123,7 +124,7 @@ $(function() {
           var languages;
           languages = [];
           $.each(json, function(name, languageObj) {
-            return languages.push(languageObj['name']);
+            return languages.push(languageObj['name'].trim());
           });
           return process(languages);
         }
