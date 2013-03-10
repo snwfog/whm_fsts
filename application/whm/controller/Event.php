@@ -27,9 +27,12 @@ class Event extends Controller implements IRedirectable
         if(!is_null($event_id)){
             $this->data["formAction"] = "event";
             $event = $this->manageEvent->findEvent($event_id);
-            $event = array( 0 => $event);
-            $event = $this->formatEvents($event);
+            $relatedEvents = $this->manageEvent->getRelatedEvents($event->getGroupId(), $event->getId());
+            $relatedEvents = $this->formatEvents($relatedEvents);
+
+            $event = $this->formatEvents(array( 0 => $event));
             $this->data["event"] = $event[0];
+            $this->data["related-events"] = $relatedEvents;
         } 
         $this->display("event.create.twig", $this->data);                  
     }
@@ -52,6 +55,7 @@ class Event extends Controller implements IRedirectable
                 "start-time" => $event->getStartTime(),
                 "end-time" => $event->getEndTime(),
                 "date" => $event->getStartDate()->format("d/m/Y"),
+                "group-id" => $event->getGroupId(),
             );
         }
         return $data;      

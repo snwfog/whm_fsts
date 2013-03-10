@@ -92,13 +92,15 @@ class ManageEvent
         return $data;
     }
 
-
     public function getUpComingEvents()
     {
+        //CONSTRAINT: RETRIEVE EVENT ONLY 2 WEEK AHEAD.
+        $dateTime2 = new DateTime();
+        $dateTime2->setTimezone(new DateTimeZone(LOCALTIME));
+        $dateNow = $dateTime2;
+
         $dateTime = new DateTime();
         $dateTime->setTimezone(new DateTimeZone(LOCALTIME));
-
-        $dateNow = $dateTime;
         $incrementer = DateInterval::createFromDateString("2 weeks");
         $dateTime = $dateTime->add($incrementer);
         $dateFuture = $dateTime;
@@ -108,12 +110,28 @@ class ManageEvent
                           ->from("WHM\model\Event", "event")
                           ->where("event.start_date <= :dateFuture")
                           ->andWhere("event.start_date >= :dateNow")
+                          ->groupBy("event.group_id")
+                          ->orderBy("event.group_id")
                           ->setParameter('dateFuture', $dateFuture)
-                          ->setParameter('dateNow', $dateNow);
-                          
+                          ->setParameter('dateNow', $dateNow);                         
 
         $upcomingEvents = $query->getQuery()->execute();
         return $upcomingEvents;
+    }
+
+
+    public function getRelatedEvents($group_id, $event_id)
+    {
+        $query = $this->em->createQueryBuilder()
+                          ->select("event")
+                          ->from("WHM\model\Event", "event")
+                          ->where("event.group_id = :group_id")
+                          ->andWhere("event.id <> :event_id")
+                          ->setParameter('group_id', $group_id)
+                          ->setParameter('event_id', $event_id);                 
+
+        $relatedEvents = $query->getQuery()->execute();
+        return $relatedEvents;
     }
 
 }
