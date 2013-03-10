@@ -40,7 +40,7 @@ class CreateEvent extends Controller implements IRedirectable
         $event = $this->manageEvent->createEvent($_POST);
 
         //If there is reoccurence, create event with same group id
-        if(isset($_POST["occurrence-type"]) && ($_POST["is_template"] == false)){
+        if(isset($_POST["occurrence-type"]) && !isset($_POST["is_template"])){
             $groupId = $event->getId();
             $repeat = array(    "daily" => "1 day", 
                                 "weekly" => "1 week", 
