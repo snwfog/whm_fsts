@@ -27,7 +27,7 @@
                                         {% for i in 1..weeklength %}
                                             <th>
                                                 {{ 7 * (k - 1) + i }} -
-                                                {{ "now"|date_modify('+1 days')|date("l") }} -
+                                                {{ "now"|date_modify('+1 days')|date("D")|upper }} -
                                                 {{ "now"|date_modify('+7 days')|date("d") }}
                                             </th>
                                         {% endfor %}
@@ -38,14 +38,33 @@
                                        This will set the maximum height of the table.
                                        In this example, it is represented by the variable maxevents. #}
                                     {% set maxevents = 4 %}
-                                    {% for i in 0..maxevents %}
+
+                                    {% for i in 1..maxevents %}
                                         <tr>
                                             {% for j in 1..weeklength %}
                                                 <td>
-                                                    <button class="btn btn-small btn-success" type="button">
-                                                        Event Desc
-                                                        {% set maxparticipants = random(50) + 1 %}
-                                                        ({{ random(maxparticipants) }}/{{ maxparticipants }})
+
+                                                    {% set maxparticipants = random(50) + 1 %}
+                                                    {% set actualparticipants = random(maxparticipants) %}
+                                                    {# MAXIMUM TITLE LENGTH IS 10. ELSE IS TRIMMED #}
+                                                    {% set eventtitle = random(['Food Basket', 'Christmas',
+                                                        'Income Tax', 'School Supply']) %}
+                                                    {# DECIDE BUTTON COLOR #}
+                                                    {% set availablespots = maxparticipants - actualparticipants %}
+                                                    {% set buttoncolor = 'success' %}
+                                                    {% if availablespots <= maxparticipants / 10 %}
+                                                        {% set buttoncolor = 'danger' %}
+                                                    {% elseif availablespots <= maxparticipants / 2 %}
+                                                        {% set buttoncolor = 'warning' %}
+                                                    {% endif %}
+
+                                                    <button class="btn btn-small btn-{{ buttoncolor }}" type="button"
+                                                        {% if availablespots == 0 %} disabled>
+                                                            {{ eventtitle }} <br /> Full
+                                                        {% else %}
+                                                            >
+                                                            {{ eventtitle }} ({{ actualparticipants }}/{{ maxparticipants }})
+                                                        {% endif %}
                                                     </button>
                                                 </td>
                                             {% endfor %}

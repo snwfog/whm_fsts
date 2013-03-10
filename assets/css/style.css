@@ -51,9 +51,10 @@ div#appointment-modal
     margin-left: -480px;
 }
 
-div#appointment-modal div.modal-body
+div#appointment-modal .carousel,
+div#appointment-modal .table
 {
-    /*padding: 0px;*/
+    margin-bottom: 0px;
 }
 
 div#manage-flag-modal
@@ -61,3 +62,4 @@ div#manage-flag-modal
     width: 400px;
     margin-left: -200px;
 }
+
