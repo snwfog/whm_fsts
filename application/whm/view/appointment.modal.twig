@@ -3,64 +3,71 @@
          class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
 
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
-            <h3>Appointments</h3>
-        </div>
-
         <div class="modal-body">
-            <table class="table table-striped">
-                <tr>
-                    <th>1</th>
-                    <th>2</th>
-                    <th>3</th>
-                    <th>4</th>
-                    <th>5</th>
-                    <th>6</th>
-                    <th>7</th>
-                </tr>
-                <tr>
-                    <td>{{ "now"|date('l', timezone="America/Montreal") }}</td>
-                    <td>{{ "tomorrow"|date('l', timezone="America/Montreal") }}</td>
-                    <td>{{ "2days"|date('l', timezone="America/Montreal") }}</td>
-                    <td>{{ "3days"|date('l', timezone="America/Montreal") }}</td>
-                    <td>{{ "4days"|date('l', timezone="America/Montreal") }}</td>
-                    <td>{{ "5days"|date('l', timezone="America/Montreal") }}</td>
-                    <td>{{ "6days"|date('l', timezone="America/Montreal") }}</td>
-                </tr>
-                <tr align=>
-                    <td>{{ "now"|date('F jS', timezone="America/Montreal") }}</td>
-                    <td>{{ "tomorrow"|date('F jS', timezone="America/Montreal") }}</td>
-                    <td>{{ "2days"|date('F jS', timezone="America/Montreal") }}</td>
-                    <td>{{ "3days"|date('F jS', timezone="America/Montreal") }}</td>
-                    <td>{{ "4days"|date('F jS', timezone="America/Montreal") }}</td>
-                    <td>{{ "5days"|date('F jS', timezone="America/Montreal") }}</td>
-                    <td>{{ "6days"|date('F jS', timezone="America/Montreal") }}</td>
-                </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td><button type="button" class="btn btn-primary btn-danger" data-dismiss="modal">Christmas Basket<br />45/50</td>
-                        <td><button type="button" class="btn btn-primary btn-warning">Back to School<br />30/50</td>
-                        <td>
-                            <button type="button" class="btn btn-primary btn-sucess">Food Basket<br />1/50</button>
-                            <button type="button" class="btn btn-primary btn-inverse disabled">Tax Stuff<br />50/50</button>
-                        </td>
-                        <td>
-                        </td>
-                        <td></td>
-                    </tr>
-            </table>
-            <div class="pagination pagination-large" align="center">
-              <ul>
-                <li><a href="#"><<</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">>></a></li>
-              </ul>
+            <div id="event-calendar-carousel" class="carousel slide" data-interval="false">
+                <ol class="carousel-indicators">
+                    <li data-target="#event-calendar-carousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#event-calendar-carousel" data-slide-to="1"></li>
+                </ol>
+                <!-- Carousel items -->
+                {# WATCHOUT!!! #}
+                {# SOME INDICES START WITH 1 INSTEAD OF 0!!! #}
+                <div class="carousel-inner">
+                    {% for k in 1..2 %}
+                        {% if k == 1 %}
+                            <div class="active item">
+                        {% else %}
+                            <div class="item">
+                        {% endif %}
+                            <legend>Events ({{ "now"|date("M d") }} - {{ "now"|date_modify('+7 days')|date("M d") }})</legend>
+                            <table class="table table-bordered">
+                                <thead>
+                                    {% set weeklength = 7 %}
+                                    <tr>
+                                        {% for i in 1..weeklength %}
+                                            <th>
+                                                {{ 7 * (k - 1) + i }} -
+                                                {{ "now"|date_modify('+1 days')|date("l") }} -
+                                                {{ "now"|date_modify('+7 days')|date("d") }}
+                                            </th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {# First get the one day with the maximum amount of events.
+                                       This will set the maximum height of the table.
+                                       In this example, it is represented by the variable maxevents. #}
+                                    {% set maxevents = 4 %}
+                                    {% for i in 0..maxevents %}
+                                        <tr>
+                                            {% for j in 1..weeklength %}
+                                                <td>
+                                                    <button class="btn btn-small btn-success" type="button">
+                                                        Event Desc
+                                                        {% set maxparticipants = random(50) + 1 %}
+                                                        ({{ random(maxparticipants) }}/{{ maxparticipants }})
+                                                    </button>
+                                                </td>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
         <div class="modal-footer">
+            <div class="btn-group" data-toggle="buttons-radio">
+                <button type="button" class="btn btn-primary active" data-target="#event-calendar-carousel" data-slide-to="0">
+                    <i class="icon-calendar icon-white"></i> First Week
+                </button>
+                <button type="button" class="btn btn-primary" data-target="#event-calendar-carousel" data-slide-to="1">
+                    <i class="icon-calendar icon-white"></i> Second Week
+                </button>
+            </div>
+            &nbsp;&nbsp;&nbsp;
             <button class="btn" data-dismiss="modal" aria-hidden="true"> Close</button>
         </div>
     </div>

@@ -14,9 +14,9 @@
                 <fieldset>
                     {% for i in ['danger', 'success', 'warning', 'info'] %}
                         <div class="controls controls-row">
-                            <button class="btn btn-{{ i }} span4 offset2" disabled>
+                            <button class="btn btn-{{ i }} span6" disabled>
                                 <i class="icon-flag icon-white"></i> {{ i|capitalize }}</button>
-                            <input class="span4" type="text" maxlength="11" />
+                            <input class="span6" type="text" maxlength="11" />
                         </div>
                     {% endfor %}
                 </fieldset>

@@ -67,7 +67,7 @@ $ ->
         success: (json) ->
           countries = []
           $.each json, (code, country) ->
-            countries.push country.trim()
+            countries.push country.trim().toUpperCase()
           return process(countries)
       )
   )
@@ -82,7 +82,7 @@ $ ->
         success: (json) ->
           languages = []
           $.each json, (name, languageObj) ->
-            languages.push languageObj['name'].trim()
+            languages.push languageObj['name'].trim().toUpperCase()
           return process(languages)
       )
   )

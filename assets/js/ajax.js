@@ -77,7 +77,7 @@ $(function() {
           var countries;
           countries = [];
           $.each(json, function(code, country) {
-            return countries.push(country.trim());
+            return countries.push(country.trim().toUpperCase());
           });
           return process(countries);
         }
@@ -97,7 +97,7 @@ $(function() {
           var languages;
           languages = [];
           $.each(json, function(name, languageObj) {
-            return languages.push(languageObj['name'].trim());
+            return languages.push(languageObj['name'].trim().toUpperCase());
           });
           return process(languages);
         }

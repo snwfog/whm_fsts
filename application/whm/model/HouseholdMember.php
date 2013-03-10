@@ -55,7 +55,7 @@ class HouseholdMember
     protected $referral;
 
     /**
-     * @Column(nullable=TRUE, length=2)
+     * @Column(nullable=TRUE)
      */
     protected $language;
 
