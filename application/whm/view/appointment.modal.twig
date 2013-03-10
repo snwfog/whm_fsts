@@ -10,7 +10,7 @@
                     <li data-target="#event-calendar-carousel" data-slide-to="1"></li>
                 </ol>
                 <!-- Carousel items -->
-                {# WATCHOUT!!! #}
+                {# WATCH OUT!!! #}
                 {# SOME INDICES START WITH 1 INSTEAD OF 0!!! #}
                 <div class="carousel-inner">
                     {% for k in 1..2 %}
@@ -19,16 +19,21 @@
                         {% else %}
                             <div class="item">
                         {% endif %}
-                            <legend>Events ({{ "now"|date("M d") }} - {{ "now"|date_modify('+7 days')|date("M d") }})</legend>
+                            {% set startdei = "+" ~ ((k - 1) * 7 + 1) ~ " days" %}
+                            {% set enddei = "+" ~ k * 7 ~ " days" %}
+                            <legend>
+                                Event Calendar of ({{ "now"|date_modify(startdei)|date("M d") }} -
+                                {{ "now"|date_modify(enddei)|date("M d") }})
+                            </legend>
                             <table class="table table-bordered">
                                 <thead>
                                     {% set weeklength = 7 %}
                                     <tr>
                                         {% for i in 1..weeklength %}
                                             <th>
-                                                {{ 7 * (k - 1) + i }} -
-                                                {{ "now"|date_modify('+1 days')|date("D")|upper }} -
-                                                {{ "now"|date_modify('+7 days')|date("d") }}
+                                                {% set deidei = "+" ~ (7 * (k - 1) + i) ~ " days" %}
+                                                {{ "now"|date_modify(deidei)|date("D")|upper }} - {# MON through SUN #}
+                                                {{ "now"|date_modify(deidei)|date("d") }} {# Date #}
                                             </th>
                                         {% endfor %}
                                     </tr>
@@ -43,7 +48,6 @@
                                         <tr>
                                             {% for j in 1..weeklength %}
                                                 <td>
-
                                                     {% set maxparticipants = random(50) + 1 %}
                                                     {% set actualparticipants = random(maxparticipants) %}
                                                     {# MAXIMUM TITLE LENGTH IS 10. ELSE IS TRIMMED #}
