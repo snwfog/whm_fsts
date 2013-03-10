@@ -24,33 +24,6 @@ $(function() {
       return $('form[name="flag-create-form"]').submit();
     }
   });
-
-  $('button#create-event-save').click(function() {
-    var clicked, formElement, occurrence;
-    clicked = $("#event-occurrence .active").length > 0;
-    if (clicked) {
-      occurrence = $("#event-occurrence .active").data("value");
-      formElement = document.createElement("input");
-      formElement.setAttribute("name", "occurrence-type");
-      formElement.setAttribute("type", "hidden");
-      formElement.setAttribute("value", occurrence);
-      $('form[name="event-form"]').append(formElement);
-    }
-    return $('form[name="event-form"]').submit();
-  });
-
-
-  $('button#create-template-save').click(function() {
-    var formElement;
-    formElement = document.createElement("input");
-    formElement.setAttribute("name", "is_template");
-    formElement.setAttribute("type", "hidden");
-    formElement.setAttribute("value", 1);
-    $('form[name="event-form"]').append(formElement);
-  
-    return $('form[name="event-form"]').submit();
-  });
-
   $('button.flag-delete-btn').click(function() {
     var $form;
     console.log("trying to delete a flag");
@@ -88,6 +61,7 @@ $(function() {
     Bootstrap Typeahead for ORIGINS and LANGUAGES
     Sexy way of doing typeahead with ajax & bootstrap
     http://stackoverflow.com/questions/9232748/twitter-bootstrap-typeahead-ajax-example
+    http://tatiyants.com/how-to-use-json-objects-with-twitter-bootstrap-typeahead/
   */
 
   $("input[name='origin']").typeahead({
@@ -103,7 +77,7 @@ $(function() {
           var countries;
           countries = [];
           $.each(json, function(code, country) {
-            return countries.push(country);
+            return countries.push(country.trim());
           });
           return process(countries);
         }
@@ -123,7 +97,7 @@ $(function() {
           var languages;
           languages = [];
           $.each(json, function(name, languageObj) {
-            return languages.push(languageObj['name']);
+            return languages.push(languageObj['name'].trim());
           });
           return process(languages);
         }
