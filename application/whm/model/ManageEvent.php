@@ -4,7 +4,9 @@ use WHM;
 use WHM\Application;
 use \WHM\Model\Event;
 use \WHM\Model\ManageHousehold;
-
+use DateTime;
+use DateTimeZone;
+use DateInterval;
 /**
  * Manage entity household
  **/
@@ -88,6 +90,29 @@ class ManageEvent
             $data[$key] = str_replace("-", "", $value);
         }
         return $data;
+    }
+
+
+    public function getUpComingEvents()
+    {
+        $dateTime = new DateTime();
+        $dateTime->setTimezone(new DateTimeZone(LOCALTIME));
+
+        $dateNow = $dateTime->format("Y-m-d");
+        $incrementer = DateInterval::createFromDateString("2 weeks");
+        $dateTime = $dateTime->add($incrementer);
+        $dateFuture = $dateTime;
+
+        $query = $this->em->createQueryBuilder()
+                          ->select("event")
+                          ->from("WHM\model\Event", "event")
+                          ->where("event.start_date <= :dateFuture")
+                          ->andWhere("event.start_date >= :dateNow")
+                          ->setParameter('dateFuture', $dateFuture)
+                          ->setParameter('dateNow', $dateNow);
+
+        $upcomingEvents = $query->getQuery()->execute();
+        return $upcomingEvents;
     }
 
 }

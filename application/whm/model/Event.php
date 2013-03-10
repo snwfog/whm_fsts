@@ -26,7 +26,7 @@ class Event
     /** @Column(type="string", nullable=TRUE) */
     protected $end_time;
 
-    /** @Column(type="date") */
+    /** @Column(type="datetime") */
     protected $start_date;
 
     /** @Column(type="smallint", nullable=TRUE) */
@@ -34,7 +34,7 @@ class Event
 
     /** @Column(type="boolean", nullable=TRUE) 
     */
-    protected $is_template;
+    protected $is_template = false;
 
     /** @Column(type="integer") */
     protected $capacity;
@@ -61,7 +61,7 @@ class Event
         $this->name = $name;
     }
 
-    public function getName($name)
+    public function getName()
     {
         return $this->name;
     }
@@ -71,7 +71,7 @@ class Event
         $this->description = $description;
     }
 
-    public function getDescription($description)
+    public function getDescription()
     {
         return $this->description;
     }
@@ -81,7 +81,7 @@ class Event
         $this->start_time = $start_time;
     }
 
-    public function getStartTime($start_time)
+    public function getStartTime()
     {
         return $this->start_time;
     }
@@ -91,7 +91,7 @@ class Event
         $this->end_time = $end_time;
     }
 
-    public function getEndTime($end_time)
+    public function getEndTime()
     {
         return $this->end_time;
     }
@@ -101,7 +101,7 @@ class Event
         $this->start_date = $start_date;
     }
 
-    public function getStartDate($start_date)
+    public function getStartDate()
     {
         return $this->start_date;
     }
@@ -111,7 +111,7 @@ class Event
         $this->group_id = $group_id;
     }
 
-    public function getGroupId($group_id)
+    public function getGroupId()
     {
         return $this->group_id;
     }
@@ -121,7 +121,7 @@ class Event
         $this->is_template = $is_template;
     }
 
-    public function getIsTemplate($is_template)
+    public function getIsTemplate()
     {
         return $this->is_template;
     }
@@ -160,7 +160,7 @@ class Event
         $this->capacity = $capacity;
     }
 
-    public function getCapacity($capacity)
+    public function getCapacity()
     {
         return $this->capacity;
     }

@@ -6,6 +6,7 @@ use WHM\Controller;
 use WHM\IRedirectable;
 use WHM\Model\ManageEvent;
 use DateTime;
+use DateTimeZone;
 use DateInterval;
 
 class CreateEvent extends Controller implements IRedirectable
@@ -20,28 +21,27 @@ class CreateEvent extends Controller implements IRedirectable
         $this->manageEvent= new ManageEvent();
     }
 
-    public function get()
-    {
-        $this->display("event.create.twig");
-    }
-
     //Create Event
     public function post()
     {
         //Format Date to be used as object type DateTime
         $form_start_date = explode("/", $_POST["start-date"]); // $_POST["start-date"] M/D/Y
         $form_end_date = explode("/", $_POST["end-date"]); // $_POST["start-date"] M/D/Y
+
         $start_date = new DateTime();
         $end_date = new DateTime();
+        $start_date->setTimezone(new DateTimeZone(LOCALTIME));
+        $end_date->setTimezone(new DateTimeZone(LOCALTIME));
+
         $start_date->setDate($form_start_date[2], $form_start_date[0], $form_start_date[1]); //ARG Y/M/D
         $end_date->setDate($form_end_date[2], $form_end_date[0], $form_end_date[1]); //ARG Y/M/D
 
         $_POST["start-date"] = $start_date;
         $event = $this->manageEvent->createEvent($_POST);
+        $groupId = $event->getId();
 
         //If there is reoccurence, create event with same group id
         if(isset($_POST["occurrence-type"]) && !isset($_POST["is_template"])){
-            $groupId = $event->getId();
             $repeat = array(    "daily" => "1 day", 
                                 "weekly" => "1 week", 
                                 "biweekly" => "2 week", 
@@ -59,6 +59,8 @@ class CreateEvent extends Controller implements IRedirectable
                 }
             }
         }
+
+        $this->redirect('event/'.$groupId);
 
     }
 
