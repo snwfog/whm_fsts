@@ -98,7 +98,7 @@ class ManageEvent
         $dateTime = new DateTime();
         $dateTime->setTimezone(new DateTimeZone(LOCALTIME));
 
-        $dateNow = $dateTime->format("Y-m-d");
+        $dateNow = $dateTime;
         $incrementer = DateInterval::createFromDateString("2 weeks");
         $dateTime = $dateTime->add($incrementer);
         $dateFuture = $dateTime;
@@ -110,6 +110,7 @@ class ManageEvent
                           ->andWhere("event.start_date >= :dateNow")
                           ->setParameter('dateFuture', $dateFuture)
                           ->setParameter('dateNow', $dateNow);
+                          
 
         $upcomingEvents = $query->getQuery()->execute();
         return $upcomingEvents;
