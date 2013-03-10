@@ -37,11 +37,7 @@ class Event extends Controller implements IRedirectable
         $this->display("event.create.twig", $this->data);                  
     }
 
-
-
-
-
-    private function formatEvents($events)
+    public function formatEvents($events)
     {
         $data = array();
         $count = 0;
