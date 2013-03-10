@@ -103,23 +103,9 @@
 
         </table>
           <!--  <ul class="nav nav-list" id="event-list">
-                {% for member in household.members %}
-                    {% if(member.principal and member.active) %}
-                        <li class="active"><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                                <i class="icon-home"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
-
-                    {% elseif member.active %}
-                        <li class="active"><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                                <i class="icon-user"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
-
-                    {% elseif member.principal %}
-                        <li><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                                <i class="icon-home"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
-
-                    {% else%}
-                        <li><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                                <i class="icon-user"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
-                    {% endif %}
+                {% for event in events %}
+                        <li class="active"><a href="{{ apppath }}/event/{{ event.event_id}}
+                        <i class="icon-home"></i> {{event["name"] }}</a></li>
                 {% endfor %}
             </ul>-->
         </div> 
