@@ -22,7 +22,7 @@ class Event extends Controller implements IRedirectable
     {
         $this->data["formAction"] = "event/new";
         $eventUCs = $this->manageEvent->getUpComingEvents();
-        $this->data["upcoming-events"] = $this->formatEvents($eventUCs);
+        $this->data["upcomingEvents"] = $this->formatEvents($eventUCs);
 
         if(!is_null($event_id)){
             $this->data["formAction"] = "event";
@@ -32,7 +32,7 @@ class Event extends Controller implements IRedirectable
 
             $event = $this->formatEvents(array( 0 => $event));
             $this->data["event"] = $event[0];
-            $this->data["related-events"] = $relatedEvents;
+            $this->data["relatedEvents"] = $relatedEvents;
         } 
         $this->display("event.create.twig", $this->data);                  
     }
