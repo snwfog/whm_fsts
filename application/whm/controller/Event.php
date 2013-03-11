@@ -20,21 +20,28 @@ class Event extends Controller implements IRedirectable
 
     public function get($event_id = null)
     {
-        $this->data["formAction"] = "event/new";
         $eventUCs = $this->manageEvent->getUpComingEvents();
         $this->data["upcomingEvents"] = $this->formatEvents($eventUCs);
 
         if(!is_null($event_id)){
+            //Get the specified event, upcoming events and related events
             $this->data["formAction"] = "event";
+
             $event = $this->manageEvent->findEvent($event_id);
             $relatedEvents = $this->manageEvent->getRelatedEvents($event->getGroupId(), $event->getId());
-            $relatedEvents = $this->formatEvents($relatedEvents);
 
+            $relatedEvents = $this->formatEvents($relatedEvents);
             $event = $this->formatEvents(array( 0 => $event));
+            
             $this->data["event"] = $event[0];
             $this->data["relatedEvents"] = $relatedEvents;
+            $this->display("event.create.twig", $this->data);      
+        }else
+        {    //Get templates if new event
+            $createEvent = new WHM\Controller\CreateEvent;
+            $createEvent->get();
         } 
-        $this->display("event.create.twig", $this->data);                  
+                   
     }
 
     public function formatEvents($events)

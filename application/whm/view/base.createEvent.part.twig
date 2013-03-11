@@ -1,13 +1,13 @@
 {% block create_event_part_twig %}
     <fieldset>
         <div class="controls controls-row" id="name-row">
-            <input class="span10" type="text" name="event-name" placeholder="Event name" value="{{ event["name"] }}"/>
+            <input class="span10" type="text" name="event-name" placeholder="Event name" value="{{ event["name"] }}{{ currentTemplate["name"] }}"/>
            
-            <input class="span2" type="text" name="event-capacity" maxlength="12" placeholder="Capacity" value="{{ event["capacity"] }}"/>
+            <input class="span2" type="text" name="event-capacity" maxlength="12" placeholder="Capacity" value="{{ event["capacity"] }}{{ currentTemplate["capacity"] }}"/>
 
-            <div class="control">
+            <div class="control controls-row">
                         {#<div class="alert">#}
-                            <textarea style="resize:none" class="span12" rows="4" name="description" placeholder="Description...">{{ event["description"] }}</textarea>
+                            <textarea class="span12" style="resize:none" rows="4" name="description" placeholder="Description...">{{ event["description"] }}{{ currentTemplate["description"] }}</textarea>
                         {#</div>#}
             </div>
 

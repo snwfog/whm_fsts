@@ -8,14 +8,15 @@
             {% endblock %}
         {% endfor %}
 
-        <form action="{{ apppath }}{{ formAction }}" method="POST" name="event-form" id="view-event-form">
+        <form action="{{ apppath }}{{ formAction }}" method="POST" name="event-form" 
+        id="{%if event is not null %}view-event-form{% endif %}">
 
             <legend class ='controls controls-row'>
                 <div class='pull-left'>
                     ID: {{ event["event-id"] }}
                 </div>
                  <div class='pull-right'>
-                    <span class="label label-success"><i class="icon-user icon-white"></i> 0/{{event.capacity}}</span>
+                    <span class="label label-success"><i class="icon-user icon-white"></i> 0/{{ event.capacity }}</span>
                 </div>
             </legend>
 
@@ -28,10 +29,17 @@
         
             <legend>Action</legend>
             <div class="btn-toolbar">
-                <button id="event-create-modify" type="button" class="btn btn-large btn-warning" aria-hidden="true"><i class="icon-edit icon-white"></i> Modify</button>
-                <button id="create-event-save" type="button" class="btn btn-large btn-success"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Create Event</button>
-                <!--<button id="load-event-template" class="btn btn-info"><i class="icon-file icon-white"></i> Load Template </button>-->
-                <button id="create-template-save" type="button" class="btn btn-large btn-info"><i class="icon-file icon-white submit"></i> Save Template </button>
+                {% if event %}
+                    <button class="btn btn-warning btn-large" data-toggle="button" class-toggle="btn-state" name="event-create-modify" type="button">
+                    <i class="icon-edit icon-white"></i> Modify</button>
+                    <button id="add-event-date" type="button" class="btn btn-large btn-info"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Add Date</button>
+
+                {% else %}
+                    <button id="create-event-save" type="button" class="btn btn-large btn-success"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Create Event</button>
+                    <button id="create-template-save" type="button" class="btn btn-large btn-info"><i class="icon-file icon-white submit"></i> Save Template </button>
+                {% endif %}
+                   
+
             </div>
         
             <input type="hidden" name="event-id" value="{{ event["event_id"] }}"/>
@@ -44,58 +52,71 @@
 {% endblock content %}
 
 {# This part should be auto generated #}
+
 {% block left1 %}
     <div class="span3">
-        <legend>Templates</legend>
+        {% if event is null %}
+            <legend>Templates</legend>
         <div class="well" id="events-well">
             <ul class="nav nav-list" id="event-list">
-                {% for template in event.templates %}
-                    {% if(template.principal and template.active) %}
-                        <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
-                                <i class="icon-home"></i> {{member["name"] }}</a></li>
+                {% for template in templates %}
 
-                    {% elseif template.active %}
-                        <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
-                                <i class="icon-home"></i> {{member["name"] }}</a></li>
-
-                    {% elseif template.principal %}
-                        <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
-                                <i class="icon-home"></i> {{member["name"] }}</a></li>
-
-                    {% else%}
-                        <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
-                                <i class="icon-home"></i> {{member["name"] }}</a></li>
+                    {% if currentTemplate["event-id"] == template["event-id"] %}
+                    <li class="active">
+                    {% else %}
+                    <li class="">
                     {% endif %}
-                {% endfor %}
+                        <a href="{{ apppath }}event/new/{{ template["event-id"] }}">
+                                    <i class="icon-file"></i> {{template.name }}</a></li>
+                {% endfor %}       
             </ul>
         </div>
             
-            <button class="btn btn-large btn-success" 
-                        id="load-template-submit-btn"
-                        name="load-template-submit-btn" type="button"
-                        data-toggle="modal" data-target="#load-template-modal">
-                    <i class="icon-file icon-white submit"></i>Load Template
-            </button>
-           
+            
     </div>
+        {% endif %}
+
+        {% if event is not null %}
+            <legend>Dates</legend>
+            <div class="well" id="events-well">
+                <ul class="nav nav-list" id="event-list">
+                <table>
+                    <thead>
+
+                    </thead>
+                {% for relatedEvent in relatedEvents %}
+                    <tbody>
+                        <tr>
+                            <td>{{ relatedEvent.date}}</td>
+                        </tr>
+                    </tbody>
+                {% endfor %}
+                </table>
+                </ul>
+            </div>   
+    </div>
+    {% endif %} 
 {% endblock left1 %}
 
 {% block left2 %}
        <div class="span3">
         <legend>Events</legend>
-        <div class="well" id="events-well">            <thead>
-        <table class ='table table-hover controls controls-row'>
-            </thead>
+        <div class="well" id="events-well">         
+           
+            <table class ='table table-hover controls controls-row'>
+            
             <tbody>
+                
+            {% for event in upcomingEvents %}
                 <tr>
-                    <td>Christmas Food Giveaways</td>
+                    <td class="active">
+                        <a href="{{ apppath }}event/{{ event["event-id"]}}">
+                        <i class="icon-tasks"></i> {{event["name"] }}</a>
+                    </td>
+                    
                 </tr>
-                <tr>
-                    <td>Back to School Supplies</td>
-                </tr>
-                <tr>
-                    <td>Matresse Giveaways</td>
-                </tr>
+            {% endfor %}
+                
 
             </tbody>
 
@@ -104,7 +125,7 @@
         </table>
           <!--  <ul class="nav nav-list" id="event-list">
                 {% for event in events %}
-                        <li class="active"><a href="{{ apppath }}/event/{{ event.event_id}}
+                        <li class="active"><a href="{{ apppath }}event/{{ event.event_id}}
                         <i class="icon-home"></i> {{event["name"] }}</a></li>
                 {% endfor %}
             </ul>-->
