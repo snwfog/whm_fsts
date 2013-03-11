@@ -52,38 +52,28 @@
 
 {% block left1 %}
     <div class="span3">
-<<<<<<< HEAD
         {% if event is null %}
             <legend>Templates</legend>
-            <div class="well" id="events-well">
-                <ul class="nav nav-list" id="event-list">
-                    {% for template in event.templates %}
-                        {% if(template.principal and template.active) %}
-                            <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
-                                    <i class="icon-home"></i> {{member["name"] }}</a></li>
-
-                        {% elseif template.active %}
-                            <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
-                                    <i class="icon-home"></i> {{member["name"] }}</a></li>
-
-                        {% elseif template.principal %}
-                            <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
-                                    <i class="icon-home"></i> {{member["name"] }}</a></li>
-
-                        {% else%}
-                            <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
-                                    <i class="icon-home"></i> {{member["name"] }}</a></li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
+        <div class="well" id="events-well">
+            <ul class="nav nav-list" id="event-list">
+                
+            </ul>
+        </div>
+            
+            <button class="btn btn-large btn-success" 
+                        id="load-template-submit-btn"
+                        name="load-template-submit-btn" type="button"
+                        data-toggle="modal" data-target="#load-template-modal">
+                    <i class="icon-file icon-white submit"></i>Load Template
+            </button>
             </div>
                 
-                <button class="btn btn-large btn-success" 
-                            id="load-template-submit-btn"
-                            name="load-template-submit-btn" type="button"
-                            data-toggle="modal" data-target="#load-template-modal">
-                        <i class="icon-file icon-white submit"></i>Load Template
-                </button>
+            <button class="btn btn-large btn-success" 
+                    id="load-template-submit-btn"
+                    name="load-template-submit-btn" type="button"
+                    data-toggle="modal" data-target="#load-template-modal">
+                    <i class="icon-file icon-white submit"></i>Load Template
+            </button>
         {% endif %}
 
         {% if relatedEvents %}
@@ -104,24 +94,7 @@
                 </table>
                 </ul>
             </div>
-        {% endif %}
-
-=======
-        <legend>Templates</legend>
-        <div class="well" id="events-well">
-            <ul class="nav nav-list" id="event-list">
-                
-            </ul>
-        </div>
-            
-            <button class="btn btn-large btn-success" 
-                        id="load-template-submit-btn"
-                        name="load-template-submit-btn" type="button"
-                        data-toggle="modal" data-target="#load-template-modal">
-                    <i class="icon-file icon-white submit"></i>Load Template
-            </button>
->>>>>>> event list, modify events
-           
+        {% endif %}           
     </div>
 {% endblock left1 %}
 
