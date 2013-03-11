@@ -6,7 +6,14 @@ use Test\Controller\ControllerTestCase;
 
 class CreateEventControllerTest extends ControllerTestCase
 {
-    function testPost()
+    function testGet()
+    {
+            $crawler = $this->request('Get', '/event');
+            $this->assertEquals(
+                1, $crawler->filter('html:contains("Action")')->count());
+            
+    }
+   function testPost()
     {
             $formValues = array(
             "event-name" => "Sunny-D drinking party",
@@ -20,10 +27,11 @@ class CreateEventControllerTest extends ControllerTestCase
         );
         
             
-        $crawler = $this->request('POST', '/event', $formValues);
-        $this->assertEquals(200, $this->client->getResponse()->getStatus());        
+        $crawler = $this->request('POST', '/event/new', $formValues);
+        $this->assertEquals(200, $this->client->getResponse()->getStatus()); 
+        $crawler = $this->request('GET', '/event/1');
         $this->assertEquals(
-                1, $crawler->filter('html:contains("Dates")')->count()
+                1, $crawler->filter('html:contains("Celetrate")')->count()
         );
             
     }
