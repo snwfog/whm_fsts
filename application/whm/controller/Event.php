@@ -48,20 +48,57 @@ class Event extends Controller implements IRedirectable
     {
         $data = array();
         $count = 0;
-        foreach( $events as $event){
+        foreach( $events as $event)
+        {
             $data[$count++] = array
-            (
-                "event-id" => $event->getId(),
-                "name" => $event->getName(),
-                "capacity" => $event->getCapacity(),
-                "description" => $event->getDescription(),
-                "start-time" => $event->getStartTime(),
-                "end-time" => $event->getEndTime(),
-                "date" => $event->getStartDate()->format("d/m/Y"),
-                "group-id" => $event->getGroupId(),
-            );
+                (
+                    "event-id" => $event->getId(),
+                    "name" => $event->getName(),
+                    "capacity" => $event->getCapacity(),
+                    "description" => $event->getDescription(),
+                    "start-time" => $event->getStartTime(),
+                    "end-time" => $event->getEndTime(),
+                    "date" => $event->getStartDate()->format("d/m/Y"),
+                    "group-id" => $event->getGroupId(),
+                );
         }
         return $data;      
+    }
+
+    public function getIndexedEvents($events)
+    {
+        $data = array();
+        $tracker = array(); 
+
+        for ($j = 1; $j <= 10; $j++)  // 5 rows for now...
+        {
+            $date = date_create('now');
+            for ($i = 1; $i <= 14; $i++)
+            {   
+                date_modify($date, '+1 day');
+                $d = date_format($date, 'd/m/Y');
+                foreach( $events as $event)
+                {
+                    $eventdate = $event->getStartDate()->format("d/m/Y");
+                    if($d == $eventdate && !in_array($event->getId() , $tracker) && empty($data[$j][$i]))
+                    {
+                        $tracker[] = $event->getId();
+                        $data[$j][$i] = array
+                        (
+                            "event-id" => $event->getId(),
+                            "name" => $event->getName(),
+                            "capacity" => $event->getCapacity(),
+                            "description" => $event->getDescription(),
+                            "start-time" => $event->getStartTime(),
+                            "end-time" => $event->getEndTime(),
+                            "date" => $event->getStartDate()->format("d/m/Y"),
+                            "group-id" => $event->getGroupId()
+                        );
+                    }
+                }; 
+            } 
+        }
+        return $data;
     }
 
 }
