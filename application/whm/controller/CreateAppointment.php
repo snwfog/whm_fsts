@@ -42,7 +42,7 @@ class CreateAppointment extends WHM\Controller implements WHM\IRedirectable
         if (isset($_POST))
         {
             $member = $this->manageappointment->addAppointment($_POST['member-id'], $_POST['event-id']);
-            echo "Appointment " . $_POST['event-id'] . " added to member " .  $_POST['member-id'];
+            $this->redirect('household/' . $_POST['household-id']."/". $_POST['member-id']);
         }
         else
         {
