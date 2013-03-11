@@ -9,10 +9,6 @@
                     <li data-target="#event-calendar-carousel" data-slide-to="0" class="active"></li>
                     <li data-target="#event-calendar-carousel" data-slide-to="1"></li>
                 </ol>
-                   <!--  {% for e in events %}
-                        {{ e.date}}
-                    {% endfor %} -->
-
                 <!-- Carousel items -->
                 {# WATCH OUT!!! #}
                 {# SOME INDICES START WITH 1 INSTEAD OF 0!!! #}
@@ -66,14 +62,30 @@
                                                         {% set buttoncolor = 'warning' %}
                                                     {% endif %}
 
-                                                    <button class="btn btn-small btn-{{ buttoncolor }}" type="button"
+                                              <!--       <button class="btn btn-small btn-{{ buttoncolor }}" type="button"
                                                         {% if availablespots == 0 %} disabled>
                                                             {{ eventtitle }} <br /> Full
                                                         {% else %}
                                                             >
                                                             {{ eventtitle }} ({{ actualparticipants }}/{{ maxparticipants }})
                                                         {% endif %}
-                                                    </button>
+                                                        </button>
+                                             -->
+                                                    {% set deidei = "+" ~ (7 * (k - 1) + j) ~ " days" %}
+                                                    {% set d = "now"|date_modify(deidei)|date("d/m/Y") %}
+                                                   
+                                                    {% for e in events %}
+                                                        {% if d == e.date %}
+                                                            <form action="{{ apppath }}appointment/new" method="POST" >
+                                                                <input type="hidden" name="member-id" value="{{ household["member-id"] }}">
+                                                                <input type="hidden" name="event-id" value="{{ e["event-id"]}}">
+                                                                <button class="btn btn-small " type="submit" }}>
+                                                                    {{ e.name }}
+                                                                </button>
+                                                            </form>
+                                                            <!-- {% set e={'date':'value'} %} -->
+                                                        {% endif %}
+                                                     {% endfor %}
                                                 </td>
                                             {% endfor %}
                                         </tr>
