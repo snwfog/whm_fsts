@@ -82,8 +82,8 @@ class CreateEvent extends Controller implements IRedirectable
             }
             $this->redirect('event/'.$groupId);
         }else
-        {// Redirect back to creation page with template loaded
-            $this->redirect('event/new'. $groupId);
+        {// Redirect back to create event page
+            $this->redirect('event');
         }       
 
     }
