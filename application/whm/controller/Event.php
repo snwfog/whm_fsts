@@ -90,16 +90,16 @@ class Event extends Controller implements IRedirectable
         $data = array();
         $tracker = array(); 
 
-        for ($j = 1; $j <= 10; $j++)  // 5 rows for now...
+        for ($j = 1; $j <= 10; $j++)  // 10 rows for now...
         {
             $date = date_create('now');
             for ($i = 1; $i <= 14; $i++)
             {   
                 date_modify($date, '+1 day');
-                $d = date_format($date, 'd/m/Y');
+                $d = date_format($date, 'm/d/Y');
                 foreach( $events as $event)
                 {
-                    $eventdate = $event->getStartDate()->format("d/m/Y");
+                    $eventdate = $event->getStartDate()->format("m/d/Y");
                     if($d == $eventdate && !in_array($event->getId() , $tracker) && empty($data[$j][$i]))
                     {
                         $tracker[] = $event->getId();
@@ -111,7 +111,7 @@ class Event extends Controller implements IRedirectable
                             "description" => $event->getDescription(),
                             "start-time" => $event->getStartTime(),
                             "end-time" => $event->getEndTime(),
-                            "date" => $event->getStartDate()->format("d/m/Y"),
+                            "date" => $event->getStartDate()->format("m/d/Y"),
                             "group-id" => $event->getGroupId()
                         );
                     }
