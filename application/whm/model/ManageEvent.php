@@ -125,7 +125,7 @@ class ManageEvent
     {
         $query = $this->em->createQueryBuilder()
                           ->select("event")
-                          ->from("WHM\model\Event", "event")
+                          ->from("WHM\Model\Event", "event")
                           ->where("event.group_id = :group_id")
                           ->andWhere("event.id <> :event_id")
                           ->andWhere("event.is_template <> 1")

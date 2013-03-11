@@ -104,5 +104,26 @@ $(function() {
       });
     }
   });
+  $("input.search-query").typeahead({
+    source: function(query, process) {
+      return $.ajax({
+        url: $(this)[0].$element.data('link') + "/" + query,
+        type: 'get',
+        dataType: 'json',
+        success: function(json) {
+          var members;
+          if (json != null) {
+            members = [];
+            $.each(json, function(index, member) {
+              return members.push((member.last_name.trim() + ", " + member.first_name.trim()).toUpperCase());
+            });
+            return process(members);
+          } else {
+            return false;
+          }
+        }
+      });
+    }
+  });
   return true;
 });

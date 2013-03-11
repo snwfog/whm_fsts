@@ -18,10 +18,9 @@ $serves = array
     '/member'                       => 'WHM\Controller\Member',
     '/member/:number'               => 'WHM\Controller\member',
     '/member/new'                   => 'WHM\Controller\CreateMember',
-    '/search'                       => 'WHM\Controller\Search',
     '/debug'                        => 'WHM\Controller\Debug',
     '.*/flag'                       => 'WHM\Controller\Flag',
-    '.*/analytic'                   => 'WHM\Controller\Logger',
+    '.*/search/:alpha'              => 'WHM\Controller\Search',
     '/appointment/:number'          => 'WHM\Controller\CreateAppointment',
     '/appointment/new'              => 'WHM\Controller\CreateAppointment',
     '/event/new'                    => 'WHM\Controller\CreateEvent',
@@ -35,7 +34,8 @@ $serves = array
     // Ajax controller
     '.*/country' => 'WHM\Controller\Ajax\Country',
     '.*/postalcode' => 'WHM\Controller\Ajax\PostalCode',
-    '.*/language' => 'WHM\Controller\Ajax\Language'
+    '.*/language' => 'WHM\Controller\Ajax\Language',
+    '.*/analytic' => 'WHM\Controller\Logger'
 );
 
 /*-----------------------------------------------

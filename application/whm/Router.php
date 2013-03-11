@@ -55,7 +55,7 @@ class Router
             (
                 ':string' => '([a-zA-Z]+)',
                 ':number' => '([0-9]+)',
-                ':alpha'  => '([a-zA-Z0-9-_])'
+                ':alpha'  => '([a-zA-Z0-9-_]+)'
             );
 
             foreach ($routes as $pattern => $controller)
@@ -78,17 +78,17 @@ class Router
             // Instantiate the class
             $cInstance = new $discoveredController();
 
-//            if (self::isXhrRequest() &&
-//                method_exists($discoveredController, $requestMethod . '_xhr'))
-            if (method_exists($discoveredController, $requestMethod . '_xhr'))
+            if (self::isXhrRequest() &&
+                method_exists($discoveredController, $requestMethod . '_xhr'))
+//            if (method_exists($discoveredController, $requestMethod . '_xhr'))
             {
                 // Send JSON Files
-//                header('Content-type: application/json');
-//                header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-//                header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-//                header('Cache-Control: no-store, no-cache, must-revalidate');
-//                header('Cache-Control: post-check=0, pre-check=0', false);
-//                header('Pragma: no-cache');
+                header('Content-type: application/json');
+                header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+                header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+                header('Cache-Control: no-store, no-cache, must-revalidate');
+                header('Cache-Control: post-check=0, pre-check=0', false);
+                header('Pragma: no-cache');
                 $requestMethod .= '_xhr';
             }
 
@@ -96,6 +96,7 @@ class Router
             {
                 Hook::fire(BEFORE_HANDLER_HOOK);
 
+//                print_r($regexMatches);
                 call_user_func_array(array($cInstance, $requestMethod), $regexMatches);
 
                 Hook::fire(AFTER_HANDLER_HOOK);

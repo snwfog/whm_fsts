@@ -87,4 +87,20 @@ $ ->
       )
   )
 
+  $("input.search-query").typeahead(
+    source: (query, process) ->
+      return $.ajax(
+        url: $(this)[0].$element.data('link') + "/" + query
+        type: 'get'
+        dataType: 'json'
+        success: (json) ->
+          if json?
+            members = []
+            $.each json, (index, member) ->
+              members.push (member.last_name.trim()+ ", " + member.first_name.trim()).toUpperCase()
+            return process(members)
+          else return false
+      )
+  )
+
   true

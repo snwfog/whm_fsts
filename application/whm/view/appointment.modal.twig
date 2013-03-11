@@ -22,13 +22,13 @@
                             {% set startdei = "+" ~ ((k - 1) * 7 + 1) ~ " days" %}
                             {% set enddei = "+" ~ k * 7 ~ " days" %}
                             <legend>
-                                Event Calendar of ({{ "now"|date_modify(startdei)|date("M d") }} -
-                                {{ "now"|date_modify(enddei)|date("M d") }})
+                                Event Calendar from {{ "now"|date_modify(startdei)|date("F     d") }} to
+                                {{ "now"|date_modify(enddei)|date("F d") }}
                             </legend>
                             <table class="table table-bordered">
                                 <thead>
                                     {% set weeklength = 7 %}
-                                    <tr>
+                                    <tr class="info">
                                         {% for i in 1..weeklength %}
                                             <th>
                                                 {% set deidei = "+" ~ (7 * (k - 1) + i) ~ " days" %}
