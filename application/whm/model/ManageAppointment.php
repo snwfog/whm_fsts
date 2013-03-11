@@ -42,20 +42,4 @@ class ManageAppointment
         return $appointment;
     }
 
-    public function getEvents(){
-        $query = "  SELECT e.id as event_id
-                    FROM \WHM\Model\Event e";
-        $q = $this->em->createQuery($query);
-        $result = $q->getResult();
-
-        // $b = array();
-        // foreach($result as $a)
-        // {
-        //     $b = $a;
-        // }
-
-
-        return $b;
-    }
-
 }

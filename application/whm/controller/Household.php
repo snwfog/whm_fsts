@@ -9,12 +9,14 @@ use \WHM\Model\ManageHousehold;
 use \WHM\Model\ManageFlag;
 use \WHM\Model\Flag;
 use \WHM\Model\HouseholdMember;
+use \WHM\Model\ManageEvent;
 
 class Household extends Controller implements IRedirectable
 {
     public $data = array( "errors" => array(), "form" => array());
     private $manageHousehold;
     private $manageFlag;
+    private $manageEvents;
     private $flag;
 
 
@@ -25,6 +27,7 @@ class Household extends Controller implements IRedirectable
         //Helper::backtrace();
         $this->manageHousehold = new ManageHousehold();
         $this->manageFlag = new ManageFlag();
+        $this->manageEvents = new ManageEvent();
         $this->flag = new Flag();
 
 
@@ -58,12 +61,17 @@ class Household extends Controller implements IRedirectable
             
         //   $flagNumber = $this->flagNum($formattedFlags);
 
+            //Get Events to make appoitment
+            $eventcontroller = new \WHM\Controller\Event; 
+            $eventdraft=$this->manageEvents->getUpComingEvents();
+            $events=$eventcontroller->formatEvents($eventdraft);
 
             $data = array(
-                            "household" => $data,
-                            "flagDescriptors" => $formattedDescriptor,
-                            "flags"=> $formattedFlags,
-      //                    "flag_number"=>$flagNumber,
+                            "household"         =>  $data,
+                            "flagDescriptors"   =>  $formattedDescriptor,
+                            "flags"             =>  $formattedFlags,
+      //                    "flag_number"       =>  $flagNumber,
+                            "events"            =>  $events
                     );
             $this->display("household.create.twig", $data);
         }
