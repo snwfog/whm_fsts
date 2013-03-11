@@ -5,6 +5,8 @@ use WHM;
 use WHM\Controller;
 use WHM\IRedirectable;
 use WHM\Model\ManageEvent;
+use DateTime;
+use DateTimeZone;
 
 class Event extends Controller implements IRedirectable
 {
@@ -44,6 +46,24 @@ class Event extends Controller implements IRedirectable
                    
     }
 
+    // Update Event
+    public function post(){
+        $event = $this->manageEvent->findEvent($_POST["event-id"]);
+
+        //Convert start-date to datetime object
+        $start_date = new DateTime();
+        $start_date->setTimezone(new DateTimeZone(LOCALTIME));
+        $form_start_date = explode("/", $_POST["start-date"]); // input m/d/Y
+        $start_date->setDate($form_start_date[2], $form_start_date[0], $form_start_date[1]);// input y/m/d
+
+        $_POST["start-date"] = $start_date;
+
+        $this->manageEvent->updateEvent($event, $_POST);
+
+        $this->redirect("event/".$event->getId());
+
+    }
+
     public function formatEvents($events)
     {
         $data = array();
@@ -58,7 +78,7 @@ class Event extends Controller implements IRedirectable
                     "description" => $event->getDescription(),
                     "start-time" => $event->getStartTime(),
                     "end-time" => $event->getEndTime(),
-                    "date" => $event->getStartDate()->format("d/m/Y"),
+                    "date" => $event->getStartDate()->format("m/d/Y"),
                     "group-id" => $event->getGroupId(),
                 );
         }

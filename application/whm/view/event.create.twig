@@ -15,9 +15,11 @@
                 <div class='pull-left'>
                     ID: {{ event["event-id"] }}
                 </div>
-                 <div class='pull-right'>
-                    <span class="label label-success"><i class="icon-user icon-white"></i> 0/{{ event.capacity }}</span>
-                </div>
+                {% if event %}
+                    <div class='pull-right'>
+                        <span class="label label-success"><i class="icon-user icon-white"></i> 0/{{ event.capacity }}</span>
+                    </div>
+                {% endif %}
             </legend>
 
             {% include 'base.createEvent.part.twig' %}
@@ -42,7 +44,7 @@
 
             </div>
         
-            <input type="hidden" name="event-id" value="{{ event["event_id"] }}"/>
+            <input type="hidden" name="event-id" value="{{ event["event-id"] }}"/>
             <input type="hidden" name="template-id" value="{{ template["template-id"] }}"/>
 
         </form>

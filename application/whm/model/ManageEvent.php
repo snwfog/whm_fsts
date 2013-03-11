@@ -69,27 +69,16 @@ class ManageEvent
         return $flagParticipants;
     }
 
-      private function updateEvent($eventInstance, $data)
+    public function updateEvent($eventInstance, $data)
     {
-        $data = $this->formatData($data);
         $eventInstance->setName($data["event-name"]);
         $eventInstance->setDescription($data["description"]);
         $eventInstance->setStartTime($data["start-time"]); 
         $eventInstance->setEndTime($data["end-time"]);
         $eventInstance->setStartDate($data["start-date"]); 
-        $eventInstance->setEndDate($data["end-date"]);
         $eventInstance->setCapacity($data["event-capacity"]);
         $this->em->persist($eventInstance);
         $this->em->flush();
-    }
-
-    private function formatData($data)
-    {
-        foreach ($data as $key => $value)
-        {
-            $data[$key] = str_replace("-", "", $value);
-        }
-        return $data;
     }
 
     public function getUpComingEvents()
@@ -145,6 +134,16 @@ class ManageEvent
 
         $templates = $query->getQuery()->execute();
         return $templates;
+    }
+
+
+    private function formatData($data)
+    {
+        foreach ($data as $key => $value)
+        {
+            $data[$key] = str_replace("-", "", $value);
+        }
+        return $data;
     }
 
 }
