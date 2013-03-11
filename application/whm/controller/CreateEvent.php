@@ -43,17 +43,21 @@ class CreateEvent extends Controller implements IRedirectable
     public function post()
     {
         //Format Date to be used as object type DateTime
-        $form_start_date = explode("/", $_POST["start-date"]); // $_POST["start-date"] M/D/Y
-        $form_end_date = explode("/", $_POST["end-date"]); // $_POST["start-date"] M/D/Y
-
         $start_date = new DateTime();
         $end_date = new DateTime();
         $start_date->setTimezone(new DateTimeZone(LOCALTIME));
         $end_date->setTimezone(new DateTimeZone(LOCALTIME));
 
-        $start_date->setDate($form_start_date[2], $form_start_date[0], $form_start_date[1]); //ARG Y/M/D
-        $end_date->setDate($form_end_date[2], $form_end_date[0], $form_end_date[1]); //ARG Y/M/D
+        $start_date->setDate("1111", "1", "1");//Default for Template
 
+        if(!isset($_POST["is_template"])){
+            $form_start_date = explode("/", $_POST["start-date"]); // $_POST["start-date"] M/D/Y
+            $form_end_date = explode("/", $_POST["end-date"]); // $_POST["start-date"] M/D/Y
+            $start_date->setDate($form_start_date[2], $form_start_date[0], $form_start_date[1]); //ARG Y/M/D
+            $end_date->setDate($form_end_date[2], $form_end_date[0], $form_end_date[1]); //ARG Y/M/D
+        }
+
+        //The initial event, every other occurrence of events is based on this event id
         $_POST["start-date"] = $start_date;
         $event = $this->manageEvent->createEvent($_POST);
         $groupId = $event->getId();
@@ -76,9 +80,11 @@ class CreateEvent extends Controller implements IRedirectable
                     $event = $this->manageEvent->createEvent($_POST);
                 }
             }
-        }
-
-        $this->redirect('event/'.$groupId);
+            $this->redirect('event/'.$groupId);
+        }else
+        {// Redirect back to creation page with template loaded
+            $this->redirect('event/new'. $groupId);
+        }       
 
     }
 
