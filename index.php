@@ -24,11 +24,9 @@ $serves = array
     '/appointment/:number'          => 'WHM\Controller\CreateAppointment',
     '/appointment/new'              => 'WHM\Controller\CreateAppointment',
     '/event/new'                    => 'WHM\Controller\CreateEvent',
-    '/event/new/:number'                    => 'WHM\Controller\CreateEvent',
+    '/event/new/:number'            => 'WHM\Controller\CreateEvent',
     '/event'                        => 'WHM\Controller\Event',
     '/event/:number'                => 'WHM\Controller\Event',
-
-
 
 
     // Ajax controller

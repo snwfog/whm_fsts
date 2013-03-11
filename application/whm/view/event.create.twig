@@ -59,7 +59,7 @@
     <div class="span3">
         {% if event is null %}
             <legend>Templates</legend>
-            <div class="well" id="events-well">
+            <div class="well no-padding-well" id="events-well">
                 <ul class="nav nav-list" id="event-list">
                     {% for template in templates %}
 
@@ -78,7 +78,7 @@
 
         {% if event is not null %}
             <legend>Dates</legend>
-            <div class="well" id="dates-well">
+            <div class="well no-padding-well" id="dates-well">
                 <ul class="nav nav-list" id="date-list">
                 {% for relatedEvent in relatedEvents %}
                     {% if relatedEvent["event-id"] == event["event-id"] %}
@@ -99,7 +99,7 @@
 {% block left2 %}
     <div class="span3">
         <legend>Events</legend>
-        <div class="well" id="dates-well">
+        <div class="well no-padding-well" id="dates-well">
             <ul class="nav nav-list" id="date-list">
             {% for eventUC in upcomingEvents %}
                 {% if eventUC["group-id"] == event["group-id"] %}
