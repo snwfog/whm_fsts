@@ -13,7 +13,7 @@
 
             <legend class ='controls controls-row'>
                 <div class='pull-left'>
-                    ID: {{ event["event-id"] }}
+                    <h1> ID: {{ event["event-id"] }} </h1>
                 </div>
                 {% if event %}
                     <div class='pull-right'>
@@ -34,8 +34,8 @@
                 {% if event %}
                     <button class="btn btn-warning btn-large" data-toggle="button" class-toggle="btn-state" name="event-create-modify" type="button">
                     <i class="icon-edit icon-white"></i> Modify</button>
-                    <button id="add-event-date" type="button" class="btn btn-large btn-info"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Add Date</button>
-
+                    {#<button id="add-event-date" type="button" class="btn btn-large btn-info"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Add Date</button>
+                    #}
                 {% else %}
                     <button id="create-event-save" type="button" class="btn btn-large btn-success"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Create Event</button>
                     <button id="create-template-save" type="button" class="btn btn-large btn-info"><i class="icon-file icon-white submit"></i> Save Template </button>

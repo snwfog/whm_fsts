@@ -42,7 +42,7 @@
                                     {# First get the one day with the maximum amount of events.
                                        This will set the maximum height of the table.
                                        In this example, it is represented by the variable maxevents. #}
-                                    {% set maxevents = 4 %}
+                                    {% set maxevents = 1 %}
                                     {# Create 4 rows. #}
                                     {% for i in 1..maxevents %}
                                         <tr>
@@ -81,9 +81,9 @@
                                                                     <input type="hidden" name="household-id" value="{{ household.household_id }}">
                                                                     <input type="hidden" name="member-id" value="{{ household["member-id"] }}">
                                                                     <input type="hidden" name="event-id" value="{{ f["event-id"]}}">
-                                                                    <button class="btn btn-small " type="submit" }}>
+                                                                    <button class="btn btn-small btn-info " type="submit" }}>
                                                                         {{ f.name }}
-                                                                        {{ f.capacity }}
+                                                                        ({{ f.capacity }})
 
                                                                     </button>
                                                                 </form>
