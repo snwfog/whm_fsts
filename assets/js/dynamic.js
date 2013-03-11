@@ -75,6 +75,32 @@ $(function() {
       return btn.prop("disabled", btn.prop("disabled") ? false : true);
     });
   });
+  $("#view-event-form input").prop("disabled", true);
+
+  $("#view-event-form textarea").prop("disabled", true);
+
+  $('button[name="event-create-modify"]').click(function() {
+  var inputs, textarea;
+  inputs = $("#view-event-form input");
+  textarea = $("#view-event-form textarea");
+  if ($(this).attr("class-toggle")) {
+    $(this).removeAttr("class-toggle");
+    inputs.prop("disabled", false);
+    textarea.prop("disabled", false);
+    noteAlert("Event Edit Mode", "warning");
+  } else {
+    $(this).attr("class-toggle", "btn-state");
+    $(this).closest("form").submit();
+    inputs.prop("disabled", true);
+    textarea.prop("disabled", true);
+    $.noty.closeAll();
+  }
+  return $(this).siblings().each(function(index, element) {
+    var btn;
+    btn = $(element);
+    return btn.prop("disabled", btn.prop("disabled") ? false : true);
+  });
+});
   noteAlert = function(msg, type) {
     var n;
     n = noty({

@@ -1,0 +1,24 @@
+{% block save_template %}
+    <div id="template-modal"
+         class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+            <h3>Saving Template</h3>
+        </div>
+
+        <div class="modal-body">
+                <form class="template" action="{{ apppath }}event" method="POST">
+                    <div id="modal-template" class="input-prepend">
+                        <span class="add-on"><i class="icon-file"></i></span>
+                        <input type="text" class="span12" name="">
+                    </div>
+                </form>
+        </div>
+
+        {#<div class="modal-footer">#}
+
+        {#</div>#}
+    </div>
+{% endblock save_template %}

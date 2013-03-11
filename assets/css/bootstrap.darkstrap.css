@@ -38,13 +38,16 @@ input[type="color"],
 .uneditable-input {
     background-color: #cccccc;
 }
+textarea:disabled{
+    background-color: rgba(0,0,0,0.3);
+}
 select {
     background-color: #cccccc;
 }
 
 .uneditable-input,
 .uneditable-textarea {
-    background-color: #c9c9c9;
+    background-color: #cccccc;
 }
 
 input:-moz-placeholder,
