@@ -44,38 +44,62 @@
 {% endblock content %}
 
 {# This part should be auto generated #}
+
 {% block left1 %}
     <div class="span3">
-        <legend>Templates</legend>
-        <div class="well" id="events-well">
-            <ul class="nav nav-list" id="event-list">
-                {% for template in event.templates %}
-                    {% if(template.principal and template.active) %}
-                        <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
-                                <i class="icon-home"></i> {{member["name"] }}</a></li>
+        {% if event is null %}
+            <legend>Templates</legend>
+            <div class="well" id="events-well">
+                <ul class="nav nav-list" id="event-list">
+                    {% for template in event.templates %}
+                        {% if(template.principal and template.active) %}
+                            <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
+                                    <i class="icon-home"></i> {{member["name"] }}</a></li>
 
-                    {% elseif template.active %}
-                        <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
-                                <i class="icon-home"></i> {{member["name"] }}</a></li>
+                        {% elseif template.active %}
+                            <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
+                                    <i class="icon-home"></i> {{member["name"] }}</a></li>
 
-                    {% elseif template.principal %}
-                        <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
-                                <i class="icon-home"></i> {{member["name"] }}</a></li>
+                        {% elseif template.principal %}
+                            <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
+                                    <i class="icon-home"></i> {{member["name"] }}</a></li>
 
-                    {% else%}
-                        <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
-                                <i class="icon-home"></i> {{member["name"] }}</a></li>
-                    {% endif %}
+                        {% else%}
+                            <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
+                                    <i class="icon-home"></i> {{member["name"] }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+                
+                <button class="btn btn-large btn-success" 
+                            id="load-template-submit-btn"
+                            name="load-template-submit-btn" type="button"
+                            data-toggle="modal" data-target="#load-template-modal">
+                        <i class="icon-file icon-white submit"></i>Load Template
+                </button>
+        {% endif %}
+
+        {% if relatedEvents %}
+            <legend>Dates</legend>
+            <div class="well" id="events-well">
+                <ul class="nav nav-list" id="event-list">
+                <table>
+                    <thead>
+
+                    </thead>
+                {% for relatedEvent in relatedEvents %}
+                    <tbody>
+                        <tr>
+                            <td>{{ relatedEvent.date}}</td>
+                        </tr>
+                    </tbody>
                 {% endfor %}
-            </ul>
-        </div>
-            
-            <button class="btn btn-large btn-success" 
-                        id="load-template-submit-btn"
-                        name="load-template-submit-btn" type="button"
-                        data-toggle="modal" data-target="#load-template-modal">
-                    <i class="icon-file icon-white submit"></i>Load Template
-            </button>
+                </table>
+                </ul>
+            </div>
+        {% endif %}
+
            
     </div>
 {% endblock left1 %}
