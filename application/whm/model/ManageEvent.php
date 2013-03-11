@@ -110,6 +110,7 @@ class ManageEvent
                           ->from("WHM\model\Event", "event")
                           ->where("event.start_date <= :dateFuture")
                           ->andWhere("event.start_date >= :dateNow")
+                          ->andWhere("event.is_template <> 1")
                           ->groupBy("event.group_id")
                           ->orderBy("event.group_id")
                           ->setParameter('dateFuture', $dateFuture)
@@ -127,11 +128,23 @@ class ManageEvent
                           ->from("WHM\model\Event", "event")
                           ->where("event.group_id = :group_id")
                           ->andWhere("event.id <> :event_id")
+                          ->andWhere("event.is_template <> 1")
                           ->setParameter('group_id', $group_id)
                           ->setParameter('event_id', $event_id);                 
 
         $relatedEvents = $query->getQuery()->execute();
         return $relatedEvents;
+    }
+
+    public function getTemplates()
+    {
+        $query = $this->em->createQueryBuilder()
+                          ->select("event")
+                          ->from("WHM\model\Event", "event")
+                          ->where("event.is_template = 1");                
+
+        $templates = $query->getQuery()->execute();
+        return $templates;
     }
 
 }

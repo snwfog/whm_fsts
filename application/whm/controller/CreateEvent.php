@@ -12,13 +12,31 @@ use DateInterval;
 class CreateEvent extends Controller implements IRedirectable
 {
     protected $data = array("errors" => array(), "form" => array());
-    private $manageEvent;
+    private $manageEvent, $event;
     public function __construct(array $args = null)
     {
         $this->data = $args;
         parent::__construct();
         //WHM\Helper::backtrace();
         $this->manageEvent= new ManageEvent();
+        $this->event = new WHM\Controller\Event;
+    }
+
+    public function get($template_id = null){
+        $this->data["formAction"] = "event/new";
+
+        $templates = $this->manageEvent->getTemplates();
+        $this->data["templates"] = $this->event->formatEvents($templates);
+
+        $eventUCs = $this->manageEvent->getUpComingEvents();
+        $this->data["upcomingEvents"] = $this->event->formatEvents($eventUCs);
+
+        if(!is_null($template_id)){
+           $template = $this->manageEvent->findEvent($template_id);
+           $template = $this->event->formatEvents(array( 0 => $template));
+           $this->data["template"] = $template[0];        
+        }
+        $this->display("event.create.twig", $this->data);   
     }
 
     //Create Event
@@ -67,5 +85,8 @@ class CreateEvent extends Controller implements IRedirectable
     public function put()
     {
     }
+
+
+
 
 }

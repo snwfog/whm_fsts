@@ -54,9 +54,34 @@
     <div class="span3">
         {% if event is null %}
             <legend>Templates</legend>
-        <div class="well" id="events-well">
-            <ul class="nav nav-list" id="event-list">
-                
+            <div class="well" id="events-well">
+                <ul class="nav nav-list" id="event-list">
+                    {% for template in templates %}
+                        {#
+                            {% if(template.principal and template.active) %}
+                                <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
+                                        <i class="icon-home"></i> {{member["name"] }}</a></li>
+
+
+                            {% elseif template.active %}
+                                <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
+                                        <i class="icon-home"></i> {{member["name"] }}</a></li>
+
+                            {% elseif template.principal %}
+                                <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
+                                        <i class="icon-home"></i> {{member["name"] }}</a></li>
+
+                            {% else%}
+                                <li class="active"><a href="{{ apppath }}/event/{{ template.template_id}}/{{ template["template-id"]}}">
+                                        <i class="icon-home"></i> {{member["name"] }}</a></li>
+                            {% endif %}
+                        #}
+                        <li class="active">
+                            <a href="{{ apppath }}event/new/{{ template["event-id"] }}">
+                                        <i class=""></i>{{template.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>                
             </ul>
         </div>
             
@@ -69,7 +94,7 @@
     </div>
         {% endif %}
 
-        {% if relatedEvents %}
+        {% if event is not null %}
             <legend>Dates</legend>
             <div class="well" id="events-well">
                 <ul class="nav nav-list" id="event-list">
