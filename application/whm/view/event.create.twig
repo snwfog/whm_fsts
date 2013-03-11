@@ -29,9 +29,11 @@
             <legend>Action</legend>
             <div class="btn-toolbar">
                 <button id="event-create-modify" type="button" class="btn btn-large btn-warning" aria-hidden="true"><i class="icon-edit icon-white"></i> Modify</button>
-                <button id="create-event-save" type="button" class="btn btn-large btn-success"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Create Event</button>
-                <!--<button id="load-event-template" class="btn btn-info"><i class="icon-file icon-white"></i> Load Template </button>-->
-                <button id="create-template-save" type="button" class="btn btn-large btn-info"><i class="icon-file icon-white submit"></i> Save Template </button>
+                {% if event is null %}
+                    <button id="create-event-save" type="button" class="btn btn-large btn-success"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Create Event</button>
+                    <!--<button id="load-event-template" class="btn btn-info"><i class="icon-file icon-white"></i> Load Template </button>-->
+                    <button id="create-template-save" type="button" class="btn btn-large btn-info"><i class="icon-file icon-white submit"></i> Save Template </button>
+                {% endif %}
             </div>
         
             <input type="hidden" name="event-id" value="{{ event["event_id"] }}"/>
