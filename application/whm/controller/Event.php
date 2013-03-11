@@ -30,7 +30,7 @@ class Event extends Controller implements IRedirectable
             $this->data["formAction"] = "event";
 
             $event = $this->manageEvent->findEvent($event_id);
-            $relatedEvents = $this->manageEvent->getRelatedEvents($event->getGroupId(), $event->getId());
+            $relatedEvents = $this->manageEvent->getRelatedEvents($event->getGroupId());
 
             $relatedEvents = $this->formatEvents($relatedEvents);
             $event = $this->formatEvents(array( 0 => $event));

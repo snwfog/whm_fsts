@@ -110,16 +110,14 @@ class ManageEvent
     }
 
 
-    public function getRelatedEvents($group_id, $event_id)
+    public function getRelatedEvents($group_id)
     {
         $query = $this->em->createQueryBuilder()
                           ->select("event")
                           ->from("WHM\Model\Event", "event")
                           ->where("event.group_id = :group_id")
-                          ->andWhere("event.id <> :event_id")
                           ->andWhere("event.is_template <> 1")
-                          ->setParameter('group_id', $group_id)
-                          ->setParameter('event_id', $event_id);                 
+                          ->setParameter('group_id', $group_id);                 
 
         $relatedEvents = $query->getQuery()->execute();
         return $relatedEvents;

@@ -59,72 +59,60 @@
     <div class="span3">
         {% if event is null %}
             <legend>Templates</legend>
-        <div class="well" id="events-well">
-            <ul class="nav nav-list" id="event-list">
-                {% for template in templates %}
+            <div class="well" id="events-well">
+                <ul class="nav nav-list" id="event-list">
+                    {% for template in templates %}
 
-                    {% if currentTemplate["event-id"] == template["event-id"] %}
-                    <li class="active">
-                    {% else %}
-                    <li class="">
-                    {% endif %}
-                        <a href="{{ apppath }}event/new/{{ template["event-id"] }}">
-                                    <i class="icon-file"></i> {{template.name }}</a></li>
-                {% endfor %}       
-            </ul>
-        </div>
-            
-            
-    </div>
+                        {% if currentTemplate["event-id"] == template["event-id"] %}
+                        <li class="active">
+                        {% else %}
+                        <li class="">
+                        {% endif %}
+                            <a href="{{ apppath }}event/new/{{ template["event-id"] }}">
+                                        <i class="icon-file"></i> {{template.name }}</a></li>
+                    {% endfor %}       
+                </ul>
+            </div>
+ 
         {% endif %}
 
         {% if event is not null %}
             <legend>Dates</legend>
-            <div class="well" id="events-well">
-                <ul class="nav nav-list" id="event-list">
-                <table>
-                    <thead>
-
-                    </thead>
+            <div class="well" id="dates-well">
+                <ul class="nav nav-list" id="date-list">
                 {% for relatedEvent in relatedEvents %}
-                    <tbody>
-                        <tr>
-                            <td>{{ relatedEvent.date}}</td>
-                        </tr>
-                    </tbody>
+                    {% if relatedEvent["event-id"] == event["event-id"] %}
+                        <li class="active">
+                    {% else %}
+                        <li class="">
+                    {% endif %}
+                        <a href="{{ apppath }}event/{{ relatedEvent["event-id"] }}">
+                            {{ relatedEvent.date }}</a></li>
                 {% endfor %}
-                </table>
                 </ul>
-            </div>   
+            </div> 
+        {% endif %}   
     </div>
-    {% endif %} 
+    
 {% endblock left1 %}
 
 {% block left2 %}
-       <div class="span3">
+    <div class="span3">
         <legend>Events</legend>
-        <div class="well" id="events-well">         
-           
-            <table class ='table table-hover controls controls-row'>
-            
-            <tbody>
-                
-            {% for event in upcomingEvents %}
-                <tr>
-                    <td class="active">
-                        <a href="{{ apppath }}event/{{ event["event-id"]}}">
-                        <i class="icon-tasks"></i> {{event["name"] }}</a>
-                    </td>
-                    
-                </tr>
+        <div class="well" id="dates-well">
+            <ul class="nav nav-list" id="date-list">
+            {% for eventUC in upcomingEvents %}
+                {% if eventUC["group-id"] == event["group-id"] %}
+                    <li class="active">
+                {% else %}
+                    <li class="">
+                {% endif %}
+                    <a href="{{ apppath }}event/{{ eventUC["event-id"] }}">
+                        <i class="icon-tasks"></i>{{ eventUC.name }}</a></li>
             {% endfor %}
+            </ul>
+           
                 
-
-            </tbody>
-
-
-
-        </table>
           <!--  <ul class="nav nav-list" id="event-list">
                 {% for event in events %}
                         <li class="active"><a href="{{ apppath }}event/{{ event.event_id}}
