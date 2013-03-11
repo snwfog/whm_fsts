@@ -83,6 +83,7 @@ $(function() {
   var inputs, textarea;
   inputs = $("#view-event-form input");
   textarea = $("#view-event-form textarea");
+  
   if ($(this).attr("class-toggle")) {
     $(this).removeAttr("class-toggle");
     inputs.prop("disabled", false);

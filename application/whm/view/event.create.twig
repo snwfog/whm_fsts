@@ -8,7 +8,8 @@
             {% endblock %}
         {% endfor %}
 
-        <form action="{{ apppath }}{{ formAction }}" method="POST" name="event-form" id="view-event-form">
+        <form action="{{ apppath }}{{ formAction }}" method="POST" name="event-form" 
+        id="{%if event is not null %}view-event-form{% endif %}">
 
             <legend class ='controls controls-row'>
                 <div class='pull-left'>
