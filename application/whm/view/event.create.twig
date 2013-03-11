@@ -60,19 +60,19 @@
         <div class="well" id="events-well">
             <ul class="nav nav-list" id="event-list">
                 {% for template in templates %}
+
+                    {% if currentTemplate["event-id"] == template["event-id"] %}
                     <li class="active">
+                    {% else %}
+                    <li class="">
+                    {% endif %}
                         <a href="{{ apppath }}event/new/{{ template["event-id"] }}">
-                                    <i class=""></i>{{template.name }}</a></li>
+                                    <i class="icon-file"></i> {{template.name }}</a></li>
                 {% endfor %}       
             </ul>
         </div>
             
-            <button class="btn btn-large btn-success" 
-                        id="load-template-submit-btn"
-                        name="load-template-submit-btn" type="button"
-                        data-toggle="modal" data-target="#load-template-modal">
-                        <i class="icon-file icon-white submit"></i>Load Template
-            </button>
+            
     </div>
         {% endif %}
 

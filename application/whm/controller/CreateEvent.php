@@ -34,7 +34,7 @@ class CreateEvent extends Controller implements IRedirectable
         if(!is_null($template_id)){
            $template = $this->manageEvent->findEvent($template_id);
            $template = $this->event->formatEvents(array( 0 => $template));
-           $this->data["template"] = $template[0];        
+           $this->data["currentTemplate"] = $template[0];        
         }
         $this->display("event.create.twig", $this->data);   
     }
