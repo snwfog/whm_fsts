@@ -8,7 +8,7 @@ use WHM\Model\ManageEvent;
 use DateTime;
 use DateTimeZone;
 
-class Reports extends Controller implements IRedirectable
+class Report extends Controller implements IRedirectable
 {
     protected $data = array("errors" => array(), "form" => array());
     public function __construct(array $args = null)
