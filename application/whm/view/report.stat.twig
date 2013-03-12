@@ -5,7 +5,8 @@
 		<legend class='controls controls-row'>
 		<h2> Yearly Reporting </h2>
 		</legend>
-	
+		
+		{# <div class="well no-padding-well" id="dates-well"> Put wells to make it nice #}
 		<form action ="{{ apppath }}{{ formAction }}" method="POST" name="stat-form"
 		id = "stat-form"> 
 		
@@ -22,7 +23,10 @@
 		<button id="excel-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export Excel</button>
 		<button id="pdf-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export PDF</button>
 		</form>
+		{# </div> #}
+		
 		<br /><br /><br /><br /><br /><br /><br /><br />
+		
 		<legend class='controls controls-row'>
 		<h2> Monthly Reporting </h2>
 		</legend>

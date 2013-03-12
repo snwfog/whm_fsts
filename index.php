@@ -28,7 +28,7 @@ $serves = array
     '/event'                        => 'WHM\Controller\Event',
     '/event/:number'                => 'WHM\Controller\Event',
 	'/reports'                      => 'WHM\Controller\Reports',
-    '/reports/statistics'           => 'WHM\Controller\Reports',
+    '/reports/functions'            => 'WHM\Controller\Reports',
 
 
     // Ajax controller
