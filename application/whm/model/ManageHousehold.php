@@ -122,7 +122,7 @@ class ManageHousehold {
         $household_member->setReferral($data["referral"]);
         $household_member->setLanguage($data["language"]);
         $household_member->setMaritalStatus($data["marital-status"]);
-        $household_member->setGender($date["gender"]);
+        $household_member->setGender($data["gender"]);
         $household_member->setOrigin($data["origin"]);
         $household_member->setFirstVisitDate($datetime);
         $household_member->setContact($data["contact"]);

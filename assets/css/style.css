@@ -32,7 +32,7 @@ div#login-well input
     transition: opacity .01s linear;
 }
 
-div#dependents-well
+div.no-padding-well
 {
     max-width: 340px;
     padding: 8px 0;
@@ -61,4 +61,13 @@ div#manage-flag-modal
 {
     width: 400px;
     margin-left: -200px;
+}
+
+/**
+ * Quick and dirty hack for showing typeahead over modal body
+ * if there is any overflow.
+ */
+.modal-body
+{
+    overflow: visible;
 }

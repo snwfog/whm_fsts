@@ -87,6 +87,7 @@ $ ->
       )
   )
 
+  usermap = {}
   $("input.search-query").typeahead(
     source: (query, process) ->
       return $.ajax(
@@ -94,13 +95,22 @@ $ ->
         type: 'get'
         dataType: 'json'
         success: (json) ->
+          members = []
+          usermap = {}
           if json?
-            members = []
             $.each json, (index, member) ->
-              members.push (member.last_name.trim()+ ", " + member.first_name.trim()).toUpperCase()
-            return process(members)
-          else return false
+              mapKey = (member.last_name.trim() + ", " + member.first_name.trim()).toUpperCase()
+              mapValue = { household_id: member.household_id, member_id: member.id }
+              usermap[mapKey] = mapValue
+              members.push mapKey
+            process(members)
       )
+    updater: (item) ->
+      url = "household/#{usermap[item].household_id}/#{usermap[item].member_id}"
+      console.log url
+      $(location).attr('href', url);
+      $.get(url)
+      return item
   )
 
   true
