@@ -2,23 +2,11 @@
 /*
 Do NOT modify .js file, modify only the .coffee file
 This script is used for data validation, and ajax.
-This script is NOT for UI, or animation, do that in global-script instead.
+This script is NOT for UI, or animation, do that in other script instead.
 */
 
-$(document).ready(function() {
-  var bidOfferValidator, creditCardValidator, displayError, loginValidator, noteAlert, noteConfirm, noteFormConfirm, postOfferValidator, registrationValidator, size, time;
-  $('#create-member-submit-btn').modal({
-    'show': false
-  });
-  size = [1200, 800];
-  $(window).resize(function() {
-    return window.resizeTo(size[0], size[1]);
-  });
-  time = function() {
-    return $('#navbar-time').html(moment().format("hh:mm:ss A", 1000));
-  };
-  setInterval(time, 1000);
-  time();
+$(function() {
+  var createHouseholdValidator, displayError, noteAlert;
   noteAlert = function(msg, type) {
     var n;
     return n = noty({
@@ -38,100 +26,7 @@ $(document).ready(function() {
       timeout: 5000
     });
   };
-  noteConfirm = function(msg, url) {
-    var n;
-    return n = noty({
-      layout: 'center',
-      type: 'alert',
-      text: msg,
-      modal: true,
-      animation: {
-        open: {
-          height: 'toggle'
-        },
-        close: {
-          height: 'toggle'
-        },
-        easing: 'swing',
-        speed: 50
-      },
-      buttons: [
-        {
-          addClass: 'btn btn-primary',
-          text: 'Continue',
-          onClick: function($noty) {
-            $noty.close();
-            return window.location = url;
-          }
-        }, {
-          addClass: 'btn btn-danger',
-          text: 'Cancel',
-          onClick: function($noty) {
-            return $noty.close();
-          }
-        }
-      ]
-    });
-  };
-  noteFormConfirm = function(msg, event) {
-    var n;
-    return n = noty({
-      layout: 'center',
-      type: 'alert',
-      text: msg,
-      modal: true,
-      animation: {
-        open: {
-          height: 'toggle'
-        },
-        close: {
-          height: 'toggle'
-        },
-        easing: 'swing',
-        speed: 50
-      },
-      buttons: [
-        {
-          addClass: 'btn btn-primary',
-          text: 'Continue',
-          onClick: function($noty) {
-            return $noty.close();
-          }
-        }, {
-          addClass: 'btn btn-danger',
-          text: 'Cancel',
-          onClick: function($noty) {
-            return $noty.close();
-          }
-        }
-      ]
-    });
-  };
-  $(".delete, .confirm, .modify, .warn").live('click', function() {
-    this.blur();
-    return false;
-  });
-  $('.delete').click(function() {
-    var loc;
-    loc = $(this).attr("href");
-    return noteConfirm("Are you sure you want to perform a delete?", loc);
-  });
-  $('.confirm').click(function() {
-    var loc;
-    loc = $(this).attr("href");
-    return noteConfirm("Are you sure you want to accept this offer?", loc);
-  });
-  $('.warn').click(function() {
-    var loc;
-    loc = $(this).attr("href");
-    return noteConfirm("Are you sure to send this warning to owner?", loc);
-  });
-  $('.modify').click(function() {
-    var loc;
-    loc = $(this).attr("href");
-    return noteConfirm("Are you sure to modify this post?", loc);
-  });
-  displayError = function(errors, event) {
+  displayError = function(errors) {
     var error, errorString, _i, _len, _results;
     if (errors.length > 0) {
       errorString = "";
@@ -141,166 +36,13 @@ $(document).ready(function() {
         _results.push(noteAlert(error.message, "warning"));
       }
       return _results;
-    } else {
-      return confirm("Ready to submit your form?");
     }
   };
   /*
-      Login Form Validator
+     Createhousehold Information
   */
 
-  loginValidator = new FormValidator("login-form", [
-    {
-      name: 'username',
-      display: 'Username',
-      rules: 'required|max_length[30]'
-    }, {
-      name: 'password',
-      display: 'Password',
-      rules: 'required'
-    }
-  ], displayError);
-  /*
-      Post Offer Form Validator
-  */
-
-  postOfferValidator = new FormValidator("post-offer-form", [
-    {
-      name: "title",
-      rules: "required|max_length[50]"
-    }, {
-      name: "category",
-      rules: "required"
-    }, {
-      name: "price",
-      rules: "required|numeric"
-    }, {
-      name: "description",
-      rules: "required"
-    }
-  ], displayError);
-  /*
-      Post Offer Form Validator
-  */
-
-  postOfferValidator = new FormValidator("comment-form", [
-    {
-      name: "rating",
-      display: "Rating",
-      rules: "required"
-    }, {
-      name: "comment",
-      display: "Comment",
-      rules: "required"
-    }
-  ], displayError);
-  /*
-      Bid On Offer Form Validator
-  */
-
-  bidOfferValidator = new FormValidator("bid-offer-form", [
-    {
-      name: "category",
-      rules: "required"
-    }, {
-      name: "price",
-      rules: "required|numeric"
-    }, {
-      name: "description",
-      rules: "required|max_length[255]"
-    }
-  ], displayError);
-  /*
-      Credit Card Information
-  */
-
-  creditCardValidator = new FormValidator("credit-card-form", [
-    {
-      name: "credit_card_type",
-      display: "Credit Card Type",
-      rules: "required"
-    }, {
-      name: "card_holder",
-      display: "Holder's Name",
-      rules: "required"
-    }, {
-      name: "credit_card_number",
-      display: "Credit Card Number",
-      rules: "required|numeric|exact_length[16]"
-    }, {
-      name: "expiration_month",
-      display: "Expire Month",
-      rules: "required|numeric|exact_length[2]|less_than[13]|more_than[0]"
-    }, {
-      name: "expiration_year",
-      display: "Expire Year",
-      rules: "required|numeric|exact_length[2]|less_than[30]|more_than[11]"
-    }, {
-      name: "verification_number",
-      display: "Verification Number",
-      rules: "required|numberic|max_length[3]"
-    }
-  ], displayError);
-  /*
-      Registration Information
-  */
-
-  registrationValidator = new FormValidator("registration-form", [
-    {
-      name: "username",
-      display: "Username",
-      rules: "required|alpha_numeric|max_length[20]"
-    }, {
-      name: "password1",
-      display: "Password",
-      rules: "required"
-    }, {
-      name: "password2",
-      display: "Password Confirmation",
-      rules: "required|matches[password1]"
-    }, {
-      name: "first_name",
-      display: "First Name",
-      rules: "required"
-    }, {
-      name: "last_name",
-      display: "Last Name",
-      rules: "required"
-    }, {
-      name: "phone_number",
-      display: "Phone Number",
-      rules: "numeric|more_than[5]|max_length[20]"
-    }, {
-      name: "email",
-      display: "Email Address",
-      rules: "required|valid_email"
-    }, {
-      name: "address",
-      display: "Address",
-      rules: "required"
-    }, {
-      name: "city",
-      display: "City",
-      rules: "required"
-    }, {
-      name: "country",
-      display: "Country",
-      rules: "required"
-    }, {
-      name: "postal_code",
-      display: "Postal Code",
-      rules: "required|alpha_numeric"
-    }, {
-      name: "tos",
-      display: "Term of Use",
-      rules: "required"
-    }
-  ], displayError);
-  /*
-      Createhousehold Information
-  */
-
-  return registrationValidator = new FormValidator("createhousehold-form", [
+  createHouseholdValidator = new FormValidator("household-create", [
     {
       name: "first-name",
       display: "First Name",
@@ -312,39 +54,39 @@ $(document).ready(function() {
     }, {
       name: "phone-number",
       display: "Phone Number",
-      rules: "numeric|phone_number"
+      rules: "callback_check_phone_number"
     }, {
       name: "sin-number",
       display: "Social Insurance",
-      rules: "sin_number"
+      rules: "callback_check_sin"
     }, {
       name: "mcare-number",
       display: "Medical Card",
-      rules: "mcare_number"
+      rules: "callback_check_mcare"
     }, {
       name: "work_status",
       display: "Work Status",
-      rules: "required"
+      rules: "exact_length[2]"
     }, {
       name: "gender",
       display: "Gender",
-      rules: "required|exact_length[1]"
+      rules: "exact_length[1]"
     }, {
       name: "welfare-number",
       display: "Welfare Number",
-      rules: "required|numeric"
+      rules: "callback_check_welfare"
     }, {
       name: "origin",
       display: "Origin",
-      rules: "required"
+      rules: "alpha"
     }, {
       name: "language",
       display: "Language",
-      rules: "required"
+      rules: "alpha"
     }, {
       name: "marital-status",
       display: "Marital Status",
-      rules: "required|length[2]"
+      rules: "length[2]"
     }, {
       name: "referral",
       display: "Referral",
@@ -356,15 +98,15 @@ $(document).ready(function() {
     }, {
       name: "first-visit-date",
       display: "First Visit Date",
-      rules: "required|alpha_dash"
+      rules: ""
     }, {
       name: "house-number",
       display: "Number",
-      rules: "required|alpha_numeric"
+      rules: "numeric"
     }, {
       name: "street",
       display: "Street",
-      rules: "required|alpha_numeric"
+      rules: "alpha_numeric"
     }, {
       name: "apt-number",
       display: "Apartment",
@@ -372,15 +114,65 @@ $(document).ready(function() {
     }, {
       name: "city",
       display: "City",
-      rules: "required|alpha"
+      rules: "alpha"
     }, {
       name: "province",
       display: "Province",
-      rules: "required"
+      rules: "exact_length[2]"
     }, {
       name: "postal-code",
       display: "Postal Code",
-      rules: "required|postal_code"
+      rules: "callback_check_postal_code"
     }
   ], displayError);
+  createHouseholdValidator.registerCallback('check_phone_number', function(value) {
+    var reg;
+    console.log(value);
+    reg = /([\d]{3}-?){2}-?([\d]{4})/ig;
+    if (reg.exec(value)) {
+      return true;
+    } else {
+      return false;
+    }
+  }).setMessage('check_phone_number', 'Invalid Phone Number format. The valid format should be of <b>###-###-####</b>');
+  createHouseholdValidator.registerCallback('check_sin', function(value) {
+    var reg;
+    console.log(value);
+    reg = /([\d]{3}-?){3}/ig;
+    if (reg.exec(value)) {
+      return true;
+    } else {
+      return false;
+    }
+  }).setMessage('check_sin', 'Invalid Social Insurance Number format. The valid format should be of <b>###-###-###</b>.');
+  createHouseholdValidator.registerCallback('check_mcare', function(value) {
+    var reg;
+    console.log(value);
+    reg = /([\w]{4}-?([\d]{4}-?){2})/ig;
+    if (reg.exec(value)) {
+      return true;
+    } else {
+      return false;
+    }
+  }).setMessage('check_mcare', 'Invalid Medical Care Number format. The valid format should be of <b>AAAA-####-####</b>.');
+  createHouseholdValidator.registerCallback('check_welfare', function(value) {
+    var reg;
+    console.log(value);
+    reg = /([\w]{4}-?[\d]{4}-?\d\d\w\d-?\d\d)/ig;
+    if (reg.exec(value)) {
+      return true;
+    } else {
+      return false;
+    }
+  }).setMessage('check_welfare', 'Invalid Welfare Number format. The valid format should be of <b>AAAA-####-##A#-##</b>.');
+  return createHouseholdValidator.registerCallback('check_postal_code', function(value) {
+    var reg;
+    console.log(value);
+    reg = /(\w\d\w)-?(\d\w\d)/ig;
+    if (reg.exec(value)) {
+      return true;
+    } else {
+      return false;
+    }
+  }).setMessage('check_postal_code', 'Invalid Postal Code format. The valid format should be of <b>A#A-#A#</b>.');
 });

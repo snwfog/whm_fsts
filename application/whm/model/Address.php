@@ -6,7 +6,7 @@ namespace WHM\Model;
  **/
 class Address
 {
-	/**
+    /**
      * @Id @Column(type="integer")
      * @GeneratedValue
      **/
@@ -38,6 +38,11 @@ class Address
     protected $postal_code;
 
     /**
+     * @Column(nullable=TRUE)
+     */
+    protected $district;
+
+    /**
      * @Column(nullable=TRUE, length=2)
      **/
     protected $province;
@@ -59,7 +64,6 @@ class Address
 
     public function setCity($city)
     {
-        $city = "Montreal";
         $this->city = $city;
     }
 
@@ -88,9 +92,18 @@ class Address
         return $this->postal_code;
     }
 
+     public function setDistrict($district)
+    {
+        $this->district = $district;
+    }
+
+    public function getDistrict()
+    {
+        return $this->district;
+    }
+
     public function setProvince($province)
     {
-        $province = "QC";
         $this->province = $province;
     }
 

@@ -18,21 +18,20 @@ abstract class ControllerTestCase extends PHPUnit_Framework_TestCase
      * @var \Goutte\Client client
      */
     protected $client;
-    
-    private static $BASE_URI;
-
-    public static function init()
-    {
-        require_once __DIR__ . '../../../../local-config.php';
-        self::$BASE_URI = $config['ControllerTestCase.Base_URI'];
-    }
 
     protected function setUp()
     {
-        $this->client = new Client();        
+        parent::setUp();        
+        $this->client = new Client(); 
+        
+    }
+        
+    public static function setUpBeforeClass()
+    {
+        parent::setUpBeforeClass();                      
     }
 
-    /**
+        /**
      * Calls a URI.
      *
      * @param string  $method        The request method
@@ -48,11 +47,9 @@ abstract class ControllerTestCase extends PHPUnit_Framework_TestCase
      */
     protected function request($method, $route, array $parameters = array(), array $files = array(), array $server = array(), $content = null)
     {
-        return $this->client->request($method, self::$BASE_URI . $route, $parameters, $files, $server, $content);
+        return $this->client->request($method, BASE_URI . $route, $parameters, $files, $server, $content);
     }
 
 }
-
-ControllerTestCase::init();
 ?>
 

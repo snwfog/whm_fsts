@@ -9,87 +9,77 @@ namespace WHM\Model;
 class Flag
 {
 
+
     /**
      * @Id
-     * @Column(type="integer") @GeneratedValue
-     * */
+     * @Column(type="integer")
+     * @GeneratedValue
+     * @var id
+     **/
     private $id;
 
     /**
-     * @Column(type="string")
-     * */
-    private $color;
+     * @Column(type="text")
+     * @var message
+     */
+    private $message;
 
     /**
-     * @Column(type="string")
+     * * <-> 1 -- Owning by default
+     * @ManyToOne(targetEntity="HouseholdMember", inversedBy="flags")
+     * @JoinColumN(name="household_member_id", referencedColumnName="id")
      * */
-    private $type;
+    private $household_member;
 
     /**
-     * @ManyToOne(targetEntity="Household", inversedBy="flags")
-     * */
-    private $household;
+     * * -> 1 -- Owning
+     *
+     * @ManyToOne(targetEntity="FlagDescriptor")
+     * @JoinColumn(name="flag_descriptor_id", referencedColumnName="id")
+     */
+    private $descriptor;
 
     /**
-     * @ManyToMany(targetEntity="Comment", mappedBy="flags")
-     * */
-    private $comments;
-
-    public function _construct()
-    {
-        $this->comments = new ArrayCollection();
-    }
-
+     * @return \WHM\Model\id
+     */
     public function getId()
     {
         return $this->id;
     }
 
-    public function setId($id)
+    public function setDescriptor($descriptor)
     {
-        $this->id = $id;
+        $this->descriptor = $descriptor;
     }
 
-    public function getColor()
+    public function getDescriptor()
     {
-        return $this->color;
+        return $this->descriptor;
     }
 
-    public function setColor($color)
+    public function setHouseholdMember($household_member)
     {
-        $this->color = $color;
+        $this->household_member = $household_member;
     }
 
-    public function getType()
+    public function getHouseholdMember()
     {
-        return $this->type;
+        return $this->household_member;
     }
 
-    public function setType($type)
+    /**
+     * @param \WHM\Model\message $message
+     */
+    public function setMessage($message)
     {
-        $this->type = $type;
+        $this->message = $message;
     }
 
-    public function getHousehold()
+    /**
+     * @return \WHM\Model\message
+     */
+    public function getMessage()
     {
-        return $this->household;
+        return $this->message;
     }
-
-    public function setHousehold($household)
-    {
-        $this->household = $household;
-    }
-
-    public function getComments()
-    {
-        return $this->comments;
-    }
-
-    public function setComments($comments)
-    {
-        $this->comments = $comments;
-    }
-
 }
-
-?>

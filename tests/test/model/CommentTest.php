@@ -11,10 +11,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
     {
         $comment = new Comment();
         $comment->setId(123456789);
-        $this->assertEquals(
-                            123456789, 
-                            $comment->getId()
-                            );
+        $this->assertEquals(123456789, $comment->getId());
     }
 
 
@@ -22,49 +19,34 @@ class CommentTest extends PHPUnit_Framework_TestCase
     {
         $comment = new Comment();
         $comment->setId(123456789);
-        $this->assertEquals(
-                            123456789, 
-                            PHPUnit_Framework_TestCase::readAttribute($comment, "id")
-                            );
+        $this->assertEquals(123456789, PHPUnit_Framework_TestCase::readAttribute($comment, "id"));
     }
 
     public function testgetContent()
     {
         $comment = new Comment();
         $comment->setContent(123456789);
-        $this->assertEquals(
-                            123456789, 
-                            $comment->getContent()
-                            );
+        $this->assertEquals(123456789, $comment->getContent());
     }
 
-        public function testsetContent()
+    public function testsetContent()
     {
         $comment = new Comment();
         $comment->setContent(123456789);
-        $this->assertEquals(
-                            123456789, 
-                            PHPUnit_Framework_TestCase::readAttribute($comment, "content")
-                            );
+        $this->assertEquals(123456789, PHPUnit_Framework_TestCase::readAttribute($comment, "content"));
     }
 
     public function testgetFlags()
     {
         $comment = new Comment();
         $comment->setFlags(123456789);
-        $this->assertEquals(
-                            123456789,  
-                            $comment->getFlags()
-                            );
+        $this->assertEquals(123456789, $comment->getFlags());
     }
 
     public function testsetFlags()
     {
         $comment = new Comment();
         $comment->setFlags(123456789);
-        $this->assertEquals(
-                            123456789, 
-                            PHPUnit_Framework_TestCase::readAttribute($comment, "flags")
-                            );
+        $this->assertEquals(123456789, PHPUnit_Framework_TestCase::readAttribute($comment, "flags"));
     }
 }

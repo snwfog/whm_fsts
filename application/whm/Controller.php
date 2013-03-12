@@ -2,8 +2,6 @@
 
 namespace WHM;
 
-use \WHM\Helper;
-
 abstract class Controller
 {
 
@@ -12,6 +10,8 @@ abstract class Controller
 
     protected $renderer;
     protected $em;
+    protected $content;
+    protected $requestContents = array();
     protected $data = array();
 
     public function __construct($redirect = TRUE)
@@ -28,39 +28,15 @@ abstract class Controller
         $this->data["syspath"] = FOLDER_URL;
         $this->data["apppath"] = SITE_ROOT;
         $this->data["site_name"] = "Welcome Hall Mission";
+        $this->data["login"] = true;
 
-        // if (!$this->isValidSession())
-        // {
-        //     if ($redirect)
-        //         $this->redirect(self::REDIRECT_INDEX);
-        // }
-        // else
-        // {
-        //     // If is logged in properly, set a global twig variable
-        //     $this->data["is_logged_in"] = TRUE;
-        //
-        //     // Global set for admin
-        //     $this->data["is_admin"] = $this->isAdmin();
-        //
-        //     // Loading a few frequently used twig data
-        //     $this->data["messages"] = array();
-        //
-        //     // Get the username if possible
-        //     $this->data["username"] = $this->getUsername();
-        // }
-
+        // 0 for white (default), 1 for black
+        $theme = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 0;
+        // Restore the cookie
+        setcookie("theme", $theme, time() + 3600 * 24 * 7); // Save cookie for 7 days
+        // Add the cookie to data so twig can display it properly
+        $this->data['theme'] = $theme;
     }
-
-//    public function verifySession(Session $session)
-//    {
-//        // Check if we invoke making a session
-//        if (isset($session))
-//        {
-//            $session->validateSession();
-//            if ($session->isValid())
-//                $session->startSession();
-//        }
-//    }
 
     public function display($file, $data = array())
     {
@@ -82,46 +58,19 @@ abstract class Controller
         return $this->em->find("\\WHM\\Model\\{$class}", $var);
     }
 
-    // public function isValidSession()
-    // {
-    //     return (isset($_SESSION['session_id'])) ? TRUE : FALSE;
-    // }
-    //
-    // public function getSessionId()
-    // {
-    //     return (isset($_SESSION['session_id'])) ? $_SESSION['session_id'] :
-    //         NULL;
-    // }
-    //
-    // public function getMemberId()
-    // {
-    //     return (isset($_SESSION['owner_id'])) ? $_SESSION['owner_id'] : NULL;
-    // }
-    //
-    // public function getUsername()
-    // {
-    //     return (isset($_SESSION['user'])) ? $_SESSION['user'] : NULL;
-    // }
-    //
-    // public function isAdmin()
-    // {
-    //     return (isset($_SESSION['is_admin'])) ? $_SESSION['is_admin'] : FALSE;
-    // }
-    //
-    //
-    // public function endSession()
-    // {
-    //     if (session_id())
-    //         session_destroy();
-    // }
+    public function getContent()
+    {
+        if (null === $this->content)
+        {
+            if (0 === strlen(trim($this->content = file_get_contents('php://input'))))
+            {
+                $this->content = false;
+            }
+        }
 
-    // public function startSession()
-    // {
-    //     if (!session_id())
-    //     {
-    //         session_start();
-    //     }
-    // }
+        return $this->content;
+    }
+
     /**-------------------------------------------------------------------------
      * Redirect a controller to another controller.
      * Such as in the case where the user is not logged in, hence
@@ -134,7 +83,7 @@ abstract class Controller
      */
     public function redirect($file = self::REDIRECT_INDEX)
     {
-        header("Location: $file");
+        header('Location: ' . SITE_ROOT . $file);
     }
 
     public function back()

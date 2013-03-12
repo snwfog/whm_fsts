@@ -27,22 +27,24 @@ class Member extends Controller implements IRedirectable
         $household = $member->getHousehold();
         $address = $household->getAddress();
         $data = array(
-                        "firstName" => $member->getFirstName(),
-                        "lastName"  => $member->getLastName(),
+                        "first-name" => $member->getFirstName(),
+                        "last-name"  => $member->getLastName(),
                         "language"  => $member->getLanguage(),
-                        "workStatus"  => $member->getWorkStatus(),
-                        "welfareNumber"  => $member->getWelfareNumber(),
-                        "phoneNumber"  => $member->getPhoneNumber(),
-                        "medicareNum"  => $member->getMcareNumber(),
+                        "work-status"  => $member->getWorkStatus(),
+                        "welfare-number"  => $member->getWelfareNumber(),
+                        "phone-number"  => $member->getPhoneNumber(),
+                        "medicare-number"  => $member->getMcareNumber(),
                         "referral"  => $member->getReferral(),
                         "marital"  => $member->getMaritalStatus(),
                         "origin"   => $member->getOrigin(),
+                        "income" => $member->getIncome(),
                         "street"    => $address->getStreet(),
-                        "apt"      => $address->getAptNumber(),
+                        "apt-number"      => $address->getAptNumber(),
                         "city"     => $address->getCity(),
                         "province" => $address->getProvince(),
-                        "postal"   => $address->getPostalCode(),
-                     );
+                        "postal-code"   => $address->getPostalCode(),
+                        "district" => $address->getDistrict(),
+                );
         $this->data["household"] = $data;
         $this->display("member_view_form.twig", $this->data);
      //  $this->display("member_create_form.twig");

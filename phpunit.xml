@@ -1,4 +1,4 @@
-<phpunit bootstrap="application/WHM/Bootstrap.php">
+<phpunit bootstrap="tests/bootstrap.php">
     <php>
       <ini name="foo" value="bar"/>
       <const name="foo" value="bar"/>

@@ -7,147 +7,58 @@ use \WHM\Model\Operator;
 
 class OperatorTest extends PHPUnit_Framework_TestCase
 {
-    public function testgetId()
+
+    /**
+     * @var Operator
+     */
+    private $operator;
+
+    /**
+     * @var Operator
+     */
+    private $operator2;
+
+    protected function setUp()
     {
-        $operator = new Operator();
-        $operator->setId(123456789);
-        $this->assertEquals(
-                            123456789, 
-                            $operator->getId()
-                            );
+        parent::setUp();
+
+        $this->operator = new Operator();
+
+        $this->operator2 = new Operator();
+        $this->operator2->setPassword("Bibi469");
+        $this->operator2->setUsername("JDoe");
     }
 
-
-    public function testsetId()
+    public function testGetId()
     {
-        $operator = new Operator();
-        $operator->setId(123456789);
-        $this->assertEquals(
-                            123456789, 
-                            PHPUnit_Framework_TestCase::readAttribute($operator, "id")
-                            );
+        $this->assertThat($this->operator->getId(), $this->equalTo(null));
+        $this->assertThat($this->operator2->getId(), $this->equalTo(null));
     }
 
-    public function testgetFirst_name()
+    public function testSetPassword()
     {
-        $operator = new Operator();
-        $operator->setFirst_name("John Smith");
-        $this->assertEquals(
-                            "John Smith", 
-                            $operator->getFirst_name()
-                            );
+        $this->operator->setPassword("0secret857");
+        $this->assertThat(
+            PHPUnit_Framework_TestCase::readAttribute($this->operator, "password"),
+            $this->equalTo("0secret857"));
     }
 
-    public function testsetFirst_name()
+    public function testGetPassword()
     {
-        $operator = new Operator();
-        $operator->setFirst_name("John Smith");
-        $this->assertEquals(
-                            "John Smith", 
-                            PHPUnit_Framework_TestCase::readAttribute($operator, "first_name")
-                            );
+        $this->assertThat($this->operator2->getPassword(), $this->equalTo("Bibi469"));
     }
 
-    public function testgetLast_name()
+    public function testSetUsername()
     {
-        $operator = new Operator();
-        $operator->setLast_name("Smith");
-        $this->assertEquals(
-                            "Smith",  
-                            $operator->getLast_name()
-                            );
+        $this->operator->setUsername("admin");
+        $this->assertThat(
+            PHPUnit_Framework_TestCase::readAttribute($this->operator, "username"),
+            $this->equalTo("admin"));
     }
 
-    public function testsetLast_name()
+    public function testGetUsername()
     {
-        $operator = new Operator();
-        $operator->setLast_name("Smith");
-        $this->assertEquals(
-                            "Smith", 
-                            PHPUnit_Framework_TestCase::readAttribute($operator, "last_name")
-                            );
-    }
-
-    public function testgetDob()
-    {
-        $operator = new Operator();
-        $operator->setDob("today");
-        $this->assertEquals(
-                            "today", 
-                            $operator->getDob()
-                            );
-    }
-
-    public function testsetDob()
-    {
-        $operator = new Operator();
-        $operator->setDob("today");
-        $this->assertEquals(
-                            "today", 
-                            PHPUnit_Framework_TestCase::readAttribute($operator, "dob")
-                            );
-    }
-
-
-
-    public function testgetPhone_number()
-    {
-        $operator = new Operator();
-        $operator->setPhone_number(123456789);
-        $this->assertEquals(
-                            123456789, 
-                            $operator->getPhone_number()
-                            );
-    }
-
-    public function testsetPhone_number()
-    {
-        $operator = new Operator();
-        $operator->setPhone_number(123456789);
-        $this->assertEquals(
-                            123456789, 
-                            PHPUnit_Framework_TestCase::readAttribute($operator, "phone_number")
-                            );
-    }
-
-    public function testgetUsername()
-    {
-        $operator = new Operator();
-        $operator->setUsername("root");
-        $this->assertEquals(
-                            "root", 
-                            $operator->getUsername()
-                            );
-    }
-
-    public function testsetReferal()
-    {
-        $operator = new Operator();
-        $operator->setUsername("Bill Gates");
-        $this->assertEquals(
-                            "Bill Gates", 
-                            PHPUnit_Framework_TestCase::readAttribute($operator, "username")
-                            );
-    }
-
-    public function testgetPassword()
-    {
-        $operator = new Operator();
-        $operator->setPassword("ssdd");
-        $this->assertEquals(
-                            "ssdd", 
-                            $operator->getPassword()
-                            );
-    }
-
-    public function testsetPassword()
-    {
-        $operator = new Operator();
-        $operator->setPassword("qwerty");
-        $this->assertEquals(
-                            "qwerty", 
-                            PHPUnit_Framework_TestCase::readAttribute($operator, "password")
-                            );
+        $this->assertThat($this->operator2->getUsername(), $this->equalTo("JDoe"));
     }
 
 }

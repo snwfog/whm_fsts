@@ -1,0 +1,125 @@
+{% extends 'static/base.twig' %}
+
+{% block content %}
+    <div class="span6">
+        {% for error in errors %}
+            {% block error %}
+                <div id="error">{{ error }}</div></br>
+            {% endblock %}
+        {% endfor %}
+
+        <form action="{{ apppath }}{{ formAction }}" method="POST" name="event-form" 
+        id="{%if event is not null %}view-event-form{% endif %}">
+
+            <legend class ='controls controls-row'>
+                <div class='pull-left'>
+                    <h1> ID: {{ event["event-id"] }} </h1>
+                </div>
+                {% if event %}
+                    <div class='pull-right'>
+                        <span class="label label-success"><i class="icon-user icon-white"></i> 0/{{ event.capacity }}</span>
+                    </div>
+                {% endif %}
+            </legend>
+
+            {% include 'base.createEvent.part.twig' %}
+
+            {% include 'date.createEvent.part.twig' %}
+
+            {% include 'info.createEvent.part.twig' %}
+
+        
+            <legend>Action</legend>
+            <div class="btn-toolbar">
+                {% if event %}
+                    <button class="btn btn-warning btn-large" data-toggle="button" class-toggle="btn-state" name="event-create-modify" type="button">
+                    <i class="icon-edit icon-white"></i> Modify</button>
+                    {#<button id="add-event-date" type="button" class="btn btn-large btn-info"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Add Date</button>
+                    #}
+                {% else %}
+                    <button id="create-event-save" type="button" class="btn btn-large btn-success"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Create Event</button>
+                    <button id="create-template-save" type="button" class="btn btn-large btn-info"><i class="icon-file icon-white submit"></i> Save Template </button>
+                {% endif %}
+                   
+
+            </div>
+        
+            <input type="hidden" name="event-id" value="{{ event["event-id"] }}"/>
+            <input type="hidden" name="template-id" value="{{ template["template-id"] }}"/>
+
+        </form>
+
+        {% include 'template.list.twig' %}
+    </div>
+{% endblock content %}
+
+{# This part should be auto generated #}
+
+{% block left1 %}
+    <div class="span3">
+        {% if event is null %}
+            <legend>Templates</legend>
+            <div class="well no-padding-well" id="events-well">
+                <ul class="nav nav-list" id="event-list">
+                    {% for template in templates %}
+
+                        {% if currentTemplate["event-id"] == template["event-id"] %}
+                        <li class="active">
+                        {% else %}
+                        <li class="">
+                        {% endif %}
+                            <a href="{{ apppath }}event/new/{{ template["event-id"] }}">
+                                        <i class="icon-file"></i> {{template.name }}</a></li>
+                    {% endfor %}       
+                </ul>
+            </div>
+ 
+        {% endif %}
+
+        {% if event is not null %}
+            <legend>Dates</legend>
+            <div class="well no-padding-well" id="dates-well">
+                <ul class="nav nav-list" id="date-list">
+                {% for relatedEvent in relatedEvents %}
+                    {% if relatedEvent["event-id"] == event["event-id"] %}
+                        <li class="active">
+                    {% else %}
+                        <li class="">
+                    {% endif %}
+                        <a href="{{ apppath }}event/{{ relatedEvent["event-id"] }}">
+                            {{ relatedEvent.date }}</a></li>
+                {% endfor %}
+                </ul>
+            </div> 
+        {% endif %}   
+    </div>
+    
+{% endblock left1 %}
+
+{% block left2 %}
+    <div class="span3">
+        <legend>Events</legend>
+        <div class="well no-padding-well" id="dates-well">
+            <ul class="nav nav-list" id="date-list">
+            {% for eventUC in upcomingEvents %}
+                {% if eventUC["group-id"] == event["group-id"] %}
+                    <li class="active">
+                {% else %}
+                    <li class="">
+                {% endif %}
+                    <a href="{{ apppath }}event/{{ eventUC["event-id"] }}">
+                        <i class="icon-tasks"></i>{{ eventUC.name }}</a></li>
+            {% endfor %}
+            </ul>
+           
+                
+          <!--  <ul class="nav nav-list" id="event-list">
+                {% for event in events %}
+                        <li class="active"><a href="{{ apppath }}event/{{ event.event_id}}
+                        <i class="icon-home"></i> {{event["name"] }}</a></li>
+                {% endfor %}
+            </ul>-->
+        </div> 
+                     
+    </div>
+{% endblock left2 %}

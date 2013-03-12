@@ -1,0 +1,104 @@
+{% block appointment_modal %}
+    <div id="appointment-modal"
+         class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+
+        <div class="modal-body">
+            <div id="event-calendar-carousel" class="carousel slide" data-interval="false">
+                <ol class="carousel-indicators">
+                    <li data-target="#event-calendar-carousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#event-calendar-carousel" data-slide-to="1"></li>
+                </ol>
+                <!-- Carousel items -->
+                {# WATCH OUT!!! #}
+                {# SOME INDICES START WITH 1 INSTEAD OF 0!!! #}
+                <div class="carousel-inner">
+                    {% for k in 1..2 %}
+                        {% if k == 1 %}
+                            <div class="active item">
+                        {% else %}
+                            <div class="item">
+                        {% endif %}
+                            {% set startdei = "+" ~ ((k - 1) * 7 + 1) ~ " days" %}
+                            {% set enddei = "+" ~ k * 7 ~ " days" %}
+                            <legend>
+                                Event Calendar from {{ "now"|date_modify(startdei)|date("F     d") }} to
+                                {{ "now"|date_modify(enddei)|date("F d") }}
+                            </legend>
+                            <table class="table table-hover">
+                                <thead>
+                                    {% set weeklength = 7 %}
+                                    <tr class="info">
+                                        {% for i in 1..weeklength %}
+                                            <th>
+                                                {% set deidei = "+" ~ (7 * (k - 1) + i) ~ " days" %}
+                                                {{ "now"|date_modify(deidei)|date("D")|upper }} - {# MON through SUN #}
+                                                {{ "now"|date_modify(deidei)|date("d") }} {# Date #}
+                                            </th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {# First get the one day with the maximum amount of events.
+                                       This will set the maximum height of the table.
+                                       In this example, it is represented by the variable maxevents. #}
+                                    {% set maxevents = 4 %}
+                                    {# Create 4 rows. #}
+                                    {% for i in 1..maxevents %}
+                                        <tr>
+                                            {% for j in 1..weeklength %}
+                                                <td>
+                                                    {% set maxparticipants = events[i][j]["capacity"] %}
+                                                    {% set actualparticipants = random(maxparticipants) %}{# NEED TO GET ACTUAL VALUE #}
+                                                    {# MAXIMUM TITLE LENGTH IS 10. ELSE IS TRIMMED #}
+                                                    {# DECIDE BUTTON COLOR #}
+                                                    {% set availablespots = maxparticipants - actualparticipants %}
+                                                    {% set buttoncolor = 'success' %}
+                                                    {% if availablespots <= maxparticipants / 10 %}
+                                                        {% set buttoncolor = 'danger' %}
+                                                    {% elseif availablespots <= maxparticipants / 2 %}
+                                                        {% set buttoncolor = 'warning' %}
+                                                    {% endif %}
+                                                    {% set index = (7 * (k - 1) + j) %}
+                                                    {% set deidei = "+" ~ index ~ " days" %}
+                                                    {% set d = "now"|date_modify(deidei)|date("m/d/Y") %}        
+                                                        {% if d == events[i][j]["date"] %} {# SHOWS ONLY WEEK ONE, NOT WEEK 2, ARRAY PROBLEM i #}
+                                                            <form action="{{ apppath }}appointment/new" method="POST" >
+                                                                <input type="hidden" name="household-id" value="{{ household.household_id }}">
+                                                                <input type="hidden" name="member-id" value="{{ household["member-id"] }}">
+                                                                <input type="hidden" name="event-id" value="{{ events[i][j]["event-id"] }}">
+                                                                <button class="btn btn-small btn-{{ buttoncolor }}" type="submit"
+                                                                    {% if availablespots == 0 %} disabled>
+                                                                        {{ events[i][j]["name"] }} <br /> Full
+                                                                    {% else %}
+                                                                        >
+                                                                        {{ events[i][j]["name"] }} <br /> ({{ actualparticipants }}/{{ maxparticipants }})
+                                                                    {% endif %}
+                                                                </button>
+                                                            </form>
+                                                        {% endif %}
+                                                </td>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="btn-group" data-toggle="buttons-radio">
+                <button type="button" class="btn btn-primary active" data-target="#event-calendar-carousel" data-slide-to="0">
+                    <i class="icon-calendar icon-white"></i> First Week
+                </button>
+                <button type="button" class="btn btn-primary" data-target="#event-calendar-carousel" data-slide-to="1">
+                    <i class="icon-calendar icon-white"></i> Second Week
+                </button>
+            </div>
+            &nbsp;&nbsp;&nbsp;
+            <button class="btn" data-dismiss="modal" aria-hidden="true"> Close</button>
+        </div>
+    </div>
+{% endblock %}

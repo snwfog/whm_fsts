@@ -16,4 +16,6 @@ namespace WHM;
 //define('APPPATH', 'application');
 
 // Bootstrap all autoloader functions
+define("LOCALTIME", "US/East-Indiana");
+
 require_once('vendor/autoload.php');

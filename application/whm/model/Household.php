@@ -17,15 +17,15 @@ class Household
     protected $id;
 
     /**
-     * 1 -> 1 -- Owning
+     * 1 -> 1 -- Owning by Default
      *
-     * @OneToOne(targetEntity="HouseholdMember")
+     * @OneToOne(targetEntity="HouseholdMember", cascade={"all"})
      * @JoinColumn
      * (
      *      name="household_principal_id",
      *      referencedColumnName="id",
      *      unique=TRUE,
-     *      nullable=TRUE
+     *      nullable=FALSE
      *
      * )
      **/
@@ -34,7 +34,7 @@ class Household
     /**
      * 1 -> 1 -- Owning
      *
-     * @OneToOne(targetEntity="Address", cascade={"persist"})
+     * @OneToOne(targetEntity="Address", cascade={"all"})
      * @JoinColumn
      * (
      *      name="address_id",
@@ -46,8 +46,8 @@ class Household
     protected $address;
 
     /**
-     * 1 <-> * -- Inversing
-     * @OneToMany(targetEntity="HouseholdMember", mappedBy="household")
+     * 1 <-> * -- Inversing by Default
+     * @OneToMany(targetEntity="HouseholdMember", mappedBy="household", cascade={"all"})
      **/
     protected $members ;
 
@@ -66,6 +66,10 @@ class Household
         $this->address = $address;
     }
 
+    /**
+     * 
+     * @return Address
+     */
     public function getAddress()
     {
         return $this->address;
@@ -74,6 +78,7 @@ class Household
     public function setHouseholdPrincipal($household_principal)
     {
         $this->household_principal = $household_principal;
+        $household_principal->setHousehold($this);
     }
 
     public function getHouseholdPrincipal()
@@ -81,9 +86,10 @@ class Household
         return $this->household_principal;
     }
 
-    public function addMember($members)
+    public function addMember($member)
     {
-        $this->members[] = $members;
+        $this->members[] = $member;
+        $member->setHousehold($this);
     }
 
     public function getMembers()
@@ -91,7 +97,8 @@ class Household
         return $this->members;
     }
 
-    public function getInstance(){
+    public function getInstance()
+    {
         return $this;
     }
 

@@ -17,12 +17,10 @@ class Index extends Controller implements IRedirectable
     public function __construct(array $args = null)
     {
         parent::__construct();
-
-        $this->data['index'] = true;
     }
 
     public function get()
     {
-        $this->display("index.twig", $this->data);
+        $this->display("index.twig");
     }
 }

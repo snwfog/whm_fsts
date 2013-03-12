@@ -1,0 +1,52 @@
+{% block add_flag_modal %}
+    <div id="add-flag-modal"
+         class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+            <h3>Add Flag</h3>
+        </div>
+
+        <div class="modal-body">
+            <form class="form-horizontal" action="{{ apppath }}flag" method="POST" name="flag-create-form" id="flag-create">
+                <fieldset>
+                    <div class="control">
+                        <div id="flag-types" class="btn-group" data-toggle="buttons-radio">
+                            {%  for flagD in flagDescriptors %}                     
+                                <button name="flag-descriptor" type="button" class="btn btn-{{ flagD["flag-color"] | lower }}" data-value="{{ flagD["flag-id"] }}">
+                                    <i class="icon-tag icon-white"></i> {{ flagD["flag-meaning"] }}
+                                </button>
+                            {%  endfor %}
+                            {#
+                                <button type="button" class="btn btn-success"><i class="icon-tag icon-white"></i> Success</button>
+                                <button type="button" class="btn btn-danger"><i class="icon-tag icon-white"></i> Danger</button>
+                                <button type="button" class="btn btn-warning"><i class="icon-tag icon-white"></i> Warning</button>
+                                <button type="button" class="btn btn-info"><i class="icon-tag icon-white"></i> Info</button>
+                            #}
+                        </div>                       
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Message</legend>
+                    <div class="control">
+                        {#<div class="alert">#}
+                            <textarea class="span12" rows="4" name="message" placeholder="Message..."></textarea>
+                        {#</div>#}
+                    </div>
+
+                    <input type="hidden" name="member-id" value="{{ household["member-id"] }}"/>
+                    <input type="hidden" name="household-id" value="{{ household.household_id}}"/>
+
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true"> Close</button>
+            <button id="flag-create-clear" class="btn btn-warning" aria-hidden="true"> Clear</button>
+            <button id="flag-create-save" class="btn btn-success"><i class="icon-ok icon-white"></i> Save changes</button>
+        </div>
+    </div>
+
+{% endblock add_flag_modal %}

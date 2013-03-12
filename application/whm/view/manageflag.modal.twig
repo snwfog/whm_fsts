@@ -1,0 +1,33 @@
+{% block manage_flag_modal %}
+    <div id="manage-flag-modal" class="modal hide fade" tabindex="-1"
+         role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                <i class="icon-remove"></i>
+            </button>
+            <h3>Manage Flag</h3>
+        </div>
+
+        <div class="modal-body">
+            <form action="{{ apppath }}flag"
+                  method="POST" name="manage-flag-form" id="flag-manage">
+                <fieldset>
+                    {% for i in ['danger', 'success', 'warning', 'info'] %}
+                        <div class="controls controls-row">
+                            <button class="btn btn-{{ i }} span6" disabled>
+                                <i class="icon-flag icon-white"></i> {{ i|capitalize }}</button>
+                            <input class="span6" type="text" maxlength="11" />
+                        </div>
+                    {% endfor %}
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true"> Close</button>
+            <button id="manage-flag-clear" class="btn btn-warning" aria-hidden="true"> Reset Default</button>
+            <button id="manage-flag-save" class="btn btn-success">
+                <i class="icon-ok icon-white"></i> Save Changes</button>
+        </div>
+    </div>
+{% endblock manage_flag_modal %}
