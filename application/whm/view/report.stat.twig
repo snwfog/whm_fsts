@@ -1,0 +1,79 @@
+{% extends 'static/base.twig' %}
+
+{% block content %}
+    <div class="span6">
+		<legend class='controls controls-row'>
+		<h2> Yearly Reporting </h2>
+		</legend>
+	
+		<form action ="{{ apppath }}{{ formAction }}" method="POST" name="stat-form"
+		id = "stat-form"> 
+		
+		<select class=''>
+			<option>Food Drive</option>
+			<option>Christmas Basket</option>
+		</select>
+		<br /><br />
+		<input type = "radio"> Annual 
+		<input type = "radio"> Fiscal
+		
+		<br /><br />
+		<button id="generate-year-report" type="button" class="btn btn-medium btn-success"><i class="icon-tasks icon-white"></i> Generate Report</button>
+		<button id="excel-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export Excel</button>
+		<button id="pdf-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export PDF</button>
+		</form>
+		<br /><br /><br /><br /><br /><br /><br /><br />
+		<legend class='controls controls-row'>
+		<h2> Monthly Reporting </h2>
+		</legend>
+		
+		<form action ="{{ apppath }}{{ formAction }}" method="POST" name="stat-form"
+		id = "stat-form"> 
+		
+		<select class=''>
+			<option>Food Drive</option>
+			<option>Christmas Basket</option>
+		</select>
+		<select class=''>
+			<option>January</option>
+			<option>February</option>
+			<option>March</option>
+			<option>April</option>
+		</select>
+		
+		<br /><br />
+		<button id="generate-year-report" type="button" class="btn btn-medium btn-success"><i class="icon-tasks icon-white"></i> Generate Report</button>
+		<button id="excel-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export Excel</button>
+		<button id="pdf-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export PDF</button>
+		</form>
+		
+	</div>
+{% endblock content %}
+
+{% block left1 %}
+	<div class="span6">
+		<legend class='controls controls-row'>
+		<h1> Ad-Hoc </h1>
+		</legend>
+		
+		<select class=''>
+			<option>Food Drive</option>
+			<option>Christmas Basket</option>
+		</select>
+		
+		<br /><br />
+		<input type="checkbox" name="gender"> Gender <br />
+		<input type="checkbox" name="gender"> Age <br />
+		<input type="checkbox" name="gender"> Income <br />
+		<input type="checkbox" name="gender"> Origin <br />
+		<input type="checkbox" name="gender"> Language <br />
+		
+		<br /><br />
+		<button id="generate-year-report" type="button" class="btn btn-medium btn-success"><i class="icon-tasks icon-white"></i> Generate Report</button>
+		<button id="excel-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export Excel</button>
+		<button id="pdf-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export PDF</button>
+		</form>
+		
+		
+	</div>
+{% endblock left1 %}
