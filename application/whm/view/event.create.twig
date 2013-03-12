@@ -16,8 +16,20 @@
                     <h1> ID: {{ event["event-id"] }} </h1>
                 </div>
                 {% if event %}
+                    {# DECIDE LABEL COLOR #}
+                    {% set maxparticipants = event.capacity %}
+                    {% set actualparticipants = random(maxparticipants) %}{# INSERT ACTUAL VALUE HERE #}
+                    {% set availablespots = maxparticipants - actualparticipants %}
+                    {% set labelcolor = 'success' %}
+                    {% if availablespots <= maxparticipants / 10 %}
+                        {% set labelcolor = 'important' %}
+                    {% elseif availablespots <= maxparticipants / 2 %}
+                        {% set labelcolor = 'warning' %}
+                    {% endif %}
                     <div class='pull-right'>
-                        <span class="label label-success"><i class="icon-user icon-white"></i> 0/{{ event.capacity }}</span>
+                        <span class="label label-{{ labelcolor }}">
+                        <i class="icon-user icon-white"></i> {{ actualparticipants }}/{{maxparticipants }}
+                        </span>
                     </div>
                 {% endif %}
             </legend>
