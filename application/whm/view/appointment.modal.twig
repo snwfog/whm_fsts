@@ -53,7 +53,8 @@
                                                         {% set j = j + 7 %}
                                                     {% endif %}
                                                     {% set maxparticipants = events[i][j]["capacity"] %}
-                                                    {% set actualparticipants = random(maxparticipants) %}{# NEED TO GET ACTUAL VALUE #}
+                                                    {# NEED TO GET ACTUAL VALUE #}
+                                                    {% set actualparticipants = random(maxparticipants) %}
                                                     {# MAXIMUM TITLE LENGTH IS 10. ELSE IS TRIMMED #}
                                                     {# DECIDE BUTTON COLOR #}
                                                     {% set availablespots = maxparticipants - actualparticipants %}
@@ -75,8 +76,7 @@
                                                                         {{ events[i][j]["name"]|slice(0, 10) }} <br /> Full
                                                                     {% else %}
                                                                         >
-                                                                        {{ events[i][j]["name"]|slice(0, 10) }} <br /> (
-                                                                        {{ actualparticipants }}/{{ maxparticipants }})
+                                                                        {{ events[i][j]["name"]|slice(0, 10) }} <br /><i class="icon-user icon-white"></i>{{ actualparticipants }}/{{ maxparticipants }}
                                                                     {% endif %}
                                                                 </button>
                                                             </form>
