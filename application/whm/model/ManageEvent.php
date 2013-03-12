@@ -83,7 +83,7 @@ class ManageEvent
 
     public function getUpComingEvents()
     {
-        //CONSTRAINT: RETRIEVE EVENT ONLY 2 WEEK AHEAD.
+        //CONSTRAINT: RETRIEVE EVENT ONLY 2 WEEKS AHEAD.
         $dateTime2 = new DateTime();
         $dateTime2->setTimezone(new DateTimeZone(LOCALTIME));
         $dateNow = $dateTime2;

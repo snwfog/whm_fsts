@@ -25,7 +25,7 @@
                                 Event Calendar from {{ "now"|date_modify(startdei)|date("F     d") }} to
                                 {{ "now"|date_modify(enddei)|date("F d") }}
                             </legend>
-                            <table class="table table-hover">
+                            <table class="table table-bordered">
                                 <thead>
                                     {% set weeklength = 7 %}
                                     <tr class="info">
@@ -48,6 +48,10 @@
                                         <tr>
                                             {% for j in 1..weeklength %}
                                                 <td>
+                                                    {% set index = (7 * (k - 1) + j) %}
+                                                    {% if k == 2 %}
+                                                        {% set j = j + 7 %}
+                                                    {% endif %}
                                                     {% set maxparticipants = events[i][j]["capacity"] %}
                                                     {% set actualparticipants = random(maxparticipants) %}{# NEED TO GET ACTUAL VALUE #}
                                                     {# MAXIMUM TITLE LENGTH IS 10. ELSE IS TRIMMED #}
@@ -59,20 +63,20 @@
                                                     {% elseif availablespots <= maxparticipants / 2 %}
                                                         {% set buttoncolor = 'warning' %}
                                                     {% endif %}
-                                                    {% set index = (7 * (k - 1) + j) %}
                                                     {% set deidei = "+" ~ index ~ " days" %}
-                                                    {% set d = "now"|date_modify(deidei)|date("m/d/Y") %}        
-                                                        {% if d == events[i][j]["date"] %} {# SHOWS ONLY WEEK ONE, NOT WEEK 2, ARRAY PROBLEM i #}
+                                                    {% set d = "now"|date_modify(deidei)|date("m/d/Y") %}
+                                                        {% if d == events[i][j]["date"] %}
                                                             <form action="{{ apppath }}appointment/new" method="POST" >
                                                                 <input type="hidden" name="household-id" value="{{ household.household_id }}">
                                                                 <input type="hidden" name="member-id" value="{{ household["member-id"] }}">
                                                                 <input type="hidden" name="event-id" value="{{ events[i][j]["event-id"] }}">
                                                                 <button class="btn btn-small btn-{{ buttoncolor }}" type="submit"
                                                                     {% if availablespots == 0 %} disabled>
-                                                                        {{ events[i][j]["name"] }} <br /> Full
+                                                                        {{ events[i][j]["name"]|slice(0, 10) }} <br /> Full
                                                                     {% else %}
                                                                         >
-                                                                        {{ events[i][j]["name"] }} <br /> ({{ actualparticipants }}/{{ maxparticipants }})
+                                                                        {{ events[i][j]["name"]|slice(0, 10) }} <br /> (
+                                                                        {{ actualparticipants }}/{{ maxparticipants }})
                                                                     {% endif %}
                                                                 </button>
                                                             </form>
