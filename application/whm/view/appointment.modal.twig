@@ -25,7 +25,7 @@
                                 Event Calendar from {{ "now"|date_modify(startdei)|date("F     d") }} to
                                 {{ "now"|date_modify(enddei)|date("F d") }}
                             </legend>
-                            <table class="table table-bordered">
+                            <table class="table table-hover">
                                 <thead>
                                     {% set weeklength = 7 %}
                                     <tr class="info">
@@ -48,11 +48,9 @@
                                         <tr>
                                             {% for j in 1..weeklength %}
                                                 <td>
-                                                    {% set maxparticipants = random(50) + 1 %}
-                                                    {% set actualparticipants = random(maxparticipants) %}
+                                                    {% set maxparticipants = events[i][j]["capacity"] %}
+                                                    {% set actualparticipants = random(maxparticipants) %}{# NEED TO GET ACTUAL VALUE #}
                                                     {# MAXIMUM TITLE LENGTH IS 10. ELSE IS TRIMMED #}
-                                                    {% set eventtitle = random(['Food Basket', 'Christmas',
-                                                        'Income Tax', 'School Supply']) %}
                                                     {# DECIDE BUTTON COLOR #}
                                                     {% set availablespots = maxparticipants - actualparticipants %}
                                                     {% set buttoncolor = 'success' %}
@@ -61,36 +59,24 @@
                                                     {% elseif availablespots <= maxparticipants / 2 %}
                                                         {% set buttoncolor = 'warning' %}
                                                     {% endif %}
-
-                                              <!--       <button class="btn btn-small btn-{{ buttoncolor }}" type="button"
-                                                        {% if availablespots == 0 %} disabled>
-                                                            {{ eventtitle }} <br /> Full
-                                                        {% else %}
-                                                            >
-                                                            {{ eventtitle }} ({{ actualparticipants }}/{{ maxparticipants }})
+                                                    {% set index = (7 * (k - 1) + j) %}
+                                                    {% set deidei = "+" ~ index ~ " days" %}
+                                                    {% set d = "now"|date_modify(deidei)|date("m/d/Y") %}        
+                                                        {% if d == events[i][j]["date"] %} {# SHOWS ONLY WEEK ONE, NOT WEEK 2, ARRAY PROBLEM i #}
+                                                            <form action="{{ apppath }}appointment/new" method="POST" >
+                                                                <input type="hidden" name="household-id" value="{{ household.household_id }}">
+                                                                <input type="hidden" name="member-id" value="{{ household["member-id"] }}">
+                                                                <input type="hidden" name="event-id" value="{{ events[i][j]["event-id"] }}">
+                                                                <button class="btn btn-small btn-{{ buttoncolor }}" type="submit"
+                                                                    {% if availablespots == 0 %} disabled>
+                                                                        {{ events[i][j]["name"] }} <br /> Full
+                                                                    {% else %}
+                                                                        >
+                                                                        {{ events[i][j]["name"] }} <br /> ({{ actualparticipants }}/{{ maxparticipants }})
+                                                                    {% endif %}
+                                                                </button>
+                                                            </form>
                                                         {% endif %}
-                                                        </button>
-                                             -->
-                                                    {% set deidei = "+" ~ (7 * (k - 1) + j) ~ " days" %}
-                                                    {% set d = "now"|date_modify(deidei)|date("m/d/Y") %}
-                                                   
-                                                    {% for e in events %}
-                                                        {% for f in e %}
-                                                            {% if d == f.date %}
-                                                                <form action="{{ apppath }}appointment/new" method="POST" >
-                                                                    <input type="hidden" name="household-id" value="{{ household.household_id }}">
-                                                                    <input type="hidden" name="member-id" value="{{ household["member-id"] }}">
-                                                                    <input type="hidden" name="event-id" value="{{ f["event-id"]}}">
-                                                                    <button class="btn btn-small " type="submit" }}>
-                                                                        {{ f.name }}
-                                                                        {{ f.capacity }}
-
-                                                                    </button>
-                                                                </form>
-                                                                <!-- {% set e={'date':'value'} %} -->
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                    {% endfor %}
                                                 </td>
                                             {% endfor %}
                                         </tr>
