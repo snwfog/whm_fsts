@@ -104,6 +104,26 @@ $(function() {
       });
     }
   });
+  $("input[name='mother-tongue']").typeahead({
+    source: function(query, process) {
+      return $.ajax({
+        url: $(this)[0].$element.data('link'),
+        type: 'get',
+        data: {
+          query: query
+        },
+        dataType: 'json',
+        success: function(json) {
+          var languages;
+          languages = [];
+          $.each(json, function(name, languageObj) {
+            return languages.push(languageObj['name'].trim().toUpperCase());
+          });
+          return process(languages);
+        }
+      });
+    }
+  });
   usermap = {};
   $("input.search-query").typeahead({
     source: function(query, process) {

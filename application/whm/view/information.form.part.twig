@@ -2,8 +2,6 @@
     <fieldset>
         <legend>Information</legend>
         <div class="controls controls-row">
-            <input class="span3" maxlength="{{ 3 * 3 + 2 }}" type="text"
-                   name="sin-number" placeholder="Social Insurance" value="{{ household["sin-number"] }}"/>
             <input class="span4" maxlength="{{ 3 * 4 + 2 }}" type="text"
                    name="mcare-number" placeholder="Medical Care" value="{{ household["medicare-number"] }}"/>
             <input class="span1" type="text" name="work_status"
@@ -15,24 +13,22 @@
 
         <div class="controls controls-row">
             <input class="span4" type="text" data-link="country"
-                   name="origin" placeholder="Origin" autocomplete="off" value="{{ household["origin"] }}"/>
+                   name="origin" placeholder="Country of Origin" autocomplete="off" value="{{ household["origin"] }}"/>
+            <input class="span4" type="text" data-link="language"
+                   name="mother-tongue" placeholder="Mother Tongue" autocomplete="off" value="{{ household["mother-tongue"] }}"/>
             <input class="span4" type="text" data-link="language"
                    name="language" placeholder="Language" autocomplete="off" value="{{ household["language"] }}"/>
-            <input class="span1" type="text" maxlength="1"
-                   name="gender" placeholder="Gender" value="{{ household["gender"] }}"/>
-            <input class="span3" maxlength="2" type="text"
-                   name="marital-status" placeholder="Marital Status" value="{{ household["marital"] }}"/>
             <input type="hidden" value="" name="date-of-birth">
         </div>
 
         <div class="controls controls-row">
-            <input class="span3" type="text"
+            <input class="span1" type="text" maxlength="1"
+                   name="gender" placeholder="Gender" value="{{ household["gender"] }}"/>
+            <input class="span3" maxlength="2" type="text"
+                   name="marital-status" placeholder="Marital Status" value="{{ household["marital"] }}"/>
+            <input class="span4" type="text"
                    name="referral" placeholder="Referral" value="{{ household.referral }}"/>
-            <input class="span3" type="text"
-                   name="contact" placeholder="Contact" value="{{ household.contact }}"/>
-            <input class="span3" type="text"
-                   name="first-visit-date" placeholder="MM-DD-YY" value="{{ household["first-visit-date"] }}"/>
-            <input class="span3" type="text"
+            <input class="span4" type="text"
                    name="income" placeholder="Annual Income" value="{{ household["income"] }}"/>
         </div>
     </fieldset>

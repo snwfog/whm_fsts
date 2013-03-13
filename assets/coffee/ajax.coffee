@@ -87,6 +87,21 @@ $ ->
       )
   )
 
+  $("input[name='mother-tongue']").typeahead(
+    source: (query, process) ->
+      return $.ajax(
+        url: $(this)[0].$element.data('link')
+        type: 'get'
+        data: {query : query}
+        dataType: 'json'
+        success: (json) ->
+          languages = []
+          $.each json, (name, languageObj) ->
+            languages.push languageObj['name'].trim().toUpperCase()
+          return process(languages)
+      )
+  )
+
   usermap = {}
   $("input.search-query").typeahead(
     source: (query, process) ->

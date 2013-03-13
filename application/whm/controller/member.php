@@ -29,6 +29,7 @@ class Member extends Controller implements IRedirectable
         $data = array(
                         "first-name" => $member->getFirstName(),
                         "last-name"  => $member->getLastName(),
+                        "mother-tongue"  => $member->getMotherTongue(),
                         "language"  => $member->getLanguage(),
                         "work-status"  => $member->getWorkStatus(),
                         "welfare-number"  => $member->getWelfareNumber(),
@@ -40,8 +41,6 @@ class Member extends Controller implements IRedirectable
                         "income" => $member->getIncome(),
                         "street"    => $address->getStreet(),
                         "apt-number"      => $address->getAptNumber(),
-                        "city"     => $address->getCity(),
-                        "province" => $address->getProvince(),
                         "postal-code"   => $address->getPostalCode(),
                         "district" => $address->getDistrict(),
                 );

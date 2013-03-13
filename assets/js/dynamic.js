@@ -120,7 +120,7 @@ $(function() {
     return n;
   };
   $("form :input").keyup(function() {
-    return $(this).val($(this).val().toUpperCase());
+    return $(this).val($(this).val().charAt(0).toUpperCase() + $(this).val().substring(1).toLowerCase());
   });
   $('form input[name="mcare-number"]').keyup(function() {
     var date, dob, gender, index, input, month, shard, year, _i, _len, _ref;

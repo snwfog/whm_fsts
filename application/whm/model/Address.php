@@ -30,22 +30,12 @@ class Address
     /**
      * @Column(nullable=TRUE)
      */
-    protected $city;
-
-    /**
-     * @Column(nullable=TRUE)
-     */
     protected $postal_code;
 
     /**
      * @Column(nullable=TRUE)
      */
     protected $district;
-
-    /**
-     * @Column(nullable=TRUE, length=2)
-     **/
-    protected $province;
 
     public function getId()
     {
@@ -60,16 +50,6 @@ class Address
     public function getAptNumber()
     {
         return $this->apt_number;
-    }
-
-    public function setCity($city)
-    {
-        $this->city = $city;
-    }
-
-    public function getCity()
-    {
-        return $this->city;
     }
 
     public function setHouseNumber($house_number)
@@ -100,16 +80,6 @@ class Address
     public function getDistrict()
     {
         return $this->district;
-    }
-
-    public function setProvince($province)
-    {
-        $this->province = $province;
-    }
-
-    public function getProvince()
-    {
-        return $this->province;
     }
 
     public function setStreet($street)

@@ -149,7 +149,7 @@ $ ->
 # Auto-capitalize all form input
 ##############################################################################
   $("form :input").keyup ->
-    $(this).val $(this).val().toUpperCase()
+    $(this).val $(this).val().charAt(0).toUpperCase() + $(this).val().substring(1).toLowerCase()
 
 ###############################################################################
 # Auto filling gender and date of birth from medical care number
