@@ -28,7 +28,6 @@ class ManageEvent
         $event->setName($data["event-name"]);
         $event->setDescription($data["description"]);
         $event->setStartTime($data["start-time"]); 
-        $event->setEndTime($data["end-time"]);
         $event->setStartDate($data["start-date"]); 
         $event->setCapacity($data["event-capacity"]);
         if(isset($data["is_template"])){
