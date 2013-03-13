@@ -52,9 +52,16 @@
                                                     {% if k == 2 %}
                                                         {% set j = j + 7 %}
                                                     {% endif %}
+                                                    {% set registered = 'unregistered' %}
+                                                    {% for h in events[i][j]["participants"] %}
+                                                    {# CONSULT TEAM #}
+                                                        {% if household.household_id == h.household_id and household["member-id"] == h["member-id"] %}
+                                                            {% set registered = 'registered' %}
+                                                        {% endif %}
+                                                    {% endfor %}
                                                     {% set maxparticipants = events[i][j]["capacity"] %}
                                                     {# NEED TO GET ACTUAL VALUE #}
-                                                    {% set actualparticipants = random(maxparticipants) %}
+                                                    {% set actualparticipants = events[i][j]["participants"] ? events[i][j]["participants"]|length : 0 %}
                                                     {# MAXIMUM TITLE LENGTH IS 10. ELSE IS TRIMMED #}
                                                     {# DECIDE BUTTON COLOR #}
                                                     {% set availablespots = maxparticipants - actualparticipants %}
@@ -74,6 +81,8 @@
                                                                 <button class="btn btn-small btn-{{ buttoncolor }}" type="submit"
                                                                     {% if availablespots == 0 %} disabled>
                                                                         {{ events[i][j]["name"]|slice(0, 10) }} <br /> Full
+                                                                    {% elseif registered == 'registered' %} disabled>
+                                                                        {{ events[i][j]["name"]|slice(0, 10) }} <br /><i class="icon-ok-sign icon-white"></i>Registered
                                                                     {% else %}
                                                                         >
                                                                         {{ events[i][j]["name"]|slice(0, 10) }} <br /><i class="icon-user icon-white"></i>{{ actualparticipants }}/{{ maxparticipants }}

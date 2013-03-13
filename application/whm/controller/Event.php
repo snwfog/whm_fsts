@@ -108,6 +108,10 @@ class Event extends Controller implements IRedirectable
                     $eventdate = $event->getStartDate()->format("m/d/Y");
                     if($d == $eventdate && !in_array($event->getId() , $tracker) && empty($data[$j][$i]))
                     {
+                        $event = $this->manageEvent->findEvent($event->getId());
+                        $participants = $event->getParticipants();
+                        $participants = $this->helper->formatMember($participants);
+
                         $tracker[] = $event->getId();
                         $data[$j][$i] = array
                         (
@@ -118,7 +122,8 @@ class Event extends Controller implements IRedirectable
                             "start-time" => $event->getStartTime(),
                             "end-time" => $event->getEndTime(),
                             "date" => $event->getStartDate()->format("m/d/Y"),
-                            "group-id" => $event->getGroupId()
+                            "group-id" => $event->getGroupId(),
+                            "participants" => $participants
                         );
                     }
                 }; 

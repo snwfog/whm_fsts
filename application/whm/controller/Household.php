@@ -64,7 +64,7 @@ class Household extends Controller implements IRedirectable
             
         //   $flagNumber = $this->flagNum($formattedFlags);
 
-            //Get Events to make appoitment
+            //Get Events to make appointment
             $eventcontroller = new \WHM\Controller\Event; 
             $eventdraft=$this->manageEvents->getUpComingEvents();
             $events=$eventcontroller->getIndexedEvents($eventdraft);
