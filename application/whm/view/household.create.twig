@@ -64,28 +64,26 @@
     </div>
 {% endblock content %}
 
-{# This part should be auto generated #}
 {% block left1 %}
     <div class="span3">
         <legend>Dependents</legend>
         <div class="well no-padding-well" id="dependents-well">
             <ul class="nav nav-list" id="dependent-list">
+                <li class="{% if household.members.principal.active %}active{% endif %}">
+                    <a href="{{ apppath }}household/{{ household.household_id}}/{{ household.members.principal["member-id"]}}">
+                         <i class="icon-home"></i> 
+                         {{household.members.principal["first-name"] }} {{ household.members.principal["last-name"]}}
+                     </a>
+                </li>
                 {% for member in household.members %}
-                    {% if(member.principal and member.active) %}
-                        <li class="active"><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                                <i class="icon-home"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
-
-                    {% elseif member.active %}
-                        <li class="active"><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                                <i class="icon-user"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
-
-                    {% elseif member.principal %}
-                        <li><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                                <i class="icon-home"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
-
-                    {% else%}
-                        <li><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                                <i class="icon-user"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
+                    {% if not member.principal %}
+                        {% if member.active %}
+                            <li class="active"><a href="{{ apppath }}household/{{ household.household_id}}/{{ member["member-id"]}}">
+                                    <i class="icon-user"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
+                        {% else%}
+                            <li><a href="{{ apppath }}household/{{ household.household_id}}/{{ member["member-id"]}}">
+                                    <i class="icon-user"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
             </ul>
