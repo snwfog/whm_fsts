@@ -1,12 +1,12 @@
 {% extends 'static/base.twig' %}
 
 {% block content %}
-    <div class="span6">
+    <div class="span4">
 		<legend class='controls controls-row'>
 		<h2> Yearly Reporting </h2>
 		</legend>
 		
-		{# <div class="well no-padding-well" id="dates-well"> Put wells to make it nice #}
+		<div class="well" id="yearly-well">
 		<form action ="{{ apppath }}{{ formAction }}" method="POST" name="stat-form"
 		id = "stat-form"> 
 		
@@ -23,14 +23,14 @@
 		<button id="excel-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export Excel</button>
 		<button id="pdf-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export PDF</button>
 		</form>
-		{# </div> #}
+		</div>
 		
 		<br /><br /><br /><br /><br /><br /><br /><br />
 		
 		<legend class='controls controls-row'>
 		<h2> Monthly Reporting </h2>
 		</legend>
-		
+		<div class="well" id="monthly-well">
 		<form action ="{{ apppath }}{{ formAction }}" method="POST" name="stat-form"
 		id = "stat-form"> 
 		
@@ -50,16 +50,16 @@
 		<button id="excel-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export Excel</button>
 		<button id="pdf-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export PDF</button>
 		</form>
-		
+		</div>
 	</div>
 {% endblock content %}
 
 {% block left1 %}
-	<div class="span6">
+	<div class="span4">
 		<legend class='controls controls-row'>
 		<h1> Ad-Hoc </h1>
 		</legend>
-		
+		<div class="well" id="adhoc-well">
 		<select class=''>
 			<option>Food Drive</option>
 			<option>Christmas Basket</option>
@@ -77,7 +77,24 @@
 		<button id="excel-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export Excel</button>
 		<button id="pdf-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export PDF</button>
 		</form>
-		
+		</div>
 		
 	</div>
 {% endblock left1 %}
+
+{% block left2 %}
+
+	<div class="span4">
+		<legend class='controls controls-row'>
+		<h2> Quick Statistics </h2>
+		</legend>
+		
+		<div class="well" id="adhoc-well">
+			<ul class="nav nav-list" id="date-list">
+				<li class="active"><a href=""> 5 Events this week</a>
+				<li class=""><a href=""> 30 Households with critical flags</a>
+				<li class=""><a href=""> Etc... </a>
+			</ul>
+		</div>
+	</div>
+{% endblock left2 %}
