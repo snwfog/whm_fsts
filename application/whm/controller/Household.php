@@ -131,29 +131,28 @@ class Household extends Controller implements IRedirectable
         $principal = $household->getHouseholdPrincipal();
         $address = $household->getAddress();
         $dependents = $household->getMembers();
-        
-        //Get list of Members
-        $members = array();
+         
+        // NEED REFACTORING
+        $count = 0;
+        $members = null;
         foreach ($dependents as $dependent){
-            if (($principal->getId() == $dependent->getId())) {
-                $members["principal"] = array(
+            $members[$count++] = array(
                                         "member-id"  => $dependent->getId(),
                                         "first-name" => $dependent->getFirstName(),
                                         "last-name"  => $dependent->getLastName(),
-                                        "active"     => $member->getId() == $dependent->getId()? TRUE : FALSE,
-                                        "principal"  => true,
+                                        "active"     => false,
+                                        "principal"  => false,
                                  );
-            }else{
-                array_push($members, array(
-                                            "member-id"  => $dependent->getId(),
-                                            "first-name" => $dependent->getFirstName(),
-                                            "last-name"  => $dependent->getLastName(),
-                                            "active"     => $member->getId() == $dependent->getId()? TRUE : FALSE,
-                                     ));
-            } 
+            if (($principal->getId() == $dependent->getId())){
+                $members[$count-1]["principal"] = true;
+            }
+            if (($member->getId() == $dependent->getId())){
+                $members[$count-1]["active"] = true;     
+            }
+
+            
         }
 
-        //Get detailed info of displayed member
         $date = $member->getFirstVisitDate();
         $date = $date->format("m-d-Y");
 

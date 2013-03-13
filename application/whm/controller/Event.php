@@ -92,7 +92,7 @@ class Event extends Controller implements IRedirectable
 
         for ($j = 1; $j <= 10; $j++)  // 10 rows for now...
         {
-            $date = date_create('now');
+            $date = date_create('now');$date->setTimezone(new DateTimeZone(LOCALTIME));
             for ($i = 1; $i <= 14; $i++)
             {   
                 date_modify($date, '+1 day');

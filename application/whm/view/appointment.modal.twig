@@ -22,8 +22,8 @@
                             {% set startdei = "+" ~ ((k - 1) * 7 + 1) ~ " days" %}
                             {% set enddei = "+" ~ k * 7 ~ " days" %}
                             <legend>
-                                Event Calendar from {{ "now"|date_modify(startdei)|date("F     d") }} to
-                                {{ "now"|date_modify(enddei)|date("F d") }}
+                                Event Calendar from {{ "now"|date_modify(startdei)|date("F     d","America/Montreal") }} to
+                                {{ "now"|date_modify(enddei)|date("F d","America/Montreal") }}
                             </legend>
                             <table class="table table-bordered">
                                 <thead>
@@ -32,8 +32,8 @@
                                         {% for i in 1..weeklength %}
                                             <th>
                                                 {% set deidei = "+" ~ (7 * (k - 1) + i) ~ " days" %}
-                                                {{ "now"|date_modify(deidei)|date("D")|upper }} - {# MON through SUN #}
-                                                {{ "now"|date_modify(deidei)|date("d") }} {# Date #}
+                                                {{ "now"|date_modify(deidei)|date("D","America/Montreal")|upper }} - {# MON through SUN #}
+                                                {{ "now"|date_modify(deidei)|date("d","America/Montreal") }} {# Date #}
                                             </th>
                                         {% endfor %}
                                     </tr>
@@ -65,7 +65,7 @@
                                                         {% set buttoncolor = 'warning' %}
                                                     {% endif %}
                                                     {% set deidei = "+" ~ index ~ " days" %}
-                                                    {% set d = "now"|date_modify(deidei)|date("m/d/Y") %}
+                                                    {% set d = "now"|date_modify(deidei)|date("m/d/Y","America/Montreal") %}
                                                         {% if d == events[i][j]["date"] %}
                                                             <form action="{{ apppath }}appointment/new" method="POST" >
                                                                 <input type="hidden" name="household-id" value="{{ household.household_id }}">
