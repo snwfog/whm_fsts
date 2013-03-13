@@ -49,12 +49,14 @@ class CreateEvent extends Controller implements IRedirectable
         $end_date->setTimezone(new DateTimeZone(LOCALTIME));
 
         $start_date->setDate("1111", "1", "1");//Default for Template
-
-        if(!isset($_POST["is_template"])){
+        
+        if( !isset($_POST["is_template"]) && !empty($_POST["start-date"]) && !empty($_POST["end-date"])){
             $form_start_date = explode("/", $_POST["start-date"]); // $_POST["start-date"] M/D/Y
             $form_end_date = explode("/", $_POST["end-date"]); // $_POST["start-date"] M/D/Y
             $start_date->setDate($form_start_date[2], $form_start_date[0], $form_start_date[1]); //ARG Y/M/D
             $end_date->setDate($form_end_date[2], $form_end_date[0], $form_end_date[1]); //ARG Y/M/D
+        }else{
+            $this->redirect('event');
         }
 
         //The initial event, every other occurrence of events is based on this event id

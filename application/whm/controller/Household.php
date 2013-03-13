@@ -10,6 +10,7 @@ use \WHM\Model\ManageFlag;
 use \WHM\Model\Flag;
 use \WHM\Model\HouseholdMember;
 use \WHM\Model\ManageEvent;
+use \WHM\Controller\ControllerHelper;
 
 class Household extends Controller implements IRedirectable
 {
@@ -18,6 +19,7 @@ class Household extends Controller implements IRedirectable
     private $manageFlag;
     private $manageEvents;
     private $flag;
+    private $helper;
 
 
     public function __construct(array $args = null)
@@ -25,6 +27,7 @@ class Household extends Controller implements IRedirectable
         $this->data = $args;
         parent::__construct();
         //Helper::backtrace();
+        $this->helper = new ControllerHelper();
         $this->manageHousehold = new ManageHousehold();
         $this->manageFlag = new ManageFlag();
         $this->manageEvents = new ManageEvent();
@@ -154,29 +157,8 @@ class Household extends Controller implements IRedirectable
         }
 
         //Get detailed info of displayed member
-        $date = $member->getFirstVisitDate();
-        $date = $date->format("m-d-Y");
-
+        $formatMember = $this->helper->formatMember(array( 0 => $member));
         $data = array(
-                        "household_id" => $household->getId(),
-                        //PrincipalMember or Selected Member
-                        "member-id" => $member->getId(),
-                        "first-name" => $member->getFirstName(),
-                        "last-name"  => $member->getLastName(),
-                        "phone-number"  => $member->getPhoneNumber(),
-                        "sin-number"  => $member->getSinNumber(),
-                        "medicare-number"  => $member->getMcareNumber(),
-                        "work-status"  => $member->getWorkStatus(),
-                        "welfare-number"  => $member->getWelfareNumber(),
-                        "referral"  => $member->getReferral(),
-                        "language"  => $member->getLanguage(),
-                        "marital"  => $member->getMaritalStatus(),
-                        "gender"  => $member->getGender(),
-                        "origin"   => $member->getOrigin(),
-                        "first-visit-date"  => $date,
-                        "contact"   => $member->getContact(),
-                        "income"   => $member->getIncome(),
-                        //Address
                         "house-number"    => $address->getHouseNumber(),
                         "street"    => $address->getStreet(),
                         "apt-number" => $address->getAptNumber(),
@@ -185,6 +167,7 @@ class Household extends Controller implements IRedirectable
                         "postal-code"   => $address->getPostalCode(),
                         "district"   => $address->getDistrict(),
                 );
+        $data = array_merge($formatMember[0], $data);
         $data["members"] = $members;
         return $data;
     }

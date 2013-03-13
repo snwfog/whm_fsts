@@ -7,16 +7,19 @@ use WHM\IRedirectable;
 use WHM\Model\ManageEvent;
 use DateTime;
 use DateTimeZone;
+use WHM\Controller\ControllerHelper;
 
 class Event extends Controller implements IRedirectable
 {
     protected $data = array("errors" => array(), "form" => array());
     private $manageEvent;
+    private $helper;
     public function __construct(array $args = null)
     {
         $this->data = $args;
         parent::__construct();
         //WHM\Helper::backtrace();
+        $this->helper = new ControllerHelper();
         $this->manageEvent= new ManageEvent();
     }
 
@@ -31,12 +34,15 @@ class Event extends Controller implements IRedirectable
 
             $event = $this->manageEvent->findEvent($event_id);
             $relatedEvents = $this->manageEvent->getRelatedEvents($event->getGroupId());
-
+            $participants = $event->getParticipants();
+            
+            $participants = $this->helper->formatMember($participants);
             $relatedEvents = $this->formatEvents($relatedEvents);
             $event = $this->formatEvents(array( 0 => $event));
             
             $this->data["event"] = $event[0];
             $this->data["relatedEvents"] = $relatedEvents;
+            $this->data["participants"] = $participants;
             $this->display("event.create.twig", $this->data);      
         }else
         {    //Get templates if new event

@@ -18,7 +18,7 @@
                 {% if event %}
                     {# DECIDE LABEL COLOR #}
                     {% set maxparticipants = event.capacity %}
-                    {% set actualparticipants = random(maxparticipants) %}{# INSERT ACTUAL VALUE HERE #}
+                    {% set actualparticipants = participants ? participants|length : 0 %}
                     {% set availablespots = maxparticipants - actualparticipants %}
                     {% set labelcolor = 'success' %}
                     {% if availablespots <= maxparticipants / 10 %}
@@ -91,7 +91,7 @@
         {% if event is not null %}
             <legend>Dates</legend>
             {# OH NO INSTYLE CSS#}
-            <div class="well no-padding-well" id="dates-well" style="max-height:200px; overflow: scroll;">
+            <div class="well no-padding-well" id="dates-well" style="{{ relatedEvents|length > 6 ? 'max-height:200px; overflow: scroll;' : ''}}">
                 <ul class="nav nav-list" id="date-list">
                 {% for relatedEvent in relatedEvents %}
                     {% if relatedEvent["event-id"] == event["event-id"] %}
@@ -109,36 +109,21 @@
             <div class="well no-padding-well" id="dates-well" style="max-height:200px; overflow: scroll;">
                 <table class="table table-striped">
                   <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Name</th>
-                    </tr>
+                      <th> HH_ID </th>
+                      <th> Name </th>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Something</td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Something</td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Something</td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Something</td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>Something</td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td>Something</td>
-                    </tr>
+                   {% for participant in participants %}
+                        <tr>
+                          <td>
+                              <a href="{{ apppath }}household/{{participant["household_id"]}}">
+                                  {{participant["household_id"]}}</td>
+                          <td><a href="{{ apppath }}household/{{participant["household_id"]}}/{{participant["member-id"]}}">
+                                  {{ participant["last-name"] }}, {{ participant["first-name"] }} 
+                              </a>
+                           </td>
+                        </tr>
+                    {% endfor %}
                   </tbody>
                 </table>
             </div>
