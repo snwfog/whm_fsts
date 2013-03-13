@@ -90,7 +90,8 @@
 
         {% if event is not null %}
             <legend>Dates</legend>
-            <div class="well no-padding-well" id="dates-well">
+            {# OH NO INSTYLE CSS#}
+            <div class="well no-padding-well" id="dates-well" style="max-height:200px; overflow: scroll;">
                 <ul class="nav nav-list" id="date-list">
                 {% for relatedEvent in relatedEvents %}
                     {% if relatedEvent["event-id"] == event["event-id"] %}
@@ -102,7 +103,45 @@
                             {{ relatedEvent.date }}</a></li>
                 {% endfor %}
                 </ul>
-            </div> 
+            </div>
+            <legend>Participants</legend>
+            {# OH NO INSTYLE CSS#}
+            <div class="well no-padding-well" id="dates-well" style="max-height:200px; overflow: scroll;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Name</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>Something</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>Something</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>Something</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>Something</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>Something</td>
+                    </tr>
+                    <tr>
+                      <td>6</td>
+                      <td>Something</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
         {% endif %}   
     </div>
     
