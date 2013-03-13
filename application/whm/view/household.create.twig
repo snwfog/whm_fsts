@@ -69,7 +69,7 @@
         <legend>Dependents</legend>
         <div class="well no-padding-well" id="dependents-well">
             <ul class="nav nav-list" id="dependent-list">
-                <li class="{% if household.members.principal.active %}active{% endif %}">
+                <li class="{{ household.members.principal.active ? "active" : '' }}">
                     <a href="{{ apppath }}household/{{ household.household_id}}/{{ household.members.principal["member-id"]}}">
                          <i class="icon-home"></i> 
                          {{household.members.principal["first-name"] }} {{ household.members.principal["last-name"]}}
@@ -77,13 +77,12 @@
                 </li>
                 {% for member in household.members %}
                     {% if not member.principal %}
-                        {% if member.active %}
-                            <li class="active"><a href="{{ apppath }}household/{{ household.household_id}}/{{ member["member-id"]}}">
-                                    <i class="icon-user"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
-                        {% else%}
-                            <li><a href="{{ apppath }}household/{{ household.household_id}}/{{ member["member-id"]}}">
-                                    <i class="icon-user"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
-                        {% endif %}
+                            <li class="{{ member.active ? "active" : '' }}">
+                                <a href="{{ apppath }}household/{{ household.household_id}}/{{ member["member-id"]}}">
+                                    <i class="icon-user"></i> 
+                                    {{member["first-name"] }} {{ member["last-name"]}}
+                                </a>
+                            </li>
                     {% endif %}
                 {% endfor %}
             </ul>
