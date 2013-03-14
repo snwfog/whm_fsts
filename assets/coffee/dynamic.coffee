@@ -178,7 +178,5 @@ $ ->
   setInterval time, 1000
   time()
 
-
-
   true
 

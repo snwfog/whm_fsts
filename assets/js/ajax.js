@@ -160,5 +160,31 @@ $(function() {
       return item;
     }
   });
+  $('input[name="postal-code"]').focus(function() {
+    var map;
+    map = {};
+    $.get('postalcode', function(data) {
+      return $.each(data, function(index, value) {
+        return $.each(value, function(postalcode, district) {
+          return map[postalcode] = district;
+        });
+      });
+    });
+    return $('input[name="postal-code"]').keyup(function() {
+      var match, reg, val;
+      val = $(this).val();
+      if (val.length >= 3) {
+        reg = /^\w\d\w/i;
+        if (reg.exec(val)) {
+          match = (reg.exec(val))[0].toUpperCase();
+        }
+        if (map[match] != null) {
+          console.log(match);
+          console.log(map[match]);
+          return $('input[name="district"]').val(map[match]);
+        }
+      }
+    });
+  });
   return true;
 });

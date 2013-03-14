@@ -32,8 +32,6 @@ $ ->
         $group.remove()
     })
 
-
-
 ################################################################################
 # Noty Confirmation Setup
 # Since this function is in the local scope of the script.coffee
@@ -128,4 +126,23 @@ $ ->
       return item
   )
 
+  ###################
+  # Auto Filling Form
+  ###################
+  $('input[name="postal-code"]').focus ->
+    map = {}
+    $.get 'postalcode', (data) ->
+      $.each data, (index, value) ->
+        $.each value, (postalcode, district) ->
+          map[postalcode] = district
+
+    $('input[name="postal-code"]').keyup ->
+      val = $(this).val()
+      if val.length >= 3
+        reg = /^\w\d\w/i
+        match = (reg.exec val)[0].toUpperCase() if reg.exec val
+        if map[match]?
+          console.log match
+          console.log map[match]
+          $('input[name="district"]').val map[match]
   true
