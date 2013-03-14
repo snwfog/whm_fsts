@@ -27,8 +27,9 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $e1->setGroupId(1);
         $e1->setIsTemplate(false);
         $e1->setName("Food Distribution");
-        $e1->setStartDate(date_create("2013-03-16 9:50 GMT"));
-        $e1->setStartDate(date_create("2013-03-16 14:50 GMT"));
+        $e1->setStartDate(date_create("2013-03-16"));
+        $e1->setStartTime("13:30");
+        $e1->setEndTime("14:30");
 
         $e2 = new Event();
         $e2->setCapacity(45);
@@ -40,8 +41,9 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $e2->setGroupId(2);
         $e2->setIsTemplate(false);
         $e2->setName("Mattress Distribution");
-        $e2->setStartDate(date_create("2013-03-13 9:50 GMT"));
-        $e2->setStartDate(date_create("2013-03-13 12:50 GMT"));
+        $e2->setStartDate(date_create("2013-03-13"));
+        $e2->setStartTime("9:50");
+        $e2->setEndTime("12:50");
 
         $e3 = new Event();
         $e3->setCapacity(100);
@@ -53,8 +55,10 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $e3->setGroupId(2);
         $e3->setIsTemplate(false);
         $e3->setName("Food Distribution");
-        $e3->setStartDate(date_create("2013-03-20 13:30 GMT"));
-        $e3->setStartDate(date_create("2013-03-20 15:30 GMT"));
+        $e3->setStartDate(date_create("2013-03-20"));
+        $e3->setStartTime("13:30");
+        $e3->setEndTime("15:30");
+        
 
         $e4 = new Event();
         $e4->setCapacity(90);
@@ -66,8 +70,9 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $e4->setGroupId(3);
         $e4->setIsTemplate(false);
         $e4->setName("Mattress Distribution");
-        $e4->setStartDate(date_create("2013-03-22 18:30 GMT"));
-        $e4->setStartDate(date_create("2013-03-22 19:30 GMT"));
+        $e4->setStartDate(date_create("2013-03-22"));
+        $e4->setStartTime("18:30");
+        $e4->setEndTime("19:30");
 
         $e5 = new Event();
         $e5->setCapacity(10);
@@ -79,10 +84,10 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $e5->setGroupId(4);
         $e5->setIsTemplate(false);
         $e5->setName("Food Distribution");
-        $e5->setStartDate(date_create("2013-04-24 17:50 GMT"));
-        $e5->setStartDate(date_create("2013-04-24 19:50 GMT"));
-        
-        
+        $e5->setStartDate(date_create("2013-03-24"));
+        $e5->setStartTime("17:50");
+        $e5->setEndTime("19:50");        
+                
         $manager->persist($e1);
         $manager->persist($e2);
         $manager->persist($e3);
