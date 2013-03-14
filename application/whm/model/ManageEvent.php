@@ -3,6 +3,7 @@ namespace WHM\Model;
 use WHM;
 use WHM\Application;
 use \WHM\Model\Event;
+use \WHM\Model\Timeslot;
 use \WHM\Model\ManageHousehold;
 use DateTime;
 use DateTimeZone;
@@ -28,7 +29,6 @@ class ManageEvent
         $event->setName($data["event-name"]);
         $event->setDescription($data["description"]);
         $event->setStartTime($data["start-time"]); 
-        $event->setEndTime($data["end-time"]);
         $event->setStartDate($data["start-date"]); 
         $event->setCapacity($data["event-capacity"]);
         if(isset($data["is_template"])){
@@ -47,6 +47,23 @@ class ManageEvent
         return $event;
 
     }
+
+
+    public function createTimeslots($event, $data)
+    {
+        $timeslot = new Timeslot();
+        $timeslot->setName($data["name"]);
+        $timeslot->setDuration($data["duration"]);
+        $timeslot->setCapacity($data["capacity"]);
+        $timeslot->setEvent($event);
+        $event->addTimeslot($timeslot);
+        $this->em->persist($event);
+        $this->em->persist($timeslot);
+        $this->em->flush();
+    }
+
+
+
 
     public function deleteEvent($id)
     {

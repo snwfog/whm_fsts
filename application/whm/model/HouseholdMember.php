@@ -100,10 +100,10 @@ class HouseholdMember
     /**
      * * <-> * -- Owning
      *
-     * @ManyToMany(targetEntity="Event", inversedBy="participants")
+     * @ManyToMany(targetEntity="Timeslot", inversedBy="participants")
      * @JoinTable
      * (
-     *      name="participants_events",
+     *      name="participants_timeslot",
      *      joinColumns=
      *      {
      *          @JoinColumn
@@ -116,14 +116,14 @@ class HouseholdMember
      *      {
      *          @JoinColumn
      *          (
-     *              name="event_id",
+     *              name="timeslot_id",
      *              referencedColumnName="id"
      *          )
      *      }
      * )
      *
      **/
-    protected $events = null;
+    protected $timeslots = null;
 
     /**
      * 1 <-> * -- Inversing by default
@@ -135,7 +135,7 @@ class HouseholdMember
 
 	public function _construct()
 	{
-		$this->events = new ArrayCollection();
+		$this->timeslots = new ArrayCollection();
         $this->flags = new ArrayCollection();
 	}
 
@@ -285,16 +285,16 @@ class HouseholdMember
         return $this->first_visit_date;
     }
 
-    public function attendEvent(Event $events)
+    public function attendTimeslot(Timeslot $timeslots)
     {
-        $this->events[] = $events;
-        $events->addParticipant($this);
+        $this->timeslots[] = $timeslots;
+        $timeslots->addParticipant($this);
     }
 
-    public function removeEvent(Event $event)
+    public function removeTimeslot(Timeslot $timeslot)
     {
-        $this->events->removeElement($event);
-        $event->removeParticipant($this);
+        $this->timeslots->removeElement($timeslot);
+        $timeslot->removeParticipant($this);
     }
 
     /**
@@ -302,16 +302,16 @@ class HouseholdMember
      * attribute synchronization.
      * You should never have to call this method explicitly,
      * 
-     * @param \WHM\Model\Event $events
+     * @param \WHM\Model\Timeslot $timeslots
      */
-    public function addEvent(Event $events)
+    public function addTimeslot(Timeslot $timeslots)
     {
-        $this->events[] = $events;
+        $this->timeslots[] = $timeslots;
     }    
 
-    public function getEvents()
+    public function getTimeslots()
     {
-        return $this->events;
+        return $this->timeslots;
     }
 
     /**

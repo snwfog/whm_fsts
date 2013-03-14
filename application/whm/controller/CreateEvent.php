@@ -45,41 +45,63 @@ class CreateEvent extends Controller implements IRedirectable
         //Format Date to be used as object type DateTime
         $start_date = new DateTime();
         $end_date = new DateTime();
+        $start_time = new DateTime();
+
         $start_date->setTimezone(new DateTimeZone(LOCALTIME));
         $end_date->setTimezone(new DateTimeZone(LOCALTIME));
+        $start_time->setTimezone(new DateTimeZone(LOCALTIME));
+
 
         $start_date->setDate("1111", "1", "1");//Default for Template
-        
-        if( !isset($_POST["is_template"]) && !empty($_POST["start-date"]) && !empty($_POST["end-date"])){
-            $form_start_date = explode("/", $_POST["start-date"]); // $_POST["start-date"] M/D/Y
-            $form_end_date = explode("/", $_POST["end-date"]); // $_POST["start-date"] M/D/Y
-            $start_date->setDate($form_start_date[2], $form_start_date[0], $form_start_date[1]); //ARG Y/M/D
-            $end_date->setDate($form_end_date[2], $form_end_date[0], $form_end_date[1]); //ARG Y/M/D
+
+        //For both template and event, start-time must exist
+        if( !empty($_POST["start-time"]) ){
+            $form_start_time = explode(":", $_POST["start-time"]);
+            $start_time->setTime($form_start_time[0], $form_start_time[1]);
         }else{
             $this->redirect('event');
         }
 
+        //If is not template then start-date and end-date must not be empty
+        if(!isset($_POST["is_template"])){
+            if( !empty($_POST["start-date"]) && !empty($_POST["end-date"]) && !empty($_POST["start-time"])  ){
+                $form_start_date = explode("/", $_POST["start-date"]); // $_POST["start-date"] M/D/Y
+                $form_end_date = explode("/", $_POST["end-date"]); // $_POST["start-date"] M/D/Y
+
+                $start_date->setDate($form_start_date[2], $form_start_date[0], $form_start_date[1]); //ARG Y/M/D
+                $end_date->setDate($form_end_date[2], $form_end_date[0], $form_end_date[1]); //ARG Y/M/D
+                
+            }else{
+                $this->redirect('event');
+            }
+        }
+
         //The initial event, every other occurrence of events is based on this event id
         $_POST["start-date"] = $start_date;
+        $_POST["start-time"] = $start_time;
         $event = $this->manageEvent->createEvent($_POST);
+        $this->createTimeslots($event, $_POST);
         $groupId = $event->getId();
 
         //If there is reoccurence, create event with same group id
-        if(isset($_POST["occurrence-type"]) && !isset($_POST["is_template"])){
-            $repeat = array(    "daily" => "1 day", 
-                                "weekly" => "1 week", 
-                                "biweekly" => "2 week", 
-                                "monthly" => "1 month", 
-                                "bimonthly" => "2 month",
-                                "yearly" => "1 year",
-            );
-            $incrementer = DateInterval::createFromDateString($repeat[$_POST["occurrence-type"]]);
-            while($start_date <= $end_date){
-                $start_date = $start_date->add($incrementer);
-                if($start_date <= $end_date){
-                    $_POST["start-date"] = $start_date;
-                    $_POST["group-id"] = $groupId;
-                    $event = $this->manageEvent->createEvent($_POST);
+        if(!isset($_POST["is_template"])){
+            if(isset($_POST["occurrence-type"])){
+                $repeat = array(    "daily" => "1 day", 
+                                    "weekly" => "1 week", 
+                                    "biweekly" => "2 week", 
+                                    "monthly" => "1 month", 
+                                    "bimonthly" => "2 month",
+                                    "yearly" => "1 year",
+                );
+                $incrementer = DateInterval::createFromDateString($repeat[$_POST["occurrence-type"]]);
+                while($start_date <= $end_date){
+                    $start_date = $start_date->add($incrementer);
+                    if($start_date <= $end_date){
+                        $_POST["start-date"] = $start_date;
+                        $_POST["group-id"] = $groupId;
+                        $event = $this->manageEvent->createEvent($_POST);
+                        $this->createTimeslots($event, $_POST);
+                    }
                 }
             }
             $this->redirect('event/'.$groupId);
@@ -92,6 +114,33 @@ class CreateEvent extends Controller implements IRedirectable
 
     public function put()
     {
+    }
+
+    public function createTimeslots($event, $timeslots){
+        $slot_name = $timeslots["slot-name"];
+        $slot_duration = $timeslots["slot-duration"];
+        $slot_capacity = $timeslots["slot-capacity"];
+
+        if( count($slot_name) > 0 && count($slot_duration) > 0 && count($slot_capacity) > 0){
+            if( count($slot_name) == count($slot_duration) && count($slot_duration) == count($slot_capacity)){
+                for ($i = 0; $i < count($slot_name); $i++){
+                    $data = array(
+                                    "name" => $slot_name[$i],
+                                    "duration" => $slot_duration[$i],
+                                    "capacity" => $slot_capacity[$i],
+                            );
+
+                    if(empty($slot_name[$i])){
+                        $eventslots = $event->getTimeslots();
+                        $num = count($eventslots) + 1;
+                        $data["name"] = "Timeslot #".$num;
+                    }
+
+
+                    $this->manageEvent->createTimeslots($event, $data);
+                }
+            }
+        }
     }
 
 

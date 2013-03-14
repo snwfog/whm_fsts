@@ -20,11 +20,8 @@ class Event
     /** @Column(type="text", nullable=TRUE) */
     protected $description;
 
-    /** @Column(type="string", nullable=TRUE) */   
+    /** @Column(type="time", nullable=TRUE) */   
     protected $start_time;
-
-    /** @Column(type="string", nullable=TRUE) */
-    protected $end_time;
 
     /** @Column(type="datetime") */
     protected $start_date;
@@ -40,15 +37,15 @@ class Event
     protected $capacity;
 
     /**
-     * * <-> * -- Inversing
-     * @ManyToMany(targetEntity="HouseholdMember", mappedBy="events")
-     * @JoinTable(name="participants_events")
+     * 1 <-> * -- Inversing by Default
+     * @OneToMany(targetEntity="Timeslot", mappedBy="Event", cascade={"all"})
      **/
-    protected $participants;
+    protected $timeslots;
+
 
     public function _construct()
     {
-        $this->participants = new ArrayCollection();
+        $this->timeslots = new ArrayCollection();
     }
 
     public function getId()
@@ -126,35 +123,6 @@ class Event
         return $this->is_template;
     }
 
-
-    public function registerParticipant(HouseholdMember $participant)
-    {
-        $this->participants[] = $participant;
-        $participant->addEvent($this);
-    }
-
-    /**
-     * Helper Method for Event class used to achieve bi-directional relationship
-     * attribute synchronization.
-     * You should never have to call this method explicitly,
-     *
-     * @param \WHM\Model\HouseholdMember $participant
-     */
-    public function addParticipant(HouseholdMember $participant)
-    {
-        $this->participants[] = $participant;
-    }
-
-    public function removeParticipant($participant)
-    {
-        $this->participants->removeElement($participant);
-    }
-
-    public function getParticipants()
-    {
-        return $this->participants;
-    }
-
     public function setCapacity($capacity)
     {
         $this->capacity = $capacity;
@@ -163,6 +131,23 @@ class Event
     public function getCapacity()
     {
         return $this->capacity;
+    }
+
+
+    public function addTimeslot(Timeslot $timeslot)
+    {
+        $this->timeslots[] = $timeslot;
+        $timeslot->setEvent($this);
+    }
+
+    public function removeTimeslot($timeslot)
+    {
+        $this->timeslots->removeElement($timeslot);
+    }
+
+    public function getTimeslots()
+    {
+        return $this->timeslots;
     }
 
 }
