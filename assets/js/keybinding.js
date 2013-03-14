@@ -19,7 +19,7 @@ $(function() {
     window.location.href = document.getElementById("eventJS").href;
   });
 
-     Mousetrap.bind("alt+1", function() {
+     Mousetrap.bind("alt+1", function() { //TOGGLE KB LEGEND
 
       var legend = document.getElementById('legendJS'); //Store the legend element object
       
@@ -32,7 +32,28 @@ $(function() {
         legend.style.display = "";//Hide it.
       }
   });
-
+  Mousetrap.bind("alt+7", function() { //STATISTIC REPORT
+    window.location.href = document.getElementById("eventJS").href;
+  });
+  Mousetrap.bind("alt+8", function() { //FUNCTIONAL REPORT
+    window.location.href = document.getElementById("eventJS").href;
+  });
+   Mousetrap.bind("alt+9", function() { //MANAGE FLAGS
+    window.location.href = document.getElementById("eventJS").href;
+  });
+  Mousetrap.bind("alt+0", function() { //SWITCH THEME
+     var $secondStyleSheet, href, pattern;
+    $secondStyleSheet = $('link[rel="stylesheet"]').first().next();
+    if ($secondStyleSheet.attr("href").match("darkstrap")) {
+      $secondStyleSheet.attr("href", "");
+      document.cookie = "theme=0";
+    } else {
+      href = $secondStyleSheet.prev().attr("href");
+      pattern = /\/[^\/]*\.css/i;
+      $secondStyleSheet.attr("href", href.replace(pattern, "/bootstrap.darkstrap.css"));
+      document.cookie = "theme=1";
+    }
+  });
   Mousetrap.bind('right', function() {
     return $('a#tab2-toggle').tab('show');
   });
