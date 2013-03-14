@@ -123,7 +123,7 @@ class MultiAddressHouseholdFixture extends AbstractFixture
         return $hh;
     }
 
-    private function _createAddress($houseNumber, $streetName, $postalCode, $city, $state)
+    private function _createAddress($houseNumber, $streetName, $postalCode, $district, $state)
     {
         // Create new address object
         $addr = new Address();
@@ -131,8 +131,7 @@ class MultiAddressHouseholdFixture extends AbstractFixture
         $addr->setStreet($streetName);
         $addr->setAptNumber(substr(sha1($houseNumber), 0, 2));
         $addr->setPostalCode(str_replace(" ", "", $postalCode));
-        $addr->setCity($city);
-        $addr->setProvince($state);
+        $addr->setDistrict($district);
 
         return $addr;
     }
