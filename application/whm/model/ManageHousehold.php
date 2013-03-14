@@ -126,7 +126,7 @@ class ManageHousehold {
         $household_member->setMaritalStatus($data["marital-status"]);
         $household_member->setGender($data["gender"]);
         $household_member->setOrigin($data["origin"]);
-     //   $household_member->setFirstVisitDate($datetime);
+        $household_member->setFirstVisitDate($datetime);
         $household_member->setIncome($data["income"]);
 
 
