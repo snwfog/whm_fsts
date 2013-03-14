@@ -30,11 +30,6 @@ class HouseholdMember
     protected $phone_number;
 
     /**
-     * @Column(nullable=TRUE, length=9)
-     */
-    protected $sin_number;
-
-    /**
      * @Column(nullable=TRUE)
      */
     protected $mcare_number;
@@ -53,6 +48,12 @@ class HouseholdMember
      * @Column(nullable=TRUE)
      */
     protected $referral;
+
+    /**
+     * @Column(nullable=TRUE)
+     */
+    protected $mother_tongue;
+
 
     /**
      * @Column(nullable=TRUE)
@@ -77,20 +78,14 @@ class HouseholdMember
     protected $origin;
 
     /**
-     * @Column(type="datetime")
-     */
-    protected $first_visit_date;
-
-    /**
-     * @Column(nullable=TRUE)
-     */
-    protected $contact;
-
-    /**
      * @Column(nullable=TRUE)
      */
     protected $income;
 
+    /**
+    * @Column(type="datetime")
+    */
+    protected $first_visit_date;
 
     /**
      * * -> 1 -- Owning by Default
@@ -179,16 +174,6 @@ class HouseholdMember
         return $this->phone_number;
     }
 
-    public function setSinNumber($sin_number)
-    {
-        $this->sin_number = $sin_number;
-    }
-
-    public function getSinNumber()
-    {
-        return $this->sin_number;
-    }
-
     public function setGender($gender)
     {
         $this->gender = $gender;
@@ -239,6 +224,16 @@ class HouseholdMember
         return $this->origin;
     }
 
+    public function setMotherTongue($mother_tongue)
+    {
+        $this->mother_tongue = $mother_tongue;
+    }
+
+    public function getMotherTongue()
+    {
+        return $this->mother_tongue;
+    }
+
     public function setLanguage($language)
     {
         $this->language = $language;
@@ -269,16 +264,6 @@ class HouseholdMember
         return $this->referral;
     }
 
-    public function setContact($contact)
-    {
-        $this->contact = $contact;
-    }
-
-    public function getContact()
-    {
-        return $this->contact;
-    }
-
     public function setIncome($income)
     {
         $this->income = $income;
@@ -288,6 +273,7 @@ class HouseholdMember
     {
         return $this->income;
     }
+
 
     public function setFirstVisitDate($first_visit_date)
     {

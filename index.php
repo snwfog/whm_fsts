@@ -32,10 +32,10 @@ $serves = array
 
 
     // Ajax controller
-    '.*/country' => 'WHM\Controller\Ajax\Country',
-    '.*/postalcode' => 'WHM\Controller\Ajax\PostalCode',
-    '.*/language' => 'WHM\Controller\Ajax\Language',
-    '.*/analytic' => 'WHM\Controller\Logger'
+    '.*/country'        => 'WHM\Controller\Ajax\Country',
+    '.*/postalcode'     => 'WHM\Controller\Ajax\PostalCode',
+    '.*/language'       => 'WHM\Controller\Ajax\Language',
+    '.*/analytic'       => 'WHM\Controller\Logger'
 );
 
 /*-----------------------------------------------

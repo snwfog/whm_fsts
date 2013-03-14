@@ -117,17 +117,16 @@ class ManageHousehold {
         $household_member->setFirstName($data["first-name"]);
         $household_member->setLastName($data["last-name"]);
         $household_member->setPhoneNumber($data["phone-number"]);
-        $household_member->setSinNumber($data["sin-number"]);
         $household_member->setMcareNumber($data["mcare-number"]);
         $household_member->setWorkStatus($data["work_status"]);
         $household_member->setWelfareNumber($data["welfare-number"]);
         $household_member->setReferral($data["referral"]);
+        $household_member->setMotherTongue($data["mother-tongue"]);
         $household_member->setLanguage($data["language"]);
         $household_member->setMaritalStatus($data["marital-status"]);
         $household_member->setGender($data["gender"]);
         $household_member->setOrigin($data["origin"]);
         $household_member->setFirstVisitDate($datetime);
-        $household_member->setContact($data["contact"]);
         $household_member->setIncome($data["income"]);
 
 
@@ -142,10 +141,8 @@ class ManageHousehold {
         $address->setHouseNumber($data["house-number"]);
         $address->setStreet($data["street"]);
         $address->setAptNumber($data["apt-number"]);
-        $address->setCity($data["city"]);
         $address->setPostalCode($data["postal-code"]);
         $address->setDistrict($data["district"]);
-        $address->setProvince($data["province"]);
         $this->em->persist($address);
         $this->em->flush();
 
@@ -159,16 +156,15 @@ class ManageHousehold {
         $memberInstance->setFirstName($data["first-name"]);
         $memberInstance->setLastName($data["last-name"]);
         $memberInstance->setPhoneNumber($data["phone-number"]);
-        $memberInstance->setSinNumber($data["sin-number"]);
         $memberInstance->setMcareNumber($data["mcare-number"]);
         $memberInstance->setWorkStatus($data["work_status"]);
         $memberInstance->setWelfareNumber($data["welfare-number"]);
         $memberInstance->setReferral($data["referral"]);
+        $memberInstance->setMotherTongue($data["mother-tongue"]);
         $memberInstance->setLanguage($data["language"]);
         $memberInstance->setMaritalStatus($data["marital-status"]);
         $memberInstance->setGender("M"); //CHANGE WHEN EXTRACT FROM MEDICARE
         $memberInstance->setOrigin($data["origin"]);
-        $memberInstance->setContact($data["contact"]);
         $memberInstance->setIncome($data["income"]);
 
         $this->em->persist($memberInstance);
@@ -180,10 +176,8 @@ class ManageHousehold {
         $addressInstance->setHouseNumber($data["house-number"]);
         $addressInstance->setStreet($data["street"]);
         $addressInstance->setAptNumber($data["apt-number"]);
-        $addressInstance->setCity($data["city"]);
         $addressInstance->setPostalCode($data["postal-code"]);
         $addressInstance->setDistrict($data["district"]);
-        $addressInstance->setProvince($data["province"]);
         $this->em->persist($addressInstance);
         $this->em->flush();
     }

@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+# Series of commands for the orm tool
+./vendor/bin/doctrine orm:schema-tool:drop --force
+./vendor/bin/doctrine orm:schema-tool:create
+php loadfixtures.php

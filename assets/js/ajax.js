@@ -104,6 +104,26 @@ $(function() {
       });
     }
   });
+  $("input[name='mother-tongue']").typeahead({
+    source: function(query, process) {
+      return $.ajax({
+        url: $(this)[0].$element.data('link'),
+        type: 'get',
+        data: {
+          query: query
+        },
+        dataType: 'json',
+        success: function(json) {
+          var languages;
+          languages = [];
+          $.each(json, function(name, languageObj) {
+            return languages.push(languageObj['name'].trim().toUpperCase());
+          });
+          return process(languages);
+        }
+      });
+    }
+  });
   usermap = {};
   $("input.search-query").typeahead({
     source: function(query, process) {
@@ -139,6 +159,32 @@ $(function() {
       $.get(url);
       return item;
     }
+  });
+  $('input[name="postal-code"]').focus(function() {
+    var map;
+    map = {};
+    $.get('postalcode', function(data) {
+      return $.each(data, function(index, value) {
+        return $.each(value, function(postalcode, district) {
+          return map[postalcode] = district;
+        });
+      });
+    });
+    return $('input[name="postal-code"]').keyup(function() {
+      var match, reg, val;
+      val = $(this).val();
+      if (val.length >= 3) {
+        reg = /^\w\d\w/i;
+        if (reg.exec(val)) {
+          match = (reg.exec(val))[0].toUpperCase();
+        }
+        if (map[match] != null) {
+          console.log(match);
+          console.log(map[match]);
+          return $('input[name="district"]').val(map[match]);
+        }
+      }
+    });
   });
   return true;
 });

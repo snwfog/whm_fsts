@@ -32,8 +32,6 @@ $ ->
         $group.remove()
     })
 
-
-
 ################################################################################
 # Noty Confirmation Setup
 # Since this function is in the local scope of the script.coffee
@@ -87,6 +85,21 @@ $ ->
       )
   )
 
+  $("input[name='mother-tongue']").typeahead(
+    source: (query, process) ->
+      return $.ajax(
+        url: $(this)[0].$element.data('link')
+        type: 'get'
+        data: {query : query}
+        dataType: 'json'
+        success: (json) ->
+          languages = []
+          $.each json, (name, languageObj) ->
+            languages.push languageObj['name'].trim().toUpperCase()
+          return process(languages)
+      )
+  )
+
   usermap = {}
   $("input.search-query").typeahead(
     source: (query, process) ->
@@ -113,4 +126,23 @@ $ ->
       return item
   )
 
+  ###################
+  # Auto Filling Form
+  ###################
+  $('input[name="postal-code"]').focus ->
+    map = {}
+    $.get 'postalcode', (data) ->
+      $.each data, (index, value) ->
+        $.each value, (postalcode, district) ->
+          map[postalcode] = district
+
+    $('input[name="postal-code"]').keyup ->
+      val = $(this).val()
+      if val.length >= 3
+        reg = /^\w\d\w/i
+        match = (reg.exec val)[0].toUpperCase() if reg.exec val
+        if map[match]?
+          console.log match
+          console.log map[match]
+          $('input[name="district"]').val map[match]
   true

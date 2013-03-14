@@ -33,7 +33,7 @@
                         </li>
 
                         <li>
-                            <a href="{{ apppath }}event" data-target="#create-event"><i class="icon-calendar"></i> Event</a>
+                            <a href="{{ apppath }}event" id="eventJS" data-target="#create-event"><i class="icon-calendar"></i> Event</a>
                            
                         </li>
 
@@ -41,8 +41,8 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list-alt"></i> Report <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li class="nav-header">Report</li>
-                                <li><a href="{{ apppath }}report">Statistics</a></li>
-                                <li><a href="{{ apppath }}report/functions">Functional Reports</a></li>
+                                <li><a href="{{ apppath }}report" id="statJS">Statistics</a></li>
+                                <li><a href="{{ apppath }}report/functions" id="funcJS">Functional Reports</a></li>
                             </ul>
                         </li>
 
@@ -58,14 +58,33 @@
 
                     <ul class="nav pull-right">
                         <li class="divider-vertical"></li>
-                        {# TIME CLOCK #}
-                        <li><a href="#" id="navbar-time"></a></li>
+                        {# TIME CLOCK 
+                        <li><a href="#" id="navbar-time"></a></li> #}
+						{# adding a "keyboard shortcut legend (help) toggle #}
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<i class="icon-list-alt"></i> 
+							Legend
+							<b class="caret"></b></a>
+							<ul class="dropdown-menu" id="legendJS">
+								<li class="nav-header">Keyboard Shortcuts</li>
+								<li><a> ALT-1 : Toggle Legend </a> </li>
+								<li><a> ALT-2 : Create Household </a></li>
+                                <li><a> ALT-3 : Add New Member </a></li>
+                                <li><a> ALT-4 : Events </a></li>
+                                <li><a> ALT-5 : Make Appointment </a></li>
+                                <li><a> ALT-6 : Search </a></li>
+								<li><a> ALT-7 : Statistics Reports </a></li>
+							    <li><a> ALT-8 : Functional Reports </a></li>
+                                <li><a> ALT-9 : Manage Flag </a></li>
+                                <li><a> ALT-0 : Switch Theme </a></li>
+                            </ul>
+						</li>  
                         <li class="divider-vertical"></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-wrench"></i> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a name="switch-theme" href="#"><i class="icon-adjust"></i> Switch Theme</a></li>
-                                <li><a href="#"><i class="icon-list-alt"></i> Generate Report</a></li>
                                 <li><a href="#"><i class="icon-user"></i> Manage Operator</a></li>
                                 <li><a href="#" data-toggle="modal" data-target="#manage-flag-modal">
                                         <i class="icon-flag"></i> Manage Flag</a></li>

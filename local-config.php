@@ -13,6 +13,7 @@ return $config = array
         'user'      => 'root',
         'password'  => '',
         'dbname'    => 'fsts',
+   
         
     ),
 

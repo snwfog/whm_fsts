@@ -162,8 +162,6 @@ class Household extends Controller implements IRedirectable
                         "house-number"    => $address->getHouseNumber(),
                         "street"    => $address->getStreet(),
                         "apt-number" => $address->getAptNumber(),
-                        "city"     => $address->getCity(),
-                        "province" => $address->getProvince(),
                         "postal-code"   => $address->getPostalCode(),
                         "district"   => $address->getDistrict(),
                 );
