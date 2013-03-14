@@ -2,16 +2,37 @@
 
 $(function() {
   var modal;
-  modal = "#create-household-modal,    #search-modal,    #add-member-modal,    #add-flag-modal";
-  Mousetrap.bind("s", function() {
+  modal = "#create-household-modal, #search-modal, #add-member-modal, #add-flag-modal, #appointment-modal";
+  Mousetrap.bind("alt+6", function() {
     return $('#search-modal').modal();
   });
-  Mousetrap.bind("a", function() {
+  Mousetrap.bind("alt+2", function() {
     return $('#create-household-modal').modal();
   });
-  Mousetrap.bind("m", function() {
+   Mousetrap.bind("alt+5", function() {
+    return $('#appointment-modal').modal();
+  });
+  Mousetrap.bind("alt+3", function() {
     return $('#add-member-modal').modal();
   });
+   Mousetrap.bind("alt+4", function() {
+    window.location.href = document.getElementById("eventJS").href;
+  });
+
+     Mousetrap.bind("alt+1", function() {
+
+      var legend = document.getElementById('legendJS'); //Store the legend element object
+      
+      if(legend.style.display == "") //Check that the display style is empty (none) and invisible.
+      {
+        legend.style.display = 'block';//Make it visible
+      }
+      else if(legend.style.display == "block")//Case that the display style is block and visible.
+      {
+        legend.style.display = "";//Hide it.
+      }
+  });
+
   Mousetrap.bind('right', function() {
     return $('a#tab2-toggle').tab('show');
   });
