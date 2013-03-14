@@ -58,14 +58,28 @@
 
                     <ul class="nav pull-right">
                         <li class="divider-vertical"></li>
-                        {# TIME CLOCK #}
-                        <li><a href="#" id="navbar-time"></a></li>
+                        {# TIME CLOCK 
+                        <li><a href="#" id="navbar-time"></a></li> #}
+						{# adding a "keyboard shortcut legend (help) toggle #}
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<i class="icon-list-alt"></i> 
+							Legend
+							<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li class="nav-header">Keyboard Shortcuts</li>
+								<li><a> ALT-1 : Toggle Legend </a> </li>
+								<li><a> ALT-2 : Search </a></li>
+								<li><a> ALT-3 : Create Household </a></li>
+								<li><a> ALT-4 : Events </a></li>
+								<li><a> ALT-5 : Reports </a></li>
+							</ul>
+						</li>  
                         <li class="divider-vertical"></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-wrench"></i> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a name="switch-theme" href="#"><i class="icon-adjust"></i> Switch Theme</a></li>
-                                <li><a href="#"><i class="icon-list-alt"></i> Generate Report</a></li>
                                 <li><a href="#"><i class="icon-user"></i> Manage Operator</a></li>
                                 <li><a href="#" data-toggle="modal" data-target="#manage-flag-modal">
                                         <i class="icon-flag"></i> Manage Flag</a></li>
