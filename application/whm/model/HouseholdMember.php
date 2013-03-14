@@ -82,6 +82,10 @@ class HouseholdMember
      */
     protected $income;
 
+    /**
+    * @Column(type="datetime")
+    */
+    protected $first_visit_date;
 
     /**
      * * -> 1 -- Owning by Default
@@ -268,6 +272,17 @@ class HouseholdMember
     public function getIncome()
     {
         return $this->income;
+    }
+
+
+    public function setFirstVisitDate($first_visit_date)
+    {
+        $this->first_visit_date = $first_visit_date;
+    }
+
+    public function getFirstVisitDate()
+    {
+        return $this->first_visit_date;
     }
 
     public function attendEvent(Event $events)
