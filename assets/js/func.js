@@ -47,7 +47,7 @@ $(function() {
                                     <input class="span" type="text" name="slot-name[]" placeholder="Name"/>\
                                 </td>\
                                 <td>\
-                                    <input class="span5" type="text" name="slot-duration[]" placeholder="Minutes"/>\
+                                    <input class="span5" type="number" name="slot-duration[]" placeholder="Minutes"/>\
                                 </td>\
                                 <td>\
                                     <input class="span" type="text" name="slot-capacity[]" placeholder="Capacity"/>\
