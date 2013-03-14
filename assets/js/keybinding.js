@@ -2,7 +2,7 @@
 
 $(function() {
   var modal;
-  modal = "#create-household-modal, #search-modal, #add-member-modal, #add-flag-modal, #appointment-modal";
+  modal = "#create-household-modal, #search-modal, #add-member-modal, #add-flag-modal, #appointment-modal, #manage-flag-modal";
   Mousetrap.bind("alt+6", function() {
     return $('#search-modal').modal();
   });
@@ -33,13 +33,13 @@ $(function() {
       }
   });
   Mousetrap.bind("alt+7", function() { //STATISTIC REPORT
-    window.location.href = document.getElementById("eventJS").href;
+    window.location.href = document.getElementById("statJS").href;
   });
   Mousetrap.bind("alt+8", function() { //FUNCTIONAL REPORT
-    window.location.href = document.getElementById("eventJS").href;
+    window.location.href = document.getElementById("funcJS").href;
   });
    Mousetrap.bind("alt+9", function() { //MANAGE FLAGS
-    window.location.href = document.getElementById("eventJS").href;
+    return $('#manage-flag-modal').modal();
   });
   Mousetrap.bind("alt+0", function() { //SWITCH THEME
      var $secondStyleSheet, href, pattern;
