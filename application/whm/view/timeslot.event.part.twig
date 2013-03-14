@@ -1,0 +1,35 @@
+{% block timeslot %}
+    <fieldset>
+        <legend>Time Slots</legend>
+            <div id="timeslot-well" style="max-height:500px; overflow-y: auto;">
+                <div class="pull-right">
+                  <button id="add-timeslot-table" type="button" class="btn btn-small btn-info"><i class="icon-file icon-white"></i> Add Timeslot</button>
+                </div>
+                <form action="{{ apppath }}event/new" method="POST" name="view-timeslot-form" id="timeslot-form">
+                    <table id="timeslot-table" class="table table-striped">
+                          <thead>
+                              <th> Time Slot </th>
+                              <th> Duration </th>
+                              <th> Capacity </th>
+                              <th> Participant </th>
+                          </thead>
+                          <tbody id="timeslot-table-tbody">
+                            <tr>
+                                <td>
+                                    <input class="span" type="text" name="slot-name[]" placeholder="Name"/>
+                                </td>
+                                <td>
+                                    <input class="span5" type="number" name="slot-duration[]" placeholder="Minutes"/>
+                                </td>
+                                <td>
+                                    <input class="span" type="text" name="slot-capacity[]" placeholder="Capacity"/>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>                 
+                          </tbody>
+                     </table>
+                </form>
+            </div>
+    </fieldset>
+{% endblock timeslot %}

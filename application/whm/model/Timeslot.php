@@ -23,16 +23,16 @@ class Timeslot
      */
     protected $event;
 
-    /** @Column(type="time", nullable=TRUE) */   
-    protected $relative_start_time;
+    /** @Column(type="string", nullable=TRUE) */
+    protected $name;
 
-    /** @Column(type="time", nullable=TRUE) */
+    /** @Column(type="integer", nullable=TRUE) */
     protected $duration;
 
      /**
      * * <-> * -- Inversing
      * @ManyToMany(targetEntity="HouseholdMember", mappedBy="Timeslot")
-     * @JoinTable(name="participants_eventslot")
+     * @JoinTable(name="participants_timeslot")
      **/
     protected $participants;
 
@@ -68,6 +68,47 @@ class Timeslot
         return $this->participants;
     }
 
+
+    public function getDuration()
+    {
+        return $this->duration;
+    }
+
+    public function setDuration($duration)
+    {
+        $this->duration = $duration;
+    }
+
+    public function getCapacity()
+    {
+        return $this->capacity;
+    }
+
+    public function setCapacity($capcity)
+    {
+        $this->capacity = $capcity;
+    }
+
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    public function setEvent($event)
+    {
+        $this->event = $event;
+    }
+
+
+    public function getName()
+    {
+        return $this->Name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
 
 }
 

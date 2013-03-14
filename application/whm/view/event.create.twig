@@ -2,66 +2,87 @@
 
 {% block content %}
     <div class="span6">
-        {% for error in errors %}
-            {% block error %}
-                <div id="error">{{ error }}</div></br>
-            {% endblock %}
-        {% endfor %}
+        <div class="tabbable tabs-top">
 
-        <form action="{{ apppath }}{{ formAction }}" method="POST" name="event-form" 
-        id="{%if event is not null %}view-event-form{% endif %}">
+            {% for error in errors %}
+                {% block error %}
+                    <div id="error">{{ error }}</div></br>
+                {% endblock %}
+            {% endfor %}
 
-            <legend class ='controls controls-row'>
-                <div class='pull-left'>
-                    ID: {{ event["event-id"] }}
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a id='tab1-toggle' href="#tab1" data-toggle="tab">
+                        <i class="icon-calendar"></i> General Event
+                    </a>
+                </li>
+                <li>
+                    <a id='tab2-toggle' href="#tab2" data-toggle="tab">
+                        <i class="icon-time"></i> TimeSlot
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                 <div class="tab-pane active" id="tab1">
+
+                    <form name="multiform" action="{{ apppath }}{{ formAction }}" method="POST">
+                    </form>
+                    <form action="{{ apppath }}{{ formAction }}" method="POST" name="event-form" 
+                    id="{%if event is not null %}view-event-form{% endif %}">
+
+                        <legend class ='controls controls-row'>
+                            <div class='pull-left'>
+                                ID: {{ event["event-id"] }}
+                            </div>
+                            {% if event %}
+                                {# DECIDE LABEL COLOR #}
+                                {% set maxparticipants = event.capacity %}
+                                {% set actualparticipants = participants ? participants|length : 0 %}
+                                {% set availablespots = maxparticipants - actualparticipants %}
+                                {% set labelcolor = 'success' %}
+                                {% if availablespots <= maxparticipants / 10 %}
+                                    {% set labelcolor = 'important' %}
+                                {% elseif availablespots <= maxparticipants / 2 %}
+                                    {% set labelcolor = 'warning' %}
+                                {% endif %}
+                                <div class='pull-right'>
+                                    <span class="label label-{{ labelcolor }}">
+                                    <i class="icon-user icon-white"></i> {{ actualparticipants }}/{{maxparticipants }}
+                                    </span>
+                                </div>
+                            {% endif %}
+                        </legend>
+
+                        {% include 'base.createEvent.part.twig' %}
+
+                        {% include 'date.createEvent.part.twig' %}
+
+                        {% include 'info.createEvent.part.twig' %}
+
+                    
+                        <legend>Action</legend>
+                        <div class="btn-toolbar">
+                            {% if event %}
+                                <button class="btn btn-warning btn-large" data-toggle="button" class-toggle="btn-state" name="event-create-modify" type="button">
+                                <i class="icon-edit icon-white"></i> Modify</button>
+                                {#<button id="add-event-date" type="button" class="btn btn-large btn-info"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Add Date</button>
+                                #}
+                            {% else %}
+                                <button id="create-event-save" type="button" class="btn btn-large btn-success"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Create Event</button>
+                                <button id="create-template-save" type="button" class="btn btn-large btn-info"><i class="icon-file icon-white submit"></i> Save Template </button>
+                            {% endif %}                              
+                        </div>                  
+                        <input type="hidden" name="event-id" value="{{ event["event-id"] }}"/>
+                        <input type="hidden" name="template-id" value="{{ template["template-id"] }}"/>
+                    </form>
+
+                    {% include 'template.list.twig' %}
                 </div>
-                {% if event %}
-                    {# DECIDE LABEL COLOR #}
-                    {% set maxparticipants = event.capacity %}
-                    {% set actualparticipants = participants ? participants|length : 0 %}
-                    {% set availablespots = maxparticipants - actualparticipants %}
-                    {% set labelcolor = 'success' %}
-                    {% if availablespots <= maxparticipants / 10 %}
-                        {% set labelcolor = 'important' %}
-                    {% elseif availablespots <= maxparticipants / 2 %}
-                        {% set labelcolor = 'warning' %}
-                    {% endif %}
-                    <div class='pull-right'>
-                        <span class="label label-{{ labelcolor }}">
-                        <i class="icon-user icon-white"></i> {{ actualparticipants }}/{{maxparticipants }}
-                        </span>
-                    </div>
-                {% endif %}
-            </legend>
-
-            {% include 'base.createEvent.part.twig' %}
-
-            {% include 'date.createEvent.part.twig' %}
-
-            {% include 'info.createEvent.part.twig' %}
-
-        
-            <legend>Action</legend>
-            <div class="btn-toolbar">
-                {% if event %}
-                    <button class="btn btn-warning btn-large" data-toggle="button" class-toggle="btn-state" name="event-create-modify" type="button">
-                    <i class="icon-edit icon-white"></i> Modify</button>
-                    {#<button id="add-event-date" type="button" class="btn btn-large btn-info"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Add Date</button>
-                    #}
-                {% else %}
-                    <button id="create-event-save" type="button" class="btn btn-large btn-success"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Create Event</button>
-                    <button id="create-template-save" type="button" class="btn btn-large btn-info"><i class="icon-file icon-white submit"></i> Save Template </button>
-                {% endif %}
-                   
-
+                <div class="tab-pane" id="tab2">
+                    {% include 'timeslot.event.part.twig' %}
+                </div>
             </div>
-        
-            <input type="hidden" name="event-id" value="{{ event["event-id"] }}"/>
-            <input type="hidden" name="template-id" value="{{ template["template-id"] }}"/>
-
-        </form>
-
-        {% include 'template.list.twig' %}
+        </div>
     </div>
 {% endblock content %}
 

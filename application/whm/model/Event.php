@@ -137,6 +137,7 @@ class Event
     public function addTimeslot(Timeslot $timeslot)
     {
         $this->timeslots[] = $timeslot;
+        $timeslot->setEvent($this);
     }
 
     public function removeTimeslot($timeslot)

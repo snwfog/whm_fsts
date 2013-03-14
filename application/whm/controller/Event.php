@@ -82,8 +82,7 @@ class Event extends Controller implements IRedirectable
                     "name" => $event->getName(),
                     "capacity" => $event->getCapacity(),
                     "description" => $event->getDescription(),
-                    "start-time" => $event->getStartTime(),
-                    "end-time" => $event->getEndTime(),
+                    "start-time" => $event->getStartTime()->format("H:i"),
                     "date" => $event->getStartDate()->format("m/d/Y"),
                     "group-id" => $event->getGroupId(),
                 );
@@ -119,7 +118,7 @@ class Event extends Controller implements IRedirectable
                             "name" => $event->getName(),
                             "capacity" => $event->getCapacity(),
                             "description" => $event->getDescription(),
-                            "start-time" => $event->getStartTime(),
+                            "start-time" => $event->getStartTime()->format("H:i"),
                             "end-time" => $event->getEndTime(),
                             "date" => $event->getStartDate()->format("m/d/Y"),
                             "group-id" => $event->getGroupId(),
