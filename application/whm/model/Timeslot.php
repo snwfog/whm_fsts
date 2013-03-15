@@ -14,12 +14,8 @@ class Timeslot
      */
     protected $id;
      /**
-     * * -> 1 -- Owning by Default
-     *
-     * @ManyToOne(targetEntity="Event")
+     * @ManyToOne(targetEntity="Event", inversedBy="timeslots")
      * @JoinColumn(name="event_id", referencedColumnName="id")
-     *
-     * @var $event;
      */
     protected $event;
 
@@ -31,7 +27,7 @@ class Timeslot
 
      /**
      * * <-> * -- Inversing
-     * @ManyToMany(targetEntity="HouseholdMember", mappedBy="Timeslot")
+     * @ManyToMany(targetEntity="HouseholdMember", mappedBy="timeslots")
      * @JoinTable(name="participants_timeslot")
      **/
     protected $participants;
@@ -102,7 +98,7 @@ class Timeslot
 
     public function getName()
     {
-        return $this->Name;
+        return $this->name;
     }
 
     public function setName($name)
