@@ -13,8 +13,8 @@ return $config = array
         'user'      => 'root',
         'password'  => '',
         'dbname'    => 'fsts',
-   
-        
+
+            
     ),
 
     // Twig configuration

@@ -74,6 +74,35 @@
                                                     {% set deidei = "+" ~ index ~ " days" %}
                                                     {% set d = "now"|date_modify(deidei)|date("m/d/Y","America/Montreal") %}
                                                         {% if d == events[i][j]["date"] %}
+
+<!-- 
+                                                            <form name="event-{{events[i][j]["event-id"]}}" action="{{ apppath }}appointment/new" method="POST" id="{{events[i][j]["event-id"]}}" > 
+                                                                <input type="hidden" name="household-id" value="{{ household.household_id }}">
+                                                                <input type="hidden" name="member-id" value="{{ household["member-id"] }}">
+                                                                <input type="hidden" name="event-id" value="{{ events[i][j]["event-id"] }}">
+                                                            </form>   
+                                                            <div class="dropdown btn-group">
+                                                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                                                    Food Bank
+                                                                    <span class="caret"></span>
+                                                                </a>
+                                                                <ul class="dropdown-menu">
+                                                                    <li><a href="javascript:void(0)" onclick="document.forms['event-{{events[i][j]["event-id"]}}'].submit()" >
+                                                                            <i class="icon-user icon-black"></i>
+                                                                            {{ household.household_id }},
+                                                                            {{ household["member-id"] }},
+                                                                            {{ events[i][j]["event-id"] }}
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+
+                                                            {% for slots in events[i][j]["timeslots"] %}}
+                                                                {{slots["duration"]}},{{slots[""]}},{{slots["participants"]}},{{slots["capacity"]}}
+                                                            {% endfor %}
+                                                         -->
+
+
                                                             <form action="{{ apppath }}appointment/new" method="POST" >
                                                                 <input type="hidden" name="household-id" value="{{ household.household_id }}">
                                                                 <input type="hidden" name="member-id" value="{{ household["member-id"] }}">
