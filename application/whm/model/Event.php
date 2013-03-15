@@ -83,16 +83,6 @@ class Event
         return $this->start_time;
     }
 
-    public function setEndTime($end_time)
-    {
-        $this->end_time = $end_time;
-    }
-
-    public function getEndTime()
-    {
-        return $this->end_time;
-    }
-
     public function setStartDate($start_date)
     {
         $this->start_date = $start_date;
