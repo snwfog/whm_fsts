@@ -148,5 +148,10 @@ $(function() {
   };
   setInterval(time, 1000);
   time();
-  return true;
+  return $('input[name="income"]').focus(function() {
+    return noteAlert('Go ahead, you may put arithmetic operations in this field.\
+      For example, 4 * 400, or 2 * 1500, or 50 000 / 12.', 'success');
+  });
 });
+
+true;
