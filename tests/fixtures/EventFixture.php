@@ -67,7 +67,7 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
             labore et dolore magna aliqua. Ut enim ad minim veniam, 
             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
             commodo consequat.");
-        $e3->setGroupId(2);
+        $e3->setGroupId(1);
         $e3->setIsTemplate(false);
         $e3->setName("Food Distribution");
         $clone3 = clone $now;
