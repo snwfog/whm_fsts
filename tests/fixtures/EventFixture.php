@@ -18,9 +18,14 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
+        $now = new \DateTime();
+        $oneWeek = new \DateInterval('P7D');
+        $oneDay = new \DateInterval('P1D');
+        $threeDays = new \DateInterval('P3D');
+        
         $e1 = new Event();
         $e1->setCapacity(90);
-        $e1->setDescription("Lorem ipsum dolor sit amet, 
+        $e1->setDescription("Lorem ipsum dolor sit amet,
             consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
             labore et dolore magna aliqua. Ut enim ad minim veniam, 
             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
@@ -28,7 +33,7 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $e1->setGroupId(1);
         $e1->setIsTemplate(false);
         $e1->setName("Food Distribution");
-        $e1->setStartDate(date_create("2013-03-16"));
+        $e1->setStartDate($now);
         $e1->setStartTime(new \DateTime("13:30"));
         $slot1 = new Timeslot();
         $slot1->setCapacity(90);
@@ -46,7 +51,8 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $e2->setGroupId(2);
         $e2->setIsTemplate(false);
         $e2->setName("Mattress Distribution");
-        $e2->setStartDate(date_create("2013-03-13"));
+        $clone2 = clone $now;
+        $e2->setStartDate($clone2->add($oneDay));
         $e2->setStartTime(new \DateTime("9:50"));        
         $slot2 = new Timeslot();
         $slot2->setCapacity(90);
@@ -64,7 +70,8 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $e3->setGroupId(2);
         $e3->setIsTemplate(false);
         $e3->setName("Food Distribution");
-        $e3->setStartDate(date_create("2013-03-20"));
+        $clone3 = clone $now;
+        $e3->setStartDate($clone3->add($oneDay));
         $e3->setStartTime(new \DateTime("13:30"));
         $slot3 = new Timeslot();
         $slot3->setCapacity(90);
@@ -83,7 +90,8 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $e4->setGroupId(3);
         $e4->setIsTemplate(false);
         $e4->setName("Mattress Distribution");
-        $e4->setStartDate(date_create("2013-03-22"));       
+        $clone4 = clone $now;
+        $e4->setStartDate($clone4->add($threeDays));       
         $e4->setStartTime(new \DateTime("18:50"));
         $slot4 = new Timeslot();
         $slot4->setCapacity(90);
@@ -101,7 +109,8 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $e5->setGroupId(4);
         $e5->setIsTemplate(false);
         $e5->setName("Food Distribution");
-        $e5->setStartDate(date_create("2013-03-24"));
+        $clone5 = clone $now;
+        $e5->setStartDate($clone5->add($threeDays));
         $e5->setStartTime(new \DateTime("17:50"));
         $slot5 = new Timeslot();
         $slot5->setCapacity(90);
@@ -115,6 +124,31 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $manager->persist($e4);
         $manager->persist($e5);
         
+        // Adding similar events for next week        
+        $e1week2 = clone $e1;
+        $e2week2 = clone $e2;
+        $e3week2 = clone $e3;
+        $e4week2 = clone $e4;
+        $e5week2 = clone $e5;
+        
+        $e1DateClone = clone $e1->getStartDate();
+        $e2DateClone = clone $e2->getStartDate();
+        $e3DateClone = clone $e3->getStartDate();
+        $e4DateClone = clone $e4->getStartDate();
+        $e5DateClone = clone $e5->getStartDate();
+
+        $e1week2->setStartDate($e1DateClone->add($oneWeek));
+        $e2week2->setStartDate($e2DateClone->add($oneWeek));
+        $e3week2->setStartDate($e3DateClone->add($oneWeek));
+        $e4week2->setStartDate($e4DateClone->add($oneWeek));
+        $e5week2->setStartDate($e5DateClone->add($oneWeek));
+        
+        $manager->persist($e1week2);
+        $manager->persist($e2week2);
+        $manager->persist($e3week2);
+        $manager->persist($e4week2);
+        $manager->persist($e5week2);
+
         $manager->flush();
     }
 
