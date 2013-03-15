@@ -5671,6 +5671,11 @@ a.badge:focus {
   background-color: #953b39;
 }
 
+.label-danger,
+.badge-danger {
+  background-color: #FF0000;
+}
+
 .label-warning,
 .badge-warning {
   background-color: #f89406;
@@ -5683,8 +5688,9 @@ a.badge:focus {
 
 .label-success,
 .badge-success {
-  background-color: #468847;
+  background-color: #5bb75b;
 }
+
 
 .label-success[href],
 .badge-success[href] {
