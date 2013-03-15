@@ -2,57 +2,15 @@
 
 $(function() {
   var modal;
-  modal = "#create-household-modal, #search-modal, #add-member-modal, #add-flag-modal, #appointment-modal, #manage-flag-modal";
-  Mousetrap.bind("alt+6", function() {
+  modal = "#create-household-modal,    #search-modal,    #add-member-modal,    #add-flag-modal";
+  Mousetrap.bind("s", function() {
     return $('#search-modal').modal();
   });
-  Mousetrap.bind("alt+2", function() {
+  Mousetrap.bind("a", function() {
     return $('#create-household-modal').modal();
   });
-   Mousetrap.bind("alt+5", function() {
-    return $('#appointment-modal').modal();
-  });
-  Mousetrap.bind("alt+3", function() {
+  Mousetrap.bind("m", function() {
     return $('#add-member-modal').modal();
-  });
-   Mousetrap.bind("alt+4", function() {
-    window.location.href = document.getElementById("eventJS").href;
-  });
-
-     Mousetrap.bind("alt+1", function() { //TOGGLE KB LEGEND
-
-      var legend = document.getElementById('legendJS'); //Store the legend element object
-      
-      if(legend.style.display == "") //Check that the display style is empty (none) and invisible.
-      {
-        legend.style.display = 'block';//Make it visible
-      }
-      else if(legend.style.display == "block")//Case that the display style is block and visible.
-      {
-        legend.style.display = "";//Hide it.
-      }
-  });
-  Mousetrap.bind("alt+7", function() { //STATISTIC REPORT
-    window.location.href = document.getElementById("statJS").href;
-  });
-  Mousetrap.bind("alt+8", function() { //FUNCTIONAL REPORT
-    window.location.href = document.getElementById("funcJS").href;
-  });
-   Mousetrap.bind("alt+9", function() { //MANAGE FLAGS
-    return $('#manage-flag-modal').modal();
-  });
-  Mousetrap.bind("alt+0", function() { //SWITCH THEME
-     var $secondStyleSheet, href, pattern;
-    $secondStyleSheet = $('link[rel="stylesheet"]').first().next();
-    if ($secondStyleSheet.attr("href").match("darkstrap")) {
-      $secondStyleSheet.attr("href", "");
-      document.cookie = "theme=0";
-    } else {
-      href = $secondStyleSheet.prev().attr("href");
-      pattern = /\/[^\/]*\.css/i;
-      $secondStyleSheet.attr("href", href.replace(pattern, "/bootstrap.darkstrap.css"));
-      document.cookie = "theme=1";
-    }
   });
   Mousetrap.bind('right', function() {
     return $('a#tab2-toggle').tab('show');

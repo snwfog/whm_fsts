@@ -35,21 +35,21 @@ class Event extends Controller implements IRedirectable
             $event = $this->manageEvent->findEvent($event_id);
             $relatedEvents = $this->manageEvent->getRelatedEvents($event->getGroupId());
             //$participants = $event->getParticipants();
-            
+
             //$participants = $this->helper->formatMember($participants);
             $relatedEvents = $this->formatEvents($relatedEvents);
             $event = $this->formatEvents(array( 0 => $event));
-            
+
             $this->data["event"] = $event[0];
             $this->data["relatedEvents"] = $relatedEvents;
             //$this->data["participants"] = $participants;
-            $this->display("event.create.twig", $this->data);      
+            $this->display("event.create.twig", $this->data);
         }else
         {    //Get templates if new event
             $createEvent = new WHM\Controller\CreateEvent;
             $createEvent->get();
-        } 
-                   
+        }
+
     }
 
     // Update Event
@@ -87,48 +87,48 @@ class Event extends Controller implements IRedirectable
                     "group-id" => $event->getGroupId(),
                 );
         }
-        return $data;      
+        return $data;
     }
 
     public function getIndexedEvents($events)
     {
-        $data = array();
-        $tracker = array(); 
+        // $data = array();
+        // $tracker = array();
 
-        for ($j = 1; $j <= 10; $j++)  // 10 rows for now...
-        {
-            $date = date_create('now');$date->setTimezone(new DateTimeZone(LOCALTIME));
-            for ($i = 1; $i <= 14; $i++)
-            {   
-                date_modify($date, '+1 day');
-                $d = date_format($date, 'm/d/Y');
-                foreach( $events as $event)
-                {
-                    $eventdate = $event->getStartDate()->format("m/d/Y");
-                    if($d == $eventdate && !in_array($event->getId() , $tracker) && empty($data[$j][$i]))
-                    {
-                        $event = $this->manageEvent->findEvent($event->getId());
-                        $participants = $event->getParticipants();
-                        $participants = $this->helper->formatMember($participants);
+        // for ($j = 1; $j <= 10; $j++)  // 10 rows for now...
+        // {
+        //     $date = date_create('now');$date->setTimezone(new DateTimeZone(LOCALTIME));
+        //     for ($i = 1; $i <= 14; $i++)
+        //     {
+        //         date_modify($date, '+1 day');
+        //         $d = date_format($date, 'm/d/Y');
+        //         foreach( $events as $event)
+        //         {
+        //             $eventdate = $event->getStartDate()->format("m/d/Y");
+        //             if($d == $eventdate && !in_array($event->getId() , $tracker) && empty($data[$j][$i]))
+        //             {
+        //                 $event = $this->manageEvent->findEvent($event->getId());
+        //                 $participants = $event->getParticipants();
+        //                 $participants = $this->helper->formatMember($participants);
 
-                        $tracker[] = $event->getId();
-                        $data[$j][$i] = array
-                        (
-                            "event-id" => $event->getId(),
-                            "name" => $event->getName(),
-                            "capacity" => $event->getCapacity(),
-                            "description" => $event->getDescription(),
-                            "start-time" => $event->getStartTime()->format("H:i"),
-                            "end-time" => $event->getEndTime(),
-                            "date" => $event->getStartDate()->format("m/d/Y"),
-                            "group-id" => $event->getGroupId(),
-                            "participants" => $participants
-                        );
-                    }
-                }; 
-            } 
-        }
-        return $data;
+        //                 $tracker[] = $event->getId();
+        //                 $data[$j][$i] = array
+        //                 (
+        //                     "event-id" => $event->getId(),
+        //                     "name" => $event->getName(),
+        //                     "capacity" => $event->getCapacity(),
+        //                     "description" => $event->getDescription(),
+        //                     "start-time" => $event->getStartTime()->format("H:i"),
+        //                     "end-time" => $event->getEndTime(),
+        //                     "date" => $event->getStartDate()->format("m/d/Y"),
+        //                     "group-id" => $event->getGroupId(),
+        //                     "participants" => $participants
+        //                 );
+        //             }
+        //         };
+        //     }
+        // }
+        // return $data;
     }
 
 }

@@ -129,6 +129,8 @@ $ ->
   ###################
   # Auto Filling Form
   ###################
+
+  ## Auto filling for postal code <-> district mapping
   $('input[name="postal-code"]').focus ->
     map = {}
     $.get 'postalcode', (data) ->
@@ -138,11 +140,16 @@ $ ->
 
     $('input[name="postal-code"]').keyup ->
       val = $(this).val()
+      $district = $('input[name="district"]')
       if val.length >= 3
         reg = /^\w\d\w/i
         match = (reg.exec val)[0].toUpperCase() if reg.exec val
         if map[match]?
-          console.log match
-          console.log map[match]
-          $('input[name="district"]').val map[match]
+          $district.css 'background-color', ''
+          $district.val map[match]
+        else
+          $district.css({ 'background-color': '#f1dede' })
+          $district.val "Invalid Postal Code"
+
+
   true

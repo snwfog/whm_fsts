@@ -171,17 +171,22 @@ $(function() {
       });
     });
     return $('input[name="postal-code"]').keyup(function() {
-      var match, reg, val;
+      var $district, match, reg, val;
       val = $(this).val();
+      $district = $('input[name="district"]');
       if (val.length >= 3) {
         reg = /^\w\d\w/i;
         if (reg.exec(val)) {
           match = (reg.exec(val))[0].toUpperCase();
         }
         if (map[match] != null) {
-          console.log(match);
-          console.log(map[match]);
-          return $('input[name="district"]').val(map[match]);
+          $district.css('background-color', '');
+          return $district.val(map[match]);
+        } else {
+          $district.css({
+            'background-color': '#f1dede'
+          });
+          return $district.val("Invalid Postal Code");
         }
       }
     });
