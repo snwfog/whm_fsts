@@ -39,6 +39,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
                                     {# First get the one day with the maximum amount of events.
                                        This will set the maximum height of the table.
                                        In this example, it is represented by the variable maxevents. #}
@@ -47,79 +48,79 @@
                                     {% for i in 1..maxevents %}
                                         <tr>
                                             {% for j in 1..weeklength %}
+
                                                 <td>
-                                                    {% set index = (7 * (k - 1) + j) %}
-                                                    {% if k == 2 %}
-                                                        {% set j = j + 7 %}
-                                                    {% endif %}
-                                                    {% set registered = 'unregistered' %}
-                                                    {% for h in events[i][j]["participants"] %}
-                                                    {# CONSULT TEAM #}
-                                                        {% if household.household_id == h.household_id and household["member-id"] == h["member-id"] %}
-                                                            {% set registered = 'registered' %}
+                                                    {% if events[i][j] is null %}
+                                                        <br/ ><br/ >
+                                                    {% else %}
+                                                        {% set index = (7 * (k - 1) + j) %}
+                                                        {% if k == 2 %}
+                                                            {% set j = j + 7 %}
                                                         {% endif %}
-                                                    {% endfor %}
-                                                    {% set maxparticipants = events[i][j]["capacity"] %}
-                                                    {# NEED TO GET ACTUAL VALUE #}
-                                                    {% set actualparticipants = events[i][j]["participants"] ? events[i][j]["participants"]|length : 0 %}
-                                                    {# MAXIMUM TITLE LENGTH IS 10. ELSE IS TRIMMED #}
-                                                    {# DECIDE BUTTON COLOR #}
-                                                    {% set availablespots = maxparticipants - actualparticipants %}
-                                                    {% set buttoncolor = 'success' %}
-                                                    {% if availablespots <= maxparticipants / 10 %}
-                                                        {% set buttoncolor = 'danger' %}
-                                                    {% elseif availablespots <= maxparticipants / 2 %}
-                                                        {% set buttoncolor = 'warning' %}
-                                                    {% endif %}
-                                                    {% set deidei = "+" ~ index ~ " days" %}
-                                                    {% set d = "now"|date_modify(deidei)|date("m/d/Y","America/Montreal") %}
-                                                        {% if d == events[i][j]["date"] %}
-
-<!-- 
-                                                            <form name="event-{{events[i][j]["event-id"]}}" action="{{ apppath }}appointment/new" method="POST" id="{{events[i][j]["event-id"]}}" > 
-                                                                <input type="hidden" name="household-id" value="{{ household.household_id }}">
-                                                                <input type="hidden" name="member-id" value="{{ household["member-id"] }}">
-                                                                <input type="hidden" name="event-id" value="{{ events[i][j]["event-id"] }}">
-                                                            </form>   
-                                                            <div class="dropdown btn-group">
-                                                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                                                                    Food Bank
-                                                                    <span class="caret"></span>
-                                                                </a>
-                                                                <ul class="dropdown-menu">
-                                                                    <li><a href="javascript:void(0)" onclick="document.forms['event-{{events[i][j]["event-id"]}}'].submit()" >
-                                                                            <i class="icon-user icon-black"></i>
-                                                                            {{ household.household_id }},
-                                                                            {{ household["member-id"] }},
-                                                                            {{ events[i][j]["event-id"] }}
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-
-                                                            {% for slots in events[i][j]["timeslots"] %}}
-                                                                {{slots["duration"]}},{{slots[""]}},{{slots["participants"]}},{{slots["capacity"]}}
-                                                            {% endfor %}
-                                                         -->
-
-
-                                                            <form action="{{ apppath }}appointment/new" method="POST" >
-                                                                <input type="hidden" name="household-id" value="{{ household.household_id }}">
-                                                                <input type="hidden" name="member-id" value="{{ household["member-id"] }}">
-                                                                <input type="hidden" name="event-id" value="{{ events[i][j]["event-id"] }}">
-                                                                <button class="btn btn-small btn-{{ buttoncolor }}" type="submit"
-                                                                    {% if availablespots == 0 %} disabled>
-                                                                        {{ events[i][j]["name"]|slice(0, 10) }} <br /> Full
-                                                                    {% elseif registered == 'registered' %} disabled>
-                                                                        {{ events[i][j]["name"]|slice(0, 10) }} <br /><i class="icon-ok-sign icon-white"></i>Registered
-                                                                    {% else %}
-                                                                        >
-                                                                        {{ events[i][j]["name"]|slice(0, 10) }} <br /><i class="icon-user icon-white"></i>{{ actualparticipants }}/{{ maxparticipants }}
-                                                                    {% endif %}
-                                                                </button>
-                                                            </form>
+                                                        {% set registered = 'unregistered' %}
+                                                        {% for h in events[i][j]["participants"] %}
+                                                        {# CONSULT TEAM #}
+                                                            {% if household.household_id == h.household_id and household["member-id"] == h["member-id"] %}
+                                                                {% set registered = 'registered' %}
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        {% set maxparticipants = events[i][j]["capacity"] %}
+                                                        {# NEED TO GET ACTUAL VALUE #}
+                                                        {% set actualparticipants = events[i][j]["participants"] ? events[i][j]["participants"]|length : 0 %}
+                                                        {# MAXIMUM TITLE LENGTH IS 10. ELSE IS TRIMMED #}
+                                                        {# DECIDE BUTTON COLOR #}
+                                                        {% set availablespots = maxparticipants - actualparticipants %}
+                                                        {% set buttoncolor = 'success' %}
+                                                        {% if availablespots <= maxparticipants / 10 %}
+                                                            {% set buttoncolor = 'danger' %}
+                                                        {% elseif availablespots <= maxparticipants / 2 %}
+                                                            {% set buttoncolor = 'warning' %}
                                                         {% endif %}
+                                                        {% set deidei = "+" ~ index ~ " days" %}
+                                                        {% set d = "now"|date_modify(deidei)|date("m/d/Y","America/Montreal") %}
+                                                            {% if d == events[i][j]["date"] %}
+                                                                <div class="dropdown btn-group">
+                                                                    <a class="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#">
+                                                                        {{ events[i][j]["name"] }}
+                                                                        <span class="caret"></span>
+                                                                    </a>
+                                                                    <ul class="dropdown-menu">
+                                                                    {% set slotdate = events[i][j]["start-time"] %}
+                                                                    {% for slots in events[i][j]["timeslots"] %}
+                                                                        <li>
+                                                                            <a href="javascript:void(0)" onclick="document.forms['slot-{{slots["id"]}}'].submit()" >  
+                                                                                {{slots["start-time"]}}-{{slots["end-time"]}} 
+                                                                                <i class="icon-user icon-black"></i>
+                                                                                {# INSERT NUMBER OF PARTICIPANTS#}
+                                                                                {{random(slots["capacity"])}}/{{slots["capacity"]}}, event-id{{events[i][j]["event-id"]}} , slot-id{{slots.id}}
+                                                                            </a>
+                                                                        </li>
+                                                                    {% endfor %}
+                                                                    </ul>
+                                                                </div>
+                                                                {# FORMS #}
+                                                                {% for slots in events[i][j]["timeslots"] %}<form name="slot-{{slots["id"]}}" action="{{ apppath }}appointment/new" method="POST" id="slot-{{slots["id"]}}"><input type="hidden" name="household-id" value="{{ household.household_id }}"><input type="hidden" name="member-id" value="{{ household["member-id"] }}"><input type="hidden" name="event-id" value="{{ events[i][j]["event-id"] }}"><input type="hidden" name="slot-id" value="{{ slots["id"] }}"></form>{% endfor %}
+
+                                                                <!-- <form action="{{ apppath }}appointment/new" method="POST" >
+                                                                    <input type="hidden" name="household-id" value="{{ household.household_id }}">
+                                                                    <input type="hidden" name="member-id" value="{{ household["member-id"] }}">
+                                                                    <input type="hidden" name="event-id" value="{{ events[i][j]["event-id"] }}">
+                                                                    <button class="btn btn-small btn-{{ buttoncolor }}" type="submit"
+                                                                        {% if availablespots == 0 %} disabled>
+                                                                            {{ events[i][j]["name"]|slice(0, 10) }} <br /> Full
+                                                                        {% elseif registered == 'registered' %} disabled>
+                                                                            {{ events[i][j]["name"]|slice(0, 10) }} <br /><i class="icon-ok-sign icon-white"></i>Registered
+                                                                        {% else %}
+                                                                            >
+                                                                            {{ events[i][j]["name"]|slice(0, 10) }} <br /><i class="icon-user icon-white"></i>{{ actualparticipants }}/{{ maxparticipants }}
+                                                                        {% endif %}
+                                                                    </button>
+                                                                </form> -->
+                                                            {% endif %}
+                                                    {% endif %}
                                                 </td>
+
+                                                
                                             {% endfor %}
                                         </tr>
                                     {% endfor %}

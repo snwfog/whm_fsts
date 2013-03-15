@@ -59,6 +59,11 @@ class Timeslot
         $this->participants->removeElement($participant);
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function getParticipants()
     {
         return $this->participants;

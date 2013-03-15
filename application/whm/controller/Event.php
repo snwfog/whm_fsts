@@ -92,43 +92,72 @@ class Event extends Controller implements IRedirectable
 
     public function getIndexedEvents($events)
     {
-        // $data = array();
-        // $tracker = array();
+        $data = array();
+        $tracker = array();
 
-        // for ($j = 1; $j <= 10; $j++)  // 10 rows for now...
-        // {
-        //     $date = date_create('now');$date->setTimezone(new DateTimeZone(LOCALTIME));
-        //     for ($i = 1; $i <= 14; $i++)
-        //     {
-        //         date_modify($date, '+1 day');
-        //         $d = date_format($date, 'm/d/Y');
-        //         foreach( $events as $event)
-        //         {
-        //             $eventdate = $event->getStartDate()->format("m/d/Y");
-        //             if($d == $eventdate && !in_array($event->getId() , $tracker) && empty($data[$j][$i]))
-        //             {
-        //                 $event = $this->manageEvent->findEvent($event->getId());
-        //                 $participants = $event->getParticipants();
-        //                 $participants = $this->helper->formatMember($participants);
+        for ($j = 1; $j <= 10; $j++)  // 10 rows for now...
+        {
+            $date = date_create('now');
+            $date->setTimezone(new DateTimeZone(LOCALTIME));
+            for ($i = 1; $i <= 14; $i++)
+            {
+                date_modify($date, '+1 day');
+                $d = date_format($date, 'm/d/Y');
+                foreach( $events as $event)
+                {
+                    $eventdate = $event->getStartDate()->format("m/d/Y");
+                    if($d == $eventdate && !in_array($event->getId() , $tracker) && empty($data[$j][$i]))
+                    {
+                        // $event = $this->manageEvent->findEvent($event->getId());
+                        // $participants = $event->getParticipants();
+                        // $participants = $this->helper->formatMember($participants);
 
-        //                 $tracker[] = $event->getId();
-        //                 $data[$j][$i] = array
-        //                 (
-        //                     "event-id" => $event->getId(),
-        //                     "name" => $event->getName(),
-        //                     "capacity" => $event->getCapacity(),
-        //                     "description" => $event->getDescription(),
-        //                     "start-time" => $event->getStartTime()->format("H:i"),
-        //                     "end-time" => $event->getEndTime(),
-        //                     "date" => $event->getStartDate()->format("m/d/Y"),
-        //                     "group-id" => $event->getGroupId(),
-        //                     "participants" => $participants
-        //                 );
-        //             }
-        //         };
-        //     }
-        // }
-        // return $data;
+                        $timeslots= $this->getSlots($event);
+
+                        $tracker[] = $event->getId();
+                        $data[$j][$i] = array
+                        (
+                            "event-id" => $event->getId(),
+                            "name" => $event->getName(),
+                            "capacity" => $event->getCapacity(),
+                            "description" => $event->getDescription(),
+                            "start-time" => $event->getStartTime()->format("H:i"),
+                            "date" => $event->getStartDate()->format("m/d/Y"),
+                            "timeslots" => $timeslots
+                        );
+                    }
+                };
+            }
+        }
+        return $data;
+    }
+
+    private function getSlots($event)
+    {
+        $count = 0;
+        $timeslots = array();
+        $timeslot = $event->getTimeslots();
+        $slotStarttime = $event->getStartTime()->format("H:i");
+        foreach( $timeslot as $t)
+        {   
+            $slotEndtime = new DateTime($slotStarttime);
+            $duration = '+'.$t->getDuration(). ' mins';
+            date_modify($slotEndtime, $duration);
+            $endtime = $slotEndtime->format('H:i');
+
+            $timeslots[$count++] = array
+            (
+                "id" => $t->getId(),
+                "name" => $t->getName(),
+                "duration" => $t->getDuration(),
+                "capacity" => $t->getCapacity(),
+                "start-time" => $slotStarttime,
+                "end-time" => $endtime,
+                // NEED TO GET PARTICIPANTS TODO!!!!!!!!!
+            );
+            $slotStarttime = $endtime;
+        }
+        return $timeslots;
     }
 
 }
