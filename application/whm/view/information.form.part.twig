@@ -1,22 +1,10 @@
 {% block information %}
 
-    {# Early implementation of help Popover #}
-    {% macro popover(msg) %}
-        <div class="popover top">
-            <div class="arrow"></div>
-            <h3 class="popover-title">Help</h3>
-            <div class="popover-content">
-              <p>{{ msg }}</p>
-            </div>
-        </div>
-    {% endmacro %}
-
     <fieldset>
         <legend>Information</legend>
         <div class="controls controls-row">
-            {{ popover('Go ahead enter the medicare number. The Age, Gender, and Date of Birth will be automatically filled in for you.') }}
-
-            <input class="span4" maxlength="{{ 3 * 4 + 2 }}" type="text"
+            <input class="span4 help" maxlength="{{ 3 * 4 + 2 }}" type="text"
+                   data-toggle="popover" data-content="Go ahead enter the medicare number. The Age, Gender, and Date of Birth will be automatically filled in for you."
                    name="mcare-number" placeholder="Medical Care" value="{{ household["medicare-number"] }}"/>
             <input class="span4" type="text" name="work_status"
                    placeholder="Work Status" maxlength="2" value="{{ household["work-status"] }}"/>
