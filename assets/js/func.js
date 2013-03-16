@@ -54,6 +54,7 @@ $(function() {
                                 </td>\
                                 <td>\
                                 </td>\
-                          </tr>');
+                          </tr>\
+                          <input class="span" type="hidden" name="slot-id[]" value=""/>');
     });
 });

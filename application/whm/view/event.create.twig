@@ -59,28 +59,27 @@
 
                         {% include 'info.createEvent.part.twig' %}
 
-                    
-                        <legend>Action</legend>
-                        <div class="btn-toolbar">
-                            {% if event %}
-                                <button class="btn btn-warning btn-large" data-toggle="button" class-toggle="btn-state" name="event-create-modify" type="button">
-                                <i class="icon-edit icon-white"></i> Modify</button>
-                                {#<button id="add-event-date" type="button" class="btn btn-large btn-info"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Add Date</button>
-                                #}
-                            {% else %}
-                                <button id="create-event-save" type="button" class="btn btn-large btn-success"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Create Event</button>
-                                <button id="create-template-save" type="button" class="btn btn-large btn-info"><i class="icon-file icon-white submit"></i> Save Template </button>
-                            {% endif %}                              
-                        </div>                  
+                             
                         <input type="hidden" name="event-id" value="{{ event["event-id"] }}"/>
                         <input type="hidden" name="template-id" value="{{ template["template-id"] }}"/>
                     </form>
-
                     {% include 'template.list.twig' %}
                 </div>
                 <div class="tab-pane" id="tab2">
                     {% include 'timeslot.event.part.twig' %}
                 </div>
+                <legend>Action</legend>
+                <div class="btn-toolbar">
+                    {% if event %}
+                        <button class="btn btn-warning btn-large" data-toggle="button" class-toggle="btn-state" name="event-create-modify" type="button">
+                        <i class="icon-edit icon-white"></i> Modify</button>
+                        {#<button id="add-event-date" type="button" class="btn btn-large btn-info"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Add Date</button>
+                        #}
+                    {% else %}
+                        <button id="create-event-save" type="button" class="btn btn-large btn-success"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Create Event</button>
+                        <button id="create-template-save" type="button" class="btn btn-large btn-info"><i class="icon-file icon-white submit"></i> Save Template </button>
+                    {% endif %}                              
+                </div>  
             </div>
         </div>
     </div>
@@ -127,7 +126,7 @@
             </div>
             <legend>Participants</legend>
             {# OH NO INSTYLE CSS#}
-            <div class="well no-padding-well" id="dates-well" style="max-height:200px; overflow: scroll;">
+            <div class="well no-padding-well" id="dates-well" style="{{ relatedEvents|length > 6 ? 'max-height:200px; overflow: scroll;' : ''}}">
                 <table class="table table-striped">
                   <thead>
                       <th> HH_ID </th>
