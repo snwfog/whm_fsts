@@ -34,6 +34,7 @@ class Event extends Controller implements IRedirectable
 
             $event = $this->manageEvent->findEvent($event_id);
             $relatedEvents = $this->manageEvent->getRelatedEvents($event->getGroupId());
+            $timeslots = $this->getSlots($event);
             //$participants = $event->getParticipants();
 
             //$participants = $this->helper->formatMember($participants);
@@ -42,6 +43,7 @@ class Event extends Controller implements IRedirectable
 
             $this->data["event"] = $event[0];
             $this->data["relatedEvents"] = $relatedEvents;
+            $this->data["timeslots"] = $timeslots;
             //$this->data["participants"] = $participants;
             $this->display("event.create.twig", $this->data);
         }else
@@ -56,16 +58,24 @@ class Event extends Controller implements IRedirectable
     public function post(){
         $event = $this->manageEvent->findEvent($_POST["event-id"]);
 
-        //Convert start-date to datetime object
+        //Convert start-date and start-time to datetime object
+        $start_time = new DateTime();
+        $start_time->setTimezone(new DateTimeZone(LOCALTIME));
         $start_date = new DateTime();
         $start_date->setTimezone(new DateTimeZone(LOCALTIME));
-        $form_start_date = explode("/", $_POST["start-date"]); // input m/d/Y
-        $start_date->setDate($form_start_date[2], $form_start_date[0], $form_start_date[1]);// input y/m/d
+
+        if( !empty($_POST["start-time"]) && !empty($_POST["start-date"]) ){
+            $form_start_time = explode(":", $_POST["start-time"]);
+            $start_time->setTime($form_start_time[0], $form_start_time[1]);            
+            $form_start_date = explode("/", $_POST["start-date"]); // input m/d/Y
+            $start_date->setDate($form_start_date[2], $form_start_date[0], $form_start_date[1]);// input y/m/d
+        }else{
+            $this->redirect('event/'.$_POST["event-id"]);
+        }
 
         $_POST["start-date"] = $start_date;
-
+        $_POST["start-time"] = $start_time;
         $this->manageEvent->updateEvent($event, $_POST);
-
         $this->redirect("event/".$event->getId());
 
     }

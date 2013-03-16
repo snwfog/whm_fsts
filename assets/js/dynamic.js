@@ -75,21 +75,29 @@ $(function() {
       return btn.prop("disabled", btn.prop("disabled") ? false : true);
     });
   });
+
   $("#view-event-form input").prop("disabled", true);
   $("#view-event-form textarea").prop("disabled", true);
+  $("#timeslot-form input").prop("disabled", true);
   $('button[name="event-create-modify"]').click(function() {
-    var inputs, textarea;
+    var form1, inputs, inputs2, textarea;
     inputs = $("#view-event-form input");
+    inputs2 = $("#timeslot-form input");
     textarea = $("#view-event-form textarea");
     if ($(this).attr("class-toggle")) {
       $(this).removeAttr("class-toggle");
       inputs.prop("disabled", false);
+      inputs2.prop("disabled", false);
       textarea.prop("disabled", false);
       noteAlert("Event Edit Mode", "warning");
     } else {
       $(this).attr("class-toggle", "btn-state");
-      $(this).closest("form").submit();
+      form1 = $('form[name="multiform"]');
+      $('form[name="view-timeslot-form"] :input').not(':submit').clone().hide().attr('isacopy', 'y').appendTo(form1);
+      $('form[name="event-form"] :input').not(':submit').clone().hide().attr('isacopy', 'y').appendTo(form1);
+      form1.submit();
       inputs.prop("disabled", true);
+      inputs2.prop("disabled", true);
       textarea.prop("disabled", true);
       $.noty.closeAll();
     }

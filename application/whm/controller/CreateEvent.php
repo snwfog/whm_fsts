@@ -44,11 +44,10 @@ class CreateEvent extends Controller implements IRedirectable
     {
         //Format Date to be used as object type DateTime
         $start_date = new DateTime();
-        $end_date = new DateTime();
-        $start_time = new DateTime();
-
         $start_date->setTimezone(new DateTimeZone(LOCALTIME));
+        $end_date = new DateTime();
         $end_date->setTimezone(new DateTimeZone(LOCALTIME));
+        $start_time = new DateTime();
         $start_time->setTimezone(new DateTimeZone(LOCALTIME));
 
 
@@ -64,7 +63,7 @@ class CreateEvent extends Controller implements IRedirectable
 
         //If is not template then start-date and end-date must not be empty
         if(!isset($_POST["is_template"])){
-            if( !empty($_POST["start-date"]) && !empty($_POST["end-date"]) && !empty($_POST["start-time"])  ){
+            if( !empty($_POST["start-date"]) && !empty($_POST["end-date"])){
                 $form_start_date = explode("/", $_POST["start-date"]); // $_POST["start-date"] M/D/Y
                 $form_end_date = explode("/", $_POST["end-date"]); // $_POST["start-date"] M/D/Y
 
@@ -116,7 +115,7 @@ class CreateEvent extends Controller implements IRedirectable
     {
     }
 
-    public function createTimeslots($event, $timeslots){
+    private function createTimeslots($event, $timeslots){
         $slot_name = $timeslots["slot-name"];
         $slot_duration = $timeslots["slot-duration"];
         $slot_capacity = $timeslots["slot-capacity"];
@@ -125,19 +124,19 @@ class CreateEvent extends Controller implements IRedirectable
             if( count($slot_name) == count($slot_duration) && count($slot_duration) == count($slot_capacity)){
                 for ($i = 0; $i < count($slot_name); $i++){
                     $data = array(
-                                    "name" => $slot_name[$i],
-                                    "duration" => $slot_duration[$i],
-                                    "capacity" => $slot_capacity[$i],
+                                    "slot-name" => $slot_name[$i],
+                                    "slot-duration" => $slot_duration[$i],
+                                    "slot-capacity" => $slot_capacity[$i],
                             );
 
                     if(empty($slot_name[$i])){
                         $eventslots = $event->getTimeslots();
                         $num = count($eventslots) + 1;
-                        $data["name"] = "Timeslot #".$num;
+                        $data["slot-name"] = "Timeslot #".$num;
                     }
 
 
-                    $this->manageEvent->createTimeslots($event, $data);
+                    $this->manageEvent->createTimeslot($event, $data);
                 }
             }
         }

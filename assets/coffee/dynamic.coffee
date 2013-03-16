@@ -99,15 +99,18 @@ $ ->
   # Default view event form is not modifiable
   $("#view-event-form input").prop "disabled", true
   $("#view-event-form textarea").prop "disabled", true
+  $("#timeslot-form input").prop "disabled", true
 
   $('button[name="event-create-modify"]').click ->
     inputs = $("#view-event-form input")
+    inputs2 = $("#timeslot-form input")
     textarea = $("#view-event-form textarea")
     if $(this).attr "class-toggle"
       # Remove the class-toggle attribute
       $(this).removeAttr "class-toggle"
       # Enable the form for rewrite
       inputs.prop "disabled", false
+      inputs2.prop "disabled", false
       textarea.prop "disabled", false
       noteAlert "Event Edit Mode", "warning"
     else
@@ -115,9 +118,13 @@ $ ->
       # Add the class-toggle attribute
       $(this).attr "class-toggle", "btn-state"
       # Resend the form modification
-      $(this).closest("form").submit()
+      form1 = $('form[name="multiform"]');
+      $('form[name="view-timeslot-form"] :input').not(':submit').clone().hide().attr('isacopy','y').appendTo(form1);
+      $('form[name="event-form"] :input').not(':submit').clone().hide().attr('isacopy','y').appendTo(form1);
+      form1.submit()
       # Disable the form for rewrite
       inputs.prop "disabled", true
+      inputs2.prop "disabled", true
       textarea.prop "disabled", true
       $.noty.closeAll()
 
