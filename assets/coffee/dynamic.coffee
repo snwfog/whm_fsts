@@ -152,10 +152,18 @@ $ ->
     })
     return n
 ###############################################################################
-# Auto-capitalize all form input
+# Auto-capitalize first letter of all form input
 ##############################################################################
-  $("form :input").keyup ->
-    $(this).val $(this).val().charAt(0).toUpperCase() + $(this).val().substring(1).toLowerCase()
+$("form :input").keyup ->
+  $(this).val $(this).val().replace(/\w\S*/g, (txt) ->
+    txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+  )
+###############################################################################
+# Auto-capitalize medicare form input
+##############################################################################
+ 
+  $('form :input[name="mcare-number"]').keyup ->
+  $(this).val $(this).val().toUpperCase()
 
 ###############################################################################
 # Auto filling gender and date of birth from medical care number

@@ -13,9 +13,7 @@ return $config = array
         'user'      => 'root',
         'password'  => 'root',
         'dbname'    => 'fsts',
-        'host'      => 'localhost',
-        'port'      => '8889'
-
+        
 
     ),
 
