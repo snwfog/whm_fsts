@@ -137,9 +137,9 @@ $ ->
 # Since this function is in the local scope of the script.coffee
 # I just copy & pasted here for simplicity
 ################################################################################
-  noteAlert = (msg, type) ->
+  noteAlert = (msg, type, position = 'bottom') ->
     n = noty({
-      layout: 'bottom',
+      layout: position,
       type: type,
       text: msg,
       timeout: false,
@@ -196,8 +196,10 @@ $("form :input").keyup ->
 # Some input guidance
 ##############################################################################
   $('input[name="income"]').focus ->
-    noteAlert 'Go ahead, you may put arithmetic operations in this field.
-      For example, 4 * 400, or 2 * 1500, or 50 000 / 12.', 'success'
+    note = noteAlert 'Go ahead, you may put arithmetic operations in this field.
+      For example, 4 * 400, or 2 * 1500, or 50 000 / 12.', 'information', 'bottomRight'
+    $(this).blur ->
+      note.close()
 
   $('input.help').popover
     'trigger': 'hover'
