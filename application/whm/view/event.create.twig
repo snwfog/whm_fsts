@@ -3,13 +3,34 @@
 {% block content %}
     <div class="span6">
         <div class="tabbable tabs-top">
-
             {% for error in errors %}
                 {% block error %}
                     <div id="error">{{ error }}</div></br>
                 {% endblock %}
             {% endfor %}
-
+            
+            <legend class ='controls controls-row'>
+                <div class='pull-left'>
+                    ID: {{ event["event-id"] }}
+                </div>
+                {% if event %}
+                    {# DECIDE LABEL COLOR #}
+                    {% set maxparticipants = event.capacity %}
+                    {% set actualparticipants = participants ? participants|length : 0 %}
+                    {% set availablespots = maxparticipants - actualparticipants %}
+                    {% set labelcolor = 'success' %}
+                    {% if availablespots <= maxparticipants / 10 %}
+                        {% set labelcolor = 'important' %}
+                    {% elseif availablespots <= maxparticipants / 2 %}
+                        {% set labelcolor = 'warning' %}
+                    {% endif %}
+                    <div class='pull-right'>
+                        <span class="label label-{{ labelcolor }}">
+                        <i class="icon-user icon-white"></i> {{ actualparticipants }}/{{maxparticipants }}
+                        </span>
+                    </div>
+                {% endif %}
+            </legend>
             <ul class="nav nav-tabs">
                 <li class="active">
                     <a id='tab1-toggle' href="#tab1" data-toggle="tab">
@@ -29,29 +50,6 @@
                     </form>
                     <form action="{{ apppath }}{{ formAction }}" method="POST" name="event-form" 
                     id="{%if event is not null %}view-event-form{% endif %}">
-
-                        <legend class ='controls controls-row'>
-                            <div class='pull-left'>
-                                ID: {{ event["event-id"] }}
-                            </div>
-                            {% if event %}
-                                {# DECIDE LABEL COLOR #}
-                                {% set maxparticipants = event.capacity %}
-                                {% set actualparticipants = participants ? participants|length : 0 %}
-                                {% set availablespots = maxparticipants - actualparticipants %}
-                                {% set labelcolor = 'success' %}
-                                {% if availablespots <= maxparticipants / 10 %}
-                                    {% set labelcolor = 'important' %}
-                                {% elseif availablespots <= maxparticipants / 2 %}
-                                    {% set labelcolor = 'warning' %}
-                                {% endif %}
-                                <div class='pull-right'>
-                                    <span class="label label-{{ labelcolor }}">
-                                    <i class="icon-user icon-white"></i> {{ actualparticipants }}/{{maxparticipants }}
-                                    </span>
-                                </div>
-                            {% endif %}
-                        </legend>
 
                         {% include 'base.createEvent.part.twig' %}
 
