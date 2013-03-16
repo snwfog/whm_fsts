@@ -1,6 +1,5 @@
 # This file contains dynamic sugar candy behaviour
 $ ->
-
 #######
 # Change active bebaviour of member buttons
 #######
