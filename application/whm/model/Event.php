@@ -38,7 +38,7 @@ class Event
 
     /**
      * 1 <-> * -- Inversing by Default
-     * @OneToMany(targetEntity="Timeslot", mappedBy="event")
+     * @OneToMany(targetEntity="Timeslot", mappedBy="event", cascade={"all"})
      **/
     protected $timeslots;
 
