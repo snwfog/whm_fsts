@@ -128,7 +128,14 @@ $(function() {
       }
     });
     return n;
-  };
+    };
+  $("form :input").keyup(function() {
+    return $(this).val($(this).val().replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}));
+    });
+  $('form :input[name="mcare-number"]').keyup(function() {
+    return $(this).val($(this).val().toUpperCase());
+  });
+
   $('form input[name="mcare-number"]').keyup(function() {
     var date, dob, gender, index, input, month, shard, year, _i, _len, _ref;
     input = $(this).val().split('-');
