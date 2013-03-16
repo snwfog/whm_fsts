@@ -1,12 +1,4 @@
 $(function() {
-    /*
-    * Draggable table rows
-    */
-     var tableDnD = new TableDnD();
-     var table = document.getElementById('timeslot-table');
-     tableDnD.init(table);
-
-    /* Create Event*/
     $('button#create-event-save').click(function() {
         var clicked, formElement, occurrence, form1, form2;
         clicked = $("#event-occurrence .active").length > 0;
@@ -24,7 +16,6 @@ $(function() {
         return form1.submit();
     });
 
-    /* Create Template*/
     $('button#create-template-save').click(function() {
         var formElement;
         formElement = document.createElement("input");
@@ -35,7 +26,6 @@ $(function() {
         return $('form[name="event-form"]').submit();
     });
 
-    /* Add timeslot row to table*/
     $('button#add-timeslot-table').click(function() {
         $('tbody#timeslot-table-tbody')
                   .append('<tr>\
@@ -52,7 +42,6 @@ $(function() {
                                 </td>\
                           </tr>\
                           <input class="span" type="hidden" name="slot-id[]" value=""/>');
-        //Rerun make table draggable everytime new row is added
         var table = document.getElementById('timeslot-table');
         var tableDnD = new TableDnD();
         return tableDnD.init(table);
