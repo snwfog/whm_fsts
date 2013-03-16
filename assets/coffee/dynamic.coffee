@@ -154,16 +154,16 @@ $ ->
 ###############################################################################
 # Auto-capitalize first letter of all form input
 ##############################################################################
-$("form :input").keyup ->
-  $(this).val $(this).val().replace(/\w\S*/g, (txt) ->
-    txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
-  )
+#$("form :input").keyup ->
+#  $(this).val $(this).val().replace(/\w\S*/g, (txt) ->
+#    txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+#  )
 ###############################################################################
 # Auto-capitalize medicare form input
 ##############################################################################
  
-  $('form :input[name="mcare-number"]').keyup ->
-  $(this).val $(this).val().toUpperCase()
+#  $('form :input[name="mcare-number"]').keyup ->
+#  $(this).val $(this).val().toUpperCase()
 
 ###############################################################################
 # Auto filling gender and date of birth from medical care number
@@ -194,16 +194,17 @@ $("form :input").keyup ->
 
 ###############################################################################
 # Some input guidance
+# Display a help tips regarding a specific input field
+# 1. Add the "help" class to the input
+# 2. Add the to-be displayed message through attribute data-message="help message here..."
 ##############################################################################
-  $('input[name="income"]').focus ->
-    note = noteAlert 'Go ahead, you may put arithmetic operations in this field.
-      For example, 4 * 400, or 2 * 1500, or 50 000 / 12.', 'information', 'bottomRight'
+  $('input.help').focus ->
+    # Get the data message
+    $input = $(this)
+    message = $input.data "message"
+    note = noteAlert message, 'information', 'bottomRight'
     $(this).blur ->
       note.close()
-
-  $('input.help').popover
-    'trigger': 'hover'
-    'placement': 'top'
 
 true
 

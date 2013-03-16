@@ -4,7 +4,7 @@
         <legend>Information</legend>
         <div class="controls controls-row">
             <input class="span4 help" maxlength="{{ 3 * 4 + 2 }}" type="text"
-                   data-toggle="popover" data-content="Go ahead enter the medicare number. The Age, Gender, and Date of Birth will be automatically filled in for you."
+                   data-message="Go ahead enter the medicare number. The Age, Gender, and Date of Birth will be automatically filled in for you."
                    name="mcare-number" placeholder="Medical Care" value="{{ household["medicare-number"] }}"/>
             <input class="span4" type="text" name="work_status"
                    placeholder="Work Status" maxlength="2" value="{{ household["work-status"] }}"/>
@@ -32,7 +32,9 @@
                    placeholder="Marital" value="{{ household["marital"] }}"/>
             <input class="span4" type="text" name="referral"
                    placeholder="Referral" value="{{ household.referral }}"/>
-            <input class="span4" type="text" name="income"
+            <input class="span4 help" type="text" name="income"
+                   data-message="[Not working ATM] Go ahead, you may put arithmetic operations in this field. For
+                   example, 4 * 400, or 2 * 1500, or 50 000 / 12 and we will calculate the result for you."
                    placeholder="Annual Income" value="{{ household["income"] }}"/>
         </div>
     </fieldset>
