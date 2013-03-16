@@ -1,4 +1,12 @@
 $(function() {
+    /*
+    * Draggable table rows
+    */
+     var tableDnD = new TableDnD();
+     var table = document.getElementById('timeslot-table');
+     tableDnD.init(table);
+
+    /* Create Event*/
     $('button#create-event-save').click(function() {
         var clicked, formElement, occurrence, form1, form2;
         clicked = $("#event-occurrence .active").length > 0;
@@ -15,6 +23,8 @@ $(function() {
         $('form[name="event-form"] :input').not(':submit').clone().hide().attr('isacopy','y').appendTo(form1);
         return form1.submit();
     });
+
+    /* Create Template*/
     $('button#create-template-save').click(function() {
         var formElement;
         formElement = document.createElement("input");
@@ -25,23 +35,9 @@ $(function() {
         return $('form[name="event-form"]').submit();
     });
 
-    $('button#add-timeslot').click(function() {
-        var count;
-        count = 1;
-        $('form[name="view-timeslot-form"]').append('<div id="timeslot-input">\
-                          <h4>Time slot ' + count + ': &nbsp; &nbsp;\
-                          <input class="span2" type="text" name="slot-start-time[]" placeholder="Start Time" />\
-                          &nbsp;\
-                          <input class="span2" type="text" name="slot-end-time[]" placeholder="End Time"/>\
-                          &nbsp;\
-                          <input class="span2" type="text" name="slot-capacity[]" placeholder="Capacity"/>\
-                          </h4>\
-                      </div>');
-        return count = count + 1;
-    });
-
+    /* Add timeslot row to table*/
     $('button#add-timeslot-table').click(function() {
-        return $('tbody#timeslot-table-tbody')
+        $('tbody#timeslot-table-tbody')
                   .append('<tr>\
                                 <td>\
                                     <input class="span" type="text" name="slot-name[]" placeholder="Name"/>\
@@ -56,5 +52,9 @@ $(function() {
                                 </td>\
                           </tr>\
                           <input class="span" type="hidden" name="slot-id[]" value=""/>');
+        //Rerun make table draggable everytime new row is added
+        var table = document.getElementById('timeslot-table');
+        var tableDnD = new TableDnD();
+        return tableDnD.init(table);
     });
 });
