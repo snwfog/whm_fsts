@@ -2,7 +2,7 @@
 var __slice = [].slice;
 
 $(function() {
-  var first, noteAlert, path, pathname, usermap, _ref;
+  var first, path, pathname, usermap, _ref;
   pathname = $(location).attr("pathname");
   _ref = pathname.split('/'), first = _ref[0], path = 2 <= _ref.length ? __slice.call(_ref, 1) : [];
   $('button#create-household-save').click(function() {
@@ -42,31 +42,6 @@ $(function() {
       }
     });
   });
-  noteAlert = function(msg, type) {
-    var n;
-    return n = noty({
-      layout: 'bottomRight',
-      type: type,
-      text: msg,
-      animation: {
-        open: {
-          height: 'toggle'
-        },
-        close: {
-          height: 'toggle'
-        },
-        easing: 'swing',
-        speed: 200
-      }
-    });
-  };
-  /*
-    Bootstrap Typeahead for ORIGINS and LANGUAGES
-    Sexy way of doing typeahead with ajax & bootstrap
-    http://stackoverflow.com/questions/9232748/twitter-bootstrap-typeahead-ajax-example
-    http://tatiyants.com/how-to-use-json-objects-with-twitter-bootstrap-typeahead/
-  */
-
   $("input[name='origin']").typeahead({
     source: function(query, process) {
       return $.ajax({
