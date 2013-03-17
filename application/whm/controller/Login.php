@@ -11,7 +11,7 @@ class Login
         {
             // Redirect user to homepage if not logged in.
             
-            if($_SERVER['REQUEST_URI'] == '/' && isset($_POST))
+            if($_SERVER['REQUEST_URI'] == FOLDER_URL && isset($_POST))
             {  
                 // do nothing
             }
