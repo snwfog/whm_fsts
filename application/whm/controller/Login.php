@@ -2,6 +2,8 @@
 
 namespace WHM\Controller;
 
+use WHM\Model\Session;
+
 class Login
 {
 
@@ -17,8 +19,7 @@ class Login
             }
             else
             {               
-                session_start();
-                if(!isset($_SESSION['sessID']) || $_SESSION['sessID'] != session_id())
+                if(!Session::isLoggedIn())
                 {
                     header('Location: ' . SITE_ROOT);                    
                 }

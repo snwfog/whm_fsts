@@ -9,6 +9,7 @@ use WHM\Helper;
 use WHM\Model\Address;
 use WHM\Application;
 use WHM\Model\ManageOperator;
+use WHM\Model\Session;
 
 /*
  * INDEX CONTROLLER / ALSO AS TEMPLATE
@@ -45,11 +46,7 @@ class Index extends Controller implements IRedirectable
 
             if ($user)
             {
-                // creating session                
-                session_start();
-                $_SESSION['sessID'] = session_id();
-                $_SESSION['username'] = $_POST["username"];
-                
+                Session::logIn($_POST["username"]);                
                 $this->redirect('household/new');
             } 
             else
