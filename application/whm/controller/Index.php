@@ -13,20 +13,22 @@ use WHM\Model\ManageOperator;
 /*
  * INDEX CONTROLLER / ALSO AS TEMPLATE
  */
+
 class Index extends Controller implements IRedirectable
 {
+
     protected $data = array("errors" => array(), "form" => array());
-    
+
     /**
      * @var ManageOperator
      */
-    protected $manageOperator ;
-    
+    protected $manageOperator;
+
     public function __construct(array $args = null)
     {
         $this->data = $args;
         parent::__construct();
-        
+
         $this->manageOperator = new ManageOperator();
     }
 
@@ -34,20 +36,31 @@ class Index extends Controller implements IRedirectable
     {
         $this->display("index.twig");
     }
+
     public function post()
     {
         if (isset($_POST))
         {
-            $user = $this->manageOperator->findOperator($_POST["username"], $_POST["inputPassword"]);            
+            $user = $this->manageOperator->findOperator($_POST["username"], $_POST["inputPassword"]);
 
-            if($user)          
+            if ($user)
+            {
+                // creating session
+                error_log("before:" . session_status());
+                session_start();
+                error_log('after:' . session_status());
+                $_SESSION['username'] = $_POST["username"];
+                
                 $this->redirect('household/new');
+            } 
             else
+            {
                 $this->display("Login.error.twig");
-        }
-        else
+            }
+        } else
         {
             $this->display("Login.error.twig");
         }
     }
+
 }

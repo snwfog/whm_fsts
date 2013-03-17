@@ -53,11 +53,8 @@ class Hook
 
         if (isset($instance->_hooks[$hook_name]))
         {
-            echo "Have found handler";
-
             foreach ($instance->_hooks[$hook_name] as $fn)
             {
-                echo "FIRING HOOKS";
                 call_user_func_array($fn, array(&$params));
             }
         }
