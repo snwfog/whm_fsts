@@ -157,6 +157,19 @@ class ManageEvent
     }
 
 
+    public function getAllEvents()
+    {
+        $query = $this->em->createQueryBuilder()
+                          ->select("event")
+                          ->from("WHM\model\Event", "event")
+                          ->groupBy("event.group_id")
+                          ->orderBy("event.group_id");                     
+
+        $allEvents = $query->getQuery()->execute();
+        return $allEvents;
+    }
+
+
     public function getRelatedEvents($group_id)
     {
         $query = $this->em->createQueryBuilder()

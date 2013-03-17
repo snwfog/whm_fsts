@@ -25,8 +25,8 @@ class Event extends Controller implements IRedirectable
 
     public function get($event_id = null)
     {
-        $eventUCs = $this->manageEvent->getUpComingEvents();
-        $this->data["upcomingEvents"] = $this->formatEvents($eventUCs);
+        $allEvents = $this->manageEvent->getAllEvents();
+        $this->data["allEvents"] = $this->formatEvents($allEvents);
 
         if(!is_null($event_id)){
             //Get the specified event, upcoming events and related events

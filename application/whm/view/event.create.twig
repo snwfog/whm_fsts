@@ -186,14 +186,14 @@
         <legend>Events</legend>
         <div class="well no-padding-well" id="dates-well">
             <ul class="nav nav-list" id="date-list">
-            {% for eventUC in upcomingEvents %}
-                {% if eventUC["group-id"] == event["group-id"] %}
+            {% for each_event in allEvents %}
+                {% if each_event["group-id"] == event["group-id"] %}
                     <li class="active">
                 {% else %}
                     <li class="">
                 {% endif %}
-                    <a href="{{ apppath }}event/{{ eventUC["event-id"] }}">
-                        <i class="icon-tasks"></i>{{ eventUC.name }}</a></li>
+                    <a href="{{ apppath }}event/{{ each_event["event-id"] }}">
+                        <i class="icon-tasks"></i>{{ each_event.name }}</a></li>
             {% endfor %}
             </ul>
            
