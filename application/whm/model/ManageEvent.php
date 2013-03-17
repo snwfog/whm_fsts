@@ -147,6 +147,7 @@ class ManageEvent
                           ->where("event.start_date <= :dateFuture")
                           ->andWhere("event.start_date >= :dateNow")
                           ->andWhere("event.is_template <> 1")
+                          ->andWhere("event.is_activated = 1")
                           ->groupBy("event.group_id")
                           ->orderBy("event.group_id")
                           ->setParameter('dateFuture', $dateFuture)
@@ -157,7 +158,7 @@ class ManageEvent
     }
 
 
-    public function getAllEventsByGroup()
+    public function getAllEvents()
     {
         $query = $this->em->createQueryBuilder()
                           ->select("event")
