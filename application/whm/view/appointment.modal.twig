@@ -48,15 +48,14 @@
                                     {% for i in 1..maxevents %}
                                         <tr>
                                             {% for j in 1..weeklength %}
-
                                                 <td>
-                                                    {% if events[i][j] is null %}
-                                                        <br/ ><br/ >
-                                                    {% else %}
                                                         {% set index = (7 * (k - 1) + j) %}
                                                         {% if k == 2 %}
                                                             {% set j = j + 7 %}
                                                         {% endif %}
+                                                            {% if events[i][j] is null %}
+                                                                <br/ ><br/ >
+                                                            {% else %}
                                                         {% set registered = 'unregistered' %}
                                                         {% for h in events[i][j]["participants"] %}
                                                         {# CONSULT TEAM #}
