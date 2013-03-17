@@ -5,7 +5,7 @@ namespace WHM\Controller;
 class Login
 {
 
-    public static function beforeHandler($phpSessionStatus)
+    public static function beforeHandler()
     {
         return function()
         {

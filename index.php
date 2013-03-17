@@ -53,7 +53,7 @@ require_once('application/whm/Bootstrap.php');
 // Instance the application
 $app = new WHM\Application($config);
 
-WHM\Hook::add(BEFORE_HANDLER_HOOK, WHM\Controller\Login::beforeHandler(session_status()));
+WHM\Hook::add(BEFORE_HANDLER_HOOK, WHM\Controller\Login::beforeHandler());
 
 $app::route($serves);
 
