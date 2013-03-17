@@ -45,10 +45,9 @@ class Index extends Controller implements IRedirectable
 
             if ($user)
             {
-                // creating session
-                error_log("before:" . session_status());
+                // creating session                
                 session_start();
-                error_log('after:' . session_status());
+                $_SESSION['sessID'] = session_id();
                 $_SESSION['username'] = $_POST["username"];
                 
                 $this->redirect('household/new');
