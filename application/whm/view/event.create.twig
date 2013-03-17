@@ -88,6 +88,11 @@
                              <a href="{{ apppath }}event/{{ event["event-id"] }}" style="text-decoration: none; color: white;"> Cancel </a>
                         </button>
 
+                        <button class="btn btn-primary btn-large"
+                        data-toggle="modal" data-target="#add-date-modal">
+                            <i class="icon-calendar"></i> New Date
+                        </button>
+
                         {# Event Activation Form + Button #}
                         {% if event["is_activated"] %}
                             <button type="button" class="btn btn-danger btn-large" id="activate-event">
@@ -112,6 +117,7 @@
             </div>
         </div>
     </div>
+    {% include 'addDate.modal.twig' %}
 {% endblock content %}
 
 {# This part should be auto generated #}

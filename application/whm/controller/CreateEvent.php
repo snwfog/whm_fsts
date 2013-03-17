@@ -28,7 +28,7 @@ class CreateEvent extends Controller implements IRedirectable
         $templates = $this->manageEvent->getTemplates();
         $this->data["templates"] = $this->event->formatEvents($templates);
 
-        $allEvents = $this->manageEvent->getAllEvents();
+        $allEvents = $this->manageEvent->getAllEventsByGroup();
         $this->data["allEvents"] = $this->event->formatEvents($allEvents);
 
         if(!is_null($template_id)){

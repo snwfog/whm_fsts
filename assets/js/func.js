@@ -53,4 +53,23 @@ $(function() {
     $('button#activate-event').click(function() {
         return $('form[name="event-active-status"]').submit();
     });
+
+
+    $('button#new-date-create').click(function() {
+        var clicked, formElement, occurrence, form1;
+        clicked = $("#event-occurrence .active").length > 0;
+        if (clicked) {
+            occurrence = $("#event-occurrence .active").data("value");
+            formElement = document.createElement("input");
+            formElement.setAttribute("name", "occurrence-type");
+            formElement.setAttribute("type", "hidden");
+            formElement.setAttribute("value", occurrence);
+            $('form[name="event-form"]').append(formElement);
+        }
+        form1 = $('form[name="multiform"]');
+        $('form[name="view-timeslot-form"] :input').not(':submit').clone().hide().attr('isacopy','y').appendTo(form1);
+        $('form[name="event-form"] :input').not(':submit').clone().hide().attr('isacopy','y').appendTo(form1);
+        $('form[name="new-date-form"] :input').not(':submit').clone().hide().attr('isacopy','y').appendTo(form1);
+        return form1.submit();
+    });
 });
