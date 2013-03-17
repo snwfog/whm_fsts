@@ -77,14 +77,17 @@
                 <legend>Action</legend>
                 <div class="btn-toolbar">
                     {% if event %}
-                        <button class="btn btn-warning btn-large" data-toggle="button" class-toggle="btn-state" name="event-create-modify" type="button">
+
+                        <button class="btn btn-warning" data-toggle="button" class-toggle="btn-state" name="event-create-modify" type="button">
+
                                 <i class="icon-edit icon-white"></i> Modify
                         </button>
 
-                        {#<button id="add-event-date" type="button" class="btn btn-large btn-info"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Add Date</button>
+                        {#<button id="add-event-date" type="button" class="btn btn-info"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Add Date</button>
                         #}
 
-                        <button href="{{ apppath }}event/{{ event["event-id"] }}" type="submit" class="btn btn-large btn-danger submit" disabled> 
+                         <button href="{{ apppath }}event/{{ event["event-id"] }}" type="submit" class="btn btn-danger submit" disabled> 
+
                              <a href="{{ apppath }}event/{{ event["event-id"] }}" style="text-decoration: none; color: white;"> Cancel </a>
                         </button>
 
@@ -105,8 +108,8 @@
                         {# END OF Event Activation Form + Button #}
 
                     {% else %}
-                        <button id="create-event-save" type="button" class="btn btn-large btn-success"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Create Event</button>
-                        <button id="create-template-save" type="button" class="btn btn-large btn-info"><i class="icon-file icon-white submit"></i> Save Template </button>
+                        <button id="create-event-save" type="button" class="btn btn-success"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Create Event</button>
+                        <button id="create-template-save" type="button" class="btn btn-info"><i class="icon-file icon-white submit"></i> Save Template </button>
                     {% endif %}                              
                 </div>  
             </div>

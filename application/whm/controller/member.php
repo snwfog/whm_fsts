@@ -39,6 +39,7 @@ class Member extends Controller implements IRedirectable
                         "marital"  => $member->getMaritalStatus(),
                         "origin"   => $member->getOrigin(),
                         "income" => $member->getIncome(),
+                        "gender" => $member->getGender(),
                         "street"    => $address->getStreet(),
                         "apt-number"      => $address->getAptNumber(),
                         "postal-code"   => $address->getPostalCode(),
