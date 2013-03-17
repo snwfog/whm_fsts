@@ -1,13 +1,10 @@
 $ ->
-
   # Get the full pathname
   pathname = $(location).attr "pathname"
   # Splat and get the "could be" local path
   # because we don't know if it is a local path or not
   [first, path...] = pathname.split '/'
 #  if path.length >= 3
-
-
 
   # Submit the create household form
   $('button#create-household-save').click ->

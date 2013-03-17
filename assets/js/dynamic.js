@@ -106,16 +106,19 @@ $(function() {
       return btn.prop("disabled", btn.prop("disabled") ? false : true);
     });
   });
-  noteAlert = function(msg, type, position) {
+  noteAlert = function(msg, type, position, timeout) {
     var n;
     if (position == null) {
       position = 'bottom';
+    }
+    if (timeout == null) {
+      timeout = false;
     }
     n = noty({
       layout: position,
       type: type,
       text: msg,
-      timeout: false,
+      timeout: timeout,
       animation: {
         open: {
           height: 'toggle'
@@ -128,15 +131,6 @@ $(function() {
       }
     });
     return n;
-    };
-  $("form :input").keyup(function() {
-    return $(this).val($(this).val().replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}));
-    });
-  $('form :input[name="mcare-number"]').keyup(function() {
-    return $(this).val($(this).val().toUpperCase());
-  });
-
-
   };
   $("form :input").keyup(function() {
     return $(this).val($(this).val().replace(/\w\S*/g, function(txt) {
@@ -145,7 +139,6 @@ $(function() {
   });
   $('form :input[name="mcare-number"]').keyup(function() {});
   $(this).val($(this).val().toUpperCase());
-
   $('form input[name="mcare-number"]').keyup(function() {
     var date, dob, gender, index, input, month, shard, year, _i, _len, _ref;
     input = $(this).val().split('-');
@@ -181,7 +174,31 @@ $(function() {
       return note.close();
     });
   });
-  return $('input[name="income"]').blur(function() {});
+  $('input[name="income"]').blur(function() {
+    var $income, first, match, operator, reg, second, val, _ref;
+    $income = $(this);
+    val = $income.val();
+    reg = /[\d]+[\s]*([\*\/\+\-])?[\s]*[\d]+/ig;
+    match = reg.exec(val);
+    if (match) {
+      if (match[1] != null) {
+        operator = match[1];
+        _ref = val.split(operator), first = _ref[0], second = _ref[1];
+        console.log("" + first + " and " + second);
+        switch (operator) {
+          case "/":
+            return $income.val(first / second);
+          case "*":
+            return $income.val(first * second);
+          case "+":
+            return $income.val(first + second);
+          case "-":
+            return $income.val(first - second);
+        }
+      }
+    } else {
+      return noteAlert("Invalid Income format.", "error", "bottomRight", true);
+    }
+  });
+  return true;
 });
-
-true;

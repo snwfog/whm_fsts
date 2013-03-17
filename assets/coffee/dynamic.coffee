@@ -137,12 +137,12 @@ $ ->
 # Since this function is in the local scope of the script.coffee
 # I just copy & pasted here for simplicity
 ################################################################################
-  noteAlert = (msg, type, position = 'bottom') ->
+  noteAlert = (msg, type, position = 'bottom', timeout = false) ->
     n = noty({
       layout: position,
       type: type,
       text: msg,
-      timeout: false,
+      timeout: timeout,
       animation: {
         open: {height: 'toggle'},
         close: {height: 'toggle'},
@@ -209,6 +209,23 @@ $ ->
 # Calculating of the income field
 #################################
   $('input[name="income"]').blur ->
+    $income = $(this)
+    val = $income.val()
     # Check for valid field
-true
+    reg = /[\d]+[\s]*([\*\/\+\-])?[\s]*[\d]+/ig
+    match = reg.exec val
+    if match
+      if match[1]?
+        operator = match[1]
+        [first, second] = val.split operator
+        console.log "#{first} and #{second}"
+        switch operator
+          when "/" then $income.val first / second
+          when "*" then $income.val first * second
+          when "+" then $income.val first + second
+          when "-" then $income.val first - second
+    else
+      noteAlert "Invalid Income format.", "error", "bottomRight", true
+
+  true
 
