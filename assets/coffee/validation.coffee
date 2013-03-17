@@ -176,7 +176,7 @@ $ ->
   }, {
     name: "street",
     display: "Street",
-    rules: "alpha_numeric"
+    rules: "callback_check_alpha_numeric_space_dash"
   }, {
     name: "apt-number",
     display: "Apartment",
@@ -225,3 +225,8 @@ $ ->
     reg = /(\w\d\w)-?(\d\w\d)/ig
     if reg.exec value then true else false
   ).setMessage('check_postal_code', 'Invalid Postal Code format. The valid format should be of <b>A#A-#A#</b>.')
+
+  createHouseholdValidator.registerCallback('check_alpha_numeric_space_dash', (value) ->
+    reg = /([\w\s\-]+)/ig
+    if reg.exec value then true else false
+  ).setMessage 'check_alpha_numeric_space_dash', 'Input contains invalid character(s).'
