@@ -6,6 +6,7 @@ use \WHM\Model\Flag;
 use \WHM\Model\FlagDescriptor;
 use \WHM\Model\ManageHousehold;
 use \WHM\Model\HouseholdMember;
+use \DateTime;
 
 
 /**
@@ -25,8 +26,10 @@ class ManageFlag
 
     public function createFlag($data)
     {
+        $datetime = new DateTime("now");
         $flag = new Flag();
-        $flag->setMessage($data["message"]); 
+        $flag->setMessage($data["message"]);
+        $flag->setFlagDate($datetime); 
         $household_member = $this->mhousehold->findMember($data["member-id"]);
         $flag_descriptors = $this->findDescriptors($data["flag-descriptor-id"]); 
         $flag->setHouseholdMember($household_member);
