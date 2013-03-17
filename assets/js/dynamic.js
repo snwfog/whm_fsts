@@ -128,7 +128,6 @@ $(function() {
       }
     });
     return n;
-<<<<<<< Updated upstream
     };
   $("form :input").keyup(function() {
     return $(this).val($(this).val().replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}));
@@ -138,7 +137,6 @@ $(function() {
   });
 
 
-=======
   };
   $("form :input").keyup(function() {
     return $(this).val($(this).val().replace(/\w\S*/g, function(txt) {
@@ -147,7 +145,7 @@ $(function() {
   });
   $('form :input[name="mcare-number"]').keyup(function() {});
   $(this).val($(this).val().toUpperCase());
->>>>>>> Stashed changes
+
   $('form input[name="mcare-number"]').keyup(function() {
     var date, dob, gender, index, input, month, shard, year, _i, _len, _ref;
     input = $(this).val().split('-');
