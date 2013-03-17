@@ -62,6 +62,7 @@ class Event extends Controller implements IRedirectable
         if(isset($_POST["activate"])){
             $this->manageEvent->setIsActivated($event, $_POST["activate"]);
             $this->redirect('event/'.$_POST["event-id"]);
+            return;
         }
 
         //Convert start-date and start-time to datetime object
@@ -77,6 +78,7 @@ class Event extends Controller implements IRedirectable
             $start_date->setDate($form_start_date[2], $form_start_date[0], $form_start_date[1]);// input y/m/d
         }else{
             $this->redirect('event/'.$_POST["event-id"]);
+            return;
         }
 
         $_POST["start-date"] = $start_date;
