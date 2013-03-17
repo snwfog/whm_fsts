@@ -67,7 +67,7 @@ class Household extends Controller implements IRedirectable
             //Get Events to make appointment
             $eventcontroller = new \WHM\Controller\Event; 
             $eventdraft=$this->manageEvents->getUpComingEvents();
-            $events=$eventcontroller->getIndexedEvents($eventdraft);
+            $events=$eventcontroller->getIndexedEvents($eventdraft, $household_id, $member_id);
 
             $data = array(
                             "household"         =>  $data,

@@ -81,21 +81,22 @@
                                                             {% if d == events[i][j]["date"] %}
                                                                 <div class="dropdown btn-group">
                                                                     <a class="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#">
-                                                                        {{ events[i][j]["name"] }}
+                                                                        {{ events[i][j]["name"]|slice(0, 10) }}
                                                                         <span class="caret"></span>
                                                                     </a>
                                                                     <ul class="dropdown-menu">
-                                                                    {% set slotdate = events[i][j]["start-time"] %}
+
                                                                     {% for slots in events[i][j]["timeslots"] %}
-                                                                        <li>
+                                                                        <li >{# class="disabled" #}
                                                                             <a href="javascript:void(0)" onclick="document.forms['slot-{{slots["id"]}}'].submit()" >  
-                                                                                {{slots["start-time"]}}-{{slots["end-time"]}} 
+                                                                                {{ slots["start-time"]}}-{{slots["end-time"] }} 
                                                                                 <i class="icon-user icon-black"></i>
-                                                                                {# INSERT NUMBER OF PARTICIPANTS#}
-                                                                                {{random(slots["capacity"])}}/{{slots["capacity"]}}
+                                                                                {{ slots["registered"]}}/{{slots["capacity"] }}
+                                                                                {{ slots.status }} 
                                                                             </a>
                                                                         </li>
                                                                     {% endfor %}
+
                                                                     </ul>
                                                                 </div>
                                                                 {# FORMS #}

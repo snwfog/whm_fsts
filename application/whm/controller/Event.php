@@ -100,12 +100,12 @@ class Event extends Controller implements IRedirectable
         return $data;
     }
 
-    public function getIndexedEvents($events)
+    public function getIndexedEvents($events, $household_id, $member_id)
     {
         $data = array();
         $tracker = array();
 
-        for ($j = 1; $j <= 10; $j++)  // 10 rows for now...
+        for ($j = 1; $j <= 4; $j++)  // 4 rows
         {
             $date = date_create('now');
             $date->setTimezone(new DateTimeZone(LOCALTIME));
@@ -118,13 +118,9 @@ class Event extends Controller implements IRedirectable
                     $eventdate = $event->getStartDate()->format("m/d/Y");
                     if($d == $eventdate && !in_array($event->getId() , $tracker) && empty($data[$j][$i]))
                     {
-                        // $event = $this->manageEvent->findEvent($event->getId());
-                        // $participants = $event->getParticipants();
-                        // $participants = $this->helper->formatMember($participants);
-
-                        $timeslots= $this->getSlots($event);
-
+                        $timeslots= $this->getSlotsInfo($event, $household_id, $member_id);
                         $tracker[] = $event->getId();
+
                         $data[$j][$i] = array
                         (
                             "event-id" => $event->getId(),
@@ -163,11 +159,65 @@ class Event extends Controller implements IRedirectable
                 "capacity" => $t->getCapacity(),
                 "start-time" => $slotStarttime,
                 "end-time" => $endtime,
-                // NEED TO GET PARTICIPANTS TODO!!!!!!!!!
             );
             $slotStarttime = $endtime;
         }
         return $timeslots;
+    }
+
+    private function getSlotsInfo($event, $household_id, $member_id)
+    {
+        $count = 0;
+        $timeslots = array();
+
+        $timeslot = $event->getTimeslots();
+        $slotStarttime = $event->getStartTime()->format("H:i");
+
+        foreach( $timeslot as $t)
+        {   
+            $registration = $this->getRegistration($t, $household_id, $member_id);
+
+            $slotEndtime = new DateTime($slotStarttime);
+            $duration = '+'.$t->getDuration(). ' mins';
+            date_modify($slotEndtime, $duration);
+            $endtime = $slotEndtime->format('H:i');
+
+            $timeslots[$count++] = array
+            (
+                "id" => $t->getId(),
+                "name" => $t->getName(),
+                "duration" => $t->getDuration(),
+                "capacity" => $t->getCapacity(),
+                "start-time" => $slotStarttime,
+                "end-time" => $endtime,
+                "status" => $registration["status"],
+                "registered" => $registration["registered"]
+            );
+            $slotStarttime = $endtime;
+        }
+        return $timeslots;
+    }
+
+    private function getRegistration($timeslot, $household_id, $member_id)
+    {
+        $participants = $timeslot->getParticipants();
+        $participants = $this->helper->formatMember($participants);
+        $status = "Unregistered";
+
+        if(!is_null($participants))
+        {
+            foreach( $participants as $p )
+            {   
+                if( $p["household_id"] == $household_id and $p["member-id"] == $member_id )
+                    $status = "Registered";
+            }
+        }
+        $data = array(
+                    "status"  =>  $status,
+                    "registered"   => count($participants)
+                    );
+
+        return $data;
     }
 
 }
