@@ -1,15 +1,10 @@
 {% block timeslot %}
     <fieldset>
-        <legend>
-            Time Slots
-            <div class="pull-right">
-                <button id="add-timeslot-table" type="button" class="btn btn-small btn-info"><i class="icon-file icon-white"></i> Add Timeslot</button>
-            </div>
-        </legend>
-            <div id="timeslot-well" style="max-height:500px; overflow-y: auto;">
+            <div id="timeslot-well" style="max-height:350px; overflow-y: auto;">
                 <form action="{{ apppath }}event/new" method="POST" name="view-timeslot-form" id="{{ timeslots? 'timeslot-form' : 'new-timeslot-form'}}">
                     <table id="timeslot-table" class="table">
                           <thead>
+                              <th> Time</th>                
                               <th> Time Slot </th>
                               <th> Duration </th>
                               <th> Capacity </th>
@@ -18,7 +13,10 @@
                           <tbody id="timeslot-table-tbody">
                             {% for timeslot in timeslots %}
                                 <input class="span" type="hidden" name="slot-id[]" value="{{ timeslot.id }}"/>
-                                <tr>                                 
+                                <tr>
+                                    <td>
+                                      {{ timeslot["start-time"] }}-{{ timeslot["end-time"] }}
+                                    </td>                                
                                     <td>
                                         <input class="span" type="text" name="slot-name[]" value="{{ timeslot.name }}"/>
                                     </td>
@@ -26,7 +24,7 @@
                                         <input class="span5" type="number" name="slot-duration[]" value="{{ timeslot.duration }}"/>
                                     </td>
                                     <td>
-                                        <input class="span" type="text" name="slot-capacity[]" value="{{ timeslot.capacity }}"/>
+                                        <input class="span5" type="text" name="slot-capacity[]" value="{{ timeslot.capacity }}"/>
                                     </td>
                                     <td>
                                     </td>
@@ -34,7 +32,9 @@
                             {% endfor %}
                             {% if not timeslots %}
                                 <input class="span" type="hidden" name="slot-id[]" value=""/>
-                                <tr>          
+                                <tr>
+                                    <td>
+                                    </td>         
                                     <td>
                                         <input class="span" type="text" name="slot-name[]" placeholder="Name"/>
                                     </td>
@@ -50,9 +50,12 @@
                              {% endif %}  
                           </tbody>
                      </table>
-                     *Note:Drag the Timeslot to reorder.
                 </form>
             </div>
+            <div class="pull-right">
+                <button id="add-timeslot-table" type="button" class="btn btn-small btn-info"><i class="icon-file icon-white"></i> Add Timeslot</button>
+            </div>
+            <small>*Note:Drag the Timeslot to reorder.</small>
     </fieldset>
 <script>
      var tableDnD = new TableDnD();

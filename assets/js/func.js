@@ -30,13 +30,16 @@ $(function() {
         $('tbody#timeslot-table-tbody')
                   .append('<tr>\
                                 <td>\
+                                    <p style="color:red;">NEW</p>\
+                                </td>\
+                                <td>\
                                     <input class="span" type="text" name="slot-name[]" placeholder="Name"/>\
                                 </td>\
                                 <td>\
                                     <input class="span5" type="number" name="slot-duration[]" placeholder="Minutes"/>\
                                 </td>\
                                 <td>\
-                                    <input class="span" type="text" name="slot-capacity[]" placeholder="Capacity"/>\
+                                    <input class="span5" type="text" name="slot-capacity[]" placeholder="Capacity"/>\
                                 </td>\
                                 <td>\
                                 </td>\
