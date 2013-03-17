@@ -128,6 +128,7 @@ $(function() {
       }
     });
     return n;
+<<<<<<< Updated upstream
     };
   $("form :input").keyup(function() {
     return $(this).val($(this).val().replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}));
@@ -136,6 +137,17 @@ $(function() {
     return $(this).val($(this).val().toUpperCase());
   });
 
+
+=======
+  };
+  $("form :input").keyup(function() {
+    return $(this).val($(this).val().replace(/\w\S*/g, function(txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    }));
+  });
+  $('form :input[name="mcare-number"]').keyup(function() {});
+  $(this).val($(this).val().toUpperCase());
+>>>>>>> Stashed changes
   $('form input[name="mcare-number"]').keyup(function() {
     var date, dob, gender, index, input, month, shard, year, _i, _len, _ref;
     input = $(this).val().split('-');
@@ -162,7 +174,7 @@ $(function() {
   };
   setInterval(time, 1000);
   time();
-  return $('input.help').focus(function() {
+  $('input.help').focus(function() {
     var $input, message, note;
     $input = $(this);
     message = $input.data("message");
@@ -171,6 +183,7 @@ $(function() {
       return note.close();
     });
   });
+  return $('input[name="income"]').blur(function() {});
 });
 
 true;

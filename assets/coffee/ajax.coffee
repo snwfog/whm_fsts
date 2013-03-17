@@ -159,6 +159,4 @@ $ ->
         else
           $district.css({ 'background-color': '#f1dede' })
           $district.val "Invalid Postal Code"
-
-
   true
