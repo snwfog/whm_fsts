@@ -2,7 +2,7 @@
 
 namespace WHM\Controller;
 
-class LoginHelper
+class Login
 {
 
     public static function beforeHandler($phpSessionStatus)
