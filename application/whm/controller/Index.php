@@ -8,19 +8,26 @@ use WHM\IRedirectable;
 use WHM\Helper;
 use WHM\Model\Address;
 use WHM\Application;
-use WHM\Model\LogIn;
+use WHM\Model\ManageOperator;
+
 /*
  * INDEX CONTROLLER / ALSO AS TEMPLATE
  */
 class Index extends Controller implements IRedirectable
 {
     protected $data = array("errors" => array(), "form" => array());
-    protected $logIn;
+    
+    /**
+     * @var ManageOperator
+     */
+    protected $manageOperator ;
+    
     public function __construct(array $args = null)
     {
         $this->data = $args;
         parent::__construct();
-        $this->logIn = new LogIn();
+        
+        $this->manageOperator = new ManageOperator();
     }
 
     public function get()
@@ -31,7 +38,8 @@ class Index extends Controller implements IRedirectable
     {
         if (isset($_POST))
         {
-            $user=$this->logIn->findOperator($_POST["username"], $_POST["inputPassword"]);
+            $user = $this->manageOperator->findOperator($_POST["username"], $_POST["inputPassword"]);            
+
             if($user)          
                 $this->redirect('household/new');
             else
