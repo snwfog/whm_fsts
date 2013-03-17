@@ -158,7 +158,7 @@ class ManageEvent
     }
 
 
-    public function getAllEvents()
+    public function getAllEventsByGroup()
     {
         $query = $this->em->createQueryBuilder()
                           ->select("event")
