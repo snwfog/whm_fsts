@@ -1,0 +1,44 @@
+{% block add_date_modal %}
+    <div id="add-date-modal"
+         class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+            <h3>Add Date</h3>
+        </div>
+
+        <div class="modal-body">
+            <form action="{{ apppath }}event/new" method="POST" name="event-date-form" id="new-date-form">
+                <div class="controls controls-row" id="name-row">
+                    <input class="span4" id="dp3" type="text" name="start-date" maxlength="8" placeholder="Start Date" value="{{ event.date }}"/>
+                    <input class="span4" id="dp4" type="text" name="end-date" maxlength="8" placeholder="End Date"/>
+                    <div class="input-append bootstrap-timepicker">
+                        <input class="span5" type="text" id="tp2" name="start-time" placeholder="Start Time" value="{{ event["start-time"] }}"/>
+                        <span class="add-on"><i class="icon-time"></i></span>
+                    </div>
+                </div>
+                <legend>Event Occurences</legend>
+
+                <div id="event-occurrence" class="btn-group" data-toggle="buttons-radio">
+                    <button type="button" class="btn btn-primary" data-value="daily">Daily</button>
+                    <button type="button" class="btn btn-primary" data-value="weekly">Weekly</button>
+                    <button type="button" class="btn btn-primary" data-value="biweekly">Biweekly</button>
+                    <button type="button" class="btn btn-primary" data-value="monthly">Monthly</button>
+                    <button type="button" class="btn btn-primary" data-value="bimonthly">Bimonthly</button>
+                    <button type="button" class="btn btn-primary" data-value="yearly">Yearly</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="modal-footer">
+            <button id="new-date-create" class="btn btn-success"><i class="icon-ok icon-white">
+                </i> Save Date
+                </button>
+        </div>
+    <script type="text/javascript">
+        $('#dp3,#dp4').datepicker();
+        $('#tp2').timepicker({showMeridian: false});
+    </script>
+    </div>
+{% endblock add_date_modal %}
