@@ -8,38 +8,58 @@ use WHM\IRedirectable;
 use WHM\Helper;
 use WHM\Model\Address;
 use WHM\Application;
-use WHM\Model\LogIn;
+use WHM\Model\ManageOperator;
+
 /*
  * INDEX CONTROLLER / ALSO AS TEMPLATE
  */
+
 class Index extends Controller implements IRedirectable
 {
+
     protected $data = array("errors" => array(), "form" => array());
-    protected $logIn;
+
+    /**
+     * @var ManageOperator
+     */
+    protected $manageOperator;
+
     public function __construct(array $args = null)
     {
         $this->data = $args;
         parent::__construct();
-        $this->logIn = new LogIn();
+
+        $this->manageOperator = new ManageOperator();
     }
 
     public function get()
     {
         $this->display("index.twig");
     }
+
     public function post()
     {
         if (isset($_POST))
         {
-            $user=$this->logIn->findOperator($_POST["username"], $_POST["inputPassword"]);
-            if($user)          
+            $user = $this->manageOperator->findOperator($_POST["username"], $_POST["inputPassword"]);
+
+            if ($user)
+            {
+                // creating session                
+                session_start();
+                $_SESSION['sessID'] = session_id();
+                $_SESSION['username'] = $_POST["username"];
+                
                 $this->redirect('household/new');
+            } 
             else
+            {
                 $this->display("Login.error.twig");
-        }
-        else
+            }
+        } else
         {
             $this->display("Login.error.twig");
         }
     }
+
 }
