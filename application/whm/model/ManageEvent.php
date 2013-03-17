@@ -180,6 +180,12 @@ class ManageEvent
         $templates = $query->getQuery()->execute();
         return $templates;
     }
+    public function setIsActivated($event, $activate)
+    {
+        $event->setIsActivated($activate);
+        $this->em->persist($event);
+        $this->em->flush();
+    }
 
 
     private function formatData($data)

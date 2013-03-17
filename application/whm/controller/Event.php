@@ -57,6 +57,12 @@ class Event extends Controller implements IRedirectable
     // Update Event
     public function post(){
         $event = $this->manageEvent->findEvent($_POST["event-id"]);
+        
+        //Activate or Deactive event
+        if(isset($_POST["activate"])){
+            $this->manageEvent->setIsActivated($event, $_POST["activate"]);
+            $this->redirect('event/'.$_POST["event-id"]);
+        }
 
         //Convert start-date and start-time to datetime object
         $start_time = new DateTime();
@@ -77,7 +83,6 @@ class Event extends Controller implements IRedirectable
         $_POST["start-time"] = $start_time;
         $this->manageEvent->updateEvent($event, $_POST);
         $this->redirect("event/".$event->getId());
-
     }
 
     public function formatEvents($events)
@@ -95,6 +100,7 @@ class Event extends Controller implements IRedirectable
                     "start-time" => $event->getStartTime()->format("H:i"),
                     "date" => $event->getStartDate()->format("m/d/Y"),
                     "group-id" => $event->getGroupId(),
+                    "is_activated" => $event->getIsActivated(),
                 );
         }
         return $data;

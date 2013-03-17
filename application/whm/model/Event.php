@@ -42,6 +42,9 @@ class Event
      **/
     protected $timeslots;
 
+    /** @Column(type="boolean") */
+    protected $is_activated = false;
+
 
     public function _construct()
     {
@@ -138,6 +141,16 @@ class Event
     public function getTimeslots()
     {
         return $this->timeslots;
+    }
+
+    public function getIsActivated()
+    {
+        return $this->is_activated;
+    }
+
+    public function setIsActivated($bool)
+    {
+        $this->is_activated = $bool;
     }
 
 }

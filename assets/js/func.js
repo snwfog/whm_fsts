@@ -49,4 +49,9 @@ $(function() {
         var tableDnD = new TableDnD();
         return tableDnD.init(table);
     });
+
+
+    $('button#activate-event').click(function() {
+        return $('form[name="event-active-status"]').submit();
+    });
 });
