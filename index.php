@@ -10,6 +10,7 @@ $serves = array
 (
     // Don't put the trailing slash - "/"
     '/'                             => 'WHM\Controller\Index',
+    '/login'                        => 'WHM\Controller\Login',
     '/logout'                       => 'WHM\Controller\Logout',
     '/household'                    => 'WHM\Controller\Household',
     '/household/:number'            => 'WHM\Controller\Household',
