@@ -37,6 +37,10 @@ class ManageEvent
         if(isset($data["group-id"]) && !is_null($data["group-id"])){
             $event->setGroupId($data["group-id"]);
         }else{
+            /*
+            **The event is saved before setting groupId just in 
+            **because the group-if might be its' own ID.
+            */
             $this->em->persist($event);
             $this->em->flush();
             $event->setGroupId($event->getId());

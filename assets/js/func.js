@@ -66,10 +66,46 @@ $(function() {
             formElement.setAttribute("value", occurrence);
             $('form[name="event-form"]').append(formElement);
         }
-        form1 = $('form[name="multiform"]');
+
+        //Disabled field cannot be submit
+        $("#view-event-form input").prop("disabled", false);
+        $("#view-event-form textarea").prop("disabled", false);
+        $("#timeslot-form input").prop("disabled", false);
+
+        //Disable common fields
+        $('#view-event-form input[name="start-date"]').prop("disabled", true)
+        $('#view-event-form input[name="start-time"]').prop("disabled", true)
+
+        form1 = $('form[name="event-date-form"]');
         $('form[name="view-timeslot-form"] :input').not(':submit').clone().hide().attr('isacopy','y').appendTo(form1);
         $('form[name="event-form"] :input').not(':submit').clone().hide().attr('isacopy','y').appendTo(form1);
-        $('form[name="new-date-form"] :input').not(':submit').clone().hide().attr('isacopy','y').appendTo(form1);
         return form1.submit();
     });
+	
+	// Javascript for dynamic fields depending on work_status
+	$('#work_status').blur(function() {
+		var workstatusObj = document.getElementById("work_status");
+		var schoolObj = document.getElementById("school");
+		var schoolIdObj = document.getElementById("school-id");
+		var welfareObj = document.getElementById("welfare-number");
+		if(workstatusObj.value == "St")
+		{
+		  schoolObj.type ="text";
+		  schoolIdObj.type ="text";
+		  welfareObj.type ="hidden";
+		}
+		else if(workstatusObj.value == "Wf")
+		{
+		  welfareObj.type ="text";
+		  schoolObj.type ="hidden";
+		  schoolIdObj.type="hidden";
+		}
+		else
+		{
+		  welfareObj.type ="hidden";
+		  schoolObj.type ="hidden";
+		  schoolIdObj.type="hidden";
+		}
+	});
+
 });
