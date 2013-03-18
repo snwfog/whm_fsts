@@ -111,6 +111,7 @@ $(function() {
     });
 	
 	// Javascript for dynamic fields depending on work_status
+
 	$('#work_status').blur(function() {
 		var workstatusObj = document.getElementById("work_status");
 		var schoolObj = document.getElementById("school");
@@ -134,8 +135,7 @@ $(function() {
 		  schoolObj.type ="hidden";
 		  schoolIdObj.type="hidden";
 		}
-	});
-	
+	});	
 	//More complex keyboard shortcuts
 	 Mousetrap.bind("0", function() { //SWITCH THEME
 		var $secondStyleSheet, href, pattern;
@@ -177,5 +177,4 @@ $(function() {
       }
      });
 
-	
 });
