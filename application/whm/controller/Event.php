@@ -137,7 +137,8 @@ class Event extends Controller implements IRedirectable
                             "description" => $event->getDescription(),
                             "start-time" => $event->getStartTime()->format("H:i"),
                             "date" => $event->getStartDate()->format("m/d/Y"),
-                            "timeslots" => $timeslots
+                            "timeslots" => $timeslots,
+                            "registered" => $this->registeredEvents($event, $household_id, $member_id)
                         );
                     }
                 };
@@ -226,6 +227,28 @@ class Event extends Controller implements IRedirectable
                     );
 
         return $data;
+    }
+
+    // Check if the ->HOUSEHOLD<- is registered for an event.
+    private function registeredEvents($event, $household_id, $member_id)
+    {
+        $timeslot = $event->getTimeslots();
+
+        foreach( $timeslot as $t)
+        {
+            $participants = $t->getParticipants();
+            $participants = $this->helper->formatMember($participants);
+
+            if(!is_null($participants))
+            {
+                foreach( $participants as $p )
+                {   
+                    if( $p["household_id"] == $household_id ) //and $p["member-id"] == $member_id 
+                        return "Registered";
+                }
+            }
+        }
+        return "Unregistered";
     }
 
 }

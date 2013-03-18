@@ -53,7 +53,7 @@
                                                         {% if k == 2 %}
                                                             {% set j = j + 7 %}
                                                         {% endif %}
-                                                        
+
                                                         {% if events[i][j] is null %}
                                                             <br/ ><br/ >
                                                         {% else %}
@@ -63,19 +63,27 @@
                                                         {% set actualparticipants = events[i][j]["participants"] ? events[i][j]["participants"]|length : 0 %}
                                                         {# MAXIMUM TITLE LENGTH IS 10. ELSE IS TRIMMED #}
                                                         {# DECIDE BUTTON COLOR #}
+                                                        {% set buttoncolour = "success" %}
+                                                            {% if events[i][j]["registered"] == "Registered" %}
+                                                                {% set buttoncolour = "danger" %}
+                                                            {% endif %}
+                                                       
+
+
+{#
                                                         {% set availablespots = maxparticipants - actualparticipants %}
                                                         {% set buttoncolor = 'success' %}
                                                         {% if availablespots <= maxparticipants / 10 %}
                                                             {% set buttoncolor = 'danger' %}
                                                         {% elseif availablespots <= maxparticipants / 2 %}
                                                             {% set buttoncolor = 'warning' %}
-                                                        {% endif %}
+                                                        {% endif %} #}
                                                         {% set deidei = "+" ~ index ~ " days" %}
                                                         {% set d = "now"|date_modify(deidei)|date("m/d/Y","America/Montreal") %}
                                                             {% if d == events[i][j]["date"] %}
                                                                 <div class="dropdown btn-group">
-                                                                    <a class="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#">
-                                                                        {{ events[i][j]["name"]|slice(0, 10) }}
+                                                                    <a class="btn dropdown-toggle btn-{{ buttoncolour }}" data-toggle="dropdown" href="#">
+                                                                        {{ events[i][j]["name"]|slice(0, 10) }}<br />{{ events[i][j]["registered"] }}
                                                                         <span class="caret"></span>
                                                                     </a>
                                                                     <ul class="dropdown-menu">
@@ -86,7 +94,9 @@
                                                                                 {{ slots["start-time"]}}-{{slots["end-time"] }} 
                                                                                 <i class="icon-user icon-black"></i>
                                                                                 {{ slots["registered"]}}/{{slots["capacity"] }}
-                                                                                {{ slots.status }} 
+                                                                                {% if slots.status == "Registered" %} 
+                                                                                    <i class="icon-ok-sign icon-black"></i>
+                                                                                {% endif %}
                                                                             </a>
                                                                         </li>
                                                                     {% endfor %}
