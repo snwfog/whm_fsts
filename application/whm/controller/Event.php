@@ -229,7 +229,7 @@ class Event extends Controller implements IRedirectable
         return $data;
     }
 
-    // Check if the ->HOUSEHOLD<- is registered for an event.
+    // Checks if the ->HOUSEHOLD<- is registered for an event.
     private function registeredEvents($event, $household_id, $member_id)
     {
         $timeslot = $event->getTimeslots();

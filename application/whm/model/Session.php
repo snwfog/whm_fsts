@@ -33,4 +33,3 @@ class Session
 Session::init();
 
 ?>
-
