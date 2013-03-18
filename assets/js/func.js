@@ -66,10 +66,19 @@ $(function() {
             formElement.setAttribute("value", occurrence);
             $('form[name="event-form"]').append(formElement);
         }
-        form1 = $('form[name="multiform"]');
+
+        //Disabled field cannot be submit
+        $("#view-event-form input").prop("disabled", false);
+        $("#view-event-form textarea").prop("disabled", false);
+        $("#timeslot-form input").prop("disabled", false);
+
+        //Disable common fields
+        $('#view-event-form input[name="start-date"]').prop("disabled", true)
+        $('#view-event-form input[name="start-time"]').prop("disabled", true)
+
+        form1 = $('form[name="event-date-form"]');
         $('form[name="view-timeslot-form"] :input').not(':submit').clone().hide().attr('isacopy','y').appendTo(form1);
         $('form[name="event-form"] :input').not(':submit').clone().hide().attr('isacopy','y').appendTo(form1);
-        $('form[name="new-date-form"] :input').not(':submit').clone().hide().attr('isacopy','y').appendTo(form1);
         return form1.submit();
     });
 	

@@ -56,7 +56,7 @@
 
                     <form name="multiform" action="{{ apppath }}{{ formAction }}" method="POST">
                     </form>
-                    <form action="{{ apppath }}{{ formAction }}" method="POST" name="event-form" 
+                    <form action="{{ apppath }}event/new" method="POST" name="event-form" 
                     id="{%if event is not null %}view-event-form{% endif %}">
 
                         {% include 'base.createEvent.part.twig' %}

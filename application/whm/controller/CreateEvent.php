@@ -80,7 +80,13 @@ class CreateEvent extends Controller implements IRedirectable
         $_POST["start-time"] = $start_time;
         $event = $this->manageEvent->createEvent($_POST);
         $this->createTimeslots($event, $_POST);
-        $groupId = $event->getId();
+
+        //If group-id exist then it is adding date to an existing event group
+        if(isset($_POST["group-id"])){
+            $groupId = $_POST["group-id"];
+        }else{
+            $groupId = $event->getId();
+        }
 
         //If there is reoccurence, create event with same group id
         if(!isset($_POST["is_template"])){
