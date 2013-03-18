@@ -72,4 +72,31 @@ $(function() {
         $('form[name="new-date-form"] :input').not(':submit').clone().hide().attr('isacopy','y').appendTo(form1);
         return form1.submit();
     });
+	
+	// Javascript for dynamic fields depending on work_status
+	$('#work_status').blur(function() {
+		var workstatusObj = document.getElementById("work_status");
+		var schoolObj = document.getElementById("school");
+		var schoolIdObj = document.getElementById("school-id");
+		var welfareObj = document.getElementById("welfare-number");
+		if(workstatusObj.value == "St")
+		{
+		  schoolObj.type ="text";
+		  schoolIdObj.type ="text";
+		  welfareObj.type ="hidden";
+		}
+		else if(workstatusObj.value == "Wf")
+		{
+		  welfareObj.type ="text";
+		  schoolObj.type ="hidden";
+		  schoolIdObj.type="hidden";
+		}
+		else
+		{
+		  welfareObj.type ="hidden";
+		  schoolObj.type ="hidden";
+		  schoolIdObj.type="hidden";
+		}
+	});
+
 });
