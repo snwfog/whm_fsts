@@ -143,6 +143,7 @@ class Household extends Controller implements IRedirectable
                                         "member-id"  => $dependent->getId(),
                                         "first-name" => $dependent->getFirstName(),
                                         "last-name"  => $dependent->getLastName(),
+                                        "gender"     => $dependent->getGender(),
                                         "active"     => $member->getId() == $dependent->getId()? TRUE : FALSE,
                                         "principal"  => true,
                                  );
@@ -151,6 +152,7 @@ class Household extends Controller implements IRedirectable
                                             "member-id"  => $dependent->getId(),
                                             "first-name" => $dependent->getFirstName(),
                                             "last-name"  => $dependent->getLastName(),
+                                            "gender"     => $dependent->getGender(),
                                             "active"     => $member->getId() == $dependent->getId()? TRUE : FALSE,
                                      ));
             } 

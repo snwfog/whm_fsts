@@ -37,18 +37,30 @@
 
             <legend>Action</legend>
             <div class="btn-toolbar">
-                <button class="btn btn-warning btn-large" data-toggle="button" class-toggle="btn-state" name="modify-household-btn" type="button">
-                    <i class="icon-edit icon-white"></i> Modify
+                <button class="btn btn-warning" data-toggle="button"        class-toggle="btn-state" name="modify-household-btn" type="        button">
+                        <i class="icon-edit icon-white"></i> Modify
                 </button>
 
-                <button class="btn btn-danger btn-large"
+                <button class="btn btn-danger"
                         name="deactivate-household-btn" type="button">
-                    <i class="icon-remove icon-white"></i> Deactivate
+                        <i class="icon-remove icon-white"></i> Deactivate
                 </button>
 
-                <button class="btn btn-primary btn-large"
+                <button class="btn btn-primary"
                         data-toggle="modal" data-target="#add-flag-modal">
-                    <i class="icon-flag icon-white"></i> Flag
+                        <i class="icon-flag icon-white"></i> Flag
+                </button>
+
+                <button class="btn btn-success" 
+                        id="create-member-submit-btn"
+                        name="create-member-submit-btn" type="button"
+                        data-toggle="modal" data-target="#add-member-modal">
+                        <i class="icon-user icon-white"></i> Add Member
+                </button>
+                <button class="btn btn-success" 
+                        id=""
+                        name="" type="button"
+                        data-toggle="modal" data-target="#appointment-modal"><i class="icon-time icon-white"></i> Make Appointment
                 </button>
                
             </div>
@@ -72,7 +84,8 @@
                 <li class="{{ household.members.principal.active ? "active" : '' }}">
                     <a href="{{ apppath }}household/{{ household.household_id}}/{{ household.members.principal["member-id"]}}">
                          <i class="icon-home"></i> 
-                         {{household.members.principal["first-name"] }} {{ household.members.principal["last-name"]}}
+                         {{household.members.principal["first-name"] }} {{ household.members.principal["last-name"]}} <span class="
+                         pull-right">{{ household.members.principal["gender"]}}</span>
                      </a>
                 </li>
                 {% for member in household.members %}
@@ -80,30 +93,20 @@
                             <li class="{{ member.active ? "active" : '' }}">
                                 <a href="{{ apppath }}household/{{ household.household_id}}/{{ member["member-id"]}}">
                                     <i class="icon-user"></i> 
-                                    {{member["first-name"] }} {{ member["last-name"]}}
+                                    {{ member["first-name"] }} {{ member["last-name"] }}<span class="pull-right">{{ member["gender"] }}</span>
                                 </a>
                             </li>
                     {% endif %}
                 {% endfor %}
             </ul>
         </div>
-            <div class="well">
-            <button class="btn btn-success btn-block btn-large" 
-                        id="create-member-submit-btn"
-                        name="create-member-submit-btn" type="button"
-                        data-toggle="modal" data-target="#add-member-modal">
-                    <i class="icon-plus icon-white"></i><i class="icon-user icon-white"></i> Add New Member
-            </button>
-            <button class="btn btn-success btn-block btn-large" 
-                        id=""
-                        name="" type="button"
-                        data-toggle="modal" data-target="#appointment-modal"><i class="icon-plus icon-white"></i><i class="icon-time icon-white"></i> Make Appointment
-            </button>
+            
+            
 <!--             <form action="{{ apppath }}appointment/{{ household["member-id"]}}" method="GET" >
                 <input type="hidden" name="type" value="remove">
                 <input type="submit" value="Delete Appointment">
             </form> -->
-            </div>
+            
     </div>
 {% endblock left1 %}
 
