@@ -5,7 +5,8 @@ $ ->
   modal = "#create-household-modal,
     #search-modal,
     #add-member-modal,
-    #add-flag-modal"
+	#manage-flag-modal,
+    #add-flag-modal",
 
   Mousetrap.bind "s", ->
     $('#search-modal').modal()
@@ -24,6 +25,9 @@ $ ->
 
   Mousetrap.bind 'f', ->
     $('#add-flag-modal').modal()
+	
+  Mousetrap.bind 'g', ->
+    $('#manage-flag-modal').modal()
 
   $(modal).on "hide", ->
     $(this).find("form :input").first().focus().blur()

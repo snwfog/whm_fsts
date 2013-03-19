@@ -107,5 +107,47 @@ $(function() {
 		  schoolIdObj.type="hidden";
 		}
 	});
+	
+	//More complex keyboard shortcuts
+	 Mousetrap.bind("0", function() { //SWITCH THEME
+		var $secondStyleSheet, href, pattern;
+		$secondStyleSheet = $('link[rel="stylesheet"]').first().next();
+		if ($secondStyleSheet.attr("href").match("darkstrap")) {
+		  $secondStyleSheet.attr("href", "");
+				document.cookie = "theme=0";
+		} else {
+		  href = $secondStyleSheet.prev().attr("href");
+		  pattern = /\/[^\/]*\.css/i;
+		  $secondStyleSheet.attr("href", href.replace(pattern, "/bootstrap.darkstrap.css"));
+		  document.cookie = "theme=1";
+		}
+	 });
+	
+	 Mousetrap.bind("1", function() { //STATISTIC REPORT
+        window.location.href = document.getElementById("statJS").href;
+     });
+	
+	 Mousetrap.bind("2", function() { //FUNCTIONAL REPORT
+        window.location.href = document.getElementById("funcJS").href;
+     });
+	 
+	 Mousetrap.bind("3", function() { //EVENT
+        window.location.href = document.getElementById("eventJS").href;
+     });
+	
+	 Mousetrap.bind("k", function() { //Toggle KB Legend
 
+      var legend = document.getElementById('legendJS'); //Store the legend element object
+      
+      if(legend.style.display == "") //Check that the display style is empty (none) and invisible.
+      {
+        legend.style.display = 'block';//Make it visible
+      }
+      else if(legend.style.display == "block")//Case that the display style is block and visible.
+      {
+        legend.style.display = "";//Hide it.
+      }
+     });
+
+	
 });
