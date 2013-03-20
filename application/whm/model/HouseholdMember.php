@@ -98,29 +98,7 @@ class HouseholdMember
     protected $household;
 
     /**
-     * * <-> * -- Owning
-     *
-     * @ManyToMany(targetEntity="Timeslot", inversedBy="participants")
-     * @JoinTable
-     * (
-     *      name="participants_timeslot",
-     *      joinColumns=
-     *      {
-     *          @JoinColumn
-     *          (
-     *              name="household_member_id",
-     *              referencedColumnName="id"
-     *          )
-     *      },
-     *      inverseJoinColumns=
-     *      {
-     *          @JoinColumn
-     *          (
-     *              name="timeslot_id",
-     *              referencedColumnName="id"
-     *          )
-     *      }
-     * )
+     * @OneToMany(targetEntity="ParticipantsTimeslots", mappedBy="household_member")
      *
      **/
     protected $timeslots = null;
@@ -285,17 +263,6 @@ class HouseholdMember
         return $this->first_visit_date;
     }
 
-    public function attendTimeslot(Timeslot $timeslots)
-    {
-        $this->timeslots[] = $timeslots;
-        $timeslots->addParticipant($this);
-    }
-
-    public function removeTimeslot(Timeslot $timeslot)
-    {
-        $this->timeslots->removeElement($timeslot);
-        $timeslot->removeParticipant($this);
-    }
 
     /**
      * Helper Method for HouseholdMember class used to achieve bi-directional relationship
@@ -303,15 +270,15 @@ class HouseholdMember
      * You should never have to call this method explicitly,
      * 
      * @param \WHM\Model\Timeslot $timeslots
-     */
-    public function addTimeslot(Timeslot $timeslots)
-    {
-        $this->timeslots[] = $timeslots;
-    }    
+     */ 
 
     public function getTimeslots()
     {
-        return $this->timeslots;
+        $data = array();
+        foreach($this->timeslots as $relation){
+            array_push($data, $relation->getTimeslot());
+        }
+        return $data;
     }
 
     /**

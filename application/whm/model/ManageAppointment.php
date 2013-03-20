@@ -4,7 +4,7 @@ use WHM;
 use WHM\Application;
 use WHM\Model\Event;
 use WHM\Model\ManageHousehold;
-
+use WHM\Model\ParticipantsTimeslots;
 /**
  * ManageAppointment appointment
  **/
@@ -20,11 +20,15 @@ class ManageAppointment
     public function addAppointment($member_id, $timeslot_id)
     {
         $managehousehold = new ManageHousehold();
+        $ParticicpantTimeslot = new ParticipantsTimeslots();
+
         $member = $managehousehold->findMember($member_id);
         $timeslot = $this->em->find("WHM\model\Timeslot", (int) $timeslot_id);
-        $member->attendTimeslot($timeslot);
         
-        $this->em->persist($member);
+        $ParticicpantTimeslot->setHouseholdMember($member);
+        $ParticicpantTimeslot->setTimeslot($timeslot);
+        
+        $this->em->persist($ParticicpantTimeslot);
         $this->em->flush();
         return $member;
     }

@@ -25,17 +25,13 @@ class Timeslot
     /** @Column(type="integer", nullable=TRUE) */
     protected $duration;
 
-     /**
-     * * <-> * -- Inversing
-     * @ManyToMany(targetEntity="HouseholdMember", mappedBy="timeslots")
-     * @JoinTable(name="participants_timeslot")
-     **/
+    /**
+    * @OneToMany(targetEntity="ParticipantsTimeslots", mappedBy="timeslot")
+    **/
     protected $participants;
 
     /** @Column(type="integer") */
     protected $capacity;
-
-
 
     /**
     * Helper Method for Timeslot class used to achieve bi-directional relationship
@@ -49,15 +45,6 @@ class Timeslot
     {
         $this->participants = new ArrayCollection();
     }
-    public function addParticipant(HouseholdMember $participant)
-    {
-        $this->participants[] = $participant;
-    }
-
-    public function removeParticipant($participant)
-    {
-        $this->participants->removeElement($participant);
-    }
 
     public function getId()
     {
@@ -66,7 +53,11 @@ class Timeslot
 
     public function getParticipants()
     {
-        return $this->participants;
+        $data = array();
+        foreach($this->participants as $relation){
+            array_push($data, $relation->getHouseholdMember());
+        }
+        return $data;
     }
 
 
