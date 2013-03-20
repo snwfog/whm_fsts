@@ -8,14 +8,14 @@ use \WHM\Model\Event;
 use \WHM\Model\ManageEvent;
 use \WHM\Model\ManageAppointment;
 use \WHM\Model\ManageHousehold;
-use WHM\Model\ManageEvent;
+use \WHM\Model\Timeslot;
 use DateTime;
 use DateTimeZone;
 
 class Report extends Controller implements IRedirectable
 {
     protected $data = array("errors" => array(), "form" => array());
-    private $em;
+    protected $em;
 
     public function __construct(array $args = null)
     {
@@ -30,9 +30,16 @@ class Report extends Controller implements IRedirectable
         
     }
 
-    public function get($event_id = null)
-    {     
-            $this->display("report.stat.twig", $this->data);               
+    public function get($eventId = null)
+    {      
+            $allEvents = $this->mevent->getAllEvents();
+            $annualReport=$this->createAnnualReport($allEvents);
+            print_r($annualReport);
+
+            $data = array(
+                           "participants"  =>  $annualReport
+                    ); 
+            $this->display("report.stat.twig", $data);             
     }
 
     // Update Event
@@ -46,13 +53,15 @@ class Report extends Controller implements IRedirectable
     {
         $data = array();
         $count = 0;
-        $findEvent = $this->event->findEvent($eventId);
-        $participants = $this->mevent->getParticipants();
-        $member = $this->manageHousehold->findMember($participants);
-        $address = $member->getAddress();
+        
         foreach ($eventId as $event) 
         {
-        $data[$count++] = array( 
+          $findEvent = $this->mevent->findEvent($eventId);
+          $participants = $this->getEventParticipants($findEvent); 
+          $member = $this->manageHousehold->findMember($participants);
+          $household = $member->getHousehold();
+          $address = $household->getAddress();  
+          $data[$count++] = array( 
                         "mother-tongue"  => $member->getMotherTongue(),
                         "work-status"  => $member->getWorkStatus(),
                         "origin"   => $member->getOrigin(),
@@ -62,7 +71,9 @@ class Report extends Controller implements IRedirectable
 
                         );
         }
+         return $data;
     }
+
 
     public function createMonthlyReport()
     {
@@ -73,6 +84,29 @@ class Report extends Controller implements IRedirectable
     {
 
     } 
+
+     public function getEventParticipants()
+    {   
+        $timeslot= new Timeslot();
+        $allEvents = $this->mevent->getAllEvents();
+        $eventSlots = $this->event->getTimeslots($allEvents);
+        $participants = null;
+        if(!is_null($eventSlots))
+        {    
+            foreach ($eventSlots as $es) 
+            {
+    
+                  $participants = $es->getParticipants();
+            }
+        }
+        $data = array(
+                    "participants"  => $participants
+                    );
+
+        return $data;
+    
+    }
+
 
     public function groupByOrigin()
     {
