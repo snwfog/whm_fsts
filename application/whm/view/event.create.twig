@@ -91,18 +91,18 @@
                              <a href="{{ apppath }}event/{{ event["event-id"] }}" style="text-decoration: none; color: white;"> Cancel </a>
                         </button>
 
-                        <button class="btn btn-primary btn-large"
+                        <button class="btn btn-primary"
                         data-toggle="modal" data-target="#add-date-modal">
                             <i class="icon-calendar"></i> New Date
                         </button>
 
                         {# Event Activation Form + Button #}
                         {% if event["is_activated"] %}
-                            <button type="button" class="btn btn-danger btn-large" id="activate-event">
+                            <button type="button" class="btn btn-danger" id="activate-event">
                                 Close Event
                             </button>
                         {% else %}
-                            <button type="button" class="btn btn-info btn-large" id="activate-event">
+                            <button type="button" class="btn btn-info" id="activate-event">
                                 Open Event
                             </button>
                         {% endif %}

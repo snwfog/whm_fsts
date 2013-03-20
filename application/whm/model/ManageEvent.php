@@ -228,7 +228,8 @@ class ManageEvent
                           ->from("WHM\Model\Event", "event")
                           ->where("event.group_id = :group_id")
                           ->andWhere("event.is_template <> 1")
-                          ->setParameter('group_id', $group_id);                 
+                          ->setParameter('group_id', $group_id)
+                          ->orderBy("event.start_date", "ASC");                 
 
         $relatedEvents = $query->getQuery()->execute();
         return $relatedEvents;

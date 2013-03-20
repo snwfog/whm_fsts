@@ -35,16 +35,12 @@ class Event extends Controller implements IRedirectable
             $event = $this->manageEvent->findEvent($event_id);
             $relatedEvents = $this->manageEvent->getRelatedEvents($event->getGroupId());
             $timeslots = $this->getSlots($event);
-            //$participants = $event->getParticipants();
-
-            //$participants = $this->helper->formatMember($participants);
             $relatedEvents = $this->formatEvents($relatedEvents);
             $event = $this->formatEvents(array( 0 => $event));
 
             $this->data["event"] = $event[0];
             $this->data["relatedEvents"] = $relatedEvents;
             $this->data["timeslots"] = $timeslots;
-            //$this->data["participants"] = $participants;
             $this->display("event.create.twig", $this->data);
         }else
         {    //Get templates if new event
