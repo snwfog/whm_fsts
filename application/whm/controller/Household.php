@@ -11,6 +11,9 @@ use \WHM\Model\Flag;
 use \WHM\Model\HouseholdMember;
 use \WHM\Model\ManageEvent;
 use \WHM\Controller\ControllerHelper;
+use \WHM\Controller\Event; 
+use DateTime;
+use DateTimeZone;
 
 class Household extends Controller implements IRedirectable
 {
@@ -20,6 +23,7 @@ class Household extends Controller implements IRedirectable
     private $manageEvents;
     private $flag;
     private $helper;
+    private $eventcontroller;
 
 
     public function __construct(array $args = null)
@@ -32,8 +36,7 @@ class Household extends Controller implements IRedirectable
         $this->manageFlag = new ManageFlag();
         $this->manageEvents = new ManageEvent();
         $this->flag = new Flag();
-
-
+        $this->eventcontroller = new Event(); 
     }
 
     public function get($household_id = null, $member_id = null)
@@ -53,7 +56,7 @@ class Household extends Controller implements IRedirectable
             }
 
             $data = $this->formatHouseholdInfo($household, $member);
-            
+;            
             //Get flag descriptor for creating flags
             $flagDescriptors = $this->manageFlag->getFlagDescriptors();
             $formattedDescriptor = $this->formatDescriptor($flagDescriptors);
@@ -65,9 +68,8 @@ class Household extends Controller implements IRedirectable
         //   $flagNumber = $this->flagNum($formattedFlags);
 
             //Get Events to make appointment
-            $eventcontroller = new \WHM\Controller\Event; 
             $eventdraft=$this->manageEvents->getAllUpComingEvents();
-            $events=$eventcontroller->getIndexedEvents($eventdraft, $household_id, $member_id);
+            $events=$this->eventcontroller->getIndexedEvents($eventdraft, $household_id, $member_id);
 
             $data = array(
                             "household"         =>  $data,
@@ -130,7 +132,7 @@ class Household extends Controller implements IRedirectable
 
     public function formatHouseholdInfo($household, $member)
     {
-        
+
         $principal = $household->getHouseholdPrincipal();
         $address = $household->getAddress();
         $dependents = $household->getMembers();
@@ -138,6 +140,8 @@ class Household extends Controller implements IRedirectable
         //Get list of Members
         $members = array();
         foreach ($dependents as $dependent){
+
+            $registeredEvents = $this->eventsRegistered($dependent->getId());
             if (($principal->getId() == $dependent->getId())) {
                 $members["principal"] = array(
                                         "member-id"  => $dependent->getId(),
@@ -146,6 +150,7 @@ class Household extends Controller implements IRedirectable
                                         "gender"     => $dependent->getGender(),
                                         "active"     => $member->getId() == $dependent->getId()? TRUE : FALSE,
                                         "principal"  => true,
+                                        "events"  => $registeredEvents,
                                  );
             }else{
                 array_push($members, array(
@@ -154,6 +159,7 @@ class Household extends Controller implements IRedirectable
                                             "last-name"  => $dependent->getLastName(),
                                             "gender"     => $dependent->getGender(),
                                             "active"     => $member->getId() == $dependent->getId()? TRUE : FALSE,
+                                            "events"  => $registeredEvents,
                                      ));
             } 
         }
@@ -225,6 +231,49 @@ class Household extends Controller implements IRedirectable
                               );
         }
 
+        return $data;
+    }
+
+    private function eventsRegistered($id)
+    {   $data = array();
+        $count = 0;
+        $upcomingEvents=$this->manageEvents->getAllUpComingEvents();
+        // $formattedEvents=$this->eventcontroller->formatEvents($upcomingEvents);
+
+        foreach( $upcomingEvents as $event )
+        {
+            $timeslot = $event->getTimeslots();
+            $slotStarttime = $event->getStartTime()->format("H:i");
+            foreach( $timeslot as $t )
+            {   
+                $participants = $t->getParticipants();
+                $participants = $this->helper->formatMember($participants);
+                if(!is_null($participants))
+                {
+                    $slotEndtime = new DateTime($slotStarttime);
+                    $duration = '+'.$t->getDuration(). ' mins';
+                    date_modify($slotEndtime, $duration);
+                    $endtime = $slotEndtime->format('H:i');
+                    foreach($participants as $p)
+                    { 
+                        if($p["member-id"]==$id)
+                        {
+                            $data[$count++] = array
+                            (
+                                "id" => $t->getId(),
+                                "name" => $t->getName(),
+                                "duration" => $t->getDuration(),
+                                "description" => $event->getDescription(),
+                                "capacity" => $t->getCapacity(),
+                                "start-time" => $slotStarttime,
+                                "end-time" => $endtime,
+                            );
+                        }
+                    }
+                    $slotStarttime = $endtime;
+                }
+            }        
+        }
         return $data;
     }
 }
