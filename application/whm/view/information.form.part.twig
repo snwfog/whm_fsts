@@ -1,16 +1,16 @@
 {% block information %}
-
+ 
     <fieldset>
         <legend>Information</legend>
         <div class="controls controls-row">
             <input class="span4 help" maxlength="{{ 3 * 4 + 2 }}" type="text"
                    data-message="Go ahead enter the medicare number. The Age, Gender, and Date of Birth will be automatically filled in for you."
                    name="mcare-number" placeholder="Medical Care" value="{{ household["medicare-number"] }}"/>
-            <input class="span4" type="text" name="referral"
-            placeholder="Referral" value="{{ household.referral }}"/>
-            <input class="span4" type="text" name="date-of-birth" placeholder="Date of Birth" value="{{ household["date-of-birth"] }}"/>
-            
-          
+            <input class="span4" type="text" name="work_status"
+                   placeholder="Work Status" maxlength="2" value="{{ household["work-status"] }}"/>
+            <input class="span4" maxlength="{{ 3 * 4 + 2 + 3 }}"
+                   type="text" name="Referral" placeholder="Referral"
+                   value="{{ household["referral"] }}"/>
         </div>
 
         <div class="controls controls-row">
@@ -29,22 +29,19 @@
             
             <input class="span2" type="text" maxlength="1" name="gender"
                    placeholder="Gender" value="{{ household["gender"] }}"/>
-
-            <input class="span3" maxlength="2"          type="text" name="marital-status"
+               <input class="span3" maxlength="2"    type="text" name="marital-status"
             placeholder="Marital Status" value="{{ household["marital"] }}"/>
-            <input class="span3" type="text" name="work_status" id="work_status"
+            <input class="span3" type="text" name="work_status" id="work_status" 
             placeholder="Work Status" maxlength="2" value="{{ household["work-status"] }}"/>
 
             <input class="span4 help" type="text" name="income"
-
-                   data-message="Go ahead, you may put arithmetic operations in this field. For
-                   example, 4 * 400, or 2 * 1500, or 50 000 / 12 and we will calculate the result for you."
-                   placeholder="Annual Income" value="{{ household["income"] }}"/>
-        </div>
+            data-message="[Not working ATM] Go ahead, you may put arithmetic operations in this field. For
+            example, 4 * 400, or 2 * 1500, or 50 000 / 12 and we will calculate the result for you."placeholder="Annual Income" value="{{ household["income"] }}"/>
+            </div>
 
           <div class="controls controls-row">
           <input class="span4" maxlength="{{ 3 * 4 + 2 + 3 }}"
-          type="hidden" name="welfare-number" id= welfare-number" placeholder="Welfare Number"
+          type="hidden" name="welfare-number" id="welfare-number" placeholder="Welfare Number"
           value="{{ household["welfare-number"] }}"/>
 
           <input class="span4" type="hidden" id="school" name="school" placeholder="School" value="{{ household["school"] }}" />
@@ -55,4 +52,6 @@
           </div>
 
     </fieldset>
+
 {% endblock information %}
+

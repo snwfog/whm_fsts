@@ -1,61 +1,75 @@
 {% block timeslot %}
     <fieldset>
-            <div id="timeslot-well" style="max-height:350px; overflow-y: auto;">
-                <form action="{{ apppath }}event/new" method="POST" name="view-timeslot-form" id="{{ timeslots? 'timeslot-form' : 'new-timeslot-form'}}">
-                    <table id="timeslot-table" class="table">
-                          <thead>
-                              <th> Time</th>                
-                              <th> Time Slot </th>
-                              <th> Duration </th>
-                              <th> Capacity </th>
-                              <th> Participant </th>
-                          </thead>
-                          <tbody id="timeslot-table-tbody">
-                            {% for timeslot in timeslots %}
-                                <input class="span" type="hidden" name="slot-id[]" value="{{ timeslot.id }}"/>
-                                <tr>
-                                    <td>
-                                      {{ timeslot["start-time"] }}-{{ timeslot["end-time"] }}
-                                    </td>                                
-                                    <td>
-                                        <input class="span" type="text" name="slot-name[]" value="{{ timeslot.name }}"/>
-                                    </td>
-                                    <td>
-                                        <input class="span5" type="number" name="slot-duration[]" value="{{ timeslot.duration }}"/>
-                                    </td>
-                                    <td>
-                                        <input class="span5" type="text" name="slot-capacity[]" value="{{ timeslot.capacity }}"/>
-                                    </td>
-                                    <td>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            {% if not timeslots %}
-                                <input class="span" type="hidden" name="slot-id[]" value=""/>
-                                <tr>
-                                    <td>
-                                    </td>         
-                                    <td>
-                                        <input class="span" type="text" name="slot-name[]" placeholder="Name"/>
-                                    </td>
-                                    <td>
-                                        <input class="span5" type="number" name="slot-duration[]" placeholder="Minutes"/>
-                                    </td>
-                                    <td>
-                                        <input class="span" type="text" name="slot-capacity[]" placeholder="Capacity"/>
-                                    </td>
-                                    <td>
-                                    </td>
-                                </tr>
-                             {% endif %}  
-                          </tbody>
-                     </table>
-                </form>
-            </div>
-            <div class="pull-right">
-                <button id="add-timeslot-table" type="button" class="btn btn-small btn-info"><i class="icon-file icon-white"></i> Add Timeslot</button>
-            </div>
-            <small>*Note:Drag the Timeslot to reorder.</small>
+        <div id="timeslot-well" style="max-height:350px; overflow-y: auto;">
+            <form action="{{ apppath }}event/new" method="POST" name="view-timeslot-form" id="{{ timeslots? 'timeslot-form' : 'new-timeslot-form'}}">
+                <table id="timeslot-table" class="table">
+                    <thead>
+                        <th> Time</th>                
+                        <th> Time Slot </th>
+                        <th> Duration </th>
+                        <th> Capacity </th>
+                        <th> Actions </th>
+                    </thead>
+                    <tbody id="timeslot-table-tbody">
+                      {% for timeslot in timeslots %}
+                          <input class="span" type="hidden" name="slot-id[]" value="{{ timeslot.id }}"/>
+                          <tr id="timeslot-row-{{timeslot.id}}">
+                              <td>
+                                {{ timeslot["start-time"] }}-{{ timeslot["end-time"] }}
+                              </td>                                
+                              <td>
+                                  <input class="span" type="text" name="slot-name[]" value="{{ timeslot.name }}"/>
+                              </td>
+                              <td>
+                                  <input class="span5" type="number" name="slot-duration[]" value="{{ timeslot.duration }}"/>
+                              </td>
+                              <td>
+                                  <input class="span5" type="text" name="slot-capacity[]" value="{{ timeslot.capacity }}"/>
+                              </td>
+                              <td>
+                                  {% if timeslot.participants|length == 0 %}
+                                      <i class="{{theme ? 'icon-white' : ''}} icon-user"></i>
+                                      <a href="#" name="delete-timeslot" id="{{timeslot.id}}">
+                                        <i class="{{theme ? 'icon-white' : ''}} icon-trash"></i>
+                                      </a>
+                                  {% endif %}
+                              </td>
+                          </tr>
+                      {% endfor %}
+                      {% if not timeslots %}
+                          <input class="span" type="hidden" name="slot-id[]" value=""/>
+                          <tr>
+                              <td>
+                              </td>         
+                              <td>
+                                  <input class="span" type="text" name="slot-name[]" placeholder="Name"/>
+                              </td>
+                              <td>
+                                  <input class="span5" type="number" name="slot-duration[]" placeholder="Minutes"/>
+                              </td>
+                              <td>
+                                  <input class="span5" type="text" name="slot-capacity[]" placeholder="Capacity"/>
+                              </td>
+                              <td>
+                                  <a href="#" onclick="this.parentNode.parentNode.remove();">
+                                      <i class="{{theme ? 'icon-white' : ''}} icon-trash"></i>
+                                  </a>
+                              </td>
+                          </tr>
+                       {% endif %}  
+                    </tbody>
+                </table>
+            </form>
+        </div>
+
+        {# for ajax delete timeslot#}
+        <form action="" method="" name="delete-timeslot">
+        </form>
+
+        <div class="pull-right">
+            <button id="add-timeslot-table" type="button" class="btn btn-small btn-info" value="{{theme ? 'icon-white' : ''}}"><i class="icon-file icon-white"></i> Add Timeslot</button>
+        </div>
+        <small>*Note:Drag the Timeslot to reorder.</small>
     </fieldset>
 <script>
      var tableDnD = new TableDnD();

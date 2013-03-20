@@ -83,6 +83,13 @@ class ManageEvent
         return $eventId;
     }
 
+    public function deleteTimeslot($id){
+        $timeslotId = $this->findTimeslot($id["timeslot-id"]);
+        $this->em->remove($timeslotId);
+        $this->em->flush();
+        return $timeslotId;
+    }
+
      public function findTimeslot($id)
     {
         $timeslot = $this->em->find("WHM\model\Timeslot", (int) $id);

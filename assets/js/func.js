@@ -41,6 +41,9 @@ $(function() {
                                     <input class="span5" type="text" name="slot-capacity[]" placeholder="Capacity"/>\
                                 </td>\
                                 <td>\
+                                  <a href="#" onclick="this.parentNode.parentNode.remove();">\
+                                          <i class="'+this.value+' icon-trash"></i>\
+                                  </a>\
                                 </td>\
                           </tr>\
                           <input class="span" type="hidden" name="slot-id[]" value=""/>');
@@ -52,6 +55,31 @@ $(function() {
 
     $('button#activate-event').click(function() {
         return $('form[name="event-active-status"]').submit();
+    });
+
+    $('a[name="delete-timeslot"]').click(function() {
+        var formElement;
+        console.log("Deleting Timeslot");
+        $deleteform = $('form[name="delete-timeslot"]')
+        $row = $('tr#timeslot-row-'+this.id);
+        formElement = document.createElement("input");
+        formElement.setAttribute("name", "timeslot-id");
+        formElement.setAttribute("type", "hidden");
+        formElement.setAttribute("value", this.id);
+        $deleteform.append(formElement);
+        return $.ajax({
+          url: '../event',
+          data: $deleteform.serialize(),
+          type: 'DELETE',
+          success: function() {
+              return $row.remove();
+          }
+        });
+
+    });
+
+    $('a[name="delete-new-timeslot"]').click(function() {
+        $(this).parents("tr").remove();
     });
 
 
@@ -83,6 +111,7 @@ $(function() {
     });
 	
 	// Javascript for dynamic fields depending on work_status
+
 	$('#work_status').blur(function() {
 		var workstatusObj = document.getElementById("work_status");
 		var schoolObj = document.getElementById("school");
@@ -106,8 +135,7 @@ $(function() {
 		  schoolObj.type ="hidden";
 		  schoolIdObj.type="hidden";
 		}
-	});
-	
+	});	
 	//More complex keyboard shortcuts
 	 Mousetrap.bind("0", function() { //SWITCH THEME
 		var $secondStyleSheet, href, pattern;
@@ -149,5 +177,4 @@ $(function() {
       }
      });
 
-	
 });
