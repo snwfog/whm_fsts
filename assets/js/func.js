@@ -54,6 +54,27 @@ $(function() {
         return $('form[name="event-active-status"]').submit();
     });
 
+    $('a[name="delete-timeslot"]').click(function() {
+        var formElement;
+        console.log("Deleting Timeslot");
+        $deleteform = $('form[name="delete-timeslot"]')
+        $row = $('tr#timeslot-row-'+this.id);
+        formElement = document.createElement("input");
+        formElement.setAttribute("name", "timeslot-id");
+        formElement.setAttribute("type", "hidden");
+        formElement.setAttribute("value", this.id);
+        $deleteform.append(formElement);
+        return $.ajax({
+          url: '../event',
+          data: $deleteform.serialize(),
+          type: 'DELETE',
+          success: function() {
+              return $row.remove();
+          }
+        });
+
+    });
+
 
     $('button#new-date-create').click(function() {
         var clicked, formElement, occurrence, form1;

@@ -87,6 +87,11 @@ class Event extends Controller implements IRedirectable
         $this->redirect("event/".$event->getId());
     }
 
+    public function delete(){
+        parse_str($this->getContent(), $this->requestContents);
+        $dflag = $this->manageEvent->deleteTimeslot($this->requestContents);
+    }
+
     public function formatEvents($events)
     {
         $data = array();
@@ -168,6 +173,7 @@ class Event extends Controller implements IRedirectable
                 "capacity" => $t->getCapacity(),
                 "start-time" => $slotStarttime,
                 "end-time" => $endtime,
+                "participants"=> $this->helper->formatMember($t->getParticipants()),
             );
             $slotStarttime = $endtime;
         }
