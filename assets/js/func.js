@@ -41,6 +41,9 @@ $(function() {
                                     <input class="span5" type="text" name="slot-capacity[]" placeholder="Capacity"/>\
                                 </td>\
                                 <td>\
+                                  <a href="#" onclick="this.parentNode.parentNode.remove();">\
+                                          <i class="'+this.value+' icon-trash"></i>\
+                                  </a>\
                                 </td>\
                           </tr>\
                           <input class="span" type="hidden" name="slot-id[]" value=""/>');
@@ -73,6 +76,10 @@ $(function() {
           }
         });
 
+    });
+
+    $('a[name="delete-new-timeslot"]').click(function() {
+        $(this).parents("tr").remove();
     });
 
 

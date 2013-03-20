@@ -48,9 +48,12 @@
                                   <input class="span5" type="number" name="slot-duration[]" placeholder="Minutes"/>
                               </td>
                               <td>
-                                  <input class="span" type="text" name="slot-capacity[]" placeholder="Capacity"/>
+                                  <input class="span5" type="text" name="slot-capacity[]" placeholder="Capacity"/>
                               </td>
                               <td>
+                                  <a href="#" onclick="this.parentNode.parentNode.remove();">
+                                      <i class="{{theme ? 'icon-white' : ''}} icon-trash"></i>
+                                  </a>
                               </td>
                           </tr>
                        {% endif %}  
@@ -62,9 +65,9 @@
         {# for ajax delete timeslot#}
         <form action="" method="" name="delete-timeslot">
         </form>
-        
+
         <div class="pull-right">
-            <button id="add-timeslot-table" type="button" class="btn btn-small btn-info"><i class="icon-file icon-white"></i> Add Timeslot</button>
+            <button id="add-timeslot-table" type="button" class="btn btn-small btn-info" value="{{theme ? 'icon-white' : ''}}"><i class="icon-file icon-white"></i> Add Timeslot</button>
         </div>
         <small>*Note:Drag the Timeslot to reorder.</small>
     </fieldset>
