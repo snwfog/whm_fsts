@@ -26,7 +26,7 @@ class ManageAppointment
         
         $this->em->persist($member);
         $this->em->flush();
-        return $appointment;
+        return $member;
     }
 
     public function deleteAppointment($member_id, $event_id)
