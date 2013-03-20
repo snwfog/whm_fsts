@@ -11,13 +11,14 @@
 		id = "stat-form"> 
 		
 		<select class=''>
-			<option>Food Drive</option>
-			<option>Christmas Basket</option>
+			<option>{{ event["name"]}}</option>
 		</select>
 		<br /><br />
+		<input type="hidden" name="event-id" value="{{ event["event-id"] }}"/>
 		<input type = "radio"> Annual 
 		<input type = "radio"> Fiscal
 		
+
 		<br /><br />
 		<button id="generate-year-report" type="button" class="btn btn-medium btn-success"><i class="icon-tasks icon-white"></i> Generate Report</button>
 		<button id="excel-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export Excel</button>
