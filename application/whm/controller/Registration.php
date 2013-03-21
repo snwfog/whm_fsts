@@ -24,7 +24,7 @@ class Registration extends WHM\Controller implements WHM\IRedirectable
 
     public function get()
     {
-            $this->display("registrationEvent.twig");  //change
+            $this->display("AttendanceAppointFull.twig");  //change
 
             // $this->display("registrationParticipants.twig");
        
