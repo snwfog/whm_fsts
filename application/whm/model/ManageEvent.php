@@ -79,15 +79,15 @@ class ManageEvent
 
      public function findEvent($id)
     {
-        $eventId = $this->em->find("WHM\model\Event", (int) $id);
-        return $eventId;
+        $eventInstance = $this->em->find("WHM\model\Event", (int) $id);
+        return $eventInstance;
     }
 
     public function deleteTimeslot($id){
-        $timeslotId = $this->findTimeslot($id["timeslot-id"]);
-        $this->em->remove($timeslotId);
+        $timeslot = $this->findTimeslot($id["timeslot-id"]);
+        $this->em->remove($timeslot);
         $this->em->flush();
-        return $timeslotId;
+        return $timeslot;
     }
 
      public function findTimeslot($id)
@@ -99,8 +99,8 @@ class ManageEvent
     public function getParticipants()
     {
         $query = $this->em->createQuery('SELECT u FROM WHM\Model\Event u');
-        $flagParticipants = $query->getResult();
-        return $flagParticipants;
+        $participants = $query->getResult();
+        return $participants;
     }
 
     public function updateEvent($eventInstance, $data)
@@ -165,6 +165,8 @@ class ManageEvent
                           ->setParameter('dateNow', $dateNow);                         
 
         $upcomingEvents = $query->getQuery()->execute();
+
+        //return Array of Objects
         return $upcomingEvents;
     }
 

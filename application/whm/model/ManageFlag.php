@@ -43,16 +43,16 @@ class ManageFlag
 
     public function deleteFlag($id)
     {
-        $flagId = $this->findFlag($id["flag-id"]);
-        $this->em->remove($flagId);
+        $flag = $this->findFlag($id["flag-id"]);
+        $this->em->remove($flag);
         $this->em->flush();
-        return $flagId;
+        return $flag;
     }
 
     public function findFlag($id)
     {
-        $flagId = $this->em->find("WHM\model\Flag", (int) $id);
-        return $flagId;
+        $flag = $this->em->find("WHM\model\Flag", (int) $id);
+        return $flag;
     }
     public function flagNumber()
     {

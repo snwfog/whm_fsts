@@ -18,7 +18,7 @@ class ManageHousehold {
 
     public function createHousehold($data)
     {
-        $pmember = $this->createMember($data);
+        $pmember = $this->createMember($data); //Principal Member
         $address = $this->createAddress($data);
         $household = new Household();
 
@@ -55,7 +55,6 @@ class ManageHousehold {
 //        $em->flush();
     }
 
-    //View
     public  function findAllHouseholds()
     {
         // to do
@@ -83,18 +82,18 @@ class ManageHousehold {
         return $member;
     }
 
+    /*
+     * @return ArrayCollection of type HouseholdMember
+     */
     public function getHouseholdMembers($id)
     {
         $household = $this->findHousehold($id);
         return $household->getMembers();
     }
 
-    
-
-    
-
-
-
+    /*
+     * @return HouseholdMember
+     */
     public function addMember($data)
     {
         $household = $this->findHousehold($data["household-id"]);
