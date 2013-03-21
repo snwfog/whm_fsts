@@ -30,16 +30,14 @@ class ManageAppointment
         
         $this->em->persist($ParticicpantTimeslot);
         $this->em->flush();
-        return $member;
     }
 
     public function deleteAppointment($member_id, $timeslot_id)
     { 
         $ParticicpantTimeslot = $this->getParticipantTimeslot($member_id, $timeslot_id);
-        // echo $ParticicpantTimeslot[0]->getAttend();
+        
         $this->em->remove($ParticicpantTimeslot);
         $this->em->flush();
-        return $member;
     }
 
     private function getParticipantTimeslot($member_id, $timeslot_id)
