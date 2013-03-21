@@ -91,9 +91,8 @@ $(function() {
       noteAlert("Event Edit Mode", "warning");
     } else {
       $(this).attr("class-toggle", "btn-state");
-      form1 = $('form[name="multiform"]');
+      form1 = $('form[name="event-form"]');
       $('form[name="view-timeslot-form"] :input').not(':submit').clone().hide().attr('isacopy', 'y').appendTo(form1);
-      $('form[name="event-form"] :input').not(':submit').clone().hide().attr('isacopy', 'y').appendTo(form1);
       form1.submit();
       inputs.prop("disabled", true);
       inputs2.prop("disabled", true);

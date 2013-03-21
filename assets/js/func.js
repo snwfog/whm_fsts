@@ -10,9 +10,8 @@ $(function() {
             formElement.setAttribute("value", occurrence);
             $('form[name="event-form"]').append(formElement);
         }
-        form1 = $('form[name="multiform"]');
+        form1 = $('form[name="event-form"]');
         $('form[name="view-timeslot-form"] :input').not(':submit').clone().hide().attr('isacopy','y').appendTo(form1);
-        $('form[name="event-form"] :input').not(':submit').clone().hide().attr('isacopy','y').appendTo(form1);
         return form1.submit();
     });
 
@@ -106,7 +105,7 @@ $(function() {
 
         form1 = $('form[name="event-date-form"]');
         $('form[name="view-timeslot-form"] :input').not(':submit').clone().hide().attr('isacopy','y').appendTo(form1);
-        $('form[name="event-form"] :input').not(':submit').clone().hide().attr('isacopy','y').appendTo(form1);
+        $('form[name="event-form"] :input, :text').not(':submit').clone().hide().attr('isacopy','y').appendTo(form1);
         return form1.submit();
     });
 	

@@ -117,9 +117,8 @@ $ ->
       # Add the class-toggle attribute
       $(this).attr "class-toggle", "btn-state"
       # Resend the form modification
-      form1 = $('form[name="multiform"]');
+      form1 = $('form[name="event-form"]');
       $('form[name="view-timeslot-form"] :input').not(':submit').clone().hide().attr('isacopy','y').appendTo(form1);
-      $('form[name="event-form"] :input').not(':submit').clone().hide().attr('isacopy','y').appendTo(form1);
       form1.submit()
       # Disable the form for rewrite
       inputs.prop "disabled", true
