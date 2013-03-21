@@ -186,9 +186,16 @@
 		},
 		
 		fill: function() {
-			var d = new Date(this.viewDate),
-				year = d.getFullYear(),
-				month = d.getMonth(),
+			var d = new Date(this.viewDate);
+				if(d.getFullYear() <= 1999)
+				{
+					year = d.getFullYear()+100;
+				}
+				else
+				{
+					year = d.getFullYear();
+				}
+				month = d.getMonth();
 				currentDate = this.date.valueOf();
 			this.picker.find('.datepicker-days th:eq(1)')
 						.text(DPGlobal.dates.months[month]+' '+year);

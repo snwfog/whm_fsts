@@ -9,9 +9,6 @@
                     <li data-target="#event-calendar-carousel" data-slide-to="0" class="active"></li>
                     <li data-target="#event-calendar-carousel" data-slide-to="1"></li>
                 </ol>
-                <!-- Carousel items -->
-                {# WATCH OUT!!! #}
-                {# SOME INDICES START WITH 1 INSTEAD OF 0!!! #}
                 <div class="carousel-inner">
                     {% for k in 1..2 %}
                         {% if k == 1 %}
@@ -39,45 +36,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
-                                    {# First get the one day with the maximum amount of events.
-                                       This will set the maximum height of the table.
-                                       In this example, it is represented by the variable maxevents. #}
                                     {% set maxevents = 4 %}
-                                    {# Create 4 rows. #}
                                     {% for i in 1..maxevents %}
                                         <tr>
                                             {% for j in 1..weeklength %}
                                                 <td>
-                                                        {% set index = (7 * (k - 1) + j) %}
-                                                        {% if k == 2 %}
-                                                            {% set j = j + 7 %}
-                                                        {% endif %}
-
-                                                        {% if events[i][j] is null %}
-                                                            <br/ ><br/ >
-                                                        {% else %}
-                                                       
-                                                        {% set maxparticipants = events[i][j]["capacity"] %}
-                                                        {# NEED TO GET ACTUAL VALUE #}
-                                                        {% set actualparticipants = events[i][j]["participants"] ? events[i][j]["participants"]|length : 0 %}
-                                                        {# MAXIMUM TITLE LENGTH IS 10. ELSE IS TRIMMED #}
-                                                        {# DECIDE BUTTON COLOR #}
+                                                    {% set index = (7 * (k - 1) + j) %}
+                                                    {% if k == 2 %}
+                                                        {% set j = j + 7 %}
+                                                    {% endif %}
+                                                    {% if events[i][j] is null %}
+                                                        <br/ ><br/ >
+                                                    {% else %}
                                                         {% set buttoncolour = "success" %}
-                                                            {% if events[i][j]["registered"] == "Registered" %}
-                                                                {% set buttoncolour = "danger" %}
-                                                            {% endif %}
-                                                       
-
-
-{#
-                                                        {% set availablespots = maxparticipants - actualparticipants %}
-                                                        {% set buttoncolor = 'success' %}
-                                                        {% if availablespots <= maxparticipants / 10 %}
-                                                            {% set buttoncolor = 'danger' %}
-                                                        {% elseif availablespots <= maxparticipants / 2 %}
-                                                            {% set buttoncolor = 'warning' %}
-                                                        {% endif %} #}
+                                                        {% if events[i][j]["registered"] == "Registered" %}
+                                                            {% set buttoncolour = "danger" %}
+                                                        {% endif %}
                                                         {% set deidei = "+" ~ index ~ " days" %}
                                                         {% set d = "now"|date_modify(deidei)|date("m/d/Y","America/Montreal") %}
                                                             {% if d == events[i][j]["date"] %}
@@ -87,20 +61,22 @@
                                                                         <span class="caret"></span>
                                                                     </a>
                                                                     <ul class="dropdown-menu">
-
-                                                                    {% for slots in events[i][j]["timeslots"] %}
-                                                                        <li >{# class="disabled" #}
-                                                                            <a href="javascript:void(0)" onclick="document.forms['slot-{{slots["id"]}}'].submit()" >  
-                                                                                {{ slots["start-time"]}}-{{slots["end-time"] }} 
-                                                                                <i class="icon-user icon-black"></i>
-                                                                                {{ slots["registered"]}}/{{slots["capacity"] }}
-                                                                                {% if slots.status == "Registered" %} 
-                                                                                    <i class="icon-ok-sign icon-black"></i>
-                                                                                {% endif %}
-                                                                            </a>
-                                                                        </li>
-                                                                    {% endfor %}
-
+                                                                        {% for slots in events[i][j]["timeslots"] %}
+                                                                            <li >{# class="disabled" #}
+                                                                                <a href="javascript:void(0)" onclick="{% if slots.status == "Unregistered" %}
+                                                                                                                            document.forms['slot-{{slots["id"]}}'].submit()
+                                                                                                                        {% else %}
+                                                                                                                            javascript:void(0)
+                                                                                                                        {% endif %}" >  
+                                                                                    {{ slots["start-time"]}}-{{slots["end-time"] }} 
+                                                                                    <i class="icon-user icon-black"></i>
+                                                                                    {{ slots["registered"]}}/{{slots["capacity"] }}
+                                                                                    {% if slots.status == "Registered" %} 
+                                                                                        <i class="icon-ok-sign icon-black"></i>
+                                                                                    {% endif %}
+                                                                                </a>
+                                                                            </li>
+                                                                        {% endfor %}
                                                                     </ul>
                                                                 </div>
                                                                 {# FORMS #}

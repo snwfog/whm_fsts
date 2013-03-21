@@ -2,6 +2,8 @@
 
 namespace WHM;
 
+use WHM\Model\Session;
+
 abstract class Controller
 {
 
@@ -40,6 +42,7 @@ abstract class Controller
 
     public function display($file, $data = array())
     {
+        $data['isLoggedIn'] = Session::isLoggedIn();
         $this->renderer->display($file, array_merge($this->data, $data));
     }
 

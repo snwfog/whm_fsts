@@ -34,21 +34,31 @@ class ManageAppointment
     }
 
     public function deleteAppointment($member_id, $timeslot_id)
-    {  
-        $managehousehold = new ManageHousehold();
-        $ParticicpantTimeslot = new ParticipantsTimeslots();
-
-        $member = $managehousehold->findMember($member_id);
-        $timeslot = $this->em->find("WHM\model\Timeslot", (int) $timeslot_id);
-
-
-        // ??????????????
-        // $member->removeEvent($event);
-
-
-        // $this->em->persist($ParticicpantTimeslot);
+    { 
+        $ParticicpantTimeslot = $this->getParticipantTimeslot($member_id, $timeslot_id);
+        // echo $ParticicpantTimeslot[0]->getAttend();
+        $this->em->remove($ParticicpantTimeslot);
         $this->em->flush();
         return $member;
+    }
+
+    private function getParticipantTimeslot($member_id, $timeslot_id)
+    {
+        $managehousehold = new ManageHousehold();
+
+        $member = $managehousehold->findMember($member_id);
+
+        $timeslot = $this->em->find("WHM\model\Timeslot", (int) $timeslot_id);
+        $query = $this->em->createQueryBuilder()
+                          ->select("participantTimeslot")
+                          ->from("WHM\model\ParticipantsTimeslots", "participantTimeslot")
+                          ->where("participantTimeslot.household_member = :member_id")
+                          ->andWhere("participantTimeslot.timeslot = :timeslot_id")
+                          ->setParameter('member_id', $member)
+                          ->setParameter('timeslot_id', $timeslot);                         
+
+        $data = $query->getQuery()->getSingleResult();
+        return $data;
     }
 
 }

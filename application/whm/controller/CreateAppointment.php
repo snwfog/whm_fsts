@@ -24,14 +24,6 @@ class CreateAppointment extends WHM\Controller implements WHM\IRedirectable
 
     public function get($member_id = null)//url
     {
-        if (in_array("create", $_GET)) {
-            $this->data["household"] = array("member_id" => $member_id);
-            $this->display("appointment.twig", $this->data);
-        }
-        if (in_array("remove", $_GET)) {
-            $this->data["household"] = array("member_id" => $member_id);
-            $this->display("removeAppointment.twig", $this->data);
-        }
         if (in_array("delete", $_GET)) {
             $this->delete($_GET);
         }
@@ -57,8 +49,8 @@ class CreateAppointment extends WHM\Controller implements WHM\IRedirectable
 
     public function delete($data)
     {
-        $member = $this->manageappointment->deleteAppointment($data['member-id'], $data['event-id']);
-        echo "Appointment " . $data['event-id'] . " sucessfully removed from member " .  $data['member-id'];
+        $member = $this->manageappointment->deleteAppointment($data['member-id'], $data['slot-id']);
+        $this->redirect('household/' . $data['household-id']."/". $data['member-id']);
     }
 
 }

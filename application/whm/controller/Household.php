@@ -238,7 +238,6 @@ class Household extends Controller implements IRedirectable
     {   $data = array();
         $count = 0;
         $upcomingEvents=$this->manageEvents->getAllUpComingEvents();
-        // $formattedEvents=$this->eventcontroller->formatEvents($upcomingEvents);
 
         foreach( $upcomingEvents as $event )
         {
@@ -260,7 +259,7 @@ class Household extends Controller implements IRedirectable
                         {
                             $data[$count++] = array
                             (
-                                "id" => $t->getId(),
+                                "timeslot-id" => $t->getId(),
                                 "timeslot-name" => $t->getName(),
                                 "event-name" => $event->getName(),
                                 "duration" => $t->getDuration(),

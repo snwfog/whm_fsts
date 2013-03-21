@@ -32,7 +32,7 @@ $serves = array
 	'/report'                       => 'WHM\Controller\Report',
     '/report/functions'             => 'WHM\Controller\Report',
     '/report/annual'                => 'WHM\Controller\Report',
-    '/registration/new'             => 'WHM\Controller\Registration',
+    '/attendance/new'               => 'WHM\Controller\AppointFulfillment',
 
 
     // Ajax controller

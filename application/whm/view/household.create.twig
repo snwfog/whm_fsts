@@ -100,13 +100,6 @@
                 {% endfor %}
             </ul>
         </div>
-            
-            
-<!--             <form action="{{ apppath }}appointment/{{ household["member-id"]}}" method="GET" >
-                <input type="hidden" name="type" value="remove">
-                <input type="submit" value="Delete Appointment">
-            </form> -->
-            
     </div>
 {% endblock left1 %}
 
@@ -119,30 +112,35 @@
                     <div class="accordion" id="accordion2">
                         {% for member in household.members %}
                             {% for event in member.events %}
-                                
-                                    <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#{{ event.id }}{{ member["member-id"] }}">
-                                                {{ event["event-name"] }}   {#EID:{{ event.id}}, MID: {{ member["member-id"] }}#}
-                                                <span class="pull-right">
-                                                   {{event["date"]}}  {{ event["start-time"] }}-{{ event["end-time"] }}
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div id="{{ event["id"] }}{{ member["member-id"] }}" class="accordion-body collapse">
-                                            <div class="accordion-inner">
-                                                <form>
-                                                <a href="#" name="delete-appointment" id="{{event.id}}"> 
-                                                    <i class="icon-white icon-trash"></i>
-                                                </a>
-                                                <form/>
-                                                {{ member["first-name"] }} {{ member["last-name"] }} 
-                                                Duration: {{ event.duration }} mins
-                                                {{ event["description"] }}
-                                            </div>
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#{{ event["timeslot-id"] }}{{ member["member-id"] }}">
+                                            {{ event["event-name"]|slice(0, 10)  }}
+                                            <span class="pull-right">
+                                               {{event["date"]}}
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div id="{{ event["timeslot-id"] }}{{ member["member-id"] }}" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <button type="button" style="margin-top: 5px;" class="close flag-delete-btn" id="appointment-delete-btn-{{ i }}" onclick="document.forms['delete-{{ member["member-id"] }}-{{ event["timeslot-id"] }}'].submit()">
+                                                <i class="icon-remove {{ theme ? 'icon-white' : ''}}"></i>
+                                            </button>
+                                            <form name="delete-{{ member["member-id"] }}-{{ event["timeslot-id"] }}" action="{{ apppath }}appointment/new" method="GET" >
+                                                <input type="hidden" name="type" value="delete" >
+                                                <input type="hidden" name="household-id" value="{{ household.household_id }}">
+                                                <input type="hidden" name="member-id" value="{{ member["member-id"] }}">
+                                                <input type="hidden" name="slot-id" value="{{ event["timeslot-id"] }}">
+                                            </form>
+                                            {{ member["first-name"] }} {{ member["last-name"] }}<br /> 
+                                            Time: {{ event["start-time"] }}-{{ event["end-time"] }}<br />
+                                            Duration: {{ event.duration }}mins<br />
+                                            {% if event["description"] != null %}
+                                                Desciption: {{ event["description"] }}
+                                            {% endif %}
                                         </div>
                                     </div>
-                                 
+                                </div>
                            {% endfor %}
                         {% endfor %} 
                     </div>
