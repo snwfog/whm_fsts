@@ -33,17 +33,22 @@ class ManageAppointment
         return $member;
     }
 
-    public function deleteAppointment($member_id, $event_id)
+    public function deleteAppointment($member_id, $timeslot_id)
     {  
         $managehousehold = new ManageHousehold();
-        $member = $managehousehold->findMember($member_id);
-        $event = $this->em->find("WHM\model\Event", (int) $event_id);
-        $member->removeEvent($event);
+        $ParticicpantTimeslot = new ParticipantsTimeslots();
 
-        $this->em->persist($member);
-        $this->em->persist($event);
+        $member = $managehousehold->findMember($member_id);
+        $timeslot = $this->em->find("WHM\model\Timeslot", (int) $timeslot_id);
+
+
+        // ??????????????
+        // $member->removeEvent($event);
+
+
+        // $this->em->persist($ParticicpantTimeslot);
         $this->em->flush();
-        return $appointment;
+        return $member;
     }
 
 }

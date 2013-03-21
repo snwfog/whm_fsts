@@ -56,7 +56,7 @@ class Household extends Controller implements IRedirectable
             }
 
             $data = $this->formatHouseholdInfo($household, $member);
-;            
+
             //Get flag descriptor for creating flags
             $flagDescriptors = $this->manageFlag->getFlagDescriptors();
             $formattedDescriptor = $this->formatDescriptor($flagDescriptors);
@@ -261,8 +261,10 @@ class Household extends Controller implements IRedirectable
                             $data[$count++] = array
                             (
                                 "id" => $t->getId(),
-                                "name" => $t->getName(),
+                                "timeslot-name" => $t->getName(),
+                                "event-name" => $event->getName(),
                                 "duration" => $t->getDuration(),
+                                "date" => $event->getStartDate()->format("m/d/Y"),
                                 "description" => $event->getDescription(),
                                 "capacity" => $t->getCapacity(),
                                 "start-time" => $slotStarttime,
