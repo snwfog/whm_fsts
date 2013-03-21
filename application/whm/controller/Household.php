@@ -259,7 +259,7 @@ class Household extends Controller implements IRedirectable
                         {
                             $data[$count++] = array
                             (
-                                "id" => $t->getId(),
+                                "timeslot-id" => $t->getId(),
                                 "timeslot-name" => $t->getName(),
                                 "event-name" => $event->getName(),
                                 "duration" => $t->getDuration(),
