@@ -116,22 +116,36 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="tab1">
                     <legend>Events</legend>
-
                     <div class="accordion" id="accordion2">
-                        <div class="accordion-group">
-                            <div class="accordion-heading">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                                    Collapsible Group Item #1
-                                </a>
-                            </div>
-                            <div id="collapseOne" class="accordion-body collapse in">
-                                <div class="accordion-inner">
-                                    Anim pariatur cliche...
-                                </div>
-                            </div>
-                        </div>
+                        {% for member in household.members %}
+                            {% for event in member.events %}
+                                
+                                    <div class="accordion-group">
+                                        <div class="accordion-heading">
+                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#{{ event.id }}{{ member["member-id"] }}">
+                                                {{ event["event-name"] }}   {#EID:{{ event.id}}, MID: {{ member["member-id"] }}#}
+                                                <span class="pull-right">
+                                                   {{event["date"]}}  {{ event["start-time"] }}-{{ event["end-time"] }}
+                                                </span>
+                                            </a>
+                                        </div>
+                                        <div id="{{ event["id"] }}{{ member["member-id"] }}" class="accordion-body collapse">
+                                            <div class="accordion-inner">
+                                                <form>
+                                                <a href="#" name="delete-appointment" id="{{event.id}}"> 
+                                                    <i class="icon-white icon-trash"></i>
+                                                </a>
+                                                <form/>
+                                                {{ member["first-name"] }} {{ member["last-name"] }} 
+                                                Duration: {{ event.duration }} mins
+                                                {{ event["description"] }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                 
+                           {% endfor %}
+                        {% endfor %} 
                     </div>
-
                 </div>
                 <div class="tab-pane" id="tab2">
                     <legend>Flags</legend>
