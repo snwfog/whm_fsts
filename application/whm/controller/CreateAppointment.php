@@ -58,7 +58,7 @@ class CreateAppointment extends WHM\Controller implements WHM\IRedirectable
     public function delete($data)
     {
         $member = $this->manageappointment->deleteAppointment($data['member-id'], $data['event-id']);
-        echo "Appointment " . $data['event-id'] . " sucessfully removed from member " .  $data['member-id'];
+        $this->redirect('household/' . $_POST['household-id']."/". $_POST['member-id']);
     }
 
 }
