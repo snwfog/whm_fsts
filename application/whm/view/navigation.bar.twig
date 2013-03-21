@@ -1,5 +1,6 @@
 {% block navigation %}
 
+    {% if isLoggedIn %}
 
     {% include "modal.group.twig" %}
 
@@ -18,93 +19,95 @@
 
 
                     <ul class="nav">
-                        {#<li class="active"><a href="#">Household</a></li>#}
+                            {#<li class="active"><a href="#">Household</a></li>#}
 
-                        {#<li><a href="#">Link</a></li>#}
-                        {#<li><a href="#">Link</a></li>#}
+                            {#<li><a href="#">Link</a></li>#}
+                            {#<li><a href="#">Link</a></li>#}
 
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-home"></i> Household <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-header">Household</li>
-                                <li><a href="#" data-toggle="modal" data-target="#search-modal"><i class="icon-search"></i> Search</a></li>
-                                <li><a href="#" data-toggle="modal" data-target="#create-household-modal"><i class="icon-plus"></i> Create Household</a></li>
-                            </ul>
-                        </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-home"></i> Household <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-header">Household</li>
+                                    <li><a href="#" data-toggle="modal" data-target="#search-modal"><i class="icon-search"></i> Search</a></li>
+                                    <li><a href="#" data-toggle="modal" data-target="#create-household-modal"><i class="icon-plus"></i> Create Household</a></li>
+                                </ul>
+                            </li>
 
-                        <li>
-                            <a href="{{ apppath }}event" id="eventJS" data-target="#create-event"><i class="icon-calendar"></i> Event</a>
-                           
-                        </li>
+                            <li>
+                                <a href="{{ apppath }}event" id="eventJS" data-target="#create-event"><i class="icon-calendar"></i> Event</a>
 
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list-alt"></i> Report <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-header">Report</li>
-                                <li><a href="{{ apppath }}report" id="statJS">Statistics</a></li>
-                                <li><a href="{{ apppath }}report/functions" id="funcJS">Functional Reports</a></li>
-                            </ul>
-                        </li>
+                            </li>
 
-                    </ul>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list-alt"></i> Report <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-header">Report</li>
+                                    <li><a href="{{ apppath }}report" id="statJS">Statistics</a></li>
+                                    <li><a href="{{ apppath }}report/functions" id="funcJS">Functional Reports</a></li>
+                                </ul>
+                            </li>
 
-
-
-                    <form class="navbar-search pull-left" action="">
-                        <input type="text" class="search-query span2" placeholder="Search Member"
-                               data-link="search">
-                    </form>
+                        </ul>
 
 
-                    <ul class="nav pull-right">
-                        <li class="divider-vertical"></li>
-                        {# TIME CLOCK 
-                        <li><a href="#" id="navbar-time"></a></li> #}
-						{# adding a "keyboard shortcut legend (help) toggle #}
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<i class="icon-list-alt"></i> 
-							Legend
-							<b class="caret"></b></a>
-							<ul class="dropdown-menu" id="legendJS">
-								<li class="nav-header">Keyboard Shortcuts</li>
-								<li><a> K : Toggle Legend </a> </li>
-								<li><a> A : Create Household </a></li>
-                                <li><a> M : Add New Member </a></li>
-								<li><a> F : Add Flag </a></li>
-                                <li><a> G : Manage Flags </a></li>
-                                <li><a> D : Make Appointment </a></li>
-                                <li><a> S : Search </a></li>
-								<li><a> 1 : Statistics Reports </a></li>
-							    <li><a> 2 : Functional Reports </a></li>
-                                <li><a> 3 : Events </a></li>
-                                <li><a> 0 : Switch Theme </a></li>
-                            </ul>
-						</li>  
-                        <li class="divider-vertical"></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-wrench"></i> <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a name="switch-theme" href="#"><i class="icon-adjust"></i> Switch Theme</a></li>
-                                <li><a href="#"><i class="icon-user"></i> Manage Operator</a></li>
-                                <li><a href="#" data-toggle="modal" data-target="#manage-flag-modal">
-                                        <i class="icon-flag"></i> Manage Flag</a></li>
-                                <li class="divider"></li>
-                                <li><a href="{{ apppath }}logout"><i class="icon-off"></i> Sign Out</a></li>
-                            </ul>
-                        </li>
-						{# adding a "keyboard shortcut legend (help) toggle 
-						<li class="divider-vertical"></li>
-						<li class="legend">
-							<a href="#" class="legend-toggle" data-toggle="dropdown">
-							<i class="icon-keyboard"></i> 
-							Alt-F1 Toggle Legend
-							</a>
-						</li> #}
-						
-                    </ul>
+
+                        <form class="navbar-search pull-left" action="">
+                            <input type="text" class="search-query span2" placeholder="Search Member"
+                                   data-link="search">
+                        </form>
+
+
+                        <ul class="nav pull-right">
+                            <li class="divider-vertical"></li>
+                            {# TIME CLOCK 
+                            <li><a href="#" id="navbar-time"></a></li> #}
+                            {# adding a "keyboard shortcut legend (help) toggle #}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-list-alt"></i> 
+                                    Legend
+                                    <b class="caret"></b></a>
+                                <ul class="dropdown-menu" id="legendJS">
+                                    <li class="nav-header">Keyboard Shortcuts</li>
+                                    <li><a> K : Toggle Legend </a> </li>
+                                    <li><a> A : Create Household </a></li>
+                                    <li><a> M : Add New Member </a></li>
+                                    <li><a> F : Add Flag </a></li>
+                                    <li><a> G : Manage Flags </a></li>
+                                    <li><a> D : Make Appointment </a></li>
+                                    <li><a> S : Search </a></li>
+                                    <li><a> 1 : Statistics Reports </a></li>
+                                    <li><a> 2 : Functional Reports </a></li>
+                                    <li><a> 3 : Events </a></li>
+                                    <li><a> 0 : Switch Theme </a></li>
+                                </ul>
+                            </li>  
+                            <li class="divider-vertical"></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-wrench"></i> <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a name="switch-theme" href="#"><i class="icon-adjust"></i> Switch Theme</a></li>
+                                    <li><a href="#"><i class="icon-user"></i> Manage Operator</a></li>
+                                    <li><a href="#" data-toggle="modal" data-target="#manage-flag-modal">
+                                            <i class="icon-flag"></i> Manage Flag</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="{{ apppath }}logout"><i class="icon-off"></i> Sign Out</a></li>
+                                </ul>
+                            </li>
+                            {# adding a "keyboard shortcut legend (help) toggle 
+                            <li class="divider-vertical"></li>
+                            <li class="legend">
+                                <a href="#" class="legend-toggle" data-toggle="dropdown">
+                                <i class="icon-keyboard"></i> 
+                                Alt-F1 Toggle Legend
+                                </a>
+                            </li> #}
+
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
     </div>
+
+    {% endif %}
 {% endblock navigation %}
