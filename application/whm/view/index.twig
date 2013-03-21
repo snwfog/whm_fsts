@@ -13,12 +13,11 @@
 
 
     <div class="span12">
-
         
-        {% if not(isLoggedIn) %}
-            <div class="well span4 offset4" id="login-well">
-                <form action="{{ apppath }}login" method="POST" id="operator-login">
-                    <legend style="color: #FFF">Welcome Hall Mission</legend>
+        <div class="well span4 offset4" id="login-well">
+            <form action="{{ apppath }}login" method="POST" id="operator-login">
+                <legend style="color: #FFF">Welcome Hall Mission</legend>
+                {% if not(isLoggedIn) %}
                     <div class="controls">
                         <input class="span12" type="text" name="username" placeholder="Username" value="{{ operator["username"] }}"/>
                         <input class="span12" type="password" name="inputPassword" placeholder="Password" value="{{ operator["password"] }}"/>			
@@ -26,9 +25,10 @@
                             <button class="btn btn-large btn-success span12">Authenticate</button>
                         </div>
                     </div>
-                </form>
-            </div>        
-        {% endif %}
+                {% endif %}
+            </form>
+        </div>        
+
         
         <div id="myCarousel" class="carousel slide">
             {#<ol class="carousel-indicators">#}
