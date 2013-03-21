@@ -24,7 +24,7 @@ class Event extends Controller implements IRedirectable
     }
 
     public function get($event_id = null)
-    {
+    {   
         $allEvents = $this->manageEvent->getAllEventsByGroup();
         $this->data["allEvents"] = $this->formatEvents($allEvents);
 
