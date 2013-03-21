@@ -9,7 +9,7 @@ use WHM\Controller;
 use WHM\IRedirectable;
 // use WHM\Model\ManageAppointment;
 
-class Registration extends WHM\Controller implements WHM\IRedirectable
+class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
 {
     protected $data = array("errors" => array(), "form" => array());
     // private $manageappointment;
@@ -24,7 +24,7 @@ class Registration extends WHM\Controller implements WHM\IRedirectable
 
     public function get()
     {
-            $this->display("registrationEvent.twig");  //change
+            $this->display("AttendanceAppointFull.twig");  //change
 
             // $this->display("registrationParticipants.twig");
        
