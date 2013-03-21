@@ -189,13 +189,39 @@ class ManageEvent
                           ->andWhere("event.is_template <> 1")
                           ->andWhere("event.is_activated = 1")
                           // ->groupBy("event.group_id")
-                          // ->orderBy("event.group_id")
+                          // ->orderBy("event.group_id" )
                           ->setParameter('dateFuture', $dateFuture)
                           ->setParameter('dateNow', $dateNow);                         
 
         $upcomingEvents = $query->getQuery()->execute();
         return $upcomingEvents;
     }
+
+    public function getTodaysEvents()
+    {
+        //CONSTRAINT: RETRIEVE EVENT ONLY 2 WEEKS AHEAD.
+        $dateTime2 = new DateTime();
+        $dateTime2->setTimezone(new DateTimeZone(LOCALTIME));
+        $dateNow = $dateTime2;
+
+        // $dateTime = new DateTime();
+        // $dateTime->setTimezone(new DateTimeZone(LOCALTIME));
+        
+        $query = $this->em->createQueryBuilder()
+                          ->select("event")
+                          ->from("WHM\model\Event", "event")
+                          ->where("event.start_date = :dateNow")    
+                          // ->andWhere("event.start_date >= :dateNow")
+                          // ->andWhere("event.is_template <> 1")
+                          // ->andWhere("event.is_activated = 1")
+                          // ->groupBy("event.group_id")
+                          // ->orderBy("event.group_id" )
+                          // ->setParameter('dateFuture', $dateFuture)
+                          ->setParameter('dateNow', $dateNow);                         
+
+        $upcomingEvents = $query->getQuery()->execute();
+        return $upcomingEvents;
+    }   
 
     public function getAllEventsByGroup()
     {

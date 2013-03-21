@@ -24,7 +24,10 @@ class Session
 
     public static function isLoggedIn()
     {
-        session_start();
+        if(!isset($_SESSION)) 
+        { 
+            session_start(); 
+        }
         return isset($_SESSION['sessID']) && $_SESSION['sessID'] == session_id();
     }
 
