@@ -9,6 +9,7 @@ use \WHM\Model\ManageEvent;
 use \WHM\Model\ManageAppointment;
 use \WHM\Model\ManageHousehold;
 use \WHM\Model\Timeslot;
+use \WHM\Model\HouseholdMember;
 use DateTime;
 use DateTimeZone;
 
@@ -31,45 +32,115 @@ class Report extends Controller implements IRedirectable
     }
 
     public function get($eventId = null)
-    {      
-            $allEvents = $this->mevent->getAllEvents();
-            $annualReport=$this->createAnnualReport($allEvents);
+    {       
+            //$event = $this->mevent->findEvent($eventId);
+            //$allEvents = $this->mevent->getAllEvents();
+     /*       $annualReport=$this->createAnnualReport($eventId);
             print_r($annualReport);
 
             $data = array(
                            "participants"  =>  $annualReport
-                    ); 
-            $this->display("report.stat.twig", $data);             
+                    ); */
+
+         /*
+
+            header("Content-Type: text/plain");
+
+            // filename for download
+            $filename = "website_data_" . date('Ymd') . ".xls";
+
+            header("Content-Disposition: attachment; filename=\"$filename\"");
+            header("Content-Type: application/vnd.ms-excel");
+            $flag = false;
+            foreach($data as $row) 
+            {
+                $data = array(
+                           "participants"  =>  $annualReport
+                    );
+
+                if(!$flag) 
+                {
+                    // display field/column names as first row
+                echo implode("\t", array_keys($row)) . "\r\n";
+                $flag = true;
+                }
+                echo implode("\t", array_values($row)) . "\r\n";
+             }
+*/
+
+        
+            $this->display("report.stat.twig");  
+
+           
     }
 
     // Update Event
     public function post()
 	{
-     
+        if (isset($_POST))
+        {
+            $annualReport=$this->createAnnualReport($_POST);
+            print_r($annualReport);
 
+            $data = array(
+                           "participants"  =>  $annualReport
+                    );
+
+             header("Content-Type: text/plain");
+
+            // filename for download
+            $filename = "website_data_" . date('Ymd') . ".xls";
+
+            header("Content-Disposition: attachment; filename=\"$filename\"");
+            header("Content-Type: application/vnd.ms-excel");
+            $flag = false;
+            foreach($data as $row) 
+            {
+                $data = array(
+                           "participants"  =>  $annualReport
+                    );
+
+                if(!$flag) 
+                {
+                    // display field/column names as first row
+                echo implode("\t", array_keys($row)) . "\r\n";
+                $flag = true;
+                }
+              //  echo implode("\t", array_values($row)) . "\r\n";
+             }
+  
+         //   $this->redirect("household/" . $_POST["household-id"] . "/" . $_POST["member-id"]);
+        }
+        else
+        {
+            $this->display("report.stat.twig",$data);
+        }
+        
     }
 
-      public function createAnnualReport($eventId)
+      public function createAnnualReport()
     {
         $data = array();
         $count = 0;
+        $allEvents = $this->mevent->getAllEvents();
         
-        foreach ($eventId as $event) 
+        foreach ($allEvents as $event) 
         {
-          $findEvent = $this->mevent->findEvent($eventId);
-          $participants = $this->getEventParticipants($findEvent); 
-          $member = $this->manageHousehold->findMember($participants);
-          $household = $member->getHousehold();
-          $address = $household->getAddress();  
-          $data[$count++] = array( 
+          $participants = $this->getEventParticipants($event); 
+          foreach ($participants as $member) 
+          { 
+            $household = $member->getHousehold();
+            $address = $household->getAddress();  
+            $data[$count++] = array( 
                         "mother-tongue"  => $member->getMotherTongue(),
                         "work-status"  => $member->getWorkStatus(),
                         "origin"   => $member->getOrigin(),
                         "income" => $member->getIncome(),
                         "postal-code"   => $address->getPostalCode(),
                         "district" => $address->getDistrict(),
-
                         );
+
+          }
         }
          return $data;
     }
@@ -85,23 +156,23 @@ class Report extends Controller implements IRedirectable
 
     } 
 
-     public function getEventParticipants()
+     public function getEventParticipants($eventInstance)
     {   
-        $timeslot= new Timeslot();
-        $allEvents = $this->mevent->getAllEvents();
-        $eventSlots = $this->event->getTimeslots($allEvents);
+        $eventSlots = $eventInstance->getTimeslots();
         $participants = null;
+        $data = array();
         if(!is_null($eventSlots))
-        {    
+        {  
             foreach ($eventSlots as $es) 
             {
-    
-                  $participants = $es->getParticipants();
+                $participants = $es->getParticipants();
+                if(!empty($participants))
+                {
+                    $data = $data + $participants;
+                }
+                              
             }
         }
-        $data = array(
-                    "participants"  => $participants
-                    );
 
         return $data;
     

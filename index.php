@@ -31,6 +31,7 @@ $serves = array
     '/event/:number'                => 'WHM\Controller\Event',
 	'/report'                       => 'WHM\Controller\Report',
     '/report/functions'             => 'WHM\Controller\Report',
+    '/report/annual'                => 'WHM\Controller\Report',
     '/registration/new'             => 'WHM\Controller\Registration',
 
 

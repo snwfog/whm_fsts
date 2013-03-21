@@ -7,12 +7,15 @@
 		</legend>
 		
 		<div class="well" id="yearly-well">
-		<form action ="{{ apppath }}{{ formAction }}" method="POST" name="stat-form"
-		id = "stat-form"> 
-		
-		<select class=''>
-			<option>{{ event["name"]}}</option>
-		</select>
+		<form action ="{{ apppath }}report/annual" method="POST" name="stat-form"
+		id = "stat-form">
+
+			<select class=''>
+			{% for each_event in allEvents %}
+				<option>{{ each_event.name}}</option>
+				{% endfor %}
+			</select>
+
 		<br /><br />
 		<input type="hidden" name="event-id" value="{{ event["event-id"] }}"/>
 		<input type = "radio"> Annual 
@@ -20,6 +23,7 @@
 		
 
 		<br /><br />
+		<input type="submit" name="submit" value="Submit"/>
 		<button id="generate-year-report" type="button" class="btn btn-medium btn-success"><i class="icon-tasks icon-white"></i> Generate Report</button>
 		<button id="excel-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export Excel</button>
 		<button id="pdf-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export PDF</button>
