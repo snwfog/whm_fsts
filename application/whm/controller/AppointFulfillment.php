@@ -9,7 +9,7 @@ use WHM\Controller;
 use WHM\IRedirectable;
 // use WHM\Model\ManageAppointment;
 
-class Registration extends WHM\Controller implements WHM\IRedirectable
+class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
 {
     protected $data = array("errors" => array(), "form" => array());
     // private $manageappointment;
