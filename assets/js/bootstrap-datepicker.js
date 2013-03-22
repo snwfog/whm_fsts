@@ -27,8 +27,8 @@
 		this.picker = $(DPGlobal.template)
 							.appendTo('body')
 							.on({
-								click: $.proxy(this.click, this)//,
-								//mousedown: $.proxy(this.mousedown, this)
+								click: $.proxy(this.click, this),
+								mousedown: $.proxy(this.mousedown, this)
 							});
 		this.isInput = this.element.is('input');
 		this.component = this.element.is('.date') ? this.element.find('.add-on') : false;
