@@ -23,7 +23,7 @@ class Event
     /** @Column(type="time", nullable=TRUE) */   
     protected $start_time;
 
-    /** @Column(type="datetime") */
+    /** @Column(type="date") */
     protected $start_date;
 
     /** @Column(type="smallint", nullable=TRUE) */

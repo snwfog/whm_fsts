@@ -97,7 +97,29 @@ class Event extends Controller implements IRedirectable
         $count = 0;
         foreach( $events as $event)
         {
-            $data[$count++] = array
+                $data[$count++] = array
+                (
+                    "event-id" => $event->getId(),
+                    "name" => $event->getName(),
+                    "capacity" => $event->getCapacity(),
+                    "description" => $event->getDescription(),
+                    "start-time" => $event->getStartTime()->format("H:i"),
+                    "date" => $event->getStartDate()->format("m/d/Y"),
+                    "group-id" => $event->getGroupId(),
+                    "is_activated" => $event->getIsActivated(),
+                );
+        }
+        return $data;
+    }
+   
+    public function formatTodaysEventsDetail($events)
+    {
+        $data = array();
+        $count = 0;
+
+         foreach( $events as $event)
+        {
+                $data[$count++] = array
                 (
                     "event-id" => $event->getId(),
                     "name" => $event->getName(),
@@ -150,6 +172,7 @@ class Event extends Controller implements IRedirectable
         }
         return $data;
     }
+
 
     private function getSlots($event)
     {

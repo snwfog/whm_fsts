@@ -9,6 +9,7 @@ use WHM\Controller;
 use WHM\IRedirectable;
 use WHM\model\ManageEvent;
 use WHM\Controller\Report;
+use WHM\Controller\Event;
 // use WHM\Model\ManageAppointment;
 
 class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
@@ -16,6 +17,7 @@ class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
     protected $data = array("errors" => array(), "form" => array());
     private $manageEvent;
     private $report;
+    private $event;
 
     public function __construct()//array $args = null
     {
@@ -26,6 +28,7 @@ class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
         // $this->manageEvent = new ManageEvent();
         $this ->report = new report();
         $this ->manageEvent= new ManageEvent();
+        $this ->event= new Event();
 
     }
 
@@ -46,9 +49,12 @@ class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
 
         // }
         
-        $todayEvent = $this ->manageEvent ->getTodaysEvents();
-        print_r($todayEvent);
-         // $allParticipant = $this->report->getEventParticipants();
+        $todayEvents = $this ->manageEvent ->getTodaysEvents();
+        $eventsT=$this->event->formatTodaysEventsDetail($todayEvents);
+
+        print_r($eventsT);
+        
+        // $allParticipant = $this->report->getEventParticipants();
         // $allEvents = $this->manageEvent->getAllEventsByGroup();
         // $this->data["allEvents"] = $this->formatEvents($allEvents);
 
