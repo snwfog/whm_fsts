@@ -27,8 +27,8 @@
 		this.picker = $(DPGlobal.template)
 							.appendTo('body')
 							.on({
-								click: $.proxy(this.click, this)//,
-								//mousedown: $.proxy(this.mousedown, this)
+								click: $.proxy(this.click, this),
+								mousedown: $.proxy(this.mousedown, this)
 							});
 		this.isInput = this.element.is('input');
 		this.component = this.element.is('.date') ? this.element.find('.add-on') : false;
@@ -36,7 +36,7 @@
 		if (this.isInput) {
 			this.element.on({
 				focus: $.proxy(this.show, this),
-				//blur: $.proxy(this.hide, this),
+				blur: $.proxy(this.hide, this),
 				keyup: $.proxy(this.update, this)
 			});
 		} else {
@@ -420,8 +420,16 @@
 							date.setFullYear(2000 + val);
 							break;
 						case 'yyyy':
-							year = val;
-							date.setFullYear(val);
+							if(parts[i].length == 2)
+							{
+								year = 2000 + val;
+								date.setFullYear(2000 + val);
+							}
+							else
+							{
+								year = val;
+								date.setFullYear(val);
+							}
 							break;
 					}
 				}
