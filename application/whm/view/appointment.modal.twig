@@ -62,15 +62,22 @@
                                                                     </a>
                                                                     <ul class="dropdown-menu">
                                                                         {% for slots in events[i][j]["timeslots"] %}
+                                                                            {% set bobby = slots["registered"] / slots["capacity"] %}
                                                                             <li >{# class="disabled" #}
-                                                                                <a href="javascript:void(0)" onclick="{% if slots.status == "Unregistered" %}
-                                                                                                                            document.forms['slot-{{slots["id"]}}'].submit()
-                                                                                                                        {% else %}
+                                                                                <a href="javascript:void(0)" onclick="{% if slots.status == "Registered" %}
                                                                                                                             javascript:void(0)
+                                                                                                                        {% elseif bobby >= 1 %}
+                                                                                                                            javascript:void(0)
+                                                                                                                        {% else %}
+                                                                                                                            document.forms['slot-{{slots["id"]}}'].submit()
                                                                                                                         {% endif %}" >  
-                                                                                    {{ slots["start-time"]}}-{{slots["end-time"] }} 
+                                                                                    {{ slots["start-time"]}}-{{slots["end-time"] }}
                                                                                     <i class="icon-user icon-black"></i>
-                                                                                    {{ slots["registered"]}}/{{slots["capacity"] }}
+                                                                                    {% if bobby >= 1 %}
+                                                                                        Full {{ slots["registered"]}}/{{slots["capacity"] }}
+                                                                                    {% else %}
+                                                                                        {{ slots["registered"]}}/{{slots["capacity"] }}
+                                                                                    {% endif %}
                                                                                     {% if slots.status == "Registered" %} 
                                                                                         <i class="icon-ok-sign icon-black"></i>
                                                                                     {% endif %}
