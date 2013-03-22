@@ -420,8 +420,16 @@
 							date.setFullYear(2000 + val);
 							break;
 						case 'yyyy':
-							year = val;
-							date.setFullYear(val);
+							if(parts[i].length == 2)
+							{
+								year = 2000 + val;
+								date.setFullYear(2000 + val);
+							}
+							else
+							{
+								year = val;
+								date.setFullYear(val);
+							}
 							break;
 					}
 				}
