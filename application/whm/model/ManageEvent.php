@@ -55,15 +55,17 @@ class ManageEvent
 
     public function createTimeslot($event, $data)
     {
-        $timeslot = new Timeslot();
-        $timeslot->setName($data["slot-name"]);
-        $timeslot->setDuration($data["slot-duration"]);
-        $timeslot->setCapacity($data["slot-capacity"]);
-        $timeslot->setEvent($event);
-        $event->addTimeslot($timeslot);
-        $this->em->persist($event);
-        $this->em->persist($timeslot);
-        $this->em->flush();
+        if(isset($data["slot-name"]) && isset($data["slot-duration"]) && isset($data["slot-capacity"])){
+            $timeslot = new Timeslot();
+            $timeslot->setName($data["slot-name"]);
+            $timeslot->setDuration($data["slot-duration"]);
+            $timeslot->setCapacity($data["slot-capacity"]);
+            $timeslot->setEvent($event);
+            $event->addTimeslot($timeslot);
+            $this->em->persist($event);
+            $this->em->persist($timeslot);
+            $this->em->flush();
+        }
     }
 
 
@@ -111,29 +113,31 @@ class ManageEvent
         $eventInstance->setStartDate($data["start-date"]); 
         $eventInstance->setCapacity($data["event-capacity"]);
 
-        $slot_ids = $data["slot-id"];
-        $slot_names = $data["slot-name"];
-        $slot_durations = $data["slot-duration"];
-        $slot_capacities = $data["slot-capacity"];
+        if(isset($data["slot-id"]) && isset($data["slot-id"]) && isset($data["slot-duration"]) && isset($data["slot-capacity"])){
+          $slot_ids = $data["slot-id"];
+          $slot_names = $data["slot-name"];
+          $slot_durations = $data["slot-duration"];
+          $slot_capacities = $data["slot-capacity"];
 
-        if( count($slot_names) > 0 && count($slot_durations) > 0 && count($slot_capacities) > 0){
-            if( count($slot_names) == count($slot_durations) && count($slot_durations) == count($slot_capacities)){
-                for ($i = 0; $i < count($slot_names); $i++){
-                    if(!empty($slot_ids[$i])){
-                        $timeslot = $this->findTimeslot($slot_ids[$i]);
-                        $timeslot->setName($slot_names[$i]);
-                        $timeslot->setDuration($slot_durations[$i]);
-                        $timeslot->setCapacity($slot_capacities[$i]);
-                    }else{
-                        $newTimeslot = array("slot-name" => $slot_names[$i],
-                                          "slot-duration" => $slot_durations[$i], 
-                                          "slot-capacity" => $slot_capacities[$i]
-                                    );
-                        $this->createTimeslot($eventInstance, $newTimeslot);
-                    }
-                }
-            }
-        }
+          if( count($slot_names) > 0 && count($slot_durations) > 0 && count($slot_capacities) > 0){
+              if( count($slot_names) == count($slot_durations) && count($slot_durations) == count($slot_capacities)){
+                  for ($i = 0; $i < count($slot_names); $i++){
+                      if(!empty($slot_ids[$i])){
+                          $timeslot = $this->findTimeslot($slot_ids[$i]);
+                          $timeslot->setName($slot_names[$i]);
+                          $timeslot->setDuration($slot_durations[$i]);
+                          $timeslot->setCapacity($slot_capacities[$i]);
+                      }else{
+                          $newTimeslot = array("slot-name" => $slot_names[$i],
+                                            "slot-duration" => $slot_durations[$i], 
+                                            "slot-capacity" => $slot_capacities[$i]
+                                      );
+                          $this->createTimeslot($eventInstance, $newTimeslot);
+                      }
+                  }
+              }
+          }
+      }
 
         $this->em->persist($eventInstance);
         $this->em->flush();

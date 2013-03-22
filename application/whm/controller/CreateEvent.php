@@ -122,27 +122,29 @@ class CreateEvent extends Controller implements IRedirectable
     }
 
     private function createTimeslots($event, $timeslots){
-        $slot_name = $timeslots["slot-name"];
-        $slot_duration = $timeslots["slot-duration"];
-        $slot_capacity = $timeslots["slot-capacity"];
+        if(isset($timeslots["slot-name"]) && isset($timeslots["slot-duration"]) && isset($timeslots["slot-capacity"])){
+            $slot_name = $timeslots["slot-name"];
+            $slot_duration = $timeslots["slot-duration"];
+            $slot_capacity = $timeslots["slot-capacity"];
 
-        if( count($slot_name) > 0 && count($slot_duration) > 0 && count($slot_capacity) > 0){
-            if( count($slot_name) == count($slot_duration) && count($slot_duration) == count($slot_capacity)){
-                for ($i = 0; $i < count($slot_name); $i++){
-                    $data = array(
-                                    "slot-name" => $slot_name[$i],
-                                    "slot-duration" => $slot_duration[$i],
-                                    "slot-capacity" => $slot_capacity[$i],
-                            );
+            if( count($slot_name) > 0 && count($slot_duration) > 0 && count($slot_capacity) > 0){
+                if( count($slot_name) == count($slot_duration) && count($slot_duration) == count($slot_capacity)){
+                    for ($i = 0; $i < count($slot_name); $i++){
+                        $data = array(
+                                        "slot-name" => $slot_name[$i],
+                                        "slot-duration" => $slot_duration[$i],
+                                        "slot-capacity" => $slot_capacity[$i],
+                                );
 
-                    if(empty($slot_name[$i])){
-                        $eventslots = $event->getTimeslots();
-                        $num = count($eventslots) + 1;
-                        $data["slot-name"] = "Timeslot #".$num;
+                        if(empty($slot_name[$i])){
+                            $eventslots = $event->getTimeslots();
+                            $num = count($eventslots) + 1;
+                            $data["slot-name"] = "Timeslot #".$num;
+                        }
+
+
+                        $this->manageEvent->createTimeslot($event, $data);
                     }
-
-
-                    $this->manageEvent->createTimeslot($event, $data);
                 }
             }
         }

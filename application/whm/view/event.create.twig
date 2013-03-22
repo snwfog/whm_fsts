@@ -23,8 +23,8 @@
                     {% endif %}
 
                     {# DECIDE LABEL COLOR #}
-                    {% set maxparticipants = event.capacity %}
-                    {% set actualparticipants = participants ? participants|length : 0 %}
+                    {% set maxparticipants = event.totalCapacity %}
+                    {% set actualparticipants = event.numOfParticipants ? numOfParticipants|length : 0 %}
                     {% set availablespots = maxparticipants - actualparticipants %}
                     {% set labelcolor = 'success' %}
                     {% if availablespots <= maxparticipants / 10 %}
@@ -76,7 +76,6 @@
                     {% if event %}
 
                         <button class="btn btn-warning" data-toggle="button" class-toggle="btn-state" name="event-create-modify" type="button">
-
                                 <i class="icon-edit icon-white"></i> Modify
                         </button>
 
@@ -161,7 +160,7 @@
             </div>
             <legend>Participants</legend>
             {# OH NO INSTYLE CSS#}
-            <div class="well no-padding-well" id="dates-well" style="{{ relatedEvents|length > 6 ? 'max-height:200px; overflow: scroll;' : ''}}">
+            <div class="well no-padding-well" id="dates-well" style="{{ participants|length > 6 ? 'max-height:200px; overflow: scroll;' : ''}}">
                 <table class="table table-striped">
                   <thead>
                       <th> HH_ID </th>

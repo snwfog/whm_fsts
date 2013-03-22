@@ -35,12 +35,15 @@ class Event extends Controller implements IRedirectable
             $event = $this->manageEvent->findEvent($event_id);
             $relatedEvents = $this->manageEvent->getRelatedEvents($event->getGroupId());
             $timeslots = $this->getSlots($event);
+
             $relatedEvents = $this->formatEvents($relatedEvents);
             $event = $this->formatEvents(array( 0 => $event));
+            $event[0]["totalCapacity"] = $timeslots["totalCapacity"];
+            $event[0]["numOfParticipants"] = $timeslots["numOfParticipants"];
 
             $this->data["event"] = $event[0];
             $this->data["relatedEvents"] = $relatedEvents;
-            $this->data["timeslots"] = $timeslots;
+            $this->data["timeslots"] = $timeslots["timeslots"];
             $this->display("event.create.twig", $this->data);
         }else
         {    //Get templates if new event
@@ -154,6 +157,9 @@ class Event extends Controller implements IRedirectable
         $timeslots = array();
         $timeslot = $event->getTimeslots();
         $slotStarttime = $event->getStartTime()->format("H:i");
+
+        $totalNumOfParticipants = 0;
+        $totalEventCapacity = 0;
         foreach( $timeslot as $t)
         {   
             $slotEndtime = new DateTime($slotStarttime);
@@ -161,7 +167,7 @@ class Event extends Controller implements IRedirectable
             date_modify($slotEndtime, $duration);
             $endtime = $slotEndtime->format('H:i');
 
-            $timeslots[$count++] = array
+            $timeslots[$count] = array
             (
                 "id" => $t->getId(),
                 "name" => $t->getName(),
@@ -171,9 +177,16 @@ class Event extends Controller implements IRedirectable
                 "end-time" => $endtime,
                 "participants"=> $this->helper->formatMember($t->getParticipants()),
             );
+            $totalNumOfParticipants += count($timeslots[$count]["participants"]);
+            $totalEventCapacity += $timeslots[$count]["capacity"];
             $slotStarttime = $endtime;
+            ++$count;
         }
-        return $timeslots;
+        return array(
+                     "timeslots" => $timeslots, 
+                     "numOfParticipants" => $totalNumOfParticipants, 
+                     "totalCapacity" => $totalEventCapacity
+                    );
     }
 
     private function getSlotsInfo($event, $household_id, $member_id)
