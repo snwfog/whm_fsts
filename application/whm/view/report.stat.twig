@@ -7,27 +7,29 @@
 		</legend>
 		
 		<div class="well" id="yearly-well">
-		<form action ="{{ apppath }}report/annual" method="POST" name="stat-form"
-		id = "stat-form">
-
-			<select class=''>
-			{% for each_event in allEvents %}
-				<option>{{ each_event.name}}</option>
-				{% endfor %}
-			</select>
-
-		<br /><br />
-		<input type="hidden" name="event-id" value="{{ event["event-id"] }}"/>
-		<input type = "radio"> Annual 
-		<input type = "radio"> Fiscal
+			<form action ="{{ apppath }}report/annual" method="POST" name="stat-form"
+			id = "stat-form">
 		
 
-		<br /><br />
-		<input type="submit" name="submit" value="Submit"/>
-		<button id="generate-year-report" type="button" class="btn btn-medium btn-success"><i class="icon-tasks icon-white"></i> Generate Report</button>
-		<button id="excel-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export Excel</button>
-		<button id="pdf-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export PDF</button>
-		</form>
+				<select class='' name="group-id">
+					{% for each_event in allEvents %}
+						<option value="{{ each_event["group-id"] }}">{{ each_event.name }}</option>
+					{% endfor %}
+				</select>
+
+			<br /><br />
+			<input type = "radio" name="occurrence-type" value="yearly"> Annual 
+			<input type = "hidden" name="start-date" placeholder="Start Date" value="Y"/>
+			<input type = "radio"> Fiscal
+				
+			
+
+			<br /><br />
+			<input type="submit" name="submit" value="Submit"/>
+			<button id="generate-year-report" type="button" class="btn btn-medium btn-success"><i class="icon-tasks icon-white"></i> Generate Report</button>
+			<button id="excel-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export Excel</button>
+			<button id="pdf-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export PDF</button>
+			</form>
 		</div>
 		
 		<br /><br /><br /><br /><br /><br /><br /><br />
@@ -40,8 +42,9 @@
 		id = "stat-form"> 
 		
 		<select class=''>
-			<option>Food Drive</option>
-			<option>Christmas Basket</option>
+			{% for each_event in allEvents %}
+					<option>{{ each_event.name }}</option>
+				{% endfor %}
 		</select>
 		<select class=''>
 			<option>January</option>
@@ -66,8 +69,9 @@
 		</legend>
 		<div class="well" id="adhoc-well">
 		<select class=''>
-			<option>Food Drive</option>
-			<option>Christmas Basket</option>
+			{% for each_event in allEvents %}
+					<option>{{ each_event.name }}</option>
+				{% endfor %}
 		</select>
 		
 		<br /><br />
