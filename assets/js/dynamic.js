@@ -99,6 +99,7 @@ $(function() {
       textarea.prop("disabled", true);
       $.noty.closeAll();
     }
+    $('button#add-timeslot-table').prop("disabled", $('button#add-timeslot-table').prop("disabled") ? false : true);
     return $(this).siblings().each(function(index, element) {
       var btn;
       btn = $(element);

@@ -127,6 +127,7 @@ $ ->
       $.noty.closeAll()
 
     # Disable the deactivate other buttons
+    $('button#add-timeslot-table').prop "disabled", if $('button#add-timeslot-table').prop "disabled" then false else true
     $(this).siblings().each (index, element) ->
       btn = $(element)
       btn.prop "disabled", if btn.prop "disabled" then false else true
