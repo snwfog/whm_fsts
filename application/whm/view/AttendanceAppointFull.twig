@@ -2,10 +2,13 @@
 
     {% block content %}
 
+
+    
+
          <h2>List Of Events</h2>
 
 
-                <!-- {% for event in todayEvents %} -->
+                
          <form action="{{ apppath }}\attendance\new" method="POST" name="appointment-fulfillment" 
                     id="appointment-fulfillment">
 
@@ -22,52 +25,48 @@
         </form>
 
 <div class="accordion span6" id="accordion2">
-  <div class="accordion-group well">
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-        Event 1 <span class="pull-right">Capacity</span>
-      </a>
-    </div>
-    <div id="collapseOne" class="accordion-body collapse in">
-      <div class="accordion-inner">
-      
-        <table class="table table-hover">
-                <thread>
-                    <tr>
-                        <th>Participant Name</th>
-                        <th>Checked In</th>
-                    </tr>
-                </thread>
-                <tobody>
-                    <tr>
-                        <td>Name x</td>
-                        <td><button class="btn btn-inverse">NO</button></td>
-                    </tr>
-                     <tr>
-                        <td>Name y</td>   
-                        <td><button class="btn btn-success">YES</button></td>
-                    </tr>
-                </tobody>
+    {% for event in todayEvents %}
+          <div class="accordion-group well">
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse-{{ event.getId()}}">
+            {{  event.getName }} <span class="pull-right">{{ event.getCapacity }}</span>
+          </a>
+        </div>
+        <div id="collapse-{{ event.getId()}}" class="accordion-body collapse in">
+          <div class="accordion-inner">
+          
+            <table class="table table-hover">
 
-                <!-- {% endfor %}      -->
+                      <thread>
+                          <tr>
+                              <th>Participant Name</th>
+                              <th>Checked In</th>
+                          </tr>
+                      </thread>
+                      <tobody>
+                      {% for timeSlot in event.getTimeslots %}
+                        {% for participant in timeSlot.getParticipantsToday %}
+                                  <tr>
+                                      <td>{{ participant.getHouseholdMember.getLastName }}</td>
+                                      <td>
+                                        {% if participant.getAttend %}
+                                        <button class="btn btn-success">YES</button>
+                                        {% else %}
+                                        <button class="btn btn-inverse">NO</button>
+                                        {% endif %}
 
-            </table>
+                                      </td>
+                                  </tr>
+                        {% endfor %}
+                      {% endfor %}
+                      </tobody>
+
+                </table>
+
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="accordion-group well">
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-        Event 2
-      </a>
-    </div>
-    <div id="collapseTwo" class="accordion-body collapse">
-      <div class="accordion-inner">
-        Anim pariatur cliche...
-      </div>
-    </div>
-  </div>
-</div>
+    {% endfor %}
 
 
             

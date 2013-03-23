@@ -55,32 +55,31 @@ class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
         $todayEvents = $this ->manageEvent ->getTodaysEvents();        
 
 
-        foreach($todayEvents as $td)
-        {
-            foreach($td->getTimeslots() as $timeslot)
-            {
+        // foreach($todayEvents as $td)
+        // {
 
-                foreach ($timeslot->getParticipantsToday() as $participants) 
-                {       
-                    
-                     print_r($participants->getHouseholdMember()->getLastName()." ".
-                        $participants->getHouseholdMember()->getFirstName());
+        //     foreach($td->getTimeslots() as $timeslot)
+        //     {
+
+        //         foreach ($timeslot->getParticipantsToday() as $participants) 
+        //         {
+
+                   
+        //              echo($participants->getHouseholdMember()->getLastName()." ".
+        //                 $participants->getHouseholdMember()->getFirstName());
                                 
-                }
-            }
+        //         }
+        //     }
 
-        }
+        // }
 
-        //$eventsT=$this->event->formatTodaysEventsDetail($todayEvents);
-
-         // print_r($eventsT);
-        
+        $eventsT=$this->event->formatTodaysEventsDetail($todayEvents);        
         
 
             $this->data['todayEvents'] = $todayEvents;
             $this->display("AttendanceAppointFull.twig");  //change
 
-            // $this->display("registrationParticipants.twig");
+     
        
     }
 
