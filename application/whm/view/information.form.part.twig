@@ -6,8 +6,8 @@
             <input class="span4 help" maxlength="{{ 3 * 4 + 2 }}" type="text"
                    data-message="Go ahead enter the medicare number. The Age, Gender, and Date of Birth will be automatically filled in for you."
                    name="mcare-number" placeholder="Medical Care" value="{{ household["medicare-number"] }}"/>
-            <input class="span4" type="text" name="work_status"
-                   placeholder="Work Status" maxlength="2" value="{{ household["work-status"] }}"/>
+            <input class="span4" type="text" name="date-of-birth"
+                   placeholder="Date of Birth" maxlength="2" value="{{ household["date-of-birth"] }}"/>
             <input class="span4" maxlength="{{ 3 * 4 + 2 + 3 }}"
                    type="text" name="Referral" placeholder="Referral"
                    value="{{ household["referral"] }}"/>
@@ -20,7 +20,6 @@
                    placeholder="Mother Tongue" value="{{ household["mother-tongue"] }}"/>
             <input class="span4" type="text" data-link="language" autocomplete="off"
                    name="language" placeholder="Language" value="{{ household["language"] }}"/>
-            <input type="hidden" value="" name="date-of-birth">
             <input type="hidden" name="first-visit-date" value="{{ household["first-visit-date"] }}"/>
 
         </div>
@@ -31,7 +30,16 @@
                    placeholder="Gender" value="{{ household["gender"] }}"/>
                <input class="span3" maxlength="2"    type="text" name="marital-status"
             placeholder="Marital Status" value="{{ household["marital"] }}"/>
-            <input class="span3" type="text" name="work_status" id="work_status" 
+
+        <select id="work" class ="span3">
+          <option disabled ="disabled" selected ="selected">Work Status</option>
+          <option value="low-income">Low Income</option>
+          <option value="welfare">Welfare</option>
+          <option value="student">Student</option>
+        </select>
+          <input type='hidden' id="other" />
+
+            <input class="span3" type="hidden" name="work_status" id="work_status" 
             placeholder="Work Status" maxlength="2" value="{{ household["work-status"] }}"/>
 
             <input class="span4 help" type="text" name="income"
@@ -49,6 +57,7 @@
           <input class="span4" type="hidden" name="school-id" placeholder="School ID" id="school-id" value="{{ household["school-id"] }}" />
 
           <input class="span4" type="hidden" name="student-bursery" id="bursery" placeholder="Bursery" value="{{ household["student-bursery"] }}" />  
+          
           </div>
 
     </fieldset>

@@ -7,10 +7,12 @@ namespace WHM\Controller;
 use WHM;
 use WHM\Controller;
 use WHM\IRedirectable;
-use WHM\model\ManageEvent;
+use WHM\Model\ManageEvent;
 use WHM\Controller\Report;
 use WHM\Controller\Event;
-// use WHM\Model\ManageAppointment;
+use WHM\Model\ManageAppointment;
+use WHM\ParticipantsTimeslots;
+
 
 class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
 {
@@ -83,7 +85,8 @@ class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
 
     public function post()
     {
-        
+        print_r($_POST);
+        $this->manageEvent->updateAttendance($_POST["slot-id"], $_POST["member-id"], $_POST["attendance"]);
     }
 
     public function put()
@@ -95,4 +98,5 @@ class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
     {
       
     }
+
 }

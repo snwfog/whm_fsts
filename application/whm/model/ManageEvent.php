@@ -5,6 +5,8 @@ use WHM\Application;
 use \WHM\Model\Event;
 use \WHM\Model\Timeslot;
 use \WHM\Model\ManageHousehold;
+use \WHM\Model\ParticipantsTimeslots;
+use \WHM\Model\ManageAppointment;
 use DateTime;
 use DateTimeZone;
 use DateInterval;
@@ -20,7 +22,7 @@ class ManageEvent
     {
         $this->em = Application::em();
         $this->mhousehold = new ManageHousehold();
-        
+        $this->mappointment = new ManageAppointment();
     }
 
     public function createEvent($data)
@@ -280,6 +282,19 @@ class ManageEvent
             $data[$key] = str_replace("-", "", $value);
         }
         return $data;
+    }
+
+    public function updateAttendance($timeslot_id, $householdM_id, $attendance)
+    {
+        $data = $this->mappointment->getParticipantTimeSlot($householdM_id, $timeslot_id);
+        $attend = $data->getAttend();
+        if ($attend != $attendance){
+            $data->setAttend($attendance);
+
+            $this->em->persist($data);
+            $this->em->flush();  
+        }
+
     }
 
 }

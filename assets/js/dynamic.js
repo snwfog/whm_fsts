@@ -202,3 +202,23 @@ $(function() {
   });
   return true;
 });
+
+$('#work').change(function() {
+  var marker, marker2, marker3, selected_item;
+  selected_item = $(this).val();
+  if (selected_item === "welfare") {
+    marker = $('<span />').insertBefore('#welfare-number');
+    $('#welfare-number').detach().attr('type', 'text').insertAfter(marker).focus();
+    return marker.remove();
+  } else if (selected_item === "student") {
+    marker = $('<span />').insertBefore('#school');
+    $('#school').detach().attr('type', 'text').insertAfter(marker).focus();
+    marker.remove();
+    marker2 = $('<span />').insertBefore('#school-id');
+    $('#school').detach().attr('type', 'text').insertAfter(marker2).focus();
+    marker2.remove();
+    marker3 = $('<span />').insertBefore('#bursery');
+    $('#bursery').detach().attr('type', 'text').insertAfter(marker3).focus();
+    return marker3.remove();
+  }
+});

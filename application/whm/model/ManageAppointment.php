@@ -40,7 +40,7 @@ class ManageAppointment
         $this->em->flush();
     }
 
-    private function getParticipantTimeslot($member_id, $timeslot_id)
+    public function getParticipantTimeslot($member_id, $timeslot_id)
     {
         $managehousehold = new ManageHousehold();
 

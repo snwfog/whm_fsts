@@ -229,3 +229,25 @@ $ ->
 
   true
 
+###############################################################################
+# Dynamically add inputs according to work status dropdown values
+##############################################################################
+
+$('#work').change ->
+    selected_item = $(this).val() 
+    if (selected_item == "welfare")
+  
+        marker = $('<span />').insertBefore('#welfare-number')
+        $('#welfare-number').detach().attr('type', 'text').insertAfter(marker).focus() 
+        marker.remove()
+    else if (selected_item =="student")
+     
+        marker = $('<span />').insertBefore('#school')
+        $('#school').detach().attr('type', 'text').insertAfter(marker).focus()
+        marker.remove()
+        marker2 = $('<span />').insertBefore('#school-id')
+        $('#school').detach().attr('type', 'text').insertAfter(marker2).focus()
+        marker2.remove()
+        marker3 = $('<span />').insertBefore('#bursery')
+        $('#bursery').detach().attr('type', 'text').insertAfter(marker3).focus()
+        marker3.remove()

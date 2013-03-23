@@ -2,34 +2,72 @@
 
     {% block content %}
 
-         <h2>List Of Events Occuring Today</h2>
+         <h2>List Of Events</h2>
 
-            <table class="table table-hover">
+
                 <!-- {% for event in todayEvents %} -->
+         <form action="{{ apppath }}\attendance\new" method="POST" name="appointment-fulfillment" 
+                    id="appointment-fulfillment">
+
+                    <input type="text" name="member-id" value="2"/>
+                    <input type="hidden" name="attendance" value="1"/>
+                    <input type="text" name="slot-id" value="6"/>
+                    <input type="submit" value ="Submit" />
+
+                          
+
+
+
+
+        </form>
+
+<div class="accordion span6" id="accordion2">
+  <div class="accordion-group well">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+        Event 1 <span class="pull-right">Capacity</span>
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse in">
+      <div class="accordion-inner">
+      
+        <table class="table table-hover">
                 <thread>
                     <tr>
                         <th>Participant Name</th>
-                        <th>Age</th>
-                        <th>Gender</th>
                         <th>Checked In</th>
                     </tr>
                 </thread>
                 <tobody>
                     <tr>
                         <td>Name x</td>
-                        <td>Age x</td>
-                        <td>Gender x</td>
-                        <td>YES</td>
+                        <td><button class="btn btn-inverse">NO</button></td>
                     </tr>
                      <tr>
                         <td>Name y</td>   
-                        <td>Age y</td>
-                        <td>Gender y</td>
-                        <td>YES</td>
+                        <td><button class="btn btn-success">YES</button></td>
                     </tr>
                 </tobody>
+
                 <!-- {% endfor %}      -->
+
             </table>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group well">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+        Event 2
+      </a>
+    </div>
+    <div id="collapseTwo" class="accordion-body collapse">
+      <div class="accordion-inner">
+        Anim pariatur cliche...
+      </div>
+    </div>
+  </div>
+</div>
 
 
             
