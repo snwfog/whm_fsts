@@ -216,11 +216,12 @@ class ManageEvent
         return $upcomingEvents;
     }   
 
-    public function getAllEventsByGroup()
+      public function getAllEventsByGroup()
     {
         $query = $this->em->createQueryBuilder()
                           ->select("event")
                           ->from("WHM\model\Event", "event")
+    
                           ->groupBy("event.group_id")
                           ->orderBy("event.group_id");                     
 

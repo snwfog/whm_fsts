@@ -49,17 +49,32 @@ class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
 
         // }
         
-        $todayEvents = $this ->manageEvent ->getTodaysEvents();
-        $eventsT=$this->event->formatTodaysEventsDetail($todayEvents);
+        $todayEvents = $this ->manageEvent ->getTodaysEvents();        
 
-        print_r($eventsT);
+
+        foreach($todayEvents as $td)
+        {
+            foreach($td->getTimeslots() as $timeslot)
+            {
+
+                foreach ($timeslot->getParticipantsToday() as $participants) 
+                {       
+                    
+                     print_r($participants->getHouseholdMember()->getLastName()." ".
+                        $participants->getHouseholdMember()->getFirstName());
+                                
+                }
+            }
+
+        }
+
+        //$eventsT=$this->event->formatTodaysEventsDetail($todayEvents);
+
+       // print_r($eventsT);
         
-        // $allParticipant = $this->report->getEventParticipants();
-        // $allEvents = $this->manageEvent->getAllEventsByGroup();
-        // $this->data["allEvents"] = $this->formatEvents($allEvents);
+        
 
-
-
+            $this->data['todayEvents'] = $todayEvents;
             $this->display("AttendanceAppointFull.twig");  //change
 
             // $this->display("registrationParticipants.twig");
@@ -80,5 +95,4 @@ class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
     {
       
     }
-
 }

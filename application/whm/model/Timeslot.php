@@ -60,6 +60,13 @@ class Timeslot
         return $data;
     }
 
+    public function getParticipantsToday()
+    {
+        $data = array();
+        return $this->participants->toArray();
+    }
+
+
 
     public function getDuration()
     {
