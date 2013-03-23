@@ -81,10 +81,12 @@ class MultiAddressHouseholdFixture extends AbstractFixture
                 case 0:
                 case 2:                    
                 case 5:
-                    // Flush the household before creating a new one
+                    // Flush the household before creating a new one            
                     $em->persist($person);
                     $em->persist($hh);
-                    $em->flush();
+
+                    $this->setReference('HouseHoldMember' . ($i -1), $person);
+                    $this->setReference('Household' . $i, $hh);                    
 
                     // Create a new household
                     $person = $this->_createMember($firstName, $lastName, $phoneNumber);
@@ -96,8 +98,11 @@ class MultiAddressHouseholdFixture extends AbstractFixture
                     $person = $this->_createMember($firstName, $lastName, $phoneNumber);
                     $hh->addMember($person);
                     break;
-            }
+            }            
+
         } while (++$i < $max);
+
+        $em->flush();
     }
 
     private function _createMember($firstName, $lastName, $phoneNumber)

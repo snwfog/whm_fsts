@@ -57,7 +57,7 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $slot2 = new Timeslot();
         $slot2->setCapacity(90);
         $slot2->setDuration(3600);
-        $slot2->setName('slot1');
+        $slot2->setName('slot1');        
         $e2->addTimeslot($slot2);        
 
         $e3 = new Event();
@@ -150,6 +150,8 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $manager->persist($e5week2);
 
         $manager->flush();
+
+        $this->addReference('timeslot2', $slot2);
     }
 
 }
