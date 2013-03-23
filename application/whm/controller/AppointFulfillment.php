@@ -51,6 +51,7 @@ class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
 
         // }
         
+
         $todayEvents = $this ->manageEvent ->getTodaysEvents();        
 
 
@@ -72,7 +73,7 @@ class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
 
         //$eventsT=$this->event->formatTodaysEventsDetail($todayEvents);
 
-       // print_r($eventsT);
+         // print_r($eventsT);
         
         
 
