@@ -151,7 +151,7 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
 
         $manager->flush();
 
-        $this->addReference('timeslot2', $slot2);
+        $this->addReference('timeslot1', $slot1);        
     }
 
 }

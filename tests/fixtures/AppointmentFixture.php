@@ -25,7 +25,7 @@ class AppointmentFixture extends AbstractFixture implements DependentFixtureInte
 
 
         $participantsTimeslot1->setHouseHoldMember($this->getReference('HouseHoldMember1'));
-        $participantsTimeslot1->setTimeslot($this->getReference('timeslot2'));
+        $participantsTimeslot1->setTimeslot($this->getReference('timeslot1'));
 
 
         $manager->persist($participantsTimeslot1);

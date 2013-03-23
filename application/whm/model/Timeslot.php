@@ -62,7 +62,6 @@ class Timeslot
 
     public function getParticipantsToday()
     {
-        $data = array();
         return $this->participants->toArray();
     }
 
