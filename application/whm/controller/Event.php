@@ -108,6 +108,7 @@ class Event extends Controller implements IRedirectable
                     "date" => $event->getStartDate()->format("m/d/Y"),
                     "group-id" => $event->getGroupId(),
                     "is_activated" => $event->getIsActivated(),
+                    "timeslots" => $this->getSlots($event)
                 );
         }
         return $data;
@@ -153,7 +154,7 @@ class Event extends Controller implements IRedirectable
     }
 
 
-    private function getSlots($event)
+    public function getSlots($event)
     {
         $count = 0;
         $timeslots = array();

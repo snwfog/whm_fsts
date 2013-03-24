@@ -52,7 +52,9 @@ class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
         // }
         
 
-        $todayEvents = $this ->manageEvent ->getTodaysEvents();        
+        $todayEvents = $this ->manageEvent ->getTodaysEvents(); 
+
+           
 
 
         // foreach($todayEvents as $td)
@@ -74,19 +76,17 @@ class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
         // }
 
         $eventsT=$this->event->formatEvents($todayEvents);        
-        
-
-            $this->data['todayEvents'] = $todayEvents;
             
-            $this->display("AttendanceAppointFull.twig");  
+           $this->data['todayEvents'] = $todayEvents;
+           $this->data['slotsInfo'] = $this->getslotsInfo();
+            
+           $this->display("AttendanceAppointFull.twig");  
+            print_r($this->data['slotsInfo']);
 
-        //$data = array(
+     
+        
+       // $this->display("AttendanceAppointFull.twig", $data);
 
-          //      "events"        =>  $eventsT
-
-            //);
-
-        //$this->display("AttendanceAppointFull.twig", $data);
 
      
        
@@ -106,6 +106,23 @@ class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
     public function delete($data)
     {
       
+    }
+    public function getSlotsInfo()
+    {
+
+        $data = array();
+        $count = 0;
+
+        $todayEvents = $this ->manageEvent ->getTodaysEvents(); 
+
+        foreach ($todayEvents as $event)
+        {
+            $todaySlots = $this ->event ->getSlots($event);
+            $data[$count++] = $todaySlots;
+           
+        }
+
+        return $data;
     }
 
 }

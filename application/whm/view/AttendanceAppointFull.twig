@@ -25,14 +25,24 @@
         </form>
 
 
-<div class="accordion span11" id="accordion2">
 
+
+
+
+
+
+<div class="accordion span11" id="accordion2">
     {% for event in todayEvents %}
+    {% for slot in slotsInfo %}
+      {% for timeslot in slot['timeslots'] %}
+        {% for participant in timeslot['participants'] %}
+
+    {% set i = 0 %}
           <div class="accordion-group well">
         <div class="accordion-heading">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse-{{ event.getId}}">
             {{  event.getName }} {% set maxparticipants = event.capacity %}
-                    {% set actualparticipants = event.numOfParticipants ? event.numOfParticipants|length : 0 %}
+                    {% set actualparticipants = slot.numOfParticipants ? slot.numOfParticipants|length : 0 %}
                     {% set availablespots = maxparticipants - actualparticipants %}
                     {% set labelcolor = 'success' %}
                     {% if availablespots <= maxparticipants / 10 %}
@@ -70,7 +80,7 @@
                         {% set endtime = starttime|date_modify("+" ~ timeSlot.getDuration ~ " mins")|date("H:i") %}
                         {% for participant in timeSlot.getParticipantsToday %}
                                   <tr>
-                                      <td>{{ participant.getHouseholdMember.getLastName }} {{ participant.getHouseholdMember.getFirstName }} </td>
+                                      <td>{{ slot[participants][i][last-name] }} {{ participant.getHouseholdMember.getFirstName }} </td>
                                       <td>
                                         {% if participant.getAttend %}
                                         <button class="btn btn-success">YES</button>
@@ -93,8 +103,10 @@
           </div>
         </div>
       </div>
+          {% endfor %}
+        {% endfor %}
+      {% endfor %}
     {% endfor %}
-
 
             
     {% endblock content %}
