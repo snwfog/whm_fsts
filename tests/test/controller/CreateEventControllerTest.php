@@ -3,12 +3,16 @@
 namespace Test\Controller;
 
 use Test\Controller\ControllerTestCase;
+use DateTime;
+use DateTimeZone;
+use DateInterval;
+use WHM;
 
 class CreateEventControllerTest extends ControllerTestCase
 {
     function testGet()
     {
-            $crawler = $this->request('Get', '/event');
+            $crawler = $this->request('Get', '/event/new');
             $this->assertEquals(
                 1, $crawler->filter('html:contains("Action")')->count());
             
@@ -18,22 +22,20 @@ class CreateEventControllerTest extends ControllerTestCase
             $formValues = array(
             "event-name" => "Sunny-D drinking party",
             "description" => "Celebrate phase reslease",
-            "start-time" => "8:30",
-            "end-time" => "14:30",
+            "start-time" => "18:30",
+            //"end-time" => "14:30:00",
+            "start-date" => "03/31/2013",
+            "end-date" => "04/02/2013",                
             "event-capacity" => "15",
             "is_template" => NULL,
             "group-id" => NULL,
             "occurrence-type" => "daily",
         );
         
-            
-        $crawler = $this->request('POST', '/event/new', $formValues);
-        $this->assertEquals(200, $this->client->getResponse()->getStatus()); 
-        $crawler = $this->request('GET', '/event/1');
+        $this->request('POST', '/event/new', $formValues);
+        $crawler = $this->request('GET', '/event/11');
         $this->assertEquals(
-                1, $crawler->filter('html:contains("Celetrate")')->count()
-        );
-            
+                1, $crawler->filter('html:contains("Celebrate")')->count());            
     }
 }
 
