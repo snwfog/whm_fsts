@@ -83,7 +83,7 @@ class HouseholdMember
     protected $income;
 
     /**
-    * @Column(type="date")
+    * @Column(type="date", nullable=TRUE)
     */
     protected $date_of_birth;
 

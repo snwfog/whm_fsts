@@ -12,7 +12,10 @@ class ControllerHelper
         $data = null;
         foreach( $member_array as $member){
             $date = $member->getFirstVisitDate()->format("m-d-Y");
-            $DOB =  $member->getDateOfBirth()->format("m-d-y");
+            $DOB = null;
+            if(!is_null($member->getDateOfBirth())){
+                $DOB =  $member->getDateOfBirth()->format("m-d-y");
+            }
             $household = $member->getHousehold();
             
             $data[$count++] = array(

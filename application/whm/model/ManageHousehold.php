@@ -118,10 +118,13 @@ class ManageHousehold {
             $household_member = new HouseholdMember();          
             $household_member->setFirstVisitDate($datetime);
         }
-
-        $DOBObject = new DateTime();
-        $DOBObject = $DOBObject->createFromFormat("m-d-y", $data["date-of-birth"]);
-
+        
+        if(isset($data["date-of-birth"]) && !empty($data["date-of-birth"])){
+            $DOBObject = new DateTime();
+            $data["date-of-birth"] = $DOBObject->createFromFormat("m-d-y", $data["date-of-birth"]);
+        }else{
+            $data["date-of-birth"] = null;
+        }
         $data = $this->formatData($data);
         $household_member->setFirstName($data["first-name"]);
         $household_member->setLastName($data["last-name"]);
@@ -135,7 +138,7 @@ class ManageHousehold {
         $household_member->setMaritalStatus($data["marital-status"]);
         $household_member->setGender($data["gender"]);
         $household_member->setOrigin($data["origin"]);
-        $household_member->setDateOfBirth($DOBObject);
+        $household_member->setDateOfBirth($data["date-of-birth"]);
         $household_member->setIncome($data["income"]);
 
 
@@ -175,7 +178,8 @@ class ManageHousehold {
     {
         foreach ($data as $key => $value)
         {
-            $data[$key] = str_replace("-", "", $value);
+
+            is_string($value) ? $data[$key] = str_replace("-", "", $value) : '';
         }
         return $data;
     }
