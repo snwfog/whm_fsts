@@ -117,17 +117,17 @@ class Event extends Controller implements IRedirectable
         return $data;
     }
 
-    public function formatAttendence($member_id, $timeslot_id)
-    {
+    // public function formatAttendence($member_id, $timeslot_id)
+    // {
 
-        if(!is_null($timeslot_id)){
+    //     if(!is_null($timeslot_id)){
 
-            $attendance = $this->manageAppointment->getParticipantTimeslot($member_id, $timeslot_id)
-            $attend = $attendance->getAttend();
-        }
+    //         $attendance = $this->manageAppointment->getParticipantTimeslot($member_id, $timeslot_id)
+    //         $attend = $attendance->getAttend();
+    //     }
 
-        return $attend;
-    }
+    //     return $attend;
+    // }
    
     public function getIndexedEvents($events, $household_id, $member_id)
     {
