@@ -55,10 +55,10 @@ $(function() {
       });
     });
   });
-  $("#view-household-form input").prop("disabled", true);
+  $("#view-household-form input,#view-household-form select").prop("disabled", true);
   $('button[name="modify-household-btn"]').click(function() {
     var inputs;
-    inputs = $("#view-household-form input");
+    inputs = $("#view-household-form input,#view-household-form select");
     if ($(this).attr("class-toggle")) {
       $(this).removeAttr("class-toggle");
       inputs.prop("disabled", false);

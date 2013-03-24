@@ -111,18 +111,18 @@ $(function() {
 	
 	// Javascript for dynamic fields depending on work_status
 
-	$('#work_status').blur(function() {
+	$('#work_status').change(function() {
 		var workstatusObj = document.getElementById("work_status");
 		var schoolObj = document.getElementById("school");
 		var schoolIdObj = document.getElementById("school-id");
 		var welfareObj = document.getElementById("welfare-number");
-		if(workstatusObj.value == "St")
+		if(workstatusObj.value == "student")
 		{
 		  schoolObj.type ="text";
 		  schoolIdObj.type ="text";
 		  welfareObj.type ="hidden";
 		}
-		else if(workstatusObj.value == "Wf")
+		else if(workstatusObj.value == "welfare")
 		{
 		  welfareObj.type ="text";
 		  schoolObj.type ="hidden";

@@ -95,42 +95,58 @@ class Report extends Controller implements IRedirectable
         $start_time = new DateTime();
         $start_time->setTimezone(new DateTimeZone(LOCALTIME));
         $currentYear = date('Y');
+        $currentMonth = date('m');
     
 
 
-       /* if (isset($_POST))
-        {
-            $annualReport=$this->createAnnualReportForEvent($_POST["group-id"]);
-
-            $data = array(
-                           "participants"  =>  $annualReport
-                    );
-
-            print_r($data);   */
+ 
 
              if(isset($_POST["occurrence-type"]))
              {
                 $repeat = array(   
                                     "monthly" => "1 month", 
                                     "yearly" => "1 year",
+                                    "fiscal" => "1 year",
                 );
+                
+            //    $months = array_keys(int($months));
+            //    print_r($months);
 
                 $incrementer = DateInterval::createFromDateString($repeat[$_POST["occurrence-type"]]);
 
-                if($_POST["occurrence-type"] == "yearly"){
+                if($_POST["occurrence-type"] == "yearly")
+                {
                     $end_date->setDate($currentYear, "1", "1");
                     $start_date->setDate($currentYear, "1", "1");
                     $start_date = $start_date->sub($incrementer);
                 }
 
-                if($_POST["occurrence-type"] == "monthly"){
-                    //todo
+                 if($_POST["occurrence-type"] == "fiscal")
+                {
+                    $end_date->setDate($currentYear, "10", "1");
+                    $start_date->setDate($currentYear, "10", "1");
+                    $start_date = $start_date->sub($incrementer);
+                    $oneDay = DateInterval::createFromDateString("1 day");
+                    $end_date->sub($oneDay);
+                    print_r($start_date);
+                    print_r($end_date);
                 }
 
-                $annualReport=$this->createReportForEvent($_POST["group-id"], $start_date, $end_date);
+                if($_POST["occurrence-type"] == "monthly")
+                {
+                        $month = $_POST["monthly-report"];                  
+                        $start_date->setDate($currentYear, (int) $month, "1");
+                        $end_date->setDate($currentYear, (int) $month, "1");
 
+                        $oneMonth = DateInterval::createFromDateString("1 month");
+                        $oneDay = DateInterval::createFromDateString("1 day");
+                        $end_date->add($oneMonth)->sub($oneDay);
+                  
+                }
+
+                $report=$this->createReportForEvent($_POST["group-id"], $start_date, $end_date);
                  $data = array(
-                   "participants"  =>  $annualReport
+                   "participants"  =>  $report
                  );
 
                  print_r($data);
@@ -138,7 +154,7 @@ class Report extends Controller implements IRedirectable
             
                 
 
-/*           header("Content-Type: text/plain");
+            /*header("Content-Type: text/plain");
 
             // filename for download
             $filename = "website_data_" . date('Ymd') . ".xls";
@@ -149,7 +165,7 @@ class Report extends Controller implements IRedirectable
             foreach($data as $row) 
             {
                 $data = array(
-                           "participants"  =>  $annualReport
+                           "participants"  =>  $report
                     );
 
                 if(!$flag) 
@@ -183,9 +199,7 @@ class Report extends Controller implements IRedirectable
         
         foreach ($events as $ev) 
         {
-            echo $endDateObject->format("Y/m/d");
             if($ev->getStartDate() >= $startDateObject && $ev->getStartDate() <= $endDateObject){
-                echo "mike";
                 $participants = $this->getEventParticipants($ev); 
                 foreach ($participants as $member) 
                 { 
