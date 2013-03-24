@@ -29,7 +29,7 @@
           <div class="accordion-group well">
         <div class="accordion-heading">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse-{{ event.getId()}}">
-            {{  event.getName }} <span class="pull-right">{{ event.getCapacity }}</span>
+            {{  event.getName }} <span class="middle">{{ event.getCapacity }}<span class="pull-right">{{ event.getStartTime.format("H:i") }}</span>
           </a>
         </div>
         <div id="collapse-{{ event.getId()}}" class="accordion-body collapse in">
@@ -41,13 +41,17 @@
                           <tr>
                               <th>Participant Name</th>
                               <th>Checked In</th>
+                              <th>Time slots</th>
                           </tr>
                       </thread>
                       <tobody>
+                        {% set starttime = event.getStartTime.format("H:i") %}
                       {% for timeSlot in event.getTimeslots %}
+                        
+                        {% set endtime = starttime|date_modify("+" ~ timeSlot.getDuration ~ " mins")|date("H:i") %}
                         {% for participant in timeSlot.getParticipantsToday %}
                                   <tr>
-                                      <td>{{ participant.getHouseholdMember.getLastName }}</td>
+                                      <td>{{ participant.getHouseholdMember.getLastName }} {{ participant.getHouseholdMember.getFirstName }}</td>
                                       <td>
                                         {% if participant.getAttend %}
                                         <button class="btn btn-success">YES</button>
@@ -56,8 +60,12 @@
                                         {% endif %}
 
                                       </td>
+                                      <td>
+                                        {{starttime}}-{{endtime}}
+                                      </td>
                                   </tr>
                         {% endfor %}
+                        {% set starttime = endtime %}
                       {% endfor %}
                       </tobody>
 
