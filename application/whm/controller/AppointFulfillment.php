@@ -73,11 +73,20 @@ class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
 
         // }
 
-        $eventsT=$this->event->formatTodaysEventsDetail($todayEvents);        
+        $eventsT=$this->event->formatEvents($todayEvents);        
         
 
             $this->data['todayEvents'] = $todayEvents;
-            $this->display("AttendanceAppointFull.twig");  //change
+            
+            $this->display("AttendanceAppointFull.twig");  
+
+        //$data = array(
+
+          //      "events"        =>  $eventsT
+
+            //);
+
+        //$this->display("AttendanceAppointFull.twig", $data);
 
      
        

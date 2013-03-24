@@ -45,6 +45,7 @@ class Event extends Controller implements IRedirectable
             $this->data["relatedEvents"] = $relatedEvents;
             $this->data["timeslots"] = $timeslots["timeslots"];
             $this->display("event.create.twig", $this->data);
+            
         }else
         {    //Get templates if new event
             $createEvent = new WHM\Controller\CreateEvent;
@@ -112,28 +113,6 @@ class Event extends Controller implements IRedirectable
         return $data;
     }
    
-    public function formatTodaysEventsDetail($events)
-    {
-        $data = array();
-        $count = 0;
-
-         foreach( $events as $event)
-        {
-                $data[$count++] = array
-                (
-                    "event-id" => $event->getId(),
-                    "name" => $event->getName(),
-                    "capacity" => $event->getCapacity(),
-                    "description" => $event->getDescription(),
-                    "start-time" => $event->getStartTime()->format("H:i"),
-                    "date" => $event->getStartDate()->format("m/d/Y"),
-                    "group-id" => $event->getGroupId(),
-                    "is_activated" => $event->getIsActivated(),
-                );
-        }
-        return $data;
-    }
-
     public function getIndexedEvents($events, $household_id, $member_id)
     {
         $data = array();

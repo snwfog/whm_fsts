@@ -24,15 +24,34 @@
 
         </form>
 
+
 <div class="accordion span11" id="accordion2">
+
     {% for event in todayEvents %}
           <div class="accordion-group well">
         <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse-{{ event.getId()}}">
-            {{  event.getName }} <span class="middle">{{ event.getCapacity }}<span class="pull-right">{{ event.getStartTime.format("H:i") }}</span>
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse-{{ event.getId}}">
+            {{  event.getName }} {% set maxparticipants = event.capacity %}
+                    {% set actualparticipants = event.numOfParticipants ? event.numOfParticipants|length : 0 %}
+                    {% set availablespots = maxparticipants - actualparticipants %}
+                    {% set labelcolor = 'success' %}
+                    {% if availablespots <= maxparticipants / 10 %}
+                        {% set labelcolor = 'important' %}
+                    {% elseif availablespots <= maxparticipants / 2 %}
+                        {% set labelcolor = 'warning' %}
+                    {% endif %}
+                    <span class="pull-right">&nbsp;&nbsp;{{ event.getStartTime.format("H:i") }}</span>
+                   
+                    
+                        <span class="label label-{{ labelcolor }} pull-right">
+                        <i class="icon-user icon-white"></i> {{ actualparticipants }}/{{maxparticipants }}
+                        </span>
           </a>
         </div>
-        <div id="collapse-{{ event.getId()}}" class="accordion-body collapse">
+
+
+        <div id="collapse-{{ event.getId}}" class="accordion-body collapse in">
+
           <div class="accordion-inner">
           
             <table class="table table-hover">
