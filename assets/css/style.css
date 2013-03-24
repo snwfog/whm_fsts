@@ -91,4 +91,23 @@ input[type=number]::-webkit-inner-spin-button {
 .modal-body
 {
     overflow: visible;
+    z-index: -1;
+}
+
+.modal-footer
+{
+    z-index: -1000;
+    position: relative;
+    overflow: visible;
+}
+
+.carousel-inner
+{
+    overflow: visible;
+}
+.dropdown-menu
+{
+    z-index: 9001;
+    position: absolute;
+    overflow: visible;
 }
