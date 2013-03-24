@@ -52,9 +52,9 @@
                                                         {% if events[i][j]["registered"] == "Registered" %}
                                                             {% set buttoncolour = "danger" %}
                                                         {% endif %}
-                                                        {% set deidei = "+" ~ index ~ " days" %}
+                                                        {# {% set deidei = "+" ~ index ~ " days" %}
                                                         {% set d = "now"|date_modify(deidei)|date("m/d/Y","America/Montreal") %}
-                                                            {% if d == events[i][j]["date"] %}
+                                                            {% if d == events[i][j]["date"] %} #}
                                                                 <div class="dropdown btn-group">
                                                                     <a class="btn dropdown-toggle btn-{{ buttoncolour }}" data-toggle="dropdown" href="#">
                                                                         {{ events[i][j]["name"]|slice(0, 10) }}
@@ -62,11 +62,15 @@
                                                                     </a>
                                                                     <ul class="dropdown-menu">
                                                                         {% for slots in events[i][j]["timeslots"] %}
-                                                                            {% set bobby = slots["registered"] / slots["capacity"] %}
+                                                                            {% if slots["capacity"] != 0 %}
+                                                                                {% set bobby = slots["registered"] / slots["capacity"] %}
+                                                                            {% endif %}
                                                                             <li >{# class="disabled" #}
                                                                                 <a href="javascript:void(0)" onclick="{% if slots.status == "Registered" %}
                                                                                                                             javascript:void(0)
                                                                                                                         {% elseif bobby >= 1 %}
+                                                                                                                            javascript:void(0)
+                                                                                                                        {% elseif slots["capacity"] == 0 %}
                                                                                                                             javascript:void(0)
                                                                                                                         {% else %}
                                                                                                                             document.forms['slot-{{slots["id"]}}'].submit()
@@ -75,6 +79,8 @@
                                                                                     <i class="icon-user icon-black"></i>
                                                                                     {% if bobby >= 1 %}
                                                                                         Full {{ slots["registered"]}}/{{slots["capacity"] }}
+                                                                                    {% elseif slots["capacity"] == 0 %}
+                                                                                        No capacity assigned
                                                                                     {% else %}
                                                                                         {{ slots["registered"]}}/{{slots["capacity"] }}
                                                                                     {% endif %}
@@ -95,7 +101,7 @@
                                                                         <input type="hidden" name="slot-id" value="{{ slots["id"] }}">
                                                                     </form>
                                                                 {% endfor %}
-                                                            {% endif %}
+                                                            {# {% endif %} #}
                                                     {% endif %}
                                                 </td>
                                             {% endfor %}
