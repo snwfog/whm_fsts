@@ -294,6 +294,7 @@ class ManageEvent
             $this->em->persist($data);
             $this->em->flush();  
         }
+        
 
     }
 

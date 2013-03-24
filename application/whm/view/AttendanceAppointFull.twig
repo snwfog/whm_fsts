@@ -16,12 +16,6 @@
                     <input type="hidden" name="attendance" value="1"/>
                     <input type="text" name="slot-id" value="6"/>
                     <input type="submit" value ="Submit" />
-
-                          
-
-
-
-
         </form>
 
 
@@ -35,14 +29,13 @@
     {% for event in todayEvents %}
     {% for slot in slotsInfo %}
       {% for timeslot in slot['timeslots'] %}
-        {% for participant in timeslot['participants'] %}
-
+        
     {% set i = 0 %}
           <div class="accordion-group well">
         <div class="accordion-heading">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse-{{ event.getId}}">
-            {{  event.getName }} {% set maxparticipants = event.capacity %}
-                    {% set actualparticipants = slot.numOfParticipants ? slot.numOfParticipants|length : 0 %}
+            {{  event.getName }} {% set maxparticipants = slot.totalCapacity %}
+                    {% set actualparticipants = slot.numOfParticipants%}
                     {% set availablespots = maxparticipants - actualparticipants %}
                     {% set labelcolor = 'success' %}
                     {% if availablespots <= maxparticipants / 10 %}
@@ -74,36 +67,32 @@
                           </tr>
                       </thread>
                       <tobody>
-                        {% set starttime = event.getStartTime.format("H:i") %}
-                      {% for timeSlot in event.getTimeslots %}
+                      
                         
-                        {% set endtime = starttime|date_modify("+" ~ timeSlot.getDuration ~ " mins")|date("H:i") %}
-                        {% for participant in timeSlot.getParticipantsToday %}
+                                {% for participant in timeslot['participants'] %}
                                   <tr>
-                                      <td>{{ slot[participants][i][last-name] }} {{ participant.getHouseholdMember.getFirstName }} </td>
+                                      <td>{{ participant['last-name'] }} {{ participant['first-name'] }} </td>
                                       <td>
-                                        {% if participant.getAttend %}
-                                        <button class="btn btn-success">YES</button>
-                                        {% else %}
-                                        <button class="btn btn-inverse">NO</button>
-                                        {% endif %}
-
+                                        <div id="event-occurrence" class="btn-group" data-toggle="buttons-radio">
+                                        <button type="button" class="btn btn-success btn-large" data-value="1">YES</button>
+                                        <button type="button" class="btn btn-danger btn-large" data-value="1">NO</button>
+                                      </div>
                                       </td>
                                       <td>
-                                        {{starttime}}-{{endtime}}
+                                        {{timeslot['start-time']}}-{{timeslot['end-time']}}
                                       </td>
                                   </tr>
-                        {% endfor %}
-                        {% set starttime = endtime %}
-                      {% endfor %}
+                                  {% endfor %}
+                        
                       </tobody>
 
                 </table>
 
           </div>
+          
         </div>
       </div>
-          {% endfor %}
+          
         {% endfor %}
       {% endfor %}
     {% endfor %}

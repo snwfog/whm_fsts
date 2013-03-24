@@ -5,6 +5,7 @@ use WHM;
 use WHM\Controller;
 use WHM\IRedirectable;
 use WHM\Model\ManageEvent;
+use WHM\Model\ManageAppointment;
 use DateTime;
 use DateTimeZone;
 use WHM\Controller\ControllerHelper;
@@ -14,6 +15,7 @@ class Event extends Controller implements IRedirectable
     protected $data = array("errors" => array(), "form" => array());
     private $manageEvent;
     private $helper;
+    private $manageAppointment;
     public function __construct(array $args = null)
     {
         $this->data = $args;
@@ -21,6 +23,7 @@ class Event extends Controller implements IRedirectable
         //WHM\Helper::backtrace();
         $this->helper = new ControllerHelper();
         $this->manageEvent= new ManageEvent();
+        $this->manageAppointment = new ManageAppointment();
     }
 
     public function get($event_id = null)
@@ -113,6 +116,18 @@ class Event extends Controller implements IRedirectable
         }
         return $data;
     }
+
+    public function formatAttendence($member_id, $timeslot_id)
+    {
+
+        if(!is_null($timeslot_id)){
+
+            $attendance = $this->manageAppointment->getParticipantTimeslot($member_id, $timeslot_id)
+            $attend = $attendance->getAttend();
+        }
+
+        return $attend;
+    }
    
     public function getIndexedEvents($events, $household_id, $member_id)
     {
@@ -189,6 +204,7 @@ class Event extends Controller implements IRedirectable
                      "timeslots" => $timeslots, 
                      "numOfParticipants" => $totalNumOfParticipants, 
                      "totalCapacity" => $totalEventCapacity
+                     
                     );
     }
 
