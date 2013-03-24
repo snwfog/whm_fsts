@@ -23,6 +23,7 @@
   left: auto;
   right: 13px;
 }
+/*
 .bootstrap-timepicker .add-on {
   cursor: pointer;
 }
@@ -30,7 +31,7 @@
   display: inline-block;
   width: 16px;
   height: 16px;
-}
+}*/
 .bootstrap-timepicker-widget.dropdown-menu {
   padding: 2px 3px 2px 2px;
 }
