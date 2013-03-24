@@ -31,34 +31,33 @@
                <input class="span3" maxlength="2"    type="text" name="marital-status"
             placeholder="Marital Status" value="{{ household["marital"] }}"/>
 
-        <select id="work" class ="span3">
-          <option disabled ="disabled" selected ="selected">Work Status</option>
-          <option value="low-income">Low Income</option>
-          <option value="welfare">Welfare</option>
-          <option value="student">Student</option>
-        </select>
-          <input type='hidden' id="other" />
+            <select name="work_status" id="work_status" class ="span3">
+              <option disabled ="disabled" {{ household["work-status"] is null ? 'selected="selected"' : ''}}>Work Status</option>
+              <option value="low-income" {{ household["work-status"] == "low-income" ? 'selected="selected"' : ''}}>Low Income</option>
+              <option value="welfare" " {{ household["work-status"] == "welfare" ? 'selected="selected"' : ''}}>Welfare</option>
+              <option value="student" {{ household["work-status"] == "student" ? 'selected="selected"' : ''}}>Student</option>
+            </select>
+            <input type='hidden' id="other" />
 
-            <input class="span3" type="hidden" name="work_status" id="work_status" 
+            <input class="span3" type="hidden" 
             placeholder="Work Status" maxlength="2" value="{{ household["work-status"] }}"/>
 
-            <input class="span4 help" type="text" name="income"
-            data-message="[Not working ATM] Go ahead, you may put arithmetic operations in this field. For
-            example, 4 * 400, or 2 * 1500, or 50 000 / 12 and we will calculate the result for you."placeholder="Annual Income" value="{{ household["income"] }}"/>
-            </div>
+            <input class="span4 help" type="text" name="income" data-message="[Not working ATM] Go ahead, you may put arithmetic operations in this field. For
+            example, 4 * 400, or 2 * 1500, or 50 000 / 12 and we will calculate the result for you." placeholder="Annual Income" value="{{ household["income"] }}"/>
+        </div>
 
-          <div class="controls controls-row">
-          <input class="span4" maxlength="{{ 3 * 4 + 2 + 3 }}"
-          type="hidden" name="welfare-number" id="welfare-number" placeholder="Welfare Number"
-          value="{{ household["welfare-number"] }}"/>
+        <div class="controls controls-row">
+            <input class="span4" maxlength="{{ 3 * 4 + 2 + 3 }}"
+            type="hidden" name="welfare-number" id="welfare-number" placeholder="Welfare Number"
+            value="{{ household["welfare-number"] }}"/>
 
-          <input class="span4" type="hidden" id="school" name="school" placeholder="School" value="{{ household["school"] }}" />
+            <input class="span4" type="hidden" id="school" name="school" placeholder="School" value="{{ household["school"] }}" />
 
-          <input class="span4" type="hidden" name="school-id" placeholder="School ID" id="school-id" value="{{ household["school-id"] }}" />
+            <input class="span4" type="hidden" name="school-id" placeholder="School ID" id="school-id" value="{{ household["school-id"] }}" />
 
-          <input class="span4" type="hidden" name="student-bursery" id="bursery" placeholder="Bursery" value="{{ household["student-bursery"] }}" />  
-          
-          </div>
+            <input class="span4" type="hidden" name="student-bursery" id="bursery" placeholder="Bursery" value="{{ household["student-bursery"] }}" />  
+        
+        </div>
 
     </fieldset>
 

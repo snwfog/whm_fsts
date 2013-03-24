@@ -68,9 +68,9 @@ $ ->
 # Edit household information form
 #######################################################
   # Default view household form is not modifiable
-  $("#view-household-form input, select").prop "disabled", true
+  $("#view-household-form input, #view-household-form select").prop "disabled", true
   $('button[name="modify-household-btn"]').click ->
-    inputs = $("#view-household-form input, select")
+    inputs = $("#view-household-form input, #view-household-form select")
     if $(this).attr "class-toggle"
       # Remove the class-toggle attribute
       $(this).removeAttr "class-toggle"

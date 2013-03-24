@@ -35,7 +35,7 @@ class HouseholdMember
     protected $mcare_number;
 
     /**
-     * @Column(nullable=TRUE, length=2)
+     * @Column(nullable=TRUE)
      */
     protected $work_status;
 
