@@ -11,8 +11,8 @@ class ControllerHelper
         $count = 0;
         $data = null;
         foreach( $member_array as $member){
-    //      $date = $member->getFirstVisitDate();
-  //        $date = $date->format("m-d-Y");
+            $date = $member->getFirstVisitDate()->format("m-d-Y");
+            $DOB =  $member->getDateOfBirth()->format("m-d-y");
             $household = $member->getHousehold();
             
             $data[$count++] = array(
@@ -30,7 +30,8 @@ class ControllerHelper
                             "marital"  => $member->getMaritalStatus(),
                             "gender"  => $member->getGender(),
                             "origin"   => $member->getOrigin(),
-      //                    "first-visit-date"  => $date,
+                            "first-visit-date"  => $date,
+                            "date-of-birth"  => $DOB,
                             "income"   => $member->getIncome(),
                     );
         }

@@ -9,7 +9,7 @@
             <input class="span4" type="text" name="date-of-birth"
                    placeholder="Date of Birth" maxlength="2" value="{{ household["date-of-birth"] }}"/>
             <input class="span4" maxlength="{{ 3 * 4 + 2 + 3 }}"
-                   type="text" name="Referral" placeholder="Referral"
+                   type="text" name="referral" placeholder="Referral"
                    value="{{ household["referral"] }}"/>
         </div>
 
@@ -20,6 +20,7 @@
                    placeholder="Mother Tongue" value="{{ household["mother-tongue"] }}"/>
             <input class="span4" type="text" data-link="language" autocomplete="off"
                    name="language" placeholder="Language" value="{{ household["language"] }}"/>
+            <input type="hidden" name="date-of-birth" value="{{ household["date-of-birth"] }}">
             <input type="hidden" name="first-visit-date" value="{{ household["first-visit-date"] }}"/>
 
         </div>

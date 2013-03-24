@@ -83,6 +83,11 @@ class HouseholdMember
     protected $income;
 
     /**
+    * @Column(type="date")
+    */
+    protected $date_of_birth;
+
+    /**
     * @Column(type="datetime")
     */
     protected $first_visit_date;
@@ -120,6 +125,11 @@ class HouseholdMember
     public function getId()
     {
         return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     public function setFirstName($first_name)
@@ -250,6 +260,16 @@ class HouseholdMember
     public function getIncome()
     {
         return $this->income;
+    }
+
+    public function setDateOfBirth($date_of_birth)
+    {
+        $this->date_of_birth = $date_of_birth;
+    }
+
+    public function getDateOfBirth()
+    {
+        return $this->date_of_birth;
     }
 
 

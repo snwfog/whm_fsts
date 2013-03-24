@@ -37,9 +37,8 @@ class ManageHousehold {
     public function updateHousehold($data)
     {
         $household = $this->findHousehold($data["household-id"]);
-        $pMember = $this->findMember($data["member-id"]);
         $address = $household->getAddress();
-        $this->updateMember($pMember, $data);
+        $this->createMember($data);
         $this->updateAddress($address, $data);
     }
 
@@ -106,11 +105,22 @@ class ManageHousehold {
 
 
 
-    //Private Methods
+    //NEW or UPDATE Member
     private function createMember($data)
     {
-        $household_member = new HouseholdMember();
-        $datetime = new DateTime("now");
+        $datetime = new DateTime();
+        if(isset($data["member-id"])){
+        //Update Member
+            $household_member = $this->findMember($data["member-id"]);
+            $household_member->setFirstVisitDate($datetime->createFromFormat("d-m-Y", $data["first-visit-date"]));
+        }else{
+        //New Member  
+            $household_member = new HouseholdMember();          
+            $household_member->setFirstVisitDate($datetime);
+        }
+
+        $DOBObject = new DateTime();
+        $DOBObject = $DOBObject->createFromFormat("m-d-y", $data["date-of-birth"]);
 
         $data = $this->formatData($data);
         $household_member->setFirstName($data["first-name"]);
@@ -125,7 +135,7 @@ class ManageHousehold {
         $household_member->setMaritalStatus($data["marital-status"]);
         $household_member->setGender($data["gender"]);
         $household_member->setOrigin($data["origin"]);
-        $household_member->setFirstVisitDate($datetime);
+        $household_member->setDateOfBirth($DOBObject);
         $household_member->setIncome($data["income"]);
 
 
@@ -147,27 +157,6 @@ class ManageHousehold {
 
         return $address;
 
-    }
-
-    private function updateMember($memberInstance, $data)
-    {
-        $data = $this->formatData($data);
-        $memberInstance->setFirstName($data["first-name"]);
-        $memberInstance->setLastName($data["last-name"]);
-        $memberInstance->setPhoneNumber($data["phone-number"]);
-        $memberInstance->setMcareNumber($data["mcare-number"]);
-        $memberInstance->setWorkStatus($data["work_status"]);
-        $memberInstance->setWelfareNumber($data["welfare-number"]);
-        $memberInstance->setReferral($data["referral"]);
-        $memberInstance->setMotherTongue($data["mother-tongue"]);
-        $memberInstance->setLanguage($data["language"]);
-        $memberInstance->setMaritalStatus($data["marital-status"]);
-        $memberInstance->setGender("M"); //CHANGE WHEN EXTRACT FROM MEDICARE
-        $memberInstance->setOrigin($data["origin"]);
-        $memberInstance->setIncome($data["income"]);
-
-        $this->em->persist($memberInstance);
-        $this->em->flush();
     }
 
     private function updateAddress($addressInstance, $data)
