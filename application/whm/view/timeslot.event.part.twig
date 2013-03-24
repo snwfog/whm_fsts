@@ -73,7 +73,7 @@
         </form>
 
         <div class="pull-right">
-            <button id="add-timeslot-table" type="button" class="btn btn-small btn-info" value="{{theme ? 'icon-white' : ''}}" disabled><i class="icon-file icon-white"></i> Add Timeslot</button>
+            <button id="add-timeslot-table" type="button" class="btn btn-small btn-info" value="{{theme ? 'icon-white' : ''}}" {{ event ? 'disabled': ''}}><i class="icon-file icon-white"></i> Add Timeslot</button>
         </div>
         <small>*Note:Drag the Timeslot to reorder.</small>
     </fieldset>
