@@ -11,7 +11,7 @@
             
             <legend class ='controls controls-row'>
                 <div class='pull-left'>
-                    ID: {{ event["event-id"] }}
+                    {{ event ? "ID: EV1000"~event["event-id"] : "Create New Event" }}
                 </div>
                 {% if event %}
                     {% if not event["is_activated"] %}
@@ -53,7 +53,7 @@
             </ul>
             <div class="tab-content">
                  <div class="tab-pane active" id="tab1">
-                    <form action="{{ apppath }}{{ formAction }}" method="POST" name="event-form" 
+                    <form action="{{ apppath }}{{ formAction }}" style="margin: 0px 0px 0px 0px;" method="POST" name="event-form" 
                     id="{%if event is not null %}view-event-form{% endif %}">
 
                         {% include 'base.createEvent.part.twig' %}
@@ -84,12 +84,11 @@
 
                          <button href="{{ apppath }}event/{{ event["event-id"] }}" type="submit" class="btn btn-danger submit" disabled> 
 
-                             <a href="{{ apppath }}event/{{ event["event-id"] }}" style="text-decoration: none; color: white;"> Cancel </a>
+                             <a href="{{ apppath }}event/{{ event["event-id"] }}" style="text-decoration: none; color: white;"> Drop Changes </a>
                         </button>
 
-                        <button class="btn btn-primary"
-                        data-toggle="modal" data-target="#add-date-modal">
-                            <i class="icon-calendar"></i> New Date
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#add-date-modal">
+                            <i class="icon-white icon-calendar"></i> New Date
                         </button>
 
                         {# Event Activation Form + Button #}
@@ -154,7 +153,7 @@
                         <li class="">
                     {% endif %}
                         <a href="{{ apppath }}event/{{ relatedEvent["event-id"] }}">
-                            {{ relatedEvent.date }}</a></li>
+                            {{ relatedEvent.date|date("F d, Y") }}</a></li>
                 {% endfor %}
                 </ul>
             </div>

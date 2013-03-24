@@ -31,18 +31,18 @@ $(function() {
                                 <td>\
                                 </td>\
                                 <td>\
-                                    <input class="span" type="text" name="slot-name[]" placeholder="Name"/>\
+                                    <input class="span12" type="text" name="slot-name[]" placeholder="Name"/>\
                                 </td>\
                                 <td>\
-                                    <input class="span5" type="number" name="slot-duration[]" placeholder="Minutes"/>\
+                                    <input class="span12" type="number" name="slot-duration[]" placeholder="Minutes"/>\
                                 </td>\
                                 <td>\
-                                    <input class="span5" type="text" name="slot-capacity[]" placeholder="Capacity"/>\
+                                    <input class="span12" type="text" name="slot-capacity[]" placeholder="Size"/>\
                                 </td>\
                                 <td>\
-                                  <a href="#" onclick="this.parentNode.parentNode.remove();">\
-                                          <i class="'+this.value+' icon-trash"></i>\
-                                  </a>\
+                                  <button type="button" class="btn btn-danger" name="delete-timeslot" id="{{timeslot.id}}" onclick="this.parentNode.parentNode.remove();">\
+                                      <i class="'+!this.value+' icon-trash"></i>\
+                                  </button>\
                                 </td>\
                           </tr>\
                           <input class="span" type="hidden" name="slot-id[]" value=""/>');
@@ -56,7 +56,7 @@ $(function() {
         return $('form[name="event-active-status"]').submit();
     });
 
-    $('a[name="delete-timeslot"]').click(function() {
+    $('button[name="delete-timeslot"]').click(function() {
         var formElement;
         console.log("Deleting Timeslot");
         $deleteform = $('form[name="delete-timeslot"]')
