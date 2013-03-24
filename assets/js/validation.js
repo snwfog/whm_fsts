@@ -64,10 +64,6 @@ $(function() {
       display: "Medical Card",
       rules: "callback_check_mcare"
     }, {
-      name: "work_status",
-      display: "Work Status",
-      rules: "exact_length[2]"
-    }, {
       name: "gender",
       display: "Gender",
       rules: "exact_length[1]"

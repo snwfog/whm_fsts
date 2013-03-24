@@ -3,6 +3,7 @@
 namespace WHM\Controller;
 
 use \WHM\Helper;
+use DateTime;
 
 class ControllerHelper
 {
@@ -14,11 +15,12 @@ class ControllerHelper
             $date = $member->getFirstVisitDate()->format("m-d-Y");
             $DOB = null;
             if(!is_null($member->getDateOfBirth())){
+                $data[$count]["age"] = $this->calculateAge($member->getDateOfBirth(), new DateTime());
                 $DOB =  $member->getDateOfBirth()->format("m-d-y");
             }
             $household = $member->getHousehold();
             
-            $data[$count++] = array(
+            $data[$count] = array(
                             "household_id" => $household->getId(),
                             "member-id" => $member->getId(),
                             "first-name" => $member->getFirstName(),
@@ -37,8 +39,16 @@ class ControllerHelper
                             "date-of-birth"  => $DOB,
                             "income"   => $member->getIncome(),
                     );
+            ++$count;
         }
         return $data;
+    }
+
+    public function calculateAge($earlierDate, $olderDate){
+        return $earlierDate->format("md") > $olderDate->format("md") ? 
+                    ($olderDate->format("Y") - $earlierDate->format("Y") - 1) 
+                    : 
+                    ($olderDate->format("Y") - $earlierDate->format("Y"));
     }
 
 }

@@ -140,7 +140,6 @@ class Household extends Controller implements IRedirectable
         //Get list of Members
         $members = array();
         foreach ($dependents as $dependent){
-
             $registeredEvents = $this->eventsRegistered($dependent->getId());
             if (($principal->getId() == $dependent->getId())) {
                 $members["principal"] = array(
@@ -150,7 +149,8 @@ class Household extends Controller implements IRedirectable
                                         "gender"     => $dependent->getGender(),
                                         "active"     => $member->getId() == $dependent->getId()? TRUE : FALSE,
                                         "principal"  => true,
-                                        "events"  => $registeredEvents,
+                                        "age"        => get_class($dependent->getDateOfBirth()) == "DateTime" ? $this->helper->calculateAge($dependent->getDateOfBirth(), new DateTime) : '',
+                                        "events"     => $registeredEvents,
                                  );
             }else{
                 array_push($members, array(
@@ -159,7 +159,8 @@ class Household extends Controller implements IRedirectable
                                             "last-name"  => $dependent->getLastName(),
                                             "gender"     => $dependent->getGender(),
                                             "active"     => $member->getId() == $dependent->getId()? TRUE : FALSE,
-                                            "events"  => $registeredEvents,
+                                            "age"        => get_class($dependent->getDateOfBirth()) == "DateTime" ? $this->helper->calculateAge($dependent->getDateOfBirth(), new DateTime) : '',
+                                            "events"     => $registeredEvents,
                                      ));
             } 
         }

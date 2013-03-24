@@ -83,8 +83,11 @@
                 <li class="{{ household.members.principal.active ? "active" : '' }}">
                     <a href="{{ apppath }}household/{{ household.household_id}}/{{ household.members.principal["member-id"]}}">
                          <i class="icon-home"></i> 
-                         {{household.members.principal["first-name"] }} {{ household.members.principal["last-name"]}} <span class="
-                         pull-right">{{ household.members.principal["gender"]}}</span>
+                         {{household.members.principal["first-name"] }} {{ household.members.principal["last-name"]}} 
+                         <span class="
+                         pull-right">
+                             {{ household.members.principal["gender"]}}{{ household.members.principal["age"] }}
+                             </span>
                      </a>
                 </li>
                 {% for member in household.members %}
@@ -92,7 +95,7 @@
                             <li class="{{ member.active ? "active" : '' }}">
                                 <a href="{{ apppath }}household/{{ household.household_id}}/{{ member["member-id"]}}">
                                     <i class="icon-user"></i> 
-                                    {{ member["first-name"] }} {{ member["last-name"] }}<span class="pull-right">{{ member["gender"] }}</span>
+                                    {{ member["first-name"] }} {{ member["last-name"] }}<span class="pull-right">{{ member["gender"] }}{{ member["age"] }}</span>
                                 </a>
                             </li>
                     {% endif %}
