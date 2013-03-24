@@ -60,7 +60,7 @@
                                                                         {{ events[i][j]["name"]|slice(0, 10) }}
                                                                         <span class="caret"></span>
                                                                     </a>
-                                                                    <ul class="dropdown-menu">
+                                                                    <ul class="dropdown-menu ">
                                                                         {% for slots in events[i][j]["timeslots"] %}
                                                                             {% if slots["capacity"] != 0 %}
                                                                                 {% set bobby = slots["registered"] / slots["capacity"] %}
@@ -75,13 +75,21 @@
                                                                                                                         {% else %}
                                                                                                                             document.forms['slot-{{slots["id"]}}'].submit()
                                                                                                                         {% endif %}" >  
-                                                                                    {{ slots["start-time"]}}-{{slots["end-time"] }}
-                                                                                    <i class="icon-user icon-black"></i>
+                                                                                   {# {{ slots["start-time"]}}-{{slots["end-time"] }}
+                                                                                    <i class="icon-user icon-black"></i> #}
                                                                                     {% if bobby >= 1 %}
-                                                                                        Full {{ slots["registered"]}}/{{slots["capacity"] }}
+                                                                                        <strike>
+                                                                                            {{ slots["start-time"]}}-{{slots["end-time"] }}
+                                                                                            <i class="icon-user icon-black"></i>
+                                                                                            Full {{ slots["registered"]}}/{{slots["capacity"] }}
+                                                                                        </strike>
                                                                                     {% elseif slots["capacity"] == 0 %}
+                                                                                        {{ slots["start-time"]}}-{{slots["end-time"] }}
+                                                                                        <i class="icon-user icon-black"></i>
                                                                                         No capacity assigned
                                                                                     {% else %}
+                                                                                        {{ slots["start-time"]}}-{{slots["end-time"] }}
+                                                                                        <i class="icon-user icon-black"></i>
                                                                                         {{ slots["registered"]}}/{{slots["capacity"] }}
                                                                                     {% endif %}
                                                                                     {% if slots.status == "Registered" %} 
@@ -94,12 +102,14 @@
                                                                 </div>
                                                                 {# FORMS #}
                                                                 {% for slots in events[i][j]["timeslots"] %}
+                                                                    <div style="display:none">
                                                                     <form name="slot-{{slots["id"]}}" action="{{ apppath }}appointment/new" method="POST" id="slot-{{slots["id"]}}">
                                                                         <input type="hidden" name="household-id" value="{{ household.household_id }}">
                                                                         <input type="hidden" name="member-id" value="{{ household["member-id"] }}">
                                                                         <input type="hidden" name="event-id" value="{{ events[i][j]["event-id"] }}">
                                                                         <input type="hidden" name="slot-id" value="{{ slots["id"] }}">
                                                                     </form>
+                                                                    </div>
                                                                 {% endfor %}
                                                             {# {% endif %} #}
                                                     {% endif %}
