@@ -144,7 +144,7 @@
         {% if event is not null %}
             <legend>Dates</legend>
             {# OH NO INSTYLE CSS#}
-            <div class="well no-padding-well" id="dates-well" style="{{ relatedEvents|length > 6 ? 'max-height:200px; overflow: scroll;' : ''}}">
+            <div class="well no-padding-well" id="dates-well" >
                 <ul class="nav nav-list" id="date-list">
                 {% for relatedEvent in relatedEvents %}
                     {% if relatedEvent["event-id"] == event["event-id"] %}
@@ -157,29 +157,31 @@
                 {% endfor %}
                 </ul>
             </div>
-            <legend>Participants</legend>
-            {# OH NO INSTYLE CSS#}
-            <div class="well no-padding-well" id="dates-well" style="{{ participants|length > 6 ? 'max-height:200px; overflow: scroll;' : ''}}">
-                <table class="table table-striped">
-                  <thead>
-                      <th> HH_ID </th>
-                      <th> Name </th>
-                  </thead>
-                  <tbody>
-                   {% for participant in participants %}
-                        <tr>
-                          <td>
-                              <a href="{{ apppath }}household/{{participant["household_id"]}}">
-                                  {{participant["household_id"]}}</td>
-                          <td><a href="{{ apppath }}household/{{participant["household_id"]}}/{{participant["member-id"]}}">
-                                  {{ participant["last-name"] }}, {{ participant["first-name"] }} 
-                              </a>
-                           </td>
-                        </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-            </div>
+            {% if false %} {# COMMENT BLOCK WASN'T WORKING #}
+                <legend>Participants</legend>
+                {# OH NO INSTYLE CSS#}
+                <div class="well no-padding-well" id="dates-well" style="{{ participants|length > 6 ? 'max-height:200px; overflow: scroll;' : ''}}">
+                    <table class="table table-striped">
+                      <thead>
+                          <th> HH_ID </th>
+                          <th> Name </th>
+                      </thead>
+                      <tbody>
+                       {% for participant in participants %}
+                            <tr>
+                              <td>
+                                  <a href="{{ apppath }}household/{{participant["household_id"]}}">
+                                      {{participant["household_id"]}}</td>
+                              <td><a href="{{ apppath }}household/{{participant["household_id"]}}/{{participant["member-id"]}}">
+                                      {{ participant["last-name"] }}, {{ participant["first-name"] }} 
+                                  </a>
+                               </td>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                </div>
+            {% endif %}
         {% endif %}   
     </div>
     
