@@ -41,7 +41,7 @@ $(function() {
                                 </td>\
                                 <td>\
                                   <button type="button" class="btn btn-danger" name="delete-timeslot" id="{{timeslot.id}}" onclick="this.parentNode.parentNode.remove();">\
-                                      <i class="'+!this.value+' icon-trash"></i>\
+                                      <i class="icon-white icon-trash"></i>\
                                   </button>\
                                 </td>\
                           </tr>\

@@ -32,7 +32,7 @@
                                           <i class="icon-white icon-trash"></i>
                                       </button>
                                   {% else %}
-                                      <button type="button" class="btn btn-info">
+                                      <button type="button" onclick="location.href='{{apppath}}attendance/{{event["event-id"]}}/{{ timeslot.id}}';" class="btn btn-info">
                                           <i class="icon-white icon-user"></i>
                                       </button>
                                   {% endif %}
