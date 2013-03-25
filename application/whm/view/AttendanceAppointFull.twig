@@ -21,8 +21,7 @@
                     {% elseif availablespots <= maxparticipants / 2 %}
                         {% set labelcolor = 'warning' %}
                     {% endif %}
-                    <span class="pull-right">&nbsp;&nbsp;{{ event.getStartTime.format("H:i") }}</span>
-                   
+                    
                     
                   <span class="label label-{{ labelcolor }} pull-right">
                   <i class="icon-user icon-white"></i> {{ actualparticipants }}/{{maxparticipants }}
@@ -31,7 +30,9 @@
                       <thread>
                           <tr>
                               <th>Participant Name</th>
+                              <th>Medicare</th>
                               <th>Checked In</th>
+
                               
                           </tr>
                       </thread>
@@ -40,9 +41,11 @@
                         
                                 {% for participant in slot['participants'] %}
                                   <tr>
-                                      <td>{{ participant['first-name'] }} {{ participant['last-name'] }} </td>
+                                      <td>{{ participant['first-name'] }} {{ participant['last-name'] }} {{participant['gender']}}</td>
+                                      <td>{{ participant['medicare-number']}}
+                                      </td>
                                       <td>
-                                        <div id="event-occurrence" class="btn-group" data-toggle="buttons-radio">
+                                        <div id="event-occurrence" class="btn-group " data-toggle="buttons-radio">
                                         <button type="button" class="btn btn-success btn-large" data-value="1">YES</button>
                                         <button type="button" class="btn btn-danger btn-large" data-value="1">NO</button>
                                       </div>

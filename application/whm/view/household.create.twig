@@ -86,7 +86,9 @@
                          {{household.members.principal["first-name"] }} {{ household.members.principal["last-name"]}} 
                          <span class="
                          pull-right">
-                             {{ household.members.principal["gender"]}}{{ household.members.principal["age"] }}
+                             {{ household.members.principal["gender"]}}
+                             {% if (household.members.principal["gender"] != null) and (household.members.principal["age"] != null) %}/{% endif %}
+                             {{ household.members.principal["age"] }}
                              </span>
                      </a>
                 </li>
@@ -95,7 +97,7 @@
                             <li class="{{ member.active ? "active" : '' }}">
                                 <a href="{{ apppath }}household/{{ household.household_id}}/{{ member["member-id"]}}">
                                     <i class="icon-user"></i> 
-                                    {{ member["first-name"] }} {{ member["last-name"] }}<span class="pull-right">{{ member["gender"] }}{{ member["age"] }}</span>
+                                    {{ member["first-name"] }} {{ member["last-name"] }}<span class="pull-right">{{ member["gender"] }}{% if (member["gender"] != null) and (member["age"] != null) %}/{% endif %}{{ member["age"] }}</span>
                                 </a>
                             </li>
                     {% endif %}

@@ -37,8 +37,9 @@ class ManageHousehold {
     public function updateHousehold($data)
     {
         $household = $this->findHousehold($data["household-id"]);
+        $pMember = $this->findMember($data["member-id"]);
         $address = $household->getAddress();
-        $this->createMember($data);
+        $this->updateMember($pMember, $data);
         $this->updateAddress($address, $data);
     }
 
@@ -105,26 +106,12 @@ class ManageHousehold {
 
 
 
-    //NEW or UPDATE Member
+    //Private Methods
     private function createMember($data)
     {
-        $datetime = new DateTime();
-        if(isset($data["member-id"])){
-        //Update Member
-            $household_member = $this->findMember($data["member-id"]);
-            $household_member->setFirstVisitDate($datetime->createFromFormat("d-m-Y", $data["first-visit-date"]));
-        }else{
-        //New Member  
-            $household_member = new HouseholdMember();          
-            $household_member->setFirstVisitDate($datetime);
-        }
-        
-        if(isset($data["date-of-birth"]) && !empty($data["date-of-birth"])){
-            $DOBObject = new DateTime();
-            $data["date-of-birth"] = $DOBObject->createFromFormat("m-d-y", $data["date-of-birth"]);
-        }else{
-            $data["date-of-birth"] = null;
-        }
+        $household_member = new HouseholdMember();
+        $datetime = new DateTime("now");
+
         $data = $this->formatData($data);
         $household_member->setFirstName($data["first-name"]);
         $household_member->setLastName($data["last-name"]);
@@ -138,7 +125,7 @@ class ManageHousehold {
         $household_member->setMaritalStatus($data["marital-status"]);
         $household_member->setGender($data["gender"]);
         $household_member->setOrigin($data["origin"]);
-        $household_member->setDateOfBirth($data["date-of-birth"]);
+        $household_member->setFirstVisitDate($datetime);
         $household_member->setIncome($data["income"]);
 
 
@@ -162,6 +149,27 @@ class ManageHousehold {
 
     }
 
+    private function updateMember($memberInstance, $data)
+    {
+        $data = $this->formatData($data);
+        $memberInstance->setFirstName($data["first-name"]);
+        $memberInstance->setLastName($data["last-name"]);
+        $memberInstance->setPhoneNumber($data["phone-number"]);
+        $memberInstance->setMcareNumber($data["mcare-number"]);
+        $memberInstance->setWorkStatus($data["work_status"]);
+        $memberInstance->setWelfareNumber($data["welfare-number"]);
+        $memberInstance->setReferral($data["referral"]);
+        $memberInstance->setMotherTongue($data["mother-tongue"]);
+        $memberInstance->setLanguage($data["language"]);
+        $memberInstance->setMaritalStatus($data["marital-status"]);
+        $memberInstance->setGender("M"); //CHANGE WHEN EXTRACT FROM MEDICARE
+        $memberInstance->setOrigin($data["origin"]);
+        $memberInstance->setIncome($data["income"]);
+
+        $this->em->persist($memberInstance);
+        $this->em->flush();
+    }
+
     private function updateAddress($addressInstance, $data)
     {
         $addressInstance->setHouseNumber($data["house-number"]);
@@ -178,8 +186,7 @@ class ManageHousehold {
     {
         foreach ($data as $key => $value)
         {
-
-            is_string($value) ? $data[$key] = str_replace("-", "", $value) : '';
+            $data[$key] = str_replace("-", "", $value);
         }
         return $data;
     }
