@@ -6,8 +6,9 @@ use WHM;
 use DateTime;
 use DateTimeZone;
 use Test\Controller\ControllerTestCase;
+use WHM\IRedirectable;
 
-class EventControllerTest extends ControllerTestCase
+class EventControllerTest extends ControllerTestCase implements IRedirectable
 {
 //    function testGet()
 //    {
@@ -16,12 +17,23 @@ class EventControllerTest extends ControllerTestCase
 //    }
     function testPost()
     {
-        $_POST["event-id"]='1';
-        $_POST["activate"]=NULL;
-        $_POST["start-time"]='19:30:00';
-        $_POST["start-date"]='03/27/2013';
-        
-        
+        $formValues = array(
+            "event-id" => '1', 
+            "activate" => NULL,
+            "start-time" => '19:30:00',
+            "start-date" => '03/27/2013',
+            "event-capacity" => '88',
+            "event-name" => 'Hong Fan Tian Join',
+            "description" => 'Celebrate iteration close',
+            "slot-id" => array('1'),
+            "slot-duration" => array('7200'),
+            "slot-capacity" => array('180')
+        );
+       
+        $crawler = $this->request('POST', '/event/1',$formValues);
+        print_r($this->client->getResponse()->getContent());
+        $this->assertEquals(200, $this->client->getResponse()->getStatus());            
+        $this->assertEquals(1, $crawler->filter('html:contains("Hong")')->count());        
     }
 }
 ?>
