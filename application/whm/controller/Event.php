@@ -133,8 +133,9 @@ class Event extends Controller implements IRedirectable
     {
         $data = array();
         $tracker = array();
+        $maxJ = array();
 
-        for ($j = 1; $j <= 4; $j++)  // 4 rows
+        for ($j = 1; $j <= 10; $j++)  // MAX 10 rows
         {
             $date = date_create('now');
             $date->setTimezone(new DateTimeZone(LOCALTIME));
@@ -149,7 +150,7 @@ class Event extends Controller implements IRedirectable
                     {
                         $timeslots= $this->getSlotsInfo($event, $household_id, $member_id);
                         $tracker[] = $event->getId();
-
+                        $maxJ[] = $j;
                         $data[$j][$i] = array
                         (
                             "event-id" => $event->getId(),
@@ -165,6 +166,7 @@ class Event extends Controller implements IRedirectable
                 };
             }
         }
+        $data['max'] = max($maxJ);
         return $data;
     }
 

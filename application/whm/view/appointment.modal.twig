@@ -36,7 +36,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% set maxevents = 4 %}
+                                    {% set maxevents = events.max %}
                                     {% for i in 1..maxevents %}
                                         <tr>
                                             {% for j in 1..weeklength %}
@@ -46,72 +46,66 @@
                                                         {% set j = j + 7 %}
                                                     {% endif %}
                                                     {% if events[i][j] is null %}
-                                                        <br/ ><br/ >
+                                                        <br /><br />
                                                     {% else %}
-                                                        {% set buttoncolour = "success" %}
+                                                        {% set buttoncolour = "primary" %}
                                                         {% if events[i][j]["registered"] == "Registered" %}
-                                                            {% set buttoncolour = "danger" %}
+                                                            {% set buttoncolour = "success" %}
                                                         {% endif %}
-                                                        {# {% set deidei = "+" ~ index ~ " days" %}
-                                                        {% set d = "now"|date_modify(deidei)|date("m/d/Y","America/Montreal") %}
-                                                            {% if d == events[i][j]["date"] %} #}
-                                                                <div class="dropdown btn-group">
-                                                                    <a class="btn dropdown-toggle btn-{{ buttoncolour }}" data-toggle="dropdown" href="#">
-                                                                        {{ events[i][j]["name"]|slice(0, 10) }}
-                                                                        <span class="caret"></span>
-                                                                    </a>
-                                                                    <ul class="dropdown-menu ">
-                                                                        {% for slots in events[i][j]["timeslots"] %}
-                                                                            {% if slots["capacity"] != 0 %}
-                                                                                {% set bobby = slots["registered"] / slots["capacity"] %}
-                                                                            {% endif %}
-                                                                            <li >{# class="disabled" #}
-                                                                                <a href="javascript:void(0)" onclick="{% if slots.status == "Registered" %}
-                                                                                                                            javascript:void(0)
-                                                                                                                        {% elseif bobby >= 1 %}
-                                                                                                                            javascript:void(0)
-                                                                                                                        {% elseif slots["capacity"] == 0 %}
-                                                                                                                            javascript:void(0)
-                                                                                                                        {% else %}
-                                                                                                                            document.forms['slot-{{slots["id"]}}'].submit()
-                                                                                                                        {% endif %}" >  
-                                                                                   {# {{ slots["start-time"]}}-{{slots["end-time"] }}
-                                                                                    <i class="icon-user icon-black"></i> #}
-                                                                                    {% if bobby >= 1 %}
-                                                                                        <strike>
-                                                                                            {{ slots["start-time"]}}-{{slots["end-time"] }}
-                                                                                            <i class="icon-user icon-black"></i>
-                                                                                            Full {{ slots["registered"]}}/{{slots["capacity"] }}
-                                                                                        </strike>
-                                                                                    {% elseif slots["capacity"] == 0 %}
+                                                            <div class="dropdown btn-group">
+                                                                <a class="btn dropdown-toggle btn-{{ buttoncolour }}" data-toggle="dropdown" href="#">
+                                                                    {{ events[i][j]["name"]|slice(0, 10) }}
+                                                                    <span class="caret"></span>
+                                                                </a>
+                                                                <ul class="dropdown-menu ">
+                                                                    {% for slots in events[i][j]["timeslots"] %}
+                                                                        {% if slots["capacity"] != 0 %}
+                                                                            {% set bobby = slots["registered"] / slots["capacity"] %}
+                                                                        {% endif %}
+                                                                        <li >{# class="disabled" #}
+                                                                            <a href="javascript:void(0)" onclick="{% if slots.status == "Registered" %}
+                                                                                                                        javascript:void(0)
+                                                                                                                    {% elseif bobby >= 1 %}
+                                                                                                                        javascript:void(0)
+                                                                                                                    {% elseif slots["capacity"] == 0 %}
+                                                                                                                        javascript:void(0)
+                                                                                                                    {% else %}
+                                                                                                                        document.forms['slot-{{slots["id"]}}'].submit()
+                                                                                                                    {% endif %}" > 
+                                                                                {% if bobby >= 1 %}
+                                                                                    <strike>
                                                                                         {{ slots["start-time"]}}-{{slots["end-time"] }}
                                                                                         <i class="icon-user icon-black"></i>
-                                                                                        No capacity assigned
-                                                                                    {% else %}
-                                                                                        {{ slots["start-time"]}}-{{slots["end-time"] }}
-                                                                                        <i class="icon-user icon-black"></i>
-                                                                                        {{ slots["registered"]}}/{{slots["capacity"] }}
-                                                                                    {% endif %}
-                                                                                    {% if slots.status == "Registered" %} 
-                                                                                        <i class="icon-ok-sign icon-black"></i>
-                                                                                    {% endif %}
-                                                                                </a>
-                                                                            </li>
-                                                                        {% endfor %}
-                                                                    </ul>
-                                                                </div>
-                                                                {# FORMS #}
-                                                                {% for slots in events[i][j]["timeslots"] %}
-                                                                    <div style="display:none">
+                                                                                        Full {{ slots["registered"]}}/{{slots["capacity"] }}
+                                                                                    </strike>
+                                                                                {% elseif slots["capacity"] == 0 %}
+                                                                                    {{ slots["start-time"]}}-{{slots["end-time"] }}
+                                                                                    <i class="icon-user icon-black"></i>
+                                                                                    No capacity assigned
+                                                                                {% else %}
+                                                                                    {{ slots["start-time"]}}-{{slots["end-time"] }}
+                                                                                    <i class="icon-user icon-black"></i>
+                                                                                    {{ slots["registered"]}}/{{slots["capacity"] }}
+                                                                                {% endif %}
+                                                                                {% if slots.status == "Registered" %} 
+                                                                                    <i class="icon-ok-sign icon-black"></i>
+                                                                                {% endif %}
+                                                                            </a>
+                                                                        </li>
+                                                                    {% endfor %}
+                                                                </ul>
+                                                            </div>
+                                                            {# FORMS #}
+                                                            {% for slots in events[i][j]["timeslots"] %}
+                                                                <div style="display:none">
                                                                     <form name="slot-{{slots["id"]}}" action="{{ apppath }}appointment/new" method="POST" id="slot-{{slots["id"]}}">
                                                                         <input type="hidden" name="household-id" value="{{ household.household_id }}">
                                                                         <input type="hidden" name="member-id" value="{{ household["member-id"] }}">
                                                                         <input type="hidden" name="event-id" value="{{ events[i][j]["event-id"] }}">
                                                                         <input type="hidden" name="slot-id" value="{{ slots["id"] }}">
                                                                     </form>
-                                                                    </div>
-                                                                {% endfor %}
-                                                            {# {% endif %} #}
+                                                                </div>
+                                                            {% endfor %}
                                                     {% endif %}
                                                 </td>
                                             {% endfor %}
