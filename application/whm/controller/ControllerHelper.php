@@ -36,6 +36,7 @@ class ControllerHelper
                             "gender"  => $member->getGender(),
                             "origin"   => $member->getOrigin(),
                             "first-visit-date"  => $date,
+                            "date-of-birth"  => $DOB,
                             "income"   => $member->getIncome(),
                     );
             ++$count;
