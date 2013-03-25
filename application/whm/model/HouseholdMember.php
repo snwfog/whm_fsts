@@ -61,7 +61,7 @@ class HouseholdMember
     protected $language;
 
 	/**
-     * @Column(nullable=TRUE, length=2)
+     * @Column(nullable=TRUE)
      */
     protected $marital_status;
 

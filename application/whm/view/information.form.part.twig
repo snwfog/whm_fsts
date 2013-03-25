@@ -1,7 +1,7 @@
 {% block information %}
  
     <fieldset>
-        <legend>Information</legend>
+        <legend>Information {{ household["date-of-birth"] }} </legend>
         <div class="controls controls-row">
             <input class="span4 help" maxlength="{{ 3 * 4 + 2 }}" type="text"
                    data-message="Go ahead enter the medicare number. The Age, Gender, and Date of Birth will be automatically filled in for you."
@@ -28,12 +28,12 @@
             
             <input class="span2" type="text" maxlength="1" name="gender"
                    placeholder="Gender" value="{{ household["gender"] }}"/>
-               <input class="span3" maxlength="2"    type="text" name="marital-status"
+               <input class="span3"    type="text" name="marital-status"
             placeholder="Marital Status" value="{{ household["marital"] }}"/>
 
             <select name="work_status" id="work_status" class ="span3">
-              <option disabled ="disabled" {{ household["work-status"] is null ? 'selected="selected"' : ''}}>Work Status</option>
-              <option value="low-income" {{ household["work-status"] == "low-income" ? 'selected="selected"' : ''}}>Low Income</option>
+              <option  value="" {{ household["work-status"] is null ? 'selected="selected"' : ''}}>Work Status</option>
+              <option value="lowincome" {{ household["work-status"] == "lowincome" ? 'selected="selected"' : ''}}>Low Income</option>
               <option value="welfare" " {{ household["work-status"] == "welfare" ? 'selected="selected"' : ''}}>Welfare</option>
               <option value="student" {{ household["work-status"] == "student" ? 'selected="selected"' : ''}}>Student</option>
             </select>

@@ -30,6 +30,7 @@
                       <thread>
                           <tr>
                               <th>Participant Name</th>
+                              <th>Gender</th>
                               <th>Medicare</th>
                               <th>Checked In</th>
 
@@ -42,6 +43,7 @@
                                 {% for participant in slot['participants'] %}
                                   <tr>
                                       <td>{{ participant['first-name'] }} {{ participant['last-name'] }} {{participant['gender']}}</td>
+                                      <td>{{ participant['gender'] }}</td>
                                       <td>{{ participant['medicare-number']}}
                                       </td>
                                       <td>

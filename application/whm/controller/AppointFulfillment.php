@@ -96,7 +96,7 @@ class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
             $this->data['event'] = $event[0];
            // $this->data['event'] = $event;
             $this->display("AttendanceAppointFull.twig");
-            print_r($this->data);
+
 
         }   
 

@@ -11,9 +11,10 @@ return $config = array
     (
         'driver'    => 'pdo_mysql',
         'user'      => 'root',
-        'password'  => '',
+        'password'  => 'root',
         'dbname'    => 'fsts',
-        
+        'host'      => 'localhost',
+        'port'      => '8889'
     ),
 
     // Twig configuration
@@ -23,7 +24,7 @@ return $config = array
         'auto_reload' => TRUE       // Autoload reload caches,
         // set to false when deploy
     ),
-    
+
     // PHPUnit Paramaters ()
     'PHPUnit.Base_URI' => 'http://localhost:8889/390' // DO NOT put forward slash at the end.
 );
