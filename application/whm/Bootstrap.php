@@ -17,5 +17,5 @@ namespace WHM;
 
 // Bootstrap all autoloader functions
 define("LOCALTIME", "US/East-Indiana");
-
+date_default_timezone_set(LOCALTIME);
 require_once('vendor/autoload.php');

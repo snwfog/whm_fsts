@@ -2,40 +2,18 @@
 
     {% block content %}
 
-
     
-
-         <h2>List Of Events</h2>
-
-
-                
-         <form action="{{ apppath }}\attendance\new" method="POST" name="appointment-fulfillment" 
-                    id="appointment-fulfillment">
-
-                    <input type="text" name="member-id" value="2"/>
-                    <input type="hidden" name="attendance" value="1"/>
-                    <input type="text" name="slot-id" value="6"/>
-                    <input type="submit" value ="Submit" />
-        </form>
+      
+        <h2>{{event.name}}</h2>
+    
+          
 
 
-
-
-
-
-
-
-<div class="accordion span11" id="accordion2">
-    {% for event in todayEvents %}
-    {% for slot in slotsInfo %}
-      {% for timeslot in slot['timeslots'] %}
         
-    {% set i = 0 %}
-          <div class="accordion-group well">
-        <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse-{{ event.getId}}">
-            {{  event.getName }} {% set maxparticipants = slot.totalCapacity %}
-                    {% set actualparticipants = slot.numOfParticipants%}
+          
+            <table class="table table-hover">
+              <th> <big>{{  slot.name}}:    {{slot.startTime}}-{{slot.endTime}}</big> {% set maxparticipants = slot.capacity %}
+                    {% set actualparticipants = slot.participants|length %}
                     {% set availablespots = maxparticipants - actualparticipants %}
                     {% set labelcolor = 'success' %}
                     {% if availablespots <= maxparticipants / 10 %}
@@ -46,41 +24,30 @@
                     <span class="pull-right">&nbsp;&nbsp;{{ event.getStartTime.format("H:i") }}</span>
                    
                     
-                        <span class="label label-{{ labelcolor }} pull-right">
-                        <i class="icon-user icon-white"></i> {{ actualparticipants }}/{{maxparticipants }}
-                        </span>
-          </a>
-        </div>
-
-
-        <div id="collapse-{{ event.getId}}" class="accordion-body collapse in">
-
-          <div class="accordion-inner">
-          
-            <table class="table table-hover">
-
+                  <span class="label label-{{ labelcolor }} pull-right">
+                  <i class="icon-user icon-white"></i> {{ actualparticipants }}/{{maxparticipants }}
+                  </span>
+              </th>
                       <thread>
                           <tr>
                               <th>Participant Name</th>
                               <th>Checked In</th>
-                              <th>Time slots</th>
+                              
                           </tr>
                       </thread>
                       <tobody>
                       
                         
-                                {% for participant in timeslot['participants'] %}
+                                {% for participant in slot['participants'] %}
                                   <tr>
-                                      <td>{{ participant['last-name'] }} {{ participant['first-name'] }} </td>
+                                      <td>{{ participant['first-name'] }} {{ participant['last-name'] }} </td>
                                       <td>
                                         <div id="event-occurrence" class="btn-group" data-toggle="buttons-radio">
                                         <button type="button" class="btn btn-success btn-large" data-value="1">YES</button>
                                         <button type="button" class="btn btn-danger btn-large" data-value="1">NO</button>
                                       </div>
                                       </td>
-                                      <td>
-                                        {{timeslot['start-time']}}-{{timeslot['end-time']}}
-                                      </td>
+                                      
                                   </tr>
                                   {% endfor %}
                         
@@ -88,14 +55,7 @@
 
                 </table>
 
-          </div>
+         
           
-        </div>
-      </div>
-          
-        {% endfor %}
-      {% endfor %}
-    {% endfor %}
-
             
     {% endblock content %}

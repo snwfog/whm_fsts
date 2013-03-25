@@ -207,7 +207,7 @@ class ManageEvent
 
     public function getTodaysEvents()
     {
-        $dateNow = date("Y-m-d", strtotime("NOW"));     
+        $dateNow = date("Y-m-d", strtotime("NOW"));    
         $query = $this->em->createQueryBuilder()
                           ->select("event")
                           ->from("WHM\model\Event", "event")

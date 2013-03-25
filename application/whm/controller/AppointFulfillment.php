@@ -12,7 +12,8 @@ use WHM\Controller\Report;
 use WHM\Controller\Event;
 use WHM\Model\ManageAppointment;
 use WHM\ParticipantsTimeslots;
-
+use WHM\Controller\ControllerHelper;
+use DateTime;
 
 class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
 {
@@ -20,6 +21,8 @@ class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
     private $manageEvent;
     private $report;
     private $event;
+    private $helper;
+    private $manageAppointment;
 
     public function __construct()//array $args = null
     {
@@ -31,57 +34,77 @@ class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
         $this ->report = new report();
         $this ->manageEvent= new ManageEvent();
         $this ->event= new Event();
+        $this ->helper= new ControllerHelper();
+        $this ->manageAppointment = new ManageAppointment();
 
     }
 
-    public function get($event_id = null)
+    public function get($event_id = null, $timeslot_id = null)
     {
-        // if (isset($_GET["event_id"]))
-        // {
-        //     $event_id = $_GET["event_id"];
+       
+        
+        if(!is_null($event_id))
+        {
+            $slot = array();
+            $count = 0;
+            $totalNumOfParticipants = 0;
+            $totalEventCapacity = 0;
+            $event = $this->manageEvent->findEvent($event_id);
+            $slotStarttime = $event->getStartTime()->format("H:i");
             
-        // }
+            $timeslots = $event->getTimeSlots();
+            foreach($timeslots as $timeslot)
+            {
 
-        // if(!is_null($event_id))
-        // {
-            
+                $slotEndtime = new DateTime($slotStarttime);
+                $duration = '+'.$timeslot->getDuration(). ' mins';
+                date_modify($slotEndtime, $duration);
+                $endtime = $slotEndtime->format('H:i');
+                if($timeslot->getId() == $timeslot_id)
+                {
+                    $slot = array
+                    (
+                        "name"=> $timeslot->getName(),
+                        "startTime"=> $slotStarttime,
+                        "endTime"=> $endtime,
+                        "duration" => $timeslot->getDuration(),
+                        "participants" => $this->helper->formatMember($timeslot->getParticipants()),
+                        "id" => $timeslot->getId(),
+                        "capacity" => $timeslot->getCapacity()
+                    );
+                }
+                    $slotStarttime = $endtime;
+                    $totalNumOfParticipants += count($slot["participants"]);
+                    $totalEventCapacity += $slot["capacity"];
+                    ++$count;
+
+            }
+
+            foreach ($slot["participants"] as $key=>$participant)
+            {
+                $pId = $participant["member-id"];
+                $participantTimeslot = $this->manageAppointment->getParticipantTimeslot($pId, $slot['id']);
+                $attendance = (int) $participantTimeslot->getAttend();
+                $participant["attend"] = $attendance;
+                $slot["participants"][$key] = $participant;
+            }
+
+            $event = $this->event->formatEvents(array( 0 => $event));
+            $event[0]["totalCapacity"] = $totalEventCapacity;
+            $event[0]["numOfParticipants"] = $totalNumOfParticipants;
+            $this->data['slot'] = $slot;
+            $this->data['event'] = $event[0];
+           // $this->data['event'] = $event;
+            $this->display("AttendanceAppointFull.twig");
+            //print_r($this->data["event"]);
+
+        }   
 
 
-
-
-        // }
         
 
-        $todayEvents = $this ->manageEvent ->getTodaysEvents(); 
+         
 
-           
-
-
-        // foreach($todayEvents as $td)
-        // {
-
-        //     foreach($td->getTimeslots() as $timeslot)
-        //     {
-
-        //         foreach ($timeslot->getParticipantsToday() as $participants) 
-        //         {
-
-                   
-        //              echo($participants->getHouseholdMember()->getLastName()." ".
-        //                 $participants->getHouseholdMember()->getFirstName());
-                                
-        //         }
-        //     }
-
-        // }
-
-        $eventsT=$this->event->formatEvents($todayEvents);        
-            
-           $this->data['todayEvents'] = $todayEvents;
-           $this->data['slotsInfo'] = $this->getslotsInfo();
-            
-           $this->display("AttendanceAppointFull.twig");  
-            print_r($this->data['slotsInfo']);
 
      
         
@@ -107,22 +130,6 @@ class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
     {
       
     }
-    public function getSlotsInfo()
-    {
-
-        $data = array();
-        $count = 0;
-
-        $todayEvents = $this ->manageEvent ->getTodaysEvents(); 
-
-        foreach ($todayEvents as $event)
-        {
-            $todaySlots = $this ->event ->getSlots($event);
-            $data[$count++] = $todaySlots;
-           
-        }
-
-        return $data;
-    }
+    
 
 }

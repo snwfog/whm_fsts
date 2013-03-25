@@ -55,4 +55,8 @@ class ParticipantsTimeslots
     public function getAttend(){
         return $this->attend;
     }
+
+    public function getId(){
+        return $this->id;
+    }
 }

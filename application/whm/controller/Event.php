@@ -111,23 +111,12 @@ class Event extends Controller implements IRedirectable
                     "date" => $event->getStartDate()->format("m/d/Y"),
                     "group-id" => $event->getGroupId(),
                     "is_activated" => $event->getIsActivated(),
-                    "timeslots" => $this->getSlots($event)
                 );
         }
         return $data;
     }
 
-    // public function formatAttendence($member_id, $timeslot_id)
-    // {
-
-    //     if(!is_null($timeslot_id)){
-
-    //         $attendance = $this->manageAppointment->getParticipantTimeslot($member_id, $timeslot_id)
-    //         $attend = $attendance->getAttend();
-    //     }
-
-    //     return $attend;
-    // }
+    
    
     public function getIndexedEvents($events, $household_id, $member_id)
     {
