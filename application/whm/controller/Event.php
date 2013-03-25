@@ -123,6 +123,7 @@ class Event extends Controller implements IRedirectable
         $data = array();
         $tracker = array();
         $maxJ = array();
+        $maxJ[] = 1; // set default row to 1
 
         for ($j = 1; $j <= 10; $j++)  // MAX 10 rows
         {
