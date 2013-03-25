@@ -1,66 +1,57 @@
 {% extends 'static/base.twig' %}
-
     {% block content %}
+        <h1>{{event.name}}</h1>
+       {% set maxparticipants = slot.capacity %}
 
-    
-      
-        <h2>{{event.name}}</h2>
-    
-          
+        {% set actualparticipants = slot.participants|length %}
+        {% set availablespots = maxparticipants - actualparticipants %}
+        {% set labelcolor = 'success' %}
+        {% if availablespots <= maxparticipants / 10 %}
+            {% set labelcolor = 'important' %}
+        {% elseif availablespots <= maxparticipants / 2 %}
+            {% set labelcolor = 'warning' %}
+        {% endif %}
+
+        <span class="label label-{{ labelcolor }}">
+            <i class="icon-user icon-white"></i> {{ actualparticipants }}/{{maxparticipants }}
+        </span>
+
+        <h4>{{ slot.name }}: &nbsp;&nbsp; {{slot.startTime}}-{{slot.endTime}}</h4>
 
 
-        
-          
-            <table class="table table-hover">
-              <th> <big>{{  slot.name}}:    {{slot.startTime}}-{{slot.endTime}}</big> {% set maxparticipants = slot.capacity %}
-                    {% set actualparticipants = slot.participants|length %}
-                    {% set availablespots = maxparticipants - actualparticipants %}
-                    {% set labelcolor = 'success' %}
-                    {% if availablespots <= maxparticipants / 10 %}
-                        {% set labelcolor = 'important' %}
-                    {% elseif availablespots <= maxparticipants / 2 %}
-                        {% set labelcolor = 'warning' %}
-                    {% endif %}
-                    
-                    
-                  <span class="label label-{{ labelcolor }} pull-right">
-                  <i class="icon-user icon-white"></i> {{ actualparticipants }}/{{maxparticipants }}
-                  </span>
-              </th>
+
+            <table class="table table-hover table-striped">
                       <thread>
                           <tr>
-                              <th>Participant Name</th>
-                              <th>Gender</th>
-                              <th>Medicare</th>
-                              <th>Checked In</th>
-
-                              
+                              <th><h4>Participant Name</h4></th>
+                              <th><h4>Gender</h4></th>
+                              <th><h4>Medicare</h4></th>
+                              <th><h4>Checked In</h4></th>
                           </tr>
                       </thread>
                       <tobody>
-                      
-                        
+
+
                                 {% for participant in slot['participants'] %}
                                   <tr>
-                                      <td>{{ participant['first-name'] }} {{ participant['last-name'] }} {{participant['gender']}}</td>
-                                      <td>{{ participant['gender'] }}</td>
-                                      <td>{{ participant['medicare-number']}}
-                                      </td>
+                                      <td><h3>{{ participant['first-name'] }} {{ participant['last-name'] }}</h3></td>
+                                      <td><h3>{{participant['gender']}}</h3></td>
+                                      <td><h3>{{ participant['medicare-number']}}</h3></td>
                                       <td>
                                         <div id="event-occurrence" class="btn-group " data-toggle="buttons-radio">
                                         <button type="button" class="btn btn-success btn-large" data-value="1">YES</button>
                                         <button type="button" class="btn btn-danger btn-large" data-value="1">NO</button>
                                       </div>
                                       </td>
-                                      
+
                                   </tr>
                                   {% endfor %}
-                        
+
                       </tobody>
 
                 </table>
 
-         
-          
-            
+
+
+
     {% endblock content %}

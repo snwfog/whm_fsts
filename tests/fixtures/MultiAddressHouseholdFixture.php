@@ -30,7 +30,7 @@ class MultiAddressHouseholdFixture extends AbstractFixture
         // | TelephoneNumber
         // | Occupation
         // Set the number of created users (Max: 20 000)
-        $max = 10;
+        $max = 250;
 
         // Generate users
         $i = 1;

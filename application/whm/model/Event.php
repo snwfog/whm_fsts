@@ -43,7 +43,7 @@ class Event
     protected $timeslots;
 
     /** @Column(type="boolean") */
-    protected $is_activated = false;
+    protected $is_activated = true;
 
 
     public function _construct()
