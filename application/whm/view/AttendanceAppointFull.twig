@@ -1,8 +1,7 @@
 {% extends 'static/base.twig' %}
     {% block content %}
         <h1>{{event.name}}</h1>
-       {% set maxparticipants = slot.capacity %}
-
+        {% set maxparticipants = slot.capacity %}
         {% set actualparticipants = slot.participants|length %}
         {% set availablespots = maxparticipants - actualparticipants %}
         {% set labelcolor = 'success' %}
@@ -17,8 +16,6 @@
         </span>
 
         <h4>{{ slot.name }}: &nbsp;&nbsp; {{slot.startTime}}-{{slot.endTime}}</h4>
-
-
 
             <table class="table table-hover table-striped">
                       <thread>
