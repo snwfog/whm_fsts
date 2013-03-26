@@ -145,42 +145,59 @@ class Report extends Controller implements IRedirectable
                 }
 
                 $report=$this->createReportForEvent($_POST["group-id"], $start_date, $end_date);
+                $originReport=$this->createOriginReportForEvent($_POST["group-id"], $start_date, $end_date);
+                $incomeReport=$this->createIncomeReportForEvent($_POST["group-id"], $start_date, $end_date);
+                $postalCodeReport=$this->createPostalCodeReportForEvent($_POST["group-id"], $start_date, $end_date);
+                $districtReport=$this->createDistrictReportForEvent($_POST["group-id"], $start_date, $end_date);
+            //    $workStatusReport=$this->createWorkStatusReportForEvent($_POST["group-id"], $start_date, $end_date);
                  $data = array(
-                   "participants"  =>  $report
+                   "participants"  =>  $report,
+                   "origin" => $originReport,
+                   "income" => $incomeReport,
+                   "postal-code" => $postalCodeReport,
+                   "district" => $districtReport,
+            //       "work-status" => $workStatusReport,
                  );
 
                  print_r($data);
                    
             
-                
+         /*      
 
-            /*header("Content-Type: text/plain");
+            header("Content-Type: text/plain");
 
             // filename for download
-            $filename = "website_data_" . date('Ymd') . ".xls";
+            $filename = "report_" . date('Y-m-d') . ".xls";
 
             header("Content-Disposition: attachment; filename=\"$filename\"");
             header("Content-Type: application/vnd.ms-excel");
+              
             $flag = false;
             foreach($data as $row) 
             {
                 $data = array(
-                           "participants"  =>  $report
+                           "participants"  =>  $report,
+                           "origin" => $originReport,
+                           "income" => $incomeReport,
+                           "postal-code" => $postalCodeReport,
+                           "district" => $districtReport,
+                  //         "work-status" => $workStatusReport,
                     );
 
                 if(!$flag) 
                 {
                     // display field/column names as first row
-                echo implode("\t", array_keys($row)) . "\r\n";
+              //  echo implode("\t", array_keys($row)) . "\r\n";
                 $flag = true;
                 }
               //  echo implode("\t", array_values($row)) . "\r\n";
              }
-             
-  
-         //   $this->redirect("household/" . $_POST["household-id"] . "/" . $_POST["member-id"]);
 
-         */
+              
+            exit();
+     
+           */  
+            
         }
         else
         {
@@ -207,18 +224,236 @@ class Report extends Controller implements IRedirectable
                 $address = $household->getAddress();  
                 $data[$count++] = array( 
                             "mother-tongue"  => $member->getMotherTongue(),
-                            "work-status"  => $member->getWorkStatus(),
-                            "origin"   => $member->getOrigin(),
-                            "income" => $member->getIncome(),
+                     //       "work-status"  => $member->getWorkStatus(),
+                      //      "origin"   => $member->getOrigin(),
+                     /*       "income" => $member->getIncome(),
                             "postal-code"   => $address->getPostalCode(),
-                            "district" => $address->getDistrict(),
+                            "district" => $address->getDistrict(),  */
                             );
 
                 }
+            //    $result =  array_unique($data);
+          //      $data2 = array_count_values(array_map('strlen',array_keys($data)));
+         //       $data = array_map("unserialize", array_unique(array_map("serialize", $data)));
+         //       $data = call_user_func_array('array_merge', $data);
+         //       $counts = var_export(array_count_values(array_map('strlen', array_keys($data))));
+              //  var_dump($counts);
+
+               
+                foreach($data as $item) 
+                { 
+            
+                   //  $count= array_count_values($item);
+                     $count = array_count_values(array_map(function($item) 
+                    {
+                     return $item['mother-tongue'];
+                    }, $data));
+                   
+                } 
+
             }
         }
-        return $data;
+        
+        return $count;
+    //    return $data;
+     //   return $counts;
     }
+
+    //Object are type Datetime
+    public function createWorkStatusReportForEvent($eventGroupId, $startDateObject, $endDateObject)
+    {
+        $events = $this->mevent->getRelatedEvents($eventGroupId);
+        $data = array();
+        $count = 0;
+     //   $allEvents = $this->mevent->getAllEvents();
+        
+        foreach ($events as $ev) 
+        {
+            if($ev->getStartDate() >= $startDateObject && $ev->getStartDate() <= $endDateObject){
+                $participants = $this->getEventParticipants($ev); 
+                foreach ($participants as $member) 
+                { 
+                    $household = $member->getHousehold();
+                    $address = $household->getAddress();  
+                    $data[$count++] = array( 
+                                "work-status" => $member->getWorkStatus(),
+                        
+                                );
+                }
+          
+               
+                foreach($data as $item) 
+                { 
+                     $count = array_count_values(array_map(function($item) 
+                    {
+                     return $item['work-status'];
+                    }, $data));
+                   
+                } 
+
+            }
+        }
+        
+        return $count;
+    }
+
+
+
+    //Object are type Datetime
+    public function createOriginReportForEvent($eventGroupId, $startDateObject, $endDateObject)
+    {
+        $events = $this->mevent->getRelatedEvents($eventGroupId);
+        $data = array();
+        $count = 0;
+     //   $allEvents = $this->mevent->getAllEvents();
+        
+        foreach ($events as $ev) 
+        {
+            if($ev->getStartDate() >= $startDateObject && $ev->getStartDate() <= $endDateObject){
+                $participants = $this->getEventParticipants($ev); 
+                foreach ($participants as $member) 
+                { 
+                    $household = $member->getHousehold();
+                    $address = $household->getAddress();  
+                    $data[$count++] = array( 
+                                "origin"   => $member->getOrigin(),
+                        
+                                );
+                }
+          
+               
+                foreach($data as $item) 
+                { 
+                     $count = array_count_values(array_map(function($item) 
+                    {
+                     return $item['origin'];
+                    }, $data));
+                   
+                } 
+
+            }
+        }
+        
+        return $count;
+    }
+
+
+
+    //Object are type Datetime
+    public function createIncomeReportForEvent($eventGroupId, $startDateObject, $endDateObject)
+    {
+        $events = $this->mevent->getRelatedEvents($eventGroupId);
+        $data = array();
+        $count = 0;
+     //   $allEvents = $this->mevent->getAllEvents();
+        
+        foreach ($events as $ev) 
+        {
+            if($ev->getStartDate() >= $startDateObject && $ev->getStartDate() <= $endDateObject){
+                $participants = $this->getEventParticipants($ev); 
+                foreach ($participants as $member) 
+                { 
+                $household = $member->getHousehold();
+                $address = $household->getAddress();  
+                $data[$count++] = array( 
+                            "income" => $member->getIncome(),
+                            );
+
+                }
+             
+                foreach($data as $item) 
+                { 
+                 $count = array_count_values(array_map(function($item) 
+                {
+                 return $item['income'];
+                }, $data));
+                   
+                } 
+
+            }
+        }
+        
+        return $count;
+    }
+
+
+
+     //Object are type Datetime
+    public function createPostalCodeReportForEvent($eventGroupId, $startDateObject, $endDateObject)
+    {
+        $events = $this->mevent->getRelatedEvents($eventGroupId);
+        $data = array();
+        $count = 0;
+     //   $allEvents = $this->mevent->getAllEvents();
+        
+        foreach ($events as $ev) 
+        {
+            if($ev->getStartDate() >= $startDateObject && $ev->getStartDate() <= $endDateObject){
+                $participants = $this->getEventParticipants($ev); 
+                foreach ($participants as $member) 
+                { 
+                    $household = $member->getHousehold();
+                    $address = $household->getAddress();  
+                    $data[$count++] = array( 
+                                "postal-code"   => $address->getPostalCode(),
+                                );
+
+                }
+                foreach($data as $item) 
+                { 
+                     $count = array_count_values(array_map(function($item) 
+                    {
+                     return $item['postal-code'];
+                    }, $data));
+                   
+                } 
+
+            }
+        }
+        
+        return $count;
+    }
+
+
+
+     //Object are type Datetime
+    public function createDistrictReportForEvent($eventGroupId, $startDateObject, $endDateObject)
+    {
+        $events = $this->mevent->getRelatedEvents($eventGroupId);
+        $data = array();
+        $count = 0;
+     //   $allEvents = $this->mevent->getAllEvents();
+        
+        foreach ($events as $ev) 
+        {
+            if($ev->getStartDate() >= $startDateObject && $ev->getStartDate() <= $endDateObject){
+                $participants = $this->getEventParticipants($ev); 
+                foreach ($participants as $member) 
+                { 
+                    $household = $member->getHousehold();
+                    $address = $household->getAddress();  
+                    $data[$count++] = array(
+                                 "district" => $address->getDistrict(),  
+                                );
+                    }
+           
+                foreach($data as $item) 
+                { 
+                     $count = array_count_values(array_map(function($item) 
+                    {
+                     return $item['district'];
+                    }, $data));
+                       
+                } 
+
+            }
+        }
+        
+        return $count;
+    }
+
+
+
 
 
     public function createMonthlyReport()
