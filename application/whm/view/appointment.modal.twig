@@ -8,12 +8,18 @@
                 <ol class="carousel-indicators">
                     <li data-target="#event-calendar-carousel" data-slide-to="0" class="active"></li>
                     <li data-target="#event-calendar-carousel" data-slide-to="1"></li>
+                    <li data-target="#event-calendar-carousel" data-slide-to="2"></li>
+                    <li data-target="#event-calendar-carousel" data-slide-to="3"></li>
                 </ol>
                 <div class="carousel-inner">
-                    {% for k in 1..2 %}
+                    {% for k in 1..4 %}
                         {% if k == 1 %}
                             <div class="active item">
-                        {% else %}
+                        {% elseif k == 2 %}
+                            <div class="item">
+                        {% elseif k == 3 %}
+                            <div class="item">
+                        {% elseif k == 4 %}
                             <div class="item">
                         {% endif %}
                             {% set startdei = "+" ~ ((k - 1) * 7 + 1) ~ " days" %}
@@ -44,7 +50,12 @@
                                                     {% set index = (7 * (k - 1) + j) %}
                                                     {% if k == 2 %}
                                                         {% set j = j + 7 %}
+                                                    {% elseif k == 3 %}
+                                                        {% set j = j + 14 %}
+                                                    {% elseif k == 4 %}
+                                                        {% set j = j + 21 %}
                                                     {% endif %}
+
                                                     {% if events[i][j] is null %}
                                                         <br /><br />
                                                     {% else %}
@@ -125,6 +136,12 @@
                 </button>
                 <button type="button" class="btn btn-primary" data-target="#event-calendar-carousel" data-slide-to="1">
                     <i class="icon-calendar icon-white"></i> Second Week
+                </button>
+                <button type="button" class="btn btn-primary" data-target="#event-calendar-carousel" data-slide-to="2">
+                    <i class="icon-calendar icon-white"></i> Third Week
+                </button>
+                <button type="button" class="btn btn-primary" data-target="#event-calendar-carousel" data-slide-to="3">
+                    <i class="icon-calendar icon-white"></i> Fourth Week
                 </button>
             </div>
             &nbsp;&nbsp;&nbsp;

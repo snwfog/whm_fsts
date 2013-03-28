@@ -129,7 +129,7 @@ class Event extends Controller implements IRedirectable
         {
             $date = date_create('now');
             $date->setTimezone(new DateTimeZone(LOCALTIME));
-            for ($i = 1; $i <= 14; $i++)
+            for ($i = 1; $i <= 27; $i++)
             {
                 date_modify($date, '+1 day');
                 $d = date_format($date, 'm/d/Y');
@@ -146,7 +146,6 @@ class Event extends Controller implements IRedirectable
                             "event-id" => $event->getId(),
                             "name" => $event->getName(),
                             "capacity" => $event->getCapacity(),
-                            "description" => $event->getDescription(),
                             "start-time" => $event->getStartTime()->format("H:i"),
                             "date" => $event->getStartDate()->format("m/d/Y"),
                             "timeslots" => $timeslots,

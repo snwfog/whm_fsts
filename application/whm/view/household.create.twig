@@ -138,10 +138,7 @@
                                             </form>
                                             {{ member["first-name"] }} {{ member["last-name"] }}<br /> 
                                             Time: {{ event["start-time"] }}-{{ event["end-time"] }}<br />
-                                            Duration: {{ event.duration }}mins<br />
-                                            {% if event["description"] != null %}
-                                                Desciption: {{ event["description"] }}
-                                            {% endif %}
+                                            Duration: {{ event.duration }}mins
                                         </div>
                                     </div>
                                 </div>
