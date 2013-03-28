@@ -35,10 +35,20 @@
                                       <td><h3>{{participant['gender']}}</h3></td>
                                       <td><h3>{{ participant['medicare-number']}}</h3></td>
                                       <td>
-                                        <div id="event-occurrence" class="btn-group " data-toggle="buttons-radio">
-                                        <button type="button" class="btn btn-success btn-large" data-value="1">YES</button>
-                                        <button type="button" class="btn btn-danger btn-large" data-value="1">NO</button>
-                                      </div>
+
+                                      <!--   <div id="event-occurrence" class="btn-group " data-toggle="buttons-radio">
+                                          <button type="button" class="btn btn-success btn-large" data-value="1">YES</button>
+                                          <button type="button" class="btn btn-danger btn-large" data-value="1">NO</button>
+                                        </div> -->
+
+                                          <div class="onoffswitch">
+                                              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                                              <label class="onoffswitch-label" for="myonoffswitch">
+                                                  <div class="onoffswitch-inner"></div>
+                                                  <div class="onoffswitch-switch"></div>
+                                              </label>
+                                          </div>
+                                        
                                       </td>
 
                                   </tr>
@@ -47,8 +57,6 @@
                       </tobody>
 
                 </table>
-
-
 
 
     {% endblock content %}
