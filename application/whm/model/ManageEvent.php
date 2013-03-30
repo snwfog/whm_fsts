@@ -203,6 +203,37 @@ class ManageEvent
         return $upcomingEvents;
     }
 
+    public function getEventsbyMonth($month)
+    {
+        $currentDate = new DateTime();
+        $currentDate->setTimezone(new DateTimeZone(LOCALTIME));
+        $currentYear = date('Y');
+        $currentMonth = date('m');
+        $currentDate->setDate($currentYear,$currentMonth,"01");
+
+        $stringMonthtoAdd = "+". $month . " month";
+
+        $startDate = $currentDate;
+        date_Modify($startDate,$stringMonthtoAdd);
+
+        $endDate = $startDate;
+        date_Modify($endDate, "+1 month");
+        date_Modify($endDate,"-1 day");
+
+        $query = $this->em->createQueryBuilder()
+                          ->select("event")
+                          ->from("WHM\model\Event", "event")
+                          ->where("event.start_date <= :dateFuture")
+                          ->andWhere("event.start_date >= :dateNow")
+                          ->andWhere("event.is_template <> 1")
+                          ->andWhere("event.is_activated = 1")
+                          ->setParameter('dateFuture', $endDate)
+                          ->setParameter('dateNow', $startDate);                         
+
+        $upcomingEvents = $query->getQuery()->execute();
+        return $upcomingEvents;
+    }
+
     public function getTodaysEvents()
     {
         $dateNow = date("Y-m-d", strtotime("NOW"));    

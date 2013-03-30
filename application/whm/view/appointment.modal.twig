@@ -27,6 +27,21 @@
                             <legend>
                                 Event Calendar from {{ "now"|date_modify(startdei)|date("F     d","America/Montreal") }} to
                                 {{ "now"|date_modify(enddei)|date("F d","America/Montreal") }}
+
+
+
+                                <select>
+                                    <form name="monthh" action="{{ apppath }}" method="#" >
+                                        {% for b in 0..6 %}
+                                            {% set month = b ~ " month" %}
+                                            <option value="{{ b }}" >{{ month|date_modify(deidei)|date("F", "America/Montreal") }}</option>
+                                        {% endfor %}
+                                    </form>
+                                </select>
+
+
+
+
                             </legend>
                             <table class="table table-bordered">
                                 <thead>
