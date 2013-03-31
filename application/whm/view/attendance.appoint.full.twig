@@ -4,7 +4,7 @@
     <table class="table table-hover">
 
 
-
+            <h2>List of Attendees</h2>
               <thead>
                 <tr>
                   <th>Last Name</th>
@@ -14,7 +14,7 @@
                   <th>Checked In</th>
                 </tr>
               </thead>
-
+              
               
               {% for participant in participants %}
                 <tbody>
@@ -25,9 +25,8 @@
                       <td><h3>{{ participant.gender }}</h3></td>
                       <td><h3>{{ participant.medicare }}</h3></td>
                       <td>
-
-                           <div class="onoffswitch">
-                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch-{{participant.id}}" checked>
+                           <div class="onoffswitch" participantId={{participant.id}} timeslotid={{participant.timeSlotId}}>
+                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch-{{participant.id}}" {{(participant.attend) ? 'checked="checked"' : ''}}>
                                 <label class="onoffswitch-label" for="myonoffswitch-{{participant.id}}">
                                     <div class="onoffswitch-inner"></div>
                                     <div class="onoffswitch-switch"></div>
@@ -47,10 +46,24 @@
 
 
 
-
-
-
-
-
     {% endblock content %}
+
+{% block footer %}
+<script type="text/javascript">
+$(document).ready(function(){
+    $('div.onoffswitch').click(function(){
+
+     var participantId = $(this).attr('participantId');
+     var timeSlotId = $(this).attr('timeslotid');
+
+      jQuery.ajax
+      ({
+        url: '/todaysevents/'+ participantId +'/' + timeSlotId,
+        type: 'PUT'
+      }); 
+    });
+ });
+</script>
+
+{% endblock footer %}
                                     

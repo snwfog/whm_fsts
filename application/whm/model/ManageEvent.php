@@ -87,6 +87,13 @@ class ManageEvent
         return $eventInstance;
     }
 
+     public function findEventAlphabetically($id)
+    {
+        $eventInstance = $this->em->find("WHM\model\Event", (int) $id);
+        return $eventInstance;
+    }
+
+
     public function deleteTimeslot($id){
         $timeslot = $this->findTimeslot($id["timeslot-id"]);
         $this->em->remove($timeslot);
@@ -322,9 +329,11 @@ class ManageEvent
 
             $this->em->persist($data);
             $this->em->flush();  
-        }
-        
-
+        }    
     }
 
+    public function findParticipantTimeslot($participantsTimeslotsId)
+    {
+      return $this->em->find("WHM\model\ParticipantsTimeslots", (int) $participantsTimeslotsId);
+    }
 }
