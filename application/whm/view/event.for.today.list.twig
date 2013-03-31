@@ -1,0 +1,34 @@
+{% extends 'static/base.twig' %}
+    {% block content %}
+
+
+      <table class="table table-hover">
+          <thead>
+              <tr>
+                    
+                 <th><h3>Today's Events</h3></th>
+                    
+              </tr>
+          </thead>
+          <tbody>
+
+          {% for tdyevent in slotEvents %}
+              
+
+                <tr>
+                    <td>
+                      <button class="btn btn-large btn-block btn-primary" type="button">
+                        {{ tdyevent.name }} 
+                      </button>
+                    </td>  
+                </tr>
+
+            <a href="syspath attendance/{{tdyevent.id}}"></a>  
+                  
+         
+          {% endfor %}
+          </tbody>
+
+      </table>
+    {% endblock content %}
+                                    

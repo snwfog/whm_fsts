@@ -97,6 +97,10 @@ class MultiAddressHouseholdFixture extends AbstractFixture
                 default:
                     $person = $this->_createMember($firstName, $lastName, $phoneNumber);
                     $hh->addMember($person);
+
+                    $this->setReference('HouseHoldMember' . ($i -1), $person);
+                    $this->setReference('Household' . $i, $hh);                    
+                    
                     break;
             }            
 

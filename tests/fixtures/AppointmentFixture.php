@@ -22,13 +22,24 @@ class AppointmentFixture extends AbstractFixture implements DependentFixtureInte
     public function load(ObjectManager $manager)
     {
         $participantsTimeslot1 = new ParticipantsTimeslots();    
+        $participantsTimeslot2 = new ParticipantsTimeslots();
+        $participantsTimeslot3 = new ParticipantsTimeslots();
 
 
         $participantsTimeslot1->setHouseHoldMember($this->getReference('HouseHoldMember1'));
         $participantsTimeslot1->setTimeslot($this->getReference('timeslot1'));
 
+        $participantsTimeslot3->setHouseHoldMember($this->getReference('HouseHoldMember4'));
+        $participantsTimeslot3->setTimeslot($this->getReference('timeslot1'));
+
+        $participantsTimeslot2->setHouseHoldMember($this->getReference('HouseHoldMember2'));
+        $participantsTimeslot2->setTimeslot($this->getReference('timeslot2'));
+
+
 
         $manager->persist($participantsTimeslot1);
+        $manager->persist($participantsTimeslot2);
+        $manager->persist($participantsTimeslot3);
 
         $manager->flush();
     }
