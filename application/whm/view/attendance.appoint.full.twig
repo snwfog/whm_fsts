@@ -1,10 +1,56 @@
 {% extends 'static/base.twig' %}
     {% block content %}
-        <h1>{{participants[0].lastName}}</h1><br />
-        <h1>{{participants[1].lastName}}</h1><br />
-        <h1>{{participants[2].lastName}}</h1><br />
-        <h1>{{participants[3].lastName}}</h1><br />
-        
+
+    <table class="table table-hover">
+
+
+
+              <thead>
+                <tr>
+                  <th>Last Name</th>
+                  <th>First Name</th>
+                  <th>Gender</th>
+                  <th>Medicare Number</th>
+                  <th>Checked In</th>
+                </tr>
+              </thead>
+
+              
+              {% for participant in participants %}
+                <tbody>
+                    <tr>
+                      
+                      <td><h3>{{ participant.lastName }}</h3></td>
+                      <td><h3>{{ participant.firstName }}</h3></td>
+                      <td><h3>{{ participant.gender }}</h3></td>
+                      <td><h3>{{ participant.medicare }}</h3></td>
+                      <td>
+
+                           <div class="onoffswitch">
+                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch-{{participant.id}}" checked>
+                                <label class="onoffswitch-label" for="myonoffswitch-{{participant.id}}">
+                                    <div class="onoffswitch-inner"></div>
+                                    <div class="onoffswitch-switch"></div>
+                                </label>
+                          </div>
+
+                      </td>
+
+                    </tr>
+
+                </tbody>
+
+              {% endfor %}
+                  
+                                
+    </table>
+
+
+
+
+
+
+
 
     {% endblock content %}
                                     

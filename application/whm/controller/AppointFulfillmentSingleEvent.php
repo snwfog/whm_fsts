@@ -38,7 +38,8 @@ class AppointFulfillmentSingleEvent extends WHM\Controller implements WHM\IRedir
                     'firstName' => $participant->getFirstName(),
                     'lastName' => $participant->getLastName(),
                     'gender' => $participant->getGender(),
-                    'medicare' => $participant->getMcareNumber(), 
+                    'medicare' => $participant->getMcareNumber(),
+                    'id' =>  $participant->getId(),
                     );
             }
         }
