@@ -178,14 +178,14 @@ class ManageEvent
 
     public function getAllUpComingEvents()
     {
-        //CONSTRAINT: RETRIEVE EVENT ONLY 2 WEEKS AHEAD.
+        //CONSTRAINT: RETRIEVE EVENT ONLY 4 WEEKS AHEAD.
         $dateTime2 = new DateTime();
         $dateTime2->setTimezone(new DateTimeZone(LOCALTIME));
         $dateNow = $dateTime2;
 
         $dateTime = new DateTime();
         $dateTime->setTimezone(new DateTimeZone(LOCALTIME));
-        $incrementer = DateInterval::createFromDateString("2 weeks");
+        $incrementer = DateInterval::createFromDateString("4 weeks");
         $dateTime = $dateTime->add($incrementer);
         $dateFuture = $dateTime;
 
@@ -196,10 +196,39 @@ class ManageEvent
                           ->andWhere("event.start_date >= :dateNow")
                           ->andWhere("event.is_template <> 1")
                           ->andWhere("event.is_activated = 1")
-                          // ->groupBy("event.group_id")
-                          // ->orderBy("event.group_id" )
                           ->setParameter('dateFuture', $dateFuture)
                           ->setParameter('dateNow', $dateNow);                         
+
+        $upcomingEvents = $query->getQuery()->execute();
+        return $upcomingEvents;
+    }
+
+    public function getEventsbyMonth($month)
+    {
+        $currentDate = new DateTime();
+        $currentDate->setTimezone(new DateTimeZone(LOCALTIME));
+        $currentYear = date('Y');
+        $currentMonth = date('m');
+        $currentDate->setDate($currentYear,$currentMonth,"01");
+
+        $stringMonthtoAdd = "+". $month . " month";
+
+        $startDate = $currentDate;
+        date_Modify($startDate,$stringMonthtoAdd);
+
+        $endDate = $startDate;
+        date_Modify($endDate, "+1 month");
+        date_Modify($endDate,"-1 day");
+
+        $query = $this->em->createQueryBuilder()
+                          ->select("event")
+                          ->from("WHM\model\Event", "event")
+                          ->where("event.start_date <= :dateFuture")
+                          ->andWhere("event.start_date >= :dateNow")
+                          ->andWhere("event.is_template <> 1")
+                          ->andWhere("event.is_activated = 1")
+                          ->setParameter('dateFuture', $endDate)
+                          ->setParameter('dateNow', $startDate);                         
 
         $upcomingEvents = $query->getQuery()->execute();
         return $upcomingEvents;

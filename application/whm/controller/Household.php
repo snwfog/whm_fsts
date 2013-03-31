@@ -265,7 +265,6 @@ class Household extends Controller implements IRedirectable
                                 "event-name" => $event->getName(),
                                 "duration" => $t->getDuration(),
                                 "date" => $event->getStartDate()->format("m/d/Y"),
-                                "description" => $event->getDescription(),
                                 "capacity" => $t->getCapacity(),
                                 "start-time" => $slotStarttime,
                                 "end-time" => $endtime,

@@ -5,11 +5,14 @@
            
             <input class="span2" type="text" name="event-capacity" maxlength="12" placeholder="Capacity" value="{{ event["capacity"] }}{{ currentTemplate["capacity"] }}"/>
 
+			{#
             <div class="control controls-row">
-                        {#<div class="alert">#}
+                        <div class="alert">
                             <textarea class="span12" style="resize:none" rows="6" name="description" placeholder="Description...">{{ event["description"] }}{{ currentTemplate["description"] }}</textarea>
-                        {#</div>#}
+                        </div>
             </div>
+			#}
+			
 
         </div>
     </fieldset>

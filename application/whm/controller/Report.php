@@ -144,30 +144,33 @@ class Report extends Controller implements IRedirectable
                   
                 }
 
-                $report=$this->createReportForEvent($_POST["group-id"], $start_date, $end_date);
+                $motherTongueReport=$this->createMotherTongueReportForEvent($_POST["group-id"], $start_date, $end_date);
                 $originReport=$this->createOriginReportForEvent($_POST["group-id"], $start_date, $end_date);
                 $incomeReport=$this->createIncomeReportForEvent($_POST["group-id"], $start_date, $end_date);
                 $postalCodeReport=$this->createPostalCodeReportForEvent($_POST["group-id"], $start_date, $end_date);
                 $districtReport=$this->createDistrictReportForEvent($_POST["group-id"], $start_date, $end_date);
-            //    $workStatusReport=$this->createWorkStatusReportForEvent($_POST["group-id"], $start_date, $end_date);
+                $workStatusReport=$this->createWorkStatusReportForEvent($_POST["group-id"], $start_date, $end_date);
                  $data = array(
-                   "participants"  =>  $report,
+                   "mother-tongue"  =>  $motherTongueReport,
                    "origin" => $originReport,
                    "income" => $incomeReport,
                    "postal-code" => $postalCodeReport,
                    "district" => $districtReport,
-            //       "work-status" => $workStatusReport,
+                   "work-status" => $workStatusReport,
                  );
 
                  print_r($data);
                    
             
-         /*      
+               
 
             header("Content-Type: text/plain");
 
             // filename for download
             $filename = "report_" . date('Y-m-d') . ".xls";
+
+            $contents = "testdata1 \t testdata2 \t testdata3 \t \n";
+
 
             header("Content-Disposition: attachment; filename=\"$filename\"");
             header("Content-Type: application/vnd.ms-excel");
@@ -176,7 +179,7 @@ class Report extends Controller implements IRedirectable
             foreach($data as $row) 
             {
                 $data = array(
-                           "participants"  =>  $report,
+                           "mother-tongue"  =>  $motherTongueReport,
                            "origin" => $originReport,
                            "income" => $incomeReport,
                            "postal-code" => $postalCodeReport,
@@ -187,17 +190,34 @@ class Report extends Controller implements IRedirectable
                 if(!$flag) 
                 {
                     // display field/column names as first row
-              //  echo implode("\t", array_keys($row)) . "\r\n";
+                echo implode("\t", array_keys($data)) . "\r";
                 $flag = true;
                 }
-              //  echo implode("\t", array_values($row)) . "\r\n";
+                echo implode("\r", array_keys($motherTongueReport)) . "\n";
+                echo implode("\n", array_values($motherTongueReport)) . "\r";
+
+
+        //        echo implode("\t", array_values($originReport)) . "\r\n";
+         //       echo implode("\t", array_values($row)) . "\r\n";
+
+
+
              }
 
+/*
+             while($data)
+             {
+                $contents.=$row[categories_name].",";
+                $contents.=$row[faqdesk_question].",";
+                $answer = str_replace(',', '\,', $row[faqdesk_answer_short]); // escape internalt commas
+                $contents.=$answer."\n";
+             }
+*/
               
             exit();
      
-           */  
-            
+            echo $contents;
+
         }
         else
         {
@@ -207,7 +227,7 @@ class Report extends Controller implements IRedirectable
     }
 
     //Object are type Datetime
-    public function createReportForEvent($eventGroupId, $startDateObject, $endDateObject)
+    public function createMotherTongueReportForEvent($eventGroupId, $startDateObject, $endDateObject)
     {
         $events = $this->mevent->getRelatedEvents($eventGroupId);
         $data = array();
@@ -284,9 +304,9 @@ class Report extends Controller implements IRedirectable
                
                 foreach($data as $item) 
                 { 
-                     $count = array_count_values(array_map(function($item) 
+                    $count = array_count_values(array_map(function($item) 
                     {
-                     return $item['work-status'];
+                     return (string)$item['work-status'];
                     }, $data));
                    
                 } 

@@ -39,6 +39,7 @@
                     </div>
                 {% endif %}
             </legend>
+			{#
             <ul class="nav nav-tabs">
                 <li class="active">
                     <a id='tab1-toggle' href="#tab1" data-toggle="tab">
@@ -51,6 +52,7 @@
                     </a>
                 </li>
             </ul>
+			#}
             <div class="tab-content">
                  <div class="tab-pane active" id="tab1">
                     <form action="{{ apppath }}{{ formAction }}" style="margin: 0px 0px 0px 0px;" method="POST" name="event-form" 
@@ -60,7 +62,9 @@
 
                         {% include 'date.createEvent.part.twig' %}
 
-                        {% include 'info.createEvent.part.twig' %}
+                       {# {% include 'info.createEvent.part.twig' %} #}
+					   
+					   {% include 'timeslot.event.part.twig' %}
 
                              
                         <input type="hidden" name="event-id" value="{{ event["event-id"] }}"/>

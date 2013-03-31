@@ -118,7 +118,7 @@ class Event extends Controller implements IRedirectable
 
     
    
-    public function getIndexedEvents($events, $household_id, $member_id)
+    public function getIndexedEvents($events, $household_id, $member_id, $month = null)
     {
         $data = array();
         $tracker = array();
@@ -126,10 +126,18 @@ class Event extends Controller implements IRedirectable
         $maxJ[] = 1; // set default row to 1
 
         for ($j = 1; $j <= 10; $j++)  // MAX 10 rows
-        {
+        {   
             $date = date_create('now');
             $date->setTimezone(new DateTimeZone(LOCALTIME));
-            for ($i = 1; $i <= 14; $i++)
+
+            if($month != null)
+            {   
+                $finalMonth = date("m") + $month;
+                $stringDate = $finalMonth . '/01/' . date('Y');
+                $date = date_create($stringDate);
+            }
+
+            for ($i = 1; $i <= 27; $i++)
             {
                 date_modify($date, '+1 day');
                 $d = date_format($date, 'm/d/Y');
@@ -146,7 +154,6 @@ class Event extends Controller implements IRedirectable
                             "event-id" => $event->getId(),
                             "name" => $event->getName(),
                             "capacity" => $event->getCapacity(),
-                            "description" => $event->getDescription(),
                             "start-time" => $event->getStartTime()->format("H:i"),
                             "date" => $event->getStartDate()->format("m/d/Y"),
                             "timeslots" => $timeslots,
