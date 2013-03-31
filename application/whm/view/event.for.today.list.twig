@@ -14,19 +14,15 @@
 
           {% for tdyevent in slotEvents %}
               
-
                 <tr>
                     <td>
-                      <button class="btn btn-large btn-block btn-primary" type="button">
-                        {{ tdyevent.name }} 
-                      </button>
+                      <a href="{{ apppath }}todaysevents/{{tdyevent.id}}">{{ tdyevent.name }} </a>
                     </td>  
                 </tr>
 
-            <a href="syspath attendance/{{tdyevent.id}}"></a>  
-                  
-         
+              
           {% endfor %}
+
           </tbody>
 
       </table>
