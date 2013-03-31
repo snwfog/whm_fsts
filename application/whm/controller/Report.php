@@ -13,6 +13,9 @@ use WHM\Controller\Event;
 use DateTime;
 use DateTimeZone;
 use DateInterval;
+use PHPExcel;
+use PHPExcel_Writer_Excel2007;
+use PHPExcel_IOFactory;
 
 class Report extends Controller implements IRedirectable
 {
@@ -101,127 +104,167 @@ class Report extends Controller implements IRedirectable
 
  
 
-             if(isset($_POST["occurrence-type"]))
-             {
-                $repeat = array(   
-                                    "monthly" => "1 month", 
-                                    "yearly" => "1 year",
-                                    "fiscal" => "1 year",
-                );
+        if(isset($_POST["occurrence-type"]))
+        {
+            $repeat = array(   
+                                "monthly" => "1 month", 
+                                "yearly" => "1 year",
+                                "fiscal" => "1 year",
+            );
                 
             //    $months = array_keys(int($months));
             //    print_r($months);
 
-                $incrementer = DateInterval::createFromDateString($repeat[$_POST["occurrence-type"]]);
+            $incrementer = DateInterval::createFromDateString($repeat[$_POST["occurrence-type"]]);
 
-                if($_POST["occurrence-type"] == "yearly")
-                {
-                    $end_date->setDate($currentYear, "1", "1");
-                    $start_date->setDate($currentYear, "1", "1");
-                    $start_date = $start_date->sub($incrementer);
-                }
-
-                 if($_POST["occurrence-type"] == "fiscal")
-                {
-                    $end_date->setDate($currentYear, "10", "1");
-                    $start_date->setDate($currentYear, "10", "1");
-                    $start_date = $start_date->sub($incrementer);
-                    $oneDay = DateInterval::createFromDateString("1 day");
-                    $end_date->sub($oneDay);
-                    print_r($start_date);
-                    print_r($end_date);
-                }
-
-                if($_POST["occurrence-type"] == "monthly")
-                {
-                        $month = $_POST["monthly-report"];                  
-                        $start_date->setDate($currentYear, (int) $month, "1");
-                        $end_date->setDate($currentYear, (int) $month, "1");
-
-                        $oneMonth = DateInterval::createFromDateString("1 month");
-                        $oneDay = DateInterval::createFromDateString("1 day");
-                        $end_date->add($oneMonth)->sub($oneDay);
-                  
-                }
-
-                $motherTongueReport=$this->createMotherTongueReportForEvent($_POST["group-id"], $start_date, $end_date);
-                $originReport=$this->createOriginReportForEvent($_POST["group-id"], $start_date, $end_date);
-                $incomeReport=$this->createIncomeReportForEvent($_POST["group-id"], $start_date, $end_date);
-                $postalCodeReport=$this->createPostalCodeReportForEvent($_POST["group-id"], $start_date, $end_date);
-                $districtReport=$this->createDistrictReportForEvent($_POST["group-id"], $start_date, $end_date);
-                $workStatusReport=$this->createWorkStatusReportForEvent($_POST["group-id"], $start_date, $end_date);
-                 $data = array(
-                   "mother-tongue"  =>  $motherTongueReport,
-                   "origin" => $originReport,
-                   "income" => $incomeReport,
-                   "postal-code" => $postalCodeReport,
-                   "district" => $districtReport,
-                   "work-status" => $workStatusReport,
-                 );
-
-                 print_r($data);
-                   
-            
-               
-
-            header("Content-Type: text/plain");
-
-            // filename for download
-            $filename = "report_" . date('Y-m-d') . ".xls";
-
-            $contents = "testdata1 \t testdata2 \t testdata3 \t \n";
-
-
-            header("Content-Disposition: attachment; filename=\"$filename\"");
-            header("Content-Type: application/vnd.ms-excel");
-              
-            $flag = false;
-            foreach($data as $row) 
+            if($_POST["occurrence-type"] == "yearly")
             {
-                $data = array(
-                           "mother-tongue"  =>  $motherTongueReport,
-                           "origin" => $originReport,
-                           "income" => $incomeReport,
-                           "postal-code" => $postalCodeReport,
-                           "district" => $districtReport,
-                  //         "work-status" => $workStatusReport,
-                    );
+                $end_date->setDate($currentYear, "1", "1");
+                $start_date->setDate($currentYear, "1", "1");
+                $start_date = $start_date->sub($incrementer);
+            }
 
-                if(!$flag) 
-                {
-                    // display field/column names as first row
-                echo implode("\t", array_keys($data)) . "\r";
-                $flag = true;
-                }
-                echo implode("\r", array_keys($motherTongueReport)) . "\n";
-                echo implode("\n", array_values($motherTongueReport)) . "\r";
+             if($_POST["occurrence-type"] == "fiscal")
+            {
+                $end_date->setDate($currentYear, "10", "1");
+                $start_date->setDate($currentYear, "10", "1");
+                $start_date = $start_date->sub($incrementer);
+                $oneDay = DateInterval::createFromDateString("1 day");
+                $end_date->sub($oneDay);
+            }
 
+            if($_POST["occurrence-type"] == "monthly")
+            {
+                    $month = $_POST["monthly-report"];                  
+                    $start_date->setDate($currentYear, (int) $month, "1");
+                    $end_date->setDate($currentYear, (int) $month, "1");
 
-        //        echo implode("\t", array_values($originReport)) . "\r\n";
-         //       echo implode("\t", array_values($row)) . "\r\n";
-
-
-
-             }
-
-/*
-             while($data)
-             {
-                $contents.=$row[categories_name].",";
-                $contents.=$row[faqdesk_question].",";
-                $answer = str_replace(',', '\,', $row[faqdesk_answer_short]); // escape internalt commas
-                $contents.=$answer."\n";
-             }
-*/
+                    $oneMonth = DateInterval::createFromDateString("1 month");
+                    $oneDay = DateInterval::createFromDateString("1 day");
+                    $end_date->add($oneMonth)->sub($oneDay);
               
-            exit();
-     
-            echo $contents;
+            }
+
+            $motherTongueReport=$this->mevent->eventStatistic("HouseholdMember" ,"mother_tongue",$_POST["group-id"], $start_date, $end_date);
+            $originReport=$this->mevent->eventStatistic("HouseholdMember" ,"origin", $_POST["group-id"], $start_date, $end_date);
+            $incomeReport=$this->mevent->eventStatistic("HouseholdMember" ,"income",$_POST["group-id"], $start_date, $end_date);
+            $postalCodeReport=$this->mevent->eventStatistic("Address" ,"postal_code",$_POST["group-id"], $start_date, $end_date);
+            $districtReport=$this->mevent->eventStatistic("Address" ,"district",$_POST["group-id"], $start_date, $end_date);
+            $workStatusReport=$this->mevent->eventStatistic("HouseholdMember" ,"work_status",$_POST["group-id"], $start_date, $end_date);
+            $maritalStatusReport= $this->mevent->eventStatistic("HouseholdMember" ,"marital_status",$_POST["group-id"], $start_date, $end_date);
+            $data = array(
+                "mother-tongue"  =>  $motherTongueReport,
+                "origin" => $originReport,
+                "income" => $incomeReport,
+                "postal-code" => $postalCodeReport,
+                "district" => $districtReport,
+                "work-status" => $workStatusReport,
+                "marital-status" =>$maritalStatusReport
+            );
+
+            $event = $this->mevent->findEvent($_POST["group-id"]);
+            $objPHPExcel = new PHPExcel();
+
+            // Set properties
+            echo date('H:i:s') . " Set properties\n";
+            $objPHPExcel->getProperties()->setCreator("WELCOME HALL MISSION");
+            $objPHPExcel->getProperties()->setLastModifiedBy("WHM");
+            $objPHPExcel->getProperties()->setTitle("");
+            $objPHPExcel->getProperties()->setSubject("");
+            $objPHPExcel->getProperties()->setDescription("");
+
+
+            // Add some data
+            echo date('H:i:s') . " Add some data\n";
+            $objPHPExcel->setActiveSheetIndex(0);
+            $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Welcome Hall Mission');
+            $objPHPExcel->getActiveSheet()->SetCellValue('A2', "Summar Report from ".$start_date->format("M d, Y")." to ". $end_date->format("M d, Y"));
+            $objPHPExcel->getActiveSheet()->SetCellValue('A3', "Event ID: ".$event->getId());
+            $objPHPExcel->getActiveSheet()->SetCellValue('A4', "Event Name: ".$event->getName());
+
+
+            //WorkStatus and Mother Tongue
+            $objPHPExcel->getActiveSheet()->SetCellValue('B8', "Work Status");
+            $workrow = 9;
+            $motherrow = $workrow;
+
+            foreach ($data["work-status"] as $key => $value){
+                if(empty($key)){
+                   $objPHPExcel->getActiveSheet()->SetCellValue('B'.$workrow, "Not Specified");
+                   $objPHPExcel->getActiveSheet()->SetCellValue('C'.$workrow, $value);
+                }else{
+                   $objPHPExcel->getActiveSheet()->SetCellValue('B'.$workrow, $key);
+                   $objPHPExcel->getActiveSheet()->SetCellValue('C'.$workrow, $value);
+                }
+                ++$workrow;
+            }
+
+            $objPHPExcel->getActiveSheet()->SetCellValue('F8', "Mother Tongue");
+            
+            foreach ($data["mother-tongue"] as $key => $value){
+                if(empty($key)){
+                   $objPHPExcel->getActiveSheet()->SetCellValue('F'.$motherrow, "Not Specified");
+                   $objPHPExcel->getActiveSheet()->SetCellValue('G'.$motherrow, $value);
+                }else{
+                   $objPHPExcel->getActiveSheet()->SetCellValue('F'.$motherrow, $key);
+                   $objPHPExcel->getActiveSheet()->SetCellValue('G'.$motherrow, $value);
+                }
+                ++$motherrow;
+            }
+
+
+                        
+            //origin and marital
+            
+            $originrow = $workrow > $motherrow ? $workrow+2 : $motherrow+2;
+            $maritalrow = $originrow;
+
+            $objPHPExcel->getActiveSheet()->SetCellValue('B'.$originrow, "Ethnic Origin");
+            ++$originrow;
+            foreach ($data["origin"] as $key => $value){
+                if(empty($key)){
+                   $objPHPExcel->getActiveSheet()->SetCellValue('B'.$originrow, "Not Specified");
+                   $objPHPExcel->getActiveSheet()->SetCellValue('C'.$originrow, $value);
+                }else{
+                   $objPHPExcel->getActiveSheet()->SetCellValue('B'.$originrow, $key);
+                   $objPHPExcel->getActiveSheet()->SetCellValue('C'.$originrow, $value);
+                }
+                ++$originrow;
+            }
+
+            $objPHPExcel->getActiveSheet()->SetCellValue('F'.$maritalrow, "Fam Composition");
+            ++$maritalrow;
+            foreach ($data["marital-status"] as $key => $value){
+                if(empty($key)){
+                   $objPHPExcel->getActiveSheet()->SetCellValue('F'.$maritalrow, "Not Specified");
+                   $objPHPExcel->getActiveSheet()->SetCellValue('G'.$maritalrow, $value);
+                }else{
+                   $objPHPExcel->getActiveSheet()->SetCellValue('F'.$maritalrow, $key);
+                   $objPHPExcel->getActiveSheet()->SetCellValue('G'.$maritalrow, $value);
+                }
+                ++$maritalrow;
+            }
+
+
+
+
+            // Rename sheet
+            echo date('H:i:s') . " Rename sheet\n";
+            $objPHPExcel->getActiveSheet()->setTitle('Statistic');
+
+                    
+            // Save Excel 2007 file
+            // We'll be outputting an excel file
+            $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, "Excel5");
+            ob_end_clean();
+            header("Content-Type: application/vnd.ms-excel");
+            header("Content-Disposition: attachment; filename=\"example-excel-file.xls\"");
+            $objWriter->save("php://output");
 
         }
         else
         {
-            $this->display("report.stat.twig",$data);
+            $this->display("report.stat.twig", $data);
         }
         
     }
@@ -264,7 +307,7 @@ class Report extends Controller implements IRedirectable
                 { 
             
                    //  $count= array_count_values($item);
-                     $count = array_count_values(array_map(function($item) 
+                    $count = array_count_values(array_map(function($item) 
                     {
                      return $item['mother-tongue'];
                     }, $data));
