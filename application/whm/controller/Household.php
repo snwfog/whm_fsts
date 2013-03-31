@@ -70,6 +70,10 @@ class Household extends Controller implements IRedirectable
             //Get Events to make appointment
             $eventdraft=$this->manageEvents->getAllUpComingEvents();
             $events=$this->eventcontroller->getIndexedEvents($eventdraft, $household_id, $member_id);
+            
+            //This method ready for use, takes a number. It will then add it to current month and 
+            // $eventmonthdraft=$this->manageEvents->getEventsbyMonth('3');
+            // $eventsMonth=$this->eventcontroller->getIndexedEvents($eventmonthdraft, $household_id, $member_id, '3');
 
             $data = array(
                             "household"         =>  $data,

@@ -3,6 +3,7 @@ namespace WHM\Model;
 use WHM;
 use WHM\Application;
 use \DateTime;
+use DateInterval;
 use \WHM\Model\Household;
 
 /**
@@ -121,7 +122,15 @@ class ManageHousehold {
 
         if(isset($data["date-of-birth"]) && !empty($data["date-of-birth"])){
             $DOBObject = new DateTime();
+            $now = new DateTime();
             $data["date-of-birth"] = $DOBObject->createFromFormat("m-d-y", $data["date-of-birth"]);
+
+            //Bug fix: PHP year date from 0-69 are added 2000
+            $DOBYear = $data["date-of-birth"]->format("y");
+            $currentYear = $now->format("y");
+            if($DOBYear < 70 && $DOBYear > $currentYear){
+                $data["date-of-birth"] = $data["date-of-birth"]->sub(DateInterval::createFromDateString("100 years"));
+            }
         }else{
             $data["date-of-birth"] = null;
         }

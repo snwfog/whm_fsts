@@ -1,7 +1,7 @@
 {% extends 'static/base.twig' %}
 
 {% block content %}
-    <div class="span4">
+    <div class="span6">
 		<legend class='controls controls-row'>
 		<h2> Yearly Reporting </h2>
 		</legend>
@@ -25,15 +25,12 @@
 			
 
 			<br /><br />
-			<input type="submit" name="submit" value="Submit"/>
-			<button id="generate-year-report" type="button" class="btn btn-medium btn-success"><i class="icon-tasks icon-white"></i> Generate Report</button>
+			<button id="generate-year-report" type="submit" class="btn btn-medium btn-success"><i class="icon-tasks icon-white"></i> Generate Report</button>
 			<button id="excel-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export Excel</button>
-
 			</form>
 		</div>
 	</div>
 {% endblock content %}
-
 {#
 {% block left1 %}
 	<div class="span4">
@@ -58,17 +55,15 @@
 		<br /><br />
 		<button id="generate-year-report" type="button" class="btn btn-medium btn-success"><i class="icon-tasks icon-white"></i> Generate Report</button>
 		<button id="excel-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export Excel</button>
-
 		</form>
 		</div>
 		
 	</div>
 {% endblock left1 %}
 #}
-
 {% block left2 %}
 
-	<div class="span4">
+	<div class="span6">
 		<legend class='controls controls-row'>
 		<h2> Monthly Reporting </h2>
 		</legend>
@@ -99,8 +94,7 @@
 		<input type = "hidden" name="occurrence-type" value="monthly"> 
 		<input type = "hidden" name="start-date" placeholder="Start Date" value="m"/>
 
-		<input type="submit" name="submit" value="Submit"/>
-		<button id="generate-year-report" type="button" class="btn btn-medium btn-success"><i class="icon-tasks icon-white"></i> Generate Report</button>
+		<button id="generate-year-report" type="submit" class="btn btn-medium btn-success"><i class="icon-tasks icon-white"></i> Generate Report</button>
 		<button id="excel-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export Excel</button>
 		</form>
 		</div>
