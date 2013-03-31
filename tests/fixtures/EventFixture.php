@@ -96,13 +96,33 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $slot5->setCapacity(90);
         $slot5->setDuration(60);
         $slot5->setName('Group A');
-        $e5->addTimeslot($slot5);            
+        $e5->addTimeslot($slot5);    
+
+        $e6 = new Event();
+        $e6->setCapacity(90);
+        $e6->setDescription("Today's special event");  
+        $e6->setGroupId(5);   
+        $e6->setIsTemplate(false);
+        $e6->setName("Special giveaways");
+        $e6->setStartDate($now);
+        $e6->setStartTime(new \DateTime("15:30"));
+        $slot6 = new Timeslot();
+        $slot6->setCapacity(90);
+        $slot6->setDuration(70);
+        $slot6->setName('Group A');
+        $e6->addTimeslot($slot6);   
+        $slot7 = new Timeslot();
+        $slot7->setCapacity(90);
+        $slot7->setDuration(70);
+        $slot7->setName('Group A');
+        $e6->addTimeslot($slot7);   
                 
         $manager->persist($e1);
         $manager->persist($e2);
         $manager->persist($e3);
         $manager->persist($e4);
         $manager->persist($e5);
+        $manager->persist($e6);
         
         // Adding similar events for next week        
         $e1week2 = clone $e1;
@@ -110,6 +130,7 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $e3week2 = clone $e3;
         $e4week2 = clone $e4;
         $e5week2 = clone $e5;
+
         
         $e1DateClone = clone $e1->getStartDate();
         $e2DateClone = clone $e2->getStartDate();
@@ -131,7 +152,8 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
 
         $manager->flush();
 
-        $this->addReference('timeslot1', $slot1);        
+        $this->addReference('timeslot1', $slot1); 
+        $this->addReference('timeslot2', $slot6);       
     }
 
 }

@@ -33,7 +33,8 @@ $serves = array
     '/report/functions'             => 'WHM\Controller\Report',
     '/report/annual'                => 'WHM\Controller\Report',
     '/attendance/new'               => 'WHM\Controller\AppointFulfillment',
-    '/attendance/:number/:number'   => 'WHM\Controller\AppointFulfillment',
+    '/todaysevents'                 => 'WHM\Controller\AppointFulfillment',
+    '/todaysevents/:number'         => 'WHM\Controller\AppointFulfillmentSingleEvent',
 
 
     // Ajax controller

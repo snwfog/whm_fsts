@@ -1,0 +1,30 @@
+{% extends 'static/base.twig' %}
+    {% block content %}
+
+
+      <table class="table table-hover">
+          <thead>
+              <tr>
+                    
+                 <th><h3>Today's Events</h3></th>
+                    
+              </tr>
+          </thead>
+          <tbody>
+
+          {% for tdyevent in slotEvents %}
+              
+                <tr>
+                    <td>  
+                      <a href="{{ apppath }}todaysevents/{{tdyevent.id}}">{{ tdyevent.name }} </a>
+                    </td>  
+                </tr>
+
+              
+          {% endfor %}
+
+          </tbody>
+
+      </table>
+    {% endblock content %}
+                                    
