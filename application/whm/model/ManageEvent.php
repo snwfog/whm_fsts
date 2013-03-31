@@ -215,10 +215,16 @@ class ManageEvent
 
         $startDate = $currentDate;
         date_Modify($startDate,$stringMonthtoAdd);
+        date_Modify($startDate, '-1 day');
 
-        $endDate = $startDate;
-        date_Modify($endDate, "+1 month");
-        date_Modify($endDate,"-1 day");
+        $dateTime = new DateTime();
+        $dateTime->setTimezone(new DateTimeZone(LOCALTIME));
+        $dateTime->setDate($currentYear,$currentMonth,"01");
+        $month++;
+        $stringMonthtoAdd2 = "+". $month . " month";
+        date_Modify($dateTime, $stringMonthtoAdd2);
+        date_Modify($dateTime, '-1 day');
+        $endDate = $dateTime;
 
         $query = $this->em->createQueryBuilder()
                           ->select("event")
