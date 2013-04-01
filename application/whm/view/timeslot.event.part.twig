@@ -1,92 +1,12 @@
 {% block timeslot %}
     <fieldset>
         <div id="timeslot-well" style="max-height:350px; overflow-y: auto;">
+            {#This form was used for timeslot now it is used for extra information for an event#}
             <form action="{{ apppath }}event/new" method="POST" name="view-timeslot-form" id="{{ timeslots? 'timeslot-form' : 'new-timeslot-form'}}">
-                <table id="timeslot-table" class="table">
-                    <thead>
-                        <th style="width: 30%"> Time</th>                
-                        <th style="width: 30%"> Time Slot </th>
-                        <th style="width: 10%"> Duration </th>
-                        <th style="width: 10%"> Capacity </th>
-                        <th style="width: 20%"> Actions </th>
-                    </thead>
-                    <tbody id="timeslot-table-tbody">
-                      {% for timeslot in timeslots %}
-                          <input class="span" type="hidden" name="slot-id[]" value="{{ timeslot.id }}"/>
-                          <tr id="timeslot-row-{{timeslot.id}}">
-                              <td>
-                                <h4 style="margin-top:5px;">{{ timeslot["start-time"] }}-{{ timeslot["end-time"] }}</h4>
-                              </td>                                
-                              <td>
-                                  <input class="span12" type="text" name="slot-name[]" value="{{ timeslot.name }}"/>
-                              </td>
-                              <td>
-                                  <input class="span12" type="number" name="slot-duration[]" value="{{ timeslot.duration }}"/>
-                              </td>
-                              <td>
-                                  <input class="span12" type="text" name="slot-capacity[]" value="{{ timeslot.capacity }}"/>
-                              </td>
-                              <td>
-                                  {% if timeslot.participants|length == 0 %}
-                                      <button type="button" class="btn btn-danger" name="delete-timeslot" id="{{timeslot.id}}">
-                                          <i class="icon-white icon-trash"></i>
-                                      </button>
-                                  {% else %}
-                                      <button type="button" onclick="location.href='{{apppath}}attendance/{{event["event-id"]}}/{{ timeslot.id}}';" class="btn btn-info">
-                                          <i class="icon-white icon-user"></i>
-                                      </button>
-                                  {% endif %}
-                              </td>
-                          </tr>
-                      {% endfor %}
-                      {% if not timeslots and not event %}
-                          <input class="span" type="hidden" name="slot-id[]" value=""/>
-                          <tr>
-                              <td>
-                              </td>         
-                              <td>
-                                  <input class="span12" type="text" name="slot-name[]" placeholder="Name"/>
-                              </td>
-                              <td>
-                                  <input class="span12" type="number" name="slot-duration[]" placeholder="Minutes"/>
-                              </td>
-                              <td>
-                                  <input class="span12" type="text" name="slot-capacity[]" placeholder="Size"/>
-                              </td>
-                              <td>
-                                  <button type="button" class="btn btn-danger" name="delete-timeslot" id="{{timeslot.id}}" onclick="this.parentNode.parentNode.remove();">
-                                      <i class="icon-white icon-trash"></i>
-                                  </button>
-                              </td>
-                          </tr>
-                      {% elseif event and timeslots|length == 0 %}
-                          <tr>
-                              <td colspan="5">
-                                  <h5> This event contains no timeslot, click modify then add timeslot. </h5>
-                              </td>
-                          </tr>
-                      {% endif %}  
-                    </tbody>
-                </table>
+                <textarea class="span12" style="resize:none" rows="6" name="description" placeholder="Description...">
+                    {{ event["description"] }}{{ currentTemplate["description"] }}
+                </textarea>
             </form>
         </div>
-
-        {# for ajax delete timeslot#}
-        <form action="" method="" name="delete-timeslot">
-        </form>
-
-        <div class="pull-right">
-            <button id="add-timeslot-table" type="button" class="btn btn-small btn-info" value="{{theme ? 'icon-white' : ''}}" {{ event ? 'disabled': ''}}>
-                <i class="icon-plus icon-white"></i> 
-                <i class="icon-time icon-white"></i> 
-                Add Timeslot
-            </button>
-        </div>
-        <small>*Note:Drag the Timeslot to reorder.</small>
     </fieldset>
-<script>
-     var tableDnD = new TableDnD();
-     var table = document.getElementById('timeslot-table');
-     tableDnD.init(table);
-</script>
 {% endblock timeslot %}

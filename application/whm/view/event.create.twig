@@ -1,7 +1,7 @@
 {% extends 'static/base.twig' %}
 
 {% block content %}
-    <div class="span6">
+    <div class="span6" id="event-main">
         <div class="tabbable tabs-top">
             {% for error in errors %}
                 {% block error %}
@@ -47,21 +47,20 @@
                 </li>
                 <li>
                     <a id='tab2-toggle' href="#tab2" data-toggle="tab">
-                        <i class="icon-time"></i> TimeSlot
+                        <i class="icon-info-sign"></i> More Info
                     </a>
                 </li>
             </ul>
             <div class="tab-content">
                  <div class="tab-pane active" id="tab1">
+                    {# for ajax delete timeslot#}
+                    <form action="" method="" name="delete-timeslot"></form>
                     <form action="{{ apppath }}{{ formAction }}" style="margin: 0px 0px 0px 0px;" method="POST" name="event-form" 
                     id="{%if event is not null %}view-event-form{% endif %}">
 
                         {% include 'base.createEvent.part.twig' %}
 
                         {% include 'date.createEvent.part.twig' %}
-
-                        {% include 'info.createEvent.part.twig' %}
-
                              
                         <input type="hidden" name="event-id" value="{{ event["event-id"] }}"/>
                         <input type="hidden" name="template-id" value="{{ template["template-id"] }}"/>
@@ -110,7 +109,12 @@
                     {% else %}
                         <button id="create-event-save" type="button" class="btn btn-success"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Create Event</button>
                         <button id="create-template-save" type="button" class="btn btn-info"><i class="icon-file icon-white submit"></i> Save Template </button>
-                    {% endif %}                              
+                    {% endif %}
+                    <button id="add-timeslot-table" type="button" class="btn btn btn-info" value="{{theme ? 'icon-white' : ''}}" {{ event ? 'disabled': ''}}>
+                        <i class="icon-plus icon-white"></i> 
+                        <i class="icon-time icon-white"></i> 
+                        Add Timeslot
+                    </button>
                 </div>  
             </div>
         </div>

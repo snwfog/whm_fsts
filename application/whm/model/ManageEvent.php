@@ -252,7 +252,7 @@ class ManageEvent
         $query = $this->em->createQueryBuilder()
                           ->select("event")
                           ->from("WHM\model\Event", "event")
-    
+                          ->where("event.is_template <> 1")    
                           ->groupBy("event.group_id")
                           ->orderBy("event.group_id");                     
 
