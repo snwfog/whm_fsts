@@ -166,7 +166,10 @@ class Report extends Controller implements IRedirectable
                 "postal-code" => $postalCodeReport,
                 "district" => $districtReport,
                 "work-status" => $workStatusReport,
-                "marital-status" =>$maritalStatusReport
+                "marital-status" =>$maritalStatusReport,
+           //     "visit"=> ,
+           //     "totalIndividual" =>
+
             );
 
 
@@ -266,6 +269,44 @@ class Report extends Controller implements IRedirectable
             }
 
 
+/*  TO BE DONE
+             //number of visit and total individual
+            
+            $visitrow = $originrow > $maritalrow ? $originrow+2 : $maritalrow+2;
+            $individrow = $visitrow;
+
+            $objPHPExcel->getActiveSheet()->SetCellValue('B'.$visitrow, "Number of visits");
+            ++$visitrow;
+            foreach ($data["visit"] as $key => $value){
+                if(empty($key)){
+                   $objPHPExcel->getActiveSheet()->SetCellValue('B'.$visitrow, "Not Specified");
+                   $objPHPExcel->getActiveSheet()->SetCellValue('C'.$visitrow, $value);
+            //       $objPHPExcel->getActiveSheet()->SetCellValue('D'.$visitrow, round($value/$totalVisit,1)."%");
+                }else{
+                   $objPHPExcel->getActiveSheet()->SetCellValue('B'.$visitrow, $key);
+                   $objPHPExcel->getActiveSheet()->SetCellValue('C'.$visitrow, $value);
+         //          $objPHPExcel->getActiveSheet()->SetCellValue('D'.$visitrow, round($value/$totalVisit,1)."%");
+                }
+                ++$visitrow;
+            }
+
+            $objPHPExcel->getActiveSheet()->SetCellValue('F'.$individrow, "Total Individual");
+            ++$individrow;
+            foreach ($data["total-individual"] as $key => $value){
+                if(empty($key)){
+                   $objPHPExcel->getActiveSheet()->SetCellValue('F'.$individrow, "Not Specified");
+                   $objPHPExcel->getActiveSheet()->SetCellValue('G'.$individrow, $value);
+          //         $objPHPExcel->getActiveSheet()->SetCellValue('H'.$individrow, round($value/$totalIndividual,1)."%");
+                }else{
+                   $objPHPExcel->getActiveSheet()->SetCellValue('F'.$individrow, $key);
+                   $objPHPExcel->getActiveSheet()->SetCellValue('G'.$individrow, $value);
+            //       $objPHPExcel->getActiveSheet()->SetCellValue('H'.$individrow, round($value/$totalIndividual,1)."%");
+
+                }
+                ++$individrow;
+            }
+
+*/
 
 
             // Rename sheet
