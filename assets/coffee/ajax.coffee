@@ -111,13 +111,19 @@ $ ->
             process(members)
       )
     matcher: (item) ->
-      console.log "Matcher called for item: #{item}"
-      console.log usermap[item]
-      if item.toLowerCase().indexOf(this.query.trim().toLowerCase()) != -1 then return true
-      if usermap[item]['mcare'].toLowerCase().indexOf(this.query.trim().toLowerCase()) != -1 then return true
+      if not /[a-zA-Z]+/i.exec this.query.trim() # If not matching any word then match by household id
+        console.log "RECORDING HOUSEHOLD ID"
+        if usermap[item]['household_id'].indexOf(this.query.trim()) == 0 then return true
+      else
+        if item.toLowerCase().indexOf(this.query.trim().toLowerCase()) != -1 then return true
+        if usermap[item]['mcare'].toLowerCase().indexOf(this.query.trim().toLowerCase()) != -1 then return true
     updater: (item) ->
-      url = "household/#{usermap[item].household_id}/#{usermap[item].member_id}"
-      console.log url
+      if not (/[\w]/i.exec item.household_id)
+        # Then it must be household id
+        url = "household/#{usermap[item].household_id}"
+      else
+        url = "household/#{usermap[item].household_id}/#{usermap[item].member_id}"
+
       $(location).attr('href', url);
       $.get(url)
       return item

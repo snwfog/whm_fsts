@@ -34,7 +34,20 @@ class ManageSearch
         $query = "SELECT partial m.{id, first_name, last_name, mcare_number}
         FROM WHM\Model\HouseholdMember m JOIN m.household h
         WHERE
-          UPPER(m.mcare_number) LIKE UPPER('%{$arg}%')";
+          UPPER(m.mcare_number) LIKE UPPER('{$arg}%')";
+
+        $result = $this->em->createQuery($query)
+            ->setHint(\Doctrine\ORM\Query::HINT_INCLUDE_META_COLUMNS, true)->setMaxResults(5);
+
+        return $result->getArrayResult();
+    }
+
+    public function searchMemberByHouseholdID($arg)
+    {
+
+        $query = "SELECT partial m.{id, first_name, last_name, mcare_number}
+        FROM WHM\Model\HouseholdMember m JOIN m.household h
+        WHERE h.id LIKE '{$arg}%'";
 
         $result = $this->em->createQuery($query)
             ->setHint(\Doctrine\ORM\Query::HINT_INCLUDE_META_COLUMNS, true)->setMaxResults(5);

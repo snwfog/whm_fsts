@@ -131,19 +131,27 @@ $(function() {
       });
     },
     matcher: function(item) {
-      console.log("Matcher called for item: " + item);
-      console.log(usermap[item]);
-      if (item.toLowerCase().indexOf(this.query.trim().toLowerCase()) !== -1) {
-        return true;
-      }
-      if (usermap[item]['mcare'].toLowerCase().indexOf(this.query.trim().toLowerCase()) !== -1) {
-        return true;
+      if (!/[a-zA-Z]+/i.exec(this.query.trim())) {
+        console.log("RECORDING HOUSEHOLD ID");
+        if (usermap[item]['household_id'].indexOf(this.query.trim()) === 0) {
+          return true;
+        }
+      } else {
+        if (item.toLowerCase().indexOf(this.query.trim().toLowerCase()) !== -1) {
+          return true;
+        }
+        if (usermap[item]['mcare'].toLowerCase().indexOf(this.query.trim().toLowerCase()) !== -1) {
+          return true;
+        }
       }
     },
     updater: function(item) {
       var url;
-      url = "household/" + usermap[item].household_id + "/" + usermap[item].member_id;
-      console.log(url);
+      if (!(/[\w]/i.exec(item.household_id))) {
+        url = "household/" + usermap[item].household_id;
+      } else {
+        url = "household/" + usermap[item].household_id + "/" + usermap[item].member_id;
+      }
       $(location).attr('href', url);
       $.get(url);
       return item;
