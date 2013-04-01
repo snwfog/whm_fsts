@@ -152,6 +152,13 @@ class Report extends Controller implements IRedirectable
             $districtReport=$this->mevent->eventStatistic("Address" ,"district",$_POST["group-id"], $start_date, $end_date);
             $workStatusReport=$this->mevent->eventStatistic("HouseholdMember" ,"work_status",$_POST["group-id"], $start_date, $end_date);
             $maritalStatusReport= $this->mevent->eventStatistic("HouseholdMember" ,"marital_status",$_POST["group-id"], $start_date, $end_date);
+            $totalMemberEvent= $this->mevent->eventStatistic("HouseholdMember" ,"id",$_POST["group-id"], $start_date, $end_date);
+            $totalWorkStatus = array_sum($workStatusReport)/100;
+            $totalMotherTongue = array_sum($motherTongueReport)/100;
+            $totalOrigin = array_sum($originReport)/100;
+            $totalPostalCode = array_sum($postalCodeReport)/100;
+            $totalDistrict = array_sum($districtReport)/100;
+            $totalMaritalStatus = array_sum($maritalStatusReport)/100;
             $data = array(
                 "mother-tongue"  =>  $motherTongueReport,
                 "origin" => $originReport,
@@ -161,6 +168,10 @@ class Report extends Controller implements IRedirectable
                 "work-status" => $workStatusReport,
                 "marital-status" =>$maritalStatusReport
             );
+
+
+
+            $totalMemberEvent = array_sum($totalMemberEvent);
 
             $event = $this->mevent->findEvent($_POST["group-id"]);
             $objPHPExcel = new PHPExcel();
@@ -175,12 +186,12 @@ class Report extends Controller implements IRedirectable
 
 
             // Add some data
-            echo date('H:i:s') . " Add some data\n";
             $objPHPExcel->setActiveSheetIndex(0);
             $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Welcome Hall Mission');
             $objPHPExcel->getActiveSheet()->SetCellValue('A2', "Summar Report from ".$start_date->format("M d, Y")." to ". $end_date->format("M d, Y"));
             $objPHPExcel->getActiveSheet()->SetCellValue('A3', "Event ID: ".$event->getId());
             $objPHPExcel->getActiveSheet()->SetCellValue('A4', "Event Name: ".$event->getName());
+            $objPHPExcel->getActiveSheet()->SetCellValue('H4', "Dist Fam Units: ".$totalMemberEvent);
 
 
             //WorkStatus and Mother Tongue
@@ -192,9 +203,11 @@ class Report extends Controller implements IRedirectable
                 if(empty($key)){
                    $objPHPExcel->getActiveSheet()->SetCellValue('B'.$workrow, "Not Specified");
                    $objPHPExcel->getActiveSheet()->SetCellValue('C'.$workrow, $value);
+                   $objPHPExcel->getActiveSheet()->SetCellValue('D'.$workrow, round($value/$totalWorkStatus,1)."%");
                 }else{
                    $objPHPExcel->getActiveSheet()->SetCellValue('B'.$workrow, $key);
                    $objPHPExcel->getActiveSheet()->SetCellValue('C'.$workrow, $value);
+                   $objPHPExcel->getActiveSheet()->SetCellValue('D'.$workrow, round($value/$totalWorkStatus,1)."%");
                 }
                 ++$workrow;
             }
@@ -205,9 +218,11 @@ class Report extends Controller implements IRedirectable
                 if(empty($key)){
                    $objPHPExcel->getActiveSheet()->SetCellValue('F'.$motherrow, "Not Specified");
                    $objPHPExcel->getActiveSheet()->SetCellValue('G'.$motherrow, $value);
+                   $objPHPExcel->getActiveSheet()->SetCellValue('H'.$motherrow, round($value/$totalMotherTongue,1)."%");
                 }else{
                    $objPHPExcel->getActiveSheet()->SetCellValue('F'.$motherrow, $key);
                    $objPHPExcel->getActiveSheet()->SetCellValue('G'.$motherrow, $value);
+                   $objPHPExcel->getActiveSheet()->SetCellValue('H'.$motherrow, round($value/$totalMotherTongue,1)."%");
                 }
                 ++$motherrow;
             }
@@ -225,9 +240,11 @@ class Report extends Controller implements IRedirectable
                 if(empty($key)){
                    $objPHPExcel->getActiveSheet()->SetCellValue('B'.$originrow, "Not Specified");
                    $objPHPExcel->getActiveSheet()->SetCellValue('C'.$originrow, $value);
+                   $objPHPExcel->getActiveSheet()->SetCellValue('D'.$originrow, round($value/$totalOrigin,1)."%");
                 }else{
                    $objPHPExcel->getActiveSheet()->SetCellValue('B'.$originrow, $key);
                    $objPHPExcel->getActiveSheet()->SetCellValue('C'.$originrow, $value);
+                   $objPHPExcel->getActiveSheet()->SetCellValue('D'.$originrow, round($value/$totalOrigin,1)."%");
                 }
                 ++$originrow;
             }
@@ -238,9 +255,12 @@ class Report extends Controller implements IRedirectable
                 if(empty($key)){
                    $objPHPExcel->getActiveSheet()->SetCellValue('F'.$maritalrow, "Not Specified");
                    $objPHPExcel->getActiveSheet()->SetCellValue('G'.$maritalrow, $value);
+                   $objPHPExcel->getActiveSheet()->SetCellValue('H'.$maritalrow, round($value/$totalMaritalStatus,1)."%");
                 }else{
                    $objPHPExcel->getActiveSheet()->SetCellValue('F'.$maritalrow, $key);
                    $objPHPExcel->getActiveSheet()->SetCellValue('G'.$maritalrow, $value);
+                   $objPHPExcel->getActiveSheet()->SetCellValue('H'.$maritalrow, round($value/$totalMaritalStatus,1)."%");
+
                 }
                 ++$maritalrow;
             }
@@ -257,8 +277,9 @@ class Report extends Controller implements IRedirectable
             // We'll be outputting an excel file
             $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, "Excel5");
             ob_end_clean();
+            $fileName = date("Y-m-d")."_report.xls";
             header("Content-Type: application/vnd.ms-excel");
-            header("Content-Disposition: attachment; filename=\"example-excel-file.xls\"");
+            header("Content-Disposition: attachment; filename=". $fileName);
             $objWriter->save("php://output");
 
         }
