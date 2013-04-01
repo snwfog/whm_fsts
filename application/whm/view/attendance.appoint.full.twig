@@ -25,7 +25,8 @@
                       <td><h3>{{ participant.gender }}</h3></td>
                       <td><h3>{{ participant.medicare }}</h3></td>
                       <td>
-                           <div class="onoffswitch" participantId={{participant.id}} timeslotid={{participant.timeSlotId}}>
+                           <div class="onoffswitch"
+                                participanttimeslotid='{{participant.participantTimeSlotId}}'>
                                 <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch-{{participant.id}}" {{(participant.attend) ? 'checked="checked"' : ''}}>
                                 <label class="onoffswitch-label" for="myonoffswitch-{{participant.id}}">
                                     <div class="onoffswitch-inner"></div>
@@ -51,16 +52,17 @@
 {% block footer %}
 <script type="text/javascript">
 $(document).ready(function(){
-    $('div.onoffswitch').click(function(){
+    $('div.onoffswitch').change(function(){
 
-     var participantId = $(this).attr('participantId');
-     var timeSlotId = $(this).attr('timeslotid');
+     var participanttimeslotid = $(this).attr('participanttimeslotid');
+     var attend = $(this).children('input').attr('checked') == 'checked';
 
       jQuery.ajax
       ({
-        url: '/todaysevents/'+ participantId +'/' + timeSlotId,
-        type: 'PUT'
-      }); 
+        url: '/todaysevents/'+ participanttimeslotid +'/' + Number(attend),
+        type: 'PUT',
+        //async: false
+      });
     });
  });
 </script>

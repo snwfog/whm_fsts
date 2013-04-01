@@ -46,6 +46,7 @@ class AppointFulfillmentSingleEvent extends WHM\Controller implements WHM\IRedir
                     'id' =>  $participant->getId(),
                     'timeSlotId' =>  $timeslot->getId(),
                     'attend' => $participantTimeSlot->getAttend(),
+                    'participantTimeSlotId' => $participantTimeSlot->getId(),
                 );
             }
         }
