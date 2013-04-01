@@ -101,12 +101,20 @@ $ ->
           usermap = {}
           if json?
             $.each json, (index, member) ->
-              mapKey = (member.last_name.trim() + ", " + member.first_name.trim()).toUpperCase()
-              mapValue = { household_id: member.household_id, member_id: member.id }
+              mapKey = (member['last_name'] + ", " + member['first_name']).toUpperCase()
+              mapValue =
+                household_id: member.household_id
+                member_id: member.id
+                mcare: member.mcare_number
               usermap[mapKey] = mapValue
               members.push mapKey
             process(members)
       )
+    matcher: (item) ->
+      console.log "Matcher called for item: #{item}"
+      console.log usermap[item]
+      if item.toLowerCase().indexOf(this.query.trim().toLowerCase()) != -1 then return true
+      if usermap[item]['mcare'].toLowerCase().indexOf(this.query.trim().toLowerCase()) != -1 then return true
     updater: (item) ->
       url = "household/#{usermap[item].household_id}/#{usermap[item].member_id}"
       console.log url

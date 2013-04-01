@@ -116,10 +116,11 @@ $(function() {
           if (json != null) {
             $.each(json, function(index, member) {
               var mapKey, mapValue;
-              mapKey = (member.last_name.trim() + ", " + member.first_name.trim()).toUpperCase();
+              mapKey = (member['last_name'] + ", " + member['first_name']).toUpperCase();
               mapValue = {
                 household_id: member.household_id,
-                member_id: member.id
+                member_id: member.id,
+                mcare: member.mcare_number
               };
               usermap[mapKey] = mapValue;
               return members.push(mapKey);
@@ -128,6 +129,16 @@ $(function() {
           }
         }
       });
+    },
+    matcher: function(item) {
+      console.log("Matcher called for item: " + item);
+      console.log(usermap[item]);
+      if (item.toLowerCase().indexOf(this.query.trim().toLowerCase()) !== -1) {
+        return true;
+      }
+      if (usermap[item]['mcare'].toLowerCase().indexOf(this.query.trim().toLowerCase()) !== -1) {
+        return true;
+      }
     },
     updater: function(item) {
       var url;

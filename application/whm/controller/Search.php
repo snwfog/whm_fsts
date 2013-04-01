@@ -43,7 +43,7 @@ class Search extends Controller
         }
         else
         {
-            echo "Digit search is not yet implemented.";
+            echo $this->json($this->manager->searchMemberByMcare($argv));
         }
 //        echo "</pre>";
     }
