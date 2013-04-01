@@ -146,11 +146,14 @@ $(function() {
       }
     },
     updater: function(item) {
-      var url;
+      var topp, url;
+      path = $('div#search-modal .modal-body .form-search').attr("action");
+      topp = path.split('/').pop();
+      path = path.replace(topp, "");
       if (!(/[\w]/i.exec(item.household_id))) {
-        url = "household/" + usermap[item].household_id;
+        url = "" + path + "household/" + usermap[item].household_id;
       } else {
-        url = "household/" + usermap[item].household_id + "/" + usermap[item].member_id;
+        url = "" + path + "household/" + usermap[item].household_id + "/" + usermap[item].member_id;
       }
       $(location).attr('href', url);
       $.get(url);

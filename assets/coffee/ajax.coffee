@@ -118,11 +118,16 @@ $ ->
         if item.toLowerCase().indexOf(this.query.trim().toLowerCase()) != -1 then return true
         if usermap[item]['mcare'].toLowerCase().indexOf(this.query.trim().toLowerCase()) != -1 then return true
     updater: (item) ->
+      # Gonna try to get the apppath from "hardcoded" project path
+      path = $('div#search-modal .modal-body .form-search').attr("action")
+      topp = path.split('/').pop();
+      path = path.replace(topp, "");
+
       if not (/[\w]/i.exec item.household_id)
         # Then it must be household id
-        url = "household/#{usermap[item].household_id}"
+        url = "#{path}household/#{usermap[item].household_id}"
       else
-        url = "household/#{usermap[item].household_id}/#{usermap[item].member_id}"
+        url = "#{path}household/#{usermap[item].household_id}/#{usermap[item].member_id}"
 
       $(location).attr('href', url);
       $.get(url)
