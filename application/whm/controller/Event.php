@@ -118,7 +118,7 @@ class Event extends Controller implements IRedirectable
 
     
    
-    public function getIndexedEvents($events, $household_id, $member_id, $month = null)
+    public function getIndexedEvents($events, $household_id, $member_id, $month = '')
     {
         $data = array();
         $tracker = array();
@@ -130,7 +130,7 @@ class Event extends Controller implements IRedirectable
             $date = date_create('now');
             $date->setTimezone(new DateTimeZone(LOCALTIME));
 
-            if($month != null)
+            if($month != '')
             {   
                 $finalMonth = date("m") + $month;
                 $stringDate = $finalMonth . '/01/' . date('Y');

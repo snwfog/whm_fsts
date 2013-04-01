@@ -14,15 +14,18 @@ use WHM\Model\ManageAppointment;
 use WHM\ParticipantsTimeslots;
 use WHM\Controller\ControllerHelper;
 use DateTime;
+use WHM\Application;
 
 class AppointFulfillmentSingleEvent extends WHM\Controller implements WHM\IRedirectable
 {
     private $manageEvent;
+    private $manageAppointment;
     
     public function __construct()
     {
         parent::__construct();
         $this->manageEvent = new ManageEvent();
+        $this->manageAppointment = new ManageAppointment();
     }
 
     public function get($eventID)
@@ -34,13 +37,16 @@ class AppointFulfillmentSingleEvent extends WHM\Controller implements WHM\IRedir
         {
             foreach($timeslot->getParticipants() as $participant)
             {
+                $participantTimeSlot = $this->manageAppointment->getParticipantTimeSlot($participant->getId(), $timeslot->getId());
                 $participants[] = array(
                     'firstName' => $participant->getFirstName(),
                     'lastName' => $participant->getLastName(),
                     'gender' => $participant->getGender(),
                     'medicare' => $participant->getMcareNumber(),
                     'id' =>  $participant->getId(),
-                    );
+                    'timeSlotId' =>  $timeslot->getId(),
+                    'attend' => $participantTimeSlot->getAttend(),
+                );
             }
         }
 
@@ -50,15 +56,15 @@ class AppointFulfillmentSingleEvent extends WHM\Controller implements WHM\IRedir
 
     }
 
-    public function post()
+    public function put($participantsTimeslotsId, $attend)
     {
-        
+        $participantsTimeslot = $this->manageEvent->findParticipantTimeslot($participantsTimeslotsId);
+        $participantsTimeslot->setAttend($attend);
+
+        Application::em()->persist($participantsTimeslot);
+        Application::em()->flush();
     }
 
-    public function put()
-    {
-
-    }
 
     public function delete($data)
     {

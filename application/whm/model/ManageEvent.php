@@ -87,6 +87,13 @@ class ManageEvent
         return $eventInstance;
     }
 
+     public function findEventAlphabetically($id)
+    {
+        $eventInstance = $this->em->find("WHM\model\Event", (int) $id);
+        return $eventInstance;
+    }
+
+
     public function deleteTimeslot($id){
         $timeslot = $this->findTimeslot($id["timeslot-id"]);
         $this->em->remove($timeslot);
@@ -215,10 +222,16 @@ class ManageEvent
 
         $startDate = $currentDate;
         date_Modify($startDate,$stringMonthtoAdd);
+        date_Modify($startDate, '-1 day');
 
-        $endDate = $startDate;
-        date_Modify($endDate, "+1 month");
-        date_Modify($endDate,"-1 day");
+        $dateTime = new DateTime();
+        $dateTime->setTimezone(new DateTimeZone(LOCALTIME));
+        $dateTime->setDate($currentYear,$currentMonth,"01");
+        $month++;
+        $stringMonthtoAdd2 = "+". $month . " month";
+        date_Modify($dateTime, $stringMonthtoAdd2);
+        date_Modify($dateTime, '-1 day');
+        $endDate = $dateTime;
 
         $query = $this->em->createQueryBuilder()
                           ->select("event")
@@ -322,11 +335,14 @@ class ManageEvent
 
             $this->em->persist($data);
             $this->em->flush();  
-        }
-        
-
+        }    
     }
 
+    public function findParticipantTimeslot($participantsTimeslotsId)
+    {
+      return $this->em->find("WHM\model\ParticipantsTimeslots", (int) $participantsTimeslotsId);
+    }
+    
     public function eventStatistic($model, $field, $event_group_id, $start_date, $end_date){
 
         /* The doctrine code should be similar to this mysql
@@ -370,5 +386,4 @@ class ManageEvent
         }
         return $formatResult;
     }
-
 }

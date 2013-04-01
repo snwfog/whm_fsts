@@ -35,6 +35,7 @@ $serves = array
     '/attendance/new'               => 'WHM\Controller\AppointFulfillment',
     '/todaysevents'                 => 'WHM\Controller\AppointFulfillment',
     '/todaysevents/:number'         => 'WHM\Controller\AppointFulfillmentSingleEvent',
+    '/todaysevents/:number/:number' => 'WHM\Controller\AppointFulfillmentSingleEvent',
 
 
     // Ajax controller
