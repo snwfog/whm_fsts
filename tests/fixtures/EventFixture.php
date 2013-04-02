@@ -21,6 +21,7 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $now = new \DateTime();
         $oneWeek = new \DateInterval('P7D');
         $twoWeek = new \DateInterval('P2W');
+        $threeWeek = new \DateInterval('P3W');
         $oneDay = new \DateInterval('P1D');
         $threeDays = new \DateInterval('P3D');
         
@@ -132,7 +133,6 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $e4week2 = clone $e4;
         $e5week2 = clone $e5;
 
-        
         $e1DateClone = clone $e1->getStartDate();
         $e2DateClone = clone $e2->getStartDate();
         $e3DateClone = clone $e3->getStartDate();
@@ -144,7 +144,15 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $e3week2->setStartDate($e3DateClone->add($oneWeek));
         $e4week2->setStartDate($e4DateClone->add($oneWeek));
         $e5week2->setStartDate($e5DateClone->add($oneWeek));
-        
+
+        $slot2 = new Timeslot();
+        $slot2->setCapacity(90);
+        $slot2->setDuration(60);
+        $slot2->setName('Group A');
+
+        $e5week2->addTimeslot($slot2);    
+ 
+
         $manager->persist($e1week2);
         $manager->persist($e2week2);
         $manager->persist($e3week2);
@@ -152,14 +160,14 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $manager->persist($e5week2);
 
 
-
+       
+        // Adding similar events for two week    
         $e1week2 = clone $e1;
         $e2week2 = clone $e2;
         $e3week2 = clone $e3;
         $e4week2 = clone $e4;
         $e5week2 = clone $e5;
 
-        
         $e1DateClone = clone $e1->getStartDate();
         $e2DateClone = clone $e2->getStartDate();
         $e3DateClone = clone $e3->getStartDate();
@@ -171,12 +179,55 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $e3week2->setStartDate($e3DateClone->add($twoWeek));
         $e4week2->setStartDate($e4DateClone->add($twoWeek));
         $e5week2->setStartDate($e5DateClone->add($twoWeek));
+
+        $slot2 = new Timeslot();
+        $slot2->setCapacity(90);
+        $slot2->setDuration(60);
+        $slot2->setName('Group A');
+
+        $e5week2->addTimeslot($slot2);     
         
         $manager->persist($e1week2);
         $manager->persist($e2week2);
         $manager->persist($e3week2);
         $manager->persist($e4week2);
         $manager->persist($e5week2);
+
+
+
+        // Adding similar events for three week later   
+        $e1week2 = clone $e1;
+        $e2week2 = clone $e2;
+        $e3week2 = clone $e3;
+        $e4week2 = clone $e4;
+        $e5week2 = clone $e5;
+
+        $e1DateClone = clone $e1->getStartDate();
+        $e2DateClone = clone $e2->getStartDate();
+        $e3DateClone = clone $e3->getStartDate();
+        $e4DateClone = clone $e4->getStartDate();
+        $e5DateClone = clone $e5->getStartDate();
+
+        $e1week2->setStartDate($e1DateClone->add($threeWeek));
+        $e2week2->setStartDate($e2DateClone->add($threeWeek));
+        $e3week2->setStartDate($e3DateClone->add($threeWeek));
+        $e4week2->setStartDate($e4DateClone->add($threeWeek));
+        $e5week2->setStartDate($e5DateClone->add($threeWeek));
+
+        $slot2 = new Timeslot();
+        $slot2->setCapacity(90);
+        $slot2->setDuration(60);
+        $slot2->setName('Group A');
+
+        $e5week2->addTimeslot($slot2);     
+        
+        $manager->persist($e1week2);
+        $manager->persist($e2week2);
+        $manager->persist($e3week2);
+        $manager->persist($e4week2);
+        $manager->persist($e5week2);
+
+
 
         $manager->flush();
 
