@@ -14,7 +14,6 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(123456789, $comment->getId());
     }
 
-
     public function testsetId()
     {
         $comment = new Comment();

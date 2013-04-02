@@ -7,20 +7,6 @@ use \WHM\Model\Address;
 
 class AddressTest extends PHPUnit_Framework_TestCase
 {
-    public function testgetstreet()
-    {
-        $address = new Address();
-        $address->setStreet("FakeStreet");
-        $this->assertEquals("FakeStreet", $address->getStreet());
-    }
-
-    public function testsetstreet()
-    {
-        $address = new Address();
-        $address->setStreet("Fake Street");
-        $this->assertEquals("Fake Street", PHPUnit_Framework_TestCase::readAttribute($address, "street"));
-    }
-
     public function testgetAptNumber()
     {
         $address = new Address();
@@ -35,35 +21,19 @@ class AddressTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(123456789, PHPUnit_Framework_TestCase::readAttribute($address, "apt_number"));
     }
 
-
-    public function testgetCity()
+    public function testGetSetHouseNumber()
     {
         $address = new Address();
-        $address->setCity(123456789);
-        $this->assertEquals(123456789, $address->getCity());
+        $address->setHouseNumber(123);
+        $this->assertEquals(123, $address->getHouseNumber());
     }
-
-    public function testsetCity()
+    
+    public function testGetSetDistrict()
     {
         $address = new Address();
-        $address->setCity(123456789);
-        $this->assertEquals(123456789, PHPUnit_Framework_TestCase::readAttribute($address, "city"));
+        $address->setDistrict("Verdon");
+        $this->assertEquals("Verdon", $address->getDistrict());
     }
-
-    public function testgetProvince()
-    {
-        $address = new Address();
-        $address->setProvince("Ontario");
-        $this->assertEquals("Ontario", $address->getProvince());
-    }
-
-    public function testsetProvince()
-    {
-        $address = new Address();
-        $address->setProvince("Ontario");
-        $this->assertEquals("Ontario", PHPUnit_Framework_TestCase::readAttribute($address, "province"));
-    }
-
     public function testgetPostalCode()
     {
         $address = new Address();
@@ -76,5 +46,11 @@ class AddressTest extends PHPUnit_Framework_TestCase
         $address = new Address();
         $address->setPostalCode("H7X");
         $this->assertEquals("H7X", PHPUnit_Framework_TestCase::readAttribute($address, "postal_code"));
+    }
+     public function testGetSetStreet()
+    {
+        $address = new Address();
+        $address->setStreet("Bell");
+        $this->assertEquals("Bell", $address->getStreet());
     }
 }
