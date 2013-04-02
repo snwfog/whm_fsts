@@ -20,6 +20,7 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
     {
         $now = new \DateTime();
         $oneWeek = new \DateInterval('P7D');
+        $twoWeek = new \DateInterval('P2W');
         $oneDay = new \DateInterval('P1D');
         $threeDays = new \DateInterval('P3D');
         
@@ -143,6 +144,33 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $e3week2->setStartDate($e3DateClone->add($oneWeek));
         $e4week2->setStartDate($e4DateClone->add($oneWeek));
         $e5week2->setStartDate($e5DateClone->add($oneWeek));
+        
+        $manager->persist($e1week2);
+        $manager->persist($e2week2);
+        $manager->persist($e3week2);
+        $manager->persist($e4week2);
+        $manager->persist($e5week2);
+
+
+
+        $e1week2 = clone $e1;
+        $e2week2 = clone $e2;
+        $e3week2 = clone $e3;
+        $e4week2 = clone $e4;
+        $e5week2 = clone $e5;
+
+        
+        $e1DateClone = clone $e1->getStartDate();
+        $e2DateClone = clone $e2->getStartDate();
+        $e3DateClone = clone $e3->getStartDate();
+        $e4DateClone = clone $e4->getStartDate();
+        $e5DateClone = clone $e5->getStartDate();
+
+        $e1week2->setStartDate($e1DateClone->add($twoWeek));
+        $e2week2->setStartDate($e2DateClone->add($twoWeek));
+        $e3week2->setStartDate($e3DateClone->add($twoWeek));
+        $e4week2->setStartDate($e4DateClone->add($twoWeek));
+        $e5week2->setStartDate($e5DateClone->add($twoWeek));
         
         $manager->persist($e1week2);
         $manager->persist($e2week2);

@@ -146,7 +146,7 @@
         {% endif %}
 
         {% if event is not null %}
-            <legend>Dates</legend>
+            <legend>Events</legend>
             {# OH NO INSTYLE CSS#}
             <div class="well no-padding-well" id="dates-well" >
                 <ul class="nav nav-list" id="date-list">
@@ -193,9 +193,9 @@
 
 {% block left2 %}
     <div class="span3">
-        <legend>Events</legend>
+        <legend>Events Group</legend>
         <div class="well no-padding-well" id="dates-well">
-            <ul class="nav nav-list" id="date-list">
+            <ul class="nav nav-list" id="event-list">
             {% for each_event in allEvents %}
                 {% if each_event["group-id"] == event["group-id"] %}
                     <li class="active">
