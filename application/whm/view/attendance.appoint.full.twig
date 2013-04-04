@@ -59,7 +59,7 @@ $(document).ready(function(){
 
       jQuery.ajax
       ({
-        url: '/todaysevents/'+ participanttimeslotid +'/' + Number(attend),
+        url: '{{ apppath }}todaysevents/'+ participanttimeslotid +'/' + Number(attend),
         type: 'PUT',
         //async: false
       });
