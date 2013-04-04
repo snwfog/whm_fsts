@@ -34,7 +34,7 @@
                                     <form name="monthh" action="{{ apppath }}" method="#" >
                                         {% for b in 0..6 %}
                                             {% set month = b ~ " month" %}
-                                            <option value="{{ b }}" >{{ month|date_modify(deidei)|date("F", "America/Montreal") }}</option>
+                                            <option value="{{ b }}" >{{ month|date("F", "America/Montreal") }}</option>
                                         {% endfor %}
                                     </form>
                                 </select>

@@ -12,7 +12,7 @@ return $config = array
         'driver'    => 'pdo_mysql',
         'user'      => 'root',
         'password'  => '',
-        'dbname'    => 'foo',
+        'dbname'    => 'fsts',
     ),
 
     // Twig configuration
