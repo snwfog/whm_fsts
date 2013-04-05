@@ -4,26 +4,43 @@
     <table class="table table-hover">
 
 
-            <h2>List of Attendees</h2>
+            <h2>{{event.name}}</h2>
+            {% set maxparticipants = event.totalCapacity %}
+            {% set actualparticipants = event.numOfParticipants %}
+            {% set availablespots = maxparticipants - actualparticipants %}
+            {% set labelcolor = 'success' %}
+            {% if availablespots <= maxparticipants / 10 %}
+                {% set labelcolor = 'important' %}
+            {% elseif availablespots <= maxparticipants / 2 %}
+                {% set labelcolor = 'warning' %}
+            {% endif %}
+
+        <span class="label label-{{ labelcolor }}">
+            <i class="icon-user icon-white"></i> {{ actualparticipants }}/{{maxparticipants }}
+        </span>
               <thead>
                 <tr>
-                  <th>Last Name</th>
-                  <th>First Name</th>
-                  <th>Gender</th>
-                  <th>Medicare Number</th>
-                  <th>Checked In</th>
+                  <th class="btn-large">Participant Name</th>
+                  <th class="btn-large">Gender</th>
+                  <th class="btn-large">Medicare Number</th>
+                  <th class="btn-large">Time Slot</th>
+                  <th class="btn-large">Checked In</th>
                 </tr>
               </thead>
               
               
               {% for participant in participants %}
                 <tbody>
-                    <tr>
+                {% if participant.attend == false %}
+                      <tr class ="">
+                {% else %}
+                      <tr class ="success">
+                {% endif %}
                       
-                      <td><h3>{{ participant.lastName }}</h3></td>
-                      <td><h3>{{ participant.firstName }}</h3></td>
+                      <td><h3>{{ participant.lastName }} {{ participant.firstName }}</h3></td>
                       <td><h3>{{ participant.gender }}</h3></td>
                       <td><h3>{{ participant.medicare }}</h3></td>
+                      <td><h3>{{participant.startTime}}-{{participant.endTime}}</h3></td>
                       <td>
                            <div class="onoffswitch"
                                 participanttimeslotid='{{participant.participantTimeSlotId}}'>
@@ -56,6 +73,11 @@ $(document).ready(function(){
 
      var participanttimeslotid = $(this).attr('participanttimeslotid');
      var attend = $(this).children('input').attr('checked') == 'checked';
+     if(attend)
+        $(this).parent().parent().attr('class', 'success');
+     else
+        $(this).parent().parent().attr('class', '');
+
 
       jQuery.ajax
       ({

@@ -18,25 +18,36 @@ use WHM\Application;
 
 class AppointFulfillmentSingleEvent extends WHM\Controller implements WHM\IRedirectable
 {
+    protected $data = array("errors" => array(), "form" => array());
     private $manageEvent;
     private $manageAppointment;
+    private $event;
     
     public function __construct()
     {
         parent::__construct();
         $this->manageEvent = new ManageEvent();
         $this->manageAppointment = new ManageAppointment();
+        $this->event = new Event();
     }
 
     public function get($eventID)
-    {
-        $findingEventId = $this ->manageEvent ->findEvent($eventID);
-
+    {   
+        $endtime = 0;
+        $event = $this->manageEvent->findEvent($eventID);
+        $totalNumOfParticipants = 0;
+        $totalEventCapacity = 0;
+        $slotStarttime = $event->getStartTime()->format("H:i");
         $participants = array();
-        foreach($findingEventId->getTimeSlots()->toArray() as $timeslot)
+        foreach($event->getTimeSlots()->toArray() as $timeslot)
         {
             foreach($timeslot->getParticipants() as $participant)
             {
+                $slotEndtime = new DateTime($slotStarttime);
+                $duration = '+'.$timeslot->getDuration(). ' mins';
+                date_modify($slotEndtime, $duration);
+                $endtime = $slotEndtime->format('H:i');
+
                 $participantTimeSlot = $this->manageAppointment->getParticipantTimeSlot($participant->getId(), $timeslot->getId());
                 $participants[] = array(
                     'firstName' => $participant->getFirstName(),
@@ -45,15 +56,25 @@ class AppointFulfillmentSingleEvent extends WHM\Controller implements WHM\IRedir
                     'medicare' => $participant->getMcareNumber(),
                     'id' =>  $participant->getId(),
                     'timeSlotId' =>  $timeslot->getId(),
-                    'attend' => $participantTimeSlot->getAttend(),
+                    'attend' =>$participantTimeSlot->getAttend(),
                     'participantTimeSlotId' => $participantTimeSlot->getId(),
+                    'duration' => $timeslot->getDuration(),
+                    'startTime'=> $slotStarttime,
+                    'endTime'=> $endtime,
                 );
             }
+
+            $slotStarttime = $endtime;
+            $totalNumOfParticipants += count($participants);
+            $totalEventCapacity += $timeslot->getCapacity();
         }
-
+        $event = $this->event->formatEvents(array($event));
+        $event[0]["totalCapacity"] = $totalEventCapacity;
+        $event[0]["numOfParticipants"] = $totalNumOfParticipants;
         $participants2 = self::msort($participants, 'lastName');
-
-        $this->display('attendance.appoint.full.twig', array('participants' => $participants2));
+        $this->data['participants'] = $participants2;
+        $this->data['event'] = $event[0];
+        $this->display('attendance.appoint.full.twig');
 
     }
 
