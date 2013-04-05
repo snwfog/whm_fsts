@@ -1,15 +1,15 @@
 {% block appointment_modal %}
-    <div id="appointment-modal1"
+    <div id="appointment-modal4"
          class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
 
         <div class="modal-body">
-            <div id="event-calendar-carousel1" class="carousel slide" data-interval="false">
+            <div id="event-calendar-carousel4" class="carousel slide" data-interval="false">
                 <ol class="carousel-indicators">
-                    <li data-target="#event-calendar-carousel1" data-slide-to="0" class="active"></li>
-                    <li data-target="#event-calendar-carousel1" data-slide-to="1"></li>
-                    <li data-target="#event-calendar-carousel1" data-slide-to="2"></li>
-                    <li data-target="#event-calendar-carousel1" data-slide-to="3"></li>
+                    <li data-target="#event-calendar-carousel4" data-slide-to="0" class="active"></li>
+                    <li data-target="#event-calendar-carousel4" data-slide-to="1"></li>
+                    <li data-target="#event-calendar-carousel4" data-slide-to="2"></li>
+                    <li data-target="#event-calendar-carousel4" data-slide-to="3"></li>
                 </ol>
                 <div class="carousel-inner">
                     {% for k in 1..4 %}
@@ -24,7 +24,7 @@
                         {% endif %}
                             {% set startdei = "+" ~ ((k - 1) * 7 + 1) ~ " days" %}
                             {% set enddei = "+" ~ k * 7 ~ " days" %}
-                            {% set month = "+" ~ 1 ~ " month" %}
+                            {% set month = "+" ~ 4 ~ " month" %}
                             {% set currentMonth = date('m').format('m') + month %}
                             {% set dateString  = currentMonth ~ "/01/2013" %}
                             <legend>
@@ -44,7 +44,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% set maxevents = events.1.max %}
+                                    {% set maxevents = events.4.max %}
                                     {% for i in 1..maxevents %}
                                         <tr>
                                             {% for j in 1..weeklength %}
@@ -58,20 +58,20 @@
                                                         {% set j = j + 21 %}
                                                     {% endif %}
 
-                                                    {% if events[1][i][j] is null %}
+                                                    {% if events[4][i][j] is null %}
                                                         <br /><br />
                                                     {% else %}
                                                         {% set buttoncolour = "primary" %}
-                                                        {% if events[1][i][j]["registered"] == "Registered" %}
+                                                        {% if events[4][i][j]["registered"] == "Registered" %}
                                                             {% set buttoncolour = "success" %}
                                                         {% endif %}
                                                             <div class="dropdown btn-group">
                                                                 <a class="btn dropdown-toggle btn-{{ buttoncolour }}" data-toggle="dropdown" href="#">
-                                                                    {{ events[1][i][j]["name"]|slice(0, 10) }}
+                                                                    {{ events[4][i][j]["name"]|slice(0, 10) }}
                                                                     <span class="caret"></span>
                                                                 </a>
                                                                 <ul class="dropdown-menu ">
-                                                                    {% for slots in events[1][i][j]["timeslots"] %}
+                                                                    {% for slots in events[4][i][j]["timeslots"] %}
                                                                         {% if slots["capacity"] != 0 %}
                                                                             {% set bobby = slots["registered"] / slots["capacity"] %}
                                                                         {% endif %}
@@ -109,7 +109,7 @@
                                                                 </ul>
                                                             </div>
                                                             {# FORMS #}
-                                                            {% for slots in events[1][i][j]["timeslots"] %}
+                                                            {% for slots in events[4][i][j]["timeslots"] %}
                                                                 <div style="display:none">
                                                                     <form name="slot-{{slots["id"]}}" action="{{ apppath }}appointment/new" method="POST" id="slot-{{slots["id"]}}">
                                                                         <input type="hidden" name="household-id" value="{{ household.household_id }}">
@@ -133,16 +133,16 @@
         </div>
         <div class="modal-footer">
             <div class="btn-group" data-toggle="buttons-radio">
-                <button type="button" class="btn btn-primary active" data-target="#event-calendar-carousel1" data-slide-to="0">
+                <button type="button" class="btn btn-primary active" data-target="#event-calendar-carousel4" data-slide-to="0">
                     <i class="icon-calendar icon-white"></i> First Week
                 </button>
-                <button type="button" class="btn btn-primary" data-target="#event-calendar-carousel1" data-slide-to="1">
+                <button type="button" class="btn btn-primary" data-target="#event-calendar-carousel4" data-slide-to="1">
                     <i class="icon-calendar icon-white"></i> Second Week
                 </button>
-                <button type="button" class="btn btn-primary" data-target="#event-calendar-carousel1" data-slide-to="2">
+                <button type="button" class="btn btn-primary" data-target="#event-calendar-carousel4" data-slide-to="2">
                     <i class="icon-calendar icon-white"></i> Third Week
                 </button>
-                <button type="button" class="btn btn-primary" data-target="#event-calendar-carousel1" data-slide-to="3">
+                <button type="button" class="btn btn-primary" data-target="#event-calendar-carousel4" data-slide-to="3">
                     <i class="icon-calendar icon-white"></i> Fourth Week
                 </button>
             </div>

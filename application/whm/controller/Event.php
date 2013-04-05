@@ -137,7 +137,10 @@ class Event extends Controller implements IRedirectable
 
             for ($i = 1; $i <= 28; $i++)
             {
-                date_modify($date, '+1 day');
+                if($month == '')
+                {
+                    date_modify($date, '+1 day');
+                }
                 $d = date_format($date, 'm/d/Y');
                 foreach( $events as $event)
                 {
@@ -159,6 +162,11 @@ class Event extends Controller implements IRedirectable
                         );
                     }
                 };
+                if($month != '')
+                {
+                    date_modify($date, '+1 day');
+                }
+
             }
         }
         $data['max'] = max($maxJ);

@@ -58,14 +58,15 @@ div.no-padding-well
 }
 
 /* Appointment modal width increase */
-div#appointment-modal, div#appointment-modal1
+div#appointment-modal, div#appointment-modal1, div#appointment-modal2, div#appointment-modal3
+, div#appointment-modal4, div#appointment-modal5, div#appointment-modal6
 {
     width: 960px;
     margin-left: -480px;
 }
 
-div#appointment-modal .carousel,
-div#appointment-modal .table
+div#appointment-modal, div#appointment-modal1 .carousel,
+div#appointment-modal, div#appointment-modal1 .table
 {
     margin-bottom: 0px;
 }
@@ -101,7 +102,7 @@ input[type=number]::-webkit-inner-spin-button {
     overflow: visible;
 }
 
-.carousel-inner
+.carousel-inner, .carousel-inner1
 {
     overflow: visible;
 }
@@ -117,3 +118,6 @@ div#event-main{
     overflow-y: auto; 
     padding-right: 10px;
 }
+
+
+

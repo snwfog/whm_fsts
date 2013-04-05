@@ -180,17 +180,26 @@ class ManageEvent
         //return Array of Objects
         return $upcomingEvents;
     }
-
-    public function getAllUpComingEvents()
+// 
+    public function getAllUpComingEvents($weeksToAdd = '' )
     {
-        //CONSTRAINT: RETRIEVE EVENT ONLY 4 WEEKS AHEAD.
+        if($weeksToAdd == '')
+        {
+          $weeks = "4 weeks";
+        }
+        else
+        {
+          $weeks = $weeksToAdd ." weeks";
+        }
+
+        //CONSTRAINT: RETRIEVE EVENT ONLY 4 WEEKS AHEAD DEFAULT.
         $dateTime2 = new DateTime();
         $dateTime2->setTimezone(new DateTimeZone(LOCALTIME));
         $dateNow = $dateTime2;
 
         $dateTime = new DateTime();
         $dateTime->setTimezone(new DateTimeZone(LOCALTIME));
-        $incrementer = DateInterval::createFromDateString("4 weeks");
+        $incrementer = DateInterval::createFromDateString($weeks);
         $dateTime = $dateTime->add($incrementer);
         $dateFuture = $dateTime;
 
