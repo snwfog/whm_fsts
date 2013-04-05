@@ -135,7 +135,7 @@ class Event extends Controller implements IRedirectable
                 $date = date_create($stringDate);
             }
 
-            for ($i = 1; $i <= 27; $i++)
+            for ($i = 1; $i <= 28; $i++)
             {
                 date_modify($date, '+1 day');
                 $d = date_format($date, 'm/d/Y');

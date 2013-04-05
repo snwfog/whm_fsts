@@ -1,5 +1,5 @@
 {% block appointment_modal %}
-    <div id="appointment-modal"
+    <div id="appointment-modal1"
          class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
 
@@ -24,9 +24,12 @@
                         {% endif %}
                             {% set startdei = "+" ~ ((k - 1) * 7 + 1) ~ " days" %}
                             {% set enddei = "+" ~ k * 7 ~ " days" %}
+                            {% set month = "+" ~ 1 ~ " month" %}
+                            {% set currentMonth = date('m').format('m') + month %}
+                            {% set dateString  = currentMonth ~ "/01/2013" %}
                             <legend>
-                                Event Calendar from {{ "now"|date_modify(startdei)|date("F     d","America/Montreal") }} to
-                                {{ "now"|date_modify(enddei)|date("F d","America/Montreal") }}
+                                Event Calendar for {{ "now"|date_modify(month)|date("M Y","America/Montreal") }} 
+
                             </legend>
                             <table class="table table-bordered">
                                 <thead>
@@ -34,15 +37,15 @@
                                     <tr class="info">
                                         {% for i in 1..weeklength %}
                                             <th>
-                                                {% set deidei = "+" ~ (7 * (k - 1) + i) ~ " days" %}
-                                                {{ "now"|date_modify(deidei)|date("D","America/Montreal")|upper }} - {# MON through SUN #}
-                                                {{ "now"|date_modify(deidei)|date("d","America/Montreal") }} {# Date #}
+                                                {% set deidei = "+" ~ ((7 * (k - 1) + i) - 1) ~ " days" %}
+                                                {{ date(dateString)|date_modify(deidei)|date("D","America/Montreal")|upper }} - {# MON through SUN #}
+                                                {{ date(dateString)|date_modify(deidei)|date("d","America/Montreal") }} {# Date #}
                                             </th>
                                         {% endfor %}
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% set maxevents = events.0.max %}
+                                    {% set maxevents = events.1.max %}
                                     {% for i in 1..maxevents %}
                                         <tr>
                                             {% for j in 1..weeklength %}
@@ -56,20 +59,21 @@
                                                         {% set j = j + 21 %}
                                                     {% endif %}
 
-                                                    {% if events[0][i][j] is null %}
-                                                        <br /><br />
+                                                    {% if events[1][i][j] is null %}
+                                                        <br /><br />{{i}},{{j}},{{deidei}}
                                                     {% else %}
+                                                    {{i}},{{j}}
                                                         {% set buttoncolour = "primary" %}
-                                                        {% if events[0][i][j]["registered"] == "Registered" %}
+                                                        {% if events[1][i][j]["registered"] == "Registered" %}
                                                             {% set buttoncolour = "success" %}
                                                         {% endif %}
                                                             <div class="dropdown btn-group">
                                                                 <a class="btn dropdown-toggle btn-{{ buttoncolour }}" data-toggle="dropdown" href="#">
-                                                                    {{ events[0][i][j]["name"]|slice(0, 10) }}
+                                                                    {{ events[1][i][j]["name"]|slice(0, 10) }}
                                                                     <span class="caret"></span>
                                                                 </a>
                                                                 <ul class="dropdown-menu ">
-                                                                    {% for slots in events[0][i][j]["timeslots"] %}
+                                                                    {% for slots in events[1][i][j]["timeslots"] %}
                                                                         {% if slots["capacity"] != 0 %}
                                                                             {% set bobby = slots["registered"] / slots["capacity"] %}
                                                                         {% endif %}
@@ -107,7 +111,7 @@
                                                                 </ul>
                                                             </div>
                                                             {# FORMS #}
-                                                            {% for slots in events[0][i][j]["timeslots"] %}
+                                                            {% for slots in events[1][i][j]["timeslots"] %}
                                                                 <div style="display:none">
                                                                     <form name="slot-{{slots["id"]}}" action="{{ apppath }}appointment/new" method="POST" id="slot-{{slots["id"]}}">
                                                                         <input type="hidden" name="household-id" value="{{ household.household_id }}">
