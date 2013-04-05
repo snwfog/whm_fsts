@@ -49,8 +49,8 @@ class ManageAppointment
                           ->from("WHM\model\ParticipantsTimeslots", "participantTimeslot")
                           ->where("participantTimeslot.household_member = :member_id")
                           ->andWhere("participantTimeslot.timeslot = :timeslot_id")
-                          ->setParameter('member_id', $member)
-                          ->setParameter('timeslot_id', $timeslot);                         
+                          ->setParameter('member_id', $member_id)
+                          ->setParameter('timeslot_id', $timeslot_id);                         
 
         $data = $query->getQuery()->getSingleResult();
         return $data;

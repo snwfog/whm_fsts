@@ -65,7 +65,6 @@ class Household extends Controller implements IRedirectable
 
             //Get Events.
             $events = $this->getMonthlyEvents($household_id, $member_id);
-            // print_r($events['1']);
 
             $data = array(
                             "household"         =>  $data,
@@ -234,7 +233,7 @@ class Household extends Controller implements IRedirectable
     private function eventsRegistered($id)
     {   $data = array();
         $count = 0;
-        $upcomingEvents=$this->manageEvents->getAllUpComingEvents("27");
+        $upcomingEvents=$this->manageEvents->getAllUpComingEvents("34");
 
         foreach( $upcomingEvents as $event )
         {
