@@ -108,9 +108,7 @@
                          {{household.members.principal["first-name"] }} {{ household.members.principal["last-name"]}} 
                          <span class="
                          pull-right">
-                             {{ household.members.principal["gender"]}}
-                             {% if (household.members.principal["gender"] != null) and (household.members.principal["age"] != null) %}/{% endif %}
-                             {{ household.members.principal["age"] }}
+                             {{ household.members.principal["gender"]}}{% if (household.members.principal["gender"] != null) and (household.members.principal["age"] != null) %}/{% endif %}{{household.members.principal["age"]}}
                              </span>
                      </a>
                 </li>
