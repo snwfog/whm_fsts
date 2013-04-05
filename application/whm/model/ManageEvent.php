@@ -324,18 +324,6 @@ class ManageEvent
         return $data;
     }
 
-    public function updateAttendance($timeslot_id, $householdM_id, $attendance)
-    {
-        $data = $this->mappointment->getParticipantTimeSlot($householdM_id, $timeslot_id);
-        $attend = $data->getAttend();
-        if ($attend != $attendance){
-            $data->setAttend($attendance);
-
-            $this->em->persist($data);
-            $this->em->flush();  
-        }    
-    }
-
     public function findParticipantTimeslot($participantsTimeslotsId)
     {
       return $this->em->find("WHM\model\ParticipantsTimeslots", (int) $participantsTimeslotsId);
