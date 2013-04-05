@@ -21,7 +21,6 @@ class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
     private $manageEvent;
     private $report;
     private $event;
-    private $helper;
     private $manageAppointment;
 
     public function __construct()//array $args = null
@@ -34,7 +33,6 @@ class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
         $this ->report = new report();
         $this ->manageEvent= new ManageEvent();
         $this ->event= new Event();
-        $this ->helper= new ControllerHelper();
         $this ->manageAppointment = new ManageAppointment();
 
     }
@@ -81,7 +79,7 @@ class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
         //                 "startTime"=> $slotStarttime,
         //                 "endTime"=> $endtime,
         //                 "duration" => $timeslot->getDuration(),
-        //                 "participants" => $this->helper->formatMember($timeslot->getParticipants()),
+        //                 "participants" => ControllerHelper::formatMember($timeslot->getParticipants()),
         //                 "id" => $timeslot->getId(),
         //                 "capacity" => $timeslot->getCapacity()
         //             );

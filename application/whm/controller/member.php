@@ -11,19 +11,17 @@ use \WHM\Model\HouseholdMember;
 class Member extends Controller implements IRedirectable
 {
     public $data = array();
-    private $manageHousehold;
     public function __construct(array $args = null)
     {
         $this->data = $args;
         parent::__construct();
       //  Helper_Core::backtrace();
-        $this->manageHousehold = new manageHousehold();
 
     }
 
     public function get($memberId)
     {  
-        $member = $this->manageHousehold->findMember($memberId);
+        $member = ManageHousehold::findMember($memberId);
         $household = $member->getHousehold();
         $address = $household->getAddress();
         $data = array(

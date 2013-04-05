@@ -18,11 +18,9 @@ use DateTimeZone;
 class Household extends Controller implements IRedirectable
 {
     public $data = array( "errors" => array(), "form" => array());
-    private $manageHousehold;
     private $manageFlag;
     private $manageEvents;
     private $flag;
-    private $helper;
     private $eventcontroller;
 
 
@@ -31,8 +29,6 @@ class Household extends Controller implements IRedirectable
         $this->data = $args;
         parent::__construct();
         //Helper::backtrace();
-        $this->helper = new ControllerHelper();
-        $this->manageHousehold = new ManageHousehold();
         $this->manageFlag = new ManageFlag();
         $this->manageEvents = new ManageEvent();
         $this->flag = new Flag();
@@ -48,11 +44,11 @@ class Household extends Controller implements IRedirectable
 
         if(!is_null($household_id)){
             //Get household and as default, get household principal if specific member is not specified.
-            $household = $this->manageHousehold->findHousehold($household_id);
+            $household = ManageHousehold::findHousehold($household_id);
             if(is_null($member_id)){
                 $member = $household->getHouseholdPrincipal();
             }else{
-                $member = $this->manageHousehold->findMember($member_id);
+                $member = ManageHousehold::findMember($member_id);
             }
 
             $data = $this->formatHouseholdInfo($household, $member);
@@ -116,7 +112,7 @@ class Household extends Controller implements IRedirectable
      */
     public function post()
     {
-        $this->manageHousehold->updateHousehold($_POST);
+        ManageHousehold::updateHousehold($_POST);
         $this->redirect('household/'.$_POST["household-id"]."/".$_POST["member-id"] );
     }
 
@@ -153,7 +149,7 @@ class Household extends Controller implements IRedirectable
                                         "gender"     => $dependent->getGender(),
                                         "active"     => $member->getId() == $dependent->getId()? TRUE : FALSE,
                                         "principal"  => true,
-                                        "age"        => get_class($dependent->getDateOfBirth()) == "DateTime" ? $this->helper->calculateAge($dependent->getDateOfBirth(), new DateTime) : '',
+                                        "age"        => get_class($dependent->getDateOfBirth()) == "DateTime" ? ControllerHelper::calculateAge($dependent->getDateOfBirth(), new DateTime) : '',
                                         "events"     => $registeredEvents,
                                  );
             }else{
@@ -163,14 +159,14 @@ class Household extends Controller implements IRedirectable
                                             "last-name"  => $dependent->getLastName(),
                                             "gender"     => $dependent->getGender(),
                                             "active"     => $member->getId() == $dependent->getId()? TRUE : FALSE,
-                                            "age"        => get_class($dependent->getDateOfBirth()) == "DateTime" ? $this->helper->calculateAge($dependent->getDateOfBirth(), new DateTime) : '',
+                                            "age"        => get_class($dependent->getDateOfBirth()) == "DateTime" ? ControllerHelper::calculateAge($dependent->getDateOfBirth(), new DateTime) : '',
                                             "events"     => $registeredEvents,
                                      ));
             } 
         }
 
         //Get detailed info of displayed member
-        $formatMember = $this->helper->formatMember(array( 0 => $member));
+        $formatMember = ControllerHelper::formatMember(array( 0 => $member));
         $data = array(
                         "house-number"    => $address->getHouseNumber(),
                         "street"    => $address->getStreet(),
@@ -251,7 +247,7 @@ class Household extends Controller implements IRedirectable
             foreach( $timeslot as $t )
             {   
                 $participants = $t->getParticipants();
-                $participants = $this->helper->formatMember($participants);
+                $participants = ControllerHelper::formatMember($participants);
                 if(!is_null($participants))
                 {
                     $slotEndtime = new DateTime($slotStarttime);

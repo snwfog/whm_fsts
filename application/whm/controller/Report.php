@@ -156,6 +156,13 @@ class Report extends Controller implements IRedirectable
                                                               $start_date,
                                                               $end_date
                                               );
+
+
+            $numberOfVisitsStatistic= $this->mevent->getNumberOfVisits(
+                                                                      $_POST["group-id"],
+                                                                      $start_date,
+                                                                      $end_date
+                                                    );
             
             $totalWorkStatus = array_sum($workStatusReport)/100;
             $totalMotherTongue = array_sum($motherTongueReport)/100;
@@ -212,14 +219,14 @@ class Report extends Controller implements IRedirectable
                    $objPHPExcel->getActiveSheet()
                                ->SetCellValue('C'.$workrow, $value);
                    $objPHPExcel->getActiveSheet()
-                               ->SetCellValue('D'.$workrow, round($value/$totalWorkStatus, 1)."%");
+                               ->SetCellValue('D'.$workrow, round( (float)$value/(float)$totalWorkStatus, 1)."%");
                 }else{
                    $objPHPExcel->getActiveSheet()
                                ->SetCellValue('B'.$workrow, $key);
                    $objPHPExcel->getActiveSheet()
                                ->SetCellValue('C'.$workrow, $value);
                    $objPHPExcel->getActiveSheet()
-                               ->SetCellValue('D'.$workrow, round($value/$totalWorkStatus, 1)."%");
+                               ->SetCellValue('D'.$workrow, round( (float)$value/(float)$totalWorkStatus, 1)."%");
                 }
                 ++$workrow;
             }
@@ -233,14 +240,14 @@ class Report extends Controller implements IRedirectable
                    $objPHPExcel->getActiveSheet()
                                ->SetCellValue('G'.$motherrow, $value);
                    $objPHPExcel->getActiveSheet()
-                               ->SetCellValue('H'.$motherrow, round($value/$totalMotherTongue, 1)."%");
+                               ->SetCellValue('H'.$motherrow, round( (float)$value/(float)$totalMotherTongue, 1)."%");
                 }else{
                    $objPHPExcel->getActiveSheet()
                                ->SetCellValue('F'.$motherrow, $key);
                    $objPHPExcel->getActiveSheet()
                                ->SetCellValue('G'.$motherrow, $value);
                    $objPHPExcel->getActiveSheet()
-                               ->SetCellValue('H'.$motherrow, round($value/$totalMotherTongue, 1)."%");
+                               ->SetCellValue('H'.$motherrow, round( (float)$value/ (float)$totalMotherTongue, 1)."%");
                 }
                 ++$motherrow;
             }
@@ -345,7 +352,7 @@ class Report extends Controller implements IRedirectable
             // We'll be outputting an excel file
             $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, "Excel5");
             ob_end_clean();
-            $fileName = date("Y-m-d")."_report.xls";
+            $fileName = $start_date->format("M_Y")."_report.xls";
             header("Content-Type: application/vnd.ms-excel");
             header("Content-Disposition: attachment; filename=". $fileName);
             $objWriter->save("php://output");

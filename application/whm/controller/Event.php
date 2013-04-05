@@ -14,14 +14,12 @@ class Event extends Controller implements IRedirectable
 {
     protected $data = array("errors" => array(), "form" => array());
     private $manageEvent;
-    private $helper;
     private $manageAppointment;
     public function __construct(array $args = null)
     {
         $this->data = $args;
         parent::__construct();
         //WHM\Helper::backtrace();
-        $this->helper = new ControllerHelper();
         $this->manageEvent= new ManageEvent();
         $this->manageAppointment = new ManageAppointment();
     }
@@ -192,7 +190,7 @@ class Event extends Controller implements IRedirectable
                 "capacity" => $t->getCapacity(),
                 "start-time" => $slotStarttime,
                 "end-time" => $endtime,
-                "participants"=> $this->helper->formatMember($t->getParticipants()),
+                "participants"=> ControllerHelper::formatMember($t->getParticipants()),
             );
             $totalNumOfParticipants += count($timeslots[$count]["participants"]);
             $totalEventCapacity += $timeslots[$count]["capacity"];
@@ -243,7 +241,7 @@ class Event extends Controller implements IRedirectable
     private function getRegistration($timeslot, $household_id, $member_id)
     {
         $participants = $timeslot->getParticipants();
-        $participants = $this->helper->formatMember($participants);
+        $participants = ControllerHelper::formatMember($participants);
         $status = "Unregistered";
 
         if(!is_null($participants))
@@ -270,7 +268,7 @@ class Event extends Controller implements IRedirectable
         foreach( $timeslot as $t)
         {
             $participants = $t->getParticipants();
-            $participants = $this->helper->formatMember($participants);
+            $participants = ControllerHelper::formatMember($participants);
 
             if(!is_null($participants))
             {

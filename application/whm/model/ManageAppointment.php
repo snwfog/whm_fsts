@@ -19,10 +19,9 @@ class ManageAppointment
 
     public function addAppointment($member_id, $timeslot_id)
     {
-        $managehousehold = new ManageHousehold();
         $ParticicpantTimeslot = new ParticipantsTimeslots();
 
-        $member = $managehousehold->findMember($member_id);
+        $member = ManageHousehold::findMember($member_id);
         $timeslot = $this->em->find("WHM\model\Timeslot", (int) $timeslot_id);
         
         $ParticicpantTimeslot->setHouseholdMember($member);
@@ -42,9 +41,7 @@ class ManageAppointment
 
     public function getParticipantTimeslot($member_id, $timeslot_id)
     {
-        $managehousehold = new ManageHousehold();
-
-        $member = $managehousehold->findMember($member_id);
+        ManageHousehold::findMember($member_id);
 
         $timeslot = $this->em->find("WHM\model\Timeslot", (int) $timeslot_id);
         $query = $this->em->createQueryBuilder()

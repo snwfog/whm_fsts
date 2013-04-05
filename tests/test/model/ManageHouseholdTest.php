@@ -52,7 +52,7 @@ class ManageHouseholdTest extends PHPUnit_Framework_TestCase
     public function testFindHousehold()
     {
         // Find the Household with id = 3
-        $householdToFind = $this->manageHousehold->findHousehold(3);
+        $householdToFind = ManageHousehold::findHousehold(3);
 
         $this->assertThat($householdToFind->getId(), $this->equalTo(3));
 
@@ -69,7 +69,7 @@ class ManageHouseholdTest extends PHPUnit_Framework_TestCase
 
     public function testCreateHousehold()
     {
-        $newHousehold = $this->manageHousehold->createHousehold($this->data);
+        $newHousehold = ManageHousehold::createHousehold($this->data);
 
         $this->assertThat(get_class($newHousehold), $this->equalTo('WHM\Model\Household'));
         $this->assertThat(
@@ -79,8 +79,8 @@ class ManageHouseholdTest extends PHPUnit_Framework_TestCase
     public function testUpdateHousehold()
     {
         // Update the Household with id = 4        
-        $this->manageHousehold->updateHousehold($this->data);
-        $household = $this->manageHousehold->findHousehold(3);
+        ManageHousehold::updateHousehold($this->data);
+        $household = ManageHousehold::findHousehold(3);
 
         $principal = $household->getHouseholdPrincipal();
         $address = $household->getAddress();
@@ -95,15 +95,15 @@ class ManageHouseholdTest extends PHPUnit_Framework_TestCase
 
     public function testRemoveHousehold()
     {
-        $this->manageHousehold->removeHousehold(3);        
+        ManageHousehold::removeHousehold(3);        
         $this->assertThat(
-                $this->manageHousehold->findHousehold(3), 
+                ManageHousehold::findHousehold(3), 
                 $this->equalTo(null));
     }
 
     public function testFindAllHouseholds()
     {
-        $households = $this->manageHousehold->findAllHouseholds();
+        $households = ManageHousehold::findAllHouseholds();
         $this->assertThat(
                 sizeof($households), $this->equalTo(10));
     }
@@ -111,12 +111,12 @@ class ManageHouseholdTest extends PHPUnit_Framework_TestCase
     public function testFindMember()
     {
         // Find the Member with id = 7
-        $memberToFind = $this->manageHousehold->findMember(7);
+        $memberToFind = ManageHousehold::findMember(7);
 
         $this->assertThat($memberToFind->getId(), $this->equalTo(7));
         $this->assertThat(
             $memberToFind->getHousehold(), 
-            $this->equalTo($this->manageHousehold->findHousehold(4))
+            $this->equalTo(ManageHousehold::findHousehold(4))
         );
 
         $this->assertThat($memberToFind->getFirstName(), $this->equalTo('FAIRBAIRN'));
@@ -125,15 +125,15 @@ class ManageHouseholdTest extends PHPUnit_Framework_TestCase
 
     public function testGetHouseholdMembers()
     {
-        $members = $this->manageHousehold->getHouseholdMembers(1);
+        $members = ManageHousehold::getHouseholdMembers(1);
         $this->assertThat(sizeof($members), $this->equalTo(2));
     }
 
     public function testAddMember()
     {
-        $this->manageHousehold->addMember($this->data);
+        ManageHousehold::addMember($this->data);
         
-        $household = $this->manageHousehold->findHousehold(3);
+        $household = ManageHousehold::findHousehold(3);
         
         $this->assertThat(sizeof($household), $this->equalTo(2));
     }

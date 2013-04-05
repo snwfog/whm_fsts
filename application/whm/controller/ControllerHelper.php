@@ -8,14 +8,14 @@ use DateTime;
 class ControllerHelper
 {
 
-    public function formatMember($member_array){
+    public static function formatMember($member_array){
         $count = 0;
         $data = null;
         foreach( $member_array as $member){
             $date = $member->getFirstVisitDate()->format("m-d-Y");
             $DOB = null;
             if(!is_null($member->getDateOfBirth())){
-                $data[$count]["age"] = $this->calculateAge($member->getDateOfBirth(), new DateTime());
+                $data[$count]["age"] = self::calculateAge($member->getDateOfBirth(), new DateTime());
                 $DOB =  $member->getDateOfBirth()->format("m-d-y");
             }
             $household = $member->getHousehold();
@@ -44,7 +44,7 @@ class ControllerHelper
         return $data;
     }
 
-    public function calculateAge($earlierDate, $olderDate){
+    public static function calculateAge($earlierDate, $olderDate){
         return $earlierDate->format("md") > $olderDate->format("md") ? 
                     ($olderDate->format("Y") - $earlierDate->format("Y") - 1) 
                     : 

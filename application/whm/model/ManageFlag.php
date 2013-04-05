@@ -15,12 +15,10 @@ use \DateTime;
 class ManageFlag 
 {
     private $em;
-    private $mhousehold;
 
     public function __construct()
     {
         $this->em = Application::em();
-        $this->mhousehold = new ManageHousehold();
         
     }
 
@@ -30,7 +28,7 @@ class ManageFlag
         $flag = new Flag();
         $flag->setMessage($data["message"]);
         $flag->setFlagDate($datetime); 
-        $household_member = $this->mhousehold->findMember($data["member-id"]);
+        $household_member = ManageHousehold::findMember($data["member-id"]);
         $flag_descriptors = $this->findDescriptors($data["flag-descriptor-id"]); 
         $flag->setHouseholdMember($household_member);
         $flag->setDescriptor($flag_descriptors);    
