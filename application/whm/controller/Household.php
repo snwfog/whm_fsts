@@ -67,13 +67,8 @@ class Household extends Controller implements IRedirectable
             
         //   $flagNumber = $this->flagNum($formattedFlags);
 
-            //Get Events to make appointment
-            $eventdraft=$this->manageEvents->getAllUpComingEvents();
-            $events=$this->eventcontroller->getIndexedEvents($eventdraft, $household_id, $member_id);
-            
-            //This method ready for use, takes a number. It will then add it to current month and 
-            // $eventmonthdraft=$this->manageEvents->getEventsbyMonth('3');
-            // $eventsMonth=$this->eventcontroller->getIndexedEvents($eventmonthdraft, $household_id, $member_id, '3');
+            //Get Events.
+            $events = $this->getMonthlyEvents($household_id, $member_id);
 
             $data = array(
                             "household"         =>  $data,
@@ -280,6 +275,22 @@ class Household extends Controller implements IRedirectable
             }        
         }
         return $data;
+    }
+
+    private function getMonthlyEvents($household_id, $member_id)
+    {   
+        $eventdraft = $this->manageEvents->getAllUpComingEvents();
+        $events = $this->eventcontroller->getIndexedEvents($eventdraft, $household_id, $member_id);
+        $event[0] = $events;
+
+        for($i = 1; $i <= 6; $i++)
+        {
+            $eventmonthdraft = $this->manageEvents->getEventsbyMonth($i);
+            $eventsMonth = $this->eventcontroller->getIndexedEvents($eventmonthdraft, $household_id, $member_id, $i);
+            $event[$i] = $eventsMonth;
+        }
+
+        return $event;
     }
 }
 

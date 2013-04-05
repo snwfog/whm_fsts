@@ -56,12 +56,28 @@
                         data-toggle="modal" data-target="#add-member-modal">
                         <i class="icon-user icon-white"></i> Add Member
                 </button>
-                <button class="btn btn-success" 
+                {#<button class="btn btn-success" 
                         id=""
                         name="" type="button"
                         data-toggle="modal" data-target="#appointment-modal"><i class="icon-time icon-white"></i> Make Appointment
-                </button>
-               
+                </button>#}
+                <div class="btn-group">
+                    <a class="btn btn-success" id=""
+                            name="" type="button"
+                            data-toggle="modal" 
+                            data-target="#appointment-modal">
+                        <i class="icon-time icon-white"></i> Make Appointment</a>
+                    <a class="btn btn-success dropdown-toggle" data-toggle="dropdown"><span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for b in 1..6 %}
+                            {% set month = b ~ " month" %}
+                            <li><a href="#" name="" type="button" data-toggle="modal" data-target="#appointment-modal{{ b }}">
+                                {{ month|date("F", "America/Montreal") }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
 
             <input type="hidden" name="household-id" value="{{ household["household_id"] }}"/>
@@ -72,6 +88,7 @@
         {% include 'addmember.modal.twig' %}
         {% include 'addflag.modal.twig' %}
         {% include 'appointment.modal.twig' %}
+        {% include 'appointment1.modal.twig' %}
     </div>
 {% endblock content %}
 

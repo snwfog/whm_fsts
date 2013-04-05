@@ -58,7 +58,7 @@ div.no-padding-well
 }
 
 /* Appointment modal width increase */
-div#appointment-modal
+div#appointment-modal, div#appointment-modal1
 {
     width: 960px;
     margin-left: -480px;
