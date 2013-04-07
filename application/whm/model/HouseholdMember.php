@@ -384,7 +384,7 @@ class HouseholdMember
     public function addFlags($flags)
     {
         $this->flags[] = $flags;
-        $flags->addHouseholdMember($this);
+        $flags->setHouseholdMember($this);
     }
 
     /**

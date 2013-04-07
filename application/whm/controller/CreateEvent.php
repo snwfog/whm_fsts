@@ -113,8 +113,6 @@ class CreateEvent extends Controller implements IRedirectable
         }
 
         $this->redirect(isset($groupId) ? 'event/'.$groupId : 'event/');
-              
-
     }
 
     public function put()

@@ -1,6 +1,7 @@
 {% block timeslot %}
     <fieldset>
         <div id="timeslot-well" style="max-height:350px; overflow-y: auto;">
+            <h4> Description </h4>
             {#This form was used for timeslot now it is used for extra information for an event#}
             <form action="{{ apppath }}event/new" method="POST" name="view-timeslot-form" id="{{ timeslots? 'timeslot-form' : 'new-timeslot-form'}}">
                 <textarea class="span12" style="resize:none" rows="6" name="description" placeholder="Description...">

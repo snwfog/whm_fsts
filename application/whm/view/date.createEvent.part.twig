@@ -1,33 +1,101 @@
 {% block create_event_date_part_twig %}
     <fieldset>
-    	<legend>Date,Time and Occurrence</legend>
-        <div class="controls controls-row" id="name-row">
-            <input class="span3" id="dp1" type="text" name="start-date" maxlength="10" placeholder="Start Date" value="{{ event.date }}"/>
-            {% if event is null %}
-                <input class="span3" id="dp2" type="text" name="end-date" maxlength="10" placeholder="End Date" />
-            {% endif %}
-    	    <div class="input-append bootstrap-timepicker" style="margin-left: 10px;">
-                <input class="span4 time-add-on" style="margin-left:15px" type="text" id="tp1" name="start-time" placeholder="Start Time" value="{{ event["start-time"] }}"/>
-                <span class="add-on"><i class="icon-time"></i></span>
+    	<legend>Timeslot</legend>      
+        <div class="control controls-row">
+                <table id="timeslot-table" class="table table-bordered">
+                    <thead>
+                        <th style="width: 30%"> Time</th>                
+                        <th style="width: 30%"> Time Slot </th>
+                        <th style="width: 10%"> Duration </th>
+                        <th style="width: 10%"> Capacity </th>
+                        <th style="width: 20%"> Actions </th>
+                    </thead>
+                    <tbody id="timeslot-table-tbody">
+                        {% for timeslot in timeslots %}
+                            <input class="span" type="hidden" name="slot-id[]" value="{{ timeslot.id }}"/>
+                            <tr id="timeslot-row-{{timeslot.id}}">
+                                <td>
+                                    <h4 style="margin-top:5px;">{{ timeslot["start-time"] }}-{{ timeslot["end-time"] }}</h4>
+                                </td>                                
+                                <td>
+                                    <input class="span12" type="text" name="slot-name[]" value="{{ timeslot.name }}"/>
+                                </td>
+                                <td>
+                                    <input class="span12" type="number" name="slot-duration[]" value="{{ timeslot.duration }}"/>
+                                </td>
+                                <td>
+                                    <input class="span12" type="text" name="slot-capacity[]" value="{{ timeslot.capacity }}"/>
+                                </td>
+                                <td>
+                                    {% if timeslot.participants|length == 0 %}
+                                        <button type="button" class="btn btn-danger" name="delete-timeslot" id="{{timeslot.id}}">
+                                            <i class="icon-white icon-trash"></i>
+                                        </button>
+                                    {% else %}
+                                        <button type="button" onclick="location.href='{{apppath}}attendance/{{event["event-id"]}}/{{ timeslot.id}}';" class="btn btn-info">
+                                            <i class="icon-white icon-user"></i>
+                                        </button>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        {% if not timeslots and not event %}
+                            <input class="span" type="hidden" name="slot-id[]" value=""/>
+                            <tr>
+                                <td>
+                                </td>         
+                                <td>
+                                    <input class="span12" type="text" name="slot-name[]" placeholder="Name"/>
+                                </td>
+                                <td>
+                                    <input class="span12" type="number" name="slot-duration[]" placeholder="Minutes"/>
+                                </td>
+                                <td>
+                                    <input class="span12" type="text" name="slot-capacity[]" placeholder="Size"/>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger" name="delete-timeslot" id="{{timeslot.id}}" onclick="this.parentNode.parentNode.remove();">
+                                        <i class="icon-white icon-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <input class="span" type="hidden" name="slot-id[]" value=""/>
+                            <tr>
+                                <td>
+                                </td>         
+                                <td>
+                                    <input class="span12" type="text" name="slot-name[]" placeholder="Name"/>
+                                </td>
+                                <td>
+                                    <input class="span12" type="number" name="slot-duration[]" placeholder="Minutes"/>
+                                </td>
+                                <td>
+                                    <input class="span12" type="text" name="slot-capacity[]" placeholder="Size"/>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger" name="delete-timeslot" id="{{timeslot.id}}" onclick="this.parentNode.parentNode.remove();">
+                                        <i class="icon-white icon-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        {% elseif event and timeslots|length == 0 %}
+                          <tr>
+                              <td colspan="5">
+                                  <h5> This event contains no timeslot, click modify then add timeslot. </h5>
+                              </td>
+                          </tr>
+                      {% endif %}  
+                    </tbody>
+                </table>
             </div>
-        </div>
-        {% if event is null %}
-            <div id="event-occurrence" class="btn-group" data-toggle="buttons-radio" style="margin-bottom: 10px;">
-                <button type="button" class="btn btn-primary" data-value="daily">Daily</button>
-                <button type="button" class="btn btn-primary" data-value="weekly">Weekly</button>
-                <button type="button" class="btn btn-primary" data-value="biweekly">Biweekly</button>
-                <button type="button" class="btn btn-primary" data-value="monthly">Monthly</button>
-                <button type="button" class="btn btn-primary" data-value="bimonthly">Bimonthly</button>
-                <button type="button" class="btn btn-primary" data-value="yearly">Yearly</button>
-            </div>
-        {% endif %}
-
-
-		<script type="text/javascript">
-			$('#dp1,#dp2').datepicker();
-			$('#tp1').timepicker({showMeridian: false});
-		</script>
-        
     </fieldset>
+    <script>
+        var tableDnD = new TableDnD();
+        var table = document.getElementById('timeslot-table');
+        tableDnD.init(table);
+    </script>
+
+
+    
 
 {% endblock create_event_date_part_twig %}
