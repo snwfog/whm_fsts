@@ -169,6 +169,11 @@ $(function() {
 	 Mousetrap.bind("3", function() { //EVENT
         window.location.href = document.getElementById("eventJS").href;
      });
+
+    Mousetrap.bind("4", function() { //EVENT
+        window.location.href = document.getElementById("todayseventsJS").href;
+     });
+  
 	
 	 Mousetrap.bind("k", function() { //Toggle KB Legend
 

@@ -33,9 +33,15 @@
                                 </ul>
                             </li>
 
-                            <li>
-                                <a href="{{ apppath }}event" id="eventJS" data-target="#create-event"><i class="icon-calendar"></i> Event</a>
-
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-calendar"></i> Event <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-header">Event
+                                    </li>
+                                    <li><a href="{{ apppath }}event" id="eventJS" data-target="#create-event"><i class="icon-calendar"></i>Create Event</a></li>
+                                    <li><a href="{{ apppath }}todaysevents" id="todayseventsJS"><i class="icon-eye-open"></i>Today Events</a>
+                                    </li>
+                                </ul>
                             </li>
 
                             <li class="dropdown">
@@ -78,6 +84,7 @@
                                     <li><a> 1 : Statistics Reports </a></li>
                                     <li><a> 2 : Functional Reports </a></li>
                                     <li><a> 3 : Events </a></li>
+                                    <li><a> 4 : Today Events </a></li>
                                     <li><a> 0 : Switch Theme </a></li>
                                 </ul>
                             </li>  
