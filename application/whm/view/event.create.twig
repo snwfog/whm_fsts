@@ -24,7 +24,7 @@
 
                     {# DECIDE LABEL COLOR #}
                     {% set maxparticipants = event.totalCapacity %}
-                    {% set actualparticipants = event.numOfParticipants ? numOfParticipants|length : 0 %}
+                    {% set actualparticipants = event.numOfParticipants %}
                     {% set availablespots = maxparticipants - actualparticipants %}
                     {% set labelcolor = 'success' %}
                     {% if availablespots <= maxparticipants / 10 %}
@@ -64,18 +64,12 @@
                              
                         <input type="hidden" name="event-id" value="{{ event["event-id"] }}"/>
                         <input type="hidden" name="template-id" value="{{ template["template-id"] }}"/>
-                    </form>
-                    {% include 'template.list.twig' %}
-                </div>
-                <div class="tab-pane" id="tab2">
-                    {% include 'timeslot.event.part.twig' %}
-                </div>
-                <legend>Action</legend>
-                <div class="btn-toolbar">
-                    {% if event %}
-
+                       
+                        <legend>Action</legend>
+                        <div class="btn-toolbar">
+                        {% if event %}
                         <button class="btn btn-warning" data-toggle="button" class-toggle="btn-state" name="event-create-modify" type="button">
-                                <i class="icon-edit icon-white"></i> Modify
+                        <i class="icon-edit icon-white"></i> Modify
                         </button>
 
                         <button href="{{ apppath }}event/{{ event["event-id"] }}" type="submit" class="btn btn-danger submit" disabled> 
@@ -112,7 +106,15 @@
                         <i class="icon-time icon-white"></i> 
                         Add Timeslot
                     </button>
-                </div>  
+                </div>
+                    </form>
+                    {% include 'template.list.twig' %}
+                </div>
+                <div class="tab-pane" id="tab2">
+                    {% include 'timeslot.event.part.twig' %}
+                    
+                </div>
+                  
             </div>
         </div>
     </div>

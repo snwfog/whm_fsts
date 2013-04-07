@@ -55,6 +55,7 @@ class AppointFulfillment extends WHM\Controller implements WHM\IRedirectable
 
         $this->data['slotEvents'] = $slotEvent;
         $this->display("event.for.today.list.twig");
+        
 
 
      
