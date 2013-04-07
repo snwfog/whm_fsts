@@ -41,9 +41,8 @@ class ManageAppointment
 
     public function getParticipantTimeslot($member_id, $timeslot_id)
     {
-       $member = ManageHousehold::findMember($member_id);
-
-        $timeslot = $this->em->find("WHM\model\Timeslot", (int) $timeslot_id);
+        // $member = ManageHousehold::findMember($member_id);
+        // $timeslot = $this->em->find("WHM\model\Timeslot", (int) $timeslot_id);
         $query = $this->em->createQueryBuilder()
                           ->select("participantTimeslot")
                           ->from("WHM\model\ParticipantsTimeslots", "participantTimeslot")
