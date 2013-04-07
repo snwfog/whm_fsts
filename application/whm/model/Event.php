@@ -33,7 +33,7 @@ class Event
     */
     protected $is_template = false;
 
-    /** @Column(type="integer") */
+    /** @Column(type="integer", nullable=TRUE) */
     protected $capacity;
 
     /**

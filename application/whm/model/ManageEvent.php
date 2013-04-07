@@ -30,7 +30,6 @@ class ManageEvent
         $event->setDescription($data["description"]);
         $event->setStartTime($data["start-time"]); 
         $event->setStartDate($data["start-date"]); 
-        $event->setCapacity($data["event-capacity"]);
         if(isset($data["is_template"])){
             $event->setIsTemplate($data["is_template"]);
         }
@@ -118,7 +117,6 @@ class ManageEvent
         $eventInstance->setDescription($data["description"]);
         $eventInstance->setStartTime($data["start-time"]);
         $eventInstance->setStartDate($data["start-date"]); 
-        $eventInstance->setCapacity($data["event-capacity"]);
 
         if(isset($data["slot-id"]) && isset($data["slot-id"]) && isset($data["slot-duration"]) && isset($data["slot-capacity"])){
           $slot_ids = $data["slot-id"];
