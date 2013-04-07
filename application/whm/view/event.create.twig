@@ -67,44 +67,49 @@
                        
                         <legend>Action</legend>
                         <div class="btn-toolbar">
-                        {% if event %}
-                        <button class="btn btn-warning" data-toggle="button" class-toggle="btn-state" name="event-create-modify" type="button">
-                        <i class="icon-edit icon-white"></i> Modify
-                        </button>
+                            {% if event %}
+                                <button class="btn btn-warning" data-toggle="button" class-toggle="btn-state" name="event-create-modify" type="button">
+                                    <i class="icon-edit icon-white"></i> Modify
+                                </button>
 
-                        <button href="{{ apppath }}event/{{ event["event-id"] }}" type="submit" class="btn btn-danger submit" disabled> 
-                        <a href="{{ apppath }}event/{{ event["event-id"] }}" style="text-decoration: none; color: white;"> Drop Changes </a>
-                        </button>
+                                <button href="{{ apppath }}event/{{ event["event-id"] }}" type="submit" class="btn btn-danger submit" disabled> 
+                                    <a href="{{ apppath }}event/{{ event["event-id"] }}" style="text-decoration: none; color: white;"> 
+                                        Drop Changes 
+                                    </a>
+                                </button>
 
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#add-date-modal">
-                        <i class="icon-white icon-calendar"></i> New Date
-                        </button>
-                        {# Event Activation Form + Button #}
-                        {% if event["is_activated"] %}
-                        <button type="button" class="btn btn-danger" id="activate-event">
-                        Close Event</button>
-                        {% else %}
-                        <button type="button" class="btn btn-info" id="activate-event">Open Event</button>{% endif %}
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#add-date-modal">
+                                    <i class="icon-white icon-calendar"></i> New Date
+                                </button>
+                                {# Event Activation Form + Button #}
+                                {% if event["is_activated"] %}
+                                    <button type="button" class="btn btn-danger" id="activate-event">
+                                        Close Event
+                                    </button>
+                                {% else %}                     
+                                    <button type="button" class="btn btn-info" id="activate-event">Open Event</button>
+                                {% endif %}
 
-                        <form action="{{ apppath }}event/" method="POST" name="event-active-status">
-                        <input type="hidden" name="event-id" value="{{ event["event-id"] }}"/>
-                        <input type="hidden" name="activate" value="{{ event["is_activated"] == 0 ? 1 : 0 }}"/>
-                        </form>
-                        {# END OF Event Activation Form + Button #}
+                                <form action="{{ apppath }}event/" method="POST" name="event-active-status">
+                                <input type="hidden" name="event-id" value="{{ event["event-id"] }}"/>
+                                <input type="hidden" name="activate" value="{{ event["is_activated"] == 0 ? 1 : 0 }}"/>
+                                </form>
+                                {# END OF Event Activation Form + Button #}
 
-                    {% else %}
-                        <button id="create-event-save" type="button" class="btn btn-success"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Create Event</button>
-                        <button id="create-template-save" type="button" class="btn btn-info"><i class="icon-file icon-white submit"></i> Save Template </button>
-                    {% endif %}
-                        <button id="add-timeslot-table" type="button" class="btn btn btn-info" value="{{theme ? 'icon-white' : ''}}" {{ event ? 'disabled': ''}}><i class="icon-plus icon-white"></i>Timeslot</button>
-                </div>
+                            {% else %}
+                                <button id="create-event-save" type="button" class="btn btn-success"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Create Event</button>
+                                <button id="create-template-save" type="button" class="btn btn-info"><i class="icon-file icon-white submit"></i> Save Template </button>
+                            {% endif %}
+                            <button id="add-timeslot-table" type="button" class="btn btn btn-info" value="{{theme ? 'icon-white' : ''}}" {{ event ? 'disabled': ''}}>
+                                <i class="icon-plus icon-white"></i>Timeslot
+                            </button>
+                        </div>
                     </form>
                     {% include 'template.list.twig' %}
                 </div>
                 <div class="tab-pane" id="tab2">
                     {% include 'timeslot.event.part.twig' %}
-                </div>
-                  
+                </div>               
             </div>
         </div>
     </div>
