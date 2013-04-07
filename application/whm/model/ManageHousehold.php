@@ -130,6 +130,10 @@ class ManageHousehold {
         $household_member->setMcareNumber($data["mcare-number"]);
         $household_member->setWorkStatus($data["work_status"]);
         $household_member->setWelfareNumber($data["welfare-number"]);
+        $household_member->setSchool($data["school"]);
+        $household_member->setStudentId($data["student-id"]);
+        $household_member->setGrade($data["grade"]);
+        $household_member->setStudentBursary($data["student-bursary"]);
         $household_member->setReferral($data["referral"]);
         $household_member->setMotherTongue($data["mother-tongue"]);
         $household_member->setLanguage($data["language"]);

@@ -21,7 +21,12 @@
               <thead>
                 <tr>
                   <th class="btn-large">Participant Name</th>
+                  {% if (event.name) == "Special giveaways" or (event.name) == "Toys giveaways" or (event.name) == "Back To School" %} 
                   <th class="btn-large">Gender</th>
+                  <th class="btn-large">Age</th>
+                  <th class="btn-large">Grade</th>
+                  {% endif %}
+
                   <th class="btn-large">Medicare Number</th>
                   <th class="btn-large">Time Slot</th>
                   <th class="btn-large">Checked In</th>
@@ -37,8 +42,12 @@
                       <tr class ="success">
                 {% endif %}
                       
-                      <td><h3>{{ participant.lastName }} {{ participant.firstName }}</h3></td>
+                      <td><h3>{{ participant.lastName }} {{ participant.firstName }}</h3></td>  
+                      {% if (event.name) == "Special giveaways" or (event.name) == "Toys giveaways" or (event.name) == "Back To School" %} 
                       <td><h3>{{ participant.gender }}</h3></td>
+                      <td><h3>{{ participant.age }}</h3></td>
+                      <td><h3>{{ participant.grade }}</h3></td>
+                      {% endif %}
                       <td><h3>{{ participant.medicare }}</h3></td>
                       <td><h3>{{participant.startTime}}-{{participant.endTime}}</h3></td>
                       <td>
@@ -46,8 +55,8 @@
                                 participanttimeslotid='{{participant.participantTimeSlotId}}'>
                                 <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch-{{participant.id}}" {{(participant.attend) ? 'checked="checked"' : ''}}>
                                 <label class="onoffswitch-label" for="myonoffswitch-{{participant.id}}">
-                                    <div class="onoffswitch-inner"></div>
-                                    <div class="onoffswitch-switch"></div>
+                                <div class="onoffswitch-inner"></div>
+                                <div class="onoffswitch-switch"></div>
                                 </label>
                           </div>
 

@@ -65,7 +65,7 @@ class AppointFulfillmentSingleEvent extends WHM\Controller implements WHM\IRedir
             }
 
             $slotStarttime = $endtime;
-            $totalNumOfParticipants += count($participants);
+            $totalNumOfParticipants = count($participants);
             $totalEventCapacity += $timeslot->getCapacity();
         }
         $event = $this->event->formatEvents(array($event));

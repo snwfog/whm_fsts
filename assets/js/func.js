@@ -114,12 +114,16 @@ $(function() {
 	$('#work_status').change(function() {
 		var workstatusObj = document.getElementById("work_status");
 		var schoolObj = document.getElementById("school");
-		var schoolIdObj = document.getElementById("school-id");
+		var schoolIdObj = document.getElementById("student-id");
+    var grade = document.getElementById("grade");
+    var bursary = document.getElementById("bursary");
 		var welfareObj = document.getElementById("welfare-number");
 		if(workstatusObj.value == "student")
 		{
 		  schoolObj.type ="text";
 		  schoolIdObj.type ="text";
+      grade.type ="text";
+      bursary.type ="text";
 		  welfareObj.type ="hidden";
 		}
 		else if(workstatusObj.value == "welfare")
@@ -127,12 +131,16 @@ $(function() {
 		  welfareObj.type ="text";
 		  schoolObj.type ="hidden";
 		  schoolIdObj.type="hidden";
+      grade.type ="hidden";
+      bursary.type ="hidden";
 		}
 		else
 		{
 		  welfareObj.type ="hidden";
 		  schoolObj.type ="hidden";
 		  schoolIdObj.type="hidden";
+      grade.type ="hidden";
+      bursary.type ="hidden";
 		}
 	});	
 	//More complex keyboard shortcuts
