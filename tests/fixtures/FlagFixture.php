@@ -54,19 +54,24 @@ class FlagFixture extends AbstractFixture implements DependentFixtureInterface
             $em->persist($flagDescriptor);
             $this->setReference("FlagDescriptor" . ($i + 1), $flagDescriptor);
         }
-//
-//        for ($i = 0; $i < 250; $i++)
-//        {
-//
-//        }
 
-        $flag = new Flag();
-        $flag->setDescriptor($this->getReference("FlagDescriptor1"));
-        $flag->setFlagDate(new \DateTime());
-        $flag->setHouseholdMember($this->getReference("HouseHoldMember1"));
-        $flag->setMessage("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
-        
-        $em->persist($flag);
+        for ($i = 1; $i < 248; $i++)
+        {
+            
+            $randomNumberOfFlags = rand(1, 11);
+            for($j = 0; $j < $randomNumberOfFlags; $j++)
+            {                
+                echo $i."\n";
+                $randomFlagDescriptorReference = rand(1, 4);            
+                $flag = new Flag();
+                $flag->setDescriptor($this->getReference("FlagDescriptor". $randomFlagDescriptorReference));
+                $flag->setFlagDate(new \DateTime());
+                $flag->setHouseholdMember($this->getReference("HouseHoldMember". $i));
+                $flag->setMessage("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
+            
+                $em->persist($flag);                
+            }            
+        }
 
         $em->flush();
     }
