@@ -52,7 +52,7 @@
                 </li>
             </ul>
             <div class="tab-content">
-                 <div class="tab-pane active" id="tab1">
+                <div class="tab-pane active" id="tab1">
                     {# for ajax delete timeslot#}
                     <form action="" method="" name="delete-timeslot"></form>
                     <form action="{{ apppath }}{{ formAction }}" style="margin: 0px 0px 0px 0px;" method="POST" name="event-form" 
@@ -73,26 +73,22 @@
                         </button>
 
                         <button href="{{ apppath }}event/{{ event["event-id"] }}" type="submit" class="btn btn-danger submit" disabled> 
-                            <a href="{{ apppath }}event/{{ event["event-id"] }}" style="text-decoration: none; color: white;"> Drop Changes </a>
+                        <a href="{{ apppath }}event/{{ event["event-id"] }}" style="text-decoration: none; color: white;"> Drop Changes </a>
                         </button>
 
                         <button class="btn btn-primary" data-toggle="modal" data-target="#add-date-modal">
-                            <i class="icon-white icon-calendar"></i> New Date
+                        <i class="icon-white icon-calendar"></i> New Date
                         </button>
-
                         {# Event Activation Form + Button #}
                         {% if event["is_activated"] %}
-                            <button type="button" class="btn btn-danger" id="activate-event">
-                                Close Event
-                            </button>
+                        <button type="button" class="btn btn-danger" id="activate-event">
+                        Close Event</button>
                         {% else %}
-                            <button type="button" class="btn btn-info" id="activate-event">
-                                Open Event
-                            </button>
-                        {% endif %}
+                        <button type="button" class="btn btn-info" id="activate-event">Open Event</button>{% endif %}
+
                         <form action="{{ apppath }}event/" method="POST" name="event-active-status">
-                            <input type="hidden" name="event-id" value="{{ event["event-id"] }}"/>
-                            <input type="hidden" name="activate" value="{{ event["is_activated"] == 0 ? 1 : 0 }}"/>
+                        <input type="hidden" name="event-id" value="{{ event["event-id"] }}"/>
+                        <input type="hidden" name="activate" value="{{ event["is_activated"] == 0 ? 1 : 0 }}"/>
                         </form>
                         {# END OF Event Activation Form + Button #}
 
@@ -100,19 +96,13 @@
                         <button id="create-event-save" type="button" class="btn btn-success"><i class="icon-plus icon-white"></i><i class="icon-tasks icon-white"></i> Create Event</button>
                         <button id="create-template-save" type="button" class="btn btn-info"><i class="icon-file icon-white submit"></i> Save Template </button>
                     {% endif %}
-
-                    <button id="add-timeslot-table" type="button" class="btn btn btn-info" value="{{theme ? 'icon-white' : ''}}" {{ event ? 'disabled': ''}}>
-                        <i class="icon-plus icon-white"></i> 
-                        <i class="icon-time icon-white"></i> 
-                        Add Timeslot
-                    </button>
+                        <button id="add-timeslot-table" type="button" class="btn btn btn-info" value="{{theme ? 'icon-white' : ''}}" {{ event ? 'disabled': ''}}><i class="icon-plus icon-white"></i>Timeslot</button>
                 </div>
                     </form>
                     {% include 'template.list.twig' %}
                 </div>
                 <div class="tab-pane" id="tab2">
                     {% include 'timeslot.event.part.twig' %}
-                    
                 </div>
                   
             </div>
