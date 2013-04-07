@@ -6,7 +6,7 @@
           <thead>
               <tr>
                     
-                 <th><h3>Today's Events</h3></th>
+                 <th><h2>Today's Events</h2></th>
                     
               </tr>
           </thead>
@@ -15,7 +15,7 @@
           {% for tdyevent in slotEvents %}
               
                 <tr>
-                    <td>  
+                    <td class="btn-large well">  
                       <a href="{{ apppath }}todaysevents/{{tdyevent.id}}">{{ tdyevent.name }} </a>
                     </td>  
                 </tr>
