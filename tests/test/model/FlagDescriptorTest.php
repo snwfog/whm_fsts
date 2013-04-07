@@ -2,6 +2,7 @@
 
 use \PHPUnit_Framework_TestCase;
 use WHM\Model\FlagDescriptor;
+use WHM\Application;
 
 class FlagDescriptorTest extends PHPUnit_Framework_TestCase
 {
@@ -10,7 +11,8 @@ class FlagDescriptorTest extends PHPUnit_Framework_TestCase
      * @var FlagDescriptor 
      */
     private $flagDescriptor;
-
+    private $em;
+    private $flagTrueColor;
     /**
      * @var FlagDescriptor 
      */
@@ -19,7 +21,8 @@ class FlagDescriptorTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-
+        $this->em = Application::em();
+        $this->flagTrueColor = "red";
         $this->flagDescriptor = new FlagDescriptor();
         
         $this->flagDescriptor2 = new FlagDescriptor();
@@ -67,5 +70,18 @@ class FlagDescriptorTest extends PHPUnit_Framework_TestCase
             $this->flagDescriptor2->getMeaning(),
             $this->equalTo("Warning Flag"));        
     }
-
+    public function testSetGetAlternativeColor()
+    {
+        $this->flagDescriptor->setAlternativeColor("hot red");
+        $this->assertThat(
+            $this->flagDescriptor->getAlternativeColor(),
+            $this->equalTo("hot red"));
+    }
+    public function testBuild(){
+        //$flagDescriptor3 = new FlagDescriptor();
+        $flagDescriptor3 = FlagDescriptor::build($this->em, $this->flagTrueColor);
+        $this->assertNull($flagDescriptor3);
+        //$this->assertThat($flagDescriptor3->getMeaning(),$this->equalTo("Success"));
+    }
+    
 }

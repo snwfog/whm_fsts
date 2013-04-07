@@ -61,6 +61,9 @@ class AppointFulfillmentSingleEvent extends WHM\Controller implements WHM\IRedir
                     'duration' => $timeslot->getDuration(),
                     'startTime'=> $slotStarttime,
                     'endTime'=> $endtime,
+                    'grade' => $participant->getGrade(),
+                    'age'   => get_class($participant->getDateOfBirth()) == "DateTime" ? ControllerHelper::calculateAge($participant->getDateOfBirth(), new DateTime) : '',
+
                 );
             }
 
