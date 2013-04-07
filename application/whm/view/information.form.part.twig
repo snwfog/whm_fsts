@@ -1,5 +1,4 @@
 {% block information %}
- 
     <fieldset>
         <legend>Information {{ household["date-of-birth"] }} </legend>
         <div class="controls controls-row">
@@ -12,7 +11,6 @@
                    type="text" name="referral" placeholder="Referral"
                    value="{{ household["referral"] }}"/>
         </div>
-
         <div class="controls controls-row">
             <input class="span4" type="text" data-link="country" name="origin" autocomplete="off"
                    placeholder="Country of Origin" value="{{ household["origin"] }}"/>
@@ -21,45 +19,59 @@
             <input class="span4" type="text" data-link="language" autocomplete="off"
                    name="language" placeholder="Language" value="{{ household["language"] }}"/>
             <input type="hidden" name="first-visit-date" value="{{ household["first-visit-date"] }}"/>
-
         </div>
-
-        <div class="controls controls-row">
-            
+        <div class="controls controls-row">            
             <input class="span2" type="text" maxlength="1" name="gender"
                    placeholder="Gender" value="{{ household["gender"] }}"/>
-               <input class="span3"    type="text" name="marital-status"
-            placeholder="Marital Status" value="{{ household["marital"] }}"/>
 
+            <select name="marital-status" class ="span3">
+                <option value="" disabled>
+                    Marital Status
+                </option>
+                <option value="MARRIED" {{ household["marital"] == "MARRIED" ? 'selected="selected"' : ''}}>
+                    Married
+                </option>
+                <option value="SINGLE" {{ household["marital"] == "SINGLE" ? 'selected="selected"' : ''}}>
+                    Single
+                </option>
+                <option value="DIVORCED" {{ household["marital"] == "DIVORCED" ? 'selected="selected"' : ''}}>
+                    Divorced
+                </option>
+                <option value="WIDOWED" {{ household["marital"] == "WIDOWED" ? 'selected="selected"' : ''}}>
+                    Married
+                </option>
+                <option value="SEPARATED" {{ household["marital"] == "SEPARATED" ? 'selected="selected"' : ''}}>
+                    Separated
+                </option>
+                <option value="DOMESTIC PARTNER" {{ household["marital"] == "DOMESTIC PARTNER" ? 'selected="selected"' : ''}}>
+                    Domestic Partner
+                </option>
+            </select>
             <select name="work_status" id="work_status" class ="span3">
-              <option  value="" {{ household["work-status"] is null ? 'selected="selected"' : ''}}>Work Status</option>
+              <option  value="" {{ household["work-status"] is null ? 'selected="selected"' : ''}} disabled>Work Status</option>
               <option value="lowincome" {{ household["work-status"] == "lowincome" ? 'selected="selected"' : ''}}>Low Income</option>
               <option value="welfare" " {{ household["work-status"] == "welfare" ? 'selected="selected"' : ''}}>Welfare</option>
               <option value="student" {{ household["work-status"] == "student" ? 'selected="selected"' : ''}}>Student</option>
             </select>
-            <input type='hidden' id="other" />
 
+            <input type='hidden' id="other" />
             <input class="span3" type="hidden" 
             placeholder="Work Status" maxlength="2" value="{{ household["work-status"] }}"/>
 
-            <input class="span4 help" type="text" name="income" data-message="[Not working ATM] Go ahead, you may put arithmetic operations in this field. For
-            example, 4 * 400, or 2 * 1500, or 50 000 / 12 and we will calculate the result for you." placeholder="Annual Income" value="{{ household["income"] }}"/>
+            <input class="span4 help" type="text" name="income" data-message="Go ahead, you may put arithmetic operations in this field. For
+            example, 4 * 400, or 2 * 1500, or 50 000 / 12 and we will calculate the result for you." placeholder="Annual Income" value="{{ household["income"] }}"/>  
         </div>
-
         <div class="controls controls-row">
             <input class="span4" maxlength="{{ 3 * 4 + 2 + 3 }}"
             type="hidden" name="welfare-number" id="welfare-number" placeholder="Welfare Number"
             value="{{ household["welfare-number"] }}"/>
-
+            
             <input class="span4" type="hidden" id="school" name="school" placeholder="School" value="{{ household["school"] }}" />
-
+            
             <input class="span4" type="hidden" name="school-id" placeholder="School ID" id="school-id" value="{{ household["school-id"] }}" />
-
-            <input class="span4" type="hidden" name="student-bursery" id="bursery" placeholder="Bursery" value="{{ household["student-bursery"] }}" />  
-        
+            
+            <input class="span4" type="hidden" name="student-bursery" id="bursery" placeholder="Bursery" value="{{ household["student-bursery"] }}" />       
         </div>
-
     </fieldset>
-
 {% endblock information %}
 
