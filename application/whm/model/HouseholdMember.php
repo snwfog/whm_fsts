@@ -83,6 +83,26 @@ class HouseholdMember
     protected $income;
 
     /**
+     * @Column(nullable=TRUE)
+     */
+    protected $school;
+
+    /**
+     * @Column(nullable=TRUE)
+     */
+    protected $student_id;
+
+    /**
+     * @Column(nullable=TRUE)
+     */
+    protected $grade;
+
+    /**
+     * @Column(nullable=TRUE)
+     */
+    protected $student_bursary;
+
+    /**
     * @Column(type="date", nullable=TRUE)
     */
     protected $date_of_birth;
@@ -261,6 +281,47 @@ class HouseholdMember
     {
         return $this->income;
     }
+
+      public function setSchool($school)
+    {
+        $this->school = $school;
+    }
+
+    public function getSchool()
+    {
+        return $this->school;
+    }
+
+    public function setStudentId($student_id)
+    {
+        $this->student_id = $student_id;
+    }
+
+    public function getStudentId()
+    {
+        return $this->student_id;
+    }
+
+    public function setGrade($grade)
+    {
+        $this->grade = $grade;
+    }
+
+    public function getGrade()
+    {
+        return $this->grade;
+    }
+
+    public function setStudentBursary($student_bursary)
+    {
+        $this->student_bursary = $student_bursary;
+    }
+
+    public function getStudentBursary()
+    {
+        return $this->student_bursary;
+    }
+
 
     public function setDateOfBirth($date_of_birth)
     {

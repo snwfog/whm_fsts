@@ -216,11 +216,14 @@ $('#work').change(function() {
     marker = $('<span />').insertBefore('#school');
     $('#school').detach().attr('type', 'text').insertAfter(marker).focus();
     marker.remove();
-    marker2 = $('<span />').insertBefore('#school-id');
+    marker2 = $('<span />').insertBefore('#student-id');
     $('#school').detach().attr('type', 'text').insertAfter(marker2).focus();
     marker2.remove();
-    marker3 = $('<span />').insertBefore('#bursery');
-    $('#bursery').detach().attr('type', 'text').insertAfter(marker3).focus();
+    marker3 = $('<span />').insertBefore('#bursary');
+    $('#bursary').detach().attr('type', 'text').insertAfter(marker3).focus();
     return marker3.remove();
+    marker4 = $('<span />').insertBefore('#grade');
+    $('#grade').detach().attr('type', 'text').insertAfter(marker4).focus();
+    return marker4.remove();
   }
 });
