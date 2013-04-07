@@ -221,7 +221,7 @@ $('#work').change(function() {
     marker2.remove();
     marker3 = $('<span />').insertBefore('#bursary');
     $('#bursary').detach().attr('type', 'text').insertAfter(marker3).focus();
-    return marker3.remove();
+    marker3.remove();
     marker4 = $('<span />').insertBefore('#grade');
     $('#grade').detach().attr('type', 'text').insertAfter(marker4).focus();
     return marker4.remove();
