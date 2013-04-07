@@ -119,5 +119,9 @@ div#event-main{
     padding-right: 10px;
 }
 
+div.container-fluid{
+    margin-bottom:40px;
+}
+
 
 
