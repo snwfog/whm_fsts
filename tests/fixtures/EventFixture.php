@@ -240,13 +240,13 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $this->createEvents($manager, $fiveDays);
         $this->createEvents($manager, $sixDays);
 
-        for($j = 8; $j <= 200; $j++)
-        {
-            $stringDays = 'P'.$j.'D';
-            $days = new \DateInterval($stringDays);
+        // for($j = 8; $j <= 200; $j++)
+        // {
+        //     $stringDays = 'P'.$j.'D';
+        //     $days = new \DateInterval($stringDays);
             
-            $this->createEvents($manager, $days);
-        }
+        //     $this->createEvents($manager, $days);
+        // }
 
         $manager->flush();
 
