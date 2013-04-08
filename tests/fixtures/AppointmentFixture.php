@@ -21,53 +21,22 @@ class AppointmentFixture extends AbstractFixture implements DependentFixtureInte
 
     public function load(ObjectManager $manager)
     {
-        // $participantsTimeslot1 = new ParticipantsTimeslots();    
-        // $participantsTimeslot2 = new ParticipantsTimeslots();
-        // $participantsTimeslot3 = new ParticipantsTimeslots();
-        // $participantsTimeslot4 = new ParticipantsTimeslots();
-        // $participantsTimeslot5 = new ParticipantsTimeslots();
 
-
-        // $participantsTimeslot1->setHouseHoldMember($this->getReference('HouseHoldMember1'));
-        // $participantsTimeslot1->setTimeslot($this->getReference('timeslot1'));
-
-        // $participantsTimeslot3->setHouseHoldMember($this->getReference('HouseHoldMember4'));
-        // $participantsTimeslot3->setTimeslot($this->getReference('timeslot1'));
-
-        // $participantsTimeslot4->setHouseHoldMember($this->getReference('HouseHoldMember5'));
-        // $participantsTimeslot4->setTimeslot($this->getReference('timeslot1'));
-
-        // $participantsTimeslot5->setHouseHoldMember($this->getReference('HouseHoldMember6'));
-        // $participantsTimeslot5->setTimeslot($this->getReference('timeslot1'));
-
-
-        // $participantsTimeslot2->setHouseHoldMember($this->getReference('HouseHoldMember2'));
-        // $participantsTimeslot2->setTimeslot($this->getReference('timeslot2'));
-
-
-
-        // $manager->persist($participantsTimeslot1);
-        // $manager->persist($participantsTimeslot2);
-        // $manager->persist($participantsTimeslot3);
-        // $manager->persist($participantsTimeslot4);
-        // $manager->persist($participantsTimeslot5);
-
-
-         for ($i = 1; $i < 248; $i++)
+         for ($i = 0; $i < 248; $i++)
         {
             
-            // $randomNumberOfApp = rand(1, 2);
-            // for($j = 0; $j < $randomNumberOfApp; $j++)
-            // {                
-                echo $i."\n";
-                $randomTimeslotReference = rand(1,2); 
+             $randomNumberOfApp = rand(1, 4);
+             for($j = 0; $j < $randomNumberOfApp; $j++)
+             {                
+               // echo $i."\n";
+                $randomTimeslotReference = rand(1,35); 
 
                 $participantsTimeslot = new ParticipantsTimeslots();
                 $participantsTimeslot->setHouseHoldMember($this->getReference('HouseHoldMember'. $i));
                 $participantsTimeslot->setTimeslot($this->getReference('timeslot'. $randomTimeslotReference));    
 
                 $manager->persist($participantsTimeslot);            
-            // }            
+             }            
         }
 
         $manager->flush();
