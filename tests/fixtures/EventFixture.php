@@ -10,7 +10,6 @@ use WHM\Model\Timeslot;
 
 class EventFixture extends AbstractFixture implements DependentFixtureInterface
 {
-
     public function getDependencies()
     {
         return array('Test\Fixture\MultiAddressHouseholdFixture'); // fixture classes fixture is dependent on
@@ -35,14 +34,34 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $e1->setGroupId(1);
         $e1->setIsActivated(1);
         $e1->setIsTemplate(false);
-        $e1->setName("Food Distribution");
+        $e1->setName("Food Bank");
         $e1->setStartDate($now);
         $e1->setStartTime(new \DateTime("13:30"));
         $slot1 = new Timeslot();
         $slot1->setCapacity(90);
         $slot1->setDuration(60);
         $slot1->setName('Group A');
-        $e1->addTimeslot($slot1);        
+        $e1->addTimeslot($slot1);     
+        $slot15 = new Timeslot();
+        $slot15->setCapacity(90);
+        $slot15->setDuration(60);
+        $slot15->setName('Group A');
+        $e1->addTimeslot($slot15);
+        $slot16 = new Timeslot();
+        $slot16->setCapacity(90);
+        $slot16->setDuration(60);
+        $slot16->setName('Group A');
+        $e1->addTimeslot($slot16);
+        $slot17 = new Timeslot();
+        $slot17->setCapacity(90);
+        $slot17->setDuration(60);
+        $slot17->setName('Group A');
+        $e1->addTimeslot($slot17);
+        $slot18 = new Timeslot();
+        $slot18->setCapacity(90);
+        $slot18->setDuration(60);
+        $slot18->setName('Group A');
+        $e1->addTimeslot($slot18);
         
         $e2 = new Event();
         $e2->setCapacity(45);
@@ -53,20 +72,45 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $e2->setName("Mattress");
         $clone2 = clone $now;
         $e2->setStartDate($clone2->add($oneDay));
-        $e2->setStartTime(new \DateTime("9:50"));        
+        $e2->setStartTime(new \DateTime("9:50"));
         $slot2 = new Timeslot();
         $slot2->setCapacity(90);
         $slot2->setDuration(60);
         $slot2->setName('slot1');        
-        $e2->addTimeslot($slot2);        
+        $e2->addTimeslot($slot2);
+        $slot19 = new Timeslot();
+        $slot19->setCapacity(90);
+        $slot19->setDuration(60);
+        $slot19->setName('Group A');
+        $e2->addTimeslot($slot19);
+        $slot20 = new Timeslot();
+        $slot20->setCapacity(90);
+        $slot20->setDuration(60);
+        $slot20->setName('Group A');
+        $e2->addTimeslot($slot20);
+        $slot20 = new Timeslot();
+        $slot20->setCapacity(90);
+        $slot20->setDuration(60);
+        $slot20->setName('Group A');
+        $e2->addTimeslot($slot20);
+        $slot21 = new Timeslot();
+        $slot21->setCapacity(90);
+        $slot21->setDuration(60);
+        $slot21->setName('Group A');
+        $e2->addTimeslot($slot21);
+        $slot22 = new Timeslot();
+        $slot22->setCapacity(90);
+        $slot22->setDuration(60);
+        $slot22->setName('Group A');
+        $e2->addTimeslot($slot22);       
 
         $e3 = new Event();
         $e3->setCapacity(100);
         $e3->setDescription("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
-        $e3->setGroupId(1);
+        $e3->setGroupId(6);
         $e2->setIsActivated(1);
         $e3->setIsTemplate(false);
-        $e3->setName("Food Distribution");
+        $e3->setName("Food Bank");
         $clone3 = clone $now;
         $e3->setStartDate($clone3->add($oneDay));
         $e3->setStartTime(new \DateTime("13:30"));
@@ -74,7 +118,37 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $slot3->setCapacity(90);
         $slot3->setDuration(60);
         $slot3->setName('Group A');
-        $e3->addTimeslot($slot3);         
+        $e3->addTimeslot($slot3);
+        $slot23 = new Timeslot();
+        $slot23->setCapacity(90);
+        $slot23->setDuration(60);
+        $slot23->setName('slot1');        
+        $e3->addTimeslot($slot23);
+        $slot24 = new Timeslot();
+        $slot24->setCapacity(90);
+        $slot24->setDuration(60);
+        $slot24->setName('Group A');
+        $e3->addTimeslot($slot24);
+        $slot24 = new Timeslot();
+        $slot24->setCapacity(90);
+        $slot24->setDuration(60);
+        $slot24->setName('Group A');
+        $e3->addTimeslot($slot24);
+        $slot25 = new Timeslot();
+        $slot25->setCapacity(90);
+        $slot25->setDuration(60);
+        $slot25->setName('Group A');
+        $e3->addTimeslot($slot25);
+        $slot26 = new Timeslot();
+        $slot26->setCapacity(90);
+        $slot26->setDuration(60);
+        $slot26->setName('Group A');
+        $e3->addTimeslot($slot26);
+        $slot27 = new Timeslot();
+        $slot27->setCapacity(90);
+        $slot27->setDuration(60);
+        $slot27->setName('Group A');
+        $e3->addTimeslot($slot27); 
         
 
         $e4 = new Event();
@@ -91,7 +165,42 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $slot4->setCapacity(90);
         $slot4->setDuration(60);
         $slot4->setName('Group A');
-        $e4->addTimeslot($slot4);         
+        $e4->addTimeslot($slot4);
+        $slot28 = new Timeslot();
+        $slot28->setCapacity(90);
+        $slot28->setDuration(60);
+        $slot28->setName('Group A');
+        $e4->addTimeslot($slot28);
+        $slot29 = new Timeslot();
+        $slot29->setCapacity(90);
+        $slot29->setDuration(60);
+        $slot29->setName('slot1');        
+        $e4->addTimeslot($slot29);
+        $slot30 = new Timeslot();
+        $slot30->setCapacity(90);
+        $slot30->setDuration(60);
+        $slot30->setName('Group A');
+        $e4->addTimeslot($slot30);
+        $slot31 = new Timeslot();
+        $slot31->setCapacity(90);
+        $slot31->setDuration(60);
+        $slot31->setName('Group A');
+        $e4->addTimeslot($slot31);
+        $slot32 = new Timeslot();
+        $slot32->setCapacity(90);
+        $slot32->setDuration(60);
+        $slot32->setName('Group A');
+        $e4->addTimeslot($slot32);
+        $slot33 = new Timeslot();
+        $slot33->setCapacity(90);
+        $slot33->setDuration(60);
+        $slot33->setName('Group A');
+        $e4->addTimeslot($slot33);
+        $slot34 = new Timeslot();
+        $slot34->setCapacity(90);
+        $slot34->setDuration(60);
+        $slot34->setName('Group A');
+        $e4->addTimeslot($slot34);  
 
         $e5 = new Event();
         $e5->setCapacity(10);
@@ -99,15 +208,30 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $e5->setGroupId(4);
         $e5->setIsActivated(1);
         $e5->setIsTemplate(false);
-        $e5->setName("Food Distribution");
+        $e5->setName("Food Basket");
         $clone5 = clone $now;
-        $e5->setStartDate($clone5->add($threeDays));
+        $e5->setStartDate($clone5->add($fourDays));
         $e5->setStartTime(new \DateTime("17:50"));
         $slot5 = new Timeslot();
         $slot5->setCapacity(90);
         $slot5->setDuration(60);
         $slot5->setName('Group A');
-        $e5->addTimeslot($slot5);    
+        $e5->addTimeslot($slot5);
+        $slot8 = new Timeslot();
+        $slot8->setCapacity(90);
+        $slot8->setDuration(60);
+        $slot8->setName('Group A');
+        $e5->addTimeslot($slot8);
+        $slot9 = new Timeslot();
+        $slot9->setCapacity(90);
+        $slot9->setDuration(60);
+        $slot9->setName('Group A');
+        $e5->addTimeslot($slot9);
+        $slot10 = new Timeslot();
+        $slot10->setCapacity(90);
+        $slot10->setDuration(60);
+        $slot10->setName('Group A');
+        $e5->addTimeslot($slot10);
 
         $e6 = new Event();
         $e6->setCapacity(90);
@@ -188,7 +312,26 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $e4week2->setStartDate($e4DateClone->add($twoWeek));
         $this->makeTimeSlot($e4week2);
         $e5week2->setStartDate($e5DateClone->add($twoWeek));
-        $this->makeTimeSlot($e5week2);    
+        $slot11 = new Timeslot();
+        $slot11->setCapacity(90);
+        $slot11->setDuration(60);
+        $slot11->setName('Group A');
+        $e5week2->addTimeslot($slot11);
+        $slot12 = new Timeslot();
+        $slot12->setCapacity(90);
+        $slot12->setDuration(60);
+        $slot12->setName('Group A');
+        $e5week2->addTimeslot($slot12);
+        $slot13 = new Timeslot();
+        $slot13->setCapacity(90);
+        $slot13->setDuration(60);
+        $slot13->setName('Group A');
+        $e5week2->addTimeslot($slot13);
+        $slot14 = new Timeslot();
+        $slot14->setCapacity(90);
+        $slot14->setDuration(60);
+        $slot14->setName('Group A');
+        $e5week2->addTimeslot($slot14);
         
         $manager->persist($e1week2);
         $manager->persist($e2week2);
@@ -233,12 +376,12 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $manager->persist($e4week2);
         $manager->persist($e5week2);
 
-        $this->createEvents($manager, $oneDay);
-        $this->createEvents($manager, $twoDays);
-        $this->createEvents($manager, $threeDays);
-        $this->createEvents($manager, $fourDays);
-        $this->createEvents($manager, $fiveDays);
-        $this->createEvents($manager, $sixDays);
+        $this->createEvents($manager, $oneDay, 6);
+        $this->createEvents($manager, $twoDays, 10);
+        $this->createEvents($manager, $threeDays, 20);
+        $this->createEvents($manager, $fourDays, 30);
+        $this->createEvents($manager, $fiveDays, 40);
+        $this->createEvents($manager, $sixDays, 50);
 
         // for($j = 8; $j <= 200; $j++)
         // {
@@ -251,7 +394,40 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $manager->flush();
 
         $this->addReference('timeslot1', $slot1); 
-        $this->addReference('timeslot2', $slot6);       
+        $this->addReference('timeslot2', $slot6); 
+        $this->addReference('timeslot3', $slot2); 
+        $this->addReference('timeslot4', $slot3); 
+        $this->addReference('timeslot5', $slot4); 
+        $this->addReference('timeslot6', $slot5); 
+        $this->addReference('timeslot7', $slot6); 
+        $this->addReference('timeslot8', $slot7); 
+        $this->addReference('timeslot9', $slot8); 
+        $this->addReference('timeslot10', $slot9); 
+        $this->addReference('timeslot11', $slot10); 
+        $this->addReference('timeslot12', $slot11); 
+        $this->addReference('timeslot13', $slot12); 
+        $this->addReference('timeslot14', $slot13); 
+        $this->addReference('timeslot15', $slot14); 
+        $this->addReference('timeslot16', $slot15); 
+        $this->addReference('timeslot17', $slot16); 
+        $this->addReference('timeslot18', $slot17); 
+        $this->addReference('timeslot19', $slot18); 
+        $this->addReference('timeslot20', $slot19);  
+        $this->addReference('timeslot21', $slot20); 
+        $this->addReference('timeslot22', $slot21); 
+        $this->addReference('timeslot23', $slot22); 
+        $this->addReference('timeslot24', $slot23); 
+        $this->addReference('timeslot25', $slot24); 
+        $this->addReference('timeslot26', $slot25); 
+        $this->addReference('timeslot27', $slot26); 
+        $this->addReference('timeslot28', $slot27); 
+        $this->addReference('timeslot29', $slot28); 
+        $this->addReference('timeslot30', $slot29);      
+        $this->addReference('timeslot31', $slot30); 
+        $this->addReference('timeslot32', $slot31); 
+        $this->addReference('timeslot33', $slot32); 
+        $this->addReference('timeslot34', $slot33);
+        $this->addReference('timeslot35', $slot34);       
     }
 
     private function makeTimeSlot($event)
@@ -272,18 +448,18 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         }
     }
 
-    private function createEvents($manager, $day)
+    private function createEvents($manager, $day, $num)
     {
         $now = new \DateTime();
         $eventsToCreate = rand(2, 4);
         $name = array("Mattress", "Food Bank", "Christmas", "Income Tax", "BackToSchool");
-
+        $id = $num;
         for($i = 1; $i <= $eventsToCreate ; $i++)
         {
             $event = new Event();
             $event->setCapacity(45);
-            $event->setDescription("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
-            // $event->setGroupId(2);
+            // $event->setDescription("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
+            $event->setGroupId($id++);
             $event->setIsActivated(1);
             $event->setIsTemplate(false);
             $event->setName($name[rand(0,4)]);
@@ -295,7 +471,6 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
             $manager->persist($event);
         }
     }
-
 }
 
 ?>

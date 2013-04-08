@@ -14,7 +14,7 @@ return $config = array
         'password'  => '',
         'dbname'    => 'fsts',
         'host'      => 'localhost'
-
+        
     ),
 
     // Twig configuration
