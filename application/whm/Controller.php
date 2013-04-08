@@ -3,6 +3,7 @@
 namespace WHM;
 
 use WHM\Model\Session;
+use WHM\Model\ManageFlag;
 
 abstract class Controller
 {
@@ -15,6 +16,11 @@ abstract class Controller
     protected $content;
     protected $requestContents = array();
     protected $data = array();
+    
+    /**
+     * @var WHM\Model\ManageFlag
+     */
+    protected $manageFlagDescriptor ;
 
     public function __construct($redirect = TRUE)
     {
@@ -38,11 +44,17 @@ abstract class Controller
         setcookie("theme", $theme, time() + 3600 * 24 * 7); // Save cookie for 7 days
         // Add the cookie to data so twig can display it properly
         $this->data['theme'] = $theme;
+        
+        $this->manageFlagDescriptor = new ManageFlag();
     }
 
     public function display($file, $data = array())
     {
         $data['isLoggedIn'] = Session::isLoggedIn();
+        if(Session::isLoggedIn())
+        {
+            $data['FlagDescriptors'] = $this->manageFlagDescriptor->getFlagDescriptors();
+        }
         $this->renderer->display($file, array_merge($this->data, $data));
     }
 
