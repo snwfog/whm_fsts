@@ -143,7 +143,7 @@ $(function() {
       bursary.type ="hidden";
 		}
 	});	
-		// Javascript for dynamic fields depending on work_status MODAL
+		// Javascript for dynamic fields depending on work_status MODAL ADD HOUSEHOLD
 
 	$('#work_status1').change(function() {
 		var workstatusObj1 = document.getElementById("work_status1");
@@ -175,6 +175,40 @@ $(function() {
 		  schoolIdObj1.type="hidden";
       grade1.type ="hidden";
       bursary1.type ="hidden";
+		}
+	});	
+		// Javascript for dynamic fields depending on work_status MODAL ADD MEMBER
+
+	$('#work_status2').change(function() {
+		var workstatusObj2 = document.getElementById("work_status2");
+		var schoolObj2 = document.getElementById("school2");
+		var schoolIdObj2 = document.getElementById("student-id2");
+    var grade2 = document.getElementById("grade2");
+    var bursary2 = document.getElementById("bursary2");
+		var welfareObj2 = document.getElementById("welfare-number2");
+		if(workstatusObj2.value == "student")
+		{
+		  schoolObj2.type ="text";
+		  schoolIdObj2.type ="text";
+      grade2.type ="text";
+      bursary2.type ="text";
+		  welfareObj2.type ="hidden";
+		}
+		else if(workstatusObj2.value == "welfare")
+		{
+		  welfareObj2.type ="text";
+		  schoolObj2.type ="hidden";
+		  schoolIdObj2.type="hidden";
+      grade2.type ="hidden";
+      bursary2.type ="hidden";
+		}
+		else
+		{
+		  welfareObj2.type ="hidden";
+		  schoolObj2.type ="hidden";
+		  schoolIdObj2.type="hidden";
+      grade2.type ="hidden";
+      bursary2.type ="hidden";
 		}
 	});	
 	//More complex keyboard shortcuts
