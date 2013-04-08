@@ -383,13 +383,14 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $this->createEvents($manager, $fiveDays, 40);
         $this->createEvents($manager, $sixDays, 50);
 
-        // for($j = 8; $j <= 200; $j++)
-        // {
-        //     $stringDays = 'P'.$j.'D';
-        //     $days = new \DateInterval($stringDays);
+        for($j = 8; $j <= 28; $j++)
+        {
+            $stringDays = 'P'.$j.'D';
+            $days = new \DateInterval($stringDays);
             
-        //     $this->createEvents($manager, $days);
-        // }
+            // $this->createEvents($manager, $days);
+            $this->create2to3Events($manager, $days, 100);
+        }
 
         $manager->flush();
 
@@ -451,7 +452,31 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
     private function createEvents($manager, $day, $num)
     {
         $now = new \DateTime();
-        $eventsToCreate = rand(2, 4);
+        $eventsToCreate = rand(2, 3);
+        $name = array("Mattress", "Food Bank", "Christmas", "Income Tax", "BackToSchool");
+        $id = $num;
+        for($i = 1; $i <= $eventsToCreate ; $i++)
+        {
+            $event = new Event();
+            $event->setCapacity(45);
+            // $event->setDescription("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
+            $event->setGroupId($id++);
+            $event->setIsActivated(1);
+            $event->setIsTemplate(false);
+            $event->setName($name[rand(0,4)]);
+            $clone = clone $now;
+            $event->setStartDate($clone->add($day));
+            $event->setStartTime(new \DateTime("13:00"));
+            $this->makeTimeSlot($event);
+
+            $manager->persist($event);
+        }
+    }
+
+    private function create2to3Events($manager, $day, $num)
+    {
+        $now = new \DateTime();
+        $eventsToCreate = rand(1, 2);
         $name = array("Mattress", "Food Bank", "Christmas", "Income Tax", "BackToSchool");
         $id = $num;
         for($i = 1; $i <= $eventsToCreate ; $i++)
