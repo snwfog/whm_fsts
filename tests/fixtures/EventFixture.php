@@ -17,6 +17,9 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
+        // 1:
+// 
+// 
         $now = new \DateTime();
         $oneWeek = new \DateInterval('P7D');
         $twoWeek = new \DateInterval('P2W');
@@ -352,26 +355,6 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $e4week2->setStartDate($e4DateClone->add($twoWeek));
         $this->makeTimeSlot($e4week2);
         $e5week2->setStartDate($e5DateClone->add($twoWeek));
-        $slot11 = new Timeslot();
-        $slot11->setCapacity(90);
-        $slot11->setDuration(60);
-        $slot11->setName('Group A');
-        $e1week2->addTimeslot($slot11);
-        $slot12 = new Timeslot();
-        $slot12->setCapacity(90);
-        $slot12->setDuration(60);
-        $slot12->setName('Group A');
-        $e2week2->addTimeslot($slot12);
-        $slot13 = new Timeslot();
-        $slot13->setCapacity(90);
-        $slot13->setDuration(60);
-        $slot13->setName('Group A');
-        $e2week2->addTimeslot($slot13);
-        $slot14 = new Timeslot();
-        $slot14->setCapacity(90);
-        $slot14->setDuration(60);
-        $slot14->setName('Group A');
-        $e3week2->addTimeslot($slot14);
         
         $manager->persist($e1week2);
         $manager->persist($e2week2);
@@ -403,25 +386,6 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $e5week2->setStartDate($e5DateClone->add($threeWeek));
         $this->makeTimeSlot($e5week2);
 
-        $slot2 = new Timeslot();
-        $slot2->setCapacity(90);
-        $slot2->setDuration(60);
-        $slot2->setName('Group A');
-
-        $slot3 = new Timeslot();
-        $slot3->setCapacity(90);
-        $slot3->setDuration(60);
-        $slot3->setName('Group A');
-
-        $slot5 = new Timeslot();
-        $slot5->setCapacity(90);
-        $slot5->setDuration(60);
-        $slot5->setName('Group A');
-
-
-        $e1week2->addTimeslot($slot2);     
-        $e1week2->addTimeslot($slot3);
-        $e1week2->addTimeslot($slot5); 
 
         $manager->persist($e1week2);
         $manager->persist($e2week2);
