@@ -39,8 +39,6 @@ class MultiAddressHouseholdFixture extends AbstractFixture
                 $city, $state, $postalCode, $country,
                 $phoneNumber, $occupation) =
                 explode("|", mb_strtoupper($userArr[0], 'UTF-8'));
-
-        echo $userArr[0] . PHP_EOL;
         ob_flush();
 
         // Further narrow down the variables
@@ -64,7 +62,6 @@ class MultiAddressHouseholdFixture extends AbstractFixture
                     $phoneNumber, $occupation) =
                     explode("|", mb_strtoupper($userArr[$i], 'UTF-8'));
 
-            echo $lastName . PHP_EOL;
             ob_flush();
 
             // Further narrow down the variables
@@ -81,26 +78,26 @@ class MultiAddressHouseholdFixture extends AbstractFixture
                 case 0:
                 case 2:                    
                 case 5:
-                    // Flush the household before creating a new one            
-                    $em->persist($person);
-                    $em->persist($hh);
-
-                    $this->setReference('HouseHoldMember' . ($i -1), $person);
-                    $this->setReference('Household' . $i, $hh);                    
-
                     // Create a new household
                     $person = $this->_createMember($firstName, $lastName, $phoneNumber);
                     $addr = $this->_createAddress($houseNumber, $streetName, $postalCode, $city, $state);
                     $hh = $this->_createHousehold($addr, $person);
-                    break;
+                    
+                    // Flush the household before creating a new one            
+                    $em->persist($person);
+                    $em->persist($hh);
+                    $this->setReference('HouseHoldMember' . ($i -1), $person);
+                    $this->setReference('Household' . $i, $hh);                                                           
+                    break; 
                 
                 default:
                     $person = $this->_createMember($firstName, $lastName, $phoneNumber);
                     $hh->addMember($person);
-
-                    $this->setReference('HouseHoldMember' . ($i -1), $person);
-                    $this->setReference('Household' . $i, $hh);                    
-                    
+                                       
+                    $em->persist($person);
+                    $em->persist($hh);    
+                    $this->setReference('HouseHoldMember' . ($i-1), $person);
+                    $this->setReference('Household' . $i, $hh);                       
                     break;
             }            
 
