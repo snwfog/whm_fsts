@@ -73,7 +73,7 @@ class FlagFixture extends AbstractFixture implements DependentFixtureInterface
 
         for ($i = 1; $i < 248; $i++)
         {
-            $randomNumberOfFlags = rand(3, 6);
+            $randomNumberOfFlags = rand(4, 6);
             for($j = 0; $j < $randomNumberOfFlags; $j++)
             {                
                 $randomFlagDescriptorReference = rand(1, 4);            

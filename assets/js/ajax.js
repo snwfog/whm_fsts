@@ -27,20 +27,27 @@ $(function() {
       return $('form[name="flag-create-form"]').submit();
     }
   });
-  $('button.flag-delete-btn').click(function() {
-    var $form;
-    console.log("trying to delete a flag");
-    $form = $(this).siblings("form");
-    return $.ajax({
-      url: 'flag',
-      data: $form.serialize(),
-      type: 'DELETE',
-      success: function() {
-        var $group;
-        $group = $form.parents('div.accordion-group');
-        return $group.remove();
-      }
-    });
+    $('button#flag-create-save').click(function() {
+    var clicked, flagD_id, formElement;
+    clicked = $("#flag-types .active").length > 0;
+    if (!clicked) {
+      alert("Choose a Flag");
+    }
+    if (clicked) {
+      flagD_id = $("#flag-types .active").data("value");
+      formElement = document.createElement("input");
+      formElement.setAttribute("name", "flag-descriptor-id");
+      formElement.setAttribute("type", "hidden");
+      formElement.setAttribute("value", flagD_id);
+      $('form[name="flag-create-form"]').append(formElement);
+      return $('form[name="flag-create-form"]').submit();
+    }
+  });
+  
+  $('#manage-flag-save').click(function() {
+    
+    console.log("here");
+    return true;
   });
   $("input[name='origin']").typeahead({
     source: function(query, process) {
