@@ -8,3 +8,9 @@
         </div>
     </div>
 {% endmacro %}
+
+{# usage: household member flag marker in the household member list #}
+{# parameter: flag descriptor type #}
+{% macro flagmarker(type) %}
+    <span class="label label-{{ type }} marker">&nbsp;</span>
+{% endmacro %}

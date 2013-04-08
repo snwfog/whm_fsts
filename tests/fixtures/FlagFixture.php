@@ -32,6 +32,21 @@ class FlagFixture extends AbstractFixture implements DependentFixtureInterface
             'error', // red
             'info'          // pale blue
         ),
+
+        'alternative_color_2' => array(
+            'success',      // green
+            'warning',      // yellow
+            'important',    // red
+            'info'          // pale blue
+        ),
+
+        'alternative_color_2' => array(
+            'success',      // green
+            'warning',      // yellow
+            'important',    // red
+            'info'          // pale blue
+        ),
+
         'meaning' => array(
             'Success',
             'Warning',
@@ -49,6 +64,7 @@ class FlagFixture extends AbstractFixture implements DependentFixtureInterface
             $flagDescriptor = new FlagDescriptor();
             $flagDescriptor->setColor($this->flagAttribute['color'][$i]);
             $flagDescriptor->setAlternativeColor($this->flagAttribute['alternative_color'][$i]);
+            $flagDescriptor->setAlternativeColor2($this->flagAttribute['alternative_color_2'][$i]);
             $flagDescriptor->setMeaning($this->flagAttribute['meaning'][$i]);
 
             $em->persist($flagDescriptor);
@@ -56,7 +72,6 @@ class FlagFixture extends AbstractFixture implements DependentFixtureInterface
         }
 
         for ($i = 1; $i < 248; $i++)
-        {            
             $randomNumberOfFlags = rand(3, 6);
             for($j = 0; $j < $randomNumberOfFlags; $j++)
             {                

@@ -97,8 +97,43 @@ class ManageFlag
         return $data;
     }
 
+    public function getFlagSummaryByHousehold($householdId)
+    {
+        $raw_query = "SELECT
+          hm.household_id,
+          hm.id,
+          f.flag_descriptor_id,
+          fd.alternative_color_2,
+          COUNT(*) AS flag_occurence
+        FROM flags f
+          JOIN household_members hm ON hm.id = f.household_member_id
+          JOIN flag_descriptors fd ON fd.id = f.flag_descriptor_id
+        WHERE hm.household_id = ${householdId}
+        GROUP BY id, flag_descriptor_id";
 
+        $stmt = $this->em->getConnection()->prepare($raw_query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return (empty($result) ? '' : $result);
+    }
 
+    public function getFlagTotal($householdId)
+    {
+        $raw_query = "SELECT
+          hm.household_id,
+          f.flag_descriptor_id,
+          fd.alternative_color_2,
+          fd.meaning,
+          COUNT(*) AS flag_occurence
+        FROM flags f
+          JOIN household_members hm ON hm.id = f.household_member_id
+          JOIN flag_descriptors fd ON fd.id = f.flag_descriptor_id
+        WHERE hm.household_id = '${householdId}'
+        GROUP BY flag_descriptor_id";
 
-
+        $stmt = $this->em->getConnection()->prepare($raw_query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return (empty($result) ? '' : $result);
+    }
 }

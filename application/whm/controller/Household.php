@@ -22,7 +22,7 @@ class Household extends Controller implements IRedirectable
     private $manageEvents;
     private $flag;
     private $eventcontroller;
-
+    private $household;
 
     public function __construct(array $args = null)
     {
@@ -42,16 +42,17 @@ class Household extends Controller implements IRedirectable
             $household_id = $_GET["household_id"];
         }
 
-        if(!is_null($household_id)){
-            //Get household and as default, get household principal if specific member is not specified.
-            $household = ManageHousehold::findHousehold($household_id);
+        $this->household = $household = ManageHousehold::findHousehold($household_id);
+        if (!is_null($household_id))
+        {
+            // Get household and as default, get household principal if specific member is not specified.
             if(is_null($member_id)){
                 $member = $household->getHouseholdPrincipal();
             }else{
                 $member = ManageHousehold::findMember($member_id);
             }
 
-            $data = $this->formatHouseholdInfo($household, $member);
+            $data = $this->formatHouseholdInfo($this->household, $member);
 
             //Get flag descriptor for creating flags
             $flagDescriptors = $this->manageFlag->getFlagDescriptors();
@@ -60,8 +61,12 @@ class Household extends Controller implements IRedirectable
             //Get member flags
             $flags = $member->getFlags();
             $formattedFlags = $this->formatMessage($flags);
+
+            //Get flag summary
+            $householdFlagSummary = $this->_formatHouseholdFlagSummary(
+                $this->manageFlag->getFlagSummaryByHousehold($household_id));
             
-        //   $flagNumber = $this->flagNum($formattedFlags);
+            $flagNumber = $this->manageFlag->getFlagTotal($household_id);
 
             //Get Events.
             $events = $this->getMonthlyEvents($household_id, $member_id);
@@ -70,7 +75,8 @@ class Household extends Controller implements IRedirectable
                             "household"         =>  $data,
                             "flagDescriptors"   =>  $formattedDescriptor,
                             "flags"             =>  $formattedFlags,
-      //                    "flag_number"       =>  $flagNumber,
+                            "flagTotal"         =>  $flagNumber,
+                            "flagSummary"       =>  $householdFlagSummary,
                             "events"            =>  $events
                     );
             $this->display("household.create.twig", $data);
@@ -80,6 +86,7 @@ class Household extends Controller implements IRedirectable
             $this->redirect("search");
         }
 
+        $this->manageFlag->getFlagSummaryByHousehold(1);
     }
 
 
@@ -134,9 +141,11 @@ class Household extends Controller implements IRedirectable
         
         //Get list of Members
         $members = array();
-        foreach ($dependents as $dependent){
+        foreach ($dependents as $dependent)
+        {
             $registeredEvents = $this->eventsRegistered($dependent->getId());
-            if (($principal->getId() == $dependent->getId())) {
+            if (($principal->getId() == $dependent->getId()))
+            {
                 $members["principal"] = array(
                                         "member-id"  => $dependent->getId(),
                                         "first-name" => $dependent->getFirstName(),
@@ -216,20 +225,6 @@ class Household extends Controller implements IRedirectable
         return $data;      
     }
 
-    private function flagNum($flagN)
-    {
-        $data = array();
-        $count = 0;
-        foreach( $flagN as $manageFlag){
-            $manageFlag = new ManageFlag();
-            $data[$count++] = array(
-                                    "flagn" => $manageFlag->flagNumber(),
-                              );
-        }
-
-        return $data;
-    }
-
     private function eventsRegistered($id)
     {   $data = array();
         $count = 0;
@@ -288,6 +283,28 @@ class Household extends Controller implements IRedirectable
         }
 
         return $event;
+    }
+
+    private function _formatHouseholdFlagSummary($data)
+    {
+        $flagSummary = array();
+        if (!empty($data))
+        {
+            foreach ($data as $row)
+            {
+                if (!isset($flagSummary['principal'])
+                    && $row['id'] == $this->household->getHouseholdPrincipal()->getId())
+                {
+                    $flagSummary['principal'] = $row;
+                }
+                else
+                {
+                    $flagSummary[$row['id']][] = $row;
+                }
+            }
+        }
+
+        return $flagSummary;
     }
 }
 

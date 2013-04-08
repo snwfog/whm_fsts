@@ -63,9 +63,9 @@
                                                         {% if events[0][i][j]["registered"] == "Registered" %}
                                                             {% set buttoncolour = "success" %}
                                                         {% endif %}
-                                                            <div class="dropdown btn-group">
+                                                            <div class="dropdown btn-group" style="width:100%;">
                                                                 <a class="btn dropdown-toggle btn-{{ buttoncolour }}" data-toggle="dropdown" href="#">
-                                                                    {{ events[0][i][j]["name"]|slice(0, 10) }}
+                                                                    {{ events[0][i][j]["name"] }}
                                                                     <span class="caret"></span>
                                                                 </a>
                                                                 <ul class="dropdown-menu ">

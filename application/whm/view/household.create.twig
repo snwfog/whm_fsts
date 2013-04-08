@@ -15,15 +15,11 @@
                     ID: {{ household["household_id"] }}
                 </div>
                 <div class='pull-right'>
-                    {%  for flag in flags %}  
-                        {% set count = 0 %}
-                               <span class="label label-{{ flag["flag-color"] | lower }}">
-                                    <i class="icon-tag icon-white"></i> {{ flag["flag-meaning"] }}
-                                </span>
-                            {% for flagn_number in flagn %}
-                                {{ flag-number["flagn"] }}
-                            {% endfor %}
-                        {% set count = count + 1 %}
+                    {%  for flagCount in flagTotal %}
+                        <span class="label label-{{ flagCount.alternative_color_2 }}">
+                            {{ flagCount.flag_occurence }}&nbsp;
+                            <i class="icon-tag icon-white"></i> {{ flagCount.meaning }}
+                        </span>
                     {% endfor %}
                 </div>
             </legend>
@@ -111,9 +107,17 @@
                     {% if not member.principal %}
                             <li class="{{ member.active ? "active" : '' }}">
                                 <a href="{{ apppath }}household/{{ household.household_id}}/{{ member["member-id"]}}">
-                                    <i class="icon-user"></i> 
+                                    <i class="icon-user"></i>
                                     {{ member["first-name"] }} {{ member["last-name"] }}<span class="pull-right">{{ member["gender"] }}{% if (member["gender"] != null) and (member["age"] != null) %}/{% endif %}{{ member["age"] }}</span>
+                                    <div class="pull-right">
+                                        {% for flagbucket in flagSummary[member['member-id']] %}
+                                            {% for i in 0..flagbucket.flag_occurence %}
+                                                <span class="label label-{{ flagbucket.alternative_color_2 }} marker">&nbsp;</span>
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </div>
                                 </a>
+
                             </li>
                     {% endif %}
                 {% endfor %}
