@@ -143,6 +143,40 @@ $(function() {
       bursary.type ="hidden";
 		}
 	});	
+		// Javascript for dynamic fields depending on work_status MODAL
+
+	$('#work_status1').change(function() {
+		var workstatusObj1 = document.getElementById("work_status1");
+		var schoolObj1 = document.getElementById("school1");
+		var schoolIdObj1 = document.getElementById("student-id1");
+    var grade1 = document.getElementById("grade1");
+    var bursary1 = document.getElementById("bursary1");
+		var welfareObj1 = document.getElementById("welfare-number1");
+		if(workstatusObj1.value == "student")
+		{
+		  schoolObj1.type ="text";
+		  schoolIdObj1.type ="text";
+      grade1.type ="text";
+      bursary1.type ="text";
+		  welfareObj1.type ="hidden";
+		}
+		else if(workstatusObj1.value == "welfare")
+		{
+		  welfareObj1.type ="text";
+		  schoolObj1.type ="hidden";
+		  schoolIdObj1.type="hidden";
+      grade1.type ="hidden";
+      bursary1.type ="hidden";
+		}
+		else
+		{
+		  welfareObj1.type ="hidden";
+		  schoolObj1.type ="hidden";
+		  schoolIdObj1.type="hidden";
+      grade1.type ="hidden";
+      bursary1.type ="hidden";
+		}
+	});	
 	//More complex keyboard shortcuts
 	 Mousetrap.bind("0", function() { //SWITCH THEME
 		var $secondStyleSheet, href, pattern;
