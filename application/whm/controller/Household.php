@@ -42,8 +42,6 @@ class Household extends Controller implements IRedirectable
             $household_id = $_GET["household_id"];
         }
 
-        //print_r($_GET);
-
         $this->household = ManageHousehold::findHousehold($household_id);
         if (!is_null($household_id))
         {
