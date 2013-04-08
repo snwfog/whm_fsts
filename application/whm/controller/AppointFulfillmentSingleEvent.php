@@ -41,12 +41,13 @@ class AppointFulfillmentSingleEvent extends WHM\Controller implements WHM\IRedir
         $participants = array();
         foreach($event->getTimeSlots()->toArray() as $timeslot)
         {
+            $slotEndtime = new DateTime($slotStarttime);
+            $duration = '+'.$timeslot->getDuration(). ' mins';
+            date_modify($slotEndtime, $duration);
+            $endtime = $slotEndtime->format('H:i');
             foreach($timeslot->getParticipants() as $participant)
             {
-                $slotEndtime = new DateTime($slotStarttime);
-                $duration = '+'.$timeslot->getDuration(). ' mins';
-                date_modify($slotEndtime, $duration);
-                $endtime = $slotEndtime->format('H:i');
+                
 
                 $participantTimeSlot = $this->manageAppointment->getParticipantTimeSlot($participant->getId(), $timeslot->getId());
                 $participants[] = array(
