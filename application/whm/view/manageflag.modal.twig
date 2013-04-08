@@ -9,14 +9,14 @@
         </div>
 
         <div class="modal-body">
-            <form action="{{ apppath }}flag"
+            <form action="{{ apppath }}editflag"
                   method="POST" name="manage-flag-form" id="flag-manage">
                 <fieldset>
                     {% for flagDescriptor in FlagDescriptors %}
                         <div class="controls controls-row">
                             <button class="btn btn-{{ flagDescriptor.getColor }} span6" disabled>
                                 <i class="icon-flag icon-white"></i> {{ flagDescriptor.getMeaning|capitalize }}</button>
-                            <input class="span6" type="text" maxlength="11" />
+                            <input class="span6" type="text" maxlength="11" name="flag-descriptor-{{flagDescriptor.getId}}" />
                         </div>
                     {% endfor %}
                 </fieldset>

@@ -45,9 +45,8 @@ $(function() {
   });
   
   $('#manage-flag-save').click(function() {
+    return $('#flag-manage').submit();
     
-    console.log("here");
-    return true;
   });
   $("input[name='origin']").typeahead({
     source: function(query, process) {
