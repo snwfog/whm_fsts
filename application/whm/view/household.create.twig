@@ -101,6 +101,13 @@
                          pull-right">
                              {{ household.members.principal["gender"]}}{% if (household.members.principal["gender"] != null) and (household.members.principal["age"] != null) %}/{% endif %}{{household.members.principal["age"]}}
                              </span>
+                        <div class="pull-right">
+                            {% for flagbucket in flagSummary[household.members.principal['member-id']] %}
+                                {% for i in 1..flagbucket.flag_occurence %}
+                                    <span class="label label-{{ flagbucket.alternative_color_2 }} marker">&nbsp;</span>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
                      </a>
                 </li>
                 {% for member in household.members %}
@@ -111,7 +118,7 @@
                                     {{ member["first-name"] }} {{ member["last-name"] }}<span class="pull-right">{{ member["gender"] }}{% if (member["gender"] != null) and (member["age"] != null) %}/{% endif %}{{ member["age"] }}</span>
                                     <div class="pull-right">
                                         {% for flagbucket in flagSummary[member['member-id']] %}
-                                            {% for i in 0..flagbucket.flag_occurence %}
+                                            {% for i in 1..flagbucket.flag_occurence %}
                                                 <span class="label label-{{ flagbucket.alternative_color_2 }} marker">&nbsp;</span>
                                             {% endfor %}
                                         {% endfor %}
