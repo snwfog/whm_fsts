@@ -97,13 +97,12 @@
                     <a href="{{ apppath }}household/{{ household.household_id}}/{{ household.members.principal["member-id"]}}">
                          <i class="icon-home"></i> 
                          {{household.members.principal["first-name"] }} {{ household.members.principal["last-name"]}} 
-                         <span class="pull-right">
-                             {{ household.members.principal["gender"]}}
+                         <span class="pull-right">&nbsp; 
+                            {{ household.members.principal["gender"]}}
                              {% if (household.members.principal["gender"] != null) and (household.members.principal["age"] != null) %}
                                  /
                              {% endif %}
-                             {{household.members.principal["age"]}}
-                         </span>
+                             {{household.members.principal["age"]}}</span>
                         <div class="pull-right">
                             {% for flagbucket in flagSummary[household.members.principal['member-id']] %}
                                 {% for i in 1..flagbucket.flag_occurence %}
@@ -120,6 +119,7 @@
                                     <i class="icon-user"></i>
                                     {{ member["first-name"] }} {{ member["last-name"] }}
                                     <span class="pull-right">
+                                        &nbsp;
                                         {{ member["gender"] }}
                                         {% if (member["gender"] != null) and (member["age"] != null) %}
                                             /
