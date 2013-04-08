@@ -8,11 +8,10 @@
                 <input class="span4 time-add-on" style="margin-left:15px" type="text" id="tp1" name="start-time" placeholder="Start Time" value="{{ event["start-time"] }}"/>
                 <span class="add-on"><i class="icon-time"></i></span>
             </div>
-            {% for timeslot in timeslots %}
-            {% if timeslot.participants|length !=0 %}
+            
             <button type="button" onclick="location.href='{{apppath}}todaysevents/{{event["event-id"]}}';" class="btn btn-info pull-right"><i class="icon-white icon-user"></i>Participants</button>
-            {% endif %}
-            {% endfor %}
+            
+            
 
         </div>
     </fieldset>
