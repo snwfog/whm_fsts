@@ -56,12 +56,10 @@ class FlagFixture extends AbstractFixture implements DependentFixtureInterface
         }
 
         for ($i = 1; $i < 248; $i++)
-        {
-            
-            $randomNumberOfFlags = rand(1, 11);
+        {            
+            $randomNumberOfFlags = rand(3, 6);
             for($j = 0; $j < $randomNumberOfFlags; $j++)
             {                
-                echo $i."\n";
                 $randomFlagDescriptorReference = rand(1, 4);            
                 $flag = new Flag();
                 $flag->setDescriptor($this->getReference("FlagDescriptor". $randomFlagDescriptorReference));
