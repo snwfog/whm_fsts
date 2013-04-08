@@ -292,15 +292,7 @@ class Household extends Controller implements IRedirectable
         {
             foreach ($data as $row)
             {
-                if (!isset($flagSummary['principal'])
-                    && $row['id'] == $this->household->getHouseholdPrincipal()->getId())
-                {
-                    $flagSummary['principal'] = $row;
-                }
-                else
-                {
-                    $flagSummary[$row['id']][] = $row;
-                }
+                $flagSummary[$row['id']][] = $row;
             }
         }
 
