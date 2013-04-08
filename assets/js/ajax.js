@@ -44,10 +44,22 @@ $(function() {
     }
   });
   
-  $('#manage-flag-save').click(function() {
-    return $('#flag-manage').submit();
-    
-  });
+    $('#manage-flag-save').click(function() {
+    var form = $('#flag-manage');        
+    $.ajax({
+        url: form.attr('action'),
+        type: 'POST',
+        data: {
+          'flag-descriptor-1': $('input[name="flag-descriptor-1"]').val(),
+          'flag-descriptor-2': $('input[name="flag-descriptor-2"]').val(),
+          'flag-descriptor-3': $('input[name="flag-descriptor-3"]').val(),            
+          'flag-descriptor-4': $('input[name="flag-descriptor-4"]').val()
+          }
+        });
+    });
+
+   
+  
   $("input[name='origin']").typeahead({
     source: function(query, process) {
       return $.ajax({
