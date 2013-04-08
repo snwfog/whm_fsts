@@ -25,11 +25,11 @@ class AppointmentFixture extends AbstractFixture implements DependentFixtureInte
          for ($i = 0; $i < 248; $i++)
         {
             
-             $randomNumberOfApp = rand(1, 4);
+             $randomNumberOfApp = rand(3, 4);
              for($j = 0; $j < $randomNumberOfApp; $j++)
              {                
                // echo $i."\n";
-                $randomTimeslotReference = rand(1,35); 
+                $randomTimeslotReference = rand(1, 38); 
 
                 $participantsTimeslot = new ParticipantsTimeslots();
                 $participantsTimeslot->setHouseHoldMember($this->getReference('HouseHoldMember'. $i));
