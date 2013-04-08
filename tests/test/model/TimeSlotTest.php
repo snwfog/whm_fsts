@@ -6,6 +6,7 @@ use \PHPUnit_Framework_TestCase;
 use WHM\Model\Timeslot;
 use WHM\Model\Event;
 use WHM\Model\HouseholdMember;
+use WHM\Model\ParticipantsTimeslots;
 
 class TimeSlotTest extends PHPUnit_Framework_TestCase
 {
@@ -36,13 +37,6 @@ class TimeSlotTest extends PHPUnit_Framework_TestCase
         $timeSlot->setName("Slot72");
         $this->assertEquals("Slot72", PHPUnit_Framework_TestCase::readAttribute($timeSlot, "name"));
     }
-    
-    public function testGetCapacity()
-    {
-        $timeSlot = new Timeslot;
-        $timeSlot->setCapacity(100);
-        $this->assertEquals(100, (int)$timeSlot->getCapacity());
-    }
 
     public function testSetCapacity()
     {
@@ -61,55 +55,23 @@ class TimeSlotTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($timeSlot->getEvent(),$observer);
     }
     
-    public function testAddParticipant()
+    public function testgetParticipantsToday()
     {
-        $timeSlot = new Timeslot;
+        $timeslot = new Timeslot;
+        $timeslot->_construct();
+
+        $arr=$timeslot->getParticipantsToday();
         
-        $participant1 = new HouseholdMember;
-        $participant1->setFirstName("John");
-        $participant1->setLastName("Doe");
-        $timeSlot->addParticipant($participant1);
-        
-        $participant2 = new HouseholdMember();
-        $participant2->setFirstName("Jane");
-        $participant2->setLastName("Doe");
-        $timeSlot->addParticipant($participant2);
-        
-        $this->assertContains($participant1, $timeSlot->getParticipants());
-        $this->assertContains($participant1, $timeSlot->getParticipants());
+        $this->assertEquals(0, sizeof($arr));
     }
-    
-    public function testgetParticipants()
+    public function testGetParticipants()
     {
-        $timeSlot = new Timeslot;
-        
-        $participant1 = new HouseholdMember;
-        $participant1->setFirstName("John");
-        $participant1->setLastName("Doe");
-        $timeSlot->addParticipant($participant1);
-        
-        $participant2 = new HouseholdMember();
-        $participant2->setFirstName("Jane");
-        $participant2->setLastName("Doe");
-        $timeSlot->addParticipant($participant2);
-        
-        $this->assertContains($participant1, $timeSlot->getParticipants());
-        $this->assertContains($participant1, $timeSlot->getParticipants());
+        $timeslot = new Timeslot;
+        $timeslot->_construct();
+        $arr=$timeslot->getParticipants();        
+        $this->assertEquals(0, sizeof($arr));
     }
-    
-    public function testRemoveParticipant()
-    {
-        $timeSlot = new Timeslot;
-        
-        $participant1 = new HouseholdMember;
-        $participant1->setFirstName("John");
-        $participant1->setLastName("Doe");
-        $timeSlot->addParticipant($participant1);
-                
-        $this->assertContains($participant1, $timeSlot->getParticipants());
-        $timeSlot->removeParticipant($participant1);
-        $this->assertNotContains($participant1, $timeSlot->getParticipants());
-    }
+
 }
 
 ?>
