@@ -36,7 +36,7 @@ $serves = array
     '/todaysevents'                 => 'WHM\Controller\AppointFulfillment',
     '/todaysevents/:number'         => 'WHM\Controller\AppointFulfillmentSingleEvent',
     '/todaysevents/:number/:number' => 'WHM\Controller\AppointFulfillmentSingleEvent',
-    '/editflag'                     => 'WHM\Controller\ManageFlag',
+    '/editflag'                     => 'WHM\Controller\ManageFlagDescriptor',
 
 
     // Ajax controller

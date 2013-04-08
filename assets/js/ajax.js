@@ -54,7 +54,16 @@ $(function() {
           'flag-descriptor-2': $('input[name="flag-descriptor-2"]').val(),
           'flag-descriptor-3': $('input[name="flag-descriptor-3"]').val(),            
           'flag-descriptor-4': $('input[name="flag-descriptor-4"]').val()
-          }
+          },
+        success: function(response){            
+            
+            var newDescriptorName = JSON.parse(response);
+            console.log(newDescriptorName['descriptor1']);
+            $('input[name="flag-descriptor-1"]').siblings('button').html('<i class="icon-flag icon-white"></i>'+newDescriptorName['descriptor1']+'</button>');
+            $('input[name="flag-descriptor-2"]').siblings('button').html('<i class="icon-flag icon-white"></i>'+newDescriptorName['descriptor2']+'</button>');
+            $('input[name="flag-descriptor-3"]').siblings('button').html('<i class="icon-flag icon-white"></i>'+newDescriptorName['descriptor3']+'</button>');
+            $('input[name="flag-descriptor-4"]').siblings('button').html('<i class="icon-flag icon-white"></i>'+newDescriptorName['descriptor4']+'</button>');
+        } 
         });
     });
 
