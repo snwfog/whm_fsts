@@ -34,7 +34,6 @@ class CreateEvent extends Controller implements IRedirectable
         if(!is_null($template_id)){
            $template = $this->manageEvent->findEvent($template_id);
            $timeslots = $this->getSlots($template);
-
            $template = $this->event->formatEvents(array( 0 => $template));
            $this->data["currentTemplate"] = $template[0];
            $this->data["timeslots"] = $timeslots;        
@@ -112,7 +111,7 @@ class CreateEvent extends Controller implements IRedirectable
             }
         }
 
-        $this->redirect(isset($groupId) ? 'event/'.$groupId : 'event/');
+        $this->redirect(isset($groupId) ? 'event/'.$event->getId() : 'event/');
     }
 
     public function put()

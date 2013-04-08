@@ -8,7 +8,7 @@
                         <th style="width: 30%"> Time Slot </th>
                         <th style="width: 10%"> Duration </th>
                         <th style="width: 10%"> Capacity </th>
-                        <th style="width: 20%"> Actions </th>
+                        <th style="width: 20%"> Action </th>
                     </thead>
                     <tbody id="timeslot-table-tbody">
                         {% for timeslot in timeslots %}
@@ -29,11 +29,7 @@
                                 <td>
                                     {% if timeslot.participants|length == 0 %}
                                         <button type="button" class="btn btn-danger" name="delete-timeslot" id="{{timeslot.id}}">
-                                            <i class="icon-white icon-trash"></i>
-                                        </button>
-                                    {% else %}
-                                        <button type="button" onclick="location.href='{{apppath}}attendance/{{event["event-id"]}}/{{ timeslot.id}}';" class="btn btn-info">
-                                            <i class="icon-white icon-user"></i>
+                                            <i class="icon-white icon-trash"></i> Delete
                                         </button>
                                     {% endif %}
                                 </td>
