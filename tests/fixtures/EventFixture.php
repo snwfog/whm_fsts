@@ -484,8 +484,7 @@ class EventFixture extends AbstractFixture implements DependentFixtureInterface
         $this->addReference('timeslot35', $slot35);
         $this->addReference('timeslot36', $slot36); 
         $this->addReference('timeslot37', $slot37); 
-        $this->addReference('timeslot38', $slot38); 
-        $this->addReference('timeslot39', $slot39);       
+        $this->addReference('timeslot38', $slot38);    
     }
 
     private function makeTimeSlot($event)
