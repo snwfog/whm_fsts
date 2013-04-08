@@ -1,4 +1,10 @@
 $ ->
+  # Get the full pathname
+  pathname = $(location).attr "pathname"
+  # Splat and get the "could be" local path
+  # because we don't know if it is a local path or not
+  [first, path...] = pathname.split '/'
+#  if path.length >= 3
 
   # Submit the create household form
   $('button#create-household-save').click ->
@@ -32,31 +38,12 @@ $ ->
         $group.remove()
     })
 
-
-
-################################################################################
-# Noty Confirmation Setup
-# Since this function is in the local scope of the script.coffee
-# I just copy & pasted here for simplicity
-################################################################################
-  noteAlert = (msg, type) ->
-    n = noty({
-      layout: 'bottomRight',
-      type: type,
-      text: msg,
-      animation: {
-        open: {height: 'toggle'},
-        close: {height: 'toggle'},
-        easing: 'swing',
-        speed: 200
-      },
-    })
-  ###
-  Bootstrap Typeahead for ORIGINS and LANGUAGES
-  Sexy way of doing typeahead with ajax & bootstrap
-  http://stackoverflow.com/questions/9232748/twitter-bootstrap-typeahead-ajax-example
-  http://tatiyants.com/how-to-use-json-objects-with-twitter-bootstrap-typeahead/
-  ###
+  #####################################################################################
+  # Bootstrap Typeahead for ORIGINS and LANGUAGES
+  # Sexy way of doing typeahead with ajax & bootstrap
+  # http://stackoverflow.com/questions/9232748/twitter-bootstrap-typeahead-ajax-example
+  # http://tatiyants.com/how-to-use-json-objects-with-twitter-bootstrap-typeahead/
+  #####################################################################################
   $("input[name='origin']").typeahead(
     source: (query, process) ->
       return $.ajax(
@@ -87,6 +74,21 @@ $ ->
       )
   )
 
+  $("input[name='mother-tongue']").typeahead(
+    source: (query, process) ->
+      return $.ajax(
+        url: $(this)[0].$element.data('link')
+        type: 'get'
+        data: {query : query}
+        dataType: 'json'
+        success: (json) ->
+          languages = []
+          $.each json, (name, languageObj) ->
+            languages.push languageObj['name'].trim().toUpperCase()
+          return process(languages)
+      )
+  )
+
   usermap = {}
   $("input.search-query").typeahead(
     source: (query, process) ->
@@ -99,18 +101,61 @@ $ ->
           usermap = {}
           if json?
             $.each json, (index, member) ->
-              mapKey = (member.last_name.trim() + ", " + member.first_name.trim()).toUpperCase()
-              mapValue = { household_id: member.household_id, member_id: member.id }
+              mapKey = (member['last_name'] + ", " + member['first_name']).toUpperCase()
+              mapValue =
+                household_id: member.household_id
+                member_id: member.id
+                mcare: member.mcare_number
               usermap[mapKey] = mapValue
               members.push mapKey
             process(members)
       )
+    matcher: (item) ->
+      if not /[a-zA-Z]+/i.exec this.query.trim() # If not matching any word then match by household id
+        console.log "RECORDING HOUSEHOLD ID"
+        if usermap[item]['household_id'].indexOf(this.query.trim()) == 0 then return true
+      else
+        if item.toLowerCase().indexOf(this.query.trim().toLowerCase()) != -1 then return true
+        if usermap[item]['mcare'].toLowerCase().indexOf(this.query.trim().toLowerCase()) != -1 then return true
     updater: (item) ->
-      url = "household/#{usermap[item].household_id}/#{usermap[item].member_id}"
-      console.log url
+      # Gonna try to get the apppath from "hardcoded" project path
+      path = $('div#search-modal .modal-body .form-search').attr("action")
+      topp = path.split('/').pop();
+      path = path.replace(topp, "");
+
+      if not (/[\w]/i.exec item.household_id)
+        # Then it must be household id
+        url = "#{path}household/#{usermap[item].household_id}"
+      else
+        url = "#{path}household/#{usermap[item].household_id}/#{usermap[item].member_id}"
+
       $(location).attr('href', url);
       $.get(url)
       return item
   )
 
+  ###################
+  # Auto Filling Form
+  ###################
+
+  ## Auto filling for postal code <-> district mapping
+  $('input[name="postal-code"]').focus ->
+    map = {}
+    $.get 'postalcode', (data) ->
+      $.each data, (index, value) ->
+        $.each value, (postalcode, district) ->
+          map[postalcode] = district
+
+    $('input[name="postal-code"]').keyup ->
+      val = $(this).val()
+      $district = $('input[name="district"]')
+      if val.length >= 3
+        reg = /^\w\d\w/i
+        match = (reg.exec val)[0].toUpperCase() if reg.exec val
+        if map[match]?
+          $district.css 'background-color', ''
+          $district.val map[match]
+        else
+          $district.css({ 'background-color': '#f1dede' })
+          $district.val "Invalid Postal Code"
   true

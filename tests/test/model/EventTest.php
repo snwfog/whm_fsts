@@ -4,43 +4,93 @@ namespace Test\Model;
 
 use \PHPUnit_Framework_TestCase;
 use \WHM\Model\Event;
+use WHM\Model\Timeslot;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class EventTest extends PHPUnit_Framework_TestCase
 {
-    // public function testgetId()
-    // {
-        // $event = new Event();
-        // $event->setId(123456789);
-        // $this->assertEquals(
-        //                     123456789, 
-        //                     $event->getId()
-        //                     );
-    // }
+    
+//
+//    public function testsetParticipants()
+//    {
+//        $event = new Event();
+//        $event->_construct();
+//
+//        $ac = new ArrayCollection();
+//
+//        $this->assertEquals($ac, PHPUnit_Framework_TestCase::readAttribute($event, "participants"));
+//     }
 
-    public function testgetParticipants()
-    {
-        $event = new Event();
-        $event->_construct();
-
-        $ac = new ArrayCollection();
-
-        $this->assertEquals($ac, PHPUnit_Framework_TestCase::readAttribute($event, "participants"));
-    }
-
-    public function testsetParticipants()
-    {
-        $event = new Event();
-        $event->_construct();
-
-        $ac = new ArrayCollection();
-
-$this->assertEquals($ac, PHPUnit_Framework_TestCase::readAttribute($event, "participants"));
+     public function testGetSetName()
+     {
+         $event =new Event();
+         $event->setName("Food Basket");
+         $this->assertEquals("Food Basket", $event->getName());
      }
-
-
-
-   //  public function testgettemplates()
+     
+     public function testSetGetDescription()
+     {
+         $event =new Event();
+         $event->setDescription("Distribute Food");
+         $this->assertEquals("Distribute Food", $event->getDescription());
+     }
+     
+     public function testSetGetStartTime()
+     {
+         $event =new Event();
+         $event->setStartTime("18:30:00");
+         $this->assertEquals("18:30:00", $event->getStartTime());
+     }
+     
+     public function testSetGetStartDate()
+     {
+         $event =new Event();
+         $event->setStartDate("09/10/2013");
+         $this->assertEquals("09/10/2013", $event->getStartDate());
+     }
+     
+     public function testSetGetGroupId()
+     {
+         $event =new Event();
+         $event->setGroupId(1);
+         $this->assertEquals(1, $event->getGroupId());
+     }
+     
+     public function testSetGetIsTemplate()
+     {
+         $event =new Event();
+         $event->setIsTemplate(TRUE);
+         $this->assertEquals(TRUE, $event->getIsTemplate());
+     }
+     
+     public function testSetGetCapacity()
+     {
+         $event =new Event();
+         $event->setCapacity(200);
+         $this->assertEquals(200, $event->getCapacity());
+     }
+     
+     public function testAddGetRemoveTimeslot()
+     {
+         $event = new Event();
+         $event->_construct();
+         $timeslot = new Timeslot();
+         
+         $event->addTimeslot($timeslot);
+         $this->assertEquals(1, Count($event->getTimeslots()));
+         $this->assertContains($timeslot, $event->getTimeslots());
+         
+         $event->removeTimeslot($timeslot);
+         $this->assertEquals(0, Count($event->getTimeslots()));         
+     }
+     
+     public function testSetGetIsActivated()
+     {
+         $event =new Event();
+         $event->setIsActivated(FALSE);
+         $this->assertEquals(FALSE, $event->getIsActivated());
+     }
+     //  public function testgettemplates()
    //  {
    //      $event = new Event();
    //      $event->setTemplates("template1");

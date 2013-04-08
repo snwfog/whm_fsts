@@ -1,0 +1,16 @@
+{# Early implementation of help Popover #}
+{% macro popover(msg) %}
+    <div class="popover top help">
+        <div class="arrow"></div>
+        <h3 class="popover-title">Help</h3>
+        <div class="popover-content">
+          <p>{{ msg }}</p>
+        </div>
+    </div>
+{% endmacro %}
+
+{# usage: household member flag marker in the household member list #}
+{# parameter: flag descriptor type #}
+{% macro flagmarker(type) %}
+    <span class="label label-{{ type }} marker">&nbsp;</span>
+{% endmacro %}

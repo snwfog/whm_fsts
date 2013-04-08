@@ -6,63 +6,43 @@
 		<h2> Yearly Reporting </h2>
 		</legend>
 		
-		{# <div class="well no-padding-well" id="dates-well"> Put wells to make it nice #}
-		<form action ="{{ apppath }}{{ formAction }}" method="POST" name="stat-form"
-		id = "stat-form"> 
+		<div class="well" id="yearly-well">
+			<form action ="{{ apppath }}report/annual" method="POST" name="stat-form"
+			id = "stat-form">
 		
-		<select class=''>
-			<option>Food Drive</option>
-			<option>Christmas Basket</option>
-		</select>
-		<br /><br />
-		<input type = "radio"> Annual 
-		<input type = "radio"> Fiscal
-		
-		<br /><br />
-		<button id="generate-year-report" type="button" class="btn btn-medium btn-success"><i class="icon-tasks icon-white"></i> Generate Report</button>
-		<button id="excel-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export Excel</button>
-		<button id="pdf-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export PDF</button>
-		</form>
-		{# </div> #}
-		
-		<br /><br /><br /><br /><br /><br /><br /><br />
-		
-		<legend class='controls controls-row'>
-		<h2> Monthly Reporting </h2>
-		</legend>
-		
-		<form action ="{{ apppath }}{{ formAction }}" method="POST" name="stat-form"
-		id = "stat-form"> 
-		
-		<select class=''>
-			<option>Food Drive</option>
-			<option>Christmas Basket</option>
-		</select>
-		<select class=''>
-			<option>January</option>
-			<option>February</option>
-			<option>March</option>
-			<option>April</option>
-		</select>
-		
-		<br /><br />
-		<button id="generate-year-report" type="button" class="btn btn-medium btn-success"><i class="icon-tasks icon-white"></i> Generate Report</button>
-		<button id="excel-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export Excel</button>
-		<button id="pdf-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export PDF</button>
-		</form>
-		
+
+				<select class='' name="group-id">
+					{% for each_event in allEvents %}
+						<option value="{{ each_event["group-id"] }}">{{ each_event.name }}</option>
+					{% endfor %}
+				</select>
+
+			<br /><br />
+			<input type = "radio" name="occurrence-type" value="yearly"> Annual 
+			<input type = "hidden" name="start-date" placeholder="Start Date" value="Y"/>
+			<input type = "radio" name="occurrence-type" value="fiscal"> Fiscal
+				
+			
+
+			<br /><br />
+			<button id="generate-year-report" type="submit" class="btn btn-medium btn-success"><i class="icon-tasks icon-white"></i> Generate Report</button>
+			<button id="excel-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export Excel</button>
+			</form>
+		</div>
 	</div>
 {% endblock content %}
-
+{#
 {% block left1 %}
-	<div class="span6">
+	<div class="span4">
 		<legend class='controls controls-row'>
 		<h1> Ad-Hoc </h1>
 		</legend>
-		
+		<div class="well" id="adhoc-well">
+		<form action ="{{ apppath }}report/annual" method="POST" name="stat-form"id = "stat-form"> 
 		<select class=''>
-			<option>Food Drive</option>
-			<option>Christmas Basket</option>
+			{% for each_event in allEvents %}
+					<option>{{ each_event.name }}</option>
+				{% endfor %}
 		</select>
 		
 		<br /><br />
@@ -75,9 +55,48 @@
 		<br /><br />
 		<button id="generate-year-report" type="button" class="btn btn-medium btn-success"><i class="icon-tasks icon-white"></i> Generate Report</button>
 		<button id="excel-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export Excel</button>
-		<button id="pdf-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export PDF</button>
 		</form>
-		
+		</div>
 		
 	</div>
 {% endblock left1 %}
+#}
+{% block left2 %}
+
+	<div class="span6">
+		<legend class='controls controls-row'>
+		<h2> Monthly Reporting </h2>
+		</legend>
+		<div class="well" id="monthly-well">
+		<form action ="{{ apppath }}report/annual" method="POST" name="stat-form"id = "stat-form"> 
+		
+		<select class='' name="group-id">
+			{% for each_event in allEvents %}
+					<option value="{{ each_event["group-id"] }}">{{ each_event.name }}</option>
+				{% endfor %}
+		</select>
+		<select class='' name="monthly-report">
+			<option value="1">January</option>
+			<option value="2">February</option>
+			<option value="3">March</option>
+			<option value="4">April</option>
+			<option value="5">May</option>
+			<option value="6">June</option>
+			<option value="7">July</option>
+			<option value="8">August</option>
+			<option value="9">September</option>
+			<option value="10">October</option>
+			<option value="11">November</option>
+			<option value="12">December</option>
+		</select>
+		
+		<br /><br />
+		<input type = "hidden" name="occurrence-type" value="monthly"> 
+		<input type = "hidden" name="start-date" placeholder="Start Date" value="m"/>
+
+		<button id="generate-year-report" type="submit" class="btn btn-medium btn-success"><i class="icon-tasks icon-white"></i> Generate Report</button>
+		<button id="excel-year-report" type="button" class="btn btn-medium btn-info"><i class="icon-tasks icon-white"></i> Export Excel</button>
+		</form>
+		</div>
+	</div>
+{% endblock left2 %}

@@ -24,6 +24,12 @@ abstract class ControllerTestCase extends PHPUnit_Framework_TestCase
         parent::setUp();        
         $this->client = new Client(); 
         
+        $formValues = array(
+          'username'=>'Admin',
+          'inputPassword'=>'Admin'
+        );
+        $this->request('POST', '/login', $formValues);
+
     }
         
     public static function setUpBeforeClass()

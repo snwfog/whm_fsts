@@ -8,7 +8,7 @@ div#modal-search
 div#login-well
 {
     position: absolute;
-    top: 20%;
+	top: 20%;
     z-index: 2;
     background-color: rgba(10, 10, 10, 0.5);
     border-color: rgba(255, 255, 255, 0.2);
@@ -20,6 +20,19 @@ div#login-well input
     height: 3em;
     padding: 3px 5px;
     background-color: rgba(255, 255, 255, 0.8);
+}
+
+div#yearly-well
+{
+	max-width: 400px;
+}
+div#monthly-well
+{
+	max-width: 400px;
+}
+div#adhoc-well
+{
+	max-width: 400px;
 }
 
 .fade
@@ -45,14 +58,15 @@ div.no-padding-well
 }
 
 /* Appointment modal width increase */
-div#appointment-modal
+div#appointment-modal, div#appointment-modal1, div#appointment-modal2, div#appointment-modal3
+, div#appointment-modal4, div#appointment-modal5, div#appointment-modal6
 {
     width: 960px;
     margin-left: -480px;
 }
 
-div#appointment-modal .carousel,
-div#appointment-modal .table
+div#appointment-modal, div#appointment-modal1 .carousel,
+div#appointment-modal, div#appointment-modal1 .table
 {
     margin-bottom: 0px;
 }
@@ -63,6 +77,14 @@ div#manage-flag-modal
     margin-left: -200px;
 }
 
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
 /**
  * Quick and dirty hack for showing typeahead over modal body
  * if there is any overflow.
@@ -70,4 +92,41 @@ div#manage-flag-modal
 .modal-body
 {
     overflow: visible;
+    z-index: -1;
 }
+
+.modal-footer
+{
+    z-index: -1000;
+    position: relative;
+    overflow: visible;
+}
+
+.carousel-inner, .carousel-inner1
+{
+    overflow: visible;
+}
+.dropdown-menu
+{
+    z-index: 9001;
+    position: absolute;
+    overflow: visible;
+}
+
+div#event-main
+{
+    max-height:600px; 
+    overflow-y: auto; 
+    padding-right: 10px;
+}
+
+div.container-fluid
+{
+    margin-bottom:40px;
+}
+
+span.marker
+{
+    padding: 2px 1px 0px 1px;
+}
+

@@ -11,7 +11,6 @@ use \WHM\Model\ManageHousehold;
 class CreateMember extends WHM\Controller implements WHM\IRedirectable
 {
     protected $data = array("errors" => array(), "form" => array());
-    private $manageHousehold;
     private $memberController;
 
     public function __construct(array $args = null)
@@ -19,7 +18,6 @@ class CreateMember extends WHM\Controller implements WHM\IRedirectable
         $this->data = $args;
         parent::__construct();
         //  WHM\Helper::backtrace();
-        $this->manageHousehold = new ManageHousehold();
         $this->memberController = new Member();
 
     }
@@ -34,7 +32,7 @@ class CreateMember extends WHM\Controller implements WHM\IRedirectable
     {
         if (isset($_POST))
         {
-            $member = $this->manageHousehold->addMember($_POST);
+            $member = ManageHousehold::addMember($_POST);
             $this->redirect("household/". $_POST['household-id'] . "/" . $member->getId());
         }else{
             $this->display("member.create.form.twig");

@@ -11,14 +11,12 @@ use WHM\Controller\Household;
 class CreateHousehold extends Controller implements IRedirectable
 {
     protected $data = array("errors" => array(), "form" => array());
-    private $manageHouse;
     private $householdController;
     public function __construct(array $args = null)
     {
         $this->data = $args;
         parent::__construct();
       //  WHM\Helper::backtrace();
-        $this->manageHouse = new ManageHousehold();
         $this->householdController = new Household();
     }
 
@@ -32,7 +30,7 @@ class CreateHousehold extends Controller implements IRedirectable
         if (isset($_POST))
         {
             $this->data["form"] = $_POST;
-            $household = $this->manageHouse->createHousehold($_POST);
+            $household = ManageHousehold::createHousehold($_POST);
             $pMember = $household->getHouseholdPrincipal();
 
             $this->redirect('household/' . $household->getId()."/". $pMember->getId());

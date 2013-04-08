@@ -1,0 +1,21 @@
+{% block registration_event %}
+    <div id="registration-event"
+         class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+
+      
+                
+        <div class="modal-footer">
+            <div class="btn-group" data-toggle="buttons-radio">
+                <button type="button" class="btn btn-primary active" data-target="#event-calendar-carousel" data-slide-to="0">
+                    <i class="icon-calendar icon-white"></i> First Week
+                </button>
+                <button type="button" class="btn btn-primary" data-target="#event-calendar-carousel" data-slide-to="1">
+                    <i class="icon-calendar icon-white"></i> Second Week
+                </button>
+            </div>
+            &nbsp;&nbsp;&nbsp;
+            <button class="btn" data-dismiss="modal" aria-hidden="true"> Close</button>
+        </div>
+    </div>
+{% endblock %}

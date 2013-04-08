@@ -30,17 +30,12 @@ class HouseholdMember
     protected $phone_number;
 
     /**
-     * @Column(nullable=TRUE, length=9)
-     */
-    protected $sin_number;
-
-    /**
      * @Column(nullable=TRUE)
      */
     protected $mcare_number;
 
     /**
-     * @Column(nullable=TRUE, length=2)
+     * @Column(nullable=TRUE)
      */
     protected $work_status;
 
@@ -57,10 +52,16 @@ class HouseholdMember
     /**
      * @Column(nullable=TRUE)
      */
+    protected $mother_tongue;
+
+
+    /**
+     * @Column(nullable=TRUE)
+     */
     protected $language;
 
 	/**
-     * @Column(nullable=TRUE, length=2)
+     * @Column(nullable=TRUE)
      */
     protected $marital_status;
 
@@ -77,20 +78,39 @@ class HouseholdMember
     protected $origin;
 
     /**
-     * @Column(type="datetime")
-     */
-    protected $first_visit_date;
-
-    /**
-     * @Column(nullable=TRUE)
-     */
-    protected $contact;
-
-    /**
      * @Column(nullable=TRUE)
      */
     protected $income;
 
+    /**
+     * @Column(nullable=TRUE)
+     */
+    protected $school;
+
+    /**
+     * @Column(nullable=TRUE)
+     */
+    protected $student_id;
+
+    /**
+     * @Column(nullable=TRUE)
+     */
+    protected $grade;
+
+    /**
+     * @Column(nullable=TRUE)
+     */
+    protected $student_bursary;
+
+    /**
+    * @Column(type="date", nullable=TRUE)
+    */
+    protected $date_of_birth;
+
+    /**
+    * @Column(type="datetime")
+    */
+    protected $first_visit_date;
 
     /**
      * * -> 1 -- Owning by Default
@@ -103,32 +123,10 @@ class HouseholdMember
     protected $household;
 
     /**
-     * * <-> * -- Owning
-     *
-     * @ManyToMany(targetEntity="Event", inversedBy="participants")
-     * @JoinTable
-     * (
-     *      name="participants_events",
-     *      joinColumns=
-     *      {
-     *          @JoinColumn
-     *          (
-     *              name="household_member_id",
-     *              referencedColumnName="id"
-     *          )
-     *      },
-     *      inverseJoinColumns=
-     *      {
-     *          @JoinColumn
-     *          (
-     *              name="event_id",
-     *              referencedColumnName="id"
-     *          )
-     *      }
-     * )
+     * @OneToMany(targetEntity="ParticipantsTimeslots", mappedBy="household_member")
      *
      **/
-    protected $events = null;
+    protected $timeslots = null;
 
     /**
      * 1 <-> * -- Inversing by default
@@ -140,13 +138,18 @@ class HouseholdMember
 
 	public function _construct()
 	{
-		$this->events = new ArrayCollection();
+		$this->timeslots = new ArrayCollection();
         $this->flags = new ArrayCollection();
 	}
 
     public function getId()
     {
         return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     public function setFirstName($first_name)
@@ -177,16 +180,6 @@ class HouseholdMember
     public function getPhoneNumber()
     {
         return $this->phone_number;
-    }
-
-    public function setSinNumber($sin_number)
-    {
-        $this->sin_number = $sin_number;
-    }
-
-    public function getSinNumber()
-    {
-        return $this->sin_number;
     }
 
     public function setGender($gender)
@@ -239,6 +232,16 @@ class HouseholdMember
         return $this->origin;
     }
 
+    public function setMotherTongue($mother_tongue)
+    {
+        $this->mother_tongue = $mother_tongue;
+    }
+
+    public function getMotherTongue()
+    {
+        return $this->mother_tongue;
+    }
+
     public function setLanguage($language)
     {
         $this->language = $language;
@@ -269,16 +272,6 @@ class HouseholdMember
         return $this->referral;
     }
 
-    public function setContact($contact)
-    {
-        $this->contact = $contact;
-    }
-
-    public function getContact()
-    {
-        return $this->contact;
-    }
-
     public function setIncome($income)
     {
         $this->income = $income;
@@ -288,6 +281,58 @@ class HouseholdMember
     {
         return $this->income;
     }
+
+      public function setSchool($school)
+    {
+        $this->school = $school;
+    }
+
+    public function getSchool()
+    {
+        return $this->school;
+    }
+
+    public function setStudentId($student_id)
+    {
+        $this->student_id = $student_id;
+    }
+
+    public function getStudentId()
+    {
+        return $this->student_id;
+    }
+
+    public function setGrade($grade)
+    {
+        $this->grade = $grade;
+    }
+
+    public function getGrade()
+    {
+        return $this->grade;
+    }
+
+    public function setStudentBursary($student_bursary)
+    {
+        $this->student_bursary = $student_bursary;
+    }
+
+    public function getStudentBursary()
+    {
+        return $this->student_bursary;
+    }
+
+
+    public function setDateOfBirth($date_of_birth)
+    {
+        $this->date_of_birth = $date_of_birth;
+    }
+
+    public function getDateOfBirth()
+    {
+        return $this->date_of_birth;
+    }
+
 
     public function setFirstVisitDate($first_visit_date)
     {
@@ -299,33 +344,22 @@ class HouseholdMember
         return $this->first_visit_date;
     }
 
-    public function attendEvent(Event $events)
-    {
-        $this->events[] = $events;
-        $events->addParticipant($this);
-    }
-
-    public function removeEvent(Event $event)
-    {
-        $this->events->removeElement($event);
-        $event->removeParticipant($this);
-    }
 
     /**
      * Helper Method for HouseholdMember class used to achieve bi-directional relationship
      * attribute synchronization.
      * You should never have to call this method explicitly,
      * 
-     * @param \WHM\Model\Event $events
-     */
-    public function addEvent(Event $events)
-    {
-        $this->events[] = $events;
-    }    
+     * @param \WHM\Model\Timeslot $timeslots
+     */ 
 
-    public function getEvents()
+    public function getTimeslots()
     {
-        return $this->events;
+        $data = array();
+        foreach($this->timeslots as $relation){
+            array_push($data, $relation->getTimeslot());
+        }
+        return $data;
     }
 
     /**
@@ -350,7 +384,7 @@ class HouseholdMember
     public function addFlags($flags)
     {
         $this->flags[] = $flags;
-        $flags->addHouseholdMember($this);
+        $flags->setHouseholdMember($this);
     }
 
     /**

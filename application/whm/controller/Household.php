@@ -10,27 +10,29 @@ use \WHM\Model\ManageFlag;
 use \WHM\Model\Flag;
 use \WHM\Model\HouseholdMember;
 use \WHM\Model\ManageEvent;
+use \WHM\Controller\ControllerHelper;
+use \WHM\Controller\Event; 
+use DateTime;
+use DateTimeZone;
 
 class Household extends Controller implements IRedirectable
 {
     public $data = array( "errors" => array(), "form" => array());
-    private $manageHousehold;
     private $manageFlag;
     private $manageEvents;
     private $flag;
-
+    private $eventcontroller;
+    private $household;
 
     public function __construct(array $args = null)
     {
         $this->data = $args;
         parent::__construct();
         //Helper::backtrace();
-        $this->manageHousehold = new ManageHousehold();
         $this->manageFlag = new ManageFlag();
         $this->manageEvents = new ManageEvent();
         $this->flag = new Flag();
-
-
+        $this->eventcontroller = new Event(); 
     }
 
     public function get($household_id = null, $member_id = null)
@@ -40,17 +42,24 @@ class Household extends Controller implements IRedirectable
             $household_id = $_GET["household_id"];
         }
 
-        if(!is_null($household_id)){
-            //Get household and as default, get household principal if specific member is not specified.
-            $household = $this->manageHousehold->findHousehold($household_id);
-            if(is_null($member_id)){
-                $member = $household->getHouseholdPrincipal();
-            }else{
-                $member = $this->manageHousehold->findMember($member_id);
+        $this->household = ManageHousehold::findHousehold($household_id);
+        if (!is_null($household_id))
+        {
+            // Get household principal if specific member is not specified.
+            $member = $this->household->getHouseholdPrincipal();
+            if(!is_null($member_id)){
+                $foundMember = ManageHousehold::findMember($member_id);
+                
+                //Make Sure member belongs to household
+                if($foundMember->getHousehold()->getId() != $this->household->getId()){
+                    $member_id = $member->getId();         
+                    return $this->redirect("household/$household_id/$member_id");;
+                }
+                $member = $foundMember;
             }
 
-            $data = $this->formatHouseholdInfo($household, $member);
-            
+            $data = $this->formatHouseholdInfo($this->household, $member);
+
             //Get flag descriptor for creating flags
             $flagDescriptors = $this->manageFlag->getFlagDescriptors();
             $formattedDescriptor = $this->formatDescriptor($flagDescriptors);
@@ -58,46 +67,32 @@ class Household extends Controller implements IRedirectable
             //Get member flags
             $flags = $member->getFlags();
             $formattedFlags = $this->formatMessage($flags);
-            
-        //   $flagNumber = $this->flagNum($formattedFlags);
 
-            //Get Events to make appoitment
-            $eventcontroller = new \WHM\Controller\Event; 
-            $eventdraft=$this->manageEvents->getUpComingEvents();
-            $events=$eventcontroller->getIndexedEvents($eventdraft);
+            //Get flag summary
+            $householdFlagSummary = $this->_formatHouseholdFlagSummary(
+                $this->manageFlag->getFlagSummaryByHousehold($household_id));
+            
+            $flagNumber = $this->manageFlag->getFlagTotal($household_id);
+
+            //Get Events.
+            $events = $this->getMonthlyEvents($household_id, $member_id);
 
             $data = array(
                             "household"         =>  $data,
                             "flagDescriptors"   =>  $formattedDescriptor,
                             "flags"             =>  $formattedFlags,
-      //                    "flag_number"       =>  $flagNumber,
+                            "flagTotal"         =>  $flagNumber,
+                            "flagSummary"       =>  $householdFlagSummary,
                             "events"            =>  $events
                     );
             $this->display("household.create.twig", $data);
         }
         else
         {
-            $this->redirect("search");
+            $this->redirect("household");
         }
 
-    }
-
-
-
-    public function put()
-    {
-
-        $content = "charles=yang&mike=pham";
-        file_put_contents("php://output", $content);
-        $var = null;
-        echo "before marker";
-        $unparsed = file_get_contents("php://input");
-        echo $unparsed."unique<br>";
-
-        echo $unparsed."secondtime<br>";
-        parse_str($unparsed, $var);
-        print_r($var);
-
+        $this->manageFlag->getFlagSummaryByHousehold(1);
     }
 
     /**
@@ -107,7 +102,7 @@ class Household extends Controller implements IRedirectable
      */
     public function post()
     {
-        $this->manageHousehold->updateHousehold($_POST);
+        ManageHousehold::updateHousehold($_POST);
         $this->redirect('household/'.$_POST["household-id"]."/".$_POST["member-id"] );
     }
 
@@ -127,63 +122,51 @@ class Household extends Controller implements IRedirectable
 
     public function formatHouseholdInfo($household, $member)
     {
-        
+
         $principal = $household->getHouseholdPrincipal();
         $address = $household->getAddress();
         $dependents = $household->getMembers();
-         
-        // NEED REFACTORING
-        $count = 0;
-        $members = null;
-        foreach ($dependents as $dependent){
-            $members[$count++] = array(
+        
+        //Get list of Members
+        $members = array();
+        foreach ($dependents as $dependent)
+        {
+            $registeredEvents = $this->eventsRegistered($dependent->getId());
+            if (($principal->getId() == $dependent->getId()))
+            {
+                $members["principal"] = array(
                                         "member-id"  => $dependent->getId(),
                                         "first-name" => $dependent->getFirstName(),
                                         "last-name"  => $dependent->getLastName(),
-                                        "active"     => false,
-                                        "principal"  => false,
+                                        "gender"     => $dependent->getGender(),
+                                        "active"     => $member->getId() == $dependent->getId()? TRUE : FALSE,
+                                        "principal"  => true,
+                                        "age"        => get_class($dependent->getDateOfBirth()) == "DateTime" ? ControllerHelper::calculateAge($dependent->getDateOfBirth(), new DateTime) : '',
+                                        "events"     => $registeredEvents,
                                  );
-            if (($principal->getId() == $dependent->getId())){
-                $members[$count-1]["principal"] = true;
-            }
-            if (($member->getId() == $dependent->getId())){
-                $members[$count-1]["active"] = true;     
-            }
-
-            
+            }else{
+                array_push($members, array(
+                                            "member-id"  => $dependent->getId(),
+                                            "first-name" => $dependent->getFirstName(),
+                                            "last-name"  => $dependent->getLastName(),
+                                            "gender"     => $dependent->getGender(),
+                                            "active"     => $member->getId() == $dependent->getId()? TRUE : FALSE,
+                                            "age"        => get_class($dependent->getDateOfBirth()) == "DateTime" ? ControllerHelper::calculateAge($dependent->getDateOfBirth(), new DateTime) : '',
+                                            "events"     => $registeredEvents,
+                                     ));
+            } 
         }
 
-        $date = $member->getFirstVisitDate();
-        $date = $date->format("m-d-Y");
-
+        //Get detailed info of displayed member
+        $formatMember = ControllerHelper::formatMember(array( 0 => $member));
         $data = array(
-                        "household_id" => $household->getId(),
-                        //PrincipalMember or Selected Member
-                        "member-id" => $member->getId(),
-                        "first-name" => $member->getFirstName(),
-                        "last-name"  => $member->getLastName(),
-                        "phone-number"  => $member->getPhoneNumber(),
-                        "sin-number"  => $member->getSinNumber(),
-                        "medicare-number"  => $member->getMcareNumber(),
-                        "work-status"  => $member->getWorkStatus(),
-                        "welfare-number"  => $member->getWelfareNumber(),
-                        "referral"  => $member->getReferral(),
-                        "language"  => $member->getLanguage(),
-                        "marital"  => $member->getMaritalStatus(),
-                        "gender"  => $member->getGender(),
-                        "origin"   => $member->getOrigin(),
-                        "first-visit-date"  => $date,
-                        "contact"   => $member->getContact(),
-                        "income"   => $member->getIncome(),
-                        //Address
                         "house-number"    => $address->getHouseNumber(),
                         "street"    => $address->getStreet(),
                         "apt-number" => $address->getAptNumber(),
-                        "city"     => $address->getCity(),
-                        "province" => $address->getProvince(),
                         "postal-code"   => $address->getPostalCode(),
                         "district"   => $address->getDistrict(),
                 );
+        $data = array_merge($formatMember[0], $data);
         $data["members"] = $members;
         return $data;
     }
@@ -230,18 +213,78 @@ class Household extends Controller implements IRedirectable
         return $data;      
     }
 
-    private function flagNum($flagN)
-    {
-        $data = array();
+    private function eventsRegistered($id)
+    {   $data = array();
         $count = 0;
-        foreach( $flagN as $manageFlag){
-            $manageFlag = new ManageFlag();
-            $data[$count++] = array(
-                                    "flagn" => $manageFlag->flagNumber(),
-                              );
+        $upcomingEvents=$this->manageEvents->getAllUpComingEvents("34");
+
+        foreach( $upcomingEvents as $event )
+        {
+            $timeslot = $event->getTimeslots();
+            $slotStarttime = $event->getStartTime()->format("H:i");
+            foreach( $timeslot as $t )
+            {   
+                $participants = $t->getParticipants();
+                $participants = ControllerHelper::formatMember($participants);
+                if(!is_null($participants))
+                {
+                    $slotEndtime = new DateTime($slotStarttime);
+                    $duration = '+'.$t->getDuration(). ' mins';
+                    date_modify($slotEndtime, $duration);
+                    $endtime = $slotEndtime->format('H:i');
+                    foreach($participants as $p)
+                    { 
+                        if($p["member-id"]==$id)
+                        {
+                            $data[$count++] = array
+                            (
+                                "timeslot-id" => $t->getId(),
+                                "timeslot-name" => $t->getName(),
+                                "event-name" => $event->getName(),
+                                "duration" => $t->getDuration(),
+                                "date" => $event->getStartDate()->format("m/d/Y"),
+                                "capacity" => $t->getCapacity(),
+                                "start-time" => $slotStarttime,
+                                "end-time" => $endtime,
+                            );
+                        }
+                    }
+                    $slotStarttime = $endtime;
+                }
+            }        
+        }
+        return $data;
+    }
+
+    private function getMonthlyEvents($household_id, $member_id)
+    {   
+        $eventdraft = $this->manageEvents->getAllUpComingEvents();
+        $events = $this->eventcontroller->getIndexedEvents($eventdraft, $household_id, $member_id);
+        $event[0] = $events;
+
+        for($i = 1; $i <= 6; $i++)
+        {
+            $eventmonthdraft = $this->manageEvents->getEventsbyMonth($i);
+            $eventsMonth = $this->eventcontroller->getIndexedEvents($eventmonthdraft, $household_id, $member_id, $i);
+            // $eventsMonth = $this->eventcontroller->formatEvents($eventmonthdraft);
+            $event[$i] = $eventsMonth;
         }
 
-        return $data;
+        return $event;
+    }
+
+    private function _formatHouseholdFlagSummary($data)
+    {
+        $flagSummary = array();
+        if (!empty($data))
+        {
+            foreach ($data as $row)
+            {
+                $flagSummary[$row['id']][] = $row;
+            }
+        }
+
+        return $flagSummary;
     }
 }
 

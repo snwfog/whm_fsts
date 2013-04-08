@@ -11,37 +11,39 @@ use \WHM\Model\HouseholdMember;
 class Member extends Controller implements IRedirectable
 {
     public $data = array();
-    private $manageHousehold;
     public function __construct(array $args = null)
     {
         $this->data = $args;
         parent::__construct();
       //  Helper_Core::backtrace();
-        $this->manageHousehold = new manageHousehold();
 
     }
 
     public function get($memberId)
     {  
-        $member = $this->manageHousehold->findMember($memberId);
+        $member = ManageHousehold::findMember($memberId);
         $household = $member->getHousehold();
         $address = $household->getAddress();
         $data = array(
                         "first-name" => $member->getFirstName(),
                         "last-name"  => $member->getLastName(),
+                        "mother-tongue"  => $member->getMotherTongue(),
                         "language"  => $member->getLanguage(),
                         "work-status"  => $member->getWorkStatus(),
                         "welfare-number"  => $member->getWelfareNumber(),
+                        "school"  => $member->getSchool(),
+                        "student-id"  => $member->getStudentId(),
+                        "grade"  => $member->getGrade(),
+                        "student-bursary"  => $member->getStudentBursary(),
                         "phone-number"  => $member->getPhoneNumber(),
                         "medicare-number"  => $member->getMcareNumber(),
                         "referral"  => $member->getReferral(),
                         "marital"  => $member->getMaritalStatus(),
                         "origin"   => $member->getOrigin(),
                         "income" => $member->getIncome(),
+                        "gender" => $member->getGender(),
                         "street"    => $address->getStreet(),
                         "apt-number"      => $address->getAptNumber(),
-                        "city"     => $address->getCity(),
-                        "province" => $address->getProvince(),
                         "postal-code"   => $address->getPostalCode(),
                         "district" => $address->getDistrict(),
                 );

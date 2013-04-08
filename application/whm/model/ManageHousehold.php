@@ -3,196 +3,187 @@ namespace WHM\Model;
 use WHM;
 use WHM\Application;
 use \DateTime;
+use DateInterval;
 use \WHM\Model\Household;
 
 /**
  * Manage entity household
  **/
 class ManageHousehold {
-    private $em;
 
-    public function __construct()
+    public static function createHousehold($data)
     {
-        $this->em = Application::em();
-    }
-
-    public function createHousehold($data)
-    {
-        $pmember = $this->createMember($data);
-        $address = $this->createAddress($data);
+        $pmember = self::createMember($data); //Principal Member
+        $address = self::createAddress($data);
         $household = new Household();
 
         $household->setHouseholdPrincipal($pmember);
         $household->setAddress($address);
-        $this->em->persist($household);
-        $this->em->flush();
+        Application::em()->persist($household);
+        Application::em()->flush();
 
         $pmember->setHousehold($household);
-        $this->em->persist($pmember);
-        $this->em->flush();
+        Application::em()->persist($pmember);
+        Application::em()->flush();
 
         return $household;
     }
 
-    public function updateHousehold($data)
+    public static function updateHousehold($data)
     {
-        $household = $this->findHousehold($data["household-id"]);
-        $pMember = $this->findMember($data["member-id"]);
+        $household = self::findHousehold($data["household-id"]);
         $address = $household->getAddress();
-        $this->updateMember($pMember, $data);
-        $this->updateAddress($address, $data);
+        self::createMember($data);
+        self::updateAddress($address, $data);
     }
 
 
     //Delete
-    public function removeHousehold($id)
+    public static function removeHousehold($id)
     {
 //        The following code throws a fatal error during unit test
 //        ManageHouseholdTest.php
-//                          
+//
 //        $household = findHousehold($id);
 //        $em->remove($household);
 //        $em->flush();
     }
 
-    //View
-    public  function findAllHouseholds()
-    {
-        // to do
-    }
-    
     /**
      * Returns the household with the passed id.
-     * 
-     * @param int $id 
+     *
+     * @param int $id
      * @return Household
      */
-    public function findHousehold($id)
+    public static function findHousehold($id)
     {
 
-        $household = $this->em->find("WHM\model\household", (int) $id);
+        $household = Application::em()->find("WHM\model\household", (int) $id);
         return $household;
     }
 
     /*
      * @return HouseholdMember
      */
-    public function findMember($id)
+    public static function findMember($id)
     {
-        $member = $this->em->find("WHM\model\HouseholdMember", (int) $id);
+        $member = Application::em()->find("WHM\model\HouseholdMember", (int) $id);
         return $member;
     }
 
-    public function getHouseholdMembers($id)
+    /*
+     * @return ArrayCollection of type HouseholdMember
+     */
+    public static function getHouseholdMembers($id)
     {
-        $household = $this->findHousehold($id);
+        $household = self::findHousehold($id);
         return $household->getMembers();
     }
 
-    
-
-
-
-    public function addMember($data)
+    /*
+     * @return HouseholdMember
+     */
+    public static function addMember($data)
     {
-        $household = $this->findHousehold($data["household-id"]);
-        $member = $this->createMember($data);
+        $household = self::findHousehold($data["household-id"]);
+        $member = self::createMember($data);
         $member->setHousehold($household);
-        $this->em->persist($member);
-        $this->em->flush();
+        Application::em()->persist($member);
+        Application::em()->flush();
         return $member;
     }
 
 
 
-    //Private Methods
-    private function createMember($data)
+    //NEW or UPDATE Member
+    private static function createMember($data)
     {
-        $household_member = new HouseholdMember();
-        $datetime = new DateTime("now");
+        $datetime = new DateTime();
+        if(isset($data["member-id"])){
+        //Update Member
+            $household_member = self::findMember($data["member-id"]);
+            $household_member->setFirstVisitDate($datetime->createFromFormat("d-m-Y", $data["first-visit-date"]));
+        }else{
+        //New Member
+            $household_member = new HouseholdMember();
+            $household_member->setFirstVisitDate($datetime);
+        }
 
-        $data = $this->formatData($data);
+        if(isset($data["date-of-birth"]) && !empty($data["date-of-birth"])){
+            $DOBObject = new DateTime();
+            $now = new DateTime();
+            $data["date-of-birth"] = $DOBObject->createFromFormat("m-d-y", $data["date-of-birth"]);
+
+            //Bug fix: PHP year date from 0-69 are added 2000
+            $DOBYear = $data["date-of-birth"]->format("y");
+            $currentYear = $now->format("y");
+            if($DOBYear < 70 && $DOBYear > $currentYear){
+                $data["date-of-birth"] = $data["date-of-birth"]->sub(DateInterval::createFromDateString("100 years"));
+            }
+        }else{
+            $data["date-of-birth"] = null;
+        }
+        $data = self::formatData($data);
         $household_member->setFirstName($data["first-name"]);
         $household_member->setLastName($data["last-name"]);
         $household_member->setPhoneNumber($data["phone-number"]);
-        $household_member->setSinNumber($data["sin-number"]);
         $household_member->setMcareNumber($data["mcare-number"]);
         $household_member->setWorkStatus($data["work_status"]);
         $household_member->setWelfareNumber($data["welfare-number"]);
+        $household_member->setSchool($data["school"]);
+        $household_member->setStudentId($data["student-id"]);
+        $household_member->setGrade($data["grade"]);
+        $household_member->setStudentBursary($data["student-bursary"]);
         $household_member->setReferral($data["referral"]);
+        $household_member->setMotherTongue($data["mother-tongue"]);
         $household_member->setLanguage($data["language"]);
         $household_member->setMaritalStatus($data["marital-status"]);
         $household_member->setGender($data["gender"]);
         $household_member->setOrigin($data["origin"]);
-        $household_member->setFirstVisitDate($datetime);
-        $household_member->setContact($data["contact"]);
+        $household_member->setDateOfBirth($data["date-of-birth"]);
         $household_member->setIncome($data["income"]);
 
 
-        $this->em->persist($household_member);
-        $this->em->flush();
+        Application::em()->persist($household_member);
+        Application::em()->flush();
         return $household_member;
     }
 
-    private function createAddress($data)
+    private static function createAddress($data)
     {
         $address = new Address();
         $address->setHouseNumber($data["house-number"]);
         $address->setStreet($data["street"]);
         $address->setAptNumber($data["apt-number"]);
-        $address->setCity($data["city"]);
         $address->setPostalCode($data["postal-code"]);
         $address->setDistrict($data["district"]);
-        $address->setProvince($data["province"]);
-        $this->em->persist($address);
-        $this->em->flush();
+        Application::em()->persist($address);
+        Application::em()->flush();
 
         return $address;
 
     }
 
-    private function updateMember($memberInstance, $data)
-    {
-        $data = $this->formatData($data);
-        $memberInstance->setFirstName($data["first-name"]);
-        $memberInstance->setLastName($data["last-name"]);
-        $memberInstance->setPhoneNumber($data["phone-number"]);
-        $memberInstance->setSinNumber($data["sin-number"]);
-        $memberInstance->setMcareNumber($data["mcare-number"]);
-        $memberInstance->setWorkStatus($data["work_status"]);
-        $memberInstance->setWelfareNumber($data["welfare-number"]);
-        $memberInstance->setReferral($data["referral"]);
-        $memberInstance->setLanguage($data["language"]);
-        $memberInstance->setMaritalStatus($data["marital-status"]);
-        $memberInstance->setGender("M"); //CHANGE WHEN EXTRACT FROM MEDICARE
-        $memberInstance->setOrigin($data["origin"]);
-        $memberInstance->setContact($data["contact"]);
-        $memberInstance->setIncome($data["income"]);
-
-        $this->em->persist($memberInstance);
-        $this->em->flush();
-    }
-
-    private function updateAddress($addressInstance, $data)
+    private static function updateAddress($addressInstance, $data)
     {
         $addressInstance->setHouseNumber($data["house-number"]);
         $addressInstance->setStreet($data["street"]);
         $addressInstance->setAptNumber($data["apt-number"]);
-        $addressInstance->setCity($data["city"]);
         $addressInstance->setPostalCode($data["postal-code"]);
         $addressInstance->setDistrict($data["district"]);
-        $addressInstance->setProvince($data["province"]);
-        $this->em->persist($addressInstance);
-        $this->em->flush();
+        Application::em()->persist($addressInstance);
+        Application::em()->flush();
     }
 
 
-    private function formatData($data)
+    private static function formatData($data)
     {
         foreach ($data as $key => $value)
         {
-            $data[$key] = str_replace("-", "", $value);
+
+            is_string($value) ? $data[$key] = str_replace("-", "", $value) : '';
         }
         return $data;
     }
+
 }

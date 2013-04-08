@@ -305,7 +305,7 @@ textarea::-webkit-input-placeholder {
     border: 0;
 }
 
-.darkwell, .breadcrumb, code, pre, select,
+.darkwell, .breadcrumb, code, pre,
 input[type="text"],
 input[type="password"],
 input[type="datetime"],
@@ -326,6 +326,14 @@ input[type="color"],
     box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset;
     background: #202020;
     background-color: rgba(0, 0, 0, 0.3);
+    border: 0;
+}
+
+select, select:disabled{
+    -webkit-box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset;
+    -moz-box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset;
+    box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset;
+    background: #202020;
     border: 0;
 }
 
@@ -915,7 +923,7 @@ select::-webkit-scrollbar-thumb {
 }
 
 .modal {
-    background-color: #444 !important;
+    background-color: #333333 !important;
 }
 
 .modal-header {

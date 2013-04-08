@@ -18,27 +18,26 @@ class FlagTest extends \PHPUnit_Framework_TestCase
 {
     private $flag;
     private $flagDescriptor;
-    private $householdMember;
-
-    public function setUp()
+    public function testSetGetHouseholdMember()
     {
         $this->flag = new Flag();
-        $this->householdMember = new HouseholdMember();
-        $this->householdMember->setFirstName("Problematic");
-        $this->householdMember->setLastName("Joe");
+        $householdMember = new HouseholdMember();
+        $this->flag->setHouseholdMember($householdMember);
+        $this->assertEquals($householdMember, $this->flag->getHouseholdMember());
     }
 
-    public function testAddMessage()
+    public function testSetGetMessage()
     {
-        $message = "Troublemaker.";
+        $message = "Good Guy.";
+        $this->flag = new Flag();
         $this->flag->setMessage($message);
-        assertEquals($this->flag->getMessage(), $message);
+        $this->assertEquals($message, $this->flag->getMessage());
     }
-
-    /**
-     * @depends testAddMessage
-     */
-    public function testAddDescriptor()
+//
+//    /**
+//     * @depends testAddMessage
+//     */
+    public function testSetGetDescriptor()
     {
         $this->flagDescriptor = new FlagDescriptor();
         // Ficticious color, as it was never stored with an entity manager
@@ -46,17 +45,19 @@ class FlagTest extends \PHPUnit_Framework_TestCase
         $this->flagDescriptor->setColor("Orange");
         $this->flagDescriptor->setAlternativeColor("Circus Orange");
         $this->flagDescriptor->setMeaning("This is not a circus.");
+        $this->flag = new Flag();
         $this->flag->setDescriptor($this->flagDescriptor);
-        assertEquals($this->flagDescriptor, $this->flag->getFlagDescriptor());
+        $this->assertEquals($this->flagDescriptor, $this->flag->getDescriptor());
     }
 
-    /**
-     * @depends testAddDescriptor
-     */
-    public function testAddFlag()
+//    /**
+//     * @depends testAddDescriptor
+//     */
+    public function testSetGetFlagDate()
     {
-        $this->flag->setHouseholdMmeber($this->householdMember);
-        assertContains($this->flag, $this->householdMember->getFlags());
+        $this->flag = new Flag();
+        $this->flag->setFlagDate("2013-09-01 18:30:00");
+        $this->assertEquals("2013-09-01 18:30:00", $this->flag->getFlagDate());
     }
 
 }

@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Configuration;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
+use Twig_Extension_Debug;
 
 class Application
 {
@@ -46,6 +47,8 @@ class Application
             new Twig_Loader_Filesystem(TWIG_VIEW_PATH),
             $this->_default_config['twig_config']
         );
+
+        $twig_instance->addExtension(new Twig_Extension_Debug());
 
         if (!isset(self::$_registry['twig'])) self::$_registry['twig'] = $twig_instance;
     }

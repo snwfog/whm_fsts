@@ -55,10 +55,10 @@ $(function() {
       });
     });
   });
-  $("#view-household-form input").prop("disabled", true);
+  $("#view-household-form input, #view-household-form select").prop("disabled", true);
   $('button[name="modify-household-btn"]').click(function() {
     var inputs;
-    inputs = $("#view-household-form input");
+    inputs = $("#view-household-form input, #view-household-form select");
     if ($(this).attr("class-toggle")) {
       $(this).removeAttr("class-toggle");
       inputs.prop("disabled", false);
@@ -77,35 +77,48 @@ $(function() {
   });
   $("#view-event-form input").prop("disabled", true);
   $("#view-event-form textarea").prop("disabled", true);
+  $("#timeslot-form input").prop("disabled", true);
   $('button[name="event-create-modify"]').click(function() {
-    var inputs, textarea;
+    var form1, inputs, inputs2, textarea;
     inputs = $("#view-event-form input");
+    inputs2 = $("#timeslot-form input");
     textarea = $("#view-event-form textarea");
     if ($(this).attr("class-toggle")) {
       $(this).removeAttr("class-toggle");
       inputs.prop("disabled", false);
+      inputs2.prop("disabled", false);
       textarea.prop("disabled", false);
       noteAlert("Event Edit Mode", "warning");
     } else {
       $(this).attr("class-toggle", "btn-state");
-      $(this).closest("form").submit();
+      form1 = $('form[name="event-form"]');
+      $('form[name="view-timeslot-form"] :input').not(':submit').clone().hide().attr('isacopy', 'y').appendTo(form1);
+      form1.submit();
       inputs.prop("disabled", true);
+      inputs2.prop("disabled", true);
       textarea.prop("disabled", true);
       $.noty.closeAll();
     }
+    $('button#add-timeslot-table').prop("disabled", $('button#add-timeslot-table').prop("disabled") ? true : false);
     return $(this).siblings().each(function(index, element) {
       var btn;
       btn = $(element);
       return btn.prop("disabled", btn.prop("disabled") ? false : true);
     });
   });
-  noteAlert = function(msg, type) {
+  noteAlert = function(msg, type, position, timeout) {
     var n;
+    if (position == null) {
+      position = 'bottom';
+    }
+    if (timeout == null) {
+      timeout = false;
+    }
     n = noty({
-      layout: 'bottom',
+      layout: position,
       type: type,
       text: msg,
-      timeout: false,
+      timeout: timeout,
       animation: {
         open: {
           height: 'toggle'
@@ -120,8 +133,14 @@ $(function() {
     return n;
   };
   $("form :input").keyup(function() {
-    return $(this).val($(this).val().toUpperCase());
+    return $(this).val($(this).val().replace(/\w\S*/g, function(txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    }));
   });
+  $('form :input[name="mcare-number"]').keyup(function() {
+     $(this).val($(this).val().toUpperCase());
+  });
+ 
   $('form input[name="mcare-number"]').keyup(function() {
     var date, dob, gender, index, input, month, shard, year, _i, _len, _ref;
     input = $(this).val().split('-');
@@ -148,5 +167,63 @@ $(function() {
   };
   setInterval(time, 1000);
   time();
+  $('input.help').focus(function() {
+    var $input, message, note;
+    $input = $(this);
+    message = $input.data("message");
+    note = noteAlert(message, 'information', 'bottomRight');
+    return $(this).blur(function() {
+      return note.close();
+    });
+  });
+  $('input[name="income"]').blur(function() {
+    var $income, first, match, operator, reg, second, val, _ref;
+    $income = $(this);
+    val = $income.val();
+    reg = /[\d]+[\s]*([\*\/\+\-])?[\s]*[\d]+/ig;
+    match = reg.exec(val);
+    if (match) {
+      if (match[1] != null) {
+        operator = match[1];
+        _ref = val.split(operator), first = _ref[0], second = _ref[1];
+        console.log("" + first + " and " + second);
+        switch (operator) {
+          case "/":
+            return $income.val(first / second);
+          case "*":
+            return $income.val(first * second);
+          case "+":
+            return $income.val(first + second);
+          case "-":
+            return $income.val(first - second);
+        }
+      }
+    } else {
+      return noteAlert("Invalid Income format.", "error", "bottomRight", true);
+    }
+  });
   return true;
+});
+
+$('#work').change(function() {
+  var marker, marker2, marker3, selected_item;
+  selected_item = $(this).val();
+  if (selected_item === "welfare") {
+    marker = $('<span />').insertBefore('#welfare-number');
+    $('#welfare-number').detach().attr('type', 'text').insertAfter(marker).focus();
+    return marker.remove();
+  } else if (selected_item === "student") {
+    marker = $('<span />').insertBefore('#school');
+    $('#school').detach().attr('type', 'text').insertAfter(marker).focus();
+    marker.remove();
+    marker2 = $('<span />').insertBefore('#student-id');
+    $('#student-id').detach().attr('type', 'text').insertAfter(marker2).focus();
+    marker2.remove();
+    marker3 = $('<span />').insertBefore('#bursary');
+    $('#bursary').detach().attr('type', 'text').insertAfter(marker3).focus();
+    marker3.remove();
+    marker4 = $('<span />').insertBefore('#grade');
+    $('#grade').detach().attr('type', 'text').insertAfter(marker4).focus();
+    return marker4.remove();
+  }
 });

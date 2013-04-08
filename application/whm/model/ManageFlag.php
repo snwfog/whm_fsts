@@ -6,6 +6,7 @@ use \WHM\Model\Flag;
 use \WHM\Model\FlagDescriptor;
 use \WHM\Model\ManageHousehold;
 use \WHM\Model\HouseholdMember;
+use \DateTime;
 
 
 /**
@@ -14,20 +15,20 @@ use \WHM\Model\HouseholdMember;
 class ManageFlag 
 {
     private $em;
-    private $mhousehold;
 
     public function __construct()
     {
         $this->em = Application::em();
-        $this->mhousehold = new ManageHousehold();
         
     }
 
     public function createFlag($data)
     {
+        $datetime = new DateTime("now");
         $flag = new Flag();
-        $flag->setMessage($data["message"]); 
-        $household_member = $this->mhousehold->findMember($data["member-id"]);
+        $flag->setMessage($data["message"]);
+        $flag->setFlagDate($datetime); 
+        $household_member = ManageHousehold::findMember($data["member-id"]);
         $flag_descriptors = $this->findDescriptors($data["flag-descriptor-id"]); 
         $flag->setHouseholdMember($household_member);
         $flag->setDescriptor($flag_descriptors);    
@@ -40,16 +41,16 @@ class ManageFlag
 
     public function deleteFlag($id)
     {
-        $flagId = $this->findFlag($id["flag-id"]);
-        $this->em->remove($flagId);
+        $flag = $this->findFlag($id["flag-id"]);
+        $this->em->remove($flag);
         $this->em->flush();
-        return $flagId;
+        return $flag;
     }
 
     public function findFlag($id)
     {
-        $flagId = $this->em->find("WHM\model\Flag", (int) $id);
-        return $flagId;
+        $flag = $this->em->find("WHM\model\Flag", (int) $id);
+        return $flag;
     }
     public function flagNumber()
     {
@@ -96,8 +97,43 @@ class ManageFlag
         return $data;
     }
 
+    public function getFlagSummaryByHousehold($householdId)
+    {
+        $raw_query = "SELECT
+          hm.household_id,
+          hm.id,
+          f.flag_descriptor_id,
+          fd.alternative_color_2,
+          COUNT(*) AS flag_occurence
+        FROM flags f
+          JOIN household_members hm ON hm.id = f.household_member_id
+          JOIN flag_descriptors fd ON fd.id = f.flag_descriptor_id
+        WHERE hm.household_id = ${householdId}
+        GROUP BY id, flag_descriptor_id";
 
+        $stmt = $this->em->getConnection()->prepare($raw_query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return (empty($result) ? '' : $result);
+    }
 
+    public function getFlagTotal($householdId)
+    {
+        $raw_query = "SELECT
+          hm.household_id,
+          f.flag_descriptor_id,
+          fd.alternative_color_2,
+          fd.meaning,
+          COUNT(*) AS flag_occurence
+        FROM flags f
+          JOIN household_members hm ON hm.id = f.household_member_id
+          JOIN flag_descriptors fd ON fd.id = f.flag_descriptor_id
+        WHERE hm.household_id = '${householdId}'
+        GROUP BY flag_descriptor_id";
 
-
+        $stmt = $this->em->getConnection()->prepare($raw_query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return (empty($result) ? '' : $result);
+    }
 }

@@ -1,0 +1,102 @@
+{% extends 'static/base.twig' %}
+    {% block content %}
+
+    <table class="table table-hover">
+
+
+            <h2>{{event.name}}</h2>
+            {% set maxparticipants = event.totalCapacity %}
+            {% set actualparticipants = event.numOfParticipants %}
+            {% set availablespots = maxparticipants - actualparticipants %}
+            {% set labelcolor = 'success' %}
+            {% if availablespots <= maxparticipants / 10 %}
+                {% set labelcolor = 'important' %}
+            {% elseif availablespots <= maxparticipants / 2 %}
+                {% set labelcolor = 'warning' %}
+            {% endif %}
+
+        <span class="label label-{{ labelcolor }}">
+            <i class="icon-user icon-white"></i> {{ actualparticipants }}/{{maxparticipants }}
+        </span>
+              <thead>
+                <tr>
+                  <th class="btn-large">Participant Name</th>
+                  {% if (event.name) == "Special giveaways" or (event.name) == "Toys giveaways" or (event.name) == "BackToSchool" %} 
+                  <th class="btn-large">Gender</th>
+                  <th class="btn-large">Age</th>
+                  <th class="btn-large">Grade</th>
+                  {% endif %}
+
+                  <th class="btn-large">Medicare Number</th>
+                  <th class="btn-large">Time Slot</th>
+                  <th class="btn-large">Checked In</th>
+                </tr>
+              </thead>
+              
+              
+              {% for participant in participants %}
+                <tbody class="well">
+                {% if participant.attend == false %}
+                      <tr class ="">
+                {% else %}
+                      <tr class ="success">
+                {% endif %}
+                      
+                      <td><h3>{{ participant.lastName }} {{ participant.firstName }}</h3></td>  
+                      {% if (event.name) == "Special giveaways" or (event.name) == "Toys giveaways" or (event.name) == "Back To School" %} 
+                      <td><h3>{{ participant.gender }}</h3></td>
+                      <td><h3>{{ participant.age }}</h3></td>
+                      <td><h3>{{ participant.grade }}</h3></td>
+                      {% endif %}
+                      <td><h3>{{ participant.medicare }}</h3></td>
+                      <td><h3>{{participant.startTime}}-{{participant.endTime}}</h3></td>
+                      <td>
+                           <div class="onoffswitch"
+                                participanttimeslotid='{{participant.participantTimeSlotId}}'>
+                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch-{{participant.id}}" {{(participant.attend) ? 'checked="checked"' : ''}}>
+                                <label class="onoffswitch-label" for="myonoffswitch-{{participant.id}}">
+                                <div class="onoffswitch-inner"></div>
+                                <div class="onoffswitch-switch"></div>
+                                </label>
+                          </div>
+
+                      </td>
+
+                    </tr>
+
+                </tbody>
+
+              {% endfor %}
+                  
+                                
+    </table>
+
+
+
+    {% endblock content %}
+
+{% block footer %}
+<script type="text/javascript">
+$(document).ready(function(){
+    $('div.onoffswitch').change(function(){
+
+     var participanttimeslotid = $(this).attr('participanttimeslotid');
+     var attend = $(this).children('input').attr('checked') == 'checked';
+     if(attend)
+        $(this).parent().parent().attr('class', 'success');
+     else
+        $(this).parent().parent().attr('class', '');
+
+
+      jQuery.ajax
+      ({
+        url: '{{ apppath }}todaysevents/'+ participanttimeslotid +'/' + Number(attend),
+        type: 'PUT',
+        //async: false
+      });
+    });
+ });
+</script>
+
+{% endblock footer %}
+                                    

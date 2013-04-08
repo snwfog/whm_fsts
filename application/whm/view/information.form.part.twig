@@ -1,39 +1,81 @@
 {% block information %}
     <fieldset>
-        <legend>Information</legend>
+        <legend>Information {{ household["date-of-birth"] }} </legend>
         <div class="controls controls-row">
-            <input class="span3" maxlength="{{ 3 * 3 + 2 }}" type="text"
-                   name="sin-number" placeholder="Social Insurance" value="{{ household["sin-number"] }}"/>
-            <input class="span4" maxlength="{{ 3 * 4 + 2 }}" type="text"
+            <input class="span4 help" maxlength="{{ 3 * 4 + 2 }}" type="text"
+                   data-message="Go ahead enter the medicare number. The Age, Gender, and Date of Birth will be automatically filled in for you."
                    name="mcare-number" placeholder="Medical Care" value="{{ household["medicare-number"] }}"/>
-            <input class="span1" type="text" name="work_status"
-                   placeholder="Work Status" maxlength="2" value="{{ household["work-status"] }}"/>
+            <input class="span4" type="text" name="date-of-birth"
+                   placeholder="Date of Birth" value="{{ household["date-of-birth"] }}" />
             <input class="span4" maxlength="{{ 3 * 4 + 2 + 3 }}"
-                   type="text" name="welfare-number" placeholder="Welfare Number"
-                   value="{{ household["welfare-number"] }}"/>
+                   type="text" name="referral" placeholder="Referral"
+                   value="{{ household["referral"] }}"/>
         </div>
-
         <div class="controls controls-row">
-            <input class="span4" type="text" data-link="country"
-                   name="origin" placeholder="Origin" value="{{ household["origin"] }}"/>
-            <input class="span4" type="text" data-link="language"
+            <input class="span4" type="text" data-link="country" name="origin" autocomplete="off"
+                   placeholder="Country of Origin" value="{{ household["origin"] }}"/>
+            <input class="span4" type="text" data-link="language" name="mother-tongue" autocomplete="off"
+                   placeholder="Mother Tongue" value="{{ household["mother-tongue"] }}"/>
+            <input class="span4" type="text" data-link="language" autocomplete="off"
                    name="language" placeholder="Language" value="{{ household["language"] }}"/>
-            <input class="span1" type="text" maxlength="1"
-                   name="gender" placeholder="Gender" value="{{ household["gender"] }}"/>
-            <input class="span3" maxlength="2" type="text"
-                   name="marital-status" placeholder="Marital Status" value="{{ household["marital"] }}"/>
-            <input type="hidden" value="" name="date-of-birth">
+            <input type="hidden" name="first-visit-date" value="{{ household["first-visit-date"] }}"/>
+        </div>
+        <div class="controls controls-row">            
+            <input class="span2" type="text" maxlength="1" name="gender"
+                   placeholder="Gender" value="{{ household["gender"] }}"/>
+
+            <select name="marital-status" class ="span3">
+                <option value="" disabled>
+                    Marital Status
+                </option>
+                <option value="MARRIED" {{ household["marital"] == "MARRIED" ? 'selected="selected"' : ''}}>
+                    Married
+                </option>
+                <option value="SINGLE" {{ household["marital"] == "SINGLE" ? 'selected="selected"' : ''}}>
+                    Single
+                </option>
+                <option value="DIVORCED" {{ household["marital"] == "DIVORCED" ? 'selected="selected"' : ''}}>
+                    Divorced
+                </option>
+                <option value="WIDOWED" {{ household["marital"] == "WIDOWED" ? 'selected="selected"' : ''}}>
+                    Married
+                </option>
+                <option value="SEPARATED" {{ household["marital"] == "SEPARATED" ? 'selected="selected"' : ''}}>
+                    Separated
+                </option>
+                <option value="DOMESTIC PARTNER" {{ household["marital"] == "DOMESTIC PARTNER" ? 'selected="selected"' : ''}}>
+                    Domestic Partner
+                </option>
+            </select>
+            <select name="work_status" id="work_status" class ="span3">
+              <option  value="" {{ household["work-status"] is null ? 'selected="selected"' : ''}} disabled>Work Status</option>
+              <option value="lowincome" {{ household["work-status"] == "lowincome" ? 'selected="selected"' : ''}}>Low Income</option>
+              <option value="welfare" " {{ household["work-status"] == "welfare" ? 'selected="selected"' : ''}}>Welfare</option>
+              <option value="student" {{ household["work-status"] == "student" ? 'selected="selected"' : ''}}>Student</option>
+            </select>
+
+            <input type='hidden' id="other" />
+            <input class="span3" type="hidden" 
+            placeholder="Work Status" maxlength="2" value="{{ household["work-status"] }}"/>
+
+            <input class="span4 help" type="text" name="income" data-message="Go ahead, you may put arithmetic operations in this field. For
+            example, 4 * 400, or 2 * 1500, or 50 000 / 12 and we will calculate the result for you." placeholder="Annual Income" value="{{ household["income"] }}"/>  
+        </div>
+        <div class="controls controls-row">
+            <input class="span4" maxlength="{{ 3 * 4 + 2 + 3 }}"
+            type="hidden" name="welfare-number" id="welfare-number" placeholder="Welfare Number"
+            value="{{ household["welfare-number"] }}"/>
         </div>
 
         <div class="controls controls-row">
-            <input class="span3" type="text"
-                   name="referral" placeholder="Referral" value="{{ household.referral }}"/>
-            <input class="span3" type="text"
-                   name="contact" placeholder="Contact" value="{{ household.contact }}"/>
-            <input class="span3" type="text"
-                   name="first-visit-date" placeholder="MM-DD-YY" value="{{ household["first-visit-date"] }}"/>
-            <input class="span3" type="text"
-                   name="income" placeholder="Annual Income" value="{{ household["income"] }}"/>
+            <input class="span3" type="hidden" id="school" name="school" placeholder="School" value="{{ household["school"] }}" />
+
+            <input class="span3" type="hidden" name="student-id" placeholder="Student ID" id="student-id" value="{{ household["student-id"] }}" />
+
+            <input class="span3" type="hidden" name="grade" placeholder="Grade" id="grade" value="{{ household["grade"] }}" />
+
+            <input class="span2" type="hidden" name="student-bursary" id="bursary" placeholder="Bursary" value="{{ household["student-bursary"] }}" />  
         </div>
     </fieldset>
 {% endblock information %}
+

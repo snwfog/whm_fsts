@@ -1,6 +1,5 @@
 # This file contains dynamic sugar candy behaviour
 $ ->
-
 #######
 # Change active bebaviour of member buttons
 #######
@@ -69,9 +68,9 @@ $ ->
 # Edit household information form
 #######################################################
   # Default view household form is not modifiable
-  $("#view-household-form input").prop "disabled", true
+  $("#view-household-form input, #view-household-form select").prop "disabled", true
   $('button[name="modify-household-btn"]').click ->
-    inputs = $("#view-household-form input")
+    inputs = $("#view-household-form input, #view-household-form select")
     if $(this).attr "class-toggle"
       # Remove the class-toggle attribute
       $(this).removeAttr "class-toggle"
@@ -97,17 +96,20 @@ $ ->
 # Edit event information form
 #######################################################
   # Default view event form is not modifiable
-  $("#view-event-form input").prop "disabled", true 
+  $("#view-event-form input").prop "disabled", true
   $("#view-event-form textarea").prop "disabled", true
+  $("#timeslot-form input").prop "disabled", true
 
   $('button[name="event-create-modify"]').click ->
     inputs = $("#view-event-form input")
+    inputs2 = $("#timeslot-form input")
     textarea = $("#view-event-form textarea")
     if $(this).attr "class-toggle"
       # Remove the class-toggle attribute
       $(this).removeAttr "class-toggle"
       # Enable the form for rewrite
       inputs.prop "disabled", false
+      inputs2.prop "disabled", false
       textarea.prop "disabled", false
       noteAlert "Event Edit Mode", "warning"
     else
@@ -115,13 +117,17 @@ $ ->
       # Add the class-toggle attribute
       $(this).attr "class-toggle", "btn-state"
       # Resend the form modification
-      $(this).closest("form").submit()
+      form1 = $('form[name="event-form"]');
+      $('form[name="view-timeslot-form"] :input').not(':submit').clone().hide().attr('isacopy','y').appendTo(form1);
+      form1.submit()
       # Disable the form for rewrite
       inputs.prop "disabled", true
+      inputs2.prop "disabled", true
       textarea.prop "disabled", true
       $.noty.closeAll()
 
     # Disable the deactivate other buttons
+    $('button#add-timeslot-table').prop "disabled", if $('button#add-timeslot-table').prop "disabled" then true else false
     $(this).siblings().each (index, element) ->
       btn = $(element)
       btn.prop "disabled", if btn.prop "disabled" then false else true
@@ -131,12 +137,12 @@ $ ->
 # Since this function is in the local scope of the script.coffee
 # I just copy & pasted here for simplicity
 ################################################################################
-  noteAlert = (msg, type) ->
+  noteAlert = (msg, type, position = 'bottom', timeout = false) ->
     n = noty({
-      layout: 'bottom',
+      layout: position,
       type: type,
       text: msg,
-      timeout: false,
+      timeout: timeout,
       animation: {
         open: {height: 'toggle'},
         close: {height: 'toggle'},
@@ -146,10 +152,17 @@ $ ->
     })
     return n
 ###############################################################################
-# Auto-capitalize all form input
+# Auto-capitalize first letter of all form input
 ##############################################################################
   $("form :input").keyup ->
-    $(this).val $(this).val().toUpperCase()
+    $(this).val $(this).val().replace(/\w\S*/g, (txt) ->
+      txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+    )
+###############################################################################
+# Auto-capitalize medicare form input
+##############################################################################
+  $('form :input[name="mcare-number"]').keyup ->
+  $(this).val $(this).val().toUpperCase()
 
 ###############################################################################
 # Auto filling gender and date of birth from medical care number
@@ -178,7 +191,66 @@ $ ->
   setInterval time, 1000
   time()
 
+###############################################################################
+# Some input guidance
+# Display a help tips regarding a specific input field
+# 1. Add the "help" class to the input
+# 2. Add the to-be displayed message through attribute data-message="help message here..."
+##############################################################################
+  $('input.help').focus ->
+    # Get the data message
+    $input = $(this)
+    message = $input.data "message"
+    note = noteAlert message, 'information', 'bottomRight'
+    $(this).blur ->
+      note.close()
 
+#################################
+# Calculating of the income field
+#################################
+  $('input[name="income"]').blur ->
+    $income = $(this)
+    val = $income.val()
+    # Check for valid field
+    reg = /[\d]+[\s]*([\*\/\+\-])?[\s]*[\d]+/ig
+    match = reg.exec val
+    if match
+      if match[1]?
+        operator = match[1]
+        [first, second] = val.split operator
+        console.log "#{first} and #{second}"
+        switch operator
+          when "/" then $income.val first / second
+          when "*" then $income.val first * second
+          when "+" then $income.val first + second
+          when "-" then $income.val first - second
+    else
+      noteAlert "Invalid Income format.", "error", "bottomRight", true
 
   true
 
+###############################################################################
+# Dynamically add inputs according to work status dropdown values
+##############################################################################
+
+$('#work').change ->
+    selected_item = $(this).val() 
+    if (selected_item == "welfare")
+  
+        marker = $('<span />').insertBefore('#welfare-number')
+        $('#welfare-number').detach().attr('type', 'text').insertAfter(marker).focus() 
+        marker.remove()
+    else if (selected_item =="student")
+     
+        marker = $('<span />').insertBefore('#school')
+        $('#school').detach().attr('type', 'text').insertAfter(marker).focus()
+        marker.remove()
+        marker2 = $('<span />').insertBefore('#student-id')
+        $('#school').detach().attr('type', 'text').insertAfter(marker2).focus()
+        marker2.remove()
+        marker3 = $('<span />').insertBefore('#bursary')
+        $('#bursery').detach().attr('type', 'text').insertAfter(marker3).focus()
+        marker3.remove()
+        marker4 = $('<span />').insertBefore('#grade')
+        $('#grade').detach().attr('type', 'text').insertAfter(marker4).focus()
+        marker4.remove()

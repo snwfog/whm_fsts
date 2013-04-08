@@ -10,6 +10,8 @@ $serves = array
 (
     // Don't put the trailing slash - "/"
     '/'                             => 'WHM\Controller\Index',
+    '/login'                        => 'WHM\Controller\Login',
+    '/logout'                       => 'WHM\Controller\Logout',
     '/household'                    => 'WHM\Controller\Household',
     '/household/:number'            => 'WHM\Controller\Household',
     '/household/:number/:number'    => 'WHM\Controller\Household',
@@ -25,17 +27,22 @@ $serves = array
     '/appointment/new'              => 'WHM\Controller\CreateAppointment',
     '/event/new'                    => 'WHM\Controller\CreateEvent',
     '/event/new/:number'            => 'WHM\Controller\CreateEvent',
-    '/event'                        => 'WHM\Controller\Event',
+    '.*/event'                      => 'WHM\Controller\Event',
     '/event/:number'                => 'WHM\Controller\Event',
-	'/reports'                      => 'WHM\Controller\Reports',
-    '/reports/functions'            => 'WHM\Controller\Reports',
+	'/report'                       => 'WHM\Controller\Report',
+    '/report/functions'             => 'WHM\Controller\Report',
+    '/report/annual'                => 'WHM\Controller\Report',
+    '/attendance/new'               => 'WHM\Controller\AppointFulfillment',
+    '/todaysevents'                 => 'WHM\Controller\AppointFulfillment',
+    '/todaysevents/:number'         => 'WHM\Controller\AppointFulfillmentSingleEvent',
+    '/todaysevents/:number/:number' => 'WHM\Controller\AppointFulfillmentSingleEvent',
 
 
     // Ajax controller
-    '.*/country' => 'WHM\Controller\Ajax\Country',
-    '.*/postalcode' => 'WHM\Controller\Ajax\PostalCode',
-    '.*/language' => 'WHM\Controller\Ajax\Language',
-    '.*/analytic' => 'WHM\Controller\Logger'
+    '.*/country'        => 'WHM\Controller\Ajax\Country',
+    '.*/postalcode'     => 'WHM\Controller\Ajax\PostalCode',
+    '.*/language'       => 'WHM\Controller\Ajax\Language',
+    '.*/analytic'       => 'WHM\Controller\Logger'
 );
 
 /*-----------------------------------------------
@@ -52,4 +59,8 @@ require_once('application/whm/Bootstrap.php');
 
 // Instance the application
 $app = new WHM\Application($config);
+
+WHM\Hook::add(BEFORE_HANDLER_HOOK, WHM\Controller\Login::beforeHandler());
+
 $app::route($serves);
+

@@ -39,6 +39,11 @@ class Flag
      */
     private $descriptor;
 
+     /**
+    * @Column(type="datetime")
+    */
+    protected $flag_date;
+
     /**
      * @return \WHM\Model\id
      */
@@ -81,5 +86,16 @@ class Flag
     public function getMessage()
     {
         return $this->message;
+    }
+
+
+    public function setFlagDate($flag_date)
+    {
+        $this->flag_date = $flag_date;
+    }
+
+    public function getFlagDate()
+    {
+        return $this->flag_date;
     }
 }

@@ -38,6 +38,28 @@ class FlagDescriptor
 
     /**
      * @Column()
+     * @var alternative color
+     */
+    private $alternative_color_2;
+
+    /**
+     * @param \WHM\Model\alternative $alternative_color_2
+     */
+    public function setAlternativeColor2($alternative_color_2)
+    {
+        $this->alternative_color_2 = $alternative_color_2;
+    }
+
+    /**
+     * @return \WHM\Model\alternative
+     */
+    public function getAlternativeColor2()
+    {
+        return $this->alternative_color_2;
+    }
+
+    /**
+     * @Column()
      * @var description
      */
     private $meaning;

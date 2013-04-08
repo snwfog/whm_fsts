@@ -43,7 +43,10 @@ class Search extends Controller
         }
         else
         {
-            echo "Digit search is not yet implemented.";
+            if (!preg_match('/[a-zA-Z]+/i', $argv)) // Do a pure household id search
+                echo $this->json($this->manager->searchMemberByHouseholdID($argv));
+            else // Do a mcare care search
+                echo $this->json($this->manager->searchMemberByMcare($argv));
         }
 //        echo "</pre>";
     }

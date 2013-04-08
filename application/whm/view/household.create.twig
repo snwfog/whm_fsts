@@ -12,18 +12,14 @@
 
             <legend class ='controls controls-row'>
                 <div class='pull-left'>
-                    <h1>ID: {{ household["household_id"] }}</h2>
+                    ID: {{ household["household_id"] }}
                 </div>
                 <div class='pull-right'>
-                    {%  for flag in flags %}  
-                        {% set count = 0 %}
-                               <span class="label label-{{ flag["flag-color"] | lower }}">
-                                    <i class="icon-tag icon-white"></i> {{ flag["flag-meaning"] }}
-                                </span>
-                            {% for flagn_number in flagn %}
-                                {{ flag-number["flagn"] }}
-                            {% endfor %}
-                        {% set count = count + 1 %}
+                    {%  for flagCount in flagTotal %}
+                        <span class="label label-{{ flagCount.alternative_color_2 }}">
+                            {{ flagCount.flag_occurence }}&nbsp;
+                            <i class="icon-tag icon-white"></i> {{ flagCount.meaning }}
+                        </span>
                     {% endfor %}
                 </div>
             </legend>
@@ -37,20 +33,42 @@
 
             <legend>Action</legend>
             <div class="btn-toolbar">
-                <button class="btn btn-warning btn-large" data-toggle="button" class-toggle="btn-state" name="modify-household-btn" type="button">
-                    <i class="icon-edit icon-white"></i> Modify
+                <button class="btn btn-warning" data-toggle="button" class-toggle="btn-state" name="modify-household-btn" type="button">
+                        <i class="icon-edit icon-white"></i> Modify
                 </button>
 
-                <button class="btn btn-danger btn-large"
+                <button class="btn btn-danger"
                         name="deactivate-household-btn" type="button">
-                    <i class="icon-remove icon-white"></i> Deactivate
+                        <i class="icon-remove icon-white"></i> Deactivate
                 </button>
 
-                <button class="btn btn-primary btn-large"
-                        data-toggle="modal" data-target="#add-flag-modal">
-                    <i class="icon-flag icon-white"></i> Flag
+                <button class="btn btn-primary" data-toggle="modal" data-target="#add-flag-modal">
+                        <i class="icon-flag icon-white"></i> Flag
                 </button>
-               
+
+                <button class="btn btn-success" 
+                        id="create-member-submit-btn"
+                        name="create-member-submit-btn" type="button"
+                        data-toggle="modal" data-target="#add-member-modal">
+                        <i class="icon-user icon-white"></i> Add Member
+                </button>
+                <div class="btn-group dropup">
+                    <a class="btn btn-success" id=""
+                            name="" type="button"
+                            data-toggle="modal" 
+                            data-target="#appointment-modal">
+                        <i class="icon-time icon-white"></i> Make Appointment</a>
+                    <a class="btn btn-success dropdown-toggle" data-toggle="dropdown"><span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for b in 1..6 %}
+                            {% set month = b ~ " month" %}
+                            <li><a href="#" name="" type="button" data-toggle="modal" data-target="#appointment-modal{{ b }}">
+                                {{ month|date("F", "America/Montreal") }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
 
             <input type="hidden" name="household-id" value="{{ household["household_id"] }}"/>
@@ -61,56 +79,67 @@
         {% include 'addmember.modal.twig' %}
         {% include 'addflag.modal.twig' %}
         {% include 'appointment.modal.twig' %}
+        {% include 'appointment1.modal.twig' %}
+        {% include 'appointment2.modal.twig' %}
+        {% include 'appointment3.modal.twig' %}
+        {% include 'appointment4.modal.twig' %}
+        {% include 'appointment5.modal.twig' %}
+        {% include 'appointment6.modal.twig' %}
     </div>
 {% endblock content %}
 
-{# This part should be auto generated #}
 {% block left1 %}
     <div class="span3">
-        <legend>Dependents</legend>
+        <legend>Household Members</legend>
         <div class="well no-padding-well" id="dependents-well">
             <ul class="nav nav-list" id="dependent-list">
+                <li class="{{ household.members.principal.active ? "active" : '' }}">
+                    <a href="{{ apppath }}household/{{ household.household_id}}/{{ household.members.principal["member-id"]}}">
+                         <i class="icon-home"></i> 
+                         {{household.members.principal["first-name"] }} {{ household.members.principal["last-name"]}} 
+                         <span class="pull-right">
+                             {{ household.members.principal["gender"]}}
+                             {% if (household.members.principal["gender"] != null) and (household.members.principal["age"] != null) %}
+                                 /
+                             {% endif %}
+                             {{household.members.principal["age"]}}
+                         </span>
+                        <div class="pull-right">
+                            {% for flagbucket in flagSummary[household.members.principal['member-id']] %}
+                                {% for i in 1..flagbucket.flag_occurence %}
+                                    <span class="label label-{{ flagbucket.alternative_color_2 }} marker">&nbsp;</span>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                     </a>
+                </li>
                 {% for member in household.members %}
-                    {% if(member.principal and member.active) %}
-                        <li class="active"><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                                <i class="icon-home"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
+                    {% if not member.principal %}
+                            <li class="{{ member.active ? "active" : '' }}">
+                                <a href="{{ apppath }}household/{{ household.household_id}}/{{ member["member-id"]}}">
+                                    <i class="icon-user"></i>
+                                    {{ member["first-name"] }} {{ member["last-name"] }}
+                                    <span class="pull-right">
+                                        {{ member["gender"] }}
+                                        {% if (member["gender"] != null) and (member["age"] != null) %}
+                                            /
+                                        {% endif %}
+                                        {{ member["age"] }}
+                                    </span>
+                                    <div class="pull-right">
+                                        {% for flagbucket in flagSummary[member['member-id']] %}
+                                            {% for i in 1..flagbucket.flag_occurence %}
+                                                <span class="label label-{{ flagbucket.alternative_color_2 }} marker">&nbsp;</span>
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </div>
+                                </a>
 
-                    {% elseif member.active %}
-                        <li class="active"><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                                <i class="icon-user"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
-
-                    {% elseif member.principal %}
-                        <li><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                                <i class="icon-home"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
-
-                    {% else%}
-                        <li><a href="{{ apppath }}/household/{{ household.household_id}}/{{ member["member-id"]}}">
-                                <i class="icon-user"></i> {{member["first-name"] }} {{ member["last-name"]}}</a></li>
+                            </li>
                     {% endif %}
                 {% endfor %}
             </ul>
         </div>
-            <div class="well">
-            <button class="btn btn-success btn-block btn-large" 
-                        id="create-member-submit-btn"
-                        name="create-member-submit-btn" type="button"
-                        data-toggle="modal" data-target="#add-member-modal">
-                    <i class="icon-plus icon-white"></i><i class="icon-user icon-white"></i> Add New Member
-            </button>
-            <button class="btn btn-success btn-block btn-large" 
-                        id=""
-                        name="" type="button"
-                        data-toggle="modal" data-target="#appointment-modal"><i class="icon-plus icon-white"></i><i class="icon-time icon-white"></i> Make Appointment
-            </button>
-<!--             <form action="{{ apppath }}appointment/{{ household["member-id"]}}" method="GET" >
-                <input type="hidden" name="type" value="create">
-                <input type="submit" value="Make Appointment">
-            </form> -->
-<!--             <form action="{{ apppath }}appointment/{{ household["member-id"]}}" method="GET" >
-                <input type="hidden" name="type" value="remove">
-                <input type="submit" value="Delete Appointment">
-            </form> -->
-            </div>
     </div>
 {% endblock left1 %}
 
@@ -119,23 +148,39 @@
         <div class="tabbable tabs-below">
             <div class="tab-content">
                 <div class="tab-pane active" id="tab1">
-                    <legend>Events</legend>
-
+                    <legend>Household Events</legend>
                     <div class="accordion" id="accordion2">
-                        <div class="accordion-group">
-                            <div class="accordion-heading">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                                    Collapsible Group Item #1
-                                </a>
-                            </div>
-                            <div id="collapseOne" class="accordion-body collapse in">
-                                <div class="accordion-inner">
-                                    Anim pariatur cliche...
+                        {% for member in household.members %}
+                            {% for event in member.events %}
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#{{ event["timeslot-id"] }}{{ member["member-id"] }}">
+                                            {{ event["event-name"]|slice(0, 30)  }}
+                                            <span class="pull-right">
+                                               {{event["date"]}}
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div id="{{ event["timeslot-id"] }}{{ member["member-id"] }}" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <button type="button" style="margin-top: 5px;" class="close flag-delete-btn" id="appointment-delete-btn-{{ i }}" onclick="document.forms['delete-{{ member["member-id"] }}-{{ event["timeslot-id"] }}'].submit()">
+                                                <i class="icon-remove {{ theme ? 'icon-white' : ''}}"></i>
+                                            </button>
+                                            <form name="delete-{{ member["member-id"] }}-{{ event["timeslot-id"] }}" action="{{ apppath }}appointment/new" method="GET" >
+                                                <input type="hidden" name="type" value="delete" >
+                                                <input type="hidden" name="household-id" value="{{ household.household_id }}">
+                                                <input type="hidden" name="member-id" value="{{ member["member-id"] }}">
+                                                <input type="hidden" name="slot-id" value="{{ event["timeslot-id"] }}">
+                                            </form>
+                                            {{ member["first-name"] }} {{ member["last-name"] }}<br /> 
+                                            Time: {{ event["start-time"] }}-{{ event["end-time"] }}<br />
+                                            Duration: {{ event.duration }}mins
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                           {% endfor %}
+                        {% endfor %} 
                     </div>
-
                 </div>
                 <div class="tab-pane" id="tab2">
                     <legend>Flags</legend>
@@ -152,7 +197,7 @@
                                             <strong>{{ "now"|date("d-m-y") }}</strong>{# Date is not displaying
                                             properly here #}
                                             <div class="pull-right">
-                                                <span class="label label-{{ flag["tag-color"] | lower }}">
+                                                <span class="label label-{{ flag["flag-color"] | lower }}">
                                                     <i class="icon-tag icon-white"></i> {{ flag["flag-meaning"] }}</span>
                                             </div>
 

@@ -20,13 +20,10 @@ class Event
     /** @Column(type="text", nullable=TRUE) */
     protected $description;
 
-    /** @Column(type="string", nullable=TRUE) */   
+    /** @Column(type="time", nullable=TRUE) */   
     protected $start_time;
 
-    /** @Column(type="string", nullable=TRUE) */
-    protected $end_time;
-
-    /** @Column(type="datetime") */
+    /** @Column(type="date") */
     protected $start_date;
 
     /** @Column(type="smallint", nullable=TRUE) */
@@ -36,19 +33,22 @@ class Event
     */
     protected $is_template = false;
 
-    /** @Column(type="integer") */
+    /** @Column(type="integer", nullable=TRUE) */
     protected $capacity;
 
     /**
-     * * <-> * -- Inversing
-     * @ManyToMany(targetEntity="HouseholdMember", mappedBy="events")
-     * @JoinTable(name="participants_events")
+     * 1 <-> * -- Inversing by Default
+     * @OneToMany(targetEntity="Timeslot", mappedBy="event", cascade={"all"})
      **/
-    protected $participants;
+    protected $timeslots;
+
+    /** @Column(type="boolean") */
+    protected $is_activated = false;
+
 
     public function _construct()
     {
-        $this->participants = new ArrayCollection();
+        $this->timeslots = new ArrayCollection();
     }
 
     public function getId()
@@ -86,16 +86,6 @@ class Event
         return $this->start_time;
     }
 
-    public function setEndTime($end_time)
-    {
-        $this->end_time = $end_time;
-    }
-
-    public function getEndTime()
-    {
-        return $this->end_time;
-    }
-
     public function setStartDate($start_date)
     {
         $this->start_date = $start_date;
@@ -126,35 +116,6 @@ class Event
         return $this->is_template;
     }
 
-
-    public function registerParticipant(HouseholdMember $participant)
-    {
-        $this->participants[] = $participant;
-        $participant->addEvent($this);
-    }
-
-    /**
-     * Helper Method for Event class used to achieve bi-directional relationship
-     * attribute synchronization.
-     * You should never have to call this method explicitly,
-     *
-     * @param \WHM\Model\HouseholdMember $participant
-     */
-    public function addParticipant(HouseholdMember $participant)
-    {
-        $this->participants[] = $participant;
-    }
-
-    public function removeParticipant($participant)
-    {
-        $this->participants->removeElement($participant);
-    }
-
-    public function getParticipants()
-    {
-        return $this->participants;
-    }
-
     public function setCapacity($capacity)
     {
         $this->capacity = $capacity;
@@ -163,6 +124,33 @@ class Event
     public function getCapacity()
     {
         return $this->capacity;
+    }
+
+
+    public function addTimeslot(Timeslot $timeslot)
+    {
+        $this->timeslots[] = $timeslot;
+        $timeslot->setEvent($this);
+    }
+
+    public function removeTimeslot($timeslot)
+    {
+        $this->timeslots->removeElement($timeslot);
+    }
+
+    public function getTimeslots()
+    {
+        return $this->timeslots;
+    }
+
+    public function getIsActivated()
+    {
+        return $this->is_activated;
+    }
+
+    public function setIsActivated($bool)
+    {
+        $this->is_activated = $bool;
     }
 
 }

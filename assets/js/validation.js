@@ -64,10 +64,6 @@ $(function() {
       display: "Medical Card",
       rules: "callback_check_mcare"
     }, {
-      name: "work_status",
-      display: "Work Status",
-      rules: "exact_length[2]"
-    }, {
       name: "gender",
       display: "Gender",
       rules: "exact_length[1]"
@@ -106,7 +102,7 @@ $(function() {
     }, {
       name: "street",
       display: "Street",
-      rules: "alpha_numeric"
+      rules: "callback_check_alpha_numeric_space_dash"
     }, {
       name: "apt-number",
       display: "Apartment",
@@ -165,7 +161,7 @@ $(function() {
       return false;
     }
   }).setMessage('check_welfare', 'Invalid Welfare Number format. The valid format should be of <b>AAAA-####-##A#-##</b>.');
-  return createHouseholdValidator.registerCallback('check_postal_code', function(value) {
+  createHouseholdValidator.registerCallback('check_postal_code', function(value) {
     var reg;
     console.log(value);
     reg = /(\w\d\w)-?(\d\w\d)/ig;
@@ -175,4 +171,13 @@ $(function() {
       return false;
     }
   }).setMessage('check_postal_code', 'Invalid Postal Code format. The valid format should be of <b>A#A-#A#</b>.');
+  return createHouseholdValidator.registerCallback('check_alpha_numeric_space_dash', function(value) {
+    var reg;
+    reg = /([\w\s\-]+)/ig;
+    if (reg.exec(value)) {
+      return true;
+    } else {
+      return false;
+    }
+  }).setMessage('check_alpha_numeric_space_dash', 'Input contains invalid character(s).');
 });

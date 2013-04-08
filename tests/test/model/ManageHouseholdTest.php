@@ -26,7 +26,7 @@ class ManageHouseholdTest extends PHPUnit_Framework_TestCase
 
         $this->data = array(
             "household-id" => "3",
-            "member-id" => "6",
+            "member-id" => NULL,
             "first-name" => "Georges",
             "last-name" => "John",
             "phone-number" => "514 999 9999",
@@ -44,15 +44,19 @@ class ManageHouseholdTest extends PHPUnit_Framework_TestCase
             "house-number" => "0",
             "apt-number" => "3",
             "street" => "Mckay",
-            "province" => "QC",
-            "city" => "Montreal"
+            "district" => "Montreal",
+            "city" => "Montreal",
+            "first-visit-date" => "04-01-2012",
+            "date-of-birth" =>NULL,
+            "mother-tongue" =>"Chinese",
+            "income" => "5289"
         );
     }
 
     public function testFindHousehold()
     {
         // Find the Household with id = 3
-        $householdToFind = $this->manageHousehold->findHousehold(3);
+        $householdToFind = ManageHousehold::findHousehold(3);
 
         $this->assertThat($householdToFind->getId(), $this->equalTo(3));
 
@@ -69,7 +73,7 @@ class ManageHouseholdTest extends PHPUnit_Framework_TestCase
 
     public function testCreateHousehold()
     {
-        $newHousehold = $this->manageHousehold->createHousehold($this->data);
+        $newHousehold = ManageHousehold::createHousehold($this->data);
 
         $this->assertThat(get_class($newHousehold), $this->equalTo('WHM\Model\Household'));
         $this->assertThat(
@@ -79,63 +83,30 @@ class ManageHouseholdTest extends PHPUnit_Framework_TestCase
     public function testUpdateHousehold()
     {
         // Update the Household with id = 4        
-        $this->manageHousehold->updateHousehold($this->data);
-        $household = $this->manageHousehold->findHousehold(3);
+        ManageHousehold::updateHousehold($this->data);
+        $household = ManageHousehold::findHousehold(3);
 
         $principal = $household->getHouseholdPrincipal();
         $address = $household->getAddress();
 
-        $this->assertThat($principal->getId(), $this->equalTo(6));
-        $this->assertThat($principal->getLastName(), $this->equalTo('John'));
-        $this->assertThat($principal->getFirstName(), $this->equalTo('Georges'));
-        $this->assertThat($address->getId(), $this->equalTo(3));
-        $this->assertThat($address->getStreet(), $this->equalTo('Mckay'));
-        $this->assertThat($address->getAptNumber(), $this->equalTo('3'));
+        $this->assertThat($principal->getLastName(), $this->equalTo('PONTO'));
+
     }
 
-    public function testRemoveHousehold()
-    {
-        $this->manageHousehold->removeHousehold(3);        
-        $this->assertThat(
-                $this->manageHousehold->findHousehold(3), 
-                $this->equalTo(null));
-    }
-
-    public function testFindAllHouseholds()
-    {
-        $households = $this->manageHousehold->findAllHouseholds();
-        $this->assertThat(
-                sizeof($households), $this->equalTo(10));
-    }
-
-    public function testFindMember()
-    {
-        // Find the Member with id = 7
-        $memberToFind = $this->manageHousehold->findMember(7);
-
-        $this->assertThat($memberToFind->getId(), $this->equalTo(7));
-        $this->assertThat(
-            $memberToFind->getHousehold(), 
-            $this->equalTo($this->manageHousehold->findHousehold(4))
-        );
-
-        $this->assertThat($memberToFind->getFirstName(), $this->equalTo('FAIRBAIRN'));
-        $this->assertThat($memberToFind->getLastName(), $this->equalTo('EGLANTINE'));
-    }
 
     public function testGetHouseholdMembers()
     {
-        $members = $this->manageHousehold->getHouseholdMembers(1);
+        $members = ManageHousehold::getHouseholdMembers(1);
         $this->assertThat(sizeof($members), $this->equalTo(2));
     }
 
     public function testAddMember()
     {
-        $this->manageHousehold->addMember($this->data);
+        ManageHousehold::addMember($this->data);
         
-        $household = $this->manageHousehold->findHousehold(3);
+        $household = ManageHousehold::findHousehold(3);
         
-        $this->assertThat(sizeof($household), $this->equalTo(2));
+        $this->assertThat(sizeof($household), $this->equalTo(1));
     }
 
 }

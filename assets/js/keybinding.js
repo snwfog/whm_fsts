@@ -2,7 +2,7 @@
 
 $(function() {
   var modal;
-  modal = "#create-household-modal,    #search-modal,    #add-member-modal,    #add-flag-modal";
+  modal = "#create-household-modal,    #search-modal,    #add-member-modal,    #manage-flag-modal,    #add-flag-modal";
   Mousetrap.bind("s", function() {
     return $('#search-modal').modal();
   });
@@ -20,6 +20,9 @@ $(function() {
   });
   Mousetrap.bind('f', function() {
     return $('#add-flag-modal').modal();
+  });
+  Mousetrap.bind('g', function() {
+    return $('#manage-flag-modal').modal();
   });
   $(modal).on("hide", function() {
     return $(this).find("form :input").first().focus().blur();

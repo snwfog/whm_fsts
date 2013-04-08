@@ -1,16 +1,22 @@
 {% block create_event_part_twig %}
     <fieldset>
         <div class="controls controls-row" id="name-row">
-            <input class="span10" type="text" name="event-name" placeholder="Event name" value="{{ event["name"] }}{{ currentTemplate["name"] }}"/>
-           
-            <input class="span2" type="text" name="event-capacity" maxlength="12" placeholder="Capacity" value="{{ event["capacity"] }}{{ currentTemplate["capacity"] }}"/>
-
-            <div class="control controls-row">
-                        {#<div class="alert">#}
-                            <textarea class="span12" style="resize:none" rows="4" name="description" placeholder="Description...">{{ event["description"] }}{{ currentTemplate["description"] }}</textarea>
-                        {#</div>#}
+            <input class="span5" type="text" name="event-name" placeholder="Event name" value="{{ event["name"] }}{{ currentTemplate["name"] }}"/>
+            
+            <input class="span3" id="dp1" type="text" name="start-date" maxlength="10" placeholder="Start Date" value="{{ event.date }}"/>
+            <div class="input-append bootstrap-timepicker" style="margin-left: 5px; max-width: 155px;">
+                <input class="span4 time-add-on" style="margin-left:15px" type="text" id="tp1" name="start-time" placeholder="Start Time" value="{{ event["start-time"] }}"/>
+                <span class="add-on"><i class="icon-time"></i></span>
             </div>
+            
+            <button type="button" onclick="location.href='{{apppath}}todaysevents/{{event["event-id"]}}';" class="btn btn-info pull-right"><i class="icon-white icon-user"></i>Participants</button>
+            
+            
 
         </div>
     </fieldset>
+    <script type="text/javascript">
+        $('#dp1,#dp2').datepicker();
+        $('#tp1').timepicker({showMeridian: false});
+    </script>
 {% endblock create_event_part_twig %}
