@@ -418,4 +418,52 @@ class ManageEvent
     }
 
 
+    public static function getNumberOfAdultsInEvent($event_group_id, $start_date, $end_date)
+    {
+        $start_date = date($start_date->format("Y-m-d"));
+        $end_date = date($end_date->format("Y-m-d"));
+        $age18 = new Datetime();
+        $age18 = date($age18->sub(new DateInterval("P18Y"))->format("Y-m-d"));
+        $raw_query = "SELECT HM.id
+                      FROM household_members HM
+                      Right Join participants_timeslots PT ON HM.id = PT.household_member_id
+                      Inner Join timeslots T ON PT.timeslot_id = T.id
+                      Inner Join events E ON T.event_id = E.id
+                      WHERE E.group_id = $event_group_id
+                      AND E.start_date>= $start_date
+                      AND E.start_date>=$end_date
+                      AND HM.date_of_birth >= $age18";
+
+        $stmt = Application::em()->getConnection()->prepare($raw_query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $data = array_map('current', $result);
+        return count($data);
+    }
+
+
+    public static function getNumberOfNonAdultsInEvent($event_group_id, $start_date, $end_date)
+    {   //Not Working
+        $start_date = date($start_date->format("Y-m-d"));
+        $end_date = date($end_date->format("Y-m-d"));
+        $age18 = new Datetime();
+        $age18 = date($age18->sub(new DateInterval("P18Y"))->format("Y-m-d"));
+        $raw_query = "SELECT HM.id
+                      FROM household_members HM
+                      Right Join participants_timeslots PT ON HM.id = PT.household_member_id
+                      Inner Join timeslots T ON PT.timeslot_id = T.id
+                      Inner Join events E ON T.event_id = E.id
+                      WHERE E.group_id = $event_group_id
+                      AND E.start_date>= $start_date
+                      AND E.start_date>=$end_date
+                      AND HM.date_of_birth <= $age18";
+
+        $stmt = Application::em()->getConnection()->prepare($raw_query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $data = array_map('current', $result);
+        return count($data);
+    }
+
+
 }

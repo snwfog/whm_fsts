@@ -163,6 +163,20 @@ class Report extends Controller implements IRedirectable
                                                                       $start_date,
                                                                       $end_date
                                                     );
+
+
+
+
+            $numberOfAdults = ManageEvent::getNumberOfAdultsInEvent(
+                                                                      $_POST["group-id"],
+                                                                      $start_date,
+                                                                      $end_date
+                                          );
+            $numberOfNonAdults = ManageEvent::getNumberOfNonAdultsInEvent(
+                                                                      $_POST["group-id"],
+                                                                      $start_date,
+                                                                      $end_date
+                                          );
             
             $totalWorkStatus = array_sum($workStatusReport);
             $totalMotherTongue = array_sum($motherTongueReport);
@@ -170,6 +184,8 @@ class Report extends Controller implements IRedirectable
             $totalPostalCode = array_sum($postalCodeReport);
             $totalDistrict = array_sum($districtReport);
             $totalMaritalStatus = array_sum($maritalStatusReport);
+            $totalMemberEvent = array_sum($totalMemberEvent);
+
             $data = array(
                           "mother-tongue"  =>  $motherTongueReport,
                           "origin" => $originReport,
@@ -179,15 +195,20 @@ class Report extends Controller implements IRedirectable
                           "work-status" => $workStatusReport,
                           "marital-status" =>$maritalStatusReport,
                           "visit"=> $numberOfVisitsStatistic,
-                     //     "totalIndividual" =>
+                          "totalIndividual" => array(     
+                                                      "adults" =>$numberOfAdults,
+                                                      "non-adults" => $numberOfNonAdults,
+                                                      "Missing Date Of Birth" => $totalMemberEvent - $numberOfAdults - $numberOfNonAdults,
+                                               ),
                     );
 
 
 
-            $totalMemberEvent = array_sum($totalMemberEvent);
+            
 
             $event = $this->mevent->findEvent($_POST["group-id"]);
             $objPHPExcel = new PHPExcel();
+
 
             // Set properties
             echo date('H:i:s') . " Set properties\n";
@@ -200,54 +221,55 @@ class Report extends Controller implements IRedirectable
 
             // Add some data
             $objPHPExcel->setActiveSheetIndex(0);
-            $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Welcome Hall Mission');
-            $objPHPExcel->getActiveSheet()->SetCellValue('A2', "Summar Report from ".$start_date->format("M d, Y")." to ". $end_date->format("M d, Y"));
-            $objPHPExcel->getActiveSheet()->SetCellValue('A3', "Event ID: ".$event->getId());
-            $objPHPExcel->getActiveSheet()->SetCellValue('A4', "Event Name: ".$event->getName());
-            $objPHPExcel->getActiveSheet()->SetCellValue('H4', "Dist Fam Units: ".$totalMemberEvent);
+            $sheet = $objPHPExcel->getActiveSheet();
+            $sheet->SetCellValue('A1', 'Welcome Hall Mission');
+            $sheet->SetCellValue('A2', "Summar Report from ".$start_date->format("M d, Y")." to ". $end_date->format("M d, Y"));
+            $sheet->SetCellValue('A3', "Event ID: ".$event->getId());
+            $sheet->SetCellValue('A4', "Event Name: ".$event->getName());
+            $sheet->SetCellValue('H4', "Dist Fam Units: ".$totalMemberEvent);
 
 
             //WorkStatus and Mother Tongue
-            $objPHPExcel->getActiveSheet()->SetCellValue('B8', "Work Status");
+            $sheet->SetCellValue('B8', "Work Status");
             $workrow = 9;
             $motherrow = $workrow;
 
             foreach ($data["work-status"] as $key => $value){
                 if(empty($key)){
-                   $objPHPExcel->getActiveSheet()
+                   $sheet
                                ->SetCellValue('B'.$workrow, "Not Specified");
-                   $objPHPExcel->getActiveSheet()
-                               ->SetCellValue('C'.$workrow, $value);
-                   $objPHPExcel->getActiveSheet()
-                               ->SetCellValue('D'.$workrow, round( ((float)$value/(float)$totalWorkStatus)*100, 1)."%");
+                   $sheet
+                               ->SetCellValue('D'.$workrow, $value);
+                   $sheet
+                               ->SetCellValue('E'.$workrow, round( ((float)$value/(float)$totalWorkStatus)*100, 1)."%");
                 }else{
-                   $objPHPExcel->getActiveSheet()
+                   $sheet
                                ->SetCellValue('B'.$workrow, $key);
-                   $objPHPExcel->getActiveSheet()
-                               ->SetCellValue('C'.$workrow, $value);
-                   $objPHPExcel->getActiveSheet()
-                               ->SetCellValue('D'.$workrow, round( ((float)$value/(float)$totalWorkStatus)*100, 1)."%");
+                   $sheet
+                               ->SetCellValue('D'.$workrow, $value);
+                   $sheet
+                               ->SetCellValue('E'.$workrow, round( ((float)$value/(float)$totalWorkStatus)*100, 1)."%");
                 }
                 ++$workrow;
             }
 
-            $objPHPExcel->getActiveSheet()->SetCellValue('F8', "Mother Tongue");
+            $sheet->SetCellValue('F8', "Mother Tongue");
             
             foreach ($data["mother-tongue"] as $key => $value){
                 if(empty($key)){
-                   $objPHPExcel->getActiveSheet()
+                   $sheet
                                ->SetCellValue('F'.$motherrow, "Not Specified");
-                   $objPHPExcel->getActiveSheet()
-                               ->SetCellValue('G'.$motherrow, $value);
-                   $objPHPExcel->getActiveSheet()
-                               ->SetCellValue('H'.$motherrow, round( ((float)$value/(float)$totalMotherTongue)*100, 1)."%");
+                   $sheet
+                               ->SetCellValue('H'.$motherrow, $value);
+                   $sheet
+                               ->SetCellValue('I'.$motherrow, round( ((float)$value/(float)$totalMotherTongue)*100, 1)."%");
                 }else{
-                   $objPHPExcel->getActiveSheet()
+                   $sheet
                                ->SetCellValue('F'.$motherrow, $key);
-                   $objPHPExcel->getActiveSheet()
-                               ->SetCellValue('G'.$motherrow, $value);
-                   $objPHPExcel->getActiveSheet()
-                               ->SetCellValue('H'.$motherrow, round( ((float)$value/ (float)$totalMotherTongue)*100, 1)."%");
+                   $sheet
+                               ->SetCellValue('H'.$motherrow, $value);
+                   $sheet
+                               ->SetCellValue('I'.$motherrow, round( ((float)$value/ (float)$totalMotherTongue)*100, 1)."%");
                 }
                 ++$motherrow;
             }
@@ -259,44 +281,44 @@ class Report extends Controller implements IRedirectable
             $originrow = $workrow > $motherrow ? $workrow+2 : $motherrow+2;
             $maritalrow = $originrow;
 
-            $objPHPExcel->getActiveSheet()->SetCellValue('B'.$originrow, "Ethnic Origin");
+            $sheet->SetCellValue('B'.$originrow, "Ethnic Origin");
             ++$originrow;
             foreach ($data["origin"] as $key => $value){
                 if(empty($key)){
-                   $objPHPExcel->getActiveSheet()
+                   $sheet
                                ->SetCellValue('B' . $originrow, "Not Specified");
-                   $objPHPExcel->getActiveSheet()
-                               ->SetCellValue('C' . $originrow, $value);
-                   $objPHPExcel->getActiveSheet()
-                               ->SetCellValue('D' . $originrow, round(((float)$value/(float)$totalOrigin)*100, 1)."%");
+                   $sheet
+                               ->SetCellValue('D' . $originrow, $value);
+                   $sheet
+                               ->SetCellValue('E' . $originrow, round(((float)$value/(float)$totalOrigin)*100, 1)."%");
                 }else{
-                   $objPHPExcel->getActiveSheet()
+                   $sheet
                                ->SetCellValue('B' . $originrow, $key);
-                   $objPHPExcel->getActiveSheet()
-                               ->SetCellValue('C' . $originrow, $value);
-                   $objPHPExcel->getActiveSheet()
-                               ->SetCellValue('D' . $originrow, round(((float)$value/(float)$totalOrigin)*100, 1)."%");
+                   $sheet
+                               ->SetCellValue('D' . $originrow, $value);
+                   $sheet
+                               ->SetCellValue('E' . $originrow, round(((float)$value/(float)$totalOrigin)*100, 1)."%");
                 }
                 ++$originrow;
             }
 
-            $objPHPExcel->getActiveSheet()->SetCellValue('F'.$maritalrow, "Fam Composition");
+            $sheet->SetCellValue('F'.$maritalrow, "Fam Composition");
             ++$maritalrow;
             foreach ($data["marital-status"] as $key => $value){
                 if(empty($key)){
-                   $objPHPExcel->getActiveSheet()
+                   $sheet
                                ->SetCellValue('F' . $maritalrow, "Not Specified");
-                   $objPHPExcel->getActiveSheet()
-                               ->SetCellValue('G' . $maritalrow, $value);
-                   $objPHPExcel->getActiveSheet()
-                               ->SetCellValue('H' . $maritalrow, round(((float)$value/(float)$totalMaritalStatus)*100, 1)."%");
+                   $sheet
+                               ->SetCellValue('H' . $maritalrow, $value);
+                   $sheet
+                               ->SetCellValue('I' . $maritalrow, round(((float)$value/(float)$totalMaritalStatus)*100, 1)."%");
                 }else{
-                   $objPHPExcel->getActiveSheet()
+                   $sheet
                                ->SetCellValue('F' . $maritalrow, $key);
-                   $objPHPExcel->getActiveSheet()
-                               ->SetCellValue('G' . $maritalrow, $value);
-                   $objPHPExcel->getActiveSheet()
-                               ->SetCellValue('H' . $maritalrow, round(((float)$value/(float)$totalMaritalStatus)*100, 1)."%");
+                   $sheet
+                               ->SetCellValue('H' . $maritalrow, $value);
+                   $sheet
+                               ->SetCellValue('I' . $maritalrow, round(((float)$value/(float)$totalMaritalStatus)*100, 1)."%");
 
                 }
                 ++$maritalrow;
@@ -307,45 +329,41 @@ class Report extends Controller implements IRedirectable
             $visitrow = $originrow > $maritalrow ? $originrow+2 : $maritalrow+2;
             $individrow = $visitrow;
 
-            $objPHPExcel->getActiveSheet()->SetCellValue('B'.$visitrow, "Number of visits");
+            $sheet->SetCellValue('B'.$visitrow, "Number of visits");
             ++$visitrow;
             foreach ($data["visit"] as $key => $value){
                 if(empty($key)){
-                   $objPHPExcel->getActiveSheet()->SetCellValue('B'.$visitrow, "Not Specified");
-                   $objPHPExcel->getActiveSheet()->SetCellValue('C'.$visitrow, $value);
-                   $objPHPExcel->getActiveSheet()->SetCellValue('D'.$visitrow, round(((float)$value/(float)$totalMemberEvent)*100,1)."%");
+                   $sheet->SetCellValue('B'.$visitrow, "Not Specified");
+                   $sheet->SetCellValue('D'.$visitrow, $value);
+                   $sheet->SetCellValue('E'.$visitrow, round(((float)$value/(float)$totalMemberEvent)*100,1)."%");
                 }else{
-                   $objPHPExcel->getActiveSheet()->SetCellValue('B'.$visitrow, $key);
-                   $objPHPExcel->getActiveSheet()->SetCellValue('C'.$visitrow, $value);
-                   $objPHPExcel->getActiveSheet()->SetCellValue('D'.$visitrow, round(((float)$value/(float)$totalMemberEvent)*100,1)."%");
+                   $sheet->SetCellValue('B'.$visitrow, $key." visits");
+                   $sheet->SetCellValue('D'.$visitrow, $value);
+                   $sheet->SetCellValue('E'.$visitrow, round(((float)$value/(float)$totalMemberEvent)*100,1)."%");
                 }
                 ++$visitrow;
             }
 
-/*  TO BE DONE
-
-            $objPHPExcel->getActiveSheet()->SetCellValue('F'.$individrow, "Total Individual");
+            $sheet->SetCellValue('F'.$individrow, "Total Individual");
             ++$individrow;
-            foreach ($data["total-individual"] as $key => $value){
+            foreach ($data["totalIndividual"] as $key => $value){
                 if(empty($key)){
-                   $objPHPExcel->getActiveSheet()->SetCellValue('F'.$individrow, "Not Specified");
-                   $objPHPExcel->getActiveSheet()->SetCellValue('G'.$individrow, $value);
-          //         $objPHPExcel->getActiveSheet()->SetCellValue('H'.$individrow, round($value/$totalIndividual,1)."%");
+                   $sheet->SetCellValue('F'.$individrow, "Not Specified");
+                   $sheet->SetCellValue('H'.$individrow, $value);
+          
                 }else{
-                   $objPHPExcel->getActiveSheet()->SetCellValue('F'.$individrow, $key);
-                   $objPHPExcel->getActiveSheet()->SetCellValue('G'.$individrow, $value);
-            //       $objPHPExcel->getActiveSheet()->SetCellValue('H'.$individrow, round($value/$totalIndividual,1)."%");
+                   $sheet->SetCellValue('F'.$individrow, $key);
+                   $sheet->SetCellValue('H'.$individrow, $value);
 
                 }
                 ++$individrow;
             }
 
-*/
 
 
             // Rename sheet
             echo date('H:i:s') . " Rename sheet\n";
-            $objPHPExcel->getActiveSheet()->setTitle('Statistic');
+            $sheet->setTitle('Statistic');
 
                     
             // Save Excel 2007 file
