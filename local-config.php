@@ -13,7 +13,11 @@ return $config = array
         'user'      => 'root',
         'password'  => '',
         'dbname'    => 'fsts',
+<<<<<<< HEAD
         
+=======
+        'host'      => 'localhost',
+>>>>>>> check if member belong in household constraint
     ),
 
     // Twig configuration

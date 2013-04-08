@@ -42,14 +42,22 @@ class Household extends Controller implements IRedirectable
             $household_id = $_GET["household_id"];
         }
 
-        $this->household = $household = ManageHousehold::findHousehold($household_id);
+        //print_r($_GET);
+
+        $this->household = ManageHousehold::findHousehold($household_id);
         if (!is_null($household_id))
         {
-            // Get household and as default, get household principal if specific member is not specified.
-            if(is_null($member_id)){
-                $member = $household->getHouseholdPrincipal();
-            }else{
-                $member = ManageHousehold::findMember($member_id);
+            // Get household principal if specific member is not specified.
+            $member = $this->household->getHouseholdPrincipal();
+            if(!is_null($member_id)){
+                $foundMember = ManageHousehold::findMember($member_id);
+                
+                //Make Sure member belongs to household
+                if($foundMember->getHousehold()->getId() != $this->household->getId()){
+                    $member_id = $member->getId();         
+                    return $this->redirect("household/$household_id/$member_id");;
+                }
+                $member = $foundMember;
             }
 
             $data = $this->formatHouseholdInfo($this->household, $member);
@@ -83,28 +91,10 @@ class Household extends Controller implements IRedirectable
         }
         else
         {
-            $this->redirect("search");
+            $this->redirect("household");
         }
 
         $this->manageFlag->getFlagSummaryByHousehold(1);
-    }
-
-
-
-    public function put()
-    {
-
-        $content = "charles=yang&mike=pham";
-        file_put_contents("php://output", $content);
-        $var = null;
-        echo "before marker";
-        $unparsed = file_get_contents("php://input");
-        echo $unparsed."unique<br>";
-
-        echo $unparsed."secondtime<br>";
-        parse_str($unparsed, $var);
-        print_r($var);
-
     }
 
     /**
