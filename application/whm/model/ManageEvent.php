@@ -381,57 +381,40 @@ class ManageEvent
     }
 
 
-    public function getNumberOfVisits($event_group_id, $start_date, $end_date){
+    public static function getNumberOfVisits($event_group_id, $start_date, $end_date){
 
         /* The doctrine code should be similar to this mysql
-SELECT PT.household_member_id, COUNT(hm.id)
-FROM `household_members` HM
-Right Join participants_timeslots PT ON HM.id = PT.household_member_id
-Inner Join timeslots T ON PT.timeslot_id = T.id
-Inner Join events E ON T.event_id = E.id
-Inner Join Households H ON HM.household_id = H.id
-Inner Join Addresses A ON H.address_id = A.id
-where E.id = 5
-group by PT.household_member_id
-
-
+            SELECT PT.household_member_id, COUNT(hm.id)
+            FROM `household_members` HM
+            Right Join participants_timeslots PT ON HM.id = PT.household_member_id
+            Inner Join timeslots T ON PT.timeslot_id = T.id
+            Inner Join events E ON T.event_id = E.id
+            Inner Join Households H ON HM.household_id = H.id
+            Inner Join Addresses A ON H.address_id = A.id
+            where E.id = 5
+            group by PT.household_member_id
         */
 
-
-/*
-        $rsm = new \Doctrine\ORM\Query\ResultSetMapping;
-        $query = $this->em->createNativeQuery('SELECT HM.id, COUNT(hm.id)
-                                              FROM household_members HM
-                                              Right Join participants_timeslots PT ON HM.id = PT.household_member_id
-                                              Inner Join timeslots T ON PT.timeslot_id = T.id
-                                              Inner Join events E ON T.event_id = E.id
-                                              Inner Join Households H ON HM.household_id = H.id
-                                              Inner Join Addresses A ON H.address_id = A.id
-                                              where E.id = 5
-                                              group by PT.household_member_id
-                                              ', $rsm);
-
-        $results = $query->getResult();
-        print_r($query);
-*/
-
-        // $query = $this->em->createQueryBuilder()
-        //                   ->select(" HM.id ,COUNT(PT.household_member)")
-        //                   ->from("WHM\Model\HouseholdMember", "HM")
-        //                   ->InnerJoin("WHM\Model\ParticipantsTimeslots", "PT", "WITH", "HM = PT.household_member")
-        //                   ->InnerJoin('WHM\Model\timeslot', "T", "WITH", "PT.timeslot = T")
-        //                   ->InnerJoin("WHM\Model\Event", "E", "WITH", "T.event = E")
-        //                   ->InnerJoin("WHM\Model\Household", "H", "WITH", "HM.household = H")
-        //                   ->InnerJoin("WHM\Model\Address", "A", "WITH", "H.address = A")
-        //                   ->Where("E.group_id = :group_id")
-        //                   ->andWhere("E.start_date >= :start_date")
-        //                   ->andWhere("E.start_date <= :end_date")
-        //                   ->groupBy("PT.household_member")
-        //                   ->setParameter('group_id', $event_group_id)
-        //                   ->setParameter('start_date', $start_date)
-        //                   ->setParameter('end_date', $end_date);  
-        // $results = $query->getQuery()->execute();
-        // print_r($results);
+        $query = Application::em()->createQueryBuilder()
+                          ->select("COUNT(PT.household_member)")
+                          ->from("WHM\Model\HouseholdMember", "HM")
+                          ->InnerJoin("WHM\Model\ParticipantsTimeslots", "PT", "WITH", "HM = PT.household_member")
+                          ->InnerJoin('WHM\Model\timeslot', "T", "WITH", "PT.timeslot = T")
+                          ->InnerJoin("WHM\Model\Event", "E", "WITH", "T.event = E")
+                          ->InnerJoin("WHM\Model\Household", "H", "WITH", "HM.household = H")
+                          ->InnerJoin("WHM\Model\Address", "A", "WITH", "H.address = A")
+                          ->Where("E.group_id = :group_id")
+                          ->andWhere("E.start_date >= :start_date")
+                          ->andWhere("E.start_date <= :end_date")
+                          ->groupBy("PT.household_member")
+                          ->setParameter('group_id', $event_group_id)
+                          ->setParameter('start_date', $start_date)
+                          ->setParameter('end_date', $end_date);  
+        $results = $query->getQuery()->execute();
+        $numberOfVisits = array_map('current', $results); //Get scalar array of results
+        $data = array_count_values($numberOfVisits);
+        
+        return $data;
     }
 
 
